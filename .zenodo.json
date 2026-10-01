@@ -1,7 +1,7 @@
 {
   "title": "Stafford Conjecture 3.8: supplementary paper\u2013Lean reviewer companion",
   "upload_type": "dataset",
-  "description": "Frozen author-review companion containing self-contained HTML correspondence review, readable mathematical accounts of formal proofs, annotated paper PDF and exact source pins. This is a working review snapshot, not a final accepted manuscript. Review focuses on publication statements and independently specified Challenge/Solution pairs; optional proof routes remain separate. Software is distributed separately as Paper\u2013Lean Audit.",
+  "description": "Frozen whole-paper correspondence review for the selected paper proof and machine-checked Lean proof, with mathematical prose, exact source pins, linked definitions and proposed corrections. Author acceptance remains pending. Historical alternatives are outside the current assignment. The reusable Apache-2.0 software is distributed separately.",
   "creators": [
     {
       "name": "Albert, Christopher",
@@ -20,7 +20,7 @@
   ],
   "related_identifiers": [
     {
-      "identifier": "10.5281/zenodo.23072839",
+      "identifier": "10.5281/zenodo.23080671",
       "relation": "isSupplementTo",
       "resource_type": "software"
     },
@@ -29,5 +29,6 @@
       "relation": "requires",
       "resource_type": "software"
     }
-  ]
+  ],
+  "version": "v0.1.3"
 }

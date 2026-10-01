@@ -21,4 +21,6 @@ with tempfile.TemporaryDirectory(prefix='paper-lean-review-') as scratch:
             arguments.extend(['--source', name + '=' + str(destination)])
     subprocess.run(['npm', 'ci'], cwd=generator, check=True)
     subprocess.run(['node', str(generator / 'build.mjs'), '--map', str(root / 'paper-lean-map.json'), '--check', '--out', str(root), *arguments], check=True)
+p = root / 'index.html'
+p.write_text(p.read_text().replace('https://itpplasma.github.io/stafford38-formal/lean_proof_details.pdf', './lean_proof_details.pdf'))
 print('Frozen HTML rebuilt from pinned public inputs. PDF hashes are in manifest.json.')

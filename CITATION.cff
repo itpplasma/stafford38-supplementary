@@ -2,7 +2,7 @@ cff-version: 1.2.0
 message: "Cite the exact frozen review release after its Zenodo DOI has been minted."
 title: "Stafford Conjecture 3.8: supplementary paper–Lean reviewer companion"
 type: dataset
-version: 0.1.2
+version: 0.1.3
 license: CC-BY-4.0
 url: "https://github.com/itpplasma/stafford38-supplementary"
 authors:

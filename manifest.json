@@ -1,51 +1,57 @@
 {
   "schema": 1,
-  "status": "Working author-review snapshot; checked adapters added; printed tangent-lattice construction not certified",
-  "paper_origin_commit": "7d10c6297f8367b3f0061d61bda5ae86f9945c2c",
+  "status": "Selected whole-paper correspondence reviewed by independent agents; author acceptance and whole-correspondence human review pending",
+  "paper_origin_commit": "093527797b85f4547e7a5be03556fa9725b6077c",
   "public_paper_snapshot": {
     "repo": "itpplasma/stafford38-formal",
-    "commit": "86f630da1b316d9a0c35aec03defee55ef7c92f3",
+    "commit": "bce92ec2d8ac53993b3edc568561a814ce5db518",
     "file": "docs/paper-lean-audit/manuscript/human_readable_main.tex",
-    "note": "Consolidated author-review draft; proposals and unresolved actions explicitly marked. Supplement preserves readable formal-proof accounts.",
+    "note": "Selected complete paper proof; marked mathematical proposals await author acceptance. Historical alternatives are outside the current review assignment.",
     "origin_repo": "itpplasma/stafford38-paper",
-    "origin_commit": "7d10c6297f8367b3f0061d61bda5ae86f9945c2c"
+    "origin_commit": "093527797b85f4547e7a5be03556fa9725b6077c"
   },
   "formal_source": {
     "repo": "itpplasma/stafford38-formal",
-    "commit": "ea641a110adea654262c03ef930772645a2401b9",
-    "note": "Signed v1.2.2 archive, DOI 10.5281/zenodo.23079259; checked paper-facing adapters and terminal proof; printed tangent-lattice construction remains a correspondence gap."
+    "commit": "ba18817c4cd4e5cfeab11da44ce76623f4c2b508",
+    "note": "Signed v1.2.3 release, DOI 10.5281/zenodo.23080671; checked selected proof and supplementary pair certificate; main Challenge unchanged."
   },
-  "formal_version_doi": "10.5281/zenodo.23079259",
+  "formal_version_doi": "10.5281/zenodo.23080671",
   "generator": {
     "repo": "itpplasma/paper-lean-audit",
-    "commit": "ebe569da9bdc4e67e40be88c30ce3963bfe5cbb0",
+    "commit": "ad0cd3d12ba62f3888432e5234c24c75919caf18",
     "license": "Apache-2.0"
   },
-  "mapping_version": "2026-10-01.11",
+  "mapping_version": "2026-10-01.13",
   "zenodo_version_doi": null,
   "software_zenodo_version_doi": null,
   "files": {
-    "index.html": "20c0a046a48c12f9650995908b4a16eb98583e6f4b5a89cc44bc4eed30e9c49a",
-    "version.json": "df6718a0fcf1dd73f0febf4a15eb5680e7479fc4551b77ba0ddbc9955ab8d93f",
-    "human_readable_main.pdf": "5a2ab2ed26e017e7912cc7c54a14ec2102bc96f43ca642dbd29e18c2bffa78cb",
-    "lean_proof_details.pdf": "d4464e6c34f7fd0b9394cef70a5853b8e13a1b088ef46b1d7f6ac91406757db6",
-    "ESM_2.pdf": "e02b2ba7a6cf26aea43f7a9db9358a2483576c2953bc7dd2e8387a553690f71e",
-    "paper-lean-map.json": "9ea27d44efb7d56b8d05a8283b1a8ff3f685fc37ec7c3c976f85c59baef767eb",
-    "README.md": "eb51d5538cb45bf5717b7d9d4f4e75171275caabac66445f61d48f2a0d798580",
-    "NOTICE": "8db3caab6dedb732642524b9defe6394e03fcbe3b3cb380d92dbd69a390af23b"
+    "index.html": "77d4f9e8a7bac443368f1c639ba3e6d41a4c7cfd1a637313cc3db483844c4768",
+    "version.json": "7242c93918e5f54086d95812a283a1bc0da97d47088b5f66fef6b27112b12a49",
+    "human_readable_main.pdf": "6299c84959c8ea4a59688d18eb2a6fffa192d446d5c80f170b5c4a4bb544bbba",
+    "lean_proof_details.pdf": "ebaa365c139e283d7b5f909f113ec97f7c11479d4bfc64f6444ae003cc357658",
+    "ESM_2.pdf": "ebaa365c139e283d7b5f909f113ec97f7c11479d4bfc64f6444ae003cc357658",
+    "paper-lean-map.json": "f16ea5490677e863d7cacd7491c9ec200368797c4aa6f8c2cc145d75a910d5a9",
+    "README.md": "7bd91c7dc59f0bacdae82665a6c5194859db82fd26d1d3c65661cb053eee04cb",
+    "NOTICE": "8db3caab6dedb732642524b9defe6394e03fcbe3b3cb380d92dbd69a390af23b",
+    ".zenodo.json": "49e5a0c209d1d38950b9c3caa3f68737b5b610edbcf9af40b126e3e672589f5c",
+    "CITATION.cff": "3b6ffad33c17e5405bfcfc8a1e24f717565e86749460ae1077438ee18964cd6d",
+    "scripts/rebuild.py": "dcbe5cfb5c7db7c5db336ed35335e2cfe7b3153a2e662c4d9500b8904674f742",
+    "LICENSES/KaTeX-MIT.txt": "766ccc1f306c885aa45542a9846bbd0a505b27a0374f146778171c2254ce18e3",
+    "LICENSES/generator-Apache-2.0.txt": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+    "LICENSES/manuscript-CC-BY-4.0.txt": "98b6fde2693d4044dce4a071640e90bd8d250dd789d9033dbd5b77c79f389de4"
   },
   "checks": {
-    "embedded_tool_behavioral_tests_passed": 52,
+    "embedded_tool_behavioral_tests_passed": 53,
     "generic_behavioral_tests_passed": 52,
     "generic_project_specific_integration_skipped": 1,
-    "paper_declarations_checked": 103,
+    "paper_declarations_checked": 104,
     "browser_publication_claims": 49,
     "browser_optional_routes": 0,
-    "challenge_definitions": 31,
+    "challenge_definitions": 32,
     "katex_errors": 0,
-    "public_only_rebuild": "passed",
+    "public_only_rebuild": "passed against exact public pins",
     "human_sign_off": "pending",
-    "unselected_proofs_collapsed": 9
+    "unselected_proofs_collapsed": 0
   },
-  "version": "0.1.1"
+  "version": "0.1.3"
 }
