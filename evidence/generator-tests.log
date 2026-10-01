@@ -1,0 +1,331 @@
+npm notice run paper-lean-audit@0.1.0 test
+npm notice run node --test test/*.test.mjs
+TAP version 13
+# Subtest: check audits current manuscript links, statement coverage, pins, and section-aware equation tags
+ok 1 - check audits current manuscript links, statement coverage, pins, and section-aware equation tags
+  ---
+  duration_ms: 362.440116
+  type: 'test'
+  ...
+# Subtest: nested manuscript snapshots load the adjacent bibliography
+ok 2 - nested manuscript snapshots load the adjacent bibliography
+  ---
+  duration_ms: 197.132861
+  type: 'test'
+  ...
+# Subtest: private Lean declarations are rejected as public refs and must be marked module-private
+ok 3 - private Lean declarations are rejected as public refs and must be marked module-private
+  ---
+  duration_ms: 400.552879
+  type: 'test'
+  ...
+# Subtest: review hashes cover card metadata and proof bodies referenced only from a step
+ok 4 - review hashes cover card metadata and proof bodies referenced only from a step
+  ---
+  duration_ms: 589.991563
+  type: 'test'
+  ...
+# Subtest: theorem cards show named propositions and full proof-step signatures
+ok 5 - theorem cards show named propositions and full proof-step signatures
+  ---
+  duration_ms: 184.414878
+  type: 'test'
+  ...
+# Subtest: changing review criterion wording invalidates the prior card digest
+ok 6 - changing review criterion wording invalidates the prior card digest
+  ---
+  duration_ms: 264.496028
+  type: 'test'
+  ...
+# Subtest: predicate expansion follows plain open scopes and respects variable shadowing
+ok 7 - predicate expansion follows plain open scopes and respects variable shadowing
+  ---
+  duration_ms: 279.321342
+  type: 'test'
+  ...
+# Subtest: changing relation vocabulary invalidates the prior card digest
+ok 8 - changing relation vocabulary invalidates the prior card digest
+  ---
+  duration_ms: 277.248507
+  type: 'test'
+  ...
+# Subtest: duplicate FQNs in separate modules cannot silently replace a predicate source
+ok 9 - duplicate FQNs in separate modules cannot silently replace a predicate source
+  ---
+  duration_ms: 306.624157
+  type: 'test'
+  ...
+# Subtest: excerpt checks catch cut markup and preserve a proposed replacement excerpt
+ok 10 - excerpt checks catch cut markup and preserve a proposed replacement excerpt
+  ---
+  duration_ms: 296.684488
+  type: 'test'
+  ...
+# Subtest: unproved goal templates are labeled rather than presented as proved results
+ok 11 - unproved goal templates are labeled rather than presented as proved results
+  ---
+  duration_ms: 197.701763
+  type: 'test'
+  ...
+# Subtest: a child excerpt of replacement text keeps proposal styling and original source offsets
+ok 12 - a child excerpt of replacement text keeps proposal styling and original source offsets
+  ---
+  duration_ms: 196.886768
+  type: 'test'
+  ...
+# Subtest: an unrelated project can supply custom source roles and output filenames
+ok 13 - an unrelated project can supply custom source roles and output filenames
+  ---
+  duration_ms: 173.712622
+  type: 'test'
+  ...
+# Subtest: namespaces are tracked through sections and nested namespaces
+ok 14 - namespaces are tracked through sections and nested namespaces
+  ---
+  duration_ms: 1.842241
+  type: 'test'
+  ...
+# Subtest: fully qualified names resolve to the right declaration
+ok 15 - fully qualified names resolve to the right declaration
+  ---
+  duration_ms: 1.360173
+  type: 'test'
+  ...
+# Subtest: statements stop before the proof; definitions keep their body
+ok 16 - statements stop before the proof; definitions keep their body
+  ---
+  duration_ms: 0.841936
+  type: 'test'
+  ...
+# Subtest: TeX helpers: comments, groups, AI markup, references
+ok 17 - TeX helpers: comments, groups, AI markup, references
+  ---
+  duration_ms: 1.162451
+  type: 'test'
+  ...
+# Subtest: named arguments inside a signature do not end the statement
+ok 18 - named arguments inside a signature do not end the statement
+  ---
+  duration_ms: 0.319963
+  type: 'test'
+  ...
+# Subtest: namespace tracking ignores commented scopes and bare end closes the inner scope
+ok 19 - namespace tracking ignores commented scopes and bare end closes the inner scope
+  ---
+  duration_ms: 0.250081
+  type: 'test'
+  ...
+# Subtest: declaration lookup ignores nested block comments and accepts local declarations
+ok 20 - declaration lookup ignores nested block comments and accepts local declarations
+  ---
+  duration_ms: 0.250211
+  type: 'test'
+  ...
+# Subtest: statement extraction does not stop at assignment text inside comments
+ok 21 - statement extraction does not stop at assignment text inside comments
+  ---
+  duration_ms: 0.208864
+  type: 'test'
+  ...
+# Subtest: pattern-matching definitions retain all branches and stop at scope commands
+ok 22 - pattern-matching definitions retain all branches and stop at scope commands
+  ---
+  duration_ms: 0.942495
+  type: 'test'
+  ...
+# Subtest: blank-separated branches and structure fields are not silently dropped
+ok 23 - blank-separated branches and structure fields are not silently dropped
+  ---
+  duration_ms: 0.485665
+  type: 'test'
+  ...
+# Subtest: ambient declarations retain outer assumptions and drop closed scopes
+ok 24 - ambient declarations retain outer assumptions and drop closed scopes
+  ---
+  duration_ms: 0.72192
+  type: 'test'
+  ...
+# Subtest: source context includes local instances and opened notation namespaces
+ok 25 - source context includes local instances and opened notation namespaces
+  ---
+  duration_ms: 1.37971
+  type: 'test'
+  ...
+# Subtest: challenge placeholders and axioms are distinguished from proved declarations
+ok 26 - challenge placeholders and axioms are distinguished from proved declarations
+  ---
+  duration_ms: 0.258567
+  type: 'test'
+  ...
+# Subtest: named result detection respects binders, universes and comments
+ok 27 - named result detection respects binders, universes and comments
+  ---
+  duration_ms: 0.476879
+  type: 'test'
+  ...
+# Subtest: external mathematical proof links render labels and reject active URL schemes
+ok 28 - external mathematical proof links render labels and reject active URL schemes
+  ---
+  duration_ms: 3.425004
+  type: 'test'
+  ...
+# Subtest: Lean identifiers jump to curated definitions without linking comments or strings
+ok 29 - Lean identifiers jump to curated definitions without linking comments or strings
+  ---
+  duration_ms: 0.279918
+  type: 'test'
+  ...
+# Subtest: unstarred align and gather displays receive computed equation tags
+ok 30 - unstarred align and gather displays receive computed equation tags
+  ---
+  duration_ms: 10.081435
+  type: 'test'
+  ...
+# Subtest: explicit tags override computed tags on aligned displays
+ok 31 - explicit tags override computed tags on aligned displays
+  ---
+  duration_ms: 0.947555
+  type: 'test'
+  ...
+# Subtest: explicit equation tags override the automatic section tag
+ok 32 - explicit equation tags override the automatic section tag
+  ---
+  duration_ms: 1.031544
+  type: 'test'
+  ...
+# Subtest: AI edit macros render inside math, including removed and replaced text
+ok 33 - AI edit macros render inside math, including removed and replaced text
+  ---
+  duration_ms: 2.728932
+  type: 'test'
+  ...
+# Subtest: psmallmatrix is rendered as a parenthesized smallmatrix
+ok 34 - psmallmatrix is rendered as a parenthesized smallmatrix
+  ---
+  duration_ms: 1.285652
+  type: 'test'
+  ...
+# Subtest: formal references and declaration macros become pinned GitHub links
+ok 35 - formal references and declaration macros become pinned GitHub links
+  ---
+  duration_ms: 0.466038
+  type: 'test'
+  ...
+# Subtest: Lean link renderer refuses an unsafe target
+ok 36 - Lean link renderer refuses an unsafe target
+  ---
+  duration_ms: 0.313952
+  type: 'test'
+  ...
+# Subtest: browser review state is revision-safe, attributable, and importable without corruption
+    # Subtest: editing a stale card discards old checkmarks before stamping the new hash
+    ok 1 - editing a stale card discards old checkmarks before stamping the new hash
+      ---
+      duration_ms: 213.044122
+      type: 'test'
+      ...
+    # Subtest: older pin-key reviews are recovered and visibly marked stale
+    ok 2 - older pin-key reviews are recovered and visibly marked stale
+      ---
+      duration_ms: 160.315559
+      type: 'test'
+      ...
+    # Subtest: checks without a revision hash cannot become a sign-off
+    ok 3 - checks without a revision hash cannot become a sign-off
+      ---
+      duration_ms: 156.061835
+      type: 'test'
+      ...
+    # Subtest: invalid JSON and malformed review objects leave existing state untouched
+    ok 4 - invalid JSON and malformed review objects leave existing state untouched
+      ---
+      duration_ms: 170.874806
+      type: 'test'
+      ...
+    # Subtest: a new reviewer cannot inherit another reviewer checks; export preserves attribution and revokes its URL
+    ok 5 - a new reviewer cannot inherit another reviewer checks; export preserves attribution and revokes its URL
+      ---
+      duration_ms: 1206.995623
+      type: 'test'
+      ...
+    # Subtest: unnamed checked boxes are not exported as a sign-off
+    ok 6 - unnamed checked boxes are not exported as a sign-off
+      ---
+      duration_ms: 211.757678
+      type: 'test'
+      ...
+    1..6
+ok 37 - browser review state is revision-safe, attributable, and importable without corruption
+  ---
+  duration_ms: 2352.344711
+  type: 'test'
+  ...
+# Subtest: publication queue separates optional variants and blocks stale-version sign-offs
+ok 38 - publication queue separates optional variants and blocks stale-version sign-offs
+  ---
+  duration_ms: 419.344977
+  type: 'test'
+  ...
+# Subtest: definition jumps open the exact target and collapsed parents without signing off
+ok 39 - definition jumps open the exact target and collapsed parents without signing off
+  ---
+  duration_ms: 415.884087
+  type: 'test'
+  ...
+# Subtest: optional citation arguments balance nested brackets, braces, and escaped closers
+ok 40 - optional citation arguments balance nested brackets, braces, and escaped closers
+  ---
+  duration_ms: 1.643817
+  type: 'test'
+  ...
+# Subtest: comments honor TeX backslash parity
+ok 41 - comments honor TeX backslash parity
+  ---
+  duration_ms: 0.202812
+  type: 'test'
+  ...
+# Subtest: inline and display math use matching, escaped delimiters
+ok 42 - inline and display math use matching, escaped delimiters
+  ---
+  duration_ms: 4.80279
+  type: 'test'
+  ...
+# Subtest: unclosed math and environments are visible, warned, and terminate
+ok 43 - unclosed math and environments are visible, warned, and terminate
+  ---
+  duration_ms: 0.884436
+  type: 'test'
+  ...
+# Subtest: nested AI markup carries the source offset and renders nested commands
+ok 44 - nested AI markup carries the source offset and renders nested commands
+  ---
+  duration_ms: 3.238672
+  type: 'test'
+  ...
+# Subtest: hyperref preserves its display text and only links local anchors
+ok 45 - hyperref preserves its display text and only links local anchors
+  ---
+  duration_ms: 0.213092
+  type: 'test'
+  ...
+# Subtest: unknown commands and hostile text stay visible without becoming HTML
+ok 46 - unknown commands and hostile text stay visible without becoming HTML
+  ---
+  duration_ms: 1.086177
+  type: 'test'
+  ...
+# Subtest: mapped excerpts from the pinned current paper render without dropped commands
+ok 47 - mapped excerpts from the pinned current paper render without dropped commands # SKIP sibling paper clone is required for this integration check
+  ---
+  duration_ms: 0.068739
+  type: 'test'
+  ...
+1..47
+# tests 53
+# suites 0
+# pass 52
+# fail 0
+# cancelled 0
+# skipped 1
+# todo 0
+# duration_ms 3788.320763

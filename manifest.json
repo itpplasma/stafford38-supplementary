@@ -1,0 +1,49 @@
+{
+  "schema": 1,
+  "status": "working author-review snapshot; not final journal submission",
+  "paper_origin_commit": "624bb81fd3f60cf52ac37a6f12f9eb5a3d0bfb20",
+  "public_paper_snapshot": {
+    "repo": "itpplasma/stafford38-formal",
+    "commit": "f44adfc7d395a524e87483b016ad55bd0d78dea2",
+    "file": "docs/paper-lean-audit/manuscript/human_readable_main.tex",
+    "note": "Consolidated author-review draft; proposals and unresolved actions explicitly marked. Supplement preserves readable formal-proof accounts.",
+    "origin_repo": "itpplasma/stafford38-paper",
+    "origin_commit": "624bb81fd3f60cf52ac37a6f12f9eb5a3d0bfb20"
+  },
+  "formal_source": {
+    "repo": "itpplasma/stafford38-formal",
+    "commit": "591d4e11e3971577be169e428ac73c44a4ac8a32",
+    "note": "Signed v1.2.0 archive; checked auxiliary declarations and immutable release source. Human review remains open."
+  },
+  "formal_version_doi": "10.5281/zenodo.23072839",
+  "generator": {
+    "repo": "itpplasma/paper-lean-audit",
+    "commit": "1258ed7b053ca7921ce53c34a30d418769f94f8a",
+    "license": "Apache-2.0"
+  },
+  "mapping_version": "2026-10-01.8",
+  "zenodo_version_doi": null,
+  "software_zenodo_version_doi": null,
+  "files": {
+    "index.html": "5bfd85a4fb61e262fe356406a0913086292d17d2b00aa64207c94661e68dc6fe",
+    "version.json": "3b82068dda71c287e6757a37067a4ff5be94787ea83b348521bb7b7fd53fd83b",
+    "human_readable_main.pdf": "3fb6dc52d0ea6eb700f9f1d5a4d9c71046905a2a5450ace0e7659df57a76dcf2",
+    "lean_proof_details.pdf": "49e47064d52ddc5b1e7fe49a1d0acac5901cb9a162601efe955c57534fd645e5",
+    "ESM_2.pdf": "53b5e39144074b84b4466c27e590f7b68dca019930206ce18a285bba62036bcb",
+    "paper-lean-map.json": "8ec95ecd5bce548c7bd245bdca52182162cdd34de6d83389ca71baf1537c6c68",
+    "README.md": "18fdc5a35155be4f377234044ff055188bedbe760b47b1451d5dae387478f8f0",
+    "NOTICE": "8db3caab6dedb732642524b9defe6394e03fcbe3b3cb380d92dbd69a390af23b"
+  },
+  "checks": {
+    "embedded_tool_behavioral_tests_passed": 52,
+    "generic_behavioral_tests_passed": 52,
+    "generic_project_specific_integration_skipped": 1,
+    "paper_declarations_checked": 101,
+    "browser_publication_claims": 23,
+    "browser_optional_routes": 6,
+    "challenge_definitions": 31,
+    "katex_errors": 0,
+    "public_only_rebuild": "passed",
+    "human_sign_off": "pending"
+  }
+}

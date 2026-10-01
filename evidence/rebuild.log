@@ -1,0 +1,21 @@
+From https://github.com/itpplasma/stafford38-formal
+ * branch            f44adfc7d395a524e87483b016ad55bd0d78dea2 -> FETCH_HEAD
+From https://github.com/itpplasma/stafford38-formal
+ * branch            591d4e11e3971577be169e428ac73c44a4ac8a32 -> FETCH_HEAD
+From https://github.com/itpplasma/algebraic-analysis
+ * branch            4aae47967f6ba02ffe2f639ab06564c9a9d1ecc8 -> FETCH_HEAD
+From https://github.com/itpplasma/global-stafford-formal
+ * branch            e676caed1253e5d09fc6699d5dc683febbabf7bb -> FETCH_HEAD
+From https://github.com/leanprover-community/mathlib4
+ * branch            db584cd6d46c92f209a44c0f1c829460d327499d -> FETCH_HEAD
+From https://github.com/itpplasma/paper-lean-audit
+ * branch            1258ed7b053ca7921ce53c34a30d418769f94f8a -> FETCH_HEAD
+
+added 3 packages, and audited 4 packages in 471ms
+
+1 package is looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+wrote /home/ert/proj/stafford38-supplementary/index.html
+Frozen HTML rebuilt from pinned public inputs. PDF hashes are in manifest.json.

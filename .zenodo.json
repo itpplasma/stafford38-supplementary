@@ -1,0 +1,33 @@
+{
+  "title": "Stafford Conjecture 3.8: supplementary paper\u2013Lean reviewer companion",
+  "upload_type": "dataset",
+  "description": "Frozen author-review companion containing self-contained HTML correspondence review, readable mathematical accounts of formal proofs, annotated paper PDF and exact source pins. This is a working review snapshot, not a final accepted manuscript. Review focuses on publication statements and independently specified Challenge/Solution pairs; optional proof routes remain separate. Software is distributed separately as Paper\u2013Lean Audit.",
+  "creators": [
+    {
+      "name": "Albert, Christopher",
+      "affiliation": "Graz University of Technology",
+      "orcid": "0000-0003-4773-416X"
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "access_right": "open",
+  "keywords": [
+    "Stafford conjecture",
+    "Weyl algebra",
+    "Lean",
+    "supplementary material",
+    "proof correspondence"
+  ],
+  "related_identifiers": [
+    {
+      "identifier": "10.5281/zenodo.23072839",
+      "relation": "isSupplementTo",
+      "resource_type": "software"
+    },
+    {
+      "identifier": "https://github.com/itpplasma/paper-lean-audit",
+      "relation": "requires",
+      "resource_type": "software"
+    }
+  ]
+}
