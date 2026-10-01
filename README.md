@@ -1,15 +1,15 @@
 # Stafford38 reviewer companion
 
-**Working author-review snapshot.** Proposed red corrections and unresolved action boxes remain visible. This is supplementary review material for *Stafford’s conjecture on cyclicity of torsion modules*, Christopher Albert et al., Graz University of Technology. Corresponding contact: albert@tugraz.at. Intended journal: Inventiones mathematicae; no submission or acceptance is claimed.
+**Working author-review snapshot.** Proposed red corrections and unresolved action boxes remain visible. This is supplementary review material for *Stafford’s conjecture on cyclicity of torsion modules*, Christopher Albert, Johanna Moser and Maximilian Philipp, Graz University of Technology. Corresponding contact: albert@tugraz.at. Intended journal: Inventiones mathematicae; no submission or acceptance is claimed.
 
 For the current editing/review version, open https://itpplasma.github.io/stafford38-formal/ . This repository freezes one explicit manuscript and proof revision for download and archival.
 
 1. Open `index.html` in a browser, or the hosted frozen snapshot. No login, private repository access, Node or Lean installation is needed to read it. The HTML embeds its rendering code and fonts.
 2. Begin at “Challenge: meaning and soundness”. Check the field and characteristic assumptions, rank, nonzero input, quotient relations and factor order. Links open exact definitions, including Field and CharZero. The proved Solution endpoints supply the theorem evidence; deliberate sorry holes in Challenge templates do not.
-3. Review the 23 publication claims. Where routes differ, use the linked mathematical account in `lean_proof_details.pdf`. Six optional routes stay outside that queue unless selected for publication. Reference definitions remain available on demand.
+3. Max reviews all 49 current mathematical correspondence cards, including exact matches, definitions, printed proofs and appendix results. Read the comparison accounts in `lean_proof_details.pdf` to distinguish mathematical gaps from implementation differences. Johanna reviews concrete text proposals. Six context/history cards are separate.
 4. Export reviewer notes as JSON. Browser storage is local, not shared human approval. The frozen snapshot has no automatic live-version check; its header and manifest identify the revision. The living interface checks freshness before sign-off.
 
-`human_readable_main.pdf` preserves proposed changes and status boxes for Johanna. `lean_proof_details.pdf` gives mathematical explanations and pinned declaration links for Max or a referee. A statement correspondence badge is a curated review assessment, not a kernel theorem. The unchanged Lean v1.2.0 archive has DOI [10.5281/zenodo.23072839](https://doi.org/10.5281/zenodo.23072839); Palomar certifies its separately scoped registered theorem.
+`human_readable_main.pdf` preserves proposed changes and status boxes for Johanna. `lean_proof_details.pdf` gives mathematical explanations and pinned declaration links for Max or a referee. A statement correspondence badge is a curated review assessment, not a kernel theorem. The checked Lean v1.2.2 archive has DOI [10.5281/zenodo.23079259](https://doi.org/10.5281/zenodo.23079259); Palomar certifies its separately scoped registered theorem.
 
 ## Journal files
 

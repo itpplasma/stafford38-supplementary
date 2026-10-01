@@ -1,21 +1,21 @@
 {
-  "publicationQueue": 23,
-  "optionalAlternatives": 6,
+  "publicationQueue": 49,
+  "optionalAlternatives": 0,
   "allCards": 55,
   "challengeDefinitions": 31,
   "katexErrors": 0,
   "fieldLink": "opens exact field definition",
   "version": {
-    "version": "2026-10-01.9",
-    "paper": "f44adfc7d395a524e87483b016ad55bd0d78dea2",
-    "formal": "591d4e11e3971577be169e428ac73c44a4ac8a32",
+    "version": "2026-10-01.11",
+    "paper": "86f630da1b316d9a0c35aec03defee55ef7c92f3",
+    "formal": "ea641a110adea654262c03ef930772645a2401b9",
     "checks": [
       "statement",
       "route",
       "issues",
       "publication"
     ],
-    "generator": "ea08363565969544",
+    "generator": "4c234bd2aa08c197",
     "live": ""
   }
 }

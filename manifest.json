@@ -1,46 +1,46 @@
 {
   "schema": 1,
-  "status": "working author-review snapshot; not final journal submission",
-  "paper_origin_commit": "624bb81fd3f60cf52ac37a6f12f9eb5a3d0bfb20",
+  "status": "Working author-review snapshot; checked adapters added; printed tangent-lattice construction not certified",
+  "paper_origin_commit": "7d10c6297f8367b3f0061d61bda5ae86f9945c2c",
   "public_paper_snapshot": {
     "repo": "itpplasma/stafford38-formal",
-    "commit": "f44adfc7d395a524e87483b016ad55bd0d78dea2",
+    "commit": "86f630da1b316d9a0c35aec03defee55ef7c92f3",
     "file": "docs/paper-lean-audit/manuscript/human_readable_main.tex",
     "note": "Consolidated author-review draft; proposals and unresolved actions explicitly marked. Supplement preserves readable formal-proof accounts.",
     "origin_repo": "itpplasma/stafford38-paper",
-    "origin_commit": "624bb81fd3f60cf52ac37a6f12f9eb5a3d0bfb20"
+    "origin_commit": "7d10c6297f8367b3f0061d61bda5ae86f9945c2c"
   },
   "formal_source": {
     "repo": "itpplasma/stafford38-formal",
-    "commit": "591d4e11e3971577be169e428ac73c44a4ac8a32",
-    "note": "Signed v1.2.0 archive; checked auxiliary declarations and immutable release source. Human review remains open."
+    "commit": "ea641a110adea654262c03ef930772645a2401b9",
+    "note": "Signed v1.2.2 archive, DOI 10.5281/zenodo.23079259; checked paper-facing adapters and terminal proof; printed tangent-lattice construction remains a correspondence gap."
   },
-  "formal_version_doi": "10.5281/zenodo.23072839",
+  "formal_version_doi": "10.5281/zenodo.23079259",
   "generator": {
     "repo": "itpplasma/paper-lean-audit",
-    "commit": "1258ed7b053ca7921ce53c34a30d418769f94f8a",
+    "commit": "ebe569da9bdc4e67e40be88c30ce3963bfe5cbb0",
     "license": "Apache-2.0"
   },
-  "mapping_version": "2026-10-01.9",
+  "mapping_version": "2026-10-01.11",
   "zenodo_version_doi": null,
   "software_zenodo_version_doi": null,
   "files": {
-    "index.html": "18d8d646344b67913c94d421d673f9bd69c04b5c0ab3c5f979912092983f003e",
-    "version.json": "8b4e62e0c11c430b37a894a297416c92c1a023e1f4698adba796a6066960f8de",
-    "human_readable_main.pdf": "3fb6dc52d0ea6eb700f9f1d5a4d9c71046905a2a5450ace0e7659df57a76dcf2",
-    "lean_proof_details.pdf": "49e47064d52ddc5b1e7fe49a1d0acac5901cb9a162601efe955c57534fd645e5",
-    "ESM_2.pdf": "53b5e39144074b84b4466c27e590f7b68dca019930206ce18a285bba62036bcb",
-    "paper-lean-map.json": "4ae3b6161b95fc89f07848ac416712bd7eefb0506b5794c1b7f5d1bbdcf8c9d8",
-    "README.md": "18fdc5a35155be4f377234044ff055188bedbe760b47b1451d5dae387478f8f0",
+    "index.html": "20c0a046a48c12f9650995908b4a16eb98583e6f4b5a89cc44bc4eed30e9c49a",
+    "version.json": "df6718a0fcf1dd73f0febf4a15eb5680e7479fc4551b77ba0ddbc9955ab8d93f",
+    "human_readable_main.pdf": "5a2ab2ed26e017e7912cc7c54a14ec2102bc96f43ca642dbd29e18c2bffa78cb",
+    "lean_proof_details.pdf": "d4464e6c34f7fd0b9394cef70a5853b8e13a1b088ef46b1d7f6ac91406757db6",
+    "ESM_2.pdf": "e02b2ba7a6cf26aea43f7a9db9358a2483576c2953bc7dd2e8387a553690f71e",
+    "paper-lean-map.json": "9ea27d44efb7d56b8d05a8283b1a8ff3f685fc37ec7c3c976f85c59baef767eb",
+    "README.md": "eb51d5538cb45bf5717b7d9d4f4e75171275caabac66445f61d48f2a0d798580",
     "NOTICE": "8db3caab6dedb732642524b9defe6394e03fcbe3b3cb380d92dbd69a390af23b"
   },
   "checks": {
     "embedded_tool_behavioral_tests_passed": 52,
     "generic_behavioral_tests_passed": 52,
     "generic_project_specific_integration_skipped": 1,
-    "paper_declarations_checked": 101,
-    "browser_publication_claims": 23,
-    "browser_optional_routes": 6,
+    "paper_declarations_checked": 103,
+    "browser_publication_claims": 49,
+    "browser_optional_routes": 0,
     "challenge_definitions": 31,
     "katex_errors": 0,
     "public_only_rebuild": "passed",
