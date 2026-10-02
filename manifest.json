@@ -1,19 +1,19 @@
 {
   "schema": 1,
-  "status": "Selected whole-paper correspondence reviewed by independent agents; author acceptance and whole-correspondence human review pending",
+  "status": "Historical v0.1.3 review bundle; predates the restored current manuscript. Current work stopped; final correspondence and next release pending.",
   "paper_origin_commit": "093527797b85f4547e7a5be03556fa9725b6077c",
   "public_paper_snapshot": {
     "repo": "itpplasma/stafford38-formal",
     "commit": "bce92ec2d8ac53993b3edc568561a814ce5db518",
     "file": "docs/paper-lean-audit/manuscript/human_readable_main.tex",
-    "note": "Selected complete paper proof; marked mathematical proposals await author acceptance. Historical alternatives are outside the current review assignment.",
+    "note": "Historical manuscript snapshot before the current author-proof restoration; not the final whole-paper correspondence.",
     "origin_repo": "itpplasma/stafford38-paper",
     "origin_commit": "093527797b85f4547e7a5be03556fa9725b6077c"
   },
   "formal_source": {
     "repo": "itpplasma/stafford38-formal",
     "commit": "ba18817c4cd4e5cfeab11da44ce76623f4c2b508",
-    "note": "Signed v1.2.3 release, DOI 10.5281/zenodo.23080671; checked selected proof and supplementary pair certificate; main Challenge unchanged."
+    "note": "Signed v1.2.3 release, DOI 10.5281/zenodo.23080671. Historical theorem archive; not a receipt for the unfinished paper-compatible route."
   },
   "formal_version_doi": "10.5281/zenodo.23080671",
   "generator": {
@@ -31,14 +31,17 @@
     "lean_proof_details.pdf": "ebaa365c139e283d7b5f909f113ec97f7c11479d4bfc64f6444ae003cc357658",
     "ESM_2.pdf": "ebaa365c139e283d7b5f909f113ec97f7c11479d4bfc64f6444ae003cc357658",
     "paper-lean-map.json": "f16ea5490677e863d7cacd7491c9ec200368797c4aa6f8c2cc145d75a910d5a9",
-    "README.md": "7bd91c7dc59f0bacdae82665a6c5194859db82fd26d1d3c65661cb053eee04cb",
+    "README.md": "20a2ea3e6375ac3a79befa706c52b59356802231d9d60db93552c583493a758f",
     "NOTICE": "8db3caab6dedb732642524b9defe6394e03fcbe3b3cb380d92dbd69a390af23b",
     ".zenodo.json": "49e5a0c209d1d38950b9c3caa3f68737b5b610edbcf9af40b126e3e672589f5c",
     "CITATION.cff": "3b6ffad33c17e5405bfcfc8a1e24f717565e86749460ae1077438ee18964cd6d",
     "scripts/rebuild.py": "dcbe5cfb5c7db7c5db336ed35335e2cfe7b3153a2e662c4d9500b8904674f742",
     "LICENSES/KaTeX-MIT.txt": "766ccc1f306c885aa45542a9846bbd0a505b27a0374f146778171c2254ce18e3",
     "LICENSES/generator-Apache-2.0.txt": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
-    "LICENSES/manuscript-CC-BY-4.0.txt": "98b6fde2693d4044dce4a071640e90bd8d250dd789d9033dbd5b77c79f389de4"
+    "LICENSES/manuscript-CC-BY-4.0.txt": "98b6fde2693d4044dce4a071640e90bd8d250dd789d9033dbd5b77c79f389de4",
+    "STATUS.md": "43f6d2b89744e6689d2d836f1f913e40f3e6aa86f125328ce37766c159b92e3c",
+    "docs/release-preparation.md": "e1e899eda14b3c7dccd4eb7f7a8e9216784a21aa6e65adfb371d82116085415c",
+    "docs/release-body-draft.md": "5e0f7b540101903a99cc1732494714d7a09504eb559ff8b2bc61928ffb6ad5c4"
   },
   "checks": {
     "embedded_tool_behavioral_tests_passed": 53,
@@ -53,5 +56,11 @@
     "human_sign_off": "pending",
     "unselected_proofs_collapsed": 0
   },
-  "version": "0.1.3"
+  "version": "0.1.3",
+  "development_checkpoint": {
+    "work": "stopped at owner request",
+    "background_jobs": "none",
+    "zenodo_integration": "enabled according to owner confirmation",
+    "next_release": "pending final verified source and regenerated review artifacts"
+  }
 }
