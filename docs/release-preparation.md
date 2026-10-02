@@ -1,6 +1,6 @@
 # Supplementary release preparation
 
-Status: work resumed on 2 October 2026; Zenodo publication is pending the final verified snapshot. The repository owner has confirmed that the Zenodo GitHub integration is enabled for `itpplasma/stafford38-supplementary`; the account setting itself is not publicly inspectable here.
+Status: paused at the owner's request on 2 October 2026; all owned agents and compiler jobs are stopped. Zenodo publication remains pending the final verified snapshot. The repository owner has confirmed that the Zenodo GitHub integration is enabled for `itpplasma/stafford38-supplementary`; the account setting itself is not publicly inspectable here.
 
 ## Historical bundle
 
@@ -12,7 +12,7 @@ Status: work resumed on 2 October 2026; Zenodo publication is pending the final 
 
 ## Release gate
 
-1. Wait for the full formal verification job and the restored manuscript checks to finish. Record the controller-selected final paper, formal, and generator commits; do not reuse the v0.1.3 pins.
+1. On resumption, complete the same-witness closure and terminal wiring, then finish the full formal verifier, Linux/Palomar comparisons and manuscript checks. Record the controller-selected final paper, formal, and generator commits; do not reuse the v0.1.3 pins.
 2. Build the next review bundle from those exact public commits. Update the map, annotated manuscript, proof details, version, manifest, `.zenodo.json`, `CITATION.cff`, archive files, and checksums together. Keep the historical v0.1.3 records unchanged.
 3. Run `python3 scripts/rebuild.py` from a clean checkout to rebuild and check the HTML against the exact pins. This script does not regenerate the PDFs or ESM_1.zip; rebuild those from the final sources and record their hashes separately.
 4. Run the final paper compilation, formal repository verifier, required Comparator checks, declaration/source-link audit, layout checks, and archive-content checks. Retain commands, exit codes, source pins, and log hashes in the release evidence.
