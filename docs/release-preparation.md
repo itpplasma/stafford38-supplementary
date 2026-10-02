@@ -1,14 +1,14 @@
 # Supplementary release preparation
 
-Status: work is stopped at the owner's request; Zenodo publication is pending the final verified snapshot. The repository owner has confirmed that the Zenodo GitHub integration is enabled for `itpplasma/stafford38-supplementary`; the account setting itself is not publicly inspectable here.
+Status: work resumed on 2 October 2026; Zenodo publication is pending the final verified snapshot. The repository owner has confirmed that the Zenodo GitHub integration is enabled for `itpplasma/stafford38-supplementary`; the account setting itself is not publicly inspectable here.
 
-## Current bundle
+## Historical bundle
 
-- Local companion version is `0.1.3`; local `HEAD` is `3ef18ca4cf1e422a13bb20514074503b8ca4671b`, and the `v0.1.3` tag points to `9576c3a1936795b1f9a2799ea60087d626decb87`.
+- Companion version is `0.1.3`; the preparation checkpoint was `3ef18ca4cf1e422a13bb20514074503b8ca4671b`, and the `v0.1.3` tag points to `9576c3a1936795b1f9a2799ea60087d626decb87`.
 - `manifest.json` records paper origin `093527797b85f4547e7a5be03556fa9725b6077c`, formal paper snapshot `bce92ec2d8ac53993b3edc568561a814ce5db518`, and formal source `ba18817c4cd4e5cfeab11da44ce76623f4c2b508` (signed v1.2.3, DOI `10.5281/zenodo.23080671`). This is the historical bundle; it predates the restored current manuscript.
 - The manifest has `zenodo_version_doi: null`. The public GitHub API shows its v0.1.3 release as a draft with no publication date. Its uploaded ESM_1.zip and ESM_2.pdf digests match the local files, so those assets are also the historical snapshot.
 - Exact Zenodo searches returned no public record for this companion. The available read-only tools cannot inspect the authenticated Zenodo–GitHub setting, so the armed state rests on the owner's confirmation.
-- The README now distinguishes the historical assets from the unfinished current proof. Documentation checksums were refreshed for this stopped checkpoint; the historical asset files and their source pins remain unchanged. Regenerate all release hashes when building the final new snapshot.
+- The README distinguishes the historical assets from the unfinished current proof. Documentation checksums were refreshed for the stopped checkpoint; the historical asset files and their source pins remain unchanged. Regenerate all release hashes when building the final new snapshot.
 
 ## Release gate
 

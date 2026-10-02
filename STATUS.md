@@ -1,6 +1,6 @@
 # Current status
 
-Updated 2 October 2026. Work is stopped at the owner's request. No background preparation, compilation or publication jobs are running.
+Updated 2 October 2026. Work resumed at the owner's request. The final source selection, review-map repairs and bundle regeneration are pending the proof assembly and verification recorded in the [formal plan](https://github.com/itpplasma/stafford38-formal/blob/main/PLAN.md).
 
 Zenodo's GitHub integration for this repository is enabled according to the owner's confirmation. The next supplementary release is prepared in outline and remains unpublished, alongside the pending next formal release.
 
