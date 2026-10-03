@@ -1,17 +1,14 @@
-# Current status
+# Supplementary v0.2.0 release preparation
 
-Updated 3 October 2026 after synchronization with faepmac1. The resumed formal campaign and older unfinished candidates are now preserved on pushed branches in the [formal branch map](https://github.com/itpplasma/stafford38-formal/blob/main/PLAN.md#branches-for-resuming-saved-work). The dated [formal checkpoint archive](https://github.com/itpplasma/stafford38-formal/blob/main/docs/audits/paused-2026-10-02/README.md) retains earlier receipts. No new supplementary release has been published.
+Updated 3 October 2026. Accepted inputs: paper origin P4 `4d19a183846beb50f37ad2b4e51e836a76ed8bac`, public snapshot S4 `2fde6c6311b9cc2e8b789649132ff87bdbcdb3d5`, formal release R `54c4f0c902bcd840e44eeba80686ef3fa0e7dc2b` (v1.3.0, DOI 10.5281/zenodo.23126868), and generator `40967b6740c2ceaf515a2fb47a5ca9571be6495f`. Formal core C2 is `12ae3cc49152672a48a96f13994314b65ae38197`.
 
-The paper preserves Johanna's historical human-readable proof with visible necessary corrections, comments and amendments. Cleanup source `ce09ead2553154c3521e0515c5e3db7a505832e0` is synchronized to GitHub and Overleaf; eleven technical comparison boxes moved to the companion while the remaining main manuscript bytes were preserved against the frozen baseline.
+## Verification evidence
 
-The rc3 retained baseline passed 425 targets, all 116 consumers and 312 axiom reports. Full paper/Lean correspondence remains blocked by the same-witness closure's scalar-action/tower coherence, followed by unverified original-prime assembly, terminal wiring and fresh dependency checks. The complete Linux verifier and actual current Palomar comparisons remain pending.
+- Core C2 passed the full Linux repository verifier (R1 job 3131801) and retained R2 targets. All four actual Palomar comparisons passed in R4. The 399-name T80 declaration audit passed; guard reported zero axiom/sorry/unsafe additions, zero children, no source swap or verification stops.
+- Formal release R’s 1,163 tagged files were verified byte-for-byte against the formal archive, with zero extras, missing files or mismatches. The 656 core files match C2 exactly; this release/core congruence is distinct from the core proof receipt.
+- The pinned generator’s 64 tests and browser oracles passed on the frozen map; the existing 57-card browser walk covers all guided cards, both challenge cards and both routes. No human-review conclusion is inferred from these machine checks.
+- Paper compilation produced the accepted P4 PDFs with zero undefined citations, references or control sequences. `ESM_2.pdf` must remain byte-identical to `lean_proof_details.pdf`.
 
-The HTML, PDFs and archive assets here remain the historical v0.1.3 bundle. Their manifest pins paper origin `093527797b85f4547e7a5be03556fa9725b6077c` and formal v1.2.3. They predate the restored manuscript and do not cover the unfinished paper-compatible geometric route. No supplementary version DOI has been recorded.
+## Remaining review and artifact steps
 
-Zenodo's GitHub integration is enabled according to the owner's confirmation. Release metadata, review-tool repairs and anchor preparation are saved, but the final bundle requires exact final paper/formal/generator commits, refreshed anchors, matching PDFs, rendering and source-link checks, and archive verification. Only then can a new immutable release and byte-verified Zenodo archive supply the version DOI.
-
-See [the saved release preparation](docs/release-preparation.md) and the [formal plan](https://github.com/itpplasma/stafford38-formal/blob/main/PLAN.md). The final Johanna and Max review handover is pending.
-
-## Branches for the next bundle
-
-This repository's `main` retains the historical bundle and release drafts. Generator, anchor and map preparation is pushed in `itpplasma/stafford38-formal` at `origin/wip/sync-20261003/faepmac1/stafford38-review-bundle-candidate` (`3bd3b2926464`). Formal proof preparation is separately pushed at `origin/wip/sync-20261003/faepmac1/stafford38-qwen` (`c3dccd4b3f93`). Fetch those branches in the formal repository and use a new worktree to inspect them. They still require acceptance and final source selection before building supplementary assets.
+Johanna’s manuscript review and Max’s whole-paper correspondence review remain pending. The final S4 map and P4 PDFs are being copied into this candidate. Then the controller will render `index.html`, calculate final manifest hashes and `SHA256SUMS`, build and inspect the ordered 16-member `ESM_1.zip`, and compare the published archive with the tagged tree. The supplementary DOI remains unassigned until that archive comparison passes. Historical supplementary v0.1.3 and formal v1.2.3 remain unchanged; formal v1.2.3 DOI `10.5281/zenodo.23080671` applies only to that historical source.

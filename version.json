@@ -1,1 +1,14 @@
-{"version":"2026-10-01.13","paper":"bce92ec2d8ac53993b3edc568561a814ce5db518","formal":"ba18817c4cd4e5cfeab11da44ce76623f4c2b508","generator":"80a44832fcace075"}
+{
+  "version": "2026-10-03-v0.2.0-frozen-review",
+  "paper": "2fde6c6311b9cc2e8b789649132ff87bdbcdb3d5",
+  "formal": "54c4f0c902bcd840e44eeba80686ef3fa0e7dc2b",
+  "generator": "52e2358f0bcd388a",
+  "status": "Frozen v0.2.0 package ready for controller publication",
+  "paper_origin_commit": "4d19a183846beb50f37ad2b4e51e836a76ed8bac",
+  "paper_snapshot_commit": "2fde6c6311b9cc2e8b789649132ff87bdbcdb3d5",
+  "formal_commit": "54c4f0c902bcd840e44eeba80686ef3fa0e7dc2b",
+  "generator_commit": "40967b6740c2ceaf515a2fb47a5ca9571be6495f",
+  "formal_version_doi": "10.5281/zenodo.23126868",
+  "supplementary_version_doi": null,
+  "release_version": "0.2.0"
+}

@@ -1,66 +1,167 @@
 {
   "schema": 1,
-  "status": "Historical v0.1.3 review bundle; predates the restored current manuscript. Current work stopped; final correspondence and next release pending.",
-  "paper_origin_commit": "093527797b85f4547e7a5be03556fa9725b6077c",
+  "status": "Frozen v0.2.0 package ready for controller publication",
+  "paper_origin_commit": "4d19a183846beb50f37ad2b4e51e836a76ed8bac",
   "public_paper_snapshot": {
     "repo": "itpplasma/stafford38-formal",
-    "commit": "bce92ec2d8ac53993b3edc568561a814ce5db518",
+    "commit": "2fde6c6311b9cc2e8b789649132ff87bdbcdb3d5",
     "file": "docs/paper-lean-audit/manuscript/human_readable_main.tex",
-    "note": "Historical manuscript snapshot before the current author-proof restoration; not the final whole-paper correspondence.",
+    "sha256": "a6a50d1a46fccb964ba72a0f60a85aec46b4d20e7d17e7a248dd152e62c87a88",
+    "note": "Exact six-input public P4 snapshot S4; source hashes verified against the actual PDF build receipt.",
     "origin_repo": "itpplasma/stafford38-paper",
-    "origin_commit": "093527797b85f4547e7a5be03556fa9725b6077c"
+    "origin_commit": "4d19a183846beb50f37ad2b4e51e836a76ed8bac"
+  },
+  "paper_snapshot_inputs": {
+    "scope": "Five TeX/bib compilation inputs plus LICENSE.txt licensing material, exactly pinned at public S4",
+    "sha256": {
+      "human_readable_main.tex": "a6a50d1a46fccb964ba72a0f60a85aec46b4d20e7d17e7a248dd152e62c87a88",
+      "main.tex": "b55ef1f254b7611b37b4bdf7633991400cdb4512bd03e0532d1f90f561cf7cbe",
+      "ai_review.tex": "396398a87768215c4eb1a4d6d6eea6740df6d2d26dcea5fba8a357350e8e9d6f",
+      "lean_proof_details.tex": "fb8b61d1570ade614cdb451f1a93544c09f1d2abeac6ba7a254b8d7bf5cc982a",
+      "references.bib": "8fd36d0da6bc94b10f7e4b04dc5a5a7a7fa1e8dfc17cd31c17b5e780efa7f394",
+      "LICENSE.txt": "98b6fde2693d4044dce4a071640e90bd8d250dd789d9033dbd5b77c79f389de4"
+    }
   },
   "formal_source": {
     "repo": "itpplasma/stafford38-formal",
-    "commit": "ba18817c4cd4e5cfeab11da44ce76623f4c2b508",
-    "note": "Signed v1.2.3 release, DOI 10.5281/zenodo.23080671. Historical theorem archive; not a receipt for the unfinished paper-compatible route."
+    "commit": "54c4f0c902bcd840e44eeba80686ef3fa0e7dc2b",
+    "version": "1.3.0",
+    "doi": "10.5281/zenodo.23126868",
+    "note": "Formal release R. Formal core C2 12ae3cc49152672a48a96f13994314b65ae38197 passed full repository verification, the retained R2 targets and all four actual Palomar comparisons (R4), and the 399-name T80 declaration audit. The 656 core files match C2 exactly; all 1,163 tagged release files were checked byte-for-byte with zero extras, missing files or mismatches. The core proof receipt and release/core congruence are separate evidence."
   },
-  "formal_version_doi": "10.5281/zenodo.23080671",
+  "formal_dependencies": {
+    "lean_toolchain": "leanprover/lean4:v4.35.0-rc3",
+    "mathlib": {
+      "repo": "leanprover-community/mathlib4",
+      "commit": "c55e6e786f49471c72fbddbec5415808896aec1e"
+    },
+    "algebraicAnalysis": {
+      "repo": "itpplasma/algebraic-analysis",
+      "commit": "bbbbf3fc358ca8100b158cec4cf47f336ab70163",
+      "version": "0.3.3"
+    }
+  },
+  "historical_releases": {
+    "supplementary": {
+      "version": "0.1.3",
+      "status": "historical bundle; GitHub release remains a draft and no supplementary DOI is recorded."
+    },
+    "formal": {
+      "version": "1.2.3",
+      "commit": "ba18817c4cd4e5cfeab11da44ce76623f4c2b508",
+      "doi": "10.5281/zenodo.23080671",
+      "note": "Historical v1.2.3 only; its DOI does not identify formal v1.3.0 or this supplementary companion."
+    }
+  },
+  "formal_version_doi": "10.5281/zenodo.23126868",
   "generator": {
     "repo": "itpplasma/paper-lean-audit",
-    "commit": "ad0cd3d12ba62f3888432e5234c24c75919caf18",
+    "commit": "40967b6740c2ceaf515a2fb47a5ca9571be6495f",
     "license": "Apache-2.0"
   },
-  "mapping_version": "2026-10-01.13",
+  "mapping_version": "2026-10-03-v0.2.0-frozen-review",
   "zenodo_version_doi": null,
   "software_zenodo_version_doi": null,
   "files": {
-    "index.html": "77d4f9e8a7bac443368f1c639ba3e6d41a4c7cfd1a637313cc3db483844c4768",
-    "version.json": "7242c93918e5f54086d95812a283a1bc0da97d47088b5f66fef6b27112b12a49",
-    "human_readable_main.pdf": "6299c84959c8ea4a59688d18eb2a6fffa192d446d5c80f170b5c4a4bb544bbba",
-    "lean_proof_details.pdf": "ebaa365c139e283d7b5f909f113ec97f7c11479d4bfc64f6444ae003cc357658",
-    "ESM_2.pdf": "ebaa365c139e283d7b5f909f113ec97f7c11479d4bfc64f6444ae003cc357658",
-    "paper-lean-map.json": "f16ea5490677e863d7cacd7491c9ec200368797c4aa6f8c2cc145d75a910d5a9",
-    "README.md": "20a2ea3e6375ac3a79befa706c52b59356802231d9d60db93552c583493a758f",
-    "NOTICE": "8db3caab6dedb732642524b9defe6394e03fcbe3b3cb380d92dbd69a390af23b",
-    ".zenodo.json": "49e5a0c209d1d38950b9c3caa3f68737b5b610edbcf9af40b126e3e672589f5c",
-    "CITATION.cff": "3b6ffad33c17e5405bfcfc8a1e24f717565e86749460ae1077438ee18964cd6d",
-    "scripts/rebuild.py": "dcbe5cfb5c7db7c5db336ed35335e2cfe7b3153a2e662c4d9500b8904674f742",
+    "index.html": "139187e09da12f3a0c5d8156cd3147efdcb8ec656629ec067b0da1830b3579f8",
+    "version.json": "fe1abf1f52266446c7a3c45a16fbf7076bc4d6962ff5df9414e2a8f5e0bad709",
+    "human_readable_main.pdf": "8bf003db76ca308786d848b98f171b11b697a7b21efea920e659b20d0519962d",
+    "lean_proof_details.pdf": "e41058299ce6bae2dea20acc2d1ca00e92a1af13842512280dc84c37e60d8c98",
+    "ESM_2.pdf": "e41058299ce6bae2dea20acc2d1ca00e92a1af13842512280dc84c37e60d8c98",
+    "paper-lean-map.json": "d7387039c835eb5d872ff8e105da7eb70f004f1468a69317fc7e3132c84b7762",
+    "README.md": "c52298539d1765575f81930bf0499225d3c609a33d5ab3423ce50f7a213e6a97",
+    "NOTICE": "6dcd0976312d7e2a0f97578ce0d66d09ddbb21978969fb13b5db7351166ab6d3",
+    ".zenodo.json": "2262562da19649cc019dd8539667b3114334027594e29e8d6b71d5333f232945",
+    "CITATION.cff": "3e3c4416a7c43f8cede783b530003f12119d2742e13399c84bb8eb7a6be0c2c5",
+    "scripts/rebuild.py": "cdd2442c74d4fc97bce6bafaa52b4b2bac7289c98e15ac4d996ea71b654a1a86",
     "LICENSES/KaTeX-MIT.txt": "766ccc1f306c885aa45542a9846bbd0a505b27a0374f146778171c2254ce18e3",
     "LICENSES/generator-Apache-2.0.txt": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
     "LICENSES/manuscript-CC-BY-4.0.txt": "98b6fde2693d4044dce4a071640e90bd8d250dd789d9033dbd5b77c79f389de4",
-    "STATUS.md": "43f6d2b89744e6689d2d836f1f913e40f3e6aa86f125328ce37766c159b92e3c",
-    "docs/release-preparation.md": "e1e899eda14b3c7dccd4eb7f7a8e9216784a21aa6e65adfb371d82116085415c",
-    "docs/release-body-draft.md": "5e0f7b540101903a99cc1732494714d7a09504eb559ff8b2bc61928ffb6ad5c4"
+    "SHA256SUMS": null,
+    "ESM_1.zip": null
   },
+  "pending_artifacts": [],
   "checks": {
-    "embedded_tool_behavioral_tests_passed": 53,
-    "generic_behavioral_tests_passed": 52,
-    "generic_project_specific_integration_skipped": 1,
-    "paper_declarations_checked": 104,
-    "browser_publication_claims": 49,
-    "browser_optional_routes": 0,
-    "challenge_definitions": 32,
-    "katex_errors": 0,
-    "public_only_rebuild": "passed against exact public pins",
-    "human_sign_off": "pending",
-    "unselected_proofs_collapsed": 0
+    "paper_pdfs": {
+      "status": "passed",
+      "receipt": "https://github.com/itpplasma/stafford38-formal/blob/b55a2466d09dd042bc7c19004959c1cf784497a4/docs/paper-lean-audit/review-pdfs.json",
+      "undefined_citations": 0,
+      "undefined_references": 0,
+      "undefined_control_sequences": 0,
+      "ESM_2_matches_lean_proof_details": true,
+      "file_hashes": {
+        "human_readable_main.pdf": "8bf003db76ca308786d848b98f171b11b697a7b21efea920e659b20d0519962d",
+        "lean_proof_details.pdf": "e41058299ce6bae2dea20acc2d1ca00e92a1af13842512280dc84c37e60d8c98"
+      },
+      "receipt_sha256": "99035d822d6ddc6e8b4342a1aeddc7a77273282fff4859eec40302160943e244"
+    },
+    "review_map": {
+      "status": "passed: all referenced public declarations resolved by the exact pinned renderer;399 public owner/name compiler queries passed separately",
+      "map_sha256": "d7387039c835eb5d872ff8e105da7eb70f004f1468a69317fc7e3132c84b7762",
+      "cards": 57,
+      "resolved_source_reference_occurrences": 519,
+      "unresolved": 0,
+      "generator": "itpplasma/paper-lean-audit@40967b6740c2ceaf515a2fb47a5ca9571be6495f",
+      "generator_tests": "64 tests and browser oracles passed; existing 57-card walk inherited for unchanged guided-card behavior"
+    },
+    "review_site": {
+      "status": "Public-pinned P4/S4/R HTML rebuild passed;57-card browser walkthrough inherited for unchanged generator runtime",
+      "scope": "57 guided cards including both challenge cards; unchanged shared challenges and separately labeled solution variants",
+      "public_site": "https://itpplasma.github.io/stafford38-formal/",
+      "public_deployment": "Tracked separately from this immutable companion bundle"
+    },
+    "dependency_guard": {
+      "production": "passed",
+      "fixtures": "passed",
+      "main_and_alternative_routes": "passed"
+    },
+    "full_repository_verifier": {
+      "status": "passed",
+      "core_commit": "12ae3cc49152672a48a96f13994314b65ae38197",
+      "profile": "R1; retained R2 targets passed"
+    },
+    "consumers": "passed",
+    "proof_library": "passed",
+    "four_palomar_comparisons": {
+      "status": "passed",
+      "profile": "R4",
+      "count": 4
+    },
+    "human_sign_off": "pending: Johanna manuscript review; Max whole-paper correspondence review",
+    "zenodo_archive_match": "pending: supplementary archive must be compared after publication",
+    "repository_build_stage": {
+      "status": "passed",
+      "build_jobs": 4475,
+      "allocation": "3131801",
+      "verified_source": "12ae3cc49152672a48a96f13994314b65ae38197"
+    },
+    "final_source_identity": "passed: exact six P4/S4 input hashes and signed formalR code congruence; frozen bundle hashes recorded below",
+    "T80_declaration_audit": {
+      "status": "passed",
+      "public_names": 399,
+      "axiom_sorry_unsafe_additions": 0,
+      "children": 0,
+      "source_swap": false,
+      "verification_stops": 0
+    },
+    "formal_release_archive_match": {
+      "status": "passed",
+      "formal_release_commit": "54c4f0c902bcd840e44eeba80686ef3fa0e7dc2b",
+      "tagged_files": 1163,
+      "extras": 0,
+      "missing": 0,
+      "mismatches": 0,
+      "core_files": 656,
+      "core_commit": "12ae3cc49152672a48a96f13994314b65ae38197",
+      "core_mismatches": 0
+    },
+    "public_only_rebuild": "passed: exact public pins, pinned generator40967, build.mjs --check; configured HTML filename copied to index.html"
   },
-  "version": "0.1.3",
+  "version": "0.2.0",
   "development_checkpoint": {
-    "work": "stopped at owner request",
-    "background_jobs": "none",
-    "zenodo_integration": "enabled according to owner confirmation",
-    "next_release": "pending final verified source and regenerated review artifacts"
-  }
+    "work": "accepted proof and pin evidence; final S4 map/P4 PDF copy and package assembly",
+    "publication": "not yet published; supplementary DOI remains null until archive publication and byte comparison",
+    "background_jobs": "none started by package preparation"
+  },
+  "file_hashes_status": "Exact hashes for packaged files; manifest.json is excluded from manifest.files, and SHA256SUMS and ESM_1.zip are excluded from their own hash coverage. Recompute only if an inventoried input changes."
 }

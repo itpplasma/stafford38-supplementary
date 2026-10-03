@@ -1,19 +1,9 @@
-# Stafford38 reviewer companion
+# Stafford38 supplementary reviewer companion v0.2.0
 
-This repository provides a frozen review bundle for “Stafford’s conjecture on cyclicity of torsion modules.” Open [index.html](index.html) in a browser to read the mapped paper and source links, without a Lean installation or private repository access. The [living review interface](https://itpplasma.github.io/stafford38-formal/) is a read-only comparison view; Overleaf remains the manuscript editing authority. This bundle freezes the revisions in [manifest.json](manifest.json). The annotated human_readable_main.pdf preserves the visible author proof and marked local proposals; the proof-details PDF explains the selected formal routes. This is a review edition.
+This frozen reviewer companion packages the annotated manuscript and paper–Lean review map. Its accepted inputs are paper origin P4 `4d19a183846beb50f37ad2b4e51e836a76ed8bac`, public six-input snapshot S4 `2fde6c6311b9cc2e8b789649132ff87bdbcdb3d5`, formal release R `itpplasma/stafford38-formal@54c4f0c902bcd840e44eeba80686ef3fa0e7dc2b`, and audit generator `40967b6740c2ceaf515a2fb47a5ca9571be6495f`. The formal release is version 1.3.0, DOI [10.5281/zenodo.23126868](https://doi.org/10.5281/zenodo.23126868). Exact inputs and evidence scope are recorded in [manifest.json](manifest.json).
 
-Max reviews the whole paper proof and both Challenge/Solution comparisons. Johanna reviews the visible manuscript and its local mathematical proposals; a proposal remains pending until she accepts it. The formal theorem's verification receipt and Palomar record apply to their named source and theorem. For the paper-to-Lean scope and current status, consult the formal repository's paper-route-alignment.json. This bundle has no new final-source or DOI record.
+The package carries the visible author proof and keeps mathematical claim agreement, proof-route correspondence, machine verification and human review as separate claims. Formal core C2 `12ae3cc49152672a48a96f13994314b65ae38197` was fully verified; all656 protected source/tool files in formal release R match C2 byte for byte. All four Palomar comparisons and the 399-name T80 declaration audit passed. The 57 guided cards include both challenge cards and the main and alternative proof routes, which use the shared unchanged challenge statements. Johanna’s manuscript review and Max’s whole-paper correspondence review remain pending.
 
-## Journal files
+The paper PDFs, map, interactive index and ESM archive use the accepted P4/S4 inputs. The published release and its archive DOI are linked from the [v0.2.0 release page](https://github.com/itpplasma/stafford38-supplementary/releases/tag/v0.2.0). Historical supplementary v0.1.3 and formal v1.2.3 remain separate records; the latter’s DOI does not identify the v1.3.0 formal release or this companion.
 
-Online Resource 1 (`ESM_1.zip`) contains the self-contained HTML review, exact map and source manifest, annotated paper and mathematical proof supplement. Online Resource 2 (`ESM_2.pdf`) contains the readable proof accounts. These PDF and ZIP formats, descriptive captions, and Online Resource citations follow the [Inventiones supplementary guidelines](https://link.springer.com/journal/222/submission-guidelines).
-
-## Rebuilding
-
-Run `python3 scripts/rebuild.py` to rebuild the frozen browser artifact from its pinned public source revisions and generator. Reading existing files requires no Lean or Node installation. Rebuilding uses the locked JavaScript dependencies; review source changes against the pins before updating the bundle.
-
-The companion is separate from the reusable Apache-2.0 paper–Lean audit generator. Licenses and third-party notices are in LICENSES and NOTICE. Historical release records remain attached to their original sources.
-
-## Archival
-
-The [Apache-2.0 generator](https://github.com/itpplasma/paper-lean-audit) and this manuscript-specific companion have separate archives. The repository owner has confirmed that the Zenodo GitHub integration is enabled for this companion. The current v0.1.3 GitHub release remains a draft and is tied to the historical bundle with paper origin `093527797b85f4547e7a5be03556fa9725b6077c` and formal v1.2.3; it predates the restored current manuscript and has no supplementary DOI recorded. Prepare the next bundle after the full verification job and final source pins are complete. Publish a new immutable release, compare its Zenodo archive with the tagged release tree, and record its DOI only after that comparison succeeds. The formal-proof repository has its own existing Zenodo archive.
+The interactive companion is intended to open from [index.html](index.html). The reusable generator is separately distributed under Apache-2.0. Manuscript and proof-account licensing and third-party notices are listed in [NOTICE](NOTICE) and [LICENSES](LICENSES/).
