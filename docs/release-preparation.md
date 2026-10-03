@@ -1,6 +1,6 @@
 # Supplementary release preparation
 
-Status: paused at the owner's request on 2 October 2026; all owned agents and compiler jobs are stopped. Zenodo publication remains pending the final verified snapshot. The repository owner has confirmed that the Zenodo GitHub integration is enabled for `itpplasma/stafford38-supplementary`; the account setting itself is not publicly inspectable here.
+Status: synchronized on 3 October 2026; the formal campaign resumed earlier today and its candidates are preserved on the branches in [STATUS.md](../STATUS.md#branches-for-the-next-bundle). Zenodo publication remains pending the final verified snapshot. The repository owner has confirmed that the Zenodo GitHub integration is enabled for `itpplasma/stafford38-supplementary`; the account setting itself is not publicly inspectable here.
 
 ## Historical bundle
 
