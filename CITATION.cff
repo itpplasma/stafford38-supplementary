@@ -1,11 +1,11 @@
 cff-version: 1.2.0
 message: >-
-  Cite the frozen v0.2.0 reviewer companion using its Zenodo version DOI,
-  recorded on the v0.2.0 release page. Exact public source pins and verification
-  scope are listed in manifest.json.
+  Cite this v0.2.1 reviewer companion using its version-specific Zenodo DOI
+  once assigned; exact source pins and verification scope are listed in
+  manifest.json.
 title: "Stafford Conjecture 3.8: supplementary paper–Lean reviewer companion"
 type: dataset
-version: 0.2.0
+version: 0.2.1
 date-released: "2026-10-03"
 license: CC-BY-4.0
 url: "https://github.com/itpplasma/stafford38-supplementary"
@@ -16,14 +16,14 @@ authors:
     orcid: "https://orcid.org/0000-0003-4773-416X"
 identifiers:
   - type: url
-    value: "https://github.com/itpplasma/stafford38-paper/tree/4d19a183846beb50f37ad2b4e51e836a76ed8bac"
-    description: Selected paper source P4
+    value: "https://github.com/itpplasma/stafford38-paper/tree/33138378368fdc9f7bcb50947ccc9889f40cac43"
+    description: Selected paper source P6
   - type: url
-    value: "https://github.com/itpplasma/stafford38-formal/tree/2fde6c6311b9cc2e8b789649132ff87bdbcdb3d5"
-    description: Six-input public snapshot S4
+    value: "https://github.com/itpplasma/stafford38-formal/tree/0bb3aa929b931bf5d82d90f62d7508d3ae1dccc1"
+    description: Six-input public snapshot S6
   - type: url
-    value: "https://github.com/itpplasma/stafford38-formal/tree/54c4f0c902bcd840e44eeba80686ef3fa0e7dc2b"
-    description: Formal v1.3.0 source R
+    value: "https://github.com/itpplasma/stafford38-formal/tree/f9448d6307fa25aff9d9f94ce0a9c7f9b03e63ff"
+    description: Formal v1.3.1 source R
   - type: doi
-    value: "10.5281/zenodo.23126868"
-    description: Formal v1.3.0 release; not the supplementary companion DOI
+    value: "10.5281/zenodo.23127367"
+    description: Formal v1.3.1 release; not the supplementary companion DOI

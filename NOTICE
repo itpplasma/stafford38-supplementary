@@ -1,6 +1,6 @@
-Stafford38 supplementary reviewer companion, v0.2.0 release preparation.
+Stafford38 supplementary reviewer companion, v0.2.1 reviewer companion.
 
-Accepted review inputs: paper origin P4 4d19a183846beb50f37ad2b4e51e836a76ed8bac; public snapshot S4 2fde6c6311b9cc2e8b789649132ff87bdbcdb3d5; formal release R 54c4f0c902bcd840e44eeba80686ef3fa0e7dc2b, version 1.3.0, DOI 10.5281/zenodo.23126868; audit generator 40967b6740c2ceaf515a2fb47a5ca9571be6495f. The proof core C2 12ae3cc49152672a48a96f13994314b65ae38197 was fully verified, and the formal release files were checked for byte-for-byte congruence with that core. Exact paths and evidence scopes are recorded in manifest.json.
+Accepted review inputs: paper origin P6 33138378368fdc9f7bcb50947ccc9889f40cac43; public snapshot S6 0bb3aa929b931bf5d82d90f62d7508d3ae1dccc1; formal release R131 f9448d6307fa25aff9d9f94ce0a9c7f9b03e63ff, version 1.3.1, DOI 10.5281/zenodo.23127367; audit generator 40967b6740c2ceaf515a2fb47a5ca9571be6495f. The proof core C2 12ae3cc49152672a48a96f13994314b65ae38197 was fully verified, and the 654 protected proof/tool files were checked for byte-for-byte congruence with that core, with formalization.yaml provenance metadata and lakefile.toml package version recorded as exceptions. Exact paths and evidence scopes are recorded in manifest.json.
 
 Manuscript and curated correspondence text: CC BY 4.0, Christopher Albert et al. The reusable paper–Lean audit generator is separately distributed under Apache-2.0. KaTeX is MIT; see LICENSES/KaTeX-MIT.txt and its font notices. External pinned Lean, Mathlib and AlgebraicAnalysis sources retain their own licenses and attributions.
 

@@ -1,6 +1,6 @@
-# ESM_1.zip member inventory for v0.2.0
+# ESM_1.zip member inventory for v0.2.1
 
-The archive must contain exactly these 16 paths, in this order. The historical v0.1.3 archive remains unchanged. Build this archive only after the final S4 map, P4 PDFs, index and checksums have been frozen.
+The archive contains exactly these 18 paths, in this order. Historical v0.2.0 and v0.1.3 archives remain unchanged. The current review ledger and actual P6 PDF receipt accompany the map and PDFs.
 
 1. `index.html`
 2. `version.json`
@@ -16,5 +16,7 @@ The archive must contain exactly these 16 paths, in this order. The historical v
 12. `LICENSES/KaTeX-MIT.txt`
 13. `LICENSES/generator-Apache-2.0.txt`
 14. `LICENSES/manuscript-CC-BY-4.0.txt`
-15. `manifest.json`
-16. `SHA256SUMS`
+15. `docs/current-review.json`
+16. `docs/paper-review-pdfs.json`
+17. `manifest.json`
+18. `SHA256SUMS`

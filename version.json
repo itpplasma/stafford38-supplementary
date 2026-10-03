@@ -1,14 +1,8 @@
 {
-  "version": "2026-10-03-v0.2.0-frozen-review",
-  "paper": "2fde6c6311b9cc2e8b789649132ff87bdbcdb3d5",
-  "formal": "54c4f0c902bcd840e44eeba80686ef3fa0e7dc2b",
+  "version": "2026-10-03-formal-v1.3.1-review",
+  "paper": "0bb3aa929b931bf5d82d90f62d7508d3ae1dccc1",
+  "formal": "f9448d6307fa25aff9d9f94ce0a9c7f9b03e63ff",
   "generator": "52e2358f0bcd388a",
-  "status": "Frozen v0.2.0 package ready for controller publication",
-  "paper_origin_commit": "4d19a183846beb50f37ad2b4e51e836a76ed8bac",
-  "paper_snapshot_commit": "2fde6c6311b9cc2e8b789649132ff87bdbcdb3d5",
-  "formal_commit": "54c4f0c902bcd840e44eeba80686ef3fa0e7dc2b",
-  "generator_commit": "40967b6740c2ceaf515a2fb47a5ca9571be6495f",
-  "formal_version_doi": "10.5281/zenodo.23126868",
-  "supplementary_version_doi": null,
-  "release_version": "0.2.0"
+  "release_version": "0.2.1",
+  "status": "Frozen v0.2.1 P6/S6/R131 reviewer companion; proof evidence passed, human reviews pending; own DOI recorded after publication and archive comparison."
 }

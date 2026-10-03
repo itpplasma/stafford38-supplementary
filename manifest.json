@@ -1,33 +1,33 @@
 {
   "schema": 1,
-  "status": "Frozen v0.2.0 package ready for controller publication",
-  "paper_origin_commit": "4d19a183846beb50f37ad2b4e51e836a76ed8bac",
+  "status": "Frozen v0.2.1 P6/S6/R131 reviewer companion; proof evidence passed, human reviews pending; own DOI recorded after publication and archive comparison.",
+  "paper_origin_commit": "33138378368fdc9f7bcb50947ccc9889f40cac43",
   "public_paper_snapshot": {
     "repo": "itpplasma/stafford38-formal",
-    "commit": "2fde6c6311b9cc2e8b789649132ff87bdbcdb3d5",
+    "commit": "0bb3aa929b931bf5d82d90f62d7508d3ae1dccc1",
     "file": "docs/paper-lean-audit/manuscript/human_readable_main.tex",
-    "sha256": "a6a50d1a46fccb964ba72a0f60a85aec46b4d20e7d17e7a248dd152e62c87a88",
-    "note": "Exact six-input public P4 snapshot S4; source hashes verified against the actual PDF build receipt.",
+    "note": "Frozen P6/S6 review with formal v1.3.1 DOI citation and source links; mathematical author/proposal text unchanged.",
     "origin_repo": "itpplasma/stafford38-paper",
-    "origin_commit": "4d19a183846beb50f37ad2b4e51e836a76ed8bac"
+    "origin_commit": "33138378368fdc9f7bcb50947ccc9889f40cac43",
+    "sha256": "a20a396280b867bfab034338fb8410b799d3f8ea9311864fa377ebce4fe84706"
   },
   "paper_snapshot_inputs": {
-    "scope": "Five TeX/bib compilation inputs plus LICENSE.txt licensing material, exactly pinned at public S4",
+    "scope": "Five TeX/bib compilation inputs plus LICENSE.txt licensing material, exactly pinned at public S6",
     "sha256": {
-      "human_readable_main.tex": "a6a50d1a46fccb964ba72a0f60a85aec46b4d20e7d17e7a248dd152e62c87a88",
+      "human_readable_main.tex": "a20a396280b867bfab034338fb8410b799d3f8ea9311864fa377ebce4fe84706",
       "main.tex": "b55ef1f254b7611b37b4bdf7633991400cdb4512bd03e0532d1f90f561cf7cbe",
-      "ai_review.tex": "396398a87768215c4eb1a4d6d6eea6740df6d2d26dcea5fba8a357350e8e9d6f",
+      "ai_review.tex": "fb502582c8e0f88544098d1aba063ea68e0674545dfe723778dcdbbede891edd",
       "lean_proof_details.tex": "fb8b61d1570ade614cdb451f1a93544c09f1d2abeac6ba7a254b8d7bf5cc982a",
-      "references.bib": "8fd36d0da6bc94b10f7e4b04dc5a5a7a7fa1e8dfc17cd31c17b5e780efa7f394",
+      "references.bib": "15907b94c6b3ba3fbd5534ccea1a47fd2de24c6d2f7bf7acbbbf51440a8af843",
       "LICENSE.txt": "98b6fde2693d4044dce4a071640e90bd8d250dd789d9033dbd5b77c79f389de4"
     }
   },
   "formal_source": {
     "repo": "itpplasma/stafford38-formal",
-    "commit": "54c4f0c902bcd840e44eeba80686ef3fa0e7dc2b",
-    "version": "1.3.0",
-    "doi": "10.5281/zenodo.23126868",
-    "note": "Formal release R. Formal core C2 12ae3cc49152672a48a96f13994314b65ae38197 passed full repository verification, the retained R2 targets and all four actual Palomar comparisons (R4), and the 399-name T80 declaration audit. The 656 core files match C2 exactly; all 1,163 tagged release files were checked byte-for-byte with zero extras, missing files or mismatches. The core proof receipt and release/core congruence are separate evidence."
+    "commit": "f9448d6307fa25aff9d9f94ce0a9c7f9b03e63ff",
+    "note": "Signed formal v1.3.1 provenance correction;654 protected proof/tool files byte-identical to C2, package version and descriptor metadata exceptions recorded. DOI10.5281/zenodo.23127367.",
+    "version": "1.3.1",
+    "doi": "10.5281/zenodo.23127367"
   },
   "formal_dependencies": {
     "lean_toolchain": "leanprover/lean4:v4.35.0-rc3",
@@ -43,40 +43,51 @@
   },
   "historical_releases": {
     "supplementary": {
-      "version": "0.1.3",
-      "status": "historical bundle; GitHub release remains a draft and no supplementary DOI is recorded."
+      "version": "0.2.0",
+      "commit": "31aea05344c3fa35fb19a3ff35f7518d723e26ec",
+      "doi": "10.5281/zenodo.23127103",
+      "files": 24,
+      "archive_status": "byte-verified"
     },
     "formal": {
       "version": "1.2.3",
       "commit": "ba18817c4cd4e5cfeab11da44ce76623f4c2b508",
       "doi": "10.5281/zenodo.23080671",
       "note": "Historical v1.2.3 only; its DOI does not identify formal v1.3.0 or this supplementary companion."
+    },
+    "formal_v1.3.0": {
+      "version": "1.3.0",
+      "commit": "54c4f0c902bcd840e44eeba80686ef3fa0e7dc2b",
+      "doi": "10.5281/zenodo.23126868",
+      "note": "Historical formal release; v1.3.1 corrects provenance metadata and package version without changing proof sources."
     }
   },
-  "formal_version_doi": "10.5281/zenodo.23126868",
+  "formal_version_doi": "10.5281/zenodo.23127367",
   "generator": {
     "repo": "itpplasma/paper-lean-audit",
     "commit": "40967b6740c2ceaf515a2fb47a5ca9571be6495f",
     "license": "Apache-2.0"
   },
-  "mapping_version": "2026-10-03-v0.2.0-frozen-review",
+  "mapping_version": "2026-10-03-formal-v1.3.1-review",
   "zenodo_version_doi": null,
   "software_zenodo_version_doi": null,
   "files": {
-    "index.html": "139187e09da12f3a0c5d8156cd3147efdcb8ec656629ec067b0da1830b3579f8",
-    "version.json": "fe1abf1f52266446c7a3c45a16fbf7076bc4d6962ff5df9414e2a8f5e0bad709",
-    "human_readable_main.pdf": "8bf003db76ca308786d848b98f171b11b697a7b21efea920e659b20d0519962d",
-    "lean_proof_details.pdf": "e41058299ce6bae2dea20acc2d1ca00e92a1af13842512280dc84c37e60d8c98",
-    "ESM_2.pdf": "e41058299ce6bae2dea20acc2d1ca00e92a1af13842512280dc84c37e60d8c98",
-    "paper-lean-map.json": "d7387039c835eb5d872ff8e105da7eb70f004f1468a69317fc7e3132c84b7762",
-    "README.md": "c52298539d1765575f81930bf0499225d3c609a33d5ab3423ce50f7a213e6a97",
-    "NOTICE": "6dcd0976312d7e2a0f97578ce0d66d09ddbb21978969fb13b5db7351166ab6d3",
-    ".zenodo.json": "2262562da19649cc019dd8539667b3114334027594e29e8d6b71d5333f232945",
-    "CITATION.cff": "3e3c4416a7c43f8cede783b530003f12119d2742e13399c84bb8eb7a6be0c2c5",
+    "index.html": "f3b010b0fec455f5e91ad4ebddfeb79d2a5f4f503d008427ec21a37345f90af3",
+    "version.json": "07f3b09d6c77c1b693f0b6d7aedfcd15ed068d41c6cab1d03e1cddd8f9a340eb",
+    "human_readable_main.pdf": "5e009b6ead72e38feb6e5edeb3138a5a2454c1376eb4f11114e4b0c02b971860",
+    "lean_proof_details.pdf": "e853ba7a37ee3fa5d13acb606c3562c187d71786ba272c5cd2bde6097fbc2c2d",
+    "ESM_2.pdf": "e853ba7a37ee3fa5d13acb606c3562c187d71786ba272c5cd2bde6097fbc2c2d",
+    "paper-lean-map.json": "f9c257d1882e474e2b1db3461a73d497c2a15d32755b5711fa150a18248c1cdf",
+    "README.md": "e97732e638c917ce36497e2d6f3066a0c04b6cd4e6dfccde14ab6bf7050aaa06",
+    "NOTICE": "a3b1c929f164d462559d59f1e43d709aae5a38a454a6fa4c840d6c2b845bcf95",
+    ".zenodo.json": "43cc910da5e583ec8849d13496588e46127defe03fac91b2d085e21d4e96cb52",
+    "CITATION.cff": "bbf3d409886e7833e699a2c2026fe37fbffd5d966f9f0791a514f1c1e87d12dc",
     "scripts/rebuild.py": "cdd2442c74d4fc97bce6bafaa52b4b2bac7289c98e15ac4d996ea71b654a1a86",
     "LICENSES/KaTeX-MIT.txt": "766ccc1f306c885aa45542a9846bbd0a505b27a0374f146778171c2254ce18e3",
     "LICENSES/generator-Apache-2.0.txt": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
     "LICENSES/manuscript-CC-BY-4.0.txt": "98b6fde2693d4044dce4a071640e90bd8d250dd789d9033dbd5b77c79f389de4",
+    "docs/current-review.json": "328900879226207e1ff4876de09a9ba2c7f3d633998b039ee539972a1c9c00c6",
+    "docs/paper-review-pdfs.json": "a5286333cc4234e3265b925218a023ffcc4a01c33c06f114321fa41ea9ba3cdf",
     "SHA256SUMS": null,
     "ESM_1.zip": null
   },
@@ -84,29 +95,29 @@
   "checks": {
     "paper_pdfs": {
       "status": "passed",
-      "receipt": "https://github.com/itpplasma/stafford38-formal/blob/b55a2466d09dd042bc7c19004959c1cf784497a4/docs/paper-lean-audit/review-pdfs.json",
+      "receipt": "https://github.com/itpplasma/stafford38-formal/blob/f9e3d8a7be63c5286045261592f0d262745d637a/docs/paper-lean-audit/review-pdfs.json",
       "undefined_citations": 0,
       "undefined_references": 0,
       "undefined_control_sequences": 0,
       "ESM_2_matches_lean_proof_details": true,
       "file_hashes": {
-        "human_readable_main.pdf": "8bf003db76ca308786d848b98f171b11b697a7b21efea920e659b20d0519962d",
-        "lean_proof_details.pdf": "e41058299ce6bae2dea20acc2d1ca00e92a1af13842512280dc84c37e60d8c98"
+        "human_readable_main.pdf": "5e009b6ead72e38feb6e5edeb3138a5a2454c1376eb4f11114e4b0c02b971860",
+        "lean_proof_details.pdf": "e853ba7a37ee3fa5d13acb606c3562c187d71786ba272c5cd2bde6097fbc2c2d"
       },
-      "receipt_sha256": "99035d822d6ddc6e8b4342a1aeddc7a77273282fff4859eec40302160943e244"
+      "receipt_sha256": "a5286333cc4234e3265b925218a023ffcc4a01c33c06f114321fa41ea9ba3cdf"
     },
     "review_map": {
-      "status": "passed: all referenced public declarations resolved by the exact pinned renderer;399 public owner/name compiler queries passed separately",
-      "map_sha256": "d7387039c835eb5d872ff8e105da7eb70f004f1468a69317fc7e3132c84b7762",
+      "status": "passed: all referenced public declarations resolved by the exact pinned renderer; 399 public owner/name compiler queries passed separately",
+      "map_sha256": "f9c257d1882e474e2b1db3461a73d497c2a15d32755b5711fa150a18248c1cdf",
       "cards": 57,
       "resolved_source_reference_occurrences": 519,
       "unresolved": 0,
       "generator": "itpplasma/paper-lean-audit@40967b6740c2ceaf515a2fb47a5ca9571be6495f",
-      "generator_tests": "64 tests and browser oracles passed; existing 57-card walk inherited for unchanged guided-card behavior"
+      "generator_tests": "Existing pinned-generator tests and browser oracles are inherited for unchanged runtime; no new guided-card behavior is claimed."
     },
     "review_site": {
-      "status": "Public-pinned P4/S4/R HTML rebuild passed;57-card browser walkthrough inherited for unchanged generator runtime",
-      "scope": "57 guided cards including both challenge cards; unchanged shared challenges and separately labeled solution variants",
+      "status": "P6/S6/R131 public-pinned HTML rebuild passed using exact public inputs and pinned generator.",
+      "scope": "57 guided cards; both challenge cards and main/alternative solution routes are separately identified.",
       "public_site": "https://itpplasma.github.io/stafford38-formal/",
       "public_deployment": "Tracked separately from this immutable companion bundle"
     },
@@ -135,7 +146,7 @@
       "allocation": "3131801",
       "verified_source": "12ae3cc49152672a48a96f13994314b65ae38197"
     },
-    "final_source_identity": "passed: exact six P4/S4 input hashes and signed formalR code congruence; frozen bundle hashes recorded below",
+    "final_source_identity": "passed: exact six P6/S6 input hashes, actual PDF build receipt and signed formal R131 source pin; frozen package hashes recorded below.",
     "T80_declaration_audit": {
       "status": "passed",
       "public_names": 399,
@@ -146,21 +157,36 @@
     },
     "formal_release_archive_match": {
       "status": "passed",
-      "formal_release_commit": "54c4f0c902bcd840e44eeba80686ef3fa0e7dc2b",
-      "tagged_files": 1163,
+      "formal_release_commit": "f9448d6307fa25aff9d9f94ce0a9c7f9b03e63ff",
+      "tagged_files": 1172,
       "extras": 0,
       "missing": 0,
       "mismatches": 0,
-      "core_files": 656,
+      "archive_sha256": "62eea6ae5488a387189d1072068b441612867a0c9fa6a8f2bf9f66903916fe80",
+      "core_files": 654,
       "core_commit": "12ae3cc49152672a48a96f13994314b65ae38197",
-      "core_mismatches": 0
+      "core_mismatches": 0,
+      "core_manifest_sha256": "9603736eeadacc3cb159027df43dfed4702babf505236f86b2b5d336756ac1be",
+      "metadata_exceptions": [
+        "formalization.yaml receipt routing and completed-replay scope",
+        "lakefile.toml package version1.3.1"
+      ],
+      "receipt": "https://github.com/itpplasma/stafford38-formal/blob/f9e3d8a7be63c5286045261592f0d262745d637a/docs/qwen-campaign/notes/T91-v1.3.1-code-congruence-20261003.json",
+      "scope": "All656 C2 protected files except formalization.yaml provenance metadata and lakefile.toml package version. All mathematical sources, challenges, solutions, dependency pins and verification programs are byte-identical. lakefile.toml differs only by version1.3.0->1.3.1."
     },
-    "public_only_rebuild": "passed: exact public pins, pinned generator40967, build.mjs --check; configured HTML filename copied to index.html"
+    "public_only_rebuild": "passed: exact public paper/formal/library/global/mathlib/generator pins; build.mjs --check; generated configured HTML copied to index.html; actual log evidence/rebuild-P6-S6-R131.log.",
+    "online_palomar": {
+      "source": "owner report in current-review.json",
+      "verification_run": "37150915082",
+      "mechanical_verification": "passed",
+      "automated_review": "pending",
+      "registration": "pending"
+    }
   },
-  "version": "0.2.0",
+  "version": "0.2.1",
   "development_checkpoint": {
-    "work": "accepted proof and pin evidence; final S4 map/P4 PDF copy and package assembly",
-    "publication": "not yet published; supplementary DOI remains null until archive publication and byte comparison",
+    "work": "P6/S6/R131 map, current review ledger, actual PDF receipt and final package assembled",
+    "publication": "own v0.2.1 DOI recorded after publication and archive byte comparison",
     "background_jobs": "none started by package preparation"
   },
   "file_hashes_status": "Exact hashes for packaged files; manifest.json is excluded from manifest.files, and SHA256SUMS and ESM_1.zip are excluded from their own hash coverage. Recompute only if an inventoried input changes."

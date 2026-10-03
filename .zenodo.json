@@ -1,7 +1,7 @@
 {
-  "title": "Stafford Conjecture 3.8: supplementary paper\u2013Lean reviewer companion",
+  "title": "Stafford Conjecture 3.8: supplementary paper–Lean reviewer companion",
   "upload_type": "dataset",
-  "description": "Unpublished v0.2.0 supplementary reviewer companion for paper P4 4d19a183846beb50f37ad2b4e51e836a76ed8bac, public snapshot S4 2fde6c6311b9cc2e8b789649132ff87bdbcdb3d5, formal release R 54c4f0c902bcd840e44eeba80686ef3fa0e7dc2b (v1.3.0; DOI 10.5281/zenodo.23126868), and pinned audit generator 40967b6740c2ceaf515a2fb47a5ca9571be6495f. Formal core C2 12ae3cc49152672a48a96f13994314b65ae38197 passed full verification and actual comparisons; release/core congruence is recorded separately. Marked mathematical proposals and whole-paper correspondence remain subject to human review. No DOI is assigned to this supplementary archive before publication and archive comparison.",
+  "description": "Version 0.2.1 reviewer companion for paper P6 33138378368fdc9f7bcb50947ccc9889f40cac43, public snapshot S6 0bb3aa929b931bf5d82d90f62d7508d3ae1dccc1, formal release R f9448d6307fa25aff9d9f94ce0a9c7f9b03e63ff (v1.3.1; DOI 10.5281/zenodo.23127367), and audit generator 40967b6740c2ceaf515a2fb47a5ca9571be6495f. The full formal verifier, four actual local Palomar comparisons and 399 public owner/name checks passed. Formal verification and paper–Lean correspondence are distinct claims. The visible author proof is preserved; proposed corrections remain for human review. Johanna's manuscript review and Max's whole-paper correspondence review remain pending. The supplementary archive's version-specific DOI is recorded after publication and byte comparison.",
   "creators": [
     {
       "name": "Albert, Christopher",
@@ -20,17 +20,17 @@
   ],
   "related_identifiers": [
     {
-      "identifier": "https://github.com/itpplasma/stafford38-paper/tree/4d19a183846beb50f37ad2b4e51e836a76ed8bac",
+      "identifier": "https://github.com/itpplasma/stafford38-paper/tree/33138378368fdc9f7bcb50947ccc9889f40cac43",
       "relation": "isSupplementTo",
       "resource_type": "publication"
     },
     {
-      "identifier": "https://github.com/itpplasma/stafford38-formal/tree/54c4f0c902bcd840e44eeba80686ef3fa0e7dc2b",
+      "identifier": "https://github.com/itpplasma/stafford38-formal/tree/f9448d6307fa25aff9d9f94ce0a9c7f9b03e63ff",
       "relation": "isSupplementTo",
       "resource_type": "software"
     },
     {
-      "identifier": "https://doi.org/10.5281/zenodo.23126868",
+      "identifier": "https://doi.org/10.5281/zenodo.23127367",
       "relation": "isSupplementTo",
       "resource_type": "software"
     },
@@ -40,5 +40,5 @@
       "resource_type": "software"
     }
   ],
-  "version": "v0.2.0"
+  "version": "v0.2.1"
 }
