@@ -82,12 +82,12 @@
   "files": {
     ".github/workflows/pages.yml": "c59be78c49fed449d1c9fd31ffd6dda853c539212b60156476d19002df4554d7",
     ".zenodo.json": "9c3a46f9756ec0cae8f31ec3ac8ff0c075e44ce9183a17de70055d9f9d3fcfe2",
-    "CITATION.cff": "de278cdd06f434b73e889de9f6136bc53478a9af9fcf05fa131d42dd5ea1195e",
+    "CITATION.cff": "6198a13bd349d35554541c82562f6f7596926c35590c103c060bae9404d50e26",
     "LICENSES/KaTeX-MIT.txt": "766ccc1f306c885aa45542a9846bbd0a505b27a0374f146778171c2254ce18e3",
     "LICENSES/generator-Apache-2.0.txt": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
     "LICENSES/manuscript-CC-BY-4.0.txt": "98b6fde2693d4044dce4a071640e90bd8d250dd789d9033dbd5b77c79f389de4",
     "NOTICE": "978a664c456dbc7d118f891dc8ecea3be1ef4609ef06970ceff2d57bf113d0af",
-    "README.md": "684899a3c5a61261aa8a49b9aabf302f237225d43a59e40febf8994729e7e922",
+    "README.md": "1b5bc9e4c3c8b2719272d08d3d10a8d9df50d8924b8f379738a5e18a721def0d",
     "human_readable_main.pdf": "7f3b5f3b2c498a1452a19cc2f4877638a48598a07f482daf9a166b44e764a32c",
     "index.html": "7dcabdbe958900737ea5c6d01e549da93b5131eee4de5d60e7c2825e1182d3d7",
     "lean_proof_details.pdf": "a043efcace06d6fee04f2cbc205a93a53f0999c01cb9e45e4399a435215bd8de",
@@ -121,5 +121,13 @@
       "skipped": 1,
       "skip": "Historical paper fixture is unavailable in the canonical renderer checkout; current pinned paper passes the release build."
     }
+  },
+  "archive": {
+    "doi": "10.5281/zenodo.23132562",
+    "tag": "v0.2.2",
+    "release_commit": "a114b06749fb01cf352f8b13ad3fda8267293ac6",
+    "sha256": "c7f16440656e5c201836ba998380a99c76458953a7775f0628ff7a9d9638bec7",
+    "files": 16,
+    "status": "byte-verified"
   }
 }

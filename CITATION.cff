@@ -5,7 +5,7 @@ type: dataset
 version: 0.2.2
 date-released: "2026-10-04"
 license: CC-BY-4.0
-doi: "10.5281/zenodo.23127102"
+doi: "10.5281/zenodo.23132562"
 url: "https://itpplasma.github.io/stafford38-supplementary/"
 authors:
   - family-names: Albert
