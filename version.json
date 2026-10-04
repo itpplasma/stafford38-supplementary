@@ -1,8 +1,7 @@
 {
-  "version": "2026-10-03-formal-v1.3.1-review",
-  "paper": "0bb3aa929b931bf5d82d90f62d7508d3ae1dccc1",
+  "version": "2026-10-04-v0.2.2-reader",
+  "paper": "9f6ca3241edcf88da42a3a000f25514d105e2f30",
   "formal": "f9448d6307fa25aff9d9f94ce0a9c7f9b03e63ff",
-  "generator": "52e2358f0bcd388a",
-  "release_version": "0.2.1",
-  "status": "Frozen v0.2.1 P6/S6/R131 reviewer companion; proof evidence passed, human reviews pending; own DOI recorded after publication and archive comparison."
+  "generator": "844c3d5ad88ad1c6",
+  "release_version": "0.2.2"
 }

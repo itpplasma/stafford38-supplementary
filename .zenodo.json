@@ -1,7 +1,7 @@
 {
-  "title": "Stafford Conjecture 3.8: supplementary paper–Lean reviewer companion",
+  "title": "Stafford\u2019s Conjecture 3.8: paper and Lean proof comparison",
   "upload_type": "dataset",
-  "description": "Version 0.2.1 reviewer companion for paper P6 33138378368fdc9f7bcb50947ccc9889f40cac43, public snapshot S6 0bb3aa929b931bf5d82d90f62d7508d3ae1dccc1, formal release R f9448d6307fa25aff9d9f94ce0a9c7f9b03e63ff (v1.3.1; DOI 10.5281/zenodo.23127367), and audit generator 40967b6740c2ceaf515a2fb47a5ca9571be6495f. The full formal verifier, four actual local Palomar comparisons and 399 public owner/name checks passed. Formal verification and paper–Lean correspondence are distinct claims. The visible author proof is preserved; proposed corrections remain for human review. Johanna's manuscript review and Max's whole-paper correspondence review remain pending. The supplementary archive's version-specific DOI is recorded after publication and byte comparison.",
+  "description": "<p><a href=\"https://itpplasma.github.io/stafford38-supplementary/\">Open the paper and Lean proof comparison</a>.</p><p>All 57 manuscript passages beside their mapped Lean declarations and complete proof bodies, with direct links to the exact sources. Includes offline HTML, manuscript and proof-details PDFs, and reproducible source pins. Download the ZIP, unzip it, and open index.html in a browser.</p><p>Uses formal proof v1.3.1 (DOI 10.5281/zenodo.23127367). Proposed manuscript corrections remain subject to author review.</p>",
   "creators": [
     {
       "name": "Albert, Christopher",
@@ -20,25 +20,20 @@
   ],
   "related_identifiers": [
     {
-      "identifier": "https://github.com/itpplasma/stafford38-paper/tree/33138378368fdc9f7bcb50947ccc9889f40cac43",
+      "identifier": "https://itpplasma.github.io/stafford38-supplementary/",
       "relation": "isSupplementTo",
       "resource_type": "publication"
     },
     {
-      "identifier": "https://github.com/itpplasma/stafford38-formal/tree/f9448d6307fa25aff9d9f94ce0a9c7f9b03e63ff",
+      "identifier": "https://github.com/itpplasma/stafford38-paper/tree/760c68d2d79a8fd2c4b58f35f32dd90969591300",
       "relation": "isSupplementTo",
-      "resource_type": "software"
+      "resource_type": "publication"
     },
     {
       "identifier": "https://doi.org/10.5281/zenodo.23127367",
       "relation": "isSupplementTo",
       "resource_type": "software"
-    },
-    {
-      "identifier": "https://github.com/itpplasma/paper-lean-audit/tree/40967b6740c2ceaf515a2fb47a5ca9571be6495f",
-      "relation": "requires",
-      "resource_type": "software"
     }
   ],
-  "version": "v0.2.1"
+  "version": "v0.2.2"
 }

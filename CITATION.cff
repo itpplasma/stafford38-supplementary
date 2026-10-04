@@ -1,29 +1,14 @@
 cff-version: 1.2.0
-message: >-
-  Cite this v0.2.1 reviewer companion using its version-specific Zenodo DOI
-  once assigned; exact source pins and verification scope are listed in
-  manifest.json.
-title: "Stafford Conjecture 3.8: supplementary paper–Lean reviewer companion"
+message: "Cite this proof comparison using its Zenodo record."
+title: "Stafford’s Conjecture 3.8: paper and Lean proof comparison"
 type: dataset
-version: 0.2.1
-date-released: "2026-10-03"
+version: 0.2.2
+date-released: "2026-10-04"
 license: CC-BY-4.0
-url: "https://github.com/itpplasma/stafford38-supplementary"
+doi: "10.5281/zenodo.23127102"
+url: "https://itpplasma.github.io/stafford38-supplementary/"
 authors:
   - family-names: Albert
     given-names: Christopher
     affiliation: "Graz University of Technology"
     orcid: "https://orcid.org/0000-0003-4773-416X"
-identifiers:
-  - type: url
-    value: "https://github.com/itpplasma/stafford38-paper/tree/33138378368fdc9f7bcb50947ccc9889f40cac43"
-    description: Selected paper source P6
-  - type: url
-    value: "https://github.com/itpplasma/stafford38-formal/tree/0bb3aa929b931bf5d82d90f62d7508d3ae1dccc1"
-    description: Six-input public snapshot S6
-  - type: url
-    value: "https://github.com/itpplasma/stafford38-formal/tree/f9448d6307fa25aff9d9f94ce0a9c7f9b03e63ff"
-    description: Formal v1.3.1 source R
-  - type: doi
-    value: "10.5281/zenodo.23127367"
-    description: Formal v1.3.1 release; not the supplementary companion DOI

@@ -25,9 +25,10 @@ p = root / 'index.html'
 rendered = root / (mapping.get('output_stem', 'stafford38-paper-lean-audit') + '.html')
 if rendered != p:
     shutil.copyfile(rendered, p)
+    rendered.unlink()
 p.write_text(p.read_text().replace('https://itpplasma.github.io/stafford38-formal/lean_proof_details.pdf', './lean_proof_details.pdf'))
 version_path = root / 'version.json'
 version = json.loads(version_path.read_text())
 version['release_version'] = manifest['version']
 version_path.write_text(json.dumps(version, indent=2) + '\n')
-print('Frozen HTML rebuilt from pinned public inputs. PDF hashes are in manifest.json.')
+print('HTML rebuilt from pinned sources. PDF hashes are in manifest.json.')
