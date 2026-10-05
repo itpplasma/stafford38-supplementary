@@ -1,0 +1,369 @@
+<!doctype html><meta charset="utf-8"><title>Stafford38/Characteristic/InitialIdeal.lean</title><style>body{font:14px monospace}pre span{display:block}pre span:target{background:#fff0ad}a{color:#666}pre{white-space:pre-wrap}</style><h1>Stafford38/Characteristic/InitialIdeal.lean</h1><p>This project (Stafford38) · 0403af3f0b1a7f84d2027121932723f67bd279ae</p><pre><span id="L1"><a href="#L1">1</a> module</span>
+<span id="L2"><a href="#L2">2</a> public import Stafford38.MathlibCompat.MvPolynomialCoeff</span>
+<span id="L3"><a href="#L3">3</a> public import Stafford38.Weyl.EulerRemainder</span>
+<span id="L4"><a href="#L4">4</a> public import Mathlib.RingTheory.Support</span>
+<span id="L5"><a href="#L5">5</a> </span>
+<span id="L6"><a href="#L6">6</a> @[expose] public section</span>
+<span id="L7"><a href="#L7">7</a> </span>
+<span id="L8"><a href="#L8">8</a> open Stafford38Challenge (WeylAlg PhaseVar)</span>
+<span id="L9"><a href="#L9">9</a> </span>
+<span id="L10"><a href="#L10">10</a> /-!</span>
+<span id="L11"><a href="#L11">11</a> # Bernstein initial ideals and characteristic support</span>
+<span id="L12"><a href="#L12">12</a> </span>
+<span id="L13"><a href="#L13">13</a> For a right ideal in the presented Weyl algebra, its Bernstein principal</span>
+<span id="L14"><a href="#L14">14</a> components generate an ordinary ideal in the commutative symbol ring.  This</span>
+<span id="L15"><a href="#L15">15</a> file defines the resulting cyclic graded module and its support.  The</span>
+<span id="L16"><a href="#L16">16</a> construction is concrete: no abstract D-module or characteristic-variety</span>
+<span id="L17"><a href="#L17">17</a> interface is assumed.</span>
+<span id="L18"><a href="#L18">18</a> -/</span>
+<span id="L19"><a href="#L19">19</a> </span>
+<span id="L20"><a href="#L20">20</a> namespace Stafford38.CharacteristicInitialIdeal</span>
+<span id="L21"><a href="#L21">21</a> </span>
+<span id="L22"><a href="#L22">22</a> open Stafford38.Characteristic</span>
+<span id="L23"><a href="#L23">23</a> open Stafford38.EulerSurjectivity</span>
+<span id="L24"><a href="#L24">24</a> open Stafford38.WeylIteratedEquivalence</span>
+<span id="L25"><a href="#L25">25</a> open Stafford38.WeylFiltration</span>
+<span id="L26"><a href="#L26">26</a> open Stafford38.WeylLeadingSymbol</span>
+<span id="L27"><a href="#L27">27</a> open Stafford38.WeylPBWMonicBridge</span>
+<span id="L28"><a href="#L28">28</a> open Stafford38.WeylEulerResidue</span>
+<span id="L29"><a href="#L29">29</a> </span>
+<span id="L30"><a href="#L30">30</a> noncomputable section</span>
+<span id="L31"><a href="#L31">31</a> </span>
+<span id="L32"><a href="#L32">32</a> universe u</span>
+<span id="L33"><a href="#L33">33</a> </span>
+<span id="L34"><a href="#L34">34</a> variable (k : Type u) [Field k]</span>
+<span id="L35"><a href="#L35">35</a> </span>
+<span id="L36"><a href="#L36">36</a> /-- Principal components of Bernstein-filtered elements of a right ideal. -/</span>
+<span id="L37"><a href="#L37">37</a> def bernsteinInitialGeneratorSet {n : ℕ}</span>
+<span id="L38"><a href="#L38">38</a>     (I : RightIdeal (WeylAlg k n)) : Set (SymbolRing k n) :=</span>
+<span id="L39"><a href="#L39">39</a>   {P | ∃ (N : ℕ) (z : WeylAlg k n),</span>
+<span id="L40"><a href="#L40">40</a>       z ∈ bernsteinPiece k n N ∧ z ∈ I ∧</span>
+<span id="L41"><a href="#L41">41</a>         P = presentedPrincipalComponent k bernsteinWeight N z}</span>
+<span id="L42"><a href="#L42">42</a> </span>
+<span id="L43"><a href="#L43">43</a> /-- The commutative initial ideal of a right ideal for the Bernstein</span>
+<span id="L44"><a href="#L44">44</a> filtration. -/</span>
+<span id="L45"><a href="#L45">45</a> def bernsteinInitialIdeal {n : ℕ}</span>
+<span id="L46"><a href="#L46">46</a>     (I : RightIdeal (WeylAlg k n)) : Ideal (SymbolRing k n) :=</span>
+<span id="L47"><a href="#L47">47</a>   Ideal.span (bernsteinInitialGeneratorSet k I)</span>
+<span id="L48"><a href="#L48">48</a> </span>
+<span id="L49"><a href="#L49">49</a> /-- The cyclic commutative module defined by the Bernstein initial ideal. -/</span>
+<span id="L50"><a href="#L50">50</a> abbrev BernsteinCharacteristicModule {n : ℕ}</span>
+<span id="L51"><a href="#L51">51</a>     (I : RightIdeal (WeylAlg k n)) :=</span>
+<span id="L52"><a href="#L52">52</a>   SymbolRing k n ⧸ bernsteinInitialIdeal k I</span>
+<span id="L53"><a href="#L53">53</a> </span>
+<span id="L54"><a href="#L54">54</a> private theorem quotient_subsingleton_iff_top {R : Type u} [CommRing R]</span>
+<span id="L55"><a href="#L55">55</a>     (J : Ideal R) : Subsingleton (R ⧸ J) ↔ J = ⊤ := by</span>
+<span id="L56"><a href="#L56">56</a>   constructor</span>
+<span id="L57"><a href="#L57">57</a>   · intro h</span>
+<span id="L58"><a href="#L58">58</a>     apply le_antisymm le_top</span>
+<span id="L59"><a href="#L59">59</a>     intro r hr</span>
+<span id="L60"><a href="#L60">60</a>     apply (Ideal.Quotient.eq_zero_iff_mem).mp</span>
+<span id="L61"><a href="#L61">61</a>     exact Subsingleton.elim (Ideal.Quotient.mk J r) 0</span>
+<span id="L62"><a href="#L62">62</a>   · intro h</span>
+<span id="L63"><a href="#L63">63</a>     constructor</span>
+<span id="L64"><a href="#L64">64</a>     intro a b</span>
+<span id="L65"><a href="#L65">65</a>     obtain ⟨a, rfl⟩ := Ideal.Quotient.mk_surjective a</span>
+<span id="L66"><a href="#L66">66</a>     obtain ⟨b, rfl⟩ := Ideal.Quotient.mk_surjective b</span>
+<span id="L67"><a href="#L67">67</a>     have ha : Ideal.Quotient.mk J a = 0 :=</span>
+<span id="L68"><a href="#L68">68</a>       (Ideal.Quotient.eq_zero_iff_mem).2 (h ▸ trivial)</span>
+<span id="L69"><a href="#L69">69</a>     have hb : Ideal.Quotient.mk J b = 0 :=</span>
+<span id="L70"><a href="#L70">70</a>       (Ideal.Quotient.eq_zero_iff_mem).2 (h ▸ trivial)</span>
+<span id="L71"><a href="#L71">71</a>     exact ha.trans hb.symm</span>
+<span id="L72"><a href="#L72">72</a> </span>
+<span id="L73"><a href="#L73">73</a> /-- Characteristic support as module support on the affine symbol spectrum. -/</span>
+<span id="L74"><a href="#L74">74</a> def bernsteinCharacteristicSupport {n : ℕ}</span>
+<span id="L75"><a href="#L75">75</a>     (I : RightIdeal (WeylAlg k n)) : Set (PrimeSpectrum (SymbolRing k n)) :=</span>
+<span id="L76"><a href="#L76">76</a>   Module.support (SymbolRing k n) (BernsteinCharacteristicModule k I)</span>
+<span id="L77"><a href="#L77">77</a> </span>
+<span id="L78"><a href="#L78">78</a> /-- The characteristic module is cyclic, so its support is exactly the closed</span>
+<span id="L79"><a href="#L79">79</a> set cut out by the initial ideal. -/</span>
+<span id="L80"><a href="#L80">80</a> theorem bernsteinCharacteristicSupport_eq_zeroLocus {n : ℕ}</span>
+<span id="L81"><a href="#L81">81</a>     (I : RightIdeal (WeylAlg k n)) :</span>
+<span id="L82"><a href="#L82">82</a>     bernsteinCharacteristicSupport k I =</span>
+<span id="L83"><a href="#L83">83</a>       PrimeSpectrum.zeroLocus (bernsteinInitialIdeal k I) := by</span>
+<span id="L84"><a href="#L84">84</a>   rw [bernsteinCharacteristicSupport, Module.support_of_algebra]</span>
+<span id="L85"><a href="#L85">85</a>   apply congrArg PrimeSpectrum.zeroLocus</span>
+<span id="L86"><a href="#L86">86</a>   ext P</span>
+<span id="L87"><a href="#L87">87</a>   change algebraMap (SymbolRing k n) (BernsteinCharacteristicModule k I) P = 0 ↔</span>
+<span id="L88"><a href="#L88">88</a>     P ∈ bernsteinInitialIdeal k I</span>
+<span id="L89"><a href="#L89">89</a>   exact Ideal.Quotient.eq_zero_iff_mem</span>
+<span id="L90"><a href="#L90">90</a> </span>
+<span id="L91"><a href="#L91">91</a> /-- Empty characteristic support is equivalent to the initial ideal being</span>
+<span id="L92"><a href="#L92">92</a> the unit ideal.  Reflecting this condition back to the Weyl right ideal is a</span>
+<span id="L93"><a href="#L93">93</a> separate filtered degree-lowering theorem. -/</span>
+<span id="L94"><a href="#L94">94</a> theorem bernsteinCharacteristicSupport_eq_empty_iff {n : ℕ}</span>
+<span id="L95"><a href="#L95">95</a>     (I : RightIdeal (WeylAlg k n)) :</span>
+<span id="L96"><a href="#L96">96</a>     bernsteinCharacteristicSupport k I = ∅ ↔</span>
+<span id="L97"><a href="#L97">97</a>       bernsteinInitialIdeal k I = ⊤ := by</span>
+<span id="L98"><a href="#L98">98</a>   rw [bernsteinCharacteristicSupport, Module.support_eq_empty_iff,</span>
+<span id="L99"><a href="#L99">99</a>     quotient_subsingleton_iff_top]</span>
+<span id="L100"><a href="#L100">100</a> </span>
+<span id="L101"><a href="#L101">101</a> theorem principalComponent_mem_bernsteinInitialIdeal {n N : ℕ}</span>
+<span id="L102"><a href="#L102">102</a>     (I : RightIdeal (WeylAlg k n)) (z : WeylAlg k n)</span>
+<span id="L103"><a href="#L103">103</a>     (hz : z ∈ bernsteinPiece k n N) (hI : z ∈ I) :</span>
+<span id="L104"><a href="#L104">104</a>     presentedPrincipalComponent k bernsteinWeight N z ∈</span>
+<span id="L105"><a href="#L105">105</a>       bernsteinInitialIdeal k I := by</span>
+<span id="L106"><a href="#L106">106</a>   apply Ideal.subset_span</span>
+<span id="L107"><a href="#L107">107</a>   exact ⟨N, z, hz, hI, rfl⟩</span>
+<span id="L108"><a href="#L108">108</a> </span>
+<span id="L109"><a href="#L109">109</a> theorem mem_annihilator_bernsteinCharacteristicModule {n : ℕ}</span>
+<span id="L110"><a href="#L110">110</a>     (I : RightIdeal (WeylAlg k n)) {P : SymbolRing k n}</span>
+<span id="L111"><a href="#L111">111</a>     (hP : P ∈ bernsteinInitialIdeal k I) :</span>
+<span id="L112"><a href="#L112">112</a>     P ∈ Module.annihilator (SymbolRing k n)</span>
+<span id="L113"><a href="#L113">113</a>       (BernsteinCharacteristicModule k I) := by</span>
+<span id="L114"><a href="#L114">114</a>   rw [Module.mem_annihilator]</span>
+<span id="L115"><a href="#L115">115</a>   intro q</span>
+<span id="L116"><a href="#L116">116</a>   obtain ⟨r, rfl⟩ := Ideal.Quotient.mk_surjective q</span>
+<span id="L117"><a href="#L117">117</a>   change Ideal.Quotient.mk (bernsteinInitialIdeal k I) (P * r) = 0</span>
+<span id="L118"><a href="#L118">118</a>   rw [Ideal.Quotient.eq_zero_iff_mem]</span>
+<span id="L119"><a href="#L119">119</a>   exact (bernsteinInitialIdeal k I).mul_mem_right r hP</span>
+<span id="L120"><a href="#L120">120</a> </span>
+<span id="L121"><a href="#L121">121</a> /-- Every element of the initial ideal vanishes on characteristic support. -/</span>
+<span id="L122"><a href="#L122">122</a> theorem bernsteinCharacteristicSupport_subset_zeroLocus {n : ℕ}</span>
+<span id="L123"><a href="#L123">123</a>     (I : RightIdeal (WeylAlg k n)) {P : SymbolRing k n}</span>
+<span id="L124"><a href="#L124">124</a>     (hP : P ∈ bernsteinInitialIdeal k I) :</span>
+<span id="L125"><a href="#L125">125</a>     bernsteinCharacteristicSupport k I ⊆</span>
+<span id="L126"><a href="#L126">126</a>       PrimeSpectrum.zeroLocus ({P} : Set (SymbolRing k n)) := by</span>
+<span id="L127"><a href="#L127">127</a>   intro p hp</span>
+<span id="L128"><a href="#L128">128</a>   rw [PrimeSpectrum.mem_zeroLocus]</span>
+<span id="L129"><a href="#L129">129</a>   intro f hf</span>
+<span id="L130"><a href="#L130">130</a>   rw [Set.mem_singleton_iff.mp hf]</span>
+<span id="L131"><a href="#L131">131</a>   exact Module.annihilator_le_of_mem_support hp</span>
+<span id="L132"><a href="#L132">132</a>     (mem_annihilator_bernsteinCharacteristicModule k I hP)</span>
+<span id="L133"><a href="#L133">133</a> </span>
+<span id="L134"><a href="#L134">134</a> /-- The defining operator belongs to the literal canonical right ideal, so</span>
+<span id="L135"><a href="#L135">135</a> its Bernstein principal component belongs to the corresponding initial</span>
+<span id="L136"><a href="#L136">136</a> ideal. -/</span>
+<span id="L137"><a href="#L137">137</a> theorem canonical_principalComponent_mem_initialIdeal</span>
+<span id="L138"><a href="#L138">138</a>     (n N : ℕ) {d : WeylAlg k (n + 1)}</span>
+<span id="L139"><a href="#L139">139</a>     (hd : IsPBWMonicAt k (.inr (0 : Fin (n + 1))) N d) :</span>
+<span id="L140"><a href="#L140">140</a>     presentedPrincipalComponent k bernsteinWeight N d ∈</span>
+<span id="L141"><a href="#L141">141</a>       bernsteinInitialIdeal k</span>
+<span id="L142"><a href="#L142">142</a>         (canonicalRightIdeal (presentedCoordinate k n) d N) := by</span>
+<span id="L143"><a href="#L143">143</a>   exact principalComponent_mem_bernsteinInitialIdeal k _ d hd.1</span>
+<span id="L144"><a href="#L144">144</a>     (firstGenerator_mem (presentedCoordinate k n) d N)</span>
+<span id="L145"><a href="#L145">145</a> </span>
+<span id="L146"><a href="#L146">146</a> /-- The concrete characteristic support is contained in the normalized</span>
+<span id="L147"><a href="#L147">147</a> principal-symbol hypersurface. -/</span>
+<span id="L148"><a href="#L148">148</a> theorem canonical_bernsteinCharacteristicSupport_subset_principal_zeroLocus</span>
+<span id="L149"><a href="#L149">149</a>     (n N : ℕ) {d : WeylAlg k (n + 1)}</span>
+<span id="L150"><a href="#L150">150</a>     (hd : IsPBWMonicAt k (.inr (0 : Fin (n + 1))) N d) :</span>
+<span id="L151"><a href="#L151">151</a>     bernsteinCharacteristicSupport k</span>
+<span id="L152"><a href="#L152">152</a>         (canonicalRightIdeal (presentedCoordinate k n) d N) ⊆</span>
+<span id="L153"><a href="#L153">153</a>       PrimeSpectrum.zeroLocus</span>
+<span id="L154"><a href="#L154">154</a>         ({presentedPrincipalComponent k bernsteinWeight N d} :</span>
+<span id="L155"><a href="#L155">155</a>           Set (SymbolRing k (n + 1))) := by</span>
+<span id="L156"><a href="#L156">156</a>   exact bernsteinCharacteristicSupport_subset_zeroLocus k _</span>
+<span id="L157"><a href="#L157">157</a>     (canonical_principalComponent_mem_initialIdeal k n N hd)</span>
+<span id="L158"><a href="#L158">158</a> </span>
+<span id="L159"><a href="#L159">159</a> theorem canonical_principalComponent_pureMomentumCoefficient</span>
+<span id="L160"><a href="#L160">160</a>     (n N : ℕ) {d : WeylAlg k (n + 1)}</span>
+<span id="L161"><a href="#L161">161</a>     (hd : IsPBWMonicAt k (.inr (0 : Fin (n + 1))) N d) :</span>
+<span id="L162"><a href="#L162">162</a>     MvPolynomial.coeff</span>
+<span id="L163"><a href="#L163">163</a>         (Finsupp.single (.inr (0 : Fin (n + 1))) N)</span>
+<span id="L164"><a href="#L164">164</a>         (presentedPrincipalComponent k bernsteinWeight N d) = 1 := by</span>
+<span id="L165"><a href="#L165">165</a>   rw [coeff_principal_pure_eq_normalForm]</span>
+<span id="L166"><a href="#L166">166</a>   exact hd.2</span>
+<span id="L167"><a href="#L167">167</a> </span>
+<span id="L168"><a href="#L168">168</a> /-! ## Differential-order characteristic support</span>
+<span id="L169"><a href="#L169">169</a> </span>
+<span id="L170"><a href="#L170">170</a> The preceding Bernstein construction is a finite-weight scaffold. The</span>
+<span id="L171"><a href="#L171">171</a> noncharacteristic theorem uses the differential-order filtration, whose base</span>
+<span id="L172"><a href="#L172">172</a> variables have weight zero and fibre variables weight one. The canonical</span>
+<span id="L173"><a href="#L173">173</a> theorems below deliberately retain the normalized Bernstein bound: the</span>
+<span id="L174"><a href="#L174">174</a> in characteristic zero, symplectic normalization produces it for every nonzero</span>
+<span id="L175"><a href="#L175">175</a> non-scalar operator</span>
+<span id="L176"><a href="#L176">176</a> (`Stafford38.WeylMonicNormalization.scalar_or_normalized_symplectic_image`), and together</span>
+<span id="L177"><a href="#L177">177</a> with order degree `N` it forces the order principal symbol to involve fibre</span>
+<span id="L178"><a href="#L178">178</a> variables only. This implication is proved explicitly below.</span>
+<span id="L179"><a href="#L179">179</a> </span>
+<span id="L180"><a href="#L180">180</a> The cyclic quotient by `orderInitialIdeal` is the intended concrete model for</span>
+<span id="L181"><a href="#L181">181</a> the associated graded quotient. Its identification with the filtration</span>
+<span id="L182"><a href="#L182">182</a> quotients, and reflection of an empty order support back to the Weyl quotient,</span>
+<span id="L183"><a href="#L183">183</a> remain separate theorems; neither is assumed here. -/</span>
+<span id="L184"><a href="#L184">184</a> </span>
+<span id="L185"><a href="#L185">185</a> def orderInitialGeneratorSet {n : ℕ}</span>
+<span id="L186"><a href="#L186">186</a>     (I : RightIdeal (WeylAlg k n)) : Set (SymbolRing k n) :=</span>
+<span id="L187"><a href="#L187">187</a>   {P | ∃ (N : ℕ) (z : WeylAlg k n),</span>
+<span id="L188"><a href="#L188">188</a>       z ∈ orderPiece k n N ∧ z ∈ I ∧</span>
+<span id="L189"><a href="#L189">189</a>         P = presentedPrincipalComponent k orderWeight N z}</span>
+<span id="L190"><a href="#L190">190</a> </span>
+<span id="L191"><a href="#L191">191</a> def orderInitialIdeal {n : ℕ}</span>
+<span id="L192"><a href="#L192">192</a>     (I : RightIdeal (WeylAlg k n)) : Ideal (SymbolRing k n) :=</span>
+<span id="L193"><a href="#L193">193</a>   Ideal.span (orderInitialGeneratorSet k I)</span>
+<span id="L194"><a href="#L194">194</a> </span>
+<span id="L195"><a href="#L195">195</a> abbrev OrderCharacteristicModule {n : ℕ}</span>
+<span id="L196"><a href="#L196">196</a>     (I : RightIdeal (WeylAlg k n)) :=</span>
+<span id="L197"><a href="#L197">197</a>   SymbolRing k n ⧸ orderInitialIdeal k I</span>
+<span id="L198"><a href="#L198">198</a> </span>
+<span id="L199"><a href="#L199">199</a> def orderCharacteristicSupport {n : ℕ}</span>
+<span id="L200"><a href="#L200">200</a>     (I : RightIdeal (WeylAlg k n)) : Set (PrimeSpectrum (SymbolRing k n)) :=</span>
+<span id="L201"><a href="#L201">201</a>   Module.support (SymbolRing k n) (OrderCharacteristicModule k I)</span>
+<span id="L202"><a href="#L202">202</a> </span>
+<span id="L203"><a href="#L203">203</a> theorem orderCharacteristicSupport_eq_zeroLocus {n : ℕ}</span>
+<span id="L204"><a href="#L204">204</a>     (I : RightIdeal (WeylAlg k n)) :</span>
+<span id="L205"><a href="#L205">205</a>     orderCharacteristicSupport k I =</span>
+<span id="L206"><a href="#L206">206</a>       PrimeSpectrum.zeroLocus (orderInitialIdeal k I) := by</span>
+<span id="L207"><a href="#L207">207</a>   rw [orderCharacteristicSupport, Module.support_of_algebra]</span>
+<span id="L208"><a href="#L208">208</a>   apply congrArg PrimeSpectrum.zeroLocus</span>
+<span id="L209"><a href="#L209">209</a>   ext P</span>
+<span id="L210"><a href="#L210">210</a>   change algebraMap (SymbolRing k n) (OrderCharacteristicModule k I) P = 0 ↔</span>
+<span id="L211"><a href="#L211">211</a>     P ∈ orderInitialIdeal k I</span>
+<span id="L212"><a href="#L212">212</a>   exact Ideal.Quotient.eq_zero_iff_mem</span>
+<span id="L213"><a href="#L213">213</a> </span>
+<span id="L214"><a href="#L214">214</a> theorem orderCharacteristicSupport_eq_empty_iff {n : ℕ}</span>
+<span id="L215"><a href="#L215">215</a>     (I : RightIdeal (WeylAlg k n)) :</span>
+<span id="L216"><a href="#L216">216</a>     orderCharacteristicSupport k I = ∅ ↔ orderInitialIdeal k I = ⊤ := by</span>
+<span id="L217"><a href="#L217">217</a>   rw [orderCharacteristicSupport, Module.support_eq_empty_iff,</span>
+<span id="L218"><a href="#L218">218</a>     quotient_subsingleton_iff_top]</span>
+<span id="L219"><a href="#L219">219</a> </span>
+<span id="L220"><a href="#L220">220</a> /-- Differential order is bounded above by Bernstein degree on every PBW</span>
+<span id="L221"><a href="#L221">221</a> monomial. -/</span>
+<span id="L222"><a href="#L222">222</a> theorem monomialWeight_order_le_bernstein {n : ℕ}</span>
+<span id="L223"><a href="#L223">223</a>     (m : PhaseVar n →₀ ℕ) :</span>
+<span id="L224"><a href="#L224">224</a>     Finsupp.weight (@orderWeight n) m ≤</span>
+<span id="L225"><a href="#L225">225</a>       Finsupp.weight (@bernsteinWeight n) m := by</span>
+<span id="L226"><a href="#L226">226</a>   classical</span>
+<span id="L227"><a href="#L227">227</a>   simp only [Finsupp.weight_apply, Finsupp.weight_apply]</span>
+<span id="L228"><a href="#L228">228</a>   apply Finsupp.sum_le_sum</span>
+<span id="L229"><a href="#L229">229</a>   intro j hj</span>
+<span id="L230"><a href="#L230">230</a>   cases j &lt;;&gt; simp [orderWeight, fibreWeight, bernsteinWeight]</span>
+<span id="L231"><a href="#L231">231</a> </span>
+<span id="L232"><a href="#L232">232</a> /-- If order degree reaches a Bernstein bound, no coordinate exponent can</span>
+<span id="L233"><a href="#L233">233</a> occur. -/</span>
+<span id="L234"><a href="#L234">234</a> theorem coordinateExponent_eq_zero_of_order_eq_of_bernstein_le</span>
+<span id="L235"><a href="#L235">235</a>     {n N : ℕ} (m : PhaseVar n →₀ ℕ)</span>
+<span id="L236"><a href="#L236">236</a>     (horder : Finsupp.weight (@orderWeight n) m = N)</span>
+<span id="L237"><a href="#L237">237</a>     (hbernstein : Finsupp.weight (@bernsteinWeight n) m ≤ N)</span>
+<span id="L238"><a href="#L238">238</a>     (i : Fin n) : m (.inl i) = 0 := by</span>
+<span id="L239"><a href="#L239">239</a>   by_contra hi</span>
+<span id="L240"><a href="#L240">240</a>   let m' := m - Finsupp.single (.inl i) 1</span>
+<span id="L241"><a href="#L241">241</a>   have hordSub := Finsupp.weight_sub_single_add</span>
+<span id="L242"><a href="#L242">242</a>     (w := @orderWeight n) hi</span>
+<span id="L243"><a href="#L243">243</a>   have hbernSub := Finsupp.weight_sub_single_add</span>
+<span id="L244"><a href="#L244">244</a>     (w := @bernsteinWeight n) hi</span>
+<span id="L245"><a href="#L245">245</a>   have hle := monomialWeight_order_le_bernstein m'</span>
+<span id="L246"><a href="#L246">246</a>   have hordCoordinate : orderWeight (.inl i) = 0 := by</span>
+<span id="L247"><a href="#L247">247</a>     simp [orderWeight, fibreWeight]</span>
+<span id="L248"><a href="#L248">248</a>   have hbernCoordinate : bernsteinWeight (.inl i) = 1 := by</span>
+<span id="L249"><a href="#L249">249</a>     simp [bernsteinWeight]</span>
+<span id="L250"><a href="#L250">250</a>   change Finsupp.weight (@orderWeight n) m' + orderWeight (.inl i) =</span>
+<span id="L251"><a href="#L251">251</a>     Finsupp.weight (@orderWeight n) m at hordSub</span>
+<span id="L252"><a href="#L252">252</a>   change Finsupp.weight (@bernsteinWeight n) m' + bernsteinWeight (.inl i) =</span>
+<span id="L253"><a href="#L253">253</a>     Finsupp.weight (@bernsteinWeight n) m at hbernSub</span>
+<span id="L254"><a href="#L254">254</a>   rw [hordCoordinate, add_zero, horder] at hordSub</span>
+<span id="L255"><a href="#L255">255</a>   rw [hbernCoordinate] at hbernSub</span>
+<span id="L256"><a href="#L256">256</a>   omega</span>
+<span id="L257"><a href="#L257">257</a> </span>
+<span id="L258"><a href="#L258">258</a> /-- A symbol uses only fibre variables when every monomial carrying a</span>
+<span id="L259"><a href="#L259">259</a> coordinate exponent has zero coefficient. -/</span>
+<span id="L260"><a href="#L260">260</a> def IsFibreOnly {n : ℕ} (P : SymbolRing k n) : Prop :=</span>
+<span id="L261"><a href="#L261">261</a>   ∀ m, MvPolynomial.coeff m P ≠ 0 →</span>
+<span id="L262"><a href="#L262">262</a>     ∀ i : Fin n, m (.inl i) = 0</span>
+<span id="L263"><a href="#L263">263</a> </span>
+<span id="L264"><a href="#L264">264</a> theorem orderPrincipalComponent_mem_initialIdeal {n N : ℕ}</span>
+<span id="L265"><a href="#L265">265</a>     (I : RightIdeal (WeylAlg k n)) (z : WeylAlg k n)</span>
+<span id="L266"><a href="#L266">266</a>     (hz : z ∈ orderPiece k n N) (hI : z ∈ I) :</span>
+<span id="L267"><a href="#L267">267</a>     presentedPrincipalComponent k orderWeight N z ∈ orderInitialIdeal k I := by</span>
+<span id="L268"><a href="#L268">268</a>   apply Ideal.subset_span</span>
+<span id="L269"><a href="#L269">269</a>   exact ⟨N, z, hz, hI, rfl⟩</span>
+<span id="L270"><a href="#L270">270</a> </span>
+<span id="L271"><a href="#L271">271</a> theorem orderCharacteristicSupport_subset_zeroLocus {n : ℕ}</span>
+<span id="L272"><a href="#L272">272</a>     (I : RightIdeal (WeylAlg k n)) {P : SymbolRing k n}</span>
+<span id="L273"><a href="#L273">273</a>     (hP : P ∈ orderInitialIdeal k I) :</span>
+<span id="L274"><a href="#L274">274</a>     orderCharacteristicSupport k I ⊆</span>
+<span id="L275"><a href="#L275">275</a>       PrimeSpectrum.zeroLocus ({P} : Set (SymbolRing k n)) := by</span>
+<span id="L276"><a href="#L276">276</a>   rw [orderCharacteristicSupport_eq_zeroLocus]</span>
+<span id="L277"><a href="#L277">277</a>   intro p hp</span>
+<span id="L278"><a href="#L278">278</a>   rw [PrimeSpectrum.mem_zeroLocus] at hp ⊢</span>
+<span id="L279"><a href="#L279">279</a>   intro f hf</span>
+<span id="L280"><a href="#L280">280</a>   rw [Set.mem_singleton_iff.mp hf]</span>
+<span id="L281"><a href="#L281">281</a>   exact hp hP</span>
+<span id="L282"><a href="#L282">282</a> </span>
+<span id="L283"><a href="#L283">283</a> theorem canonical_orderPrincipalComponent_mem_initialIdeal</span>
+<span id="L284"><a href="#L284">284</a>     (n N : ℕ) {d : WeylAlg k (n + 1)}</span>
+<span id="L285"><a href="#L285">285</a>     (hd : IsPBWMonicAt k (.inr (0 : Fin (n + 1))) N d) :</span>
+<span id="L286"><a href="#L286">286</a>     presentedPrincipalComponent k orderWeight N d ∈</span>
+<span id="L287"><a href="#L287">287</a>       orderInitialIdeal k</span>
+<span id="L288"><a href="#L288">288</a>         (canonicalRightIdeal (presentedCoordinate k n) d N) := by</span>
+<span id="L289"><a href="#L289">289</a>   exact orderPrincipalComponent_mem_initialIdeal k _ d</span>
+<span id="L290"><a href="#L290">290</a>     (bernsteinPiece_le_orderPiece k (n + 1) N hd.1)</span>
+<span id="L291"><a href="#L291">291</a>     (firstGenerator_mem (presentedCoordinate k n) d N)</span>
+<span id="L292"><a href="#L292">292</a> </span>
+<span id="L293"><a href="#L293">293</a> theorem canonical_orderCharacteristicSupport_subset_principal_zeroLocus</span>
+<span id="L294"><a href="#L294">294</a>     (n N : ℕ) {d : WeylAlg k (n + 1)}</span>
+<span id="L295"><a href="#L295">295</a>     (hd : IsPBWMonicAt k (.inr (0 : Fin (n + 1))) N d) :</span>
+<span id="L296"><a href="#L296">296</a>     orderCharacteristicSupport k</span>
+<span id="L297"><a href="#L297">297</a>         (canonicalRightIdeal (presentedCoordinate k n) d N) ⊆</span>
+<span id="L298"><a href="#L298">298</a>       PrimeSpectrum.zeroLocus</span>
+<span id="L299"><a href="#L299">299</a>         ({presentedPrincipalComponent k orderWeight N d} :</span>
+<span id="L300"><a href="#L300">300</a>           Set (SymbolRing k (n + 1))) := by</span>
+<span id="L301"><a href="#L301">301</a>   exact orderCharacteristicSupport_subset_zeroLocus k _</span>
+<span id="L302"><a href="#L302">302</a>     (canonical_orderPrincipalComponent_mem_initialIdeal k n N hd)</span>
+<span id="L303"><a href="#L303">303</a> </span>
+<span id="L304"><a href="#L304">304</a> theorem canonical_orderPrincipalComponent_pureMomentumCoefficient</span>
+<span id="L305"><a href="#L305">305</a>     (n N : ℕ) {d : WeylAlg k (n + 1)}</span>
+<span id="L306"><a href="#L306">306</a>     (hd : IsPBWMonicAt k (.inr (0 : Fin (n + 1))) N d) :</span>
+<span id="L307"><a href="#L307">307</a>     MvPolynomial.coeff</span>
+<span id="L308"><a href="#L308">308</a>         (Finsupp.single (.inr (0 : Fin (n + 1))) N)</span>
+<span id="L309"><a href="#L309">309</a>         (presentedPrincipalComponent k orderWeight N d) = 1 := by</span>
+<span id="L310"><a href="#L310">310</a>   change AddMonoidAlgebra.coeff</span>
+<span id="L311"><a href="#L311">311</a>       (presentedPrincipalComponent k orderWeight N d)</span>
+<span id="L312"><a href="#L312">312</a>       (Finsupp.single (.inr (0 : Fin (n + 1))) N) = 1</span>
+<span id="L313"><a href="#L313">313</a>   rw [coeff_presentedPrincipalComponent]</span>
+<span id="L314"><a href="#L314">314</a>   have hweight : Finsupp.weight (@orderWeight (n + 1))</span>
+<span id="L315"><a href="#L315">315</a>       (Finsupp.single (.inr (0 : Fin (n + 1))) N) = N := by</span>
+<span id="L316"><a href="#L316">316</a>     simp [Finsupp.weight_apply, orderWeight, fibreWeight]</span>
+<span id="L317"><a href="#L317">317</a>   rw [if_pos hweight]</span>
+<span id="L318"><a href="#L318">318</a>   exact hd.2</span>
+<span id="L319"><a href="#L319">319</a> </span>
+<span id="L320"><a href="#L320">320</a> /-- The normalized Bernstein bound makes the degree-`N` order symbol a</span>
+<span id="L321"><a href="#L321">321</a> constant-coefficient polynomial in the fibre variables. -/</span>
+<span id="L322"><a href="#L322">322</a> theorem canonical_orderPrincipalComponent_isFibreOnly</span>
+<span id="L323"><a href="#L323">323</a>     (n N : ℕ) {d : WeylAlg k (n + 1)}</span>
+<span id="L324"><a href="#L324">324</a>     (hd : IsPBWMonicAt k (.inr (0 : Fin (n + 1))) N d) :</span>
+<span id="L325"><a href="#L325">325</a>     IsFibreOnly k (presentedPrincipalComponent k orderWeight N d) := by</span>
+<span id="L326"><a href="#L326">326</a>   intro m hm i</span>
+<span id="L327"><a href="#L327">327</a>   change AddMonoidAlgebra.coeff</span>
+<span id="L328"><a href="#L328">328</a>       (presentedPrincipalComponent k orderWeight N d) m ≠ 0 at hm</span>
+<span id="L329"><a href="#L329">329</a>   rw [coeff_presentedPrincipalComponent] at hm</span>
+<span id="L330"><a href="#L330">330</a>   by_cases horder : Finsupp.weight (@orderWeight (n + 1)) m = N</span>
+<span id="L331"><a href="#L331">331</a>   · rw [if_pos horder] at hm</span>
+<span id="L332"><a href="#L332">332</a>     have hbernstein :=</span>
+<span id="L333"><a href="#L333">333</a>       (mem_presentedWeightPiece k (@bernsteinWeight (n + 1)) N d).mp</span>
+<span id="L334"><a href="#L334">334</a>         hd.1 m hm</span>
+<span id="L335"><a href="#L335">335</a>     exact coordinateExponent_eq_zero_of_order_eq_of_bernstein_le</span>
+<span id="L336"><a href="#L336">336</a>       m horder hbernstein i</span>
+<span id="L337"><a href="#L337">337</a>   · rw [if_neg horder] at hm</span>
+<span id="L338"><a href="#L338">338</a>     exact (hm rfl).elim</span>
+<span id="L339"><a href="#L339">339</a> </span>
+<span id="L340"><a href="#L340">340</a> #print axioms bernsteinInitialGeneratorSet</span>
+<span id="L341"><a href="#L341">341</a> #print axioms bernsteinInitialIdeal</span>
+<span id="L342"><a href="#L342">342</a> #print axioms bernsteinCharacteristicSupport</span>
+<span id="L343"><a href="#L343">343</a> #print axioms bernsteinCharacteristicSupport_eq_zeroLocus</span>
+<span id="L344"><a href="#L344">344</a> #print axioms bernsteinCharacteristicSupport_eq_empty_iff</span>
+<span id="L345"><a href="#L345">345</a> #print axioms principalComponent_mem_bernsteinInitialIdeal</span>
+<span id="L346"><a href="#L346">346</a> #print axioms mem_annihilator_bernsteinCharacteristicModule</span>
+<span id="L347"><a href="#L347">347</a> #print axioms bernsteinCharacteristicSupport_subset_zeroLocus</span>
+<span id="L348"><a href="#L348">348</a> #print axioms canonical_principalComponent_mem_initialIdeal</span>
+<span id="L349"><a href="#L349">349</a> #print axioms canonical_bernsteinCharacteristicSupport_subset_principal_zeroLocus</span>
+<span id="L350"><a href="#L350">350</a> #print axioms canonical_principalComponent_pureMomentumCoefficient</span>
+<span id="L351"><a href="#L351">351</a> #print axioms orderInitialGeneratorSet</span>
+<span id="L352"><a href="#L352">352</a> #print axioms orderInitialIdeal</span>
+<span id="L353"><a href="#L353">353</a> #print axioms orderCharacteristicSupport</span>
+<span id="L354"><a href="#L354">354</a> #print axioms orderCharacteristicSupport_eq_zeroLocus</span>
+<span id="L355"><a href="#L355">355</a> #print axioms orderCharacteristicSupport_eq_empty_iff</span>
+<span id="L356"><a href="#L356">356</a> #print axioms monomialWeight_order_le_bernstein</span>
+<span id="L357"><a href="#L357">357</a> #print axioms coordinateExponent_eq_zero_of_order_eq_of_bernstein_le</span>
+<span id="L358"><a href="#L358">358</a> #print axioms IsFibreOnly</span>
+<span id="L359"><a href="#L359">359</a> #print axioms orderPrincipalComponent_mem_initialIdeal</span>
+<span id="L360"><a href="#L360">360</a> #print axioms orderCharacteristicSupport_subset_zeroLocus</span>
+<span id="L361"><a href="#L361">361</a> #print axioms canonical_orderPrincipalComponent_mem_initialIdeal</span>
+<span id="L362"><a href="#L362">362</a> #print axioms canonical_orderCharacteristicSupport_subset_principal_zeroLocus</span>
+<span id="L363"><a href="#L363">363</a> #print axioms canonical_orderPrincipalComponent_pureMomentumCoefficient</span>
+<span id="L364"><a href="#L364">364</a> #print axioms canonical_orderPrincipalComponent_isFibreOnly</span>
+<span id="L365"><a href="#L365">365</a> </span>
+<span id="L366"><a href="#L366">366</a> end</span>
+<span id="L367"><a href="#L367">367</a> </span>
+<span id="L368"><a href="#L368">368</a> end Stafford38.CharacteristicInitialIdeal</span>
+<span id="L369"><a href="#L369">369</a> </span></pre>

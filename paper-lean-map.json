@@ -1,8 +1,8 @@
 {
  "schema": 1,
- "version": "2026-10-04-v0.2.2-reader",
+ "version": "0.2.3-canonical-review",
  "title": "Stafford’s Conjecture 3.8",
- "subtitle": "The manuscript argument beside its Lean proofs.",
+ "subtitle": "Canonical-definition review draft · preserved manuscript and proof routes",
  "sources": {
   "paper": {
    "repo": "itpplasma/stafford38-formal",
@@ -15,26 +15,31 @@
   },
   "formal": {
    "repo": "itpplasma/stafford38-formal",
-   "commit": "f9448d6307fa25aff9d9f94ce0a9c7f9b03e63ff",
-   "note": "Signed formal v1.3.1 provenance correction;654 protected proof/tool files byte-identical to C2, package version and descriptor metadata exceptions recorded. DOI10.5281/zenodo.23127367."
+   "commit": "0403af3f0b1a7f84d2027121932723f67bd279ae",
+   "note": "Local canonical-definition refactor; review source pages and the bundled patch. Publication is pending.",
+   "label": "This project (Stafford38)",
+   "local_source_base": "./sources/formal",
+   "base_commit": "746952ede40ac5dd22ac57201883da7ef7a42dfb",
+   "bundle": "verification/canonical-definitions/formal.bundle"
   },
   "library": {
    "repo": "itpplasma/algebraic-analysis",
    "commit": "bbbbf3fc358ca8100b158cec4cf47f336ab70163",
-   "note": "Pinned AlgebraicAnalysis v0.3.3 dependency for Lean 4.35.0-rc3."
+   "note": "Pinned AlgebraicAnalysis v0.3.3 dependency for Lean 4.35.0-rc3.",
+   "label": "AlgebraicAnalysis library"
   },
   "global": {
    "repo": "itpplasma/global-stafford-formal",
    "commit": "e676caed1253e5d09fc6699d5dc683febbabf7bb",
    "note": "(archived v1.0.6 formal source; exact repository revision supplied by controller)",
    "file": "GlobalStafford/Assembly/Closure.lean",
-   "name": "GlobalStafford.universalStatement",
-   "line": 221
+   "name": "GlobalStafford.universalStatement"
   },
   "mathlib": {
    "repo": "leanprover-community/mathlib4",
    "commit": "c55e6e786f49471c72fbddbec5415808896aec1e",
-   "note": "Exact Mathlib dependency pin; standard length definitions."
+   "note": "Exact Mathlib dependency pin; these definitions are imported from Mathlib.",
+   "label": "Mathlib"
   }
  },
  "vocab": {
@@ -257,17 +262,16 @@
      "file": "Stafford38/FoundationClosure.lean",
      "role": "statement",
      "name": "Stafford38.universalStatement",
-     "line": 67,
      "expands": [
       {
-       "file": "Stafford38/Statement.lean",
-       "name": "Stafford38.UniversalStatement",
-       "line": 23
+       "file": "Stafford38/ChallengeDefinitions.lean",
+       "name": "Stafford38Challenge.UniversalStatement",
+       "repo": "formal"
       },
       {
-       "file": "Stafford38/Statement.lean",
-       "name": "Stafford38.WeylAlg",
-       "line": 19
+       "file": "Stafford38/ChallengeDefinitions.lean",
+       "name": "Stafford38Challenge.WeylAlg",
+       "repo": "formal"
       }
      ]
     },
@@ -275,22 +279,21 @@
      "file": "Stafford38/FoundationClosure.lean",
      "role": "statement",
      "name": "Stafford38.universalFixedSourceStatement",
-     "line": 71,
      "expands": [
       {
-       "file": "Stafford38/FixedSourceStatement.lean",
-       "name": "Stafford38.FixedSource.UniversalFixedSourceStatement",
-       "line": 35
+       "file": "Stafford38/ChallengeDefinitions.lean",
+       "name": "Stafford38FixedSourceChallenge.UniversalFixedSourceStatement",
+       "repo": "formal"
       },
       {
-       "file": "Stafford38/FixedSourceStatement.lean",
-       "name": "Stafford38.FixedSource.IsLinearWeylCoordinate",
-       "line": 28
+       "file": "Stafford38/ChallengeDefinitions.lean",
+       "name": "Stafford38FixedSourceChallenge.IsLinearWeylCoordinate",
+       "repo": "formal"
       },
       {
-       "file": "Stafford38/FixedSourceStatement.lean",
-       "name": "Stafford38.FixedSource.bernsteinDegree",
-       "line": 23
+       "file": "Stafford38/ChallengeDefinitions.lean",
+       "name": "Stafford38FixedSourceChallenge.bernsteinDegree",
+       "repo": "formal"
       }
      ]
     }
@@ -335,63 +338,56 @@
    "route": null,
    "lean": [
     {
-     "file": "Stafford38/Statement.lean",
+     "file": "Stafford38/ChallengeDefinitions.lean",
      "role": "statement",
-     "name": "Stafford38.UniversalStatement",
-     "line": 23
+     "name": "Stafford38Challenge.UniversalStatement",
+     "repo": "formal"
     },
     {
      "file": "Challenge.lean",
      "role": "statement",
-     "name": "Stafford38Challenge.UniversalStatement",
-     "line": 95
+     "name": "Stafford38Challenge.UniversalStatement"
     },
     {
-     "file": "Stafford38/FixedSourceStatement.lean",
+     "file": "Stafford38/ChallengeDefinitions.lean",
      "role": "statement",
-     "name": "Stafford38.FixedSource.UniversalFixedSourceStatement",
-     "line": 35
+     "name": "Stafford38FixedSourceChallenge.UniversalFixedSourceStatement",
+     "repo": "formal"
     },
     {
-     "file": "Stafford38/FixedSourceStatement.lean",
+     "file": "Stafford38/ChallengeDefinitions.lean",
      "role": "definition",
-     "name": "Stafford38.FixedSource.IsLinearWeylCoordinate",
-     "line": 28
+     "name": "Stafford38FixedSourceChallenge.IsLinearWeylCoordinate",
+     "repo": "formal"
     },
     {
      "file": "FixedSourceChallenge.lean",
      "role": "statement",
-     "name": "Stafford38FixedSourceChallenge.UniversalFixedSourceStatement",
-     "line": 195
+     "name": "Stafford38FixedSourceChallenge.UniversalFixedSourceStatement"
     },
     {
      "file": "Stafford38/UniversalAssembly.lean",
      "role": "main-proof",
-     "name": "Stafford38.UniversalAssembly.universalStatement_of_canonicalSupportVanishing",
-     "line": 69
+     "name": "Stafford38.UniversalAssembly.universalStatement_of_canonicalSupportVanishing"
     },
     {
      "file": "Stafford38/FixedSourceAssembly.lean",
      "role": "main-proof",
-     "name": "Stafford38.FixedSource.universalFixedSourceStatement_of_canonicalSupportVanishing",
-     "line": 24
+     "name": "Stafford38.FixedSource.universalFixedSourceStatement_of_canonicalSupportVanishing"
     },
     {
      "file": "Stafford38/FoundationClosure.lean",
      "role": "main-proof",
-     "name": "Stafford38.FoundationClosure.canonicalSupportVanishingViaGeneralCoisotropic",
-     "line": 41
+     "name": "Stafford38.FoundationClosure.canonicalSupportVanishingViaGeneralCoisotropic"
     },
     {
      "file": "Stafford38/FoundationClosure.lean",
      "name": "Stafford38.universalStatement",
-     "line": 67,
      "role": "proved statement"
     },
     {
      "file": "Stafford38/FoundationClosure.lean",
      "name": "Stafford38.universalFixedSourceStatement",
-     "line": 71,
      "role": "proved statement"
     }
    ],
@@ -448,27 +444,23 @@
      "file": "Stafford38/ChallengeDefinitions.lean",
      "role": "statement",
      "name": "Stafford38Challenge.UniversalStatement",
-     "line": 78,
      "expands": [
       {
        "repo": "formal",
        "file": "Stafford38/ChallengeDefinitions.lean",
        "name": "Stafford38Challenge.PhaseVar",
-       "line": 65,
        "role": "definition"
       },
       {
        "repo": "formal",
        "file": "Stafford38/ChallengeDefinitions.lean",
        "name": "Stafford38Challenge.relation",
-       "line": 68,
        "role": "definition"
       },
       {
        "repo": "formal",
        "file": "Stafford38/ChallengeDefinitions.lean",
        "name": "Stafford38Challenge.WeylAlg",
-       "line": 74,
        "role": "definition"
       }
      ]
@@ -477,13 +469,11 @@
      "file": "Solution.lean",
      "role": "proof-entry",
      "name": "Stafford38Challenge.universalStatement",
-     "line": 12,
      "expands": [
       {
        "file": "Stafford38/ChallengeDefinitions.lean",
        "name": "Stafford38Challenge.UniversalStatement",
-       "role": "definition",
-       "line": 78
+       "role": "definition"
       }
      ]
     },
@@ -491,13 +481,11 @@
      "file": "AlternativeSolution.lean",
      "role": "alternative-proof-entry",
      "name": "Stafford38Challenge.universalStatement",
-     "line": 17,
      "expands": [
       {
        "file": "Stafford38/ChallengeDefinitions.lean",
        "name": "Stafford38Challenge.UniversalStatement",
-       "role": "definition",
-       "line": 78
+       "role": "definition"
       }
      ]
     }
@@ -539,104 +527,89 @@
      "file": "Stafford38/ChallengeDefinitions.lean",
      "role": "statement",
      "name": "Stafford38FixedSourceChallenge.UniversalFixedSourceStatement",
-     "line": 193,
      "expands": [
       {
        "repo": "formal",
        "file": "Stafford38/ChallengeDefinitions.lean",
-       "name": "Stafford38FixedSourceChallenge.PhaseVar",
-       "line": 98,
+       "name": "Stafford38Challenge.PhaseVar",
        "role": "definition"
       },
       {
        "repo": "formal",
        "file": "Stafford38/ChallengeDefinitions.lean",
-       "name": "Stafford38FixedSourceChallenge.relation",
-       "line": 100,
+       "name": "Stafford38Challenge.relation",
        "role": "definition"
       },
       {
        "repo": "formal",
        "file": "Stafford38/ChallengeDefinitions.lean",
-       "name": "Stafford38FixedSourceChallenge.WeylAlg",
-       "line": 105,
+       "name": "Stafford38Challenge.WeylAlg",
        "role": "definition"
       },
       {
        "repo": "formal",
        "file": "Stafford38/ChallengeDefinitions.lean",
-       "name": "Stafford38FixedSourceChallenge.generator",
-       "line": 108,
+       "name": "Stafford38Challenge.generator",
        "role": "definition"
       },
       {
        "repo": "formal",
        "file": "Stafford38/ChallengeDefinitions.lean",
        "name": "Stafford38FixedSourceChallenge.oldIndex",
-       "line": 112,
        "role": "definition"
       },
       {
        "repo": "formal",
        "file": "Stafford38/ChallengeDefinitions.lean",
        "name": "Stafford38FixedSourceChallenge.freeOldMap",
-       "line": 123,
        "role": "definition"
       },
       {
        "repo": "formal",
        "file": "Stafford38/ChallengeDefinitions.lean",
        "name": "Stafford38FixedSourceChallenge.freeOrderedMonomial",
-       "line": 128,
        "role": "definition"
       },
       {
        "repo": "formal",
        "file": "Stafford38/ChallengeDefinitions.lean",
        "name": "Stafford38FixedSourceChallenge.orderedMonomial",
-       "line": 138,
        "role": "definition"
       },
       {
        "repo": "formal",
        "file": "Stafford38/ChallengeDefinitions.lean",
        "name": "Stafford38FixedSourceChallenge.phaseDegree",
-       "line": 144,
        "role": "definition"
       },
       {
        "repo": "formal",
        "file": "Stafford38/ChallengeDefinitions.lean",
        "name": "Stafford38FixedSourceChallenge.bernsteinPiece",
-       "line": 148,
        "role": "definition"
       },
       {
        "repo": "formal",
        "file": "Stafford38/ChallengeDefinitions.lean",
        "name": "Stafford38FixedSourceChallenge.bernsteinDegree",
-       "line": 155,
        "role": "definition"
       },
       {
        "repo": "formal",
        "file": "Stafford38/ChallengeDefinitions.lean",
-       "name": "Stafford38FixedSourceChallenge.linearCombination",
-       "line": 160,
+       "name": "Stafford.linearCombination",
        "role": "definition"
       },
       {
        "repo": "formal",
        "file": "Stafford38/ChallengeDefinitions.lean",
-       "name": "Stafford38FixedSourceChallenge.standardForm",
-       "line": 165,
+       "name": "Stafford38Challenge.standardForm",
        "role": "definition"
       },
       {
        "repo": "formal",
        "file": "Stafford38/ChallengeDefinitions.lean",
        "name": "Stafford38FixedSourceChallenge.IsLinearWeylCoordinate",
-       "line": 170,
        "role": "definition"
       }
      ]
@@ -645,13 +618,11 @@
      "file": "FixedSourceSolution.lean",
      "role": "proof-entry",
      "name": "Stafford38FixedSourceChallenge.universalFixedSourceStatement",
-     "line": 24,
      "expands": [
       {
        "file": "Stafford38/ChallengeDefinitions.lean",
        "name": "Stafford38FixedSourceChallenge.UniversalFixedSourceStatement",
-       "role": "definition",
-       "line": 193
+       "role": "definition"
       }
      ]
     },
@@ -659,13 +630,11 @@
      "file": "AlternativeFixedSourceSolution.lean",
      "role": "alternative-proof-entry",
      "name": "Stafford38FixedSourceChallenge.universalFixedSourceStatement",
-     "line": 20,
      "expands": [
       {
        "file": "Stafford38/ChallengeDefinitions.lean",
        "name": "Stafford38FixedSourceChallenge.UniversalFixedSourceStatement",
-       "role": "definition",
-       "line": 193
+       "role": "definition"
       }
      ]
     }
@@ -708,26 +677,22 @@
      "file": "GlobalStafford/Assembly/Closure.lean",
      "role": "statement",
      "name": "GlobalStafford.universalStatement",
-     "line": 221,
      "expands": [
       {
        "repo": "global",
        "file": "GlobalStafford/Assembly/ChallengeTransport.lean",
-       "name": "GlobalStaffordChallenge.UniversalStatement",
-       "line": 66
+       "name": "GlobalStaffordChallenge.UniversalStatement"
       },
       {
        "repo": "library",
        "file": "AlgebraicAnalysis/RingTheory/TwoGeneratorIdentity.lean",
        "name": "AlgebraicAnalysis.TwoGeneratorIdentity",
-       "line": 29,
        "role": "definition"
       },
       {
        "repo": "library",
        "file": "AlgebraicAnalysis/DifferentialOperators/Basic.lean",
        "name": "AlgebraicAnalysis.DifferentialOperators.algebra",
-       "line": 174,
        "role": "definition"
       }
      ]
@@ -817,20 +782,17 @@
     {
      "file": "Stafford38/FoundationClosure.lean",
      "role": "statement",
-     "name": "Stafford38.universalFixedSourceStatement",
-     "line": 71
+     "name": "Stafford38.universalFixedSourceStatement"
     },
     {
      "file": "Solution.lean",
      "role": "statement",
      "name": "Stafford38Challenge.universalStatement",
-     "line": 12,
      "expands": [
       {
        "file": "Stafford38/ChallengeDefinitions.lean",
        "name": "Stafford38Challenge.UniversalStatement",
-       "role": "definition",
-       "line": 78
+       "role": "definition"
       }
      ]
     }
@@ -887,40 +849,34 @@
     {
      "file": "Stafford38/Weyl/OuterOreMonic.lean",
      "role": "definition",
-     "name": "Stafford38.WeylOuterOreMonic.presentedOuterPolynomial",
-     "line": 47
+     "name": "Stafford38.WeylOuterOreMonic.presentedOuterPolynomial"
     },
     {
      "file": "Stafford38/Ore/CoordinateStage.lean",
      "role": "definition",
-     "name": "Stafford38.OreCoordinateStage.coordinateDerivation",
-     "line": 89
+     "name": "Stafford38.OreCoordinateStage.coordinateDerivation"
     },
     {
      "file": "AlgebraicAnalysis/Ore/Associativity.lean",
      "role": "definition",
      "repo": "library",
-     "name": "AlgebraicAnalysis.OreAssociativity.normalFormAddEquiv",
-     "line": 272
+     "name": "AlgebraicAnalysis.OreAssociativity.normalFormAddEquiv"
     },
     {
      "file": "AlgebraicAnalysis/Ore/Associativity.lean",
      "role": "helper",
      "repo": "library",
-     "name": "AlgebraicAnalysis.OreAssociativity.normalForm_monomial",
-     "line": 291
+     "name": "AlgebraicAnalysis.OreAssociativity.normalForm_monomial"
     },
     {
      "file": "Stafford38/Weyl/IteratedEquivalence.lean",
      "role": "source citation",
-     "name": "Stafford38.WeylIteratedEquivalence.presentedIteratedEquiv",
-     "line": 636
+     "name": "Stafford38.WeylIteratedEquivalence.presentedIteratedEquiv"
     },
     {
      "repo": "library",
      "file": "AlgebraicAnalysis/Ore/RightPBW.lean",
      "name": "AlgebraicAnalysis.OreRightPBW.rightOrePBWBasis",
-     "line": 191,
      "role": "definition"
     }
    ],
@@ -974,14 +930,12 @@
     {
      "file": "Stafford38/Characteristic/Polynomial.lean",
      "role": "definition",
-     "name": "Stafford38.Characteristic.SymbolRing",
-     "line": 22
+     "name": "Stafford38.Characteristic.SymbolRing"
     },
     {
      "file": "Stafford38/Characteristic/Polynomial.lean",
      "role": "definition",
-     "name": "Stafford38.Characteristic.fibreWeight",
-     "line": 26
+     "name": "Stafford38.Characteristic.fibreWeight"
     }
    ],
    "depends_on": [],
@@ -1037,8 +991,7 @@
     {
      "file": "Stafford38/Characteristic/Polynomial.lean",
      "role": "definition",
-     "name": "Stafford38.Characteristic.SymbolRing",
-     "line": 22
+     "name": "Stafford38.Characteristic.SymbolRing"
     }
    ],
    "depends_on": [],
@@ -1072,58 +1025,51 @@
     {
      "file": "Stafford38/Weyl/Filtration.lean",
      "role": "definition",
-     "name": "Stafford38.WeylFiltration.presentedWeightPiece",
-     "line": 113
+     "name": "Stafford38.WeylFiltration.presentedWeightPiece"
     },
     {
      "file": "Stafford38/Weyl/Filtration.lean",
      "role": "definition",
-     "name": "Stafford38.WeylFiltration.bernsteinPiece",
-     "line": 284
+     "name": "Stafford38.WeylFiltration.bernsteinPiece"
     },
     {
      "file": "Stafford38/Weyl/Filtration.lean",
      "role": "definition",
-     "name": "Stafford38.WeylFiltration.orderPiece",
-     "line": 288
+     "name": "Stafford38.WeylFiltration.orderPiece"
     },
     {
-     "file": "Stafford38/FixedSourceStatement.lean",
+     "file": "Stafford38/ChallengeDefinitions.lean",
      "role": "definition",
-     "name": "Stafford38.FixedSource.bernsteinDegree",
-     "line": 23
+     "name": "Stafford38FixedSourceChallenge.bernsteinDegree",
+     "repo": "formal"
     },
     {
      "file": "FixedSourceChallenge.lean",
      "role": "definition",
-     "name": "Stafford38FixedSourceChallenge.bernsteinDegree",
-     "line": 157
+     "name": "Stafford38FixedSourceChallenge.bernsteinDegree"
     },
     {
-     "file": "Stafford38/FixedSourceChallengeTransport.lean",
+     "file": "Stafford38/Weyl/BernsteinDegree.lean",
      "role": "helper",
      "name": "Stafford38FixedSourceChallengeTransport.bernsteinDegree_eq",
-     "line": 150
+     "repo": "formal"
     },
     {
      "repo": "formal",
      "file": "Stafford38/Weyl/GradedAlgebra.lean",
      "name": "Stafford38.WeylAssociatedGraded.presentedAssociatedGradedAlgEquiv",
-     "line": 84,
      "role": "definition"
     },
     {
      "repo": "formal",
      "file": "Stafford38/Weyl/GradedAlgebra.lean",
      "name": "Stafford38.WeylAssociatedGraded.presentedAssociatedGradedMk_mul_bernstein",
-     "line": 168,
      "role": "statement"
     },
     {
      "repo": "formal",
      "file": "Stafford38/Weyl/GradedAlgebra.lean",
      "name": "Stafford38.WeylAssociatedGraded.presentedAssociatedGradedMk_mul_order",
-     "line": 185,
      "role": "statement"
     }
    ],
@@ -1169,14 +1115,12 @@
     {
      "file": "Stafford38/Characteristic/InitialIdeal.lean",
      "role": "definition",
-     "name": "Stafford38.CharacteristicInitialIdeal.orderInitialIdeal",
-     "line": 189
+     "name": "Stafford38.CharacteristicInitialIdeal.orderInitialIdeal"
     },
     {
      "file": "Stafford38/Characteristic/FilteredQuotient.lean",
      "role": "definition",
-     "name": "Stafford38.CharacteristicFilteredQuotient.quotientOrderPiece",
-     "line": 105
+     "name": "Stafford38.CharacteristicFilteredQuotient.quotientOrderPiece"
     }
    ],
    "depends_on": [],
@@ -1230,20 +1174,17 @@
     {
      "file": "Stafford38/Characteristic/InitialIdeal.lean",
      "role": "definition",
-     "name": "Stafford38.CharacteristicInitialIdeal.orderCharacteristicSupport",
-     "line": 197
+     "name": "Stafford38.CharacteristicInitialIdeal.orderCharacteristicSupport"
     },
     {
      "file": "Stafford38/Characteristic/InitialIdeal.lean",
      "role": "helper",
-     "name": "Stafford38.CharacteristicInitialIdeal.orderCharacteristicSupport_eq_zeroLocus",
-     "line": 201
+     "name": "Stafford38.CharacteristicInitialIdeal.orderCharacteristicSupport_eq_zeroLocus"
     },
     {
      "file": "Stafford38/Characteristic/CanonicalGabberInvolutivityInterface.lean",
      "role": "helper",
-     "name": "Stafford38.Characteristic.CanonicalGabberInvolutivityInterface.weylOrderInitialRadicalInvolutivity_iff_associatedGraded",
-     "line": 110
+     "name": "Stafford38.Characteristic.CanonicalGabberInvolutivityInterface.weylOrderInitialRadicalInvolutivity_iff_associatedGraded"
     }
    ],
    "depends_on": [],
@@ -1307,20 +1248,17 @@
     {
      "file": "Challenge.lean",
      "role": "definition",
-     "name": "Stafford38Challenge.relation",
-     "line": 85
+     "name": "Stafford38Challenge.relation"
     },
     {
      "file": "Stafford38/Characteristic/SymplecticCompletion.lean",
      "role": "definition",
-     "name": "Stafford38.CharacteristicSymplecticCompletion.phasePairing",
-     "line": 31
+     "name": "Stafford38.CharacteristicSymplecticCompletion.phasePairing"
     },
     {
      "file": "Stafford38/Characteristic/Polynomial.lean",
      "role": "definition",
-     "name": "Stafford38.Characteristic.poissonBracket",
-     "line": 31
+     "name": "Stafford38.Characteristic.poissonBracket"
     }
    ],
    "depends_on": [],
@@ -1373,32 +1311,27 @@
     {
      "file": "Stafford38/Characteristic/PostScalarExtensionPoisson.lean",
      "role": "definition",
-     "name": "Stafford38.Characteristic.PostScalarExtensionPoisson.IsInvolutive",
-     "line": 33
+     "name": "Stafford38.Characteristic.PostScalarExtensionPoisson.IsInvolutive"
     },
     {
      "file": "Stafford38/Characteristic/Polynomial.lean",
      "role": "definition",
-     "name": "Stafford38.Characteristic.poissonBracket",
-     "line": 31
+     "name": "Stafford38.Characteristic.poissonBracket"
     },
     {
      "file": "Stafford38/Characteristic/Polynomial.lean",
      "role": "definition",
-     "name": "Stafford38.Characteristic.IsPoisson",
-     "line": 41
+     "name": "Stafford38.Characteristic.IsPoisson"
     },
     {
      "file": "Stafford38/Characteristic/BaseRelativePoisson.lean",
      "role": "definition",
-     "name": "Stafford38.Characteristic.BaseRelativePoisson.IsBaseRelativePoisson",
-     "line": 29
+     "name": "Stafford38.Characteristic.BaseRelativePoisson.IsBaseRelativePoisson"
     },
     {
      "file": "Stafford38/Geometry/GeneralCoisotropicSetsTest.lean",
      "role": "source citation",
-     "name": "Stafford38.Geometry.GeneralCoisotropicSetsTest.zeroSectionIdealOne_not_isPoisson",
-     "line": 164
+     "name": "Stafford38.Geometry.GeneralCoisotropicSetsTest.zeroSectionIdealOne_not_isPoisson"
     }
    ],
    "depends_on": [],
@@ -1472,25 +1405,21 @@
     {
      "file": "Stafford38/Characteristic/CanonicalGabberInvolutivityInterface.lean",
      "role": "statement",
-     "name": "Stafford38.Characteristic.CanonicalGabberInvolutivityInterface.WeylAssociatedGradedRadicalInvolutivity",
-     "line": 86
+     "name": "Stafford38.Characteristic.CanonicalGabberInvolutivityInterface.WeylAssociatedGradedRadicalInvolutivity"
     },
     {
      "file": "Stafford38/Characteristic/GabberGlobalAssembly.lean",
      "role": "main-proof",
-     "name": "Stafford38.Characteristic.GabberGlobalAssembly.weylAssociatedGradedRadicalInvolutivity",
-     "line": 224
+     "name": "Stafford38.Characteristic.GabberGlobalAssembly.weylAssociatedGradedRadicalInvolutivity"
     },
     {
      "file": "Stafford38/Characteristic/GabberGlobalAssembly.lean",
      "role": "main-proof",
      "name": "Stafford38.Characteristic.GabberGlobalAssembly.associatedGraded_radical_isInvolutive",
-     "line": 212,
      "expands": [
       {
        "file": "Stafford38/Characteristic/PostScalarExtensionPoisson.lean",
-       "name": "Stafford38.Characteristic.PostScalarExtensionPoisson.IsInvolutive",
-       "line": 33
+       "name": "Stafford38.Characteristic.PostScalarExtensionPoisson.IsInvolutive"
       }
      ]
     },
@@ -1498,92 +1427,77 @@
      "file": "Stafford38/Characteristic/GabberGlobalAssembly.lean",
      "role": "main-proof",
      "name": "Stafford38.Characteristic.GabberGlobalAssembly.minimalPrime_isInvolutive",
-     "line": 144,
      "expands": [
       {
        "file": "Stafford38/Characteristic/PostScalarExtensionPoisson.lean",
-       "name": "Stafford38.Characteristic.PostScalarExtensionPoisson.IsInvolutive",
-       "line": 33
+       "name": "Stafford38.Characteristic.PostScalarExtensionPoisson.IsInvolutive"
       }
      ]
     },
     {
      "file": "Stafford38/Characteristic/GabberGlobalAssembly.lean",
      "role": "helper",
-     "name": "Stafford38.Characteristic.GabberGlobalAssembly.localized_cofactor_mem",
-     "line": 80
+     "name": "Stafford38.Characteristic.GabberGlobalAssembly.localized_cofactor_mem"
     },
     {
      "file": "Stafford38/Characteristic/BGab001CoefficientFieldTrace.lean",
      "role": "helper",
-     "name": "Stafford38.Characteristic.BGab001CoefficientFieldTrace.artinian_local_cofactor_mem_maximalIdeal",
-     "line": 338
+     "name": "Stafford38.Characteristic.BGab001CoefficientFieldTrace.artinian_local_cofactor_mem_maximalIdeal"
     },
     {
      "file": "Stafford38/Characteristic/BGab001CoefficientFieldTrace.lean",
      "role": "helper",
-     "name": "Stafford38.Characteristic.BGab001CoefficientFieldTrace.actual_commutator_cofactor_trace_eq_zero",
-     "line": 146
+     "name": "Stafford38.Characteristic.BGab001CoefficientFieldTrace.actual_commutator_cofactor_trace_eq_zero"
     },
     {
      "file": "Stafford38/Characteristic/ArtinianTriangularTrace.lean",
      "role": "helper",
-     "name": "Stafford38.Characteristic.ArtinianTriangularTrace.scalar_eq_zero_of_trace_identity",
-     "line": 101
+     "name": "Stafford38.Characteristic.ArtinianTriangularTrace.scalar_eq_zero_of_trace_identity"
     },
     {
      "file": "Stafford38/Characteristic/ArtinianCoefficientField.lean",
      "role": "helper",
-     "name": "Stafford38.Characteristic.ArtinianCoefficientField.exists_residue_section",
-     "line": 91
+     "name": "Stafford38.Characteristic.ArtinianCoefficientField.exists_residue_section"
     },
     {
      "file": "Stafford38/Characteristic/ArtinianAdaptedBasisExistence.lean",
      "role": "helper",
-     "name": "Stafford38.Characteristic.ArtinianAdaptedBasisExistence.exists_maximalIdealFiltrationAdaptedBasis",
-     "line": 213
+     "name": "Stafford38.Characteristic.ArtinianAdaptedBasisExistence.exists_maximalIdealFiltrationAdaptedBasis"
     },
     {
      "file": "Stafford38/Characteristic/RightReesArtinianAdapter.lean",
      "role": "helper",
-     "name": "Stafford38.Characteristic.RightReesArtinianAdapter.exists_concrete_localizedPreArtinianCore",
-     "line": 177
+     "name": "Stafford38.Characteristic.RightReesArtinianAdapter.exists_concrete_localizedPreArtinianCore"
     },
     {
      "file": "Stafford38/Characteristic/RightReesArtinianAdapter.lean",
      "role": "definition",
-     "name": "Stafford38.Characteristic.RightReesArtinianAdapter.LocalizedPreArtinianCore",
-     "line": 86
+     "name": "Stafford38.Characteristic.RightReesArtinianAdapter.LocalizedPreArtinianCore"
     },
     {
      "file": "Stafford38/Characteristic/OrderReesTwoJet.lean",
      "role": "definition",
-     "name": "Stafford38.CharacteristicOrderReesTwoJet.OrderReesTwoJet",
-     "line": 230
+     "name": "Stafford38.CharacteristicOrderReesTwoJet.OrderReesTwoJet"
     },
     {
      "file": "Stafford38/Characteristic/ConcreteSquareZeroTraceData.lean",
      "role": "helper",
-     "name": "Stafford38.CharacteristicConcreteSquareZeroTraceData.filteredQuotientTwoJetTraceData_bracket",
-     "line": 121
+     "name": "Stafford38.CharacteristicConcreteSquareZeroTraceData.filteredQuotientTwoJetTraceData_bracket"
     },
     {
      "file": "Stafford38/Characteristic/SquareZeroTraceData.lean",
      "role": "helper",
-     "name": "Stafford38.Characteristic.SquareZeroTraceData.RightSquareZeroTraceData.exists_lifts_commutator_factor",
-     "line": 135
+     "name": "Stafford38.Characteristic.SquareZeroTraceData.RightSquareZeroTraceData.exists_lifts_commutator_factor"
     },
     {
      "file": "Stafford38/Characteristic/AssociatedGradedModule.lean",
      "role": "definition",
-     "name": "Stafford38.CharacteristicAssociatedGradedModule.OrderAssociatedGradedModule",
-     "line": 53
+     "name": "Stafford38.CharacteristicAssociatedGradedModule.OrderAssociatedGradedModule"
     },
     {
      "file": "Stafford38/Characteristic/AssociatedGradedModule.lean",
      "role": "helper",
-     "name": "Stafford38.CharacteristicAssociatedGradedModule.annihilator_orderAssociatedGradedModule",
-     "line": 373
+     "name": "Stafford38.CharacteristicAssociatedGradedModule.annihilator_orderAssociatedGradedModule"
     }
    ],
    "depends_on": [],
@@ -1655,45 +1569,38 @@
     {
      "file": "Stafford38/Characteristic/RadicalMinimalPrimeInvolutivity.lean",
      "role": "statement",
-     "name": "Stafford38.Characteristic.RadicalMinimalPrimeInvolutivity.minimalPrimes_isInvolutive_of_radical_isInvolutive",
-     "line": 111
+     "name": "Stafford38.Characteristic.RadicalMinimalPrimeInvolutivity.minimalPrimes_isInvolutive_of_radical_isInvolutive"
     },
     {
      "file": "Stafford38/Characteristic/RadicalMinimalPrimeInvolutivity.lean",
      "role": "helper",
-     "name": "Stafford38.Characteristic.RadicalMinimalPrimeInvolutivity.exists_notMem_mul_mem_radical",
-     "line": 56
+     "name": "Stafford38.Characteristic.RadicalMinimalPrimeInvolutivity.exists_notMem_mul_mem_radical"
     },
     {
      "file": "Stafford38/Characteristic/RadicalMinimalPrimeInvolutivity.lean",
      "role": "helper",
-     "name": "Stafford38.Characteristic.RadicalMinimalPrimeInvolutivity.sq_mul_poissonBracket_eq",
-     "line": 100
+     "name": "Stafford38.Characteristic.RadicalMinimalPrimeInvolutivity.sq_mul_poissonBracket_eq"
     },
     {
      "file": "Stafford38/Characteristic/CanonicalGabberInvolutivityInterface.lean",
      "role": "helper",
-     "name": "Stafford38.Characteristic.CanonicalGabberInvolutivityInterface.rightWeylMinimalPrimeInvolutivity_of_radical",
-     "line": 128
+     "name": "Stafford38.Characteristic.CanonicalGabberInvolutivityInterface.rightWeylMinimalPrimeInvolutivity_of_radical"
     },
     {
      "file": "Stafford38/Characteristic/GabberGlobalAssembly.lean",
      "role": "main-proof",
      "name": "Stafford38.Characteristic.GabberGlobalAssembly.minimalPrime_isInvolutive",
-     "line": 144,
      "expands": [
       {
        "file": "Stafford38/Characteristic/PostScalarExtensionPoisson.lean",
-       "name": "Stafford38.Characteristic.PostScalarExtensionPoisson.IsInvolutive",
-       "line": 33
+       "name": "Stafford38.Characteristic.PostScalarExtensionPoisson.IsInvolutive"
       }
      ]
     },
     {
      "file": "Stafford38/Characteristic/NoncharacteristicMinimalPrime.lean",
      "role": "helper",
-     "name": "Stafford38.Characteristic.NoncharacteristicMinimalPrime.canonical_minimalPrime_mem_of_normalCoordinate_false",
-     "line": 118
+     "name": "Stafford38.Characteristic.NoncharacteristicMinimalPrime.canonical_minimalPrime_mem_of_normalCoordinate_false"
     }
    ],
    "depends_on": [
@@ -1767,20 +1674,17 @@
     {
      "file": "Stafford38/Weyl/MonicNormalization.lean",
      "role": "main-proof",
-     "name": "Stafford38.WeylMonicNormalization.scalar_or_normalized_symplectic_image",
-     "line": 181
+     "name": "Stafford38.WeylMonicNormalization.scalar_or_normalized_symplectic_image"
     },
     {
      "file": "Stafford38/Weyl/MonicNormalization.lean",
      "role": "helper",
-     "name": "Stafford38.WeylMonicNormalization.eq_algebraMap_of_mem_bernsteinPiece_zero",
-     "line": 90
+     "name": "Stafford38.WeylMonicNormalization.eq_algebraMap_of_mem_bernsteinPiece_zero"
     },
     {
      "file": "Stafford38/FixedSourceAssembly.lean",
      "role": "main-proof",
-     "name": "Stafford38.FixedSource.universalFixedSourceStatement_of_canonicalSupportVanishing",
-     "line": 24
+     "name": "Stafford38.FixedSource.universalFixedSourceStatement_of_canonicalSupportVanishing"
     }
    ],
    "depends_on": [],
@@ -1833,50 +1737,42 @@
     {
      "file": "Stafford38/Weyl/Symplectic.lean",
      "role": "definition",
-     "name": "Stafford38.WeylSymplectic.standardSymplecticAlgHom",
-     "line": 46
+     "name": "Stafford38.WeylSymplectic.standardSymplecticAlgHom"
     },
     {
      "file": "Stafford38/Weyl/Symplectic.lean",
      "role": "helper",
-     "name": "Stafford38.WeylSymplectic.standardSymplecticAlgHom_generator",
-     "line": 54
+     "name": "Stafford38.WeylSymplectic.standardSymplecticAlgHom_generator"
     },
     {
      "file": "Stafford38/Weyl/Symplectic.lean",
      "role": "definition",
-     "name": "Stafford38.WeylSymplectic.standardSymplecticAlgEquivOfInverse",
-     "line": 91
+     "name": "Stafford38.WeylSymplectic.standardSymplecticAlgEquivOfInverse"
     },
     {
      "file": "Stafford38/Weyl/SymbolCompatibility.lean",
      "role": "helper",
-     "name": "Stafford38.WeylSymbolCompatibility.standardSymplecticAlgHom_preserves_bernsteinPiece",
-     "line": 213
+     "name": "Stafford38.WeylSymbolCompatibility.standardSymplecticAlgHom_preserves_bernsteinPiece"
     },
     {
      "file": "Stafford38/Weyl/SymbolCompatibility.lean",
      "role": "helper",
-     "name": "Stafford38.WeylSymbolCompatibility.standardSymplecticAlgHom_principal_compatibility",
-     "line": 416
+     "name": "Stafford38.WeylSymbolCompatibility.standardSymplecticAlgHom_principal_compatibility"
     },
     {
      "file": "Stafford38/Characteristic/LinearAction.lean",
      "role": "definition",
-     "name": "Stafford38.CharacteristicLinearAction.symbolLinearAlgHom",
-     "line": 30
+     "name": "Stafford38.CharacteristicLinearAction.symbolLinearAlgHom"
     },
     {
      "file": "Stafford38/Characteristic/HomogeneousChart.lean",
      "role": "helper",
-     "name": "Stafford38.CharacteristicHomogeneousChart.eval_symbolLinearAlgHom",
-     "line": 37
+     "name": "Stafford38.CharacteristicHomogeneousChart.eval_symbolLinearAlgHom"
     },
     {
      "repo": "formal",
      "file": "Stafford38/Characteristic/LinearAction.lean",
      "name": "Stafford38.CharacteristicLinearAction.symbolLinearAlgEquivOfInverse",
-     "line": 68,
      "role": "definition"
     }
    ],
@@ -1941,20 +1837,17 @@
     {
      "file": "Stafford38/Characteristic/SymplecticCompletion.lean",
      "role": "statement",
-     "name": "Stafford38.CharacteristicSymplecticCompletion.exists_symplectic_mulVec_eq",
-     "line": 238
+     "name": "Stafford38.CharacteristicSymplecticCompletion.exists_symplectic_mulVec_eq"
     },
     {
      "file": "Stafford38/Characteristic/SymplecticCompletion.lean",
      "role": "helper",
-     "name": "Stafford38.CharacteristicSymplecticCompletion.exists_symplectic_column_eq",
-     "line": 311
+     "name": "Stafford38.CharacteristicSymplecticCompletion.exists_symplectic_column_eq"
     },
     {
      "file": "Stafford38/Characteristic/SymplecticCompletion.lean",
      "role": "helper",
-     "name": "Stafford38.CharacteristicSymplecticCompletion.symplecticTransvection_mem",
-     "line": 159
+     "name": "Stafford38.CharacteristicSymplecticCompletion.symplecticTransvection_mem"
     }
    ],
    "depends_on": [],
@@ -2009,50 +1902,42 @@
     {
      "file": "Stafford38/Weyl/MonicNormalization.lean",
      "role": "statement",
-     "name": "Stafford38.WeylMonicNormalization.exists_normalized_symplectic_image",
-     "line": 158
+     "name": "Stafford38.WeylMonicNormalization.exists_normalized_symplectic_image"
     },
     {
      "file": "Stafford38/Weyl/MonicNormalization.lean",
      "role": "definition",
-     "name": "Stafford38.WeylMonicNormalization.HasNormalizedSymplecticChart",
-     "line": 146
+     "name": "Stafford38.WeylMonicNormalization.HasNormalizedSymplecticChart"
     },
     {
      "file": "Stafford38/Weyl/PBWMonicBridge.lean",
      "role": "definition",
-     "name": "Stafford38.WeylPBWMonicBridge.IsPBWMonicAt",
-     "line": 98
+     "name": "Stafford38.WeylPBWMonicBridge.IsPBWMonicAt"
     },
     {
      "file": "Stafford38/Weyl/PBWMonicBridge.lean",
      "role": "helper",
-     "name": "Stafford38.WeylPBWMonicBridge.coeff_principal_pure_eq_normalForm",
-     "line": 84
+     "name": "Stafford38.WeylPBWMonicBridge.coeff_principal_pure_eq_normalForm"
     },
     {
      "file": "Stafford38/Weyl/OuterOreMonic.lean",
      "role": "helper",
-     "name": "Stafford38.WeylOuterOreMonic.presentedOuterPolynomial_monic",
-     "line": 404
+     "name": "Stafford38.WeylOuterOreMonic.presentedOuterPolynomial_monic"
     },
     {
      "file": "Stafford38/Characteristic/SymplecticCompletion.lean",
      "role": "main-proof",
-     "name": "Stafford38.CharacteristicSymplecticCompletion.exists_symplectic_chart_matrices",
-     "line": 346
+     "name": "Stafford38.CharacteristicSymplecticCompletion.exists_symplectic_chart_matrices"
     },
     {
      "file": "Stafford38/Characteristic/HomogeneousChart.lean",
      "role": "helper",
-     "name": "Stafford38.CharacteristicHomogeneousChart.pureCoefficient_symbolLinearAlgHom",
-     "line": 140
+     "name": "Stafford38.CharacteristicHomogeneousChart.pureCoefficient_symbolLinearAlgHom"
     },
     {
      "file": "Stafford38/Characteristic/HomogeneousChart.lean",
      "role": "helper",
-     "name": "Stafford38.CharacteristicHomogeneousChart.exists_eval_ne_zero_of_homogeneous",
-     "line": 29
+     "name": "Stafford38.CharacteristicHomogeneousChart.exists_eval_ne_zero_of_homogeneous"
     }
    ],
    "depends_on": [
@@ -2118,39 +2003,33 @@
     {
      "file": "Stafford38/Weyl/PresentedScalarExtension.lean",
      "role": "main-proof",
-     "name": "Stafford38.Weyl.PresentedScalarExtension.canonicalSupportDescent_of_filteredInitialLifting",
-     "line": 573
+     "name": "Stafford38.Weyl.PresentedScalarExtension.canonicalSupportDescent_of_filteredInitialLifting"
     },
     {
      "file": "Stafford38/Weyl/PresentedScalarExtension.lean",
      "role": "definition",
-     "name": "Stafford38.Weyl.PresentedScalarExtension.FilteredInitialLifting",
-     "line": 561
+     "name": "Stafford38.Weyl.PresentedScalarExtension.FilteredInitialLifting"
     },
     {
      "file": "Stafford38/Weyl/FilteredScalarLifting.lean",
      "role": "main-proof",
      "name": "Stafford38.Weyl.FilteredScalarLifting.filteredInitialLifting",
-     "line": 465,
      "expands": [
       {
        "file": "Stafford38/Weyl/PresentedScalarExtension.lean",
-       "name": "Stafford38.Weyl.PresentedScalarExtension.FilteredInitialLifting",
-       "line": 561
+       "name": "Stafford38.Weyl.PresentedScalarExtension.FilteredInitialLifting"
       }
      ]
     },
     {
      "file": "Stafford38/Weyl/PresentedScalarExtension.lean",
      "role": "helper",
-     "name": "Stafford38.Weyl.PresentedScalarExtension.presentedWeylScalarExtension_isPBWMonicAt",
-     "line": 329
+     "name": "Stafford38.Weyl.PresentedScalarExtension.presentedWeylScalarExtension_isPBWMonicAt"
     },
     {
      "file": "Stafford38/CanonicalSupportVanishingReduction.lean",
      "role": "definition",
-     "name": "Stafford38.CanonicalSupportVanishingReduction.AlgebraicallyClosedCanonicalSupportVanishing",
-     "line": 117
+     "name": "Stafford38.CanonicalSupportVanishingReduction.AlgebraicallyClosedCanonicalSupportVanishing"
     }
    ],
    "depends_on": [],
@@ -2222,20 +2101,17 @@
     {
      "file": "Stafford38/FixedSourceAssembly.lean",
      "role": "main-proof",
-     "name": "Stafford38.FixedSource.universalFixedSourceStatement_of_canonicalSupportVanishing",
-     "line": 24
+     "name": "Stafford38.FixedSource.universalFixedSourceStatement_of_canonicalSupportVanishing"
     },
     {
      "file": "Stafford38/Weyl/Symplectic.lean",
      "role": "helper",
-     "name": "Stafford38.WeylSymplectic.standardSymplecticAlgEquivOfInverse_symm_generator",
-     "line": 119
+     "name": "Stafford38.WeylSymplectic.standardSymplecticAlgEquivOfInverse_symm_generator"
     },
     {
      "file": "Stafford38/UniversalAssembly.lean",
      "role": "main-proof",
-     "name": "Stafford38.UniversalAssembly.universalStatement_of_canonicalSupportVanishing",
-     "line": 69
+     "name": "Stafford38.UniversalAssembly.universalStatement_of_canonicalSupportVanishing"
     }
    ],
    "depends_on": [
@@ -2291,14 +2167,12 @@
     {
      "file": "Stafford38/Characteristic/NormalSymbolPolynomial.lean",
      "role": "statement",
-     "name": "Stafford38.Characteristic.NormalSymbolPolynomial.canonicalNormalPolynomial_monic",
-     "line": 104
+     "name": "Stafford38.Characteristic.NormalSymbolPolynomial.canonicalNormalPolynomial_monic"
     },
     {
      "file": "Stafford38/Characteristic/NormalSymbolPolynomial.lean",
      "role": "source citation",
-     "name": "Stafford38.Characteristic.NormalSymbolPolynomial.normalSymbolAlgEquiv",
-     "line": 28
+     "name": "Stafford38.Characteristic.NormalSymbolPolynomial.normalSymbolAlgEquiv"
     }
    ],
    "depends_on": [],
@@ -2333,32 +2207,27 @@
     {
      "file": "Stafford38/Characteristic/InitialIdeal.lean",
      "role": "statement",
-     "name": "Stafford38.CharacteristicInitialIdeal.canonical_orderPrincipalComponent_isFibreOnly",
-     "line": 320
+     "name": "Stafford38.CharacteristicInitialIdeal.canonical_orderPrincipalComponent_isFibreOnly"
     },
     {
      "file": "Stafford38/Geometry/ConormalAxisContradiction.lean",
      "role": "statement",
-     "name": "Stafford38.Geometry.ConormalAxisContradiction.canonical_orderPrincipalComponent_isHomogeneous",
-     "line": 61
+     "name": "Stafford38.Geometry.ConormalAxisContradiction.canonical_orderPrincipalComponent_isHomogeneous"
     },
     {
      "file": "Stafford38/Characteristic/InitialIdeal.lean",
      "role": "statement",
-     "name": "Stafford38.CharacteristicInitialIdeal.canonical_orderPrincipalComponent_pureMomentumCoefficient",
-     "line": 302
+     "name": "Stafford38.CharacteristicInitialIdeal.canonical_orderPrincipalComponent_pureMomentumCoefficient"
     },
     {
      "file": "Stafford38/Geometry/ConormalAxisContradiction.lean",
      "role": "statement",
-     "name": "Stafford38.Geometry.ConormalAxisContradiction.canonical_orderPrincipalComponent_eval_pureMomentumAxis",
-     "line": 131
+     "name": "Stafford38.Geometry.ConormalAxisContradiction.canonical_orderPrincipalComponent_eval_pureMomentumAxis"
     },
     {
      "file": "Stafford38/Characteristic/NormalSymbolPolynomial.lean",
      "role": "statement",
-     "name": "Stafford38.Characteristic.NormalSymbolPolynomial.canonicalNormalPolynomial_monic",
-     "line": 104
+     "name": "Stafford38.Characteristic.NormalSymbolPolynomial.canonicalNormalPolynomial_monic"
     }
    ],
    "depends_on": [
@@ -2414,26 +2283,22 @@
     {
      "file": "Stafford38/Weyl/EulerResidue.lean",
      "role": "definition",
-     "name": "Stafford38.WeylEulerResidue.canonicalRightIdeal",
-     "line": 26
+     "name": "Stafford38.WeylEulerResidue.canonicalRightIdeal"
     },
     {
      "file": "Stafford38/Weyl/QuotientTransport.lean",
      "role": "definition",
-     "name": "Stafford38.WeylQuotientTransport.presentedCanonicalRightIdeal",
-     "line": 99
+     "name": "Stafford38.WeylQuotientTransport.presentedCanonicalRightIdeal"
     },
     {
      "file": "Stafford38/Quotient/EulerSurjectivity.lean",
      "role": "definition",
-     "name": "Stafford38.EulerSurjectivity.rightMul",
-     "line": 32
+     "name": "Stafford38.EulerSurjectivity.rightMul"
     },
     {
      "file": "proofs/weyl_pure_power.lean",
      "role": "definition",
-     "name": "Stafford.eulerPolynomialEval",
-     "line": 131
+     "name": "Stafford.eulerPolynomialEval"
     }
    ],
    "depends_on": [],
@@ -2478,32 +2343,27 @@
     {
      "file": "Stafford38/Weyl/EulerSubring.lean",
      "role": "definition",
-     "name": "Stafford38.WeylEulerSubring.eulerSubring",
-     "line": 25
+     "name": "Stafford38.WeylEulerSubring.eulerSubring"
     },
     {
      "file": "Stafford38/Weyl/EulerSubring.lean",
      "role": "definition",
-     "name": "Stafford38.WeylEulerSubring.pairEulerSubring",
-     "line": 184
+     "name": "Stafford38.WeylEulerSubring.pairEulerSubring"
     },
     {
      "file": "Stafford38/Weyl/EulerSubring.lean",
      "role": "helper",
-     "name": "Stafford38.WeylEulerSubring.pairOrderedMonomial_mem_eulerSubring",
-     "line": 203
+     "name": "Stafford38.WeylEulerSubring.pairOrderedMonomial_mem_eulerSubring"
     },
     {
      "file": "Stafford38/Weyl/EulerSubring.lean",
      "role": "main-proof",
-     "name": "Stafford38.WeylEulerSubring.coordinate_normal_eulerSubring",
-     "line": 71
+     "name": "Stafford38.WeylEulerSubring.coordinate_normal_eulerSubring"
     },
     {
      "file": "Stafford38/Weyl/EulerSubring.lean",
      "role": "helper",
-     "name": "Stafford38.WeylEulerSubring.normalAcross",
-     "line": 30
+     "name": "Stafford38.WeylEulerSubring.normalAcross"
     }
    ],
    "depends_on": [],
@@ -2575,20 +2435,17 @@
     {
      "file": "Stafford38/Weyl/EulerProductIdentities.lean",
      "role": "statement",
-     "name": "Stafford38.Weyl.EulerProductIdentities.eval_fallingEulerProduct",
-     "line": 70
+     "name": "Stafford38.Weyl.EulerProductIdentities.eval_fallingEulerProduct"
     },
     {
      "file": "Stafford38/Weyl/EulerProductIdentities.lean",
      "role": "statement",
-     "name": "Stafford38.Weyl.EulerProductIdentities.eval_risingEulerProduct",
-     "line": 79
+     "name": "Stafford38.Weyl.EulerProductIdentities.eval_risingEulerProduct"
     },
     {
      "file": "proofs/weyl_pure_power.lean",
      "role": "helper",
-     "name": "Stafford.exists_eulerPolynomial_x_pow_mul_d_pow",
-     "line": 148
+     "name": "Stafford.exists_eulerPolynomial_x_pow_mul_d_pow"
     }
    ],
    "depends_on": [],
@@ -2633,56 +2490,47 @@
     {
      "file": "Stafford38/Weyl/EulerResidue.lean",
      "role": "helper",
-     "name": "Stafford38.WeylEulerResidue.positiveEulerResidue_identity",
-     "line": 41
+     "name": "Stafford38.WeylEulerResidue.positiveEulerResidue_identity"
     },
     {
      "file": "Stafford38/Weyl/EulerResidue.lean",
      "role": "helper",
-     "name": "Stafford38.WeylEulerResidue.positiveEulerResidue_polynomial_mem",
-     "line": 84
+     "name": "Stafford38.WeylEulerResidue.positiveEulerResidue_polynomial_mem"
     },
     {
      "file": "proofs/weyl_pure_power.lean",
      "role": "helper",
-     "name": "Stafford.euler_products_right_bezout_exists",
-     "line": 210
+     "name": "Stafford.euler_products_right_bezout_exists"
     },
     {
      "file": "proofs/weyl_pure_power.lean",
      "role": "helper",
-     "name": "Stafford.euler_products_polynomial_right_bezout_exists",
-     "line": 246
+     "name": "Stafford.euler_products_polynomial_right_bezout_exists"
     },
     {
      "file": "Stafford38/Weyl/EulerRemainder.lean",
      "role": "definition",
-     "name": "Stafford38.WeylEulerRemainder.HasPositiveCoordinateFactor",
-     "line": 45
+     "name": "Stafford38.WeylEulerRemainder.HasPositiveCoordinateFactor"
     },
     {
      "file": "Stafford38/Weyl/EulerRemainder.lean",
      "role": "helper",
-     "name": "Stafford38.WeylEulerRemainder.pairOrderedMonomial_hasPositiveCoordinateFactor",
-     "line": 88
+     "name": "Stafford38.WeylEulerRemainder.pairOrderedMonomial_hasPositiveCoordinateFactor"
     },
     {
      "file": "Stafford38/Weyl/EulerSubring.lean",
      "role": "helper",
-     "name": "Stafford38.WeylEulerSubring.pairOrderedMonomial_eq_eulerSubring_mul_coordinate",
-     "line": 237
+     "name": "Stafford38.WeylEulerSubring.pairOrderedMonomial_eq_eulerSubring_mul_coordinate"
     },
     {
      "file": "Stafford38/Weyl/EulerRemainder.lean",
      "role": "main-proof",
-     "name": "Stafford38.WeylEulerRemainder.positiveEulerResidue_eq_eulerSubring_mul_coordinate",
-     "line": 257
+     "name": "Stafford38.WeylEulerRemainder.positiveEulerResidue_eq_eulerSubring_mul_coordinate"
     },
     {
      "file": "Stafford38/Weyl/EulerRemainder.lean",
      "role": "statement",
-     "name": "Stafford38.WeylEulerRemainder.presentedPositiveEulerResidue",
-     "line": 405
+     "name": "Stafford38.WeylEulerRemainder.presentedPositiveEulerResidue"
     }
    ],
    "depends_on": [
@@ -2776,38 +2624,32 @@
     {
      "file": "Stafford38/Quotient/EulerSurjectivity.lean",
      "role": "main-proof",
-     "name": "Stafford38.EulerSurjectivity.rightMul_surjective_of_euler_normal",
-     "line": 86
+     "name": "Stafford38.EulerSurjectivity.rightMul_surjective_of_euler_normal"
     },
     {
      "file": "Stafford38/Quotient/EulerSurjectivity.lean",
      "role": "helper",
-     "name": "Stafford38.EulerSurjectivity.preservers",
-     "line": 45
+     "name": "Stafford38.EulerSurjectivity.preservers"
     },
     {
      "file": "Stafford38/Weyl/EulerSubring.lean",
      "role": "helper",
-     "name": "Stafford38.WeylEulerSubring.closure_eulerSubring_union_momentum_eq_top",
-     "line": 102
+     "name": "Stafford38.WeylEulerSubring.closure_eulerSubring_union_momentum_eq_top"
     },
     {
      "file": "Stafford38/Weyl/EulerRemainder.lean",
      "role": "helper",
-     "name": "Stafford38.WeylEulerRemainder.closure_pairOldSubring_union_coordinate_momentum_eq_top",
-     "line": 310
+     "name": "Stafford38.WeylEulerRemainder.closure_pairOldSubring_union_coordinate_momentum_eq_top"
     },
     {
      "file": "Stafford38/Weyl/EulerRemainder.lean",
      "role": "statement",
-     "name": "Stafford38.WeylEulerRemainder.presentedCanonicalQuotient_rightMul_coordinate_surjective",
-     "line": 424
+     "name": "Stafford38.WeylEulerRemainder.presentedCanonicalQuotient_rightMul_coordinate_surjective"
     },
     {
      "file": "Stafford38/Weyl/QuotientTransport.lean",
      "role": "statement",
-     "name": "Stafford38.WeylQuotientTransport.presentedCanonicalRightQuotient_rightMul_coordinate_surjective",
-     "line": 240
+     "name": "Stafford38.WeylQuotientTransport.presentedCanonicalRightQuotient_rightMul_coordinate_surjective"
     }
    ],
    "depends_on": [
@@ -2872,20 +2714,17 @@
     {
      "file": "Stafford38/Characteristic/CanonicalGradedTangentialEquivalences.lean",
      "role": "definition",
-     "name": "Stafford38.Characteristic.CanonicalGradedTangentialEquivalences.Graded",
-     "line": 32
+     "name": "Stafford38.Characteristic.CanonicalGradedTangentialEquivalences.Graded"
     },
     {
      "file": "Stafford38/Characteristic/CanonicalGradedTangentialEquivalences.lean",
      "role": "definition",
-     "name": "Stafford38.Characteristic.CanonicalGradedTangentialEquivalences.T",
-     "line": 33
+     "name": "Stafford38.Characteristic.CanonicalGradedTangentialEquivalences.T"
     },
     {
      "file": "Stafford38/Characteristic/CanonicalOldTangentialFiniteness.lean",
      "role": "definition",
-     "name": "Stafford38.Characteristic.CanonicalOldTangentialFiniteness.oldCoordinateMap",
-     "line": 39
+     "name": "Stafford38.Characteristic.CanonicalOldTangentialFiniteness.oldCoordinateMap"
     }
    ],
    "depends_on": [],
@@ -2948,14 +2787,12 @@
      "repo": "mathlib",
      "file": "Mathlib/RingTheory/Length.lean",
      "name": "Module.length",
-     "line": 32,
      "role": "definition"
     },
     {
      "repo": "mathlib",
      "file": "Mathlib/RingTheory/FiniteLength.lean",
      "name": "IsFiniteLength",
-     "line": 30,
      "role": "definition"
     }
    ],
@@ -3002,47 +2839,40 @@
     {
      "file": "Stafford38/Characteristic/CanonicalOldTangentialFiniteness.lean",
      "role": "statement",
-     "name": "Stafford38.Characteristic.CanonicalOldTangentialFiniteness.canonical_finite_old_coordinate_kernel_cokernel",
-     "line": 73
+     "name": "Stafford38.Characteristic.CanonicalOldTangentialFiniteness.canonical_finite_old_coordinate_kernel_cokernel"
     },
     {
      "file": "Stafford38/Characteristic/CanonicalTangentialSymbolFiniteness.lean",
      "role": "main-proof",
-     "name": "Stafford38.Characteristic.CanonicalTangentialSymbolFiniteness.canonical_orderAssociatedGradedModule_finite_tangential_coordinate",
-     "line": 116
+     "name": "Stafford38.Characteristic.CanonicalTangentialSymbolFiniteness.canonical_orderAssociatedGradedModule_finite_tangential_coordinate"
     },
     {
      "file": "Stafford38/Characteristic/CanonicalNormalSymbolFiniteness.lean",
      "role": "helper",
-     "name": "Stafford38.Characteristic.CanonicalNormalSymbolFiniteness.canonical_orderAssociatedGradedModule_finite_normalCoeffRing",
-     "line": 47
+     "name": "Stafford38.Characteristic.CanonicalNormalSymbolFiniteness.canonical_orderAssociatedGradedModule_finite_normalCoeffRing"
     },
     {
      "file": "AlgebraicAnalysis/Module/MonicAnnihilatorFinite.lean",
      "role": "helper",
      "repo": "library",
-     "name": "AlgebraicAnalysis.MonicAnnihilatorFinite.finite_of_monic_annihilator",
-     "line": 21
+     "name": "AlgebraicAnalysis.MonicAnnihilatorFinite.finite_of_monic_annihilator"
     },
     {
      "file": "Stafford38/Characteristic/NormalSymbolPolynomial.lean",
      "role": "helper",
-     "name": "Stafford38.Characteristic.NormalSymbolPolynomial.canonicalNormalPolynomial_monic",
-     "line": 104
+     "name": "Stafford38.Characteristic.NormalSymbolPolynomial.canonicalNormalPolynomial_monic"
     },
     {
      "file": "AlgebraicAnalysis/Module/EndomorphismKernelSupportOverBase.lean",
      "role": "helper",
      "repo": "library",
-     "name": "AlgebraicAnalysis.endomorphism_kernel_support_subset_cokernel_support_over_base",
-     "line": 17
+     "name": "AlgebraicAnalysis.endomorphism_kernel_support_subset_cokernel_support_over_base"
     },
     {
      "file": "AlgebraicAnalysis/Module/MinimalSupportKernelCokernelLengths.lean",
      "role": "statement",
      "repo": "library",
-     "name": "AlgebraicAnalysis.localized_kernel_and_cokernel_isFiniteLength",
-     "line": 48
+     "name": "AlgebraicAnalysis.localized_kernel_and_cokernel_isFiniteLength"
     }
    ],
    "depends_on": [
@@ -3116,71 +2946,60 @@
     {
      "file": "Stafford38/Characteristic/CanonicalPageEulerInequality.lean",
      "role": "statement",
-     "name": "Stafford38.Characteristic.CanonicalPageEulerInequality.canonicalPage_length_target_le_source",
-     "line": 25
+     "name": "Stafford38.Characteristic.CanonicalPageEulerInequality.canonicalPage_length_target_le_source"
     },
     {
      "file": "Stafford38/Characteristic/CanonicalFilteredTwoTerm.lean",
      "role": "definition",
-     "name": "Stafford38.Characteristic.CanonicalFilteredTwoTerm.canonicalFilteredTwoTerm",
-     "line": 112
+     "name": "Stafford38.Characteristic.CanonicalFilteredTwoTerm.canonicalFilteredTwoTerm"
     },
     {
      "file": "Stafford38/Characteristic/CanonicalFilteredTwoTerm.lean",
      "role": "helper",
-     "name": "Stafford38.Characteristic.CanonicalFilteredTwoTerm.canonicalFilteredTwoTerm_f_surjective",
-     "line": 130
+     "name": "Stafford38.Characteristic.CanonicalFilteredTwoTerm.canonicalFilteredTwoTerm_f_surjective"
     },
     {
      "file": "Stafford38/Characteristic/CanonicalTangentialBoundaryMaps.lean",
      "role": "helper",
-     "name": "Stafford38.Characteristic.CanonicalTangentialTotalAction.tangentialBoundaryMap_eventually_zero",
-     "line": 55
+     "name": "Stafford38.Characteristic.CanonicalTangentialTotalAction.tangentialBoundaryMap_eventually_zero"
     },
     {
      "file": "AlgebraicAnalysis/Module/FilteredTwoTermBoundaryExhaustion.lean",
      "role": "helper",
      "repo": "library",
-     "name": "AlgebraicAnalysis.FilteredTwoTermPages.FilteredTwoTerm.totalBoundaryMap_eventually_zero",
-     "line": 122
+     "name": "AlgebraicAnalysis.FilteredTwoTermPages.FilteredTwoTerm.totalBoundaryMap_eventually_zero"
     },
     {
      "file": "AlgebraicAnalysis/Module/UniformBoundaryVanishing.lean",
      "role": "helper",
      "repo": "library",
-     "name": "AlgebraicAnalysis.exists_uniform_subsingleton_localized",
-     "line": 106
+     "name": "AlgebraicAnalysis.exists_uniform_subsingleton_localized"
     },
     {
      "file": "AlgebraicAnalysis/Module/TwoTermPageLength.lean",
      "role": "helper",
      "repo": "library",
-     "name": "AlgebraicAnalysis.TwoTermPageLength.twoTermPage_length_target_le_source",
-     "line": 19
+     "name": "AlgebraicAnalysis.TwoTermPageLength.twoTermPage_length_target_le_source"
     },
     {
      "file": "Stafford38/Characteristic/CanonicalTangentialTotalAction.lean",
      "role": "helper",
-     "name": "Stafford38.Characteristic.CanonicalTangentialTotalAction.generator_commutator_lowers",
-     "line": 38
+     "name": "Stafford38.Characteristic.CanonicalTangentialTotalAction.generator_commutator_lowers"
     },
     {
      "file": "Stafford38/Characteristic/CanonicalTangentialSuccessors.lean",
      "role": "helper",
-     "name": "Stafford38.Characteristic.CanonicalTangentialTotalAction.tangentialSourceSuccEquiv",
-     "line": 80
+     "name": "Stafford38.Characteristic.CanonicalTangentialTotalAction.tangentialSourceSuccEquiv"
     },
     {
      "file": "Stafford38/Characteristic/CanonicalGradedTangentialEquivalences.lean",
      "role": "helper",
-     "name": "Stafford38.Characteristic.CanonicalGradedTangentialEquivalences.firstSourceGradedKernelEquiv",
-     "line": 158
+     "name": "Stafford38.Characteristic.CanonicalGradedTangentialEquivalences.firstSourceGradedKernelEquiv"
     },
     {
      "file": "Stafford38/Characteristic/CanonicalGradedTangentialEquivalences.lean",
      "role": "helper",
-     "name": "Stafford38.Characteristic.CanonicalGradedTangentialEquivalences.firstTargetGradedCokernelEquiv",
-     "line": 163
+     "name": "Stafford38.Characteristic.CanonicalGradedTangentialEquivalences.firstTargetGradedCokernelEquiv"
     }
    ],
    "depends_on": [
@@ -3266,25 +3085,21 @@
      "file": "AlgebraicAnalysis/Module/BaseLocalizedKoszulPositivity.lean",
      "role": "statement",
      "repo": "library",
-     "name": "AlgebraicAnalysis.BaseLocalizedKoszulPositivity.localized_length_cokernel_gt_kernel",
-     "line": 25
+     "name": "AlgebraicAnalysis.BaseLocalizedKoszulPositivity.localized_length_cokernel_gt_kernel"
     },
     {
      "file": "Stafford38/Characteristic/NoncharacteristicMinimalPrime.lean",
      "role": "main-proof",
-     "name": "Stafford38.Characteristic.NoncharacteristicMinimalPrime.canonical_minimalPrime_mem_of_normalCoordinate_false",
-     "line": 118
+     "name": "Stafford38.Characteristic.NoncharacteristicMinimalPrime.canonical_minimalPrime_mem_of_normalCoordinate_false"
     },
     {
      "file": "Stafford38/Characteristic/GabberGlobalAssembly.lean",
      "role": "helper",
      "name": "Stafford38.Characteristic.GabberGlobalAssembly.minimalPrime_isInvolutive",
-     "line": 144,
      "expands": [
       {
        "file": "Stafford38/Characteristic/PostScalarExtensionPoisson.lean",
-       "name": "Stafford38.Characteristic.PostScalarExtensionPoisson.IsInvolutive",
-       "line": 33
+       "name": "Stafford38.Characteristic.PostScalarExtensionPoisson.IsInvolutive"
       }
      ]
     },
@@ -3292,50 +3107,43 @@
      "file": "AlgebraicAnalysis/Module/LocalizedMinimalSupportAvoidance.lean",
      "role": "helper",
      "repo": "library",
-     "name": "AlgebraicAnalysis.LocalizedMinimalSupportAvoidance.localized_minimalPrime_avoids",
-     "line": 75
+     "name": "AlgebraicAnalysis.LocalizedMinimalSupportAvoidance.localized_minimalPrime_avoids"
     },
     {
      "file": "AlgebraicAnalysis/Module/BaseLocalizationModuleComparison.lean",
      "role": "helper",
      "repo": "library",
-     "name": "AlgebraicAnalysis.BaseLocalizationModuleComparison.localizedModuleComparison",
-     "line": 70
+     "name": "AlgebraicAnalysis.BaseLocalizationModuleComparison.localizedModuleComparison"
     },
     {
      "file": "AlgebraicAnalysis/Module/PrincipalKoszulMinimalSupportPositivity.lean",
      "role": "helper",
      "repo": "library",
-     "name": "AlgebraicAnalysis.PrincipalKoszulMinimalSupportPositivity.length_cokernel_gt_kernel_of_minimal_support",
-     "line": 30
+     "name": "AlgebraicAnalysis.PrincipalKoszulMinimalSupportPositivity.length_cokernel_gt_kernel_of_minimal_support"
     },
     {
      "file": "AlgebraicAnalysis/Module/PrincipalKoszulSupportOverBase.lean",
      "role": "helper",
      "repo": "library",
-     "name": "AlgebraicAnalysis.PrincipalKoszulSupportOverBase.length_cokernel_gt_kernel_of_support_over_base",
-     "line": 31
+     "name": "AlgebraicAnalysis.PrincipalKoszulSupportOverBase.length_cokernel_gt_kernel_of_support_over_base"
     },
     {
      "file": "AlgebraicAnalysis/Module/StableTorsionResidualSupport.lean",
      "role": "helper",
      "repo": "library",
-     "name": "AlgebraicAnalysis.StableTorsionResidualSupport.residual_nontrivial_of_support",
-     "line": 29
+     "name": "AlgebraicAnalysis.StableTorsionResidualSupport.residual_nontrivial_of_support"
     },
     {
      "file": "AlgebraicAnalysis/Module/PrincipalKoszulPositivity.lean",
      "role": "helper",
      "repo": "library",
-     "name": "AlgebraicAnalysis.PrincipalKoszulPositivity.length_cokernel_eq_kernel_add_regular_quotient",
-     "line": 110
+     "name": "AlgebraicAnalysis.PrincipalKoszulPositivity.length_cokernel_eq_kernel_add_regular_quotient"
     },
     {
      "file": "AlgebraicAnalysis/Module/PrincipalKoszulFiniteTorsion.lean",
      "role": "helper",
      "repo": "library",
-     "name": "AlgebraicAnalysis.PrincipalKoszulFiniteTorsion.length_cokernel_gt_kernel_of_stable_power_and_nonzero",
-     "line": 79
+     "name": "AlgebraicAnalysis.PrincipalKoszulFiniteTorsion.length_cokernel_gt_kernel_of_stable_power_and_nonzero"
     }
    ],
    "depends_on": [
@@ -3440,27 +3248,23 @@
     {
      "file": "Stafford38/Characteristic/CanonicalKoszulContradiction.lean",
      "role": "statement",
-     "name": "Stafford38.Characteristic.CanonicalKoszulContradiction.coordinate_cokernel_subsingleton",
-     "line": 86
+     "name": "Stafford38.Characteristic.CanonicalKoszulContradiction.coordinate_cokernel_subsingleton"
     },
     {
      "file": "Stafford38/Characteristic/CanonicalKoszulContradiction.lean",
      "role": "main-proof",
-     "name": "Stafford38.Characteristic.CanonicalKoszulContradiction.no_minimal_coordinate_cokernel_support",
-     "line": 50
+     "name": "Stafford38.Characteristic.CanonicalKoszulContradiction.no_minimal_coordinate_cokernel_support"
     },
     {
      "file": "Stafford38/Characteristic/CanonicalKoszulContradiction.lean",
      "role": "statement",
-     "name": "Stafford38.Characteristic.CanonicalKoszulContradiction.coordinate_quotSMulTop_subsingleton",
-     "line": 100
+     "name": "Stafford38.Characteristic.CanonicalKoszulContradiction.coordinate_quotSMulTop_subsingleton"
     },
     {
      "file": "AlgebraicAnalysis/Module/MinimalSupportExistence.lean",
      "role": "helper",
      "repo": "library",
-     "name": "AlgebraicAnalysis.MinimalSupportExistence.exists_minimal_support_prime",
-     "line": 21
+     "name": "AlgebraicAnalysis.MinimalSupportExistence.exists_minimal_support_prime"
     }
    ],
    "depends_on": [
@@ -3508,20 +3312,17 @@
     {
      "file": "Stafford38/Characteristic/InitialIdeal.lean",
      "role": "statement",
-     "name": "Stafford38.CharacteristicInitialIdeal.canonical_orderPrincipalComponent_mem_initialIdeal",
-     "line": 281
+     "name": "Stafford38.CharacteristicInitialIdeal.canonical_orderPrincipalComponent_mem_initialIdeal"
     },
     {
      "file": "Stafford38/Characteristic/AssociatedGradedModule.lean",
      "role": "helper",
-     "name": "Stafford38.CharacteristicAssociatedGradedModule.annihilator_orderAssociatedGradedModule",
-     "line": 373
+     "name": "Stafford38.CharacteristicAssociatedGradedModule.annihilator_orderAssociatedGradedModule"
     },
     {
      "file": "Stafford38/Characteristic/InitialIdeal.lean",
      "role": "statement",
-     "name": "Stafford38.CharacteristicInitialIdeal.canonical_orderCharacteristicSupport_subset_principal_zeroLocus",
-     "line": 291
+     "name": "Stafford38.CharacteristicInitialIdeal.canonical_orderCharacteristicSupport_subset_principal_zeroLocus"
     }
    ],
    "depends_on": [
@@ -3577,49 +3378,41 @@
     {
      "file": "Stafford38/Characteristic/CanonicalKoszulContradiction.lean",
      "role": "statement",
-     "name": "Stafford38.Characteristic.CanonicalKoszulContradiction.canonical_support_avoidance",
-     "line": 123
+     "name": "Stafford38.Characteristic.CanonicalKoszulContradiction.canonical_support_avoidance"
     },
     {
      "file": "Stafford38/Characteristic/CanonicalSupportAvoidanceFromCokernel.lean",
      "role": "main-proof",
-     "name": "Stafford38.Characteristic.CanonicalSupportAvoidanceFromCokernel.canonical_support_avoidance_of_coordinate_cokernel_subsingleton",
-     "line": 26
+     "name": "Stafford38.Characteristic.CanonicalSupportAvoidanceFromCokernel.canonical_support_avoidance_of_coordinate_cokernel_subsingleton"
     },
     {
      "file": "Stafford38/Characteristic/TransposedFilteredModuleSupport.lean",
      "role": "definition",
-     "name": "Stafford38.CharacteristicTransposedFilteredModuleSupport.transposedOrderAssociatedGradedSupport",
-     "line": 295
+     "name": "Stafford38.CharacteristicTransposedFilteredModuleSupport.transposedOrderAssociatedGradedSupport"
     },
     {
      "file": "Stafford38/Characteristic/TransposedFilteredModuleSupport.lean",
      "role": "helper",
-     "name": "Stafford38.CharacteristicTransposedFilteredModuleSupport.transposedOrderAssociatedGradedSupport_eq_preimage",
-     "line": 303
+     "name": "Stafford38.CharacteristicTransposedFilteredModuleSupport.transposedOrderAssociatedGradedSupport_eq_preimage"
     },
     {
      "file": "Stafford38/Characteristic/SpecializedNoncharacteristicEquality.lean",
      "role": "helper",
-     "name": "Stafford38.SpecializedNoncharacteristicEquality.transposedSupport_disjoint_axis_iff",
-     "line": 151
+     "name": "Stafford38.SpecializedNoncharacteristicEquality.transposedSupport_disjoint_axis_iff"
     },
     {
      "file": "Stafford38/PaperInputs.lean",
      "role": "definition",
-     "name": "Stafford38.PaperInputs.CanonicalNoncharacteristicSupportAvoidance",
-     "line": 44
+     "name": "Stafford38.PaperInputs.CanonicalNoncharacteristicSupportAvoidance"
     },
     {
      "file": "Stafford38/Characteristic/SpecializedNoncharacteristicEquality.lean",
      "role": "helper",
      "name": "Stafford38.SpecializedNoncharacteristicEquality.strictUnitCoordinatePreimage_of_transposedSupport_disjoint_axis",
-     "line": 266,
      "expands": [
       {
        "file": "Stafford38/Characteristic/CanonicalUnitCoordinatePreimage.lean",
-       "name": "Stafford38.CanonicalUnitCoordinatePreimage.StrictUnitCoordinatePreimage",
-       "line": 52
+       "name": "Stafford38.CanonicalUnitCoordinatePreimage.StrictUnitCoordinatePreimage"
       }
      ]
     }
@@ -3686,38 +3479,32 @@
     {
      "file": "Stafford38/Geometry/ProjectiveConormalDirections.lean",
      "role": "definition",
-     "name": "Stafford38.Geometry.ProjectiveConormalDirections.projectiveHomogeneousClosure",
-     "line": 32
+     "name": "Stafford38.Geometry.ProjectiveConormalDirections.projectiveHomogeneousClosure"
     },
     {
      "file": "Stafford38/Geometry/ProjectiveConormalDirections.lean",
      "role": "definition",
-     "name": "Stafford38.Geometry.ProjectiveConormalDirections.smoothConormalDirectionSet",
-     "line": 40
+     "name": "Stafford38.Geometry.ProjectiveConormalDirections.smoothConormalDirectionSet"
     },
     {
      "file": "Stafford38/Geometry/ProjectiveConormalDirections.lean",
      "role": "definition",
-     "name": "Stafford38.Geometry.ProjectiveConormalDirections.projectivizedDirectionSet",
-     "line": 53
+     "name": "Stafford38.Geometry.ProjectiveConormalDirections.projectivizedDirectionSet"
     },
     {
      "file": "Stafford38/Geometry/SmoothAffineConormal.lean",
      "role": "definition",
-     "name": "Stafford38.Geometry.SmoothAffineConormal.SmoothAffinePoint",
-     "line": 25
+     "name": "Stafford38.Geometry.SmoothAffineConormal.SmoothAffinePoint"
     },
     {
      "file": "Stafford38/Geometry/AffineConormalSpan.lean",
      "role": "definition",
-     "name": "Stafford38.Geometry.AffineConormalSpan.affineConormalSpace",
-     "line": 92
+     "name": "Stafford38.Geometry.AffineConormalSpan.affineConormalSpace"
     },
     {
      "repo": "formal",
      "file": "Stafford38/Geometry/ProjectiveConormalDirections.lean",
      "name": "Stafford38.Geometry.ProjectiveConormalDirections.smoothConormalFibreProjection",
-     "line": 47,
      "role": "definition"
     }
    ],
@@ -3771,51 +3558,43 @@
     {
      "file": "Stafford38/Geometry/GeneralTangentLimitCriterion.lean",
      "role": "statement",
-     "name": "Stafford38.Geometry.GeneralTangentLimitCriterion.tangent_limit_criterion_of_directSummand",
-     "line": 629
+     "name": "Stafford38.Geometry.GeneralTangentLimitCriterion.tangent_limit_criterion_of_directSummand"
     },
     {
      "file": "Stafford38/Geometry/GeneralTangentLimitCriterion.lean",
      "role": "definition",
-     "name": "Stafford38.Geometry.GeneralTangentLimitCriterion.DirectSummandInput",
-     "line": 310
+     "name": "Stafford38.Geometry.GeneralTangentLimitCriterion.DirectSummandInput"
     },
     {
      "file": "Stafford38/Geometry/GeneralTangentLimitCriterion.lean",
      "role": "main-proof",
-     "name": "Stafford38.Geometry.GeneralTangentLimitCriterion.exists_axis_laurent_smooth_conormal_direction",
-     "line": 501
+     "name": "Stafford38.Geometry.GeneralTangentLimitCriterion.exists_axis_laurent_smooth_conormal_direction"
     },
     {
      "file": "AlgebraicAnalysis/Module/SplitLatticePresentation.lean",
      "role": "helper",
      "repo": "library",
-     "name": "AlgebraicAnalysis.SplitLatticePresentation.exists_splitMatrixPresentation_of_isComplemented",
-     "line": 82
+     "name": "AlgebraicAnalysis.SplitLatticePresentation.exists_splitMatrixPresentation_of_isComplemented"
     },
     {
      "file": "Stafford38/Geometry/ProjectiveConormalDehomogenization.lean",
      "role": "helper",
-     "name": "Stafford38.Geometry.ProjectiveConormalDehomogenization.phasePoint_mem_equationConormalLocus_of_projective_row",
-     "line": 149
+     "name": "Stafford38.Geometry.ProjectiveConormalDehomogenization.phasePoint_mem_equationConormalLocus_of_projective_row"
     },
     {
      "file": "Stafford38/Geometry/ConormalScalarExtensionVanishing.lean",
      "role": "helper",
-     "name": "Stafford38.Geometry.ConormalScalarExtensionVanishing.scalarExtension_vanishing",
-     "line": 137
+     "name": "Stafford38.Geometry.ConormalScalarExtensionVanishing.scalarExtension_vanishing"
     },
     {
      "file": "Stafford38/Geometry/GeneralTangentLimitCriterionTest.lean",
      "role": "helper",
-     "name": "Stafford38.Geometry.GeneralTangentLimitCriterionTest.paper_shape_consumer",
-     "line": 25
+     "name": "Stafford38.Geometry.GeneralTangentLimitCriterionTest.paper_shape_consumer"
     },
     {
      "file": "Stafford38/Geometry/LaurentConormalDirection.lean",
      "role": "source citation",
-     "name": "Stafford38.Geometry.LaurentConormalDirection.residue_mem_extensionFibreClosure_of_laurent_generic",
-     "line": 71
+     "name": "Stafford38.Geometry.LaurentConormalDirection.residue_mem_extensionFibreClosure_of_laurent_generic"
     }
    ],
    "depends_on": [],
@@ -3897,26 +3676,22 @@
     {
      "file": "Stafford38/Geometry/GeneralAsymptoticConormal.lean",
      "role": "statement",
-     "name": "Stafford38.Geometry.GeneralAsymptoticConormal.coordinate_axis_mem_projective_conormal_directions",
-     "line": 42
+     "name": "Stafford38.Geometry.GeneralAsymptoticConormal.coordinate_axis_mem_projective_conormal_directions"
     },
     {
      "file": "Stafford38/Geometry/GeneralAsymptoticConormal.lean",
      "role": "main-proof",
-     "name": "Stafford38.Geometry.GeneralAsymptoticConormal.coordinate_axis_mem_smooth_fibre_closure",
-     "line": 32
+     "name": "Stafford38.Geometry.GeneralAsymptoticConormal.coordinate_axis_mem_smooth_fibre_closure"
     },
     {
      "file": "Stafford38/Geometry/ProjectiveConormalDirections.lean",
      "role": "helper",
-     "name": "Stafford38.Geometry.ProjectiveConormalDirections.mk_mem_projectiveHomogeneousClosure_of_fibre_zeroLocus",
-     "line": 73
+     "name": "Stafford38.Geometry.ProjectiveConormalDirections.mk_mem_projectiveHomogeneousClosure_of_fibre_zeroLocus"
     },
     {
      "file": "Stafford38/Geometry/GeneralCoisotropicExclusion.lean",
      "role": "helper",
-     "name": "Stafford38.Geometry.GeneralCoisotropicExclusion.exists_zero_base_coordinate",
-     "line": 84
+     "name": "Stafford38.Geometry.GeneralCoisotropicExclusion.exists_zero_base_coordinate"
     }
    ],
    "depends_on": [
@@ -3963,614 +3738,513 @@
     {
      "file": "Stafford38/Geometry/GeneralAsymptoticLaurentAxis.lean",
      "role": "alternative-support",
-     "name": "Stafford38.Geometry.GeneralAsymptoticLaurentAxis.exists_groundConormalAxis_of_prime_coordinate_avoidance",
-     "line": 31
+     "name": "Stafford38.Geometry.GeneralAsymptoticLaurentAxis.exists_groundConormalAxis_of_prime_coordinate_avoidance"
     },
     {
      "file": "Stafford38/Geometry/GeneralConstantCoordinateAxis.lean",
      "role": "helper",
-     "name": "Stafford38.Geometry.GeneralConstantCoordinateAxis.exists_constant_coordinate_equation_and_pure_axis",
-     "line": 18
+     "name": "Stafford38.Geometry.GeneralConstantCoordinateAxis.exists_constant_coordinate_equation_and_pure_axis"
     },
     {
      "file": "Stafford38/Geometry/GeneralConormalAxis.lean",
      "role": "alternative-support",
-     "name": "Stafford38.Geometry.GeneralConormalAxis.exists_groundConormalAxis_of_minimalPrime_unit_transcendental",
-     "line": 53
+     "name": "Stafford38.Geometry.GeneralConormalAxis.exists_groundConormalAxis_of_minimalPrime_unit_transcendental"
     },
     {
      "file": "Stafford38/Geometry/GeneralDivisorialVisibleFrame.lean",
      "role": "main-proof",
      "name": "Stafford38.Geometry.GeneralDivisorialVisibleFrame.generalDivisorialVisibleFrameExistence",
-     "line": 339,
      "expands": [
       {
        "file": "Stafford38/Geometry/ExactVisibleDivisorFrameInterface.lean",
-       "name": "Stafford38.Geometry.ExactVisibleDivisorFrameInterface.HasNormalizedCompatibleVisibleFrame",
-       "line": 170
+       "name": "Stafford38.Geometry.ExactVisibleDivisorFrameInterface.HasNormalizedCompatibleVisibleFrame"
       }
      ]
     },
     {
      "file": "Stafford38/Geometry/DivisorialVisibleFrameStageAssembly.lean",
      "role": "helper",
-     "name": "Stafford38.Geometry.LaneC.divisorialVisibleFrameExistence",
-     "line": 35
+     "name": "Stafford38.Geometry.LaneC.divisorialVisibleFrameExistence"
     },
     {
      "file": "Stafford38/Geometry/DivisorialVisibleFrameStage2.lean",
      "role": "helper",
-     "name": "Stafford38.Geometry.DivisorialVisibleFrameStage2.stage2_exists_chart_normalization",
-     "line": 137
+     "name": "Stafford38.Geometry.DivisorialVisibleFrameStage2.stage2_exists_chart_normalization"
     },
     {
      "file": "Stafford38/Geometry/DivisorialVisibleFrameCore.lean",
      "role": "helper",
-     "name": "Stafford38.Geometry.LaneC.stage3_exists_height_one_prime_valuation",
-     "line": 275
+     "name": "Stafford38.Geometry.LaneC.stage3_exists_height_one_prime_valuation"
     },
     {
      "file": "Stafford38/Geometry/NormalizationHeightOne.lean",
      "role": "helper",
-     "name": "Stafford38.Geometry.NormalizationHeightOne.exists_height_one_minimal_prime",
-     "line": 76
+     "name": "Stafford38.Geometry.NormalizationHeightOne.exists_height_one_minimal_prime"
     },
     {
      "file": "Stafford38/Geometry/ComponentProjectiveOrder.lean",
      "role": "helper",
-     "name": "Stafford38.Geometry.ComponentProjectiveOrder.normalized_denominator_nonunit_of_polynomial_inverse",
-     "line": 115
+     "name": "Stafford38.Geometry.ComponentProjectiveOrder.normalized_denominator_nonunit_of_polynomial_inverse"
     },
     {
      "file": "Stafford38/Geometry/ProjectiveDivisorOrderGap.lean",
      "role": "helper",
-     "name": "Stafford38.Geometry.ProjectiveDivisorOrderGap.exists_uniformizer_strict_orderGap",
-     "line": 49
+     "name": "Stafford38.Geometry.ProjectiveDivisorOrderGap.exists_uniformizer_strict_orderGap"
     },
     {
      "file": "Stafford38/Geometry/KaehlerDVRVisibility.lean",
      "role": "helper",
-     "name": "Stafford38.Geometry.KaehlerDVRVisibility.kaehler_span_of_isAlgebraic_adjoin",
-     "line": 136
+     "name": "Stafford38.Geometry.KaehlerDVRVisibility.kaehler_span_of_isAlgebraic_adjoin"
     },
     {
      "file": "Stafford38/Geometry/KaehlerDVRVisibility.lean",
      "role": "helper",
-     "name": "Stafford38.Geometry.KaehlerDVRVisibility.exists_visibleDivisorFrame_of_kaehler_image",
-     "line": 301
+     "name": "Stafford38.Geometry.KaehlerDVRVisibility.exists_visibleDivisorFrame_of_kaehler_image"
     },
     {
      "file": "Stafford38/Geometry/DivisorTangentLattice.lean",
      "role": "helper",
-     "name": "Stafford38.Geometry.DivisorTangentLattice.VisibleDivisorFrame.exists_maximalIdeal_coefficients",
-     "line": 335
+     "name": "Stafford38.Geometry.DivisorTangentLattice.VisibleDivisorFrame.exists_maximalIdeal_coefficients"
     },
     {
      "file": "Stafford38/Geometry/CanonicalVisibleDivisorFrameProduction.lean",
      "role": "helper",
-     "name": "Stafford38.Geometry.CanonicalVisibleDivisorFrameProduction.exists_finiteGradientBoundaryCertificateOver_of_hasVisibleDivisorFrame",
-     "line": 193
+     "name": "Stafford38.Geometry.CanonicalVisibleDivisorFrameProduction.exists_finiteGradientBoundaryCertificateOver_of_hasVisibleDivisorFrame"
     },
     {
      "file": "Stafford38/Geometry/CanonicalVisibleDivisorFrameProduction.lean",
      "role": "helper",
-     "name": "Stafford38.Geometry.CanonicalVisibleDivisorFrameProduction.component_kaehler_bridge",
-     "line": 178
+     "name": "Stafford38.Geometry.CanonicalVisibleDivisorFrameProduction.component_kaehler_bridge"
     },
     {
      "file": "Stafford38/Geometry/FiniteGradientResidueExtension.lean",
      "role": "helper",
-     "name": "Stafford38.Geometry.FiniteGradientResidueExtension.exists_groundConormalAxis_of_finiteGradientBoundaryCertificateOver",
-     "line": 43
+     "name": "Stafford38.Geometry.FiniteGradientResidueExtension.exists_groundConormalAxis_of_finiteGradientBoundaryCertificateOver"
     },
     {
      "file": "Stafford38/Geometry/LaurentConormalResidueExtension.lean",
      "role": "helper",
-     "name": "Stafford38.Geometry.LaurentConormalResidueExtension.residue_mem_residueExtensionFibreClosure_of_laurent_generic",
-     "line": 143
+     "name": "Stafford38.Geometry.LaurentConormalResidueExtension.residue_mem_residueExtensionFibreClosure_of_laurent_generic"
     },
     {
      "file": "Stafford38/Geometry/ConormalScalarExtensionVanishing.lean",
      "role": "helper",
-     "name": "Stafford38.Geometry.ConormalScalarExtensionVanishing.scalarExtension_vanishing",
-     "line": 137
+     "name": "Stafford38.Geometry.ConormalScalarExtensionVanishing.scalarExtension_vanishing"
     },
     {
      "file": "Stafford38/Geometry/SmoothConormalFibreVanishing.lean",
      "role": "helper",
-     "name": "Stafford38.Geometry.SmoothConormalFibreVanishing.fibreLift_mem_vanishingIdeal_equationConormal",
-     "line": 24
+     "name": "Stafford38.Geometry.SmoothConormalFibreVanishing.fibreLift_mem_vanishingIdeal_equationConormal"
     },
     {
      "file": "Stafford38/Geometry/SmoothAffineConormal.lean",
      "role": "helper",
-     "name": "Stafford38.Geometry.SmoothAffineConormal.equationConormalClosure_smoothAffine_eq",
-     "line": 43
+     "name": "Stafford38.Geometry.SmoothAffineConormal.equationConormalClosure_smoothAffine_eq"
     },
     {
      "file": "Stafford38/Geometry/SameWitness/AffineFibreClosure.lean",
      "name": "Stafford38.Geometry.SameWitness.retainedClosureChartData",
-     "line": 29,
      "role": "helper",
      "visibility": "module-private"
     },
     {
      "file": "Stafford38/Geometry/SameWitness/AffineFibreClosure.lean",
      "name": "Stafford38.Geometry.SameWitness.retainedClosureChartData_lift",
-     "line": 63,
      "role": "helper",
      "visibility": "module-private"
     },
     {
      "file": "Stafford38/Geometry/SameWitness/AffineFibreClosure.lean",
      "name": "Stafford38.Geometry.SameWitness.axis_mem_smoothConormalFibreProjection_closure_of_groundPointOutput",
-     "line": 137,
      "role": "helper"
     },
     {
      "file": "Stafford38/Geometry/SameWitness/AwayFactorToAtPrime.lean",
      "name": "Stafford38.Geometry.SameWitness.factorization_to_atPrime",
-     "line": 17,
      "role": "helper"
     },
     {
      "file": "Stafford38/Geometry/SameWitness/AwayFactorToAtPrime.lean",
      "name": "Stafford38.Geometry.SameWitness.pair_factorizations_to_atPrime",
-     "line": 49,
      "role": "helper"
     },
     {
      "file": "Stafford38/Geometry/SameWitness/AxisLiftFromGroundPoint.lean",
      "name": "Stafford38.Geometry.SameWitness.exists_axis_lift_of_groundPointChartOutput",
-     "line": 26,
      "role": "helper"
     },
     {
      "file": "Stafford38/Geometry/SameWitness/ChartGroundMap.lean",
      "name": "Stafford38.Geometry.SameWitness.originalAffineChartToCommonOpen_groundMap",
-     "line": 28,
      "role": "helper"
     },
     {
      "file": "Stafford38/Geometry/SameWitness/ChartSetup.lean",
      "name": "Stafford38.Geometry.SameWitness.ChartSetup",
-     "line": 31,
      "role": "definition"
     },
     {
      "file": "Stafford38/Geometry/SameWitness/ChartSetup.lean",
      "name": "Stafford38.Geometry.SameWitness.nonempty_chartSetup",
-     "line": 68,
      "role": "helper"
     },
     {
      "file": "Stafford38/Geometry/SameWitness/CommonOpen.lean",
      "name": "Stafford38.Geometry.SameWitness.CommonOpenArcFactors",
-     "line": 88,
      "role": "helper"
     },
     {
      "file": "Stafford38/Geometry/SameWitness/CommonOpen.lean",
      "name": "Stafford38.Geometry.SameWitness.commonOpenArcFactors_of_tiltedProduct",
-     "line": 121,
      "role": "helper"
     },
     {
      "file": "Stafford38/Geometry/SameWitness/CommonOpen.lean",
      "name": "Stafford38.Geometry.SameWitness.essFiniteType_of_coordinateMap",
-     "line": 148,
      "role": "helper"
     },
     {
      "file": "Stafford38/Geometry/SameWitness/CommonOpen.lean",
      "name": "Stafford38.Geometry.SameWitness.CommonOpenPointData",
-     "line": 161,
      "role": "definition"
     },
     {
      "file": "Stafford38/Geometry/SameWitness/CommonOpen.lean",
      "name": "Stafford38.Geometry.SameWitness.CommonOpenChartData",
-     "line": 261,
      "role": "definition"
     },
     {
      "file": "Stafford38/Geometry/SameWitness/CommonOpen.lean",
      "name": "Stafford38.Geometry.SameWitness.CommonOpenMapData",
-     "line": 283,
      "role": "definition"
     },
     {
      "file": "Stafford38/Geometry/SameWitness/CommonOpen.lean",
      "name": "Stafford38.Geometry.SameWitness.CommonOpenArcCompatibility",
-     "line": 325,
      "role": "definition"
     },
     {
      "file": "Stafford38/Geometry/SameWitness/CommonOpen.lean",
      "name": "Stafford38.Geometry.SameWitness.CommonOpenData",
-     "line": 356,
      "role": "definition"
     },
     {
      "file": "Stafford38/Geometry/SameWitness/CommonOpen.lean",
      "name": "Stafford38.Geometry.SameWitness.CommonOpenData.M",
-     "line": 379,
      "role": "helper"
     },
     {
      "file": "Stafford38/Geometry/SameWitness/CommonOpen.lean",
      "name": "Stafford38.Geometry.SameWitness.CommonOpenData.hM",
-     "line": 380,
      "role": "helper"
     },
     {
      "file": "Stafford38/Geometry/SameWitness/CommonOpen.lean",
      "name": "Stafford38.Geometry.SameWitness.CommonOpenData.eM",
-     "line": 381,
      "role": "helper"
     },
     {
      "file": "Stafford38/Geometry/SameWitness/CommonOpen.lean",
      "name": "Stafford38.Geometry.SameWitness.CommonOpenData.hEtM",
-     "line": 382,
      "role": "helper"
     },
     {
      "file": "Stafford38/Geometry/SameWitness/CommonOpen.lean",
      "name": "Stafford38.Geometry.SameWitness.CommonOpenData.fUnit",
-     "line": 383,
      "role": "helper"
     },
     {
      "file": "Stafford38/Geometry/SameWitness/CommonOpen.lean",
      "name": "Stafford38.Geometry.SameWitness.CommonOpenData.hfUnitM",
-     "line": 384,
      "role": "helper"
     },
     {
      "file": "Stafford38/Geometry/SameWitness/CommonOpen.lean",
      "name": "Stafford38.Geometry.SameWitness.CommonOpenData.u0",
-     "line": 385,
      "role": "helper"
     },
     {
      "file": "Stafford38/Geometry/SameWitness/CommonOpen.lean",
      "name": "Stafford38.Geometry.SameWitness.CommonOpenData.u1",
-     "line": 386,
      "role": "helper"
     },
     {
      "file": "Stafford38/Geometry/SameWitness/CommonOpen.lean",
      "name": "Stafford38.Geometry.SameWitness.CommonOpenData.hu0",
-     "line": 387,
      "role": "helper"
     },
     {
      "file": "Stafford38/Geometry/SameWitness/CommonOpen.lean",
      "name": "Stafford38.Geometry.SameWitness.CommonOpenData.hu1",
-     "line": 388,
      "role": "helper"
     },
     {
      "file": "Stafford38/Geometry/SameWitness/CommonOpen.lean",
      "name": "Stafford38.Geometry.SameWitness.CommonOpenData.hq0M",
-     "line": 389,
      "role": "helper"
     },
     {
      "file": "Stafford38/Geometry/SameWitness/CommonOpen.lean",
      "name": "Stafford38.Geometry.SameWitness.CommonOpenData.hq1M",
-     "line": 390,
      "role": "helper"
     },
     {
      "file": "Stafford38/Geometry/SameWitness/CommonOpen.lean",
      "name": "Stafford38.Geometry.SameWitness.CommonOpenData.alpha",
-     "line": 391,
      "role": "helper"
     },
     {
      "file": "Stafford38/Geometry/SameWitness/CommonOpen.lean",
      "name": "Stafford38.Geometry.SameWitness.CommonOpenData.havoid",
-     "line": 392,
      "role": "helper"
     },
     {
      "file": "Stafford38/Geometry/SameWitness/CommonOpen.lean",
      "name": "Stafford38.Geometry.SameWitness.CommonOpenData.hdata",
-     "line": 393,
      "role": "helper"
     },
     {
      "file": "Stafford38/Geometry/SameWitness/CommonOpen.lean",
      "name": "Stafford38.Geometry.SameWitness.CommonOpenData.hxj",
-     "line": 394,
      "role": "helper"
     },
     {
      "file": "Stafford38/Geometry/SameWitness/CommonOpen.lean",
      "name": "Stafford38.Geometry.SameWitness.CommonOpenData.hsel",
-     "line": 395,
      "role": "helper"
     },
     {
      "file": "Stafford38/Geometry/SameWitness/CommonOpen.lean",
      "name": "Stafford38.Geometry.SameWitness.CommonOpenData.qQ",
-     "line": 396,
      "role": "helper"
     },
     {
      "file": "Stafford38/Geometry/SameWitness/CommonOpen.lean",
      "name": "Stafford38.Geometry.SameWitness.CommonOpenData.hqchartQ",
-     "line": 397,
      "role": "helper"
     },
     {
      "file": "Stafford38/Geometry/SameWitness/CommonOpen.lean",
      "name": "Stafford38.Geometry.SameWitness.CommonOpenData.hqQF",
-     "line": 398,
      "role": "helper"
     },
     {
      "file": "Stafford38/Geometry/SameWitness/CommonOpen.lean",
      "name": "Stafford38.Geometry.SameWitness.CommonOpenData.hq0",
-     "line": 399,
      "role": "helper"
     },
     {
      "file": "Stafford38/Geometry/SameWitness/CommonOpen.lean",
      "name": "Stafford38.Geometry.SameWitness.CommonOpenData.hqvars",
-     "line": 400,
      "role": "helper"
     },
     {
      "file": "Stafford38/Geometry/SameWitness/CommonOpen.lean",
      "name": "Stafford38.Geometry.SameWitness.CommonOpenData.hqA",
-     "line": 401,
      "role": "helper"
     },
     {
      "file": "Stafford38/Geometry/SameWitness/CommonOpen.lean",
      "name": "Stafford38.Geometry.SameWitness.CommonOpenData.hqUPoint",
-     "line": 402,
      "role": "helper"
     },
     {
      "file": "Stafford38/Geometry/SameWitness/CommonOpen.lean",
      "name": "Stafford38.Geometry.SameWitness.CommonOpenData.hchartU",
-     "line": 405,
      "role": "helper"
     },
     {
      "file": "Stafford38/Geometry/SameWitness/CommonOpen.lean",
      "name": "Stafford38.Geometry.SameWitness.CommonOpenData.hq0B",
-     "line": 408,
      "role": "helper"
     },
     {
      "file": "Stafford38/Geometry/SameWitness/CommonOpen.lean",
      "name": "Stafford38.Geometry.SameWitness.CommonOpenData.hbaseMap",
-     "line": 411,
      "role": "helper"
     },
     {
      "file": "Stafford38/Geometry/SameWitness/CommonOpen.lean",
      "name": "Stafford38.Geometry.SameWitness.CommonOpenData.hfactor",
-     "line": 415,
      "role": "helper"
     },
     {
      "file": "Stafford38/Geometry/SameWitness/CommonOpen.lean",
      "name": "Stafford38.Geometry.SameWitness.CommonOpenData.g",
-     "line": 421,
      "role": "helper"
     },
     {
      "file": "Stafford38/Geometry/SameWitness/CommonOpen.lean",
      "name": "Stafford38.Geometry.SameWitness.CommonOpenData.Cq",
-     "line": 431,
      "role": "helper"
     },
     {
      "file": "Stafford38/Geometry/SameWitness/CommonOpen.lean",
      "name": "Stafford38.Geometry.SameWitness.CommonOpenData.U",
-     "line": 442,
      "role": "helper"
     },
     {
      "file": "Stafford38/Geometry/SameWitness/CommonOpen.lean",
      "name": "Stafford38.Geometry.SameWitness.CommonOpenData.qU",
-     "line": 453,
      "role": "helper"
     },
     {
      "file": "Stafford38/Geometry/SameWitness/CommonOpen.lean",
      "name": "Stafford38.Geometry.SameWitness.CommonOpenData.qT",
-     "line": 464,
      "role": "helper"
     },
     {
      "file": "Stafford38/Geometry/SameWitness/CommonOpen.lean",
      "name": "Stafford38.Geometry.SameWitness.CommonOpenData.φ",
-     "line": 478,
      "role": "helper"
     },
     {
      "file": "Stafford38/Geometry/SameWitness/CommonOpen.lean",
      "name": "Stafford38.Geometry.SameWitness.exists_selected_chart_coordinate_data",
-     "line": 492,
      "role": "helper"
     },
     {
      "file": "Stafford38/Geometry/SameWitness/CommonOpen.lean",
      "name": "Stafford38.Geometry.SameWitness.exists_common_open_map_data",
-     "line": 520,
      "role": "helper"
     },
     {
      "file": "Stafford38/Geometry/SameWitness/CommonOpen.lean",
      "name": "Stafford38.Geometry.SameWitness.nonempty_commonOpenPointData",
-     "line": 609,
      "role": "helper"
     },
     {
      "file": "Stafford38/Geometry/SameWitness/CommonOpen.lean",
      "name": "Stafford38.Geometry.SameWitness.nonempty_commonOpenArcCompatibility",
-     "line": 650,
      "role": "helper"
     },
     {
      "file": "Stafford38/Geometry/SameWitness/CommonOpen.lean",
      "name": "Stafford38.Geometry.SameWitness.nonempty_commonOpenData",
-     "line": 691,
      "role": "helper"
     },
     {
      "file": "Stafford38/Geometry/SameWitness/CommonOpenArc.lean",
      "name": "Stafford38.Geometry.SameWitness.CommonOpenArcTransport",
-     "line": 24,
      "role": "definition"
     },
     {
      "file": "Stafford38/Geometry/SameWitness/CommonOpenArc.lean",
      "name": "Stafford38.Geometry.SameWitness.pointLocalArc_unit_of_not_mem",
-     "line": 71,
      "role": "helper",
      "visibility": "module-private"
     },
     {
      "file": "Stafford38/Geometry/SameWitness/CommonOpenArc.lean",
      "name": "Stafford38.Geometry.SameWitness.exists_commonOpenArcTransport",
-     "line": 88,
      "role": "helper",
      "visibility": "module-private"
     },
     {
      "file": "Stafford38/Geometry/SameWitness/CommonOpenArc.lean",
      "name": "Stafford38.Geometry.SameWitness.CommonOpenArcData",
-     "line": 127,
      "role": "definition"
     },
     {
      "file": "Stafford38/Geometry/SameWitness/CommonOpenArc.lean",
      "name": "Stafford38.Geometry.SameWitness.CommonOpenArcData.rhoA",
-     "line": 170,
      "role": "helper"
     },
     {
      "file": "Stafford38/Geometry/SameWitness/CommonOpenArc.lean",
      "name": "Stafford38.Geometry.SameWitness.CommonOpenArcData.hcanonicalRhoA",
-     "line": 173,
      "role": "helper"
     },
     {
      "file": "Stafford38/Geometry/SameWitness/CommonOpenArc.lean",
      "name": "Stafford38.Geometry.SameWitness.CommonOpenArcData.hf",
-     "line": 176,
      "role": "helper"
     },
     {
      "file": "Stafford38/Geometry/SameWitness/CommonOpenArc.lean",
      "name": "Stafford38.Geometry.SameWitness.CommonOpenArcData.hg",
-     "line": 179,
      "role": "helper"
     },
     {
      "file": "Stafford38/Geometry/SameWitness/CommonOpenArc.lean",
      "name": "Stafford38.Geometry.SameWitness.CommonOpenArcData.hunitM",
-     "line": 182,
      "role": "helper"
     },
     {
      "file": "Stafford38/Geometry/SameWitness/CommonOpenArc.lean",
      "name": "Stafford38.Geometry.SameWitness.CommonOpenArcData.rhoU",
-     "line": 185,
      "role": "helper"
     },
     {
      "file": "Stafford38/Geometry/SameWitness/CommonOpenArc.lean",
      "name": "Stafford38.Geometry.SameWitness.CommonOpenArcData.hcanonicalRhoU",
-     "line": 188,
      "role": "helper"
     },
     {
      "file": "Stafford38/Geometry/SameWitness/CommonOpenArc.lean",
      "name": "Stafford38.Geometry.SameWitness.CommonOpenArcData.hcomp'",
-     "line": 191,
      "role": "helper"
     },
     {
      "file": "Stafford38/Geometry/SameWitness/CommonOpenArc.lean",
      "name": "Stafford38.Geometry.SameWitness.CommonOpenArcData.hgroundB'",
-     "line": 194,
      "role": "helper"
     },
     {
      "file": "Stafford38/Geometry/SameWitness/CommonOpenArc.lean",
      "name": "Stafford38.Geometry.SameWitness.CommonOpenArcData.hbaseMap",
-     "line": 197,
      "role": "helper"
     },
     {
      "file": "Stafford38/Geometry/SameWitness/CommonOpenArc.lean",
      "name": "Stafford38.Geometry.SameWitness.CommonOpenArcData.hgroundU",
-     "line": 200,
      "role": "helper"
     },
     {
      "file": "Stafford38/Geometry/SameWitness/CommonOpenArc.lean",
      "name": "Stafford38.Geometry.SameWitness.CommonOpenArcData.hbadU",
-     "line": 203,
      "role": "helper"
     },
     {
      "file": "Stafford38/Geometry/SameWitness/CommonOpenArc.lean",
      "name": "Stafford38.Geometry.SameWitness.CommonOpenArcData.hrU",
-     "line": 206,
      "role": "helper"
     },
     {
      "file": "Stafford38/Geometry/SameWitness/CommonOpenArc.lean",
      "name": "Stafford38.Geometry.SameWitness.CommonOpenArcData.hq0U",
-     "line": 209,
      "role": "helper"
     },
     {
      "file": "Stafford38/Geometry/SameWitness/CommonOpenArc.lean",
      "name": "Stafford38.Geometry.SameWitness.CommonOpenArcData.hq1U",
-     "line": 212,
      "role": "helper"
     },
     {
      "file": "Stafford38/Geometry/SameWitness/CommonOpenArc.lean",
      "name": "Stafford38.Geometry.SameWitness.commonOpenMap_comp_groundMap",
-     "line": 219,
      "role": "helper",
      "visibility": "module-private"
     },
     {
      "file": "Stafford38/Geometry/SameWitness/CommonOpenArc.lean",
      "name": "Stafford38.Geometry.SameWitness.exists_commonOpenArcData",
-     "line": 260,
      "role": "helper"
     },
     {
      "file": "Stafford38/Geometry/SameWitness/CommonOpenArcDerivatives.lean",
      "name": "Stafford38.Geometry.SameWitness.retainedArcDerivativeCertificate",
-     "line": 32,
      "role": "helper",
      "visibility": "module-private"
     },
     {
      "file": "Stafford38/Geometry/SameWitness/CommonOpenArcDerivatives.lean",
      "name": "Stafford38.Geometry.SameWitness.commonOpen_arcDerivativeData",
-     "line": 52,
      "role": "helper",
      "expands": [
       {
        "file": "Stafford38/Geometry/SameWitness/CommonOpenColumnDerivatives.lean",
        "name": "Stafford38.Geometry.SameWitness.CommonOpenDerivativeData",
-       "line": 111,
        "role": "definition"
       }
      ]
@@ -4578,31 +4252,26 @@
     {
      "file": "Stafford38/Geometry/SameWitness/CommonOpenColumnDerivatives.lean",
      "name": "Stafford38.Geometry.SameWitness.commonOpenDerivativeIdentities",
-     "line": 34,
      "role": "helper"
     },
     {
      "file": "Stafford38/Geometry/SameWitness/CommonOpenColumnDerivatives.lean",
      "name": "Stafford38.Geometry.SameWitness.commonOpenDerivativeIdentities_transport",
-     "line": 86,
      "role": "helper"
     },
     {
      "file": "Stafford38/Geometry/SameWitness/CommonOpenColumnDerivatives.lean",
      "name": "Stafford38.Geometry.SameWitness.CommonOpenDerivativeData",
-     "line": 111,
      "role": "definition"
     },
     {
      "file": "Stafford38/Geometry/SameWitness/CommonOpenColumnDerivatives.lean",
      "name": "Stafford38.Geometry.SameWitness.commonOpenDerivativeData_of_rawCertificate",
-     "line": 182,
      "role": "helper",
      "expands": [
       {
        "file": "Stafford38/Geometry/SameWitness/CommonOpenColumnDerivatives.lean",
        "name": "Stafford38.Geometry.SameWitness.CommonOpenDerivativeData",
-       "line": 111,
        "role": "definition"
       }
      ]
@@ -4610,55 +4279,46 @@
     {
      "file": "Stafford38/Geometry/SameWitness/CommonOpenColumnDerivatives.lean",
      "name": "Stafford38.Geometry.SameWitness.commonOpen_rawDerivativeCertificate_of_pointColumns",
-     "line": 222,
      "role": "helper"
     },
     {
      "file": "Stafford38/Geometry/SameWitness/CommonOpenColumnDerivatives.lean",
      "name": "Stafford38.Geometry.SameWitness.commonOpen_derivatives_of_pointColumns",
-     "line": 375,
      "role": "helper"
     },
     {
      "file": "Stafford38/Geometry/SameWitness/CommonOpenColumnDerivatives.lean",
      "name": "Stafford38.Geometry.SameWitness.commonOpen_derivatives_of_retainedArc",
-     "line": 441,
      "role": "helper"
     },
     {
      "file": "Stafford38/Geometry/SameWitness/CommonOpenColumns.lean",
      "name": "Stafford38.Geometry.SameWitness.CommonOpenColumnsData",
-     "line": 35,
      "role": "definition"
     },
     {
      "file": "Stafford38/Geometry/SameWitness/CommonOpenColumns.lean",
      "name": "Stafford38.Geometry.SameWitness.CommonOpenColumnsData.htransverse",
-     "line": 60,
      "role": "helper"
     },
     {
      "file": "Stafford38/Geometry/SameWitness/CommonOpenColumns.lean",
      "name": "Stafford38.Geometry.SameWitness.CommonOpenColumnsData.hraw",
-     "line": 65,
      "role": "helper"
     },
     {
      "file": "Stafford38/Geometry/SameWitness/CommonOpenColumns.lean",
      "name": "Stafford38.Geometry.SameWitness.commonOpen_selectedNumerator_ne_zero",
-     "line": 71,
      "role": "helper"
     },
     {
      "file": "Stafford38/Geometry/SameWitness/CommonOpenColumns.lean",
      "name": "Stafford38.Geometry.SameWitness.commonOpenColumnsData_of_arc",
-     "line": 133,
      "role": "helper",
      "expands": [
       {
        "file": "Stafford38/Geometry/SameWitness/CommonOpenColumns.lean",
        "name": "Stafford38.Geometry.SameWitness.CommonOpenColumnsData",
-       "line": 35,
        "role": "definition"
       }
      ]
@@ -4666,119 +4326,100 @@
     {
      "file": "Stafford38/Geometry/SameWitness/CommonOpenEtale.lean",
      "name": "Stafford38.Geometry.SameWitness.coordinateMapToOpen",
-     "line": 26,
      "role": "helper",
      "visibility": "module-private"
     },
     {
      "file": "Stafford38/Geometry/SameWitness/CommonOpenEtale.lean",
      "name": "Stafford38.Geometry.SameWitness.formallyEtale_coordinateMapToOpen",
-     "line": 36,
      "role": "helper",
      "visibility": "module-private"
     },
     {
      "file": "Stafford38/Geometry/SameWitness/CommonOpenEtale.lean",
      "name": "Stafford38.Geometry.SameWitness.CommonOpenEtaleData",
-     "line": 68,
      "role": "definition"
     },
     {
      "file": "Stafford38/Geometry/SameWitness/CommonOpenEtale.lean",
      "name": "Stafford38.Geometry.SameWitness.originalChartToCommonOpen_groundMap_k",
-     "line": 99,
      "role": "helper",
      "visibility": "module-private"
     },
     {
      "file": "Stafford38/Geometry/SameWitness/CommonOpenEtale.lean",
      "name": "Stafford38.Geometry.SameWitness.nonempty_commonOpenEtaleData",
-     "line": 151,
      "role": "helper"
     },
     {
      "file": "Stafford38/Geometry/SameWitness/CommonOpenPositions.lean",
      "name": "Stafford38.Geometry.SameWitness.pointLocalPowerSeriesChart",
-     "line": 26,
      "role": "helper"
     },
     {
      "file": "Stafford38/Geometry/SameWitness/CommonOpenPositions.lean",
      "name": "Stafford38.Geometry.SameWitness.commonOpen_position_of_pointColumns",
-     "line": 56,
      "role": "helper"
     },
     {
      "file": "Stafford38/Geometry/SameWitness/CommonOpenPositions.lean",
      "name": "Stafford38.Geometry.SameWitness.genericOpenArc_eq_of_source_eq",
-     "line": 127,
      "role": "helper"
     },
     {
      "file": "Stafford38/Geometry/SameWitness/CommonOpenPositions.lean",
      "name": "Stafford38.Geometry.SameWitness.CommonOpenPositionData",
-     "line": 145,
      "role": "definition"
     },
     {
      "file": "Stafford38/Geometry/SameWitness/CommonOpenPositions.lean",
      "name": "Stafford38.Geometry.SameWitness.commonOpenPositionData_of_arc",
-     "line": 171,
      "role": "helper"
     },
     {
      "file": "Stafford38/Geometry/SameWitness/CoordinatePresentation.lean",
      "name": "Stafford38.Geometry.SameWitness.CoordinatePresentation",
-     "line": 32,
      "role": "definition"
     },
     {
      "file": "Stafford38/Geometry/SameWitness/CoordinatePresentation.lean",
      "name": "Stafford38.Geometry.SameWitness.CoordinatePresentation.fFin",
-     "line": 87,
      "role": "helper"
     },
     {
      "file": "Stafford38/Geometry/SameWitness/CoordinatePresentation.lean",
      "name": "Stafford38.Geometry.SameWitness.chart_rows_injective",
-     "line": 103,
      "role": "helper"
     },
     {
      "file": "Stafford38/Geometry/SameWitness/CoordinatePresentation.lean",
      "name": "Stafford38.Geometry.SameWitness.selected_rows_chart_eq",
-     "line": 114,
      "role": "helper"
     },
     {
      "file": "Stafford38/Geometry/SameWitness/CoordinatePresentation.lean",
      "name": "Stafford38.Geometry.SameWitness.nonempty_coordinatePresentation",
-     "line": 130,
      "role": "helper"
     },
     {
      "file": "Stafford38/Geometry/SameWitness/EndpointOfAlgHoms.lean",
      "name": "Stafford38.Geometry.SameWitness.axis_mem_smoothConormalFibreProjection_closure_of_algHoms",
-     "line": 27,
      "role": "helper"
     },
     {
      "file": "Stafford38/Geometry/SameWitness/OriginalPrimeAxis.lean",
      "name": "Stafford38.Geometry.SameWitness.coordinate_axis_mem_smooth_fibre_closure",
-     "line": 22,
      "role": "helper"
     },
     {
      "file": "Stafford38/Geometry/GeneralAsymptoticConormal.lean",
      "name": "Stafford38.Geometry.GeneralAsymptoticConormal.coordinate_axis_mem_smooth_fibre_closure",
-     "line": 32,
      "role": "main-proof",
      "note": "Selected main endpoint; delegates to the retained-witness original-prime theorem."
     },
     {
      "file": "Stafford38/Geometry/AlternativeAsymptoticConormal.lean",
      "name": "Stafford38.Geometry.AlternativeAsymptoticConormal.coordinate_axis_mem_smooth_fibre_closure",
-     "line": 33,
      "role": "alternative-proof",
      "note": "Separately named generic/Laurent route; not the selected main route."
     }
@@ -4898,14 +4539,12 @@
     {
      "file": "Stafford38/Geometry/FibreConicalVanishingIdeal.lean",
      "role": "definition",
-     "name": "Stafford38.Geometry.FibreConicalVanishingIdeal.IsFibreConical",
-     "line": 22
+     "name": "Stafford38.Geometry.FibreConicalVanishingIdeal.IsFibreConical"
     },
     {
      "file": "Stafford38/Geometry/FibreConicalVanishingIdeal.lean",
      "role": "helper",
-     "name": "Stafford38.Geometry.FibreConicalVanishingIdeal.vanishingIdeal_isHomogeneous_of_isFibreConical",
-     "line": 80
+     "name": "Stafford38.Geometry.FibreConicalVanishingIdeal.vanishingIdeal_isHomogeneous_of_isFibreConical"
     }
    ],
    "depends_on": [],
@@ -4939,116 +4578,97 @@
     {
      "file": "Stafford38/Geometry/GeneralCoisotropicSets.lean",
      "role": "statement",
-     "name": "Stafford38.Geometry.GeneralCoisotropicSets.exists_zero_base_coordinate_of_isFibreConical",
-     "line": 160
+     "name": "Stafford38.Geometry.GeneralCoisotropicSets.exists_zero_base_coordinate_of_isFibreConical"
     },
     {
      "file": "Stafford38/Geometry/GeneralCoisotropicExclusion.lean",
      "role": "main-proof",
-     "name": "Stafford38.Geometry.GeneralCoisotropicExclusion.exists_zero_base_coordinate",
-     "line": 84
+     "name": "Stafford38.Geometry.GeneralCoisotropicExclusion.exists_zero_base_coordinate"
     },
     {
      "file": "Stafford38/Geometry/GeneralCoisotropicSetsTest.lean",
      "role": "statement",
-     "name": "Stafford38.Geometry.GeneralCoisotropicSetsTest.exact_complex_manuscript_coisotropic_consumer",
-     "line": 104
+     "name": "Stafford38.Geometry.GeneralCoisotropicSetsTest.exact_complex_manuscript_coisotropic_consumer"
     },
     {
      "file": "Stafford38/Geometry/GeneralCoisotropicSets.lean",
      "role": "helper",
-     "name": "Stafford38.Geometry.GeneralCoisotropicSets.baseProjection_eq_zeroLocus_comap",
-     "line": 59
+     "name": "Stafford38.Geometry.GeneralCoisotropicSets.baseProjection_eq_zeroLocus_comap"
     },
     {
      "file": "Stafford38/Geometry/GeneralCoisotropicSets.lean",
      "role": "helper",
-     "name": "Stafford38.Geometry.GeneralCoisotropicSets.smoothConormalClosure_minimalPrime_subset_of_isFibreConical",
-     "line": 88
+     "name": "Stafford38.Geometry.GeneralCoisotropicSets.smoothConormalClosure_minimalPrime_subset_of_isFibreConical"
     },
     {
      "file": "Stafford38/Geometry/GeneralConormalContainment.lean",
      "role": "helper",
-     "name": "Stafford38.Geometry.GeneralConormalContainment.zeroSection_commonZero_of_isHomogeneous",
-     "line": 98
+     "name": "Stafford38.Geometry.GeneralConormalContainment.zeroSection_commonZero_of_isHomogeneous"
     },
     {
      "file": "Stafford38/Geometry/GeneralConormalContainment.lean",
      "role": "helper",
-     "name": "Stafford38.Geometry.GeneralConormalContainment.equationConormalLocus_subset_zeroLocus",
-     "line": 117
+     "name": "Stafford38.Geometry.GeneralConormalContainment.equationConormalLocus_subset_zeroLocus"
     },
     {
      "file": "Stafford38/Geometry/CoisotropicTranslation.lean",
      "role": "definition",
-     "name": "Stafford38.Geometry.CoisotropicTranslation.hamiltonIter",
-     "line": 263
+     "name": "Stafford38.Geometry.CoisotropicTranslation.hamiltonIter"
     },
     {
      "file": "Stafford38/Geometry/CoisotropicTranslation.lean",
      "role": "helper",
-     "name": "Stafford38.Geometry.CoisotropicTranslation.zeroSection_stable_under_differential_translation",
-     "line": 329
+     "name": "Stafford38.Geometry.CoisotropicTranslation.zeroSection_stable_under_differential_translation"
     },
     {
      "file": "Stafford38/Characteristic/BaseRelativePoisson.lean",
      "role": "helper",
-     "name": "Stafford38.Characteristic.BaseRelativePoisson.zeroSection_stable_under_differential_translation_of_isBaseRelativePoisson",
-     "line": 72
+     "name": "Stafford38.Characteristic.BaseRelativePoisson.zeroSection_stable_under_differential_translation_of_isBaseRelativePoisson"
     },
     {
      "file": "Stafford38/Geometry/PointwiseConormalContainment.lean",
      "role": "helper",
-     "name": "Stafford38.Geometry.PointwiseConormalContainment.differentialCombinationPoint_isCommonZero",
-     "line": 94
+     "name": "Stafford38.Geometry.PointwiseConormalContainment.differentialCombinationPoint_isCommonZero"
     },
     {
      "file": "Stafford38/Geometry/AffineConormalSpan.lean",
      "role": "helper",
-     "name": "Stafford38.Geometry.AffineConormalSpan.affineConormal_coordinatePoint_isCommonZero",
-     "line": 156
+     "name": "Stafford38.Geometry.AffineConormalSpan.affineConormal_coordinatePoint_isCommonZero"
     },
     {
      "file": "Stafford38/Geometry/GeneralComponentConormalContainment.lean",
      "role": "helper",
-     "name": "Stafford38.Geometry.GeneralComponentConormalContainment.equationConormalClosure_minimalPrime_subset_zeroLocus",
-     "line": 72
+     "name": "Stafford38.Geometry.GeneralComponentConormalContainment.equationConormalClosure_minimalPrime_subset_zeroLocus"
     },
     {
      "file": "Stafford38/Geometry/GeneralComponentConormalContainment.lean",
      "role": "helper",
-     "name": "Stafford38.Geometry.GeneralComponentConormalContainment.smoothConormalClosure_minimalPrime_subset_zeroLocus",
-     "line": 139
+     "name": "Stafford38.Geometry.GeneralComponentConormalContainment.smoothConormalClosure_minimalPrime_subset_zeroLocus"
     },
     {
      "file": "Stafford38/Geometry/AffineConormalClosure.lean",
      "role": "definition",
-     "name": "Stafford38.Geometry.AffineConormalClosure.equationConormalClosure",
-     "line": 44
+     "name": "Stafford38.Geometry.AffineConormalClosure.equationConormalClosure"
     },
     {
      "file": "Stafford38/Geometry/ConormalPrincipalOpenDensity.lean",
      "role": "helper",
-     "name": "Stafford38.Geometry.ConormalPrincipalOpenDensity.equationConormalClosure_restricted_eq",
-     "line": 111
+     "name": "Stafford38.Geometry.ConormalPrincipalOpenDensity.equationConormalClosure_restricted_eq"
     },
     {
      "file": "Stafford38/Geometry/SmoothAffineConormal.lean",
      "role": "helper",
-     "name": "Stafford38.Geometry.SmoothAffineConormal.equationConormalClosure_smoothAffine_eq",
-     "line": 43
+     "name": "Stafford38.Geometry.SmoothAffineConormal.equationConormalClosure_smoothAffine_eq"
     },
     {
      "file": "Stafford38/Geometry/GeneralAsymptoticConormal.lean",
      "role": "helper",
-     "name": "Stafford38.Geometry.GeneralAsymptoticConormal.coordinate_axis_mem_smooth_fibre_closure",
-     "line": 32
+     "name": "Stafford38.Geometry.GeneralAsymptoticConormal.coordinate_axis_mem_smooth_fibre_closure"
     },
     {
      "file": "Stafford38/Geometry/ProjectiveConormalDirections.lean",
      "role": "definition",
-     "name": "Stafford38.Geometry.ProjectiveConormalDirections.smoothConormalFibreProjection",
-     "line": 47
+     "name": "Stafford38.Geometry.ProjectiveConormalDirections.smoothConormalFibreProjection"
     }
    ],
    "depends_on": [
@@ -5159,98 +4779,82 @@
     {
      "file": "Stafford38/FoundationClosure.lean",
      "role": "statement",
-     "name": "Stafford38.universalStatement",
-     "line": 67
+     "name": "Stafford38.universalStatement"
     },
     {
      "file": "Stafford38/FoundationClosure.lean",
      "role": "statement",
-     "name": "Stafford38.universalFixedSourceStatement",
-     "line": 71
+     "name": "Stafford38.universalFixedSourceStatement"
     },
     {
      "file": "Stafford38/FoundationClosure.lean",
      "role": "main-proof",
-     "name": "Stafford38.FoundationClosure.canonicalSupportVanishingViaGeneralCoisotropic",
-     "line": 41
+     "name": "Stafford38.FoundationClosure.canonicalSupportVanishingViaGeneralCoisotropic"
     },
     {
      "file": "Stafford38/UniversalAssembly.lean",
      "role": "definition",
-     "name": "Stafford38.UniversalAssembly.CanonicalSupportVanishing",
-     "line": 34
+     "name": "Stafford38.UniversalAssembly.CanonicalSupportVanishing"
     },
     {
      "file": "Stafford38/UniversalAssembly.lean",
      "role": "main-proof",
-     "name": "Stafford38.UniversalAssembly.universalStatement_of_canonicalSupportVanishing",
-     "line": 69
+     "name": "Stafford38.UniversalAssembly.universalStatement_of_canonicalSupportVanishing"
     },
     {
      "file": "Stafford38/FixedSourceAssembly.lean",
      "role": "main-proof",
-     "name": "Stafford38.FixedSource.universalFixedSourceStatement_of_canonicalSupportVanishing",
-     "line": 24
+     "name": "Stafford38.FixedSource.universalFixedSourceStatement_of_canonicalSupportVanishing"
     },
     {
      "file": "Stafford38/Characteristic/CanonicalCertificate.lean",
      "role": "main-proof",
-     "name": "Stafford38.CharacteristicCanonicalCertificate.exists_fixedSource_certificate_of_orderCharacteristicSupport_eq_empty",
-     "line": 33
+     "name": "Stafford38.CharacteristicCanonicalCertificate.exists_fixedSource_certificate_of_orderCharacteristicSupport_eq_empty"
     },
     {
      "file": "Stafford38/Characteristic/EmptySupportVanishing.lean",
      "role": "helper",
-     "name": "Stafford38.CharacteristicEmptySupportVanishing.rightQuotient_subsingleton_of_orderCharacteristicSupport_eq_empty",
-     "line": 55
+     "name": "Stafford38.CharacteristicEmptySupportVanishing.rightQuotient_subsingleton_of_orderCharacteristicSupport_eq_empty"
     },
     {
      "file": "Stafford38/Weyl/FilteredScalarLifting.lean",
      "role": "main-proof",
-     "name": "Stafford38.Weyl.FilteredScalarLifting.canonicalSupportDescent",
-     "line": 472
+     "name": "Stafford38.Weyl.FilteredScalarLifting.canonicalSupportDescent"
     },
     {
      "file": "Stafford38/Weyl/FilteredScalarLifting.lean",
      "role": "helper",
      "name": "Stafford38.Weyl.FilteredScalarLifting.filteredInitialLifting",
-     "line": 465,
      "expands": [
       {
        "file": "Stafford38/Weyl/PresentedScalarExtension.lean",
-       "name": "Stafford38.Weyl.PresentedScalarExtension.FilteredInitialLifting",
-       "line": 561
+       "name": "Stafford38.Weyl.PresentedScalarExtension.FilteredInitialLifting"
       }
      ]
     },
     {
      "file": "Stafford38/Weyl/PresentedScalarExtension.lean",
      "role": "helper",
-     "name": "Stafford38.Weyl.PresentedScalarExtension.canonicalSupportDescent_of_filteredInitialLifting",
-     "line": 573
+     "name": "Stafford38.Weyl.PresentedScalarExtension.canonicalSupportDescent_of_filteredInitialLifting"
     },
     {
      "file": "Stafford38/CanonicalSupportVanishingReduction.lean",
      "role": "definition",
-     "name": "Stafford38.CanonicalSupportVanishingReduction.AlgebraicallyClosedCanonicalSupportVanishing",
-     "line": 117
+     "name": "Stafford38.CanonicalSupportVanishingReduction.AlgebraicallyClosedCanonicalSupportVanishing"
     },
     {
      "file": "Stafford38/CanonicalSupportVanishingReduction.lean",
      "role": "definition",
-     "name": "Stafford38.CanonicalSupportVanishingReduction.CanonicalSupportDescent",
-     "line": 127
+     "name": "Stafford38.CanonicalSupportVanishingReduction.CanonicalSupportDescent"
     },
     {
      "file": "Stafford38/Geometry/GeneralCoisotropicCanonicalAdapter.lean",
      "role": "main-proof",
      "name": "Stafford38.Geometry.GeneralCoisotropicCanonicalAdapter.algebraicallyClosedCanonicalSupportVanishing_of_generalCoisotropic",
-     "line": 222,
      "expands": [
       {
        "file": "Stafford38/CanonicalSupportVanishingReduction.lean",
-       "name": "Stafford38.CanonicalSupportVanishingReduction.AlgebraicallyClosedCanonicalSupportVanishing",
-       "line": 117
+       "name": "Stafford38.CanonicalSupportVanishingReduction.AlgebraicallyClosedCanonicalSupportVanishing"
       }
      ]
     },
@@ -5258,81 +4862,68 @@
      "file": "Stafford38/Characteristic/GabberGlobalAssembly.lean",
      "role": "helper",
      "name": "Stafford38.Characteristic.GabberGlobalAssembly.associatedGraded_radical_isInvolutive",
-     "line": 212,
      "expands": [
       {
        "file": "Stafford38/Characteristic/PostScalarExtensionPoisson.lean",
-       "name": "Stafford38.Characteristic.PostScalarExtensionPoisson.IsInvolutive",
-       "line": 33
+       "name": "Stafford38.Characteristic.PostScalarExtensionPoisson.IsInvolutive"
       }
      ]
     },
     {
      "file": "Stafford38/Geometry/GeneralCoisotropicSets.lean",
      "role": "helper",
-     "name": "Stafford38.Geometry.GeneralCoisotropicSets.exists_zero_base_coordinate_of_isFibreConical",
-     "line": 160
+     "name": "Stafford38.Geometry.GeneralCoisotropicSets.exists_zero_base_coordinate_of_isFibreConical"
     },
     {
      "file": "Stafford38/Characteristic/SpecializedNoncharacteristicEquality.lean",
      "role": "helper",
      "name": "Stafford38.SpecializedNoncharacteristicEquality.strictUnitCoordinatePreimage_of_transposedSupport_disjoint_axis",
-     "line": 266,
      "expands": [
       {
        "file": "Stafford38/Characteristic/CanonicalUnitCoordinatePreimage.lean",
-       "name": "Stafford38.CanonicalUnitCoordinatePreimage.StrictUnitCoordinatePreimage",
-       "line": 52
+       "name": "Stafford38.CanonicalUnitCoordinatePreimage.StrictUnitCoordinatePreimage"
       }
      ]
     },
     {
      "file": "Stafford38/Characteristic/CanonicalKoszulContradiction.lean",
      "role": "helper",
-     "name": "Stafford38.Characteristic.CanonicalKoszulContradiction.canonical_support_avoidance",
-     "line": 123
+     "name": "Stafford38.Characteristic.CanonicalKoszulContradiction.canonical_support_avoidance"
     },
     {
      "file": "Stafford38/Weyl/MonicNormalization.lean",
      "role": "helper",
-     "name": "Stafford38.WeylMonicNormalization.scalar_or_normalized_symplectic_image",
-     "line": 181
+     "name": "Stafford38.WeylMonicNormalization.scalar_or_normalized_symplectic_image"
     },
     {
      "file": "Stafford38/Weyl/Symplectic.lean",
      "role": "definition",
-     "name": "Stafford38.WeylSymplectic.standardSymplecticAlgEquivOfInverse",
-     "line": 91
+     "name": "Stafford38.WeylSymplectic.standardSymplecticAlgEquivOfInverse"
     },
     {
      "file": "Stafford38/Weyl/FilteredScalarLifting.lean",
      "role": "helper",
-     "name": "Stafford38.Weyl.FilteredScalarLifting.target_orderInitialIdeal_le_map_source_orderInitialIdeal",
-     "line": 387
+     "name": "Stafford38.Weyl.FilteredScalarLifting.target_orderInitialIdeal_le_map_source_orderInitialIdeal"
     },
     {
      "file": "Stafford38/Weyl/PresentedScalarExtension.lean",
      "role": "definition",
-     "name": "Stafford38.Weyl.PresentedScalarExtension.FilteredInitialLifting",
-     "line": 561
+     "name": "Stafford38.Weyl.PresentedScalarExtension.FilteredInitialLifting"
     },
     {
      "file": "Stafford38/Characteristic/GeometricSupportDescent.lean",
      "role": "helper",
-     "name": "Stafford38.Characteristic.GeometricSupportDescent.map_scalarPolynomialMap_eq_top_iff",
-     "line": 101
+     "name": "Stafford38.Characteristic.GeometricSupportDescent.map_scalarPolynomialMap_eq_top_iff"
     },
     {
      "file": "Stafford38/Characteristic/EmptySupportVanishing.lean",
      "role": "helper",
-     "name": "Stafford38.CharacteristicEmptySupportVanishing.orderInitialIdeal_eq_top_iff_rightQuotient_subsingleton",
-     "line": 83
+     "name": "Stafford38.CharacteristicEmptySupportVanishing.orderInitialIdeal_eq_top_iff_rightQuotient_subsingleton"
     },
     {
      "file": "Stafford38/Characteristic/SpecializedNoncharacteristicEquality.lean",
      "role": "helper",
-     "name": "Stafford38.SpecializedNoncharacteristicEquality.transposedSupport_disjoint_axis_iff",
-     "line": 151
+     "name": "Stafford38.SpecializedNoncharacteristicEquality.transposedSupport_disjoint_axis_iff"
     }
    ],
    "depends_on": [
@@ -5466,33 +5057,28 @@
     {
      "file": "Stafford38/Weyl/FilteredScalarLifting.lean",
      "role": "statement",
-     "name": "Stafford38.Weyl.FilteredScalarLifting.presentedWeylScalarExtension_map_orderInitialIdeal_eq",
-     "line": 449
+     "name": "Stafford38.Weyl.FilteredScalarLifting.presentedWeylScalarExtension_map_orderInitialIdeal_eq"
     },
     {
      "file": "Stafford38/Weyl/FilteredScalarLifting.lean",
      "role": "input",
      "name": "Stafford38.Weyl.FilteredScalarLifting.filteredInitialLifting",
-     "line": 465,
      "expands": [
       {
        "file": "Stafford38/Weyl/PresentedScalarExtension.lean",
-       "name": "Stafford38.Weyl.PresentedScalarExtension.FilteredInitialLifting",
-       "line": 561
+       "name": "Stafford38.Weyl.PresentedScalarExtension.FilteredInitialLifting"
       }
      ]
     },
     {
      "file": "Stafford38/Weyl/FilteredScalarLifting.lean",
      "role": "input",
-     "name": "Stafford38.Weyl.FilteredScalarLifting.target_orderInitialIdeal_le_map_source_orderInitialIdeal",
-     "line": 387
+     "name": "Stafford38.Weyl.FilteredScalarLifting.target_orderInitialIdeal_le_map_source_orderInitialIdeal"
     },
     {
      "file": "Stafford38/Weyl/PresentedScalarExtension.lean",
      "role": "source citation",
-     "name": "Stafford38.Weyl.PresentedScalarExtension.presentedWeylScalarExtension_map_orderInitialIdeal_le",
-     "line": 390
+     "name": "Stafford38.Weyl.PresentedScalarExtension.presentedWeylScalarExtension_map_orderInitialIdeal_le"
     }
    ],
    "depends_on": [],
@@ -5526,57 +5112,49 @@
     {
      "file": "Stafford38/ChallengeDefinitions.lean",
      "role": "definition",
-     "name": "Stafford38.TorsionCyclicity.IsRightTorsion",
-     "line": 203
+     "name": "Stafford38.TorsionCyclicity.IsRightTorsion"
     },
     {
      "repo": "formal",
      "file": "Stafford38/TorsionCyclicity.lean",
-     "line": 27,
      "name": "Stafford38.TorsionCyclicity.span_adjusted_pair_eq_span_pair",
      "role": "paper certificate calculation"
     },
     {
      "file": "Stafford38/TorsionCyclicity.lean",
      "role": "paper generator",
-     "name": "Stafford38.TorsionCyclicity.exists_span_adjusted_pair",
-     "line": 39
+     "name": "Stafford38.TorsionCyclicity.exists_span_adjusted_pair"
     },
     {
      "file": "Stafford38/TorsionCyclicity.lean",
      "role": "helper",
-     "name": "Stafford38.TorsionCyclicity.exists_span_singleton_eq_span_pair",
-     "line": 52
+     "name": "Stafford38.TorsionCyclicity.exists_span_singleton_eq_span_pair"
     },
     {
      "file": "Stafford38/Weyl/Domain.lean",
      "role": "helper",
-     "name": "Stafford38.WeylDomain.mul_ne_zero",
-     "line": 25
+     "name": "Stafford38.WeylDomain.mul_ne_zero"
     },
     {
      "file": "Stafford38/TorsionCyclicity.lean",
      "role": "statement",
-     "name": "Stafford38.TorsionCyclicity.weyl_isCyclic_of_isRightTorsion",
-     "line": 66
+     "name": "Stafford38.TorsionCyclicity.weyl_isCyclic_of_isRightTorsion"
     },
     {
-     "file": "CorollaryChallenge.lean",
+     "file": "Stafford38/ChallengeDefinitions.lean",
      "role": "definition",
-     "name": "Stafford38CorollaryChallenge.IsRightTorsion",
-     "line": 28
+     "name": "Stafford38.TorsionCyclicity.IsRightTorsion",
+     "repo": "formal"
     },
     {
      "file": "CorollaryChallenge.lean",
      "role": "statement",
-     "name": "Stafford38CorollaryChallenge.torsionCyclicStatement",
-     "line": 34
+     "name": "Stafford38CorollaryChallenge.torsionCyclicStatement"
     },
     {
      "file": "tests/TorsionCyclicityConsumer.lean",
      "role": "consumer",
-     "name": "Stafford38CorollaryChallenge.torsionCyclicStatement_consumer",
-     "line": 13
+     "name": "Stafford38CorollaryChallenge.torsionCyclicStatement_consumer"
     }
    ],
    "depends_on": [
@@ -5665,14 +5243,12 @@
        "repo": "formal",
        "file": "PaperPairChallenge.lean",
        "name": "Stafford38PaperPairChallenge.pairGeneratorStatement",
-       "line": 12,
        "role": "supplementary statement"
       },
       {
        "repo": "formal",
        "file": "tests/PaperPairConsumer.lean",
        "name": "Stafford38PaperPairChallenge.pairGeneratorStatement_consumer",
-       "line": 9,
        "role": "proved literal consumer"
       }
      ]
@@ -5790,44 +5366,37 @@
     {
      "file": "Stafford38/LocalizationCorollaries.lean",
      "role": "statement",
-     "name": "Stafford38.LocalizationCorollaries.s38_rightOreLocalization",
-     "line": 31
+     "name": "Stafford38.LocalizationCorollaries.s38_rightOreLocalization"
     },
     {
      "file": "Stafford38/LeftHandedCorollary.lean",
      "role": "statement",
-     "name": "Stafford38.LeftHandedCorollary.leftHanded_of_universalStatement",
-     "line": 23
+     "name": "Stafford38.LeftHandedCorollary.leftHanded_of_universalStatement"
     },
     {
      "file": "Stafford38/LocalizedDifferentialCorollaries.lean",
      "role": "statement",
-     "name": "Stafford38.LocalizedDifferentialCorollaries.s38_laurent_differential",
-     "line": 108
+     "name": "Stafford38.LocalizedDifferentialCorollaries.s38_laurent_differential"
     },
     {
      "file": "Stafford38/LocalizedDifferentialCorollaries.lean",
      "role": "statement",
-     "name": "Stafford38.LocalizedDifferentialCorollaries.s38_partial_laurent_differential",
-     "line": 131
+     "name": "Stafford38.LocalizedDifferentialCorollaries.s38_partial_laurent_differential"
     },
     {
      "file": "Stafford38/LocalizedDifferentialCorollaries.lean",
      "role": "statement",
-     "name": "Stafford38.LocalizedDifferentialCorollaries.s38_fraction_ring_differential",
-     "line": 94
+     "name": "Stafford38.LocalizedDifferentialCorollaries.s38_fraction_ring_differential"
     },
     {
      "file": "Stafford38/EvolutionaryCorollary.lean",
      "role": "statement",
-     "name": "Stafford38.Evolution.evolutionaryCorollary",
-     "line": 36
+     "name": "Stafford38.Evolution.evolutionaryCorollary"
     },
     {
      "file": "Stafford38/EvolutionaryCorollary.lean",
      "role": "statement",
-     "name": "Stafford38.Evolution.tensorEvolutionaryCorollary",
-     "line": 57
+     "name": "Stafford38.Evolution.tensorEvolutionaryCorollary"
     }
    ],
    "depends_on": [],
@@ -5897,8 +5466,7 @@
     {
      "file": "Stafford38/LocalizationCorollaries.lean",
      "role": "statement",
-     "name": "Stafford38.LocalizationCorollaries.s38_rightOreLocalization",
-     "line": 31
+     "name": "Stafford38.LocalizationCorollaries.s38_rightOreLocalization"
     }
    ],
    "depends_on": [],
@@ -5931,8 +5499,7 @@
     {
      "file": "Stafford38/LeftHandedCorollary.lean",
      "role": "statement",
-     "name": "Stafford38.LeftHandedCorollary.leftHanded_of_universalStatement",
-     "line": 23
+     "name": "Stafford38.LeftHandedCorollary.leftHanded_of_universalStatement"
     }
    ],
    "depends_on": [],
@@ -5965,8 +5532,7 @@
     {
      "file": "Stafford38/LocalizedDifferentialCorollaries.lean",
      "role": "statement",
-     "name": "Stafford38.LocalizedDifferentialCorollaries.s38_unconditional_localized_differential",
-     "line": 83
+     "name": "Stafford38.LocalizedDifferentialCorollaries.s38_unconditional_localized_differential"
     }
    ],
    "depends_on": [],
@@ -5999,8 +5565,7 @@
     {
      "file": "Stafford38/EvolutionaryCorollary.lean",
      "role": "statement",
-     "name": "Stafford38.Evolution.evolutionaryCorollary",
-     "line": 36
+     "name": "Stafford38.Evolution.evolutionaryCorollary"
     }
    ],
    "depends_on": [],
@@ -6035,14 +5600,12 @@
      "repo": "formal",
      "file": "Stafford38/NoncharacteristicHyperplane.lean",
      "name": "Stafford38.NoncharacteristicHyperplane.IsNoncharacteristic",
-     "line": 73,
      "role": "definition"
     },
     {
      "repo": "formal",
      "file": "Stafford38/NoncharacteristicHyperplane.lean",
      "name": "Stafford38.NoncharacteristicHyperplane.isNoncharacteristic_iff_finite_restrictedCoordinateQuotient",
-     "line": 220,
      "role": "statement"
     }
    ],
@@ -6088,81 +5651,68 @@
     {
      "file": "Stafford38/Characteristic/CanonicalNormalSymbolFiniteness.lean",
      "role": "statement",
-     "name": "Stafford38.Characteristic.CanonicalNormalSymbolFiniteness.canonical_orderAssociatedGradedModule_finite_normalCoeffRing",
-     "line": 47
+     "name": "Stafford38.Characteristic.CanonicalNormalSymbolFiniteness.canonical_orderAssociatedGradedModule_finite_normalCoeffRing"
     },
     {
      "file": "Stafford38/Characteristic/NormalSymbolPolynomial.lean",
      "role": "helper",
-     "name": "Stafford38.Characteristic.NormalSymbolPolynomial.canonicalNormalPolynomial_monic",
-     "line": 104
+     "name": "Stafford38.Characteristic.NormalSymbolPolynomial.canonicalNormalPolynomial_monic"
     },
     {
      "file": "Stafford38/Characteristic/CanonicalNormalAxisSupport.lean",
      "role": "statement",
-     "name": "Stafford38.Characteristic.CanonicalNormalAxisSupport.no_canonicalSupport_prime_on_punctured_normal_axis",
-     "line": 96
+     "name": "Stafford38.Characteristic.CanonicalNormalAxisSupport.no_canonicalSupport_prime_on_punctured_normal_axis"
     },
     {
      "file": "AlgebraicAnalysis/Module/HyperplaneRestriction.lean",
      "role": "helper",
      "repo": "library",
-     "name": "AlgebraicAnalysis.HyperplaneRestriction.support_disjoint_zeroLocus_of_restriction_subsingleton",
-     "line": 109
+     "name": "AlgebraicAnalysis.HyperplaneRestriction.support_disjoint_zeroLocus_of_restriction_subsingleton"
     },
     {
      "file": "Stafford38/Characteristic/CanonicalTangentialSymbolFiniteness.lean",
      "role": "helper",
-     "name": "Stafford38.Characteristic.CanonicalTangentialSymbolFiniteness.canonical_orderAssociatedGradedModule_finite_tangential_coordinate",
-     "line": 116
+     "name": "Stafford38.Characteristic.CanonicalTangentialSymbolFiniteness.canonical_orderAssociatedGradedModule_finite_tangential_coordinate"
     },
     {
      "file": "Stafford38/NoncharacteristicHyperplane.lean",
      "role": "definition",
-     "name": "Stafford38.NoncharacteristicHyperplane.IsNoncharacteristic",
-     "line": 73
+     "name": "Stafford38.NoncharacteristicHyperplane.IsNoncharacteristic"
     },
     {
      "file": "Stafford38/NoncharacteristicHyperplane.lean",
      "role": "helper",
-     "name": "Stafford38.NoncharacteristicHyperplane.isNoncharacteristic_iff_finite_restrictedCoordinateQuotient",
-     "line": 220
+     "name": "Stafford38.NoncharacteristicHyperplane.isNoncharacteristic_iff_finite_restrictedCoordinateQuotient"
     },
     {
      "file": "Stafford38/NoncharacteristicHyperplane.lean",
      "role": "statement",
-     "name": "Stafford38.NoncharacteristicHyperplane.canonical_isNoncharacteristic_annihilator",
-     "line": 235
+     "name": "Stafford38.NoncharacteristicHyperplane.canonical_isNoncharacteristic_annihilator"
     },
     {
      "file": "Stafford38/NoncharacteristicHyperplane.lean",
      "role": "statement",
-     "name": "Stafford38.NoncharacteristicHyperplane.canonical_finite_restrictedCoordinateQuotient",
-     "line": 310
+     "name": "Stafford38.NoncharacteristicHyperplane.canonical_finite_restrictedCoordinateQuotient"
     },
     {
      "file": "Stafford38/NoncharacteristicHyperplane.lean",
      "role": "statement",
-     "name": "Stafford38.NoncharacteristicHyperplane.canonicalSupport_conormal_subset_zeroSection",
-     "line": 331
+     "name": "Stafford38.NoncharacteristicHyperplane.canonicalSupport_conormal_subset_zeroSection"
     },
     {
      "file": "Stafford38/NoncharacteristicHypersurface.lean",
      "role": "definition",
-     "name": "Stafford38.NoncharacteristicHypersurface.canonicalPrincipalHypersurfaceIdeal",
-     "line": 37
+     "name": "Stafford38.NoncharacteristicHypersurface.canonicalPrincipalHypersurfaceIdeal"
     },
     {
      "file": "Stafford38/NoncharacteristicHypersurface.lean",
      "role": "helper",
-     "name": "Stafford38.NoncharacteristicHypersurface.normalMomentumPolynomialEquiv_tangentialMap",
-     "line": 79
+     "name": "Stafford38.NoncharacteristicHypersurface.normalMomentumPolynomialEquiv_tangentialMap"
     },
     {
      "file": "Stafford38/NoncharacteristicHypersurface.lean",
      "role": "statement",
-     "name": "Stafford38.NoncharacteristicHypersurface.canonical_principal_hypersurface_finite",
-     "line": 132
+     "name": "Stafford38.NoncharacteristicHypersurface.canonical_principal_hypersurface_finite"
     }
    ],
    "depends_on": [
@@ -6265,8 +5815,7 @@
    "related": [
     "conv:pair",
     "prop:x-surjective"
-   ],
-   "line": 636
+   ]
   },
   {
    "name": "Stafford38.WeylEulerRemainder.closure_pairOldSubring_union_coordinate_momentum_eq_top",
@@ -6274,8 +5823,7 @@
    "note": "“$C$ and $p$ generate $A_n$” — asserted without comment in Proposition 5.3.",
    "related": [
     "prop:x-surjective"
-   ],
-   "line": 310
+   ]
   },
   {
    "name": "Stafford38.WeylQuotientTransport.transported_canonicalRightIdeal",
@@ -6283,8 +5831,7 @@
    "note": "Transport of the canonical right ideal between the presentation and the Ore tower.",
    "related": [
     "eq:I-Q"
-   ],
-   "line": 108
+   ]
   },
   {
    "name": "Stafford38.WeylOuterOreMonic.presentedOuterPolynomial_monic",
@@ -6293,8 +5840,7 @@
    "related": [
     "prop:monic",
     "lem:euler-residue"
-   ],
-   "line": 404
+   ]
   },
   {
    "name": "Stafford.exists_eulerPolynomial_x_pow_mul_d_pow",
@@ -6302,8 +5848,7 @@
    "note": "This remains a power-multiplication helper in the `proofs` library. The falling and rising Euler-product identities are public theorems in Stafford38/Weyl/EulerProductIdentities.lean; the historical private product lemmas in this file are no longer linked from the manuscript.",
    "related": [
     "lem:euler"
-   ],
-   "line": 148
+   ]
   },
   {
    "name": "Stafford38.WeylSymplectic.standardSymplecticAlgEquivOfInverse",
@@ -6311,18 +5856,17 @@
    "note": "Φ is built with an explicit inverse matrix; the paper asserts Φ_g is an automorphism without constructing the inverse.",
    "related": [
     "phi-g"
-   ],
-   "line": 91
+   ]
   },
   {
    "name": "Stafford38FixedSourceChallengeTransport.bernsteinDegree_eq",
-   "file": "Stafford38/FixedSourceChallengeTransport.lean",
+   "file": "Stafford38/Weyl/BernsteinDegree.lean",
    "note": "Identifies the intrinsic “least N with d in span of ordered PBW words of degree ≤ N” with the PBW-normal-form degree used internally.",
    "related": [
     "def:filtration",
     "thm:main"
    ],
-   "line": 150
+   "repo": "formal"
   },
   {
    "name": "Stafford38.CharacteristicAssociatedGradedModule.annihilator_orderAssociatedGradedModule",
@@ -6331,8 +5875,7 @@
    "related": [
     "proof-main",
     "thm:coisotropic-exclusion"
-   ],
-   "line": 373
+   ]
   },
   {
    "name": "Stafford38.Weyl.FilteredScalarLifting.target_orderInitialIdeal_le_map_source_orderInitialIdeal",
@@ -6341,8 +5884,7 @@
    "related": [
     "proof-main",
     "reduction-k0"
-   ],
-   "line": 387
+   ]
   },
   {
    "name": "Stafford38.Weyl.FilteredScalarLifting.filteredInitialLifting",
@@ -6351,8 +5893,7 @@
    "related": [
     "proof-main",
     "reduction-k0"
-   ],
-   "line": 465
+   ]
   },
   {
    "name": "Stafford38.SpecializedNoncharacteristicEquality.transposedSupport_disjoint_axis_iff",
@@ -6361,8 +5902,7 @@
    "related": [
     "prop:char-avoids",
     "proof-main"
-   ],
-   "line": 151
+   ]
   },
   {
    "name": "Stafford38.SpecializedNoncharacteristicEquality.strictUnitCoordinatePreimage_of_transposedSupport_disjoint_axis",
@@ -6371,8 +5911,7 @@
    "related": [
     "prop:char-avoids",
     "proof-main"
-   ],
-   "line": 266
+   ]
   },
   {
    "name": "AlgebraicAnalysis.FilteredTwoTermPages.FilteredTwoTerm.pointwise_boundary_exhaustion",
@@ -6383,8 +5922,7 @@
    ],
    "repo": "library",
    "visibility": "module-private",
-   "role": "helper",
-   "line": 104
+   "role": "helper"
   },
   {
    "name": "AlgebraicAnalysis.exists_uniform_subsingleton_localized",
@@ -6393,8 +5931,7 @@
    "related": [
     "lem:page-inequality"
    ],
-   "repo": "library",
-   "line": 106
+   "repo": "library"
   },
   {
    "name": "Stafford38.Geometry.SmoothAffineConormal.equationConormalClosure_smoothAffine_eq",
@@ -6402,8 +5939,7 @@
    "note": "For prime I the closure of equation-conormal covectors equals the smooth conormal closure. This is why Lean never needs the paper’s tilted arc.",
    "related": [
     "thm:asymptotic-conormal-proof"
-   ],
-   "line": 43
+   ]
   },
   {
    "name": "Stafford38.Geometry.ConormalScalarExtensionVanishing.scalarExtension_vanishing",
@@ -6412,8 +5948,7 @@
    "related": [
     "lem:tangent-limit",
     "thm:asymptotic-conormal-proof"
-   ],
-   "line": 137
+   ]
   },
   {
    "name": "Stafford38.Geometry.DivisorialVisibleFrameStage2.chart_of_valuation",
@@ -6423,8 +5958,7 @@
     "thm:asymptotic-conormal-proof"
    ],
    "visibility": "module-private",
-   "role": "helper",
-   "line": 26
+   "role": "helper"
   },
   {
    "name": "Stafford38.Geometry.KaehlerDVRVisibility.ker_kaehler_residue_map_eq",
@@ -6432,8 +5966,7 @@
    "note": "Kernel of Ω_V → Ω_κ(V); replaces the paper’s generic smoothness of ν|_D (GEO-01).",
    "related": [
     "thm:asymptotic-conormal-proof"
-   ],
-   "line": 65
+   ]
   },
   {
    "name": "Stafford38.Geometry.ProjectiveConormalDirections.mk_mem_projectiveHomogeneousClosure_of_fibre_zeroLocus",
@@ -6441,8 +5974,7 @@
    "note": "Projective statement derived from the affine-cone statement; downstream only the affine-cone version is used.",
    "related": [
     "thm:asymptotic-conormal"
-   ],
-   "line": 73
+   ]
   },
   {
    "name": "Stafford38.FoundationClosure.inputs",
@@ -6450,8 +5982,7 @@
    "note": "A second, fully proved assembly (`PaperInputs.Inputs`, older residue/visible-frame route). NOT used by `Stafford38.universalStatement`; do not review it as part of the terminal proof.",
    "related": [
     "proof-main"
-   ],
-   "line": 33
+   ]
   }
  ],
  "aicomments": [
@@ -6624,209 +6155,201 @@
    "note": "Current selected manuscript annotation; author acceptance is separate from machine verification."
   }
  ],
- "overview": "Compare the complete preserved manuscript proof with the formal proof, including definitions, hypotheses and supporting lemmas. The main solution follows the manuscript construction; the earlier generic/Laurent argument is labeled as an alternative. Marked manuscript corrections remain proposals for Johanna’s review, and Max’s full correspondence review remains pending. Statement and route labels compare the proposed corrected review text; struck original errors stay in historical findings. Johanna has not yet accepted those corrections. “Similar” means the same mathematical idea with explicit formal steps; “proved in Lean only” identifies a cited theorem whose proof is supplied by Lean.",
+ "overview": "Compare the complete preserved manuscript proof with the formal proof, including definitions, hypotheses and supporting lemmas. The main solution follows the manuscript construction; the earlier generic/Laurent argument is labeled as an alternative. Marked manuscript corrections remain proposals for Johanna’s review, and Max’s full correspondence review remains pending. Statement and route labels compare the proposed corrected review text; struck original errors stay in historical findings. Johanna has not yet accepted those corrections. “Similar” means the same mathematical idea with explicit formal steps; “proved in Lean only” identifies a cited theorem whose proof is supplied by Lean.<p><strong>Definition ownership:</strong> <code>Stafford38Challenge.WeylAlg</code> is the standard Weyl algebra used throughout. It specializes the generic matrix presentation <code>Stafford.FreeWeyl</code>. The iterated Ore representation is related by a proved algebra equivalence. <code>MvPolynomial.weightedTotalDegree</code> belongs to Mathlib; <code>Stafford.Reduction.Stafford38</code> belongs to this project. Click a highlighted name to see its definition and owner.</p>",
  "how_to_use": "Read the paper and Lean proofs side by side. Each passage and declaration links to its exact source. Review tools provide manuscript annotations, all reference passages, and note import/export.",
- "provenance": "Final P7/S7 review, signed formal v1.3.1 and corrected supplementary v0.2.1. Formal archive1172 files and companion archive29 files match signed tags. The companion freezes P6/S6/R131; P7 changes its citation only. All mathematical sources, challenges, solutions, dependency pins and verification programs match C2; descriptor provenance and package version changes are recorded separately. Complete C2 verifier, four comparisons and399 public-name checks passed. Johanna and Max human reviews remain pending.",
+ "provenance": "<p>This local review draft consolidates definitions in the formal proof. The manuscript, its annotations, and its recorded proof routes are preserved. The changed source commits have not been published; their source links open local pages rendered from the same pinned bytes. Historical releases and their verification receipts remain available in the repository history.</p>",
  "challenge_definitions": [
   {
    "repo": "formal",
    "file": "Stafford38/ChallengeDefinitions.lean",
-   "name": "Stafford38Challenge.PhaseVar",
-   "line": 65
+   "name": "Stafford38Challenge.PhaseVar"
   },
   {
    "repo": "formal",
    "file": "Stafford38/ChallengeDefinitions.lean",
-   "name": "Stafford38Challenge.relation",
-   "line": 68
+   "name": "Stafford38Challenge.relation"
   },
   {
    "repo": "formal",
    "file": "Stafford38/ChallengeDefinitions.lean",
-   "name": "Stafford38Challenge.WeylAlg",
-   "line": 74
+   "name": "Stafford38Challenge.WeylAlg"
   },
   {
    "repo": "formal",
    "file": "Stafford38/ChallengeDefinitions.lean",
-   "name": "Stafford38Challenge.UniversalStatement",
-   "line": 78
+   "name": "Stafford38Challenge.UniversalStatement"
   },
   {
    "repo": "formal",
    "file": "Stafford38/ChallengeDefinitions.lean",
-   "name": "Stafford38FixedSourceChallenge.PhaseVar",
-   "line": 98
+   "name": "Stafford38Challenge.generator"
   },
   {
    "repo": "formal",
    "file": "Stafford38/ChallengeDefinitions.lean",
-   "name": "Stafford38FixedSourceChallenge.relation",
-   "line": 100
+   "name": "Stafford38FixedSourceChallenge.oldIndex"
   },
   {
    "repo": "formal",
    "file": "Stafford38/ChallengeDefinitions.lean",
-   "name": "Stafford38FixedSourceChallenge.WeylAlg",
-   "line": 105
+   "name": "Stafford38FixedSourceChallenge.freeOldMap"
   },
   {
    "repo": "formal",
    "file": "Stafford38/ChallengeDefinitions.lean",
-   "name": "Stafford38FixedSourceChallenge.generator",
-   "line": 108
+   "name": "Stafford38FixedSourceChallenge.freeOrderedMonomial"
   },
   {
    "repo": "formal",
    "file": "Stafford38/ChallengeDefinitions.lean",
-   "name": "Stafford38FixedSourceChallenge.oldIndex",
-   "line": 112
+   "name": "Stafford38FixedSourceChallenge.orderedMonomial"
   },
   {
    "repo": "formal",
    "file": "Stafford38/ChallengeDefinitions.lean",
-   "name": "Stafford38FixedSourceChallenge.freeOldMap",
-   "line": 123
+   "name": "Stafford38FixedSourceChallenge.phaseDegree"
   },
   {
    "repo": "formal",
    "file": "Stafford38/ChallengeDefinitions.lean",
-   "name": "Stafford38FixedSourceChallenge.freeOrderedMonomial",
-   "line": 128
+   "name": "Stafford38FixedSourceChallenge.bernsteinPiece"
   },
   {
    "repo": "formal",
    "file": "Stafford38/ChallengeDefinitions.lean",
-   "name": "Stafford38FixedSourceChallenge.orderedMonomial",
-   "line": 138
+   "name": "Stafford38FixedSourceChallenge.bernsteinDegree"
   },
   {
    "repo": "formal",
    "file": "Stafford38/ChallengeDefinitions.lean",
-   "name": "Stafford38FixedSourceChallenge.phaseDegree",
-   "line": 144
+   "name": "Stafford.linearCombination"
   },
   {
    "repo": "formal",
    "file": "Stafford38/ChallengeDefinitions.lean",
-   "name": "Stafford38FixedSourceChallenge.bernsteinPiece",
-   "line": 148
+   "name": "Stafford38Challenge.standardForm"
   },
   {
    "repo": "formal",
    "file": "Stafford38/ChallengeDefinitions.lean",
-   "name": "Stafford38FixedSourceChallenge.bernsteinDegree",
-   "line": 155
+   "name": "Stafford38FixedSourceChallenge.IsLinearWeylCoordinate"
   },
   {
    "repo": "formal",
    "file": "Stafford38/ChallengeDefinitions.lean",
-   "name": "Stafford38FixedSourceChallenge.linearCombination",
-   "line": 160
+   "name": "Stafford38FixedSourceChallenge.UniversalFixedSourceStatement"
   },
   {
    "repo": "formal",
    "file": "Stafford38/ChallengeDefinitions.lean",
-   "name": "Stafford38FixedSourceChallenge.standardForm",
-   "line": 165
-  },
-  {
-   "repo": "formal",
-   "file": "Stafford38/ChallengeDefinitions.lean",
-   "name": "Stafford38FixedSourceChallenge.IsLinearWeylCoordinate",
-   "line": 170
-  },
-  {
-   "repo": "formal",
-   "file": "Stafford38/ChallengeDefinitions.lean",
-   "name": "Stafford38FixedSourceChallenge.UniversalFixedSourceStatement",
-   "line": 193
+   "name": "Stafford38.TorsionCyclicity.IsRightTorsion"
   },
   {
    "repo": "formal",
    "file": "CorollaryChallenge.lean",
-   "name": "Stafford38CorollaryChallenge.PhaseVar",
-   "line": 18
-  },
-  {
-   "repo": "formal",
-   "file": "CorollaryChallenge.lean",
-   "name": "Stafford38CorollaryChallenge.relation",
-   "line": 20
-  },
-  {
-   "repo": "formal",
-   "file": "CorollaryChallenge.lean",
-   "name": "Stafford38CorollaryChallenge.WeylAlg",
-   "line": 25
-  },
-  {
-   "repo": "formal",
-   "file": "CorollaryChallenge.lean",
-   "name": "Stafford38CorollaryChallenge.IsRightTorsion",
-   "line": 28
-  },
-  {
-   "repo": "formal",
-   "file": "CorollaryChallenge.lean",
-   "name": "Stafford38CorollaryChallenge.torsionCyclicStatement",
-   "line": 34
+   "name": "Stafford38CorollaryChallenge.torsionCyclicStatement"
   },
   {
    "repo": "mathlib",
    "file": "Mathlib/Algebra/Field/Defs.lean",
    "name": "Field",
-   "note": "Commutative field axioms, including nontriviality via its parents",
-   "line": 180
+   "note": "Commutative field axioms, including nontriviality via its parents"
   },
   {
    "repo": "mathlib",
    "file": "Mathlib/Algebra/Field/Defs.lean",
    "name": "DivisionRing",
-   "note": "Division, inverse and nontrivial ring axioms",
-   "line": 116
+   "note": "Division, inverse and nontrivial ring axioms"
   },
   {
    "repo": "mathlib",
    "file": "Mathlib/Algebra/Ring/Defs.lean",
    "name": "CommRing",
-   "note": "Commutative unital ring axioms",
-   "line": 414
+   "note": "Commutative unital ring axioms"
   },
   {
    "repo": "mathlib",
    "file": "Mathlib/Algebra/CharZero/Defs.lean",
    "name": "CharZero",
-   "note": "Injectivity of the natural-number cast",
-   "line": 43
+   "note": "Injectivity of the natural-number cast"
   },
   {
    "repo": "mathlib",
    "file": "Mathlib/Algebra/RingQuot.lean",
    "name": "RingQuot",
-   "note": "Universal ring quotient by a generating relation",
-   "line": 125
+   "note": "Universal ring quotient by a generating relation"
   },
   {
    "repo": "mathlib",
    "file": "Mathlib/Algebra/FreeAlgebra.lean",
    "name": "FreeAlgebra",
-   "note": "Free associative algebra",
-   "line": 168
+   "note": "Free associative algebra"
   },
   {
    "repo": "mathlib",
    "file": "Mathlib/LinearAlgebra/SymplecticGroup.lean",
    "name": "Matrix.J",
-   "note": "Standard symplectic matrix; fixes commutator signs",
-   "line": 58
+   "note": "Standard symplectic matrix; fixes commutator signs"
   },
   {
    "repo": "formal",
    "file": "PaperPairChallenge.lean",
    "name": "Stafford38PaperPairChallenge.pairGeneratorStatement",
-   "note": "Supplementary certificate calculation only; the main Challenge and Solution are unchanged.",
-   "line": 12
+   "note": "Supplementary certificate calculation only; the main Challenge and Solution are unchanged."
+  },
+  {
+   "repo": "formal",
+   "file": "Stafford38/ChallengeDefinitions.lean",
+   "name": "Stafford.FreeWeyl",
+   "note": "Generic matrix presentation; WeylAlg specializes this construction."
+  },
+  {
+   "repo": "formal",
+   "file": "Stafford38/ChallengeDefinitions.lean",
+   "name": "Stafford.freeWeylRelation",
+   "note": "Relations for the generic matrix presentation."
+  },
+  {
+   "repo": "formal",
+   "file": "Stafford38/ChallengeDefinitions.lean",
+   "name": "Stafford.freeWeylGenerator",
+   "note": "Canonical quotient generator."
+  },
+  {
+   "repo": "formal",
+   "file": "Stafford38/ChallengeDefinitions.lean",
+   "name": "Stafford.Reduction.Stafford38",
+   "note": "The certificate predicate for one element."
+  },
+  {
+   "repo": "formal",
+   "file": "Stafford38/Weyl/Filtration.lean",
+   "name": "Stafford38.WeylFiltration.bernsteinWeight",
+   "note": "Weight used for the computational degree."
+  },
+  {
+   "repo": "mathlib",
+   "file": "Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.lean",
+   "name": "MvPolynomial.weightedTotalDegree",
+   "note": "Imported from Mathlib."
+  },
+  {
+   "repo": "mathlib",
+   "file": "Mathlib/Data/Finsupp/Weight.lean",
+   "name": "Finsupp.weight",
+   "note": "Imported from Mathlib."
+  },
+  {
+   "repo": "library",
+   "file": "AlgebraicAnalysis/Commutator.lean",
+   "name": "AlgebraicAnalysis.ringCommutator",
+   "note": "Imported from AlgebraicAnalysis."
+  },
+  {
+   "repo": "formal",
+   "file": "Stafford38/Weyl/PBW.lean",
+   "name": "Stafford38.WeylPBW.presentedNormalFormLinearEquiv",
+   "note": "PBW normal form used to compute the intrinsic degree."
   }
  ],
  "challenge_endpoints": [
@@ -6838,11 +6361,9 @@
     {
      "file": "Stafford38/ChallengeDefinitions.lean",
      "name": "Stafford38Challenge.UniversalStatement",
-     "role": "definition",
-     "line": 78
+     "role": "definition"
     }
-   ],
-   "line": 12
+   ]
   },
   {
    "file": "FixedSourceSolution.lean",
@@ -6852,11 +6373,9 @@
     {
      "file": "Stafford38/ChallengeDefinitions.lean",
      "name": "Stafford38FixedSourceChallenge.UniversalFixedSourceStatement",
-     "role": "definition",
-     "line": 193
+     "role": "definition"
     }
-   ],
-   "line": 24
+   ]
   }
  ],
  "live_url": "https://itpplasma.github.io/stafford38-supplementary/",
@@ -16687,5 +16206,157 @@
   ],
   "warning": "Navigational correspondence proposals only. Full statement and proof correspondence remains open."
  },
- "comparison_scope": "Relations classify the current selected review text in human_readable_main.tex, including AIadd/AIreplace proposal text. Historical author-baseline text remains recorded under historical_issues; marked corrections and route replacements remain subject to human author review. This map does not treat a proposed correction as accepted publication text."
+ "comparison_scope": "Relations classify the current selected review text in human_readable_main.tex, including AIadd/AIreplace proposal text. Historical author-baseline text remains recorded under historical_issues; marked corrections and route replacements remain subject to human author review. This map does not treat a proposed correction as accepted publication text.",
+ "canonical_declarations": {
+  "Stafford38FixedSourceChallengeTransport.bernsteinDegree_eq": {
+   "repo": "formal",
+   "file": "Stafford38/Weyl/BernsteinDegree.lean",
+   "name": "Stafford38FixedSourceChallengeTransport.bernsteinDegree_eq"
+  },
+  "Stafford38.WeylAlg": {
+   "repo": "formal",
+   "file": "Stafford38/ChallengeDefinitions.lean",
+   "name": "Stafford38Challenge.WeylAlg"
+  },
+  "Stafford38.WeylIteratedEquivalence.PresentedWeyl": {
+   "repo": "formal",
+   "file": "Stafford38/ChallengeDefinitions.lean",
+   "name": "Stafford38Challenge.WeylAlg"
+  },
+  "Stafford38FixedSourceChallenge.WeylAlg": {
+   "repo": "formal",
+   "file": "Stafford38/ChallengeDefinitions.lean",
+   "name": "Stafford38Challenge.WeylAlg"
+  },
+  "Stafford38CorollaryChallenge.WeylAlg": {
+   "repo": "formal",
+   "file": "Stafford38/ChallengeDefinitions.lean",
+   "name": "Stafford38Challenge.WeylAlg"
+  },
+  "Stafford38.Characteristic.PhaseVar": {
+   "repo": "formal",
+   "file": "Stafford38/ChallengeDefinitions.lean",
+   "name": "Stafford38Challenge.PhaseVar"
+  },
+  "Stafford38FixedSourceChallenge.PhaseVar": {
+   "repo": "formal",
+   "file": "Stafford38/ChallengeDefinitions.lean",
+   "name": "Stafford38Challenge.PhaseVar"
+  },
+  "Stafford38CorollaryChallenge.PhaseVar": {
+   "repo": "formal",
+   "file": "Stafford38/ChallengeDefinitions.lean",
+   "name": "Stafford38Challenge.PhaseVar"
+  },
+  "Stafford38FixedSourceChallenge.relation": {
+   "repo": "formal",
+   "file": "Stafford38/ChallengeDefinitions.lean",
+   "name": "Stafford38Challenge.relation"
+  },
+  "Stafford38CorollaryChallenge.relation": {
+   "repo": "formal",
+   "file": "Stafford38/ChallengeDefinitions.lean",
+   "name": "Stafford38Challenge.relation"
+  },
+  "Stafford38FixedSourceChallenge.generator": {
+   "repo": "formal",
+   "file": "Stafford38/ChallengeDefinitions.lean",
+   "name": "Stafford38Challenge.generator"
+  },
+  "Stafford38FixedSourceChallenge.standardForm": {
+   "repo": "formal",
+   "file": "Stafford38/ChallengeDefinitions.lean",
+   "name": "Stafford38Challenge.standardForm"
+  },
+  "Stafford38.WeylSymplectic.standardForm": {
+   "repo": "formal",
+   "file": "Stafford38/ChallengeDefinitions.lean",
+   "name": "Stafford38Challenge.standardForm"
+  },
+  "Stafford38.WeylIteratedEquivalence.oldIndex": {
+   "repo": "formal",
+   "file": "Stafford38/ChallengeDefinitions.lean",
+   "name": "Stafford38FixedSourceChallenge.oldIndex"
+  },
+  "Stafford38CorollaryChallenge.IsRightTorsion": {
+   "repo": "formal",
+   "file": "Stafford38/ChallengeDefinitions.lean",
+   "name": "Stafford38.TorsionCyclicity.IsRightTorsion"
+  },
+  "Stafford38.UniversalStatement": {
+   "repo": "formal",
+   "file": "Stafford38/ChallengeDefinitions.lean",
+   "name": "Stafford38Challenge.UniversalStatement"
+  },
+  "Stafford38.FixedSource.IsLinearWeylCoordinate": {
+   "repo": "formal",
+   "file": "Stafford38/ChallengeDefinitions.lean",
+   "name": "Stafford38FixedSourceChallenge.IsLinearWeylCoordinate"
+  },
+  "Stafford38.FixedSource.UniversalFixedSourceStatement": {
+   "repo": "formal",
+   "file": "Stafford38/ChallengeDefinitions.lean",
+   "name": "Stafford38FixedSourceChallenge.UniversalFixedSourceStatement"
+  },
+  "Stafford38.FixedSource.bernsteinDegree": {
+   "repo": "formal",
+   "file": "Stafford38/ChallengeDefinitions.lean",
+   "name": "Stafford38FixedSourceChallenge.bernsteinDegree"
+  },
+  "Stafford38FixedSourceChallenge.linearCombination": {
+   "repo": "formal",
+   "file": "Stafford38/ChallengeDefinitions.lean",
+   "name": "Stafford.linearCombination"
+  },
+  "Stafford.freeWeylLinearCombination": {
+   "repo": "formal",
+   "file": "Stafford38/ChallengeDefinitions.lean",
+   "name": "Stafford.linearCombination"
+  },
+  "Stafford.commutator": {
+   "repo": "library",
+   "file": "AlgebraicAnalysis/Commutator.lean",
+   "name": "AlgebraicAnalysis.ringCommutator"
+  },
+  "Stafford.Reduction.ad": {
+   "repo": "library",
+   "file": "AlgebraicAnalysis/Commutator.lean",
+   "name": "AlgebraicAnalysis.ringCommutator"
+  },
+  "Stafford38.WeylFiltration.monomialWeight": {
+   "repo": "mathlib",
+   "file": "Mathlib/Data/Finsupp/Weight.lean",
+   "name": "Finsupp.weight"
+  },
+  "Stafford38.Geometry.AsymptoticChartArcAdapter.projectiveFirstJet": {
+   "repo": "formal",
+   "file": "Stafford38/Geometry/ContinuousPowerSeriesTangentFrame.lean",
+   "name": "Stafford38.Geometry.ContinuousPowerSeriesTangentFrame.powerSeriesFirstCoefficient"
+  },
+  "Stafford38.Geometry.PowerSeriesArcTangency.arcVelocity": {
+   "repo": "formal",
+   "file": "Stafford38/Geometry/ContinuousPowerSeriesTangentFrame.lean",
+   "name": "Stafford38.Geometry.ContinuousPowerSeriesTangentFrame.powerSeriesFirstCoefficient"
+  },
+  "Stafford38.PaperEulerGrading.pbwNonnegativeEulerPart": {
+   "repo": "formal",
+   "file": "Stafford38/Weyl/EulerSubring.lean",
+   "name": "Stafford38.WeylEulerSubring.pairEulerSubring"
+  },
+  "Stafford38.Geometry.LaurentConormalResidueExtension.groundPolynomialMap": {
+   "repo": "formal",
+   "file": "Stafford38/Geometry/ScalarExtensionPoints.lean",
+   "name": "Stafford38.Geometry.ScalarExtensionPoints.scalarPolynomialMap"
+  },
+  "Stafford38.Geometry.LaurentConormalResidueExtension.residuePolynomialMap": {
+   "repo": "formal",
+   "file": "Stafford38/Geometry/ScalarExtensionPoints.lean",
+   "name": "Stafford38.Geometry.ScalarExtensionPoints.scalarPolynomialMap"
+  }
+ },
+ "manuscript_sources": {
+  "formal": {
+   "commit": "f9448d6307fa25aff9d9f94ce0a9c7f9b03e63ff"
+  }
+ }
 }

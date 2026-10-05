@@ -1,0 +1,58 @@
+<!doctype html><meta charset="utf-8"><title>Stafford38/Geometry/GeneralAsymptoticLaurentAxis.lean</title><style>body{font:14px monospace}pre span{display:block}pre span:target{background:#fff0ad}a{color:#666}pre{white-space:pre-wrap}</style><h1>Stafford38/Geometry/GeneralAsymptoticLaurentAxis.lean</h1><p>This project (Stafford38) · 0403af3f0b1a7f84d2027121932723f67bd279ae</p><pre><span id="L1"><a href="#L1">1</a> module</span>
+<span id="L2"><a href="#L2">2</a> public import Stafford38.Geometry.GeneralConormalAxis</span>
+<span id="L3"><a href="#L3">3</a> public import Stafford38.Geometry.GeneralConstantCoordinateAxis</span>
+<span id="L4"><a href="#L4">4</a> public import Stafford38.Geometry.GeneralCoordinateAvoidance</span>
+<span id="L5"><a href="#L5">5</a> public import Stafford38.Geometry.CanonicalConstantCoordinateBranch</span>
+<span id="L6"><a href="#L6">6</a> </span>
+<span id="L7"><a href="#L7">7</a> @[expose] public section</span>
+<span id="L8"><a href="#L8">8</a> </span>
+<span id="L9"><a href="#L9">9</a> /-!</span>
+<span id="L10"><a href="#L10">10</a> # Laurent conormal axes for coordinate-avoiding prime varieties</span>
+<span id="L11"><a href="#L11">11</a> </span>
+<span id="L12"><a href="#L12">12</a> This combines the constant-coordinate and divisorial cases for an arbitrary</span>
+<span id="L13"><a href="#L13">13</a> prime affine ideal. The conclusion is a residue-extension Laurent witness;</span>
+<span id="L14"><a href="#L14">14</a> its comparison with ground-field projective directions is separate.</span>
+<span id="L15"><a href="#L15">15</a> -/</span>
+<span id="L16"><a href="#L16">16</a> </span>
+<span id="L17"><a href="#L17">17</a> namespace Stafford38.Geometry.GeneralAsymptoticLaurentAxis</span>
+<span id="L18"><a href="#L18">18</a> </span>
+<span id="L19"><a href="#L19">19</a> open Stafford38.Geometry.AffineComponentCoordinateSplit</span>
+<span id="L20"><a href="#L20">20</a> open Stafford38.Geometry.GeneralConormalAxis</span>
+<span id="L21"><a href="#L21">21</a> open Stafford38.Geometry.GeneralConstantCoordinateAxis</span>
+<span id="L22"><a href="#L22">22</a> open Stafford38.Geometry.GeneralCoordinateAvoidance</span>
+<span id="L23"><a href="#L23">23</a> open Stafford38.Geometry.CanonicalConstantCoordinateBranch</span>
+<span id="L24"><a href="#L24">24</a> open Stafford38.Geometry.LaurentConormalResidueExtension</span>
+<span id="L25"><a href="#L25">25</a> open Stafford38.GeometryRetractionSpecialization</span>
+<span id="L26"><a href="#L26">26</a> </span>
+<span id="L27"><a href="#L27">27</a> noncomputable section</span>
+<span id="L28"><a href="#L28">28</a> </span>
+<span id="L29"><a href="#L29">29</a> universe u</span>
+<span id="L30"><a href="#L30">30</a> </span>
+<span id="L31"><a href="#L31">31</a> theorem exists_groundConormalAxis_of_prime_coordinate_avoidance</span>
+<span id="L32"><a href="#L32">32</a>     {k : Type u} [Field k] [IsAlgClosed k] [CharZero k]</span>
+<span id="L33"><a href="#L33">33</a>     {m : ℕ} (hm : 0 &lt; m)</span>
+<span id="L34"><a href="#L34">34</a>     (P : PrimeSpectrum (MvPolynomial (Fin m) k))</span>
+<span id="L35"><a href="#L35">35</a>     (havoid : ∀ y ∈ MvPolynomial.zeroLocus k P.asIdeal, y ⟨0, hm⟩ ≠ 0) :</span>
+<span id="L36"><a href="#L36">36</a>     ∃ (K : Type u) (_ : Field K) (_ : Algebra k K)</span>
+<span id="L37"><a href="#L37">37</a>       (y : Fin m → LaurentSeries K) (xi : Fin m → PowerSeries K),</span>
+<span id="L38"><a href="#L38">38</a>       Sum.elim y</span>
+<span id="L39"><a href="#L39">39</a>           (fun i ↦ algebraMap (PowerSeries K) (LaurentSeries K) (xi i)) ∈</span>
+<span id="L40"><a href="#L40">40</a>         groundEquationConormalLocus (k := k) (K := K) P.asIdeal ∧</span>
+<span id="L41"><a href="#L41">41</a>       residueColumn xi =</span>
+<span id="L42"><a href="#L42">42</a>         (fun i : Fin m ↦ if i = ⟨0, hm⟩ then 1 else 0) := by</span>
+<span id="L43"><a href="#L43">43</a>   by_cases halg : IsAlgebraic k (componentCoordinate P ⟨0, hm⟩)</span>
+<span id="L44"><a href="#L44">44</a>   · obtain ⟨c, y, hc, hy, _⟩ :=</span>
+<span id="L45"><a href="#L45">45</a>       exists_constant_coordinate_equation_and_pure_axis hm P halg</span>
+<span id="L46"><a href="#L46">46</a>     exact exists_residueExtensionConormalAxis_of_ambientCoordinate_constant</span>
+<span id="L47"><a href="#L47">47</a>       hm P.asIdeal ⟨y, hy⟩ ⟨c, hc⟩</span>
+<span id="L48"><a href="#L48">48</a>   · apply exists_groundConormalAxis_of_minimalPrime_unit_transcendental</span>
+<span id="L49"><a href="#L49">49</a>       hm P.asIdeal P.isPrime.isRadical P</span>
+<span id="L50"><a href="#L50">50</a>     · simp [Ideal.minimalPrimes_eq_subsingleton_self]</span>
+<span id="L51"><a href="#L51">51</a>     · exact exists_coordinate_inverse_of_avoidance P.asIdeal ⟨0, hm⟩ havoid</span>
+<span id="L52"><a href="#L52">52</a>     · exact halg</span>
+<span id="L53"><a href="#L53">53</a> </span>
+<span id="L54"><a href="#L54">54</a> #print axioms exists_groundConormalAxis_of_prime_coordinate_avoidance</span>
+<span id="L55"><a href="#L55">55</a> </span>
+<span id="L56"><a href="#L56">56</a> end</span>
+<span id="L57"><a href="#L57">57</a> end Stafford38.Geometry.GeneralAsymptoticLaurentAxis</span>
+<span id="L58"><a href="#L58">58</a> </span></pre>

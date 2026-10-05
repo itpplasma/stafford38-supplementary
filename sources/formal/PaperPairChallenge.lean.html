@@ -1,0 +1,22 @@
+<!doctype html><meta charset="utf-8"><title>PaperPairChallenge.lean</title><style>body{font:14px monospace}pre span{display:block}pre span:target{background:#fff0ad}a{color:#666}pre{white-space:pre-wrap}</style><h1>PaperPairChallenge.lean</h1><p>This project (Stafford38) · 0403af3f0b1a7f84d2027121932723f67bd279ae</p><pre><span id="L1"><a href="#L1">1</a> module</span>
+<span id="L2"><a href="#L2">2</a> public import Mathlib.LinearAlgebra.Span.Defs</span>
+<span id="L3"><a href="#L3">3</a> public import Mathlib.Algebra.Module.Opposite</span>
+<span id="L4"><a href="#L4">4</a> </span>
+<span id="L5"><a href="#L5">5</a> @[expose] public section</span>
+<span id="L6"><a href="#L6">6</a> </span>
+<span id="L7"><a href="#L7">7</a> /-! Supplementary statement of the paper generator step. This is not the</span>
+<span id="L8"><a href="#L8">8</a> main Stafford Challenge, introduces no proof hole, and imports only Mathlib. -/</span>
+<span id="L9"><a href="#L9">9</a> namespace Stafford38PaperPairChallenge</span>
+<span id="L10"><a href="#L10">10</a> universe u v</span>
+<span id="L11"><a href="#L11">11</a> </span>
+<span id="L12"><a href="#L12">12</a> def pairGeneratorStatement : Prop :=</span>
+<span id="L13"><a href="#L13">13</a>   ∀ (A : Type u) [Ring A] (M : Type v) [AddCommGroup M] [Module Aᵐᵒᵖ M]</span>
+<span id="L14"><a href="#L14">14</a>     (x y : M) (d F R S : A),</span>
+<span id="L15"><a href="#L15">15</a>     (MulOpposite.op d : Aᵐᵒᵖ) • x = 0 →</span>
+<span id="L16"><a href="#L16">16</a>     (MulOpposite.op d : Aᵐᵒᵖ) • y = 0 →</span>
+<span id="L17"><a href="#L17">17</a>     (1 : A) = d * R + F * d * S →</span>
+<span id="L18"><a href="#L18">18</a>     Submodule.span Aᵐᵒᵖ ({x - (MulOpposite.op F : Aᵐᵒᵖ) • y} : Set M) =</span>
+<span id="L19"><a href="#L19">19</a>       Submodule.span Aᵐᵒᵖ ({x, y} : Set M)</span>
+<span id="L20"><a href="#L20">20</a> </span>
+<span id="L21"><a href="#L21">21</a> end Stafford38PaperPairChallenge</span>
+<span id="L22"><a href="#L22">22</a> </span></pre>

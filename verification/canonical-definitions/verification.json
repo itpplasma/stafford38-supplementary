@@ -1,0 +1,149 @@
+{
+  "status": "passed",
+  "scope": "Local verification; no Palomar service-runner receipt is claimed.",
+  "formal": "0403af3f0b1a7f84d2027121932723f67bd279ae",
+  "generator": "162f62b7aab437a9a1a5edf6dfb96178ae42f00d",
+  "definitions_removed": 29,
+  "definitions_added": 0,
+  "count_scope": "Definition and abbreviation declaration names; generated isolated challenge copies excluded.",
+  "public_challenge_interfaces": "preserved",
+  "manuscript_and_route_record": "byte-identical to the public base",
+  "lean_build": {
+    "status": "passed",
+    "jobs": 4476
+  },
+  "verifier": "scripts/verify.sh passed",
+  "kernel_comparisons": {
+    "main": {
+      "status": "passed",
+      "kernels": [
+        "con-ron",
+        "nanoda",
+        "Lean"
+      ],
+      "statement_match": true
+    },
+    "-fixed-source": {
+      "status": "passed",
+      "kernels": [
+        "con-ron",
+        "nanoda",
+        "Lean"
+      ],
+      "statement_match": true
+    },
+    "-alternative": {
+      "status": "passed",
+      "kernels": [
+        "con-ron",
+        "nanoda",
+        "Lean"
+      ],
+      "statement_match": true
+    },
+    "-alternative-fixed-source": {
+      "status": "passed",
+      "kernels": [
+        "con-ron",
+        "nanoda",
+        "Lean"
+      ],
+      "statement_match": true
+    }
+  },
+  "generator_tests": {
+    "passed": 77,
+    "failed": 0,
+    "skipped": 1,
+    "skip_reason": "Historical sibling-paper fixture unavailable; pinned current manuscript passes the actual build audit."
+  },
+  "browser": {
+    "status": "passed",
+    "definition_links": "all targets present",
+    "canonical_weyl_definitions": 1,
+    "local_source_links": 1771,
+    "ownership_labels": true,
+    "definition_clicks": true,
+    "mobile_overflow": false,
+    "javascript_errors": [],
+    "offline_requests": 0
+  },
+  "environment": "NixOS; local launchers use sandbox-visible Nix Git/coreutils paths. Bundled Lean kernel executables unchanged.",
+  "logs": {
+    "verify.log": {
+      "sha256": "af86d130e3dd986d9e0c430adf73e63f6af88cb5e6b45cb3327c303ff5106cc8",
+      "full_local_log_sha256": "af86d130e3dd986d9e0c430adf73e63f6af88cb5e6b45cb3327c303ff5106cc8",
+      "excerpt": false
+    },
+    "kernel-comparisons.log": {
+      "sha256": "edc54bbf5eeea368c1dc14885a1fe35316ccc009ec330c4d771a9c3a7177ed89",
+      "full_local_log_sha256": "f82cd6e7632addc427b38b4810b081d8ba3ee0cfab8c65fdaefea62f51ebc333",
+      "excerpt": true
+    },
+    "generator-tests.log": {
+      "sha256": "d886e1f1ef18bdb565980bf2422089245eb032c0e96653258869c85ca1a11ed6",
+      "full_local_log_sha256": "d886e1f1ef18bdb565980bf2422089245eb032c0e96653258869c85ca1a11ed6",
+      "excerpt": false
+    },
+    "rebuild.log": {
+      "sha256": "b705d5d3d4a83125a63c926debb2670e4907b805011453a1d83087f37019708d",
+      "full_local_log_sha256": "b705d5d3d4a83125a63c926debb2670e4907b805011453a1d83087f37019708d",
+      "excerpt": false
+    },
+    "browser.json": {
+      "sha256": "9619f794dca069b2a99b219ae5f13bf181c3d91400206c2995b6ffac98c6ec19",
+      "full_local_log_sha256": "9619f794dca069b2a99b219ae5f13bf181c3d91400206c2995b6ffac98c6ec19",
+      "excerpt": false
+    },
+    "comparator.log": {
+      "sha256": "94020b9e97fd2e40456d0d3032aa71135272caf25e196faab3c44474213f0daa",
+      "full_local_log_sha256": "2c113a37a7e1bc85ad7a2042185c8193dfb1c14fc4ed34dc15af830d9f17b3d5",
+      "excerpt": true
+    },
+    "comparator-fixed-source.log": {
+      "sha256": "d94d008e518e62327ed2554994500bac2ad1ff60ccc73c7c4fd6ade0adcc0482",
+      "full_local_log_sha256": "1e0f4c57ce9e431b8b107af843ddb818cfe90ada4aac6847eafdca28faed06fa",
+      "excerpt": true
+    },
+    "comparator-alternative.log": {
+      "sha256": "a59fe598aa4aa700652bf3ad2b568fed5088c8587a44ef6deccd4520280608b7",
+      "full_local_log_sha256": "4fc52dc5ec224c79ef673799282d44b0a9f53655262eec06e5a6a6a6e76a7d8c",
+      "excerpt": true
+    },
+    "comparator-alternative-fixed-source.log": {
+      "sha256": "15265b0a8efd4f45e4bc1a4341927fc9ddf5a46be0bae7312a058d510c4b7554",
+      "full_local_log_sha256": "fe20145445f1b429166ed6daf11352d7c2f5aac76fabb3ec501155be1d16483c",
+      "excerpt": true
+    },
+    "terminal-dependency-guard.log": {
+      "sha256": "6db7dbe0b39a17add146fbe0ef5afddab28e5f39163b4cddd30da20169cb2c47",
+      "full_local_log_sha256": "2f9c31ef04fad346b6a32b7a8ef61d2a08d46e29cc297d23ea9825bc10e1fabc",
+      "excerpt": true
+    },
+    "main-solution-dependency-routes.log": {
+      "sha256": "e7f51e6f98432120f9173807bb8f40d0291482876b560ec976eff52b057d85c1",
+      "full_local_log_sha256": "940ed8370007939e46744a4b013fa8a0873a75fef503df055eae8a72f5177450",
+      "excerpt": true
+    },
+    "alternative-solution-dependency-routes.log": {
+      "sha256": "c6a07f69830a3a971bcc9c6d909a27c9a9636def6138af8c124568591ab7d034",
+      "full_local_log_sha256": "9a1815057741c36b57501c04b94541fbb6e806afc3121ee699cb31e53a93861e",
+      "excerpt": true
+    },
+    "independent-consumers.log": {
+      "sha256": "6340c800511fa2bc0dbae55e936071711621a574399d518c5d4aedebb24eaa3f",
+      "full_local_log_sha256": "6340c800511fa2bc0dbae55e936071711621a574399d518c5d4aedebb24eaa3f",
+      "excerpt": false
+    },
+    "paper-declarations.log": {
+      "sha256": "8c0225c596821208620d959edf8654ac00ef184f8f03788b46cda744b0d190ad",
+      "full_local_log_sha256": "8c0225c596821208620d959edf8654ac00ef184f8f03788b46cda744b0d190ad",
+      "excerpt": false
+    },
+    "axioms.log": {
+      "sha256": "0992f70f1f92ebb258a4a9b05846c5780d6a705451fe44cd08c62e47652ff636",
+      "full_local_log_sha256": "0992f70f1f92ebb258a4a9b05846c5780d6a705451fe44cd08c62e47652ff636",
+      "excerpt": false
+    }
+  }
+}

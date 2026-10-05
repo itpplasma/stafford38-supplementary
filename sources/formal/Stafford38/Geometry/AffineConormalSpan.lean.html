@@ -1,0 +1,244 @@
+<!doctype html><meta charset="utf-8"><title>Stafford38/Geometry/AffineConormalSpan.lean</title><style>body{font:14px monospace}pre span{display:block}pre span:target{background:#fff0ad}a{color:#666}pre{white-space:pre-wrap}</style><h1>Stafford38/Geometry/AffineConormalSpan.lean</h1><p>This project (Stafford38) · 0403af3f0b1a7f84d2027121932723f67bd279ae</p><pre><span id="L1"><a href="#L1">1</a> module</span>
+<span id="L2"><a href="#L2">2</a> public import Mathlib.LinearAlgebra.Dual.Lemmas</span>
+<span id="L3"><a href="#L3">3</a> public import Mathlib.LinearAlgebra.Finsupp.LinearCombination</span>
+<span id="L4"><a href="#L4">4</a> public import Stafford38.Characteristic.BaseZeroSection</span>
+<span id="L5"><a href="#L5">5</a> public import Stafford38.Geometry.PointwiseConormalContainment</span>
+<span id="L6"><a href="#L6">6</a> </span>
+<span id="L7"><a href="#L7">7</a> @[expose] public section</span>
+<span id="L8"><a href="#L8">8</a> </span>
+<span id="L9"><a href="#L9">9</a> open Stafford38Challenge (WeylAlg)</span>
+<span id="L10"><a href="#L10">10</a> </span>
+<span id="L11"><a href="#L11">11</a> /-!</span>
+<span id="L12"><a href="#L12">12</a> # Affine conormals are finite spans of equation differentials</span>
+<span id="L13"><a href="#L13">13</a> </span>
+<span id="L14"><a href="#L14">14</a> For an ideal of equations in affine space and a rational point, define the</span>
+<span id="L15"><a href="#L15">15</a> embedded Zariski tangent space as the common kernel of the evaluated</span>
+<span id="L16"><a href="#L16">16</a> differentials.  Its annihilator is exactly the span of those differentials.</span>
+<span id="L17"><a href="#L17">17</a> Because the ambient affine space is finite-dimensional, every conormal</span>
+<span id="L18"><a href="#L18">18</a> covector is therefore an explicit finite linear combination of equation</span>
+<span id="L19"><a href="#L19">19</a> differentials.</span>
+<span id="L20"><a href="#L20">20</a> </span>
+<span id="L21"><a href="#L21">21</a> The final theorem feeds that finite representation into the pointwise</span>
+<span id="L22"><a href="#L22">22</a> Hamiltonian-translation theorem.  No smoothness assumption is needed for this</span>
+<span id="L23"><a href="#L23">23</a> linear-algebraic bridge.  What is not proved here is the scheme-geometric</span>
+<span id="L24"><a href="#L24">24</a> identification of this equation-defined tangent space with the tangent fibre</span>
+<span id="L25"><a href="#L25">25</a> of a smooth locus, or the passage from pointwise fibres to the closure of the</span>
+<span id="L26"><a href="#L26">26</a> smooth conormal bundle.</span>
+<span id="L27"><a href="#L27">27</a> -/</span>
+<span id="L28"><a href="#L28">28</a> </span>
+<span id="L29"><a href="#L29">29</a> namespace Stafford38.Geometry.AffineConormalSpan</span>
+<span id="L30"><a href="#L30">30</a> </span>
+<span id="L31"><a href="#L31">31</a> open Stafford38.Characteristic</span>
+<span id="L32"><a href="#L32">32</a> open Stafford38.Characteristic.BaseRelativePoisson</span>
+<span id="L33"><a href="#L33">33</a> open Stafford38.Characteristic.BaseZeroSection</span>
+<span id="L34"><a href="#L34">34</a> open Stafford38.Characteristic.ReducedSupportIdeal</span>
+<span id="L35"><a href="#L35">35</a> open Stafford38.Characteristic.ZeroSectionContainment</span>
+<span id="L36"><a href="#L36">36</a> open Stafford38.Geometry.CoisotropicTranslation</span>
+<span id="L37"><a href="#L37">37</a> open Stafford38.Geometry.PointwiseConormalContainment</span>
+<span id="L38"><a href="#L38">38</a> open Stafford38.EulerSurjectivity</span>
+<span id="L39"><a href="#L39">39</a> open Stafford38.WeylIteratedEquivalence</span>
+<span id="L40"><a href="#L40">40</a> </span>
+<span id="L41"><a href="#L41">41</a> noncomputable section</span>
+<span id="L42"><a href="#L42">42</a> </span>
+<span id="L43"><a href="#L43">43</a> variable {k : Type*} [Field k] {n : ℕ}</span>
+<span id="L44"><a href="#L44">44</a> </span>
+<span id="L45"><a href="#L45">45</a> abbrev AffineTangentVector (k : Type*) (n : ℕ) := Fin n → k</span>
+<span id="L46"><a href="#L46">46</a> </span>
+<span id="L47"><a href="#L47">47</a> /-- The differential of `f` at `y`, viewed as a linear functional on the</span>
+<span id="L48"><a href="#L48">48</a> ambient affine tangent space. -/</span>
+<span id="L49"><a href="#L49">49</a> def differentialCovector (y : Fin n → k) (f : MvPolynomial (Fin n) k) :</span>
+<span id="L50"><a href="#L50">50</a>     Module.Dual k (AffineTangentVector k n) where</span>
+<span id="L51"><a href="#L51">51</a>   toFun v := ∑ i, differentialAt y f i * v i</span>
+<span id="L52"><a href="#L52">52</a>   map_add' u v := by simp [mul_add, Finset.sum_add_distrib]</span>
+<span id="L53"><a href="#L53">53</a>   map_smul' a v := by simp [mul_assoc, mul_left_comm, mul_comm, Finset.mul_sum]</span>
+<span id="L54"><a href="#L54">54</a> </span>
+<span id="L55"><a href="#L55">55</a> @[simp]</span>
+<span id="L56"><a href="#L56">56</a> theorem differentialCovector_apply (y : Fin n → k)</span>
+<span id="L57"><a href="#L57">57</a>     (f : MvPolynomial (Fin n) k) (v : AffineTangentVector k n) :</span>
+<span id="L58"><a href="#L58">58</a>     differentialCovector y f v = ∑ i, differentialAt y f i * v i :=</span>
+<span id="L59"><a href="#L59">59</a>   rfl</span>
+<span id="L60"><a href="#L60">60</a> </span>
+<span id="L61"><a href="#L61">61</a> /-- Product rule for the evaluated differential covector.  All consumers,</span>
+<span id="L62"><a href="#L62">62</a> including scalar extensions, use this low-level identity rather than carrying</span>
+<span id="L63"><a href="#L63">63</a> private copies of the polynomial product-rule calculation. -/</span>
+<span id="L64"><a href="#L64">64</a> theorem differentialCovector_mul (y : Fin n → k)</span>
+<span id="L65"><a href="#L65">65</a>     (p q : MvPolynomial (Fin n) k) :</span>
+<span id="L66"><a href="#L66">66</a>     differentialCovector y (p * q) =</span>
+<span id="L67"><a href="#L67">67</a>       MvPolynomial.eval y q • differentialCovector y p +</span>
+<span id="L68"><a href="#L68">68</a>         MvPolynomial.eval y p • differentialCovector y q := by</span>
+<span id="L69"><a href="#L69">69</a>   apply LinearMap.ext</span>
+<span id="L70"><a href="#L70">70</a>   intro v</span>
+<span id="L71"><a href="#L71">71</a>   change (∑ i, differentialAt y (p * q) i * v i) =</span>
+<span id="L72"><a href="#L72">72</a>     MvPolynomial.eval y q * (∑ i, differentialAt y p i * v i) +</span>
+<span id="L73"><a href="#L73">73</a>       MvPolynomial.eval y p * (∑ i, differentialAt y q i * v i)</span>
+<span id="L74"><a href="#L74">74</a>   simp only [differentialAt, MvPolynomial.pderiv_mul, map_add, map_mul,</span>
+<span id="L75"><a href="#L75">75</a>     Finset.mul_sum, ← Finset.sum_add_distrib]</span>
+<span id="L76"><a href="#L76">76</a>   refine Finset.sum_congr rfl fun i _ ↦ ?_</span>
+<span id="L77"><a href="#L77">77</a>   ring</span>
+<span id="L78"><a href="#L78">78</a> </span>
+<span id="L79"><a href="#L79">79</a> /-- Covectors generated by the differentials of all equations in `I`. -/</span>
+<span id="L80"><a href="#L80">80</a> def equationCovectorSpan (y : Fin n → k)</span>
+<span id="L81"><a href="#L81">81</a>     (I : Ideal (MvPolynomial (Fin n) k)) :</span>
+<span id="L82"><a href="#L82">82</a>     Submodule k (Module.Dual k (AffineTangentVector k n)) :=</span>
+<span id="L83"><a href="#L83">83</a>   Submodule.span k (Set.range fun f : I ↦ differentialCovector y f.1)</span>
+<span id="L84"><a href="#L84">84</a> </span>
+<span id="L85"><a href="#L85">85</a> /-- The embedded Zariski tangent space cut out by the first-order parts of all</span>
+<span id="L86"><a href="#L86">86</a> equations in `I`. -/</span>
+<span id="L87"><a href="#L87">87</a> def zariskiTangentSpace (y : Fin n → k)</span>
+<span id="L88"><a href="#L88">88</a>     (I : Ideal (MvPolynomial (Fin n) k)) :</span>
+<span id="L89"><a href="#L89">89</a>     Submodule k (AffineTangentVector k n) :=</span>
+<span id="L90"><a href="#L90">90</a>   (equationCovectorSpan y I).dualCoannihilator</span>
+<span id="L91"><a href="#L91">91</a> </span>
+<span id="L92"><a href="#L92">92</a> /-- The embedded conormal space, defined as the annihilator of the embedded</span>
+<span id="L93"><a href="#L93">93</a> Zariski tangent space. -/</span>
+<span id="L94"><a href="#L94">94</a> def affineConormalSpace (y : Fin n → k)</span>
+<span id="L95"><a href="#L95">95</a>     (I : Ideal (MvPolynomial (Fin n) k)) :</span>
+<span id="L96"><a href="#L96">96</a>     Submodule k (Module.Dual k (AffineTangentVector k n)) :=</span>
+<span id="L97"><a href="#L97">97</a>   (zariskiTangentSpace y I).dualAnnihilator</span>
+<span id="L98"><a href="#L98">98</a> </span>
+<span id="L99"><a href="#L99">99</a> /-- The embedded conormal is exactly the span of evaluated differentials of</span>
+<span id="L100"><a href="#L100">100</a> the equation ideal.  This is finite-dimensional double-annihilator duality. -/</span>
+<span id="L101"><a href="#L101">101</a> theorem affineConormalSpace_eq_equationCovectorSpan</span>
+<span id="L102"><a href="#L102">102</a>     (y : Fin n → k) (I : Ideal (MvPolynomial (Fin n) k)) :</span>
+<span id="L103"><a href="#L103">103</a>     affineConormalSpace y I = equationCovectorSpan y I := by</span>
+<span id="L104"><a href="#L104">104</a>   classical</span>
+<span id="L105"><a href="#L105">105</a>   exact Subspace.dualCoannihilator_dualAnnihilator_eq</span>
+<span id="L106"><a href="#L106">106</a> </span>
+<span id="L107"><a href="#L107">107</a> /-- Every embedded conormal covector has an explicit finite-support expansion</span>
+<span id="L108"><a href="#L108">108</a> in differentials of equations. -/</span>
+<span id="L109"><a href="#L109">109</a> theorem mem_affineConormalSpace_iff_exists_finsupp</span>
+<span id="L110"><a href="#L110">110</a>     (y : Fin n → k) (I : Ideal (MvPolynomial (Fin n) k))</span>
+<span id="L111"><a href="#L111">111</a>     (phi : Module.Dual k (AffineTangentVector k n)) :</span>
+<span id="L112"><a href="#L112">112</a>     phi ∈ affineConormalSpace y I ↔</span>
+<span id="L113"><a href="#L113">113</a>       ∃ c : I →₀ k,</span>
+<span id="L114"><a href="#L114">114</a>         Finsupp.linearCombination k (fun f : I ↦ differentialCovector y f.1) c = phi := by</span>
+<span id="L115"><a href="#L115">115</a>   classical</span>
+<span id="L116"><a href="#L116">116</a>   rw [affineConormalSpace_eq_equationCovectorSpan]</span>
+<span id="L117"><a href="#L117">117</a>   exact Finsupp.mem_span_range_iff_exists_finsupp</span>
+<span id="L118"><a href="#L118">118</a> </span>
+<span id="L119"><a href="#L119">119</a> /-- The coordinate covector associated with a fibre coordinate `xi`. -/</span>
+<span id="L120"><a href="#L120">120</a> def coordinateCovector (xi : Fin n → k) :</span>
+<span id="L121"><a href="#L121">121</a>     Module.Dual k (AffineTangentVector k n) where</span>
+<span id="L122"><a href="#L122">122</a>   toFun v := ∑ i, xi i * v i</span>
+<span id="L123"><a href="#L123">123</a>   map_add' u v := by simp [mul_add, Finset.sum_add_distrib]</span>
+<span id="L124"><a href="#L124">124</a>   map_smul' a v := by simp [mul_assoc, mul_left_comm, mul_comm, Finset.mul_sum]</span>
+<span id="L125"><a href="#L125">125</a> </span>
+<span id="L126"><a href="#L126">126</a> @[simp]</span>
+<span id="L127"><a href="#L127">127</a> theorem coordinateCovector_apply (xi v : Fin n → k) :</span>
+<span id="L128"><a href="#L128">128</a>     coordinateCovector xi v = ∑ i, xi i * v i :=</span>
+<span id="L129"><a href="#L129">129</a>   rfl</span>
+<span id="L130"><a href="#L130">130</a> </span>
+<span id="L131"><a href="#L131">131</a> /-- Equality of coordinate covectors recovers equality of their coordinates. -/</span>
+<span id="L132"><a href="#L132">132</a> theorem coordinateCovector_injective :</span>
+<span id="L133"><a href="#L133">133</a>     Function.Injective (coordinateCovector (k := k) (n := n)) := by</span>
+<span id="L134"><a href="#L134">134</a>   intro xi eta h</span>
+<span id="L135"><a href="#L135">135</a>   funext i</span>
+<span id="L136"><a href="#L136">136</a>   have hi := LinearMap.congr_fun h (Pi.single i 1)</span>
+<span id="L137"><a href="#L137">137</a>   simpa [coordinateCovector, Pi.single_apply] using hi</span>
+<span id="L138"><a href="#L138">138</a> </span>
+<span id="L139"><a href="#L139">139</a> /-- A conormal coordinate covector admits a finite-support expansion in</span>
+<span id="L140"><a href="#L140">140</a> gradients of equations. -/</span>
+<span id="L141"><a href="#L141">141</a> theorem coordinate_mem_affineConormalSpace_exists_finsupp</span>
+<span id="L142"><a href="#L142">142</a>     (y xi : Fin n → k) (I : Ideal (MvPolynomial (Fin n) k)) :</span>
+<span id="L143"><a href="#L143">143</a>     coordinateCovector xi ∈ affineConormalSpace y I →</span>
+<span id="L144"><a href="#L144">144</a>       ∃ c : I →₀ k, ∀ i,</span>
+<span id="L145"><a href="#L145">145</a>         xi i = ∑ f ∈ c.support, c f * differentialAt y f.1 i := by</span>
+<span id="L146"><a href="#L146">146</a>   classical</span>
+<span id="L147"><a href="#L147">147</a>   intro hxi</span>
+<span id="L148"><a href="#L148">148</a>   obtain ⟨c, hc⟩ :=</span>
+<span id="L149"><a href="#L149">149</a>     (mem_affineConormalSpace_iff_exists_finsupp y I (coordinateCovector xi)).mp hxi</span>
+<span id="L150"><a href="#L150">150</a>   refine ⟨c, fun i ↦ ?_⟩</span>
+<span id="L151"><a href="#L151">151</a>   have hi := LinearMap.congr_fun hc (Pi.single i 1)</span>
+<span id="L152"><a href="#L152">152</a>   simpa [Finsupp.linearCombination_apply, differentialCovector, coordinateCovector,</span>
+<span id="L153"><a href="#L153">153</a>     Pi.single_apply, Finsupp.sum, mul_comm, mul_left_comm, mul_assoc] using hi.symm</span>
+<span id="L154"><a href="#L154">154</a> </span>
+<span id="L155"><a href="#L155">155</a> /-- The genuine conormal consumer: under the existing base-relative Poisson</span>
+<span id="L156"><a href="#L156">156</a> hypothesis, every coordinate covector in the equation-defined affine</span>
+<span id="L157"><a href="#L157">157</a> conormal space gives a common zero in the corresponding support fibre. -/</span>
+<span id="L158"><a href="#L158">158</a> theorem affineConormal_coordinatePoint_isCommonZero</span>
+<span id="L159"><a href="#L159">159</a>     [CharZero k]</span>
+<span id="L160"><a href="#L160">160</a>     (J : Ideal (SymbolRing k n)) (hJ : IsBaseRelativePoisson J)</span>
+<span id="L161"><a href="#L161">161</a>     (y : Fin n → k)</span>
+<span id="L162"><a href="#L162">162</a>     (hzero : ∀ g ∈ J, MvPolynomial.eval (zeroSectionPoint y) g = 0)</span>
+<span id="L163"><a href="#L163">163</a>     (I : Ideal (MvPolynomial (Fin n) k))</span>
+<span id="L164"><a href="#L164">164</a>     (hlift : ∀ f : I, baseLift f.1 ∈ J)</span>
+<span id="L165"><a href="#L165">165</a>     (xi : Fin n → k)</span>
+<span id="L166"><a href="#L166">166</a>     (hxi : coordinateCovector xi ∈ affineConormalSpace y I) :</span>
+<span id="L167"><a href="#L167">167</a>     ∀ g ∈ J, MvPolynomial.eval (Sum.elim y xi) g = 0 := by</span>
+<span id="L168"><a href="#L168">168</a>   classical</span>
+<span id="L169"><a href="#L169">169</a>   obtain ⟨c, hc⟩ :=</span>
+<span id="L170"><a href="#L170">170</a>     coordinate_mem_affineConormalSpace_exists_finsupp y xi I hxi</span>
+<span id="L171"><a href="#L171">171</a>   let ι := {f : I // f ∈ c.support}</span>
+<span id="L172"><a href="#L172">172</a>   let equations : ι → MvPolynomial (Fin n) k := fun f ↦ f.1.1</span>
+<span id="L173"><a href="#L173">173</a>   let coefficients : ι → k := fun f ↦ c f.1</span>
+<span id="L174"><a href="#L174">174</a>   have hpoint : differentialCombinationPoint y coefficients equations = Sum.elim y xi := by</span>
+<span id="L175"><a href="#L175">175</a>     funext q</span>
+<span id="L176"><a href="#L176">176</a>     rcases q with i | i</span>
+<span id="L177"><a href="#L177">177</a>     · rfl</span>
+<span id="L178"><a href="#L178">178</a>     · rw [differentialCombinationPoint_inr]</span>
+<span id="L179"><a href="#L179">179</a>       simp only [coefficients, equations, Sum.elim_inr]</span>
+<span id="L180"><a href="#L180">180</a>       rw [hc i]</span>
+<span id="L181"><a href="#L181">181</a>       exact (Finset.sum_subtype c.support (by simp)</span>
+<span id="L182"><a href="#L182">182</a>         (fun f ↦ c f * differentialAt y f.1 i)).symm</span>
+<span id="L183"><a href="#L183">183</a>   rw [← hpoint]</span>
+<span id="L184"><a href="#L184">184</a>   exact differentialCombinationPoint_isCommonZero J hJ y hzero equations</span>
+<span id="L185"><a href="#L185">185</a>     (fun f ↦ hlift f.1) coefficients</span>
+<span id="L186"><a href="#L186">186</a> </span>
+<span id="L187"><a href="#L187">187</a> /-- Concrete characteristic-support form.  If `(y, eta)` lies in the reduced</span>
+<span id="L188"><a href="#L188">188</a> order support and the required base-relative Gabber fragment holds, then the</span>
+<span id="L189"><a href="#L189">189</a> entire equation-defined conormal space of the contracted base ideal over `y`</span>
+<span id="L190"><a href="#L190">190</a> lies in the same reduced support fibre. -/</span>
+<span id="L191"><a href="#L191">191</a> theorem reducedOrderSupport_affineConormal_coordinatePoint_isCommonZero</span>
+<span id="L192"><a href="#L192">192</a>     [CharZero k]</span>
+<span id="L193"><a href="#L193">193</a>     (W : RightIdeal (WeylAlg k n))</span>
+<span id="L194"><a href="#L194">194</a>     (hJ : IsBaseRelativePoisson (reducedOrderSupportIdeal k W))</span>
+<span id="L195"><a href="#L195">195</a>     (y eta : Fin n → k)</span>
+<span id="L196"><a href="#L196">196</a>     (hpoint : ∀ g ∈ reducedOrderSupportIdeal k W,</span>
+<span id="L197"><a href="#L197">197</a>       MvPolynomial.eval (Sum.elim y eta) g = 0)</span>
+<span id="L198"><a href="#L198">198</a>     (xi : Fin n → k)</span>
+<span id="L199"><a href="#L199">199</a>     (hxi : coordinateCovector xi ∈</span>
+<span id="L200"><a href="#L200">200</a>       affineConormalSpace y (reducedOrderBaseIdeal k W)) :</span>
+<span id="L201"><a href="#L201">201</a>     ∀ g ∈ reducedOrderSupportIdeal k W,</span>
+<span id="L202"><a href="#L202">202</a>       MvPolynomial.eval (Sum.elim y xi) g = 0 := by</span>
+<span id="L203"><a href="#L203">203</a>   apply affineConormal_coordinatePoint_isCommonZero</span>
+<span id="L204"><a href="#L204">204</a>     (reducedOrderSupportIdeal k W) hJ y</span>
+<span id="L205"><a href="#L205">205</a>     (zeroSection_mem_of_mem_reducedOrderSupport_zeroSet k W y eta hpoint)</span>
+<span id="L206"><a href="#L206">206</a>     (reducedOrderBaseIdeal k W)</span>
+<span id="L207"><a href="#L207">207</a>   · intro f</span>
+<span id="L208"><a href="#L208">208</a>     exact (mem_reducedOrderBaseIdeal_iff k W f.1).mp f.2</span>
+<span id="L209"><a href="#L209">209</a>   · exact hxi</span>
+<span id="L210"><a href="#L210">210</a> </span>
+<span id="L211"><a href="#L211">211</a> /-- Stronger contracted-base form: every equation-defined conormal covector</span>
+<span id="L212"><a href="#L212">212</a> over a common zero of the contracted base ideal lies in the reduced support</span>
+<span id="L213"><a href="#L213">213</a> fibre. No auxiliary point of that fibre is required. -/</span>
+<span id="L214"><a href="#L214">214</a> theorem reducedOrderBaseZero_affineConormal_coordinatePoint_isCommonZero</span>
+<span id="L215"><a href="#L215">215</a>     [CharZero k]</span>
+<span id="L216"><a href="#L216">216</a>     (W : RightIdeal (WeylAlg k n))</span>
+<span id="L217"><a href="#L217">217</a>     (hJ : IsBaseRelativePoisson (reducedOrderSupportIdeal k W))</span>
+<span id="L218"><a href="#L218">218</a>     (y : Fin n → k)</span>
+<span id="L219"><a href="#L219">219</a>     (hy : ∀ f ∈ reducedOrderBaseIdeal k W,</span>
+<span id="L220"><a href="#L220">220</a>       MvPolynomial.eval y f = 0)</span>
+<span id="L221"><a href="#L221">221</a>     (xi : Fin n → k)</span>
+<span id="L222"><a href="#L222">222</a>     (hxi : coordinateCovector xi ∈</span>
+<span id="L223"><a href="#L223">223</a>       affineConormalSpace y (reducedOrderBaseIdeal k W)) :</span>
+<span id="L224"><a href="#L224">224</a>     ∀ g ∈ reducedOrderSupportIdeal k W,</span>
+<span id="L225"><a href="#L225">225</a>       MvPolynomial.eval (Sum.elim y xi) g = 0 := by</span>
+<span id="L226"><a href="#L226">226</a>   apply affineConormal_coordinatePoint_isCommonZero</span>
+<span id="L227"><a href="#L227">227</a>     (reducedOrderSupportIdeal k W) hJ y</span>
+<span id="L228"><a href="#L228">228</a>     (zeroSection_mem_of_mem_reducedOrderBaseZeroSet k W y hy)</span>
+<span id="L229"><a href="#L229">229</a>     (reducedOrderBaseIdeal k W)</span>
+<span id="L230"><a href="#L230">230</a>   · intro f</span>
+<span id="L231"><a href="#L231">231</a>     exact (mem_reducedOrderBaseIdeal_iff k W f.1).mp f.2</span>
+<span id="L232"><a href="#L232">232</a>   · exact hxi</span>
+<span id="L233"><a href="#L233">233</a> </span>
+<span id="L234"><a href="#L234">234</a> #print axioms affineConormalSpace_eq_equationCovectorSpan</span>
+<span id="L235"><a href="#L235">235</a> #print axioms mem_affineConormalSpace_iff_exists_finsupp</span>
+<span id="L236"><a href="#L236">236</a> #print axioms coordinate_mem_affineConormalSpace_exists_finsupp</span>
+<span id="L237"><a href="#L237">237</a> #print axioms affineConormal_coordinatePoint_isCommonZero</span>
+<span id="L238"><a href="#L238">238</a> #print axioms reducedOrderSupport_affineConormal_coordinatePoint_isCommonZero</span>
+<span id="L239"><a href="#L239">239</a> #print axioms reducedOrderBaseZero_affineConormal_coordinatePoint_isCommonZero</span>
+<span id="L240"><a href="#L240">240</a> </span>
+<span id="L241"><a href="#L241">241</a> end</span>
+<span id="L242"><a href="#L242">242</a> </span>
+<span id="L243"><a href="#L243">243</a> end Stafford38.Geometry.AffineConormalSpan</span>
+<span id="L244"><a href="#L244">244</a> </span></pre>

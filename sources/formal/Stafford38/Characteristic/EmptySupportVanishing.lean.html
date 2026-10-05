@@ -1,0 +1,119 @@
+<!doctype html><meta charset="utf-8"><title>Stafford38/Characteristic/EmptySupportVanishing.lean</title><style>body{font:14px monospace}pre span{display:block}pre span:target{background:#fff0ad}a{color:#666}pre{white-space:pre-wrap}</style><h1>Stafford38/Characteristic/EmptySupportVanishing.lean</h1><p>This project (Stafford38) · 0403af3f0b1a7f84d2027121932723f67bd279ae</p><pre><span id="L1"><a href="#L1">1</a> module</span>
+<span id="L2"><a href="#L2">2</a> public import Stafford38.Characteristic.FilteredQuotientSupport</span>
+<span id="L3"><a href="#L3">3</a> public import Stafford38.Characteristic.FilteredVanishing</span>
+<span id="L4"><a href="#L4">4</a> </span>
+<span id="L5"><a href="#L5">5</a> @[expose] public section</span>
+<span id="L6"><a href="#L6">6</a> </span>
+<span id="L7"><a href="#L7">7</a> open Stafford38Challenge (WeylAlg)</span>
+<span id="L8"><a href="#L8">8</a> </span>
+<span id="L9"><a href="#L9">9</a> /-!</span>
+<span id="L10"><a href="#L10">10</a> # Empty order-characteristic support forces quotient vanishing</span>
+<span id="L11"><a href="#L11">11</a> </span>
+<span id="L12"><a href="#L12">12</a> The global additive equivalence between the cyclic symbol quotient and the</span>
+<span id="L13"><a href="#L13">13</a> external direct sum of the actual filtered quotient pieces is enough for</span>
+<span id="L14"><a href="#L14">14</a> vanishing.  No action of the symbol ring on that direct sum is transported or</span>
+<span id="L15"><a href="#L15">15</a> used here.</span>
+<span id="L16"><a href="#L16">16</a> -/</span>
+<span id="L17"><a href="#L17">17</a> </span>
+<span id="L18"><a href="#L18">18</a> namespace Stafford38.CharacteristicEmptySupportVanishing</span>
+<span id="L19"><a href="#L19">19</a> </span>
+<span id="L20"><a href="#L20">20</a> open Stafford38.Characteristic</span>
+<span id="L21"><a href="#L21">21</a> open Stafford38.CharacteristicFilteredQuotient</span>
+<span id="L22"><a href="#L22">22</a> open Stafford38.CharacteristicFilteredQuotientGraded</span>
+<span id="L23"><a href="#L23">23</a> open Stafford38.CharacteristicFilteredQuotientSupport</span>
+<span id="L24"><a href="#L24">24</a> open Stafford38.CharacteristicFilteredVanishing</span>
+<span id="L25"><a href="#L25">25</a> open Stafford38.CharacteristicInitialIdeal</span>
+<span id="L26"><a href="#L26">26</a> open Stafford38.EulerSurjectivity</span>
+<span id="L27"><a href="#L27">27</a> open Stafford38.WeylIteratedEquivalence</span>
+<span id="L28"><a href="#L28">28</a> </span>
+<span id="L29"><a href="#L29">29</a> noncomputable section</span>
+<span id="L30"><a href="#L30">30</a> </span>
+<span id="L31"><a href="#L31">31</a> universe u</span>
+<span id="L32"><a href="#L32">32</a> </span>
+<span id="L33"><a href="#L33">33</a> variable (k : Type u) [Field k]</span>
+<span id="L34"><a href="#L34">34</a> variable {n : ℕ}</span>
+<span id="L35"><a href="#L35">35</a> </span>
+<span id="L36"><a href="#L36">36</a> /-- Empty order-characteristic support makes every actual associated-graded</span>
+<span id="L37"><a href="#L37">37</a> piece of the induced quotient filtration subsingleton.  The argument uses</span>
+<span id="L38"><a href="#L38">38</a> only the global additive equivalence with the cyclic symbol quotient. -/</span>
+<span id="L39"><a href="#L39">39</a> theorem all_graded_subsingleton_of_orderCharacteristicSupport_eq_empty</span>
+<span id="L40"><a href="#L40">40</a>     (I : RightIdeal (WeylAlg k n))</span>
+<span id="L41"><a href="#L41">41</a>     (hsupport : orderCharacteristicSupport k I = ∅) :</span>
+<span id="L42"><a href="#L42">42</a>     ∀ N, Subsingleton (QuotientOrderGradedPiece k I N) := by</span>
+<span id="L43"><a href="#L43">43</a>   have htop : orderInitialIdeal k I = ⊤ :=</span>
+<span id="L44"><a href="#L44">44</a>     (orderCharacteristicSupport_eq_empty_iff k I).mp hsupport</span>
+<span id="L45"><a href="#L45">45</a>   letI : Subsingleton (OrderCharacteristicModule k I) := by</span>
+<span id="L46"><a href="#L46">46</a>     rw [Submodule.Quotient.subsingleton_iff]</span>
+<span id="L47"><a href="#L47">47</a>     exact htop</span>
+<span id="L48"><a href="#L48">48</a>   letI : Subsingleton (QuotientOrderAssociatedGraded k I) :=</span>
+<span id="L49"><a href="#L49">49</a>     (quotientOrderAssociatedGradedAddEquivCharacteristic k I).toEquiv.subsingleton</span>
+<span id="L50"><a href="#L50">50</a>   intro N</span>
+<span id="L51"><a href="#L51">51</a>   exact ⟨fun q r =&gt; DirectSum.of_injective N (Subsingleton.elim</span>
+<span id="L52"><a href="#L52">52</a>     (DirectSum.of (fun M =&gt; QuotientOrderGradedPiece k I M) N q)</span>
+<span id="L53"><a href="#L53">53</a>     (DirectSum.of (fun M =&gt; QuotientOrderGradedPiece k I M) N r))⟩</span>
+<span id="L54"><a href="#L54">54</a> </span>
+<span id="L55"><a href="#L55">55</a> /-- Empty order-characteristic support reflects through the actual associated</span>
+<span id="L56"><a href="#L56">56</a> graded pieces to vanishing of the original right-module quotient. -/</span>
+<span id="L57"><a href="#L57">57</a> theorem rightQuotient_subsingleton_of_orderCharacteristicSupport_eq_empty</span>
+<span id="L58"><a href="#L58">58</a>     (I : RightIdeal (WeylAlg k n))</span>
+<span id="L59"><a href="#L59">59</a>     (hsupport : orderCharacteristicSupport k I = ∅) :</span>
+<span id="L60"><a href="#L60">60</a>     Subsingleton (RightQuotient I) :=</span>
+<span id="L61"><a href="#L61">61</a>   rightQuotient_subsingleton_of_all_graded_subsingleton k I</span>
+<span id="L62"><a href="#L62">62</a>     (all_graded_subsingleton_of_orderCharacteristicSupport_eq_empty k I hsupport)</span>
+<span id="L63"><a href="#L63">63</a> </span>
+<span id="L64"><a href="#L64">64</a> /-- Vanishing of the actual quotient also forces every filtered graded piece</span>
+<span id="L65"><a href="#L65">65</a> to vanish. -/</span>
+<span id="L66"><a href="#L66">66</a> theorem all_graded_subsingleton_of_rightQuotient_subsingleton</span>
+<span id="L67"><a href="#L67">67</a>     (I : RightIdeal (WeylAlg k n))</span>
+<span id="L68"><a href="#L68">68</a>     (hquotient : Subsingleton (RightQuotient I)) :</span>
+<span id="L69"><a href="#L69">69</a>     ∀ N, Subsingleton (QuotientOrderGradedPiece k I N) := by</span>
+<span id="L70"><a href="#L70">70</a>   letI : Subsingleton (RightQuotient I) := hquotient</span>
+<span id="L71"><a href="#L71">71</a>   letI : Subsingleton (FilteredRightQuotient k I) :=</span>
+<span id="L72"><a href="#L72">72</a>     (filteredRightQuotientEquivRightQuotient k I).toEquiv.subsingleton</span>
+<span id="L73"><a href="#L73">73</a>   intro N</span>
+<span id="L74"><a href="#L74">74</a>   constructor</span>
+<span id="L75"><a href="#L75">75</a>   intro q r</span>
+<span id="L76"><a href="#L76">76</a>   refine Submodule.Quotient.induction_on _ q ?_</span>
+<span id="L77"><a href="#L77">77</a>   intro a</span>
+<span id="L78"><a href="#L78">78</a>   refine Submodule.Quotient.induction_on _ r ?_</span>
+<span id="L79"><a href="#L79">79</a>   intro b</span>
+<span id="L80"><a href="#L80">80</a>   exact congrArg Submodule.Quotient.mk</span>
+<span id="L81"><a href="#L81">81</a>     (Subtype.ext (Subsingleton.elim a.1 b.1))</span>
+<span id="L82"><a href="#L82">82</a> </span>
+<span id="L83"><a href="#L83">83</a> /-- For the concrete order filtration, the initial ideal is the unit ideal</span>
+<span id="L84"><a href="#L84">84</a> exactly when the original right-module quotient vanishes. -/</span>
+<span id="L85"><a href="#L85">85</a> theorem orderInitialIdeal_eq_top_iff_rightQuotient_subsingleton</span>
+<span id="L86"><a href="#L86">86</a>     (I : RightIdeal (WeylAlg k n)) :</span>
+<span id="L87"><a href="#L87">87</a>     orderInitialIdeal k I = ⊤ ↔ Subsingleton (RightQuotient I) := by</span>
+<span id="L88"><a href="#L88">88</a>   constructor</span>
+<span id="L89"><a href="#L89">89</a>   · intro htop</span>
+<span id="L90"><a href="#L90">90</a>     apply rightQuotient_subsingleton_of_orderCharacteristicSupport_eq_empty k I</span>
+<span id="L91"><a href="#L91">91</a>     exact (orderCharacteristicSupport_eq_empty_iff k I).mpr htop</span>
+<span id="L92"><a href="#L92">92</a>   · intro hquotient</span>
+<span id="L93"><a href="#L93">93</a>     letI : ∀ N, Subsingleton (QuotientOrderGradedPiece k I N) :=</span>
+<span id="L94"><a href="#L94">94</a>       all_graded_subsingleton_of_rightQuotient_subsingleton k I hquotient</span>
+<span id="L95"><a href="#L95">95</a>     letI : Subsingleton (QuotientOrderAssociatedGraded k I) := by</span>
+<span id="L96"><a href="#L96">96</a>       infer_instance</span>
+<span id="L97"><a href="#L97">97</a>     letI : Subsingleton (OrderCharacteristicModule k I) :=</span>
+<span id="L98"><a href="#L98">98</a>       (Equiv.subsingleton_congr</span>
+<span id="L99"><a href="#L99">99</a>         (quotientOrderAssociatedGradedAddEquivCharacteristic k I).toEquiv).mp</span>
+<span id="L100"><a href="#L100">100</a>           (by infer_instance)</span>
+<span id="L101"><a href="#L101">101</a>     exact (Submodule.Quotient.subsingleton_iff).mp (by infer_instance)</span>
+<span id="L102"><a href="#L102">102</a> </span>
+<span id="L103"><a href="#L103">103</a> /-- Clean support formulation of the same vanishing criterion. -/</span>
+<span id="L104"><a href="#L104">104</a> theorem orderCharacteristicSupport_eq_empty_iff_rightQuotient_subsingleton</span>
+<span id="L105"><a href="#L105">105</a>     (I : RightIdeal (WeylAlg k n)) :</span>
+<span id="L106"><a href="#L106">106</a>     orderCharacteristicSupport k I = ∅ ↔ Subsingleton (RightQuotient I) := by</span>
+<span id="L107"><a href="#L107">107</a>   rw [orderCharacteristicSupport_eq_empty_iff,</span>
+<span id="L108"><a href="#L108">108</a>     orderInitialIdeal_eq_top_iff_rightQuotient_subsingleton]</span>
+<span id="L109"><a href="#L109">109</a> </span>
+<span id="L110"><a href="#L110">110</a> #print axioms all_graded_subsingleton_of_orderCharacteristicSupport_eq_empty</span>
+<span id="L111"><a href="#L111">111</a> #print axioms rightQuotient_subsingleton_of_orderCharacteristicSupport_eq_empty</span>
+<span id="L112"><a href="#L112">112</a> #print axioms all_graded_subsingleton_of_rightQuotient_subsingleton</span>
+<span id="L113"><a href="#L113">113</a> #print axioms orderInitialIdeal_eq_top_iff_rightQuotient_subsingleton</span>
+<span id="L114"><a href="#L114">114</a> #print axioms orderCharacteristicSupport_eq_empty_iff_rightQuotient_subsingleton</span>
+<span id="L115"><a href="#L115">115</a> </span>
+<span id="L116"><a href="#L116">116</a> end</span>
+<span id="L117"><a href="#L117">117</a> </span>
+<span id="L118"><a href="#L118">118</a> end Stafford38.CharacteristicEmptySupportVanishing</span>
+<span id="L119"><a href="#L119">119</a> </span></pre>

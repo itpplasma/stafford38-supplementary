@@ -1,0 +1,105 @@
+<!doctype html><meta charset="utf-8"><title>Stafford38/Characteristic/ArtinianCoefficientField.lean</title><style>body{font:14px monospace}pre span{display:block}pre span:target{background:#fff0ad}a{color:#666}pre{white-space:pre-wrap}</style><h1>Stafford38/Characteristic/ArtinianCoefficientField.lean</h1><p>This project (Stafford38) · 0403af3f0b1a7f84d2027121932723f67bd279ae</p><pre><span id="L1"><a href="#L1">1</a> module</span>
+<span id="L2"><a href="#L2">2</a> public import Mathlib.RingTheory.AlgebraicIndependent.Adjoin</span>
+<span id="L3"><a href="#L3">3</a> public import Mathlib.RingTheory.AlgebraicIndependent.TranscendenceBasis</span>
+<span id="L4"><a href="#L4">4</a> public import Mathlib.RingTheory.Artinian.Ring</span>
+<span id="L5"><a href="#L5">5</a> public import Mathlib.RingTheory.Etale.Field</span>
+<span id="L6"><a href="#L6">6</a> </span>
+<span id="L7"><a href="#L7">7</a> @[expose] public section</span>
+<span id="L8"><a href="#L8">8</a> </span>
+<span id="L9"><a href="#L9">9</a> /-!</span>
+<span id="L10"><a href="#L10">10</a> # Coefficient fields in equal-characteristic-zero Artinian local rings</span>
+<span id="L11"><a href="#L11">11</a> </span>
+<span id="L12"><a href="#L12">12</a> The Artinian-local trace argument needs a genuine coefficient field: a</span>
+<span id="L13"><a href="#L13">13</a> section of the residue map by a field homomorphism.  Mathlib does not package</span>
+<span id="L14"><a href="#L14">14</a> the equal-characteristic coefficient-field theorem directly.  This file</span>
+<span id="L15"><a href="#L15">15</a> proves the required characteristic-zero case from its formal-smoothness API.</span>
+<span id="L16"><a href="#L16">16</a> </span>
+<span id="L17"><a href="#L17">17</a> The field-theoretic input is that every characteristic-zero field extension</span>
+<span id="L18"><a href="#L18">18</a> is formally smooth.  A transcendence basis factors the extension into a</span>
+<span id="L19"><a href="#L19">19</a> rational-function extension and an algebraic separable extension.  The first</span>
+<span id="L20"><a href="#L20">20</a> is formally smooth because polynomial algebras and localizations are; the</span>
+<span id="L21"><a href="#L21">21</a> second is formally etale because characteristic-zero fields are perfect.</span>
+<span id="L22"><a href="#L22">22</a> </span>
+<span id="L23"><a href="#L23">23</a> For an Artinian local algebra, the maximal ideal is nilpotent.  Formal</span>
+<span id="L24"><a href="#L24">24</a> smoothness of the residue field therefore lifts its identity map through the</span>
+<span id="L25"><a href="#L25">25</a> residue quotient, producing the coefficient-field section.</span>
+<span id="L26"><a href="#L26">26</a> -/</span>
+<span id="L27"><a href="#L27">27</a> </span>
+<span id="L28"><a href="#L28">28</a> noncomputable section</span>
+<span id="L29"><a href="#L29">29</a> </span>
+<span id="L30"><a href="#L30">30</a> namespace Stafford38.Characteristic.ArtinianCoefficientField</span>
+<span id="L31"><a href="#L31">31</a> </span>
+<span id="L32"><a href="#L32">32</a> open Algebra</span>
+<span id="L33"><a href="#L33">33</a> open scoped IntermediateField</span>
+<span id="L34"><a href="#L34">34</a> </span>
+<span id="L35"><a href="#L35">35</a> universe u</span>
+<span id="L36"><a href="#L36">36</a> </span>
+<span id="L37"><a href="#L37">37</a> /-- Every extension of a characteristic-zero field is formally smooth.</span>
+<span id="L38"><a href="#L38">38</a> </span>
+<span id="L39"><a href="#L39">39</a> Mathlib's `Algebra.IsSeparable` describes algebraic separability, so the</span>
+<span id="L40"><a href="#L40">40</a> transcendental part is first isolated with a transcendence basis. -/</span>
+<span id="L41"><a href="#L41">41</a> theorem formallySmooth_fieldExtension_of_charZero</span>
+<span id="L42"><a href="#L42">42</a>     (F E : Type u) [Field F] [Field E] [Algebra F E] [CharZero F] :</span>
+<span id="L43"><a href="#L43">43</a>     Algebra.FormallySmooth F E := by</span>
+<span id="L44"><a href="#L44">44</a>   obtain ⟨ι, x, hx⟩ :=</span>
+<span id="L45"><a href="#L45">45</a>     exists_isTranscendenceBasis' F E</span>
+<span id="L46"><a href="#L46">46</a>   let K := IntermediateField.adjoin F (Set.range x)</span>
+<span id="L47"><a href="#L47">47</a>   let P := MvPolynomial ι F</span>
+<span id="L48"><a href="#L48">48</a>   let L := FractionRing P</span>
+<span id="L49"><a href="#L49">49</a>   haveI : Algebra.FormallySmooth F P := inferInstance</span>
+<span id="L50"><a href="#L50">50</a>   haveI : Algebra.FormallySmooth P L :=</span>
+<span id="L51"><a href="#L51">51</a>     Algebra.FormallySmooth.of_isLocalization (nonZeroDivisors P)</span>
+<span id="L52"><a href="#L52">52</a>   haveI : Algebra.FormallySmooth F L :=</span>
+<span id="L53"><a href="#L53">53</a>     Algebra.FormallySmooth.comp F P L</span>
+<span id="L54"><a href="#L54">54</a>   haveI : Algebra.FormallySmooth F K :=</span>
+<span id="L55"><a href="#L55">55</a>     Algebra.FormallySmooth.of_equiv hx.1.aevalEquivField</span>
+<span id="L56"><a href="#L56">56</a>   haveI : Algebra.IsAlgebraic K E := hx.isAlgebraic_field</span>
+<span id="L57"><a href="#L57">57</a>   haveI : CharZero K :=</span>
+<span id="L58"><a href="#L58">58</a>     charZero_of_injective_algebraMap (algebraMap F K).injective</span>
+<span id="L59"><a href="#L59">59</a>   haveI : PerfectField K := PerfectField.ofCharZero</span>
+<span id="L60"><a href="#L60">60</a>   haveI : Algebra.IsSeparable K E := inferInstance</span>
+<span id="L61"><a href="#L61">61</a>   haveI : Algebra.FormallyEtale K E :=</span>
+<span id="L62"><a href="#L62">62</a>     Algebra.FormallyEtale.of_isSeparable K E</span>
+<span id="L63"><a href="#L63">63</a>   exact Algebra.FormallySmooth.comp F K E</span>
+<span id="L64"><a href="#L64">64</a> </span>
+<span id="L65"><a href="#L65">65</a> section ArtinianLocal</span>
+<span id="L66"><a href="#L66">66</a> </span>
+<span id="L67"><a href="#L67">67</a> variable (F R : Type u) [Field F] [CharZero F]</span>
+<span id="L68"><a href="#L68">68</a> variable [CommRing R] [Algebra F R] [IsLocalRing R] [IsArtinianRing R]</span>
+<span id="L69"><a href="#L69">69</a> </span>
+<span id="L70"><a href="#L70">70</a> local notation &quot;𝔪&quot; =&gt; IsLocalRing.maximalIdeal R</span>
+<span id="L71"><a href="#L71">71</a> local notation &quot;κ&quot; =&gt; IsLocalRing.ResidueField R</span>
+<span id="L72"><a href="#L72">72</a> </span>
+<span id="L73"><a href="#L73">73</a> /-- The maximal ideal of a commutative Artinian local ring is nilpotent. -/</span>
+<span id="L74"><a href="#L74">74</a> lemma maximalIdeal_isNilpotent : IsNilpotent 𝔪 := by</span>
+<span id="L75"><a href="#L75">75</a>   rw [← IsLocalRing.jacobson_eq_maximalIdeal (⊥ : Ideal R)]</span>
+<span id="L76"><a href="#L76">76</a>   · exact IsArtinianRing.isNilpotent_jacobson_bot</span>
+<span id="L77"><a href="#L77">77</a>   · exact bot_ne_top</span>
+<span id="L78"><a href="#L78">78</a> </span>
+<span id="L79"><a href="#L79">79</a> /-- An equal-characteristic-zero Artinian local algebra contains a coefficient</span>
+<span id="L80"><a href="#L80">80</a> field: the residue map has a section as an algebra homomorphism over the base</span>
+<span id="L81"><a href="#L81">81</a> field. -/</span>
+<span id="L82"><a href="#L82">82</a> theorem exists_residue_algHom_section :</span>
+<span id="L83"><a href="#L83">83</a>     ∃ s : κ →ₐ[F] R,</span>
+<span id="L84"><a href="#L84">84</a>       (Ideal.Quotient.mkₐ F 𝔪).comp s = AlgHom.id F κ := by</span>
+<span id="L85"><a href="#L85">85</a>   letI : Algebra.FormallySmooth F κ :=</span>
+<span id="L86"><a href="#L86">86</a>     formallySmooth_fieldExtension_of_charZero F κ</span>
+<span id="L87"><a href="#L87">87</a>   exact Algebra.FormallySmooth.exists_lift 𝔪</span>
+<span id="L88"><a href="#L88">88</a>     (maximalIdeal_isNilpotent (R := R)) (AlgHom.id F κ)</span>
+<span id="L89"><a href="#L89">89</a> </span>
+<span id="L90"><a href="#L90">90</a> /-- Pointwise form of `exists_residue_algHom_section`. -/</span>
+<span id="L91"><a href="#L91">91</a> theorem exists_residue_section :</span>
+<span id="L92"><a href="#L92">92</a>     ∃ s : κ →ₐ[F] R, ∀ a : κ, IsLocalRing.residue R (s a) = a := by</span>
+<span id="L93"><a href="#L93">93</a>   obtain ⟨s, hs⟩ := exists_residue_algHom_section F R</span>
+<span id="L94"><a href="#L94">94</a>   refine ⟨s, fun a ↦ ?_⟩</span>
+<span id="L95"><a href="#L95">95</a>   exact AlgHom.congr_fun hs a</span>
+<span id="L96"><a href="#L96">96</a> </span>
+<span id="L97"><a href="#L97">97</a> #print axioms formallySmooth_fieldExtension_of_charZero</span>
+<span id="L98"><a href="#L98">98</a> #print axioms maximalIdeal_isNilpotent</span>
+<span id="L99"><a href="#L99">99</a> #print axioms exists_residue_algHom_section</span>
+<span id="L100"><a href="#L100">100</a> #print axioms exists_residue_section</span>
+<span id="L101"><a href="#L101">101</a> </span>
+<span id="L102"><a href="#L102">102</a> end ArtinianLocal</span>
+<span id="L103"><a href="#L103">103</a> </span>
+<span id="L104"><a href="#L104">104</a> end Stafford38.Characteristic.ArtinianCoefficientField</span>
+<span id="L105"><a href="#L105">105</a> </span></pre>

@@ -1,0 +1,9 @@
+Acceptance excerpt; complete local log sha256: 1e0f4c57ce9e431b8b107af843ddb818cfe90ada4aac6847eafdca28faed06fa
+Running con-ron kernel on solution
+con-ron: accepted 53721 declarations (--verified)
+con-ron kernel accepts the solution
+Running nanoda kernel on solution
+nanoda kernel accepts the solution
+Running Lean default kernel on solution
+Lean default kernel accepts the solution
+Your solution is okay!

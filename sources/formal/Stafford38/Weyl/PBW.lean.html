@@ -1,0 +1,722 @@
+<!doctype html><meta charset="utf-8"><title>Stafford38/Weyl/PBW.lean</title><style>body{font:14px monospace}pre span{display:block}pre span:target{background:#fff0ad}a{color:#666}pre{white-space:pre-wrap}</style><h1>Stafford38/Weyl/PBW.lean</h1><p>This project (Stafford38) · 0403af3f0b1a7f84d2027121932723f67bd279ae</p><pre><span id="L1"><a href="#L1">1</a> module</span>
+<span id="L2"><a href="#L2">2</a> public import Mathlib.RingTheory.MvPolynomial.Basic</span>
+<span id="L3"><a href="#L3">3</a> public import AlgebraicAnalysis.Ore.Associativity</span>
+<span id="L4"><a href="#L4">4</a> public import Stafford38.Weyl.IteratedEquivalence</span>
+<span id="L5"><a href="#L5">5</a> public import Stafford38.Ore.LinearNormalForm</span>
+<span id="L6"><a href="#L6">6</a> public import Stafford38.Characteristic.Polynomial</span>
+<span id="L7"><a href="#L7">7</a> public import Mathlib.LinearAlgebra.Basis.Basic</span>
+<span id="L8"><a href="#L8">8</a> </span>
+<span id="L9"><a href="#L9">9</a> @[expose] public section</span>
+<span id="L10"><a href="#L10">10</a> </span>
+<span id="L11"><a href="#L11">11</a> open Stafford38Challenge (WeylAlg PhaseVar)</span>
+<span id="L12"><a href="#L12">12</a> </span>
+<span id="L13"><a href="#L13">13</a> /-!</span>
+<span id="L14"><a href="#L14">14</a> # Ordered PBW basis from Ore normal forms</span>
+<span id="L15"><a href="#L15">15</a> </span>
+<span id="L16"><a href="#L16">16</a> The checked iterated Ore normal form gives a scalar-linear equivalence with</span>
+<span id="L17"><a href="#L17">17</a> the commutative polynomial symbol space.  Transport across the independently</span>
+<span id="L18"><a href="#L18">18</a> proved presented/iterated algebra equivalence yields a free-module basis</span>
+<span id="L19"><a href="#L19">19</a> indexed by commutative monomials, without using monomial independence in the</span>
+<span id="L20"><a href="#L20">20</a> quotient presentation.  Recursive all-degree formulas identify those basis</span>
+<span id="L21"><a href="#L21">21</a> vectors with ordered products of the named Weyl generators.</span>
+<span id="L22"><a href="#L22">22</a> -/</span>
+<span id="L23"><a href="#L23">23</a> </span>
+<span id="L24"><a href="#L24">24</a> namespace Stafford38.WeylPBW</span>
+<span id="L25"><a href="#L25">25</a> </span>
+<span id="L26"><a href="#L26">26</a> open Stafford</span>
+<span id="L27"><a href="#L27">27</a> open AlgebraicAnalysis</span>
+<span id="L28"><a href="#L28">28</a> open AlgebraicAnalysis.OreDivision</span>
+<span id="L29"><a href="#L29">29</a> open Stafford38.Characteristic</span>
+<span id="L30"><a href="#L30">30</a> open AlgebraicAnalysis.OreAssociativity</span>
+<span id="L31"><a href="#L31">31</a> open Stafford38.OreCoordinateStage</span>
+<span id="L32"><a href="#L32">32</a> open Stafford38.OreIteratedPairStage</span>
+<span id="L33"><a href="#L33">33</a> open Stafford38.OreLinearNormalForm</span>
+<span id="L34"><a href="#L34">34</a> open Stafford38.OrePairStage</span>
+<span id="L35"><a href="#L35">35</a> open Stafford38.OreScalarAlgebra</span>
+<span id="L36"><a href="#L36">36</a> open Stafford38.WeylIteratedEquivalence</span>
+<span id="L37"><a href="#L37">37</a> </span>
+<span id="L38"><a href="#L38">38</a> noncomputable section</span>
+<span id="L39"><a href="#L39">39</a> </span>
+<span id="L40"><a href="#L40">40</a> universe u</span>
+<span id="L41"><a href="#L41">41</a> </span>
+<span id="L42"><a href="#L42">42</a> variable (k : Type u) [Field k]</span>
+<span id="L43"><a href="#L43">43</a> </span>
+<span id="L44"><a href="#L44">44</a> /-- Reindex the two newest symbol variables followed by the old variables to</span>
+<span id="L45"><a href="#L45">45</a> the standard newest-first coordinate/momentum indexing. -/</span>
+<span id="L46"><a href="#L46">46</a> def phaseSuccEquiv (n : Nat) :</span>
+<span id="L47"><a href="#L47">47</a>     ((PUnit.{1} ⊕ PUnit.{1}) ⊕ PhaseVar n) ≃ PhaseVar (n + 1) where</span>
+<span id="L48"><a href="#L48">48</a>   toFun</span>
+<span id="L49"><a href="#L49">49</a>     | .inl (.inl _) =&gt; .inr 0</span>
+<span id="L50"><a href="#L50">50</a>     | .inl (.inr _) =&gt; .inl 0</span>
+<span id="L51"><a href="#L51">51</a>     | .inr (.inl i) =&gt; .inl i.succ</span>
+<span id="L52"><a href="#L52">52</a>     | .inr (.inr i) =&gt; .inr i.succ</span>
+<span id="L53"><a href="#L53">53</a>   invFun</span>
+<span id="L54"><a href="#L54">54</a>     | .inl i =&gt; Fin.cases (.inl (.inr PUnit.unit))</span>
+<span id="L55"><a href="#L55">55</a>         (fun j =&gt; .inr (.inl j)) i</span>
+<span id="L56"><a href="#L56">56</a>     | .inr i =&gt; Fin.cases (.inl (.inl PUnit.unit))</span>
+<span id="L57"><a href="#L57">57</a>         (fun j =&gt; .inr (.inr j)) i</span>
+<span id="L58"><a href="#L58">58</a>   left_inv x := by</span>
+<span id="L59"><a href="#L59">59</a>     rcases x with (⟨⟨u⟩ | ⟨u⟩⟩ | ⟨i | i⟩) &lt;;&gt; rfl</span>
+<span id="L60"><a href="#L60">60</a>   right_inv x := by</span>
+<span id="L61"><a href="#L61">61</a>     rcases x with (i | i)</span>
+<span id="L62"><a href="#L62">62</a>     · exact Fin.cases rfl (fun _ =&gt; rfl) i</span>
+<span id="L63"><a href="#L63">63</a>     · exact Fin.cases rfl (fun _ =&gt; rfl) i</span>
+<span id="L64"><a href="#L64">64</a> </span>
+<span id="L65"><a href="#L65">65</a> @[simp] theorem phaseSuccEquiv_old (n : Nat) (i : PhaseVar n) :</span>
+<span id="L66"><a href="#L66">66</a>     phaseSuccEquiv n (.inr i) = Stafford38FixedSourceChallenge.oldIndex i := by</span>
+<span id="L67"><a href="#L67">67</a>   cases i &lt;;&gt; rfl</span>
+<span id="L68"><a href="#L68">68</a> </span>
+<span id="L69"><a href="#L69">69</a> /-- Flatten the two new univariate normal-form layers and the old symbol</span>
+<span id="L70"><a href="#L70">70</a> coefficients into the standard rank-successor symbol ring. -/</span>
+<span id="L71"><a href="#L71">71</a> def flattenPairSymbols (n : Nat) :</span>
+<span id="L72"><a href="#L72">72</a>     Polynomial (Polynomial (SymbolRing k n)) ≃ₗ[k] SymbolRing k (n + 1) :=</span>
+<span id="L73"><a href="#L73">73</a>   (nestedPolynomialLinearEquiv.{u, u}</span>
+<span id="L74"><a href="#L74">74</a>       (k := k) (R := SymbolRing k n)).trans</span>
+<span id="L75"><a href="#L75">75</a>     ((((MvPolynomial.sumAlgEquiv k (PUnit.{1} ⊕ PUnit.{1}) (PhaseVar n)).symm</span>
+<span id="L76"><a href="#L76">76</a>       ).toLinearEquiv).trans</span>
+<span id="L77"><a href="#L77">77</a>         (MvPolynomial.renameEquiv k (phaseSuccEquiv n)).toLinearEquiv)</span>
+<span id="L78"><a href="#L78">78</a> </span>
+<span id="L79"><a href="#L79">79</a> @[simp] theorem flattenPairSymbols_coordinate (n : Nat) :</span>
+<span id="L80"><a href="#L80">80</a>     flattenPairSymbols k n (Polynomial.C Polynomial.X) =</span>
+<span id="L81"><a href="#L81">81</a>       MvPolynomial.X (.inl (0 : Fin (n + 1))) := by</span>
+<span id="L82"><a href="#L82">82</a>   simp [flattenPairSymbols, nestedPolynomialLinearEquiv_coordinate,</span>
+<span id="L83"><a href="#L83">83</a>     MvPolynomial.sumAlgEquiv_symm_X]</span>
+<span id="L84"><a href="#L84">84</a>   rfl</span>
+<span id="L85"><a href="#L85">85</a> </span>
+<span id="L86"><a href="#L86">86</a> @[simp] theorem flattenPairSymbols_momentum (n : Nat) :</span>
+<span id="L87"><a href="#L87">87</a>     flattenPairSymbols k n Polynomial.X =</span>
+<span id="L88"><a href="#L88">88</a>       MvPolynomial.X (.inr (0 : Fin (n + 1))) := by</span>
+<span id="L89"><a href="#L89">89</a>   simp [flattenPairSymbols, nestedPolynomialLinearEquiv_momentum,</span>
+<span id="L90"><a href="#L90">90</a>     MvPolynomial.sumAlgEquiv_symm_X]</span>
+<span id="L91"><a href="#L91">91</a>   rfl</span>
+<span id="L92"><a href="#L92">92</a> </span>
+<span id="L93"><a href="#L93">93</a> @[simp] theorem flattenPairSymbols_one (n : Nat) :</span>
+<span id="L94"><a href="#L94">94</a>     flattenPairSymbols k n 1 = 1 := by</span>
+<span id="L95"><a href="#L95">95</a>   change flattenPairSymbols k n (Polynomial.C (Polynomial.C 1)) = 1</span>
+<span id="L96"><a href="#L96">96</a>   rw [flattenPairSymbols, LinearEquiv.trans_apply,</span>
+<span id="L97"><a href="#L97">97</a>     nestedPolynomialLinearEquiv_constant]</span>
+<span id="L98"><a href="#L98">98</a>   simp</span>
+<span id="L99"><a href="#L99">99</a> </span>
+<span id="L100"><a href="#L100">100</a> @[simp] theorem flattenPairSymbols_oldGenerator (n : Nat) (i : PhaseVar n) :</span>
+<span id="L101"><a href="#L101">101</a>     flattenPairSymbols k n</span>
+<span id="L102"><a href="#L102">102</a>         (Polynomial.C (Polynomial.C (MvPolynomial.X i))) =</span>
+<span id="L103"><a href="#L103">103</a>       MvPolynomial.X (Stafford38FixedSourceChallenge.oldIndex i) := by</span>
+<span id="L104"><a href="#L104">104</a>   simp [flattenPairSymbols, nestedPolynomialLinearEquiv_constant,</span>
+<span id="L105"><a href="#L105">105</a>     MvPolynomial.sumAlgEquiv_symm_C_X]</span>
+<span id="L106"><a href="#L106">106</a> </span>
+<span id="L107"><a href="#L107">107</a> theorem iterToSum_C_eq_rename {R S₁ S₂ : Type*} [CommSemiring R]</span>
+<span id="L108"><a href="#L108">108</a>     (r : MvPolynomial S₂ R) :</span>
+<span id="L109"><a href="#L109">109</a>     MvPolynomial.iterToSum R S₁ S₂ (MvPolynomial.C r) =</span>
+<span id="L110"><a href="#L110">110</a>       MvPolynomial.rename Sum.inr r := by</span>
+<span id="L111"><a href="#L111">111</a>   induction r using MvPolynomial.induction_on with</span>
+<span id="L112"><a href="#L112">112</a>   | C c =&gt;</span>
+<span id="L113"><a href="#L113">113</a>       simpa only [MvPolynomial.rename_C] using</span>
+<span id="L114"><a href="#L114">114</a>         (MvPolynomial.iterToSum_C_C R S₁ S₂ c)</span>
+<span id="L115"><a href="#L115">115</a>   | add p q hp hq =&gt; simp [hp, hq]</span>
+<span id="L116"><a href="#L116">116</a>   | mul_X p i hp =&gt;</span>
+<span id="L117"><a href="#L117">117</a>       simp only [map_mul, hp, MvPolynomial.iterToSum_C_X,</span>
+<span id="L118"><a href="#L118">118</a>         MvPolynomial.rename_X]</span>
+<span id="L119"><a href="#L119">119</a> </span>
+<span id="L120"><a href="#L120">120</a> private theorem sumAlgEquiv_symm_C_eq_rename</span>
+<span id="L121"><a href="#L121">121</a>     {R S₁ S₂ : Type*} [CommSemiring R] (r : MvPolynomial S₂ R) :</span>
+<span id="L122"><a href="#L122">122</a>     (MvPolynomial.sumAlgEquiv R S₁ S₂).symm (MvPolynomial.C r) =</span>
+<span id="L123"><a href="#L123">123</a>       MvPolynomial.rename Sum.inr r := by</span>
+<span id="L124"><a href="#L124">124</a>   induction r using MvPolynomial.induction_on with</span>
+<span id="L125"><a href="#L125">125</a>   | C c =&gt; simp</span>
+<span id="L126"><a href="#L126">126</a>   | add p q hp hq =&gt; simp [hp, hq]</span>
+<span id="L127"><a href="#L127">127</a>   | mul_X p i hp =&gt;</span>
+<span id="L128"><a href="#L128">128</a>       simp only [map_mul, hp, MvPolynomial.sumAlgEquiv_symm_C_X,</span>
+<span id="L129"><a href="#L129">129</a>         MvPolynomial.rename_X]</span>
+<span id="L130"><a href="#L130">130</a> </span>
+<span id="L131"><a href="#L131">131</a> /-- Flattening a nested monomial preserves its two new exponents and embeds</span>
+<span id="L132"><a href="#L132">132</a> the old symbol polynomial through `Stafford38FixedSourceChallenge.oldIndex`. -/</span>
+<span id="L133"><a href="#L133">133</a> theorem flattenPairSymbols_monomial (n a p : ℕ) (r : SymbolRing k n) :</span>
+<span id="L134"><a href="#L134">134</a>     flattenPairSymbols k n</span>
+<span id="L135"><a href="#L135">135</a>         (Polynomial.monomial p (Polynomial.monomial a r)) =</span>
+<span id="L136"><a href="#L136">136</a>       MvPolynomial.X (.inr (0 : Fin (n + 1))) ^ p *</span>
+<span id="L137"><a href="#L137">137</a>         MvPolynomial.X (.inl (0 : Fin (n + 1))) ^ a *</span>
+<span id="L138"><a href="#L138">138</a>         MvPolynomial.rename Stafford38FixedSourceChallenge.oldIndex r := by</span>
+<span id="L139"><a href="#L139">139</a>   rw [flattenPairSymbols, LinearEquiv.trans_apply,</span>
+<span id="L140"><a href="#L140">140</a>     nestedPolynomialLinearEquiv_monomial]</span>
+<span id="L141"><a href="#L141">141</a>   simp only [LinearEquiv.trans_apply, AlgEquiv.toLinearEquiv_apply,</span>
+<span id="L142"><a href="#L142">142</a>     map_mul, map_pow, MvPolynomial.sumAlgEquiv_symm_X,</span>
+<span id="L143"><a href="#L143">143</a>     sumAlgEquiv_symm_C_eq_rename,</span>
+<span id="L144"><a href="#L144">144</a>     MvPolynomial.renameEquiv_apply, MvPolynomial.rename_X]</span>
+<span id="L145"><a href="#L145">145</a>   rw [MvPolynomial.rename_rename]</span>
+<span id="L146"><a href="#L146">146</a>   have hindex : (⇑(phaseSuccEquiv n) ∘ Sum.inr) = Stafford38FixedSourceChallenge.oldIndex := by</span>
+<span id="L147"><a href="#L147">147</a>     funext i</span>
+<span id="L148"><a href="#L148">148</a>     exact phaseSuccEquiv_old n i</span>
+<span id="L149"><a href="#L149">149</a>   rw [hindex]</span>
+<span id="L150"><a href="#L150">150</a>   rfl</span>
+<span id="L151"><a href="#L151">151</a> </span>
+<span id="L152"><a href="#L152">152</a> /-- The finite exponent vector with coordinate exponents `a` and momentum</span>
+<span id="L153"><a href="#L153">153</a> exponents `p`. -/</span>
+<span id="L154"><a href="#L154">154</a> def phaseExponent {n : ℕ} (a p : Fin n → ℕ) : PhaseVar n →₀ ℕ :=</span>
+<span id="L155"><a href="#L155">155</a>   Finsupp.equivFunOnFinite.symm (Sum.elim a p)</span>
+<span id="L156"><a href="#L156">156</a> </span>
+<span id="L157"><a href="#L157">157</a> @[simp] theorem phaseExponent_apply {n : ℕ} (a p : Fin n → ℕ)</span>
+<span id="L158"><a href="#L158">158</a>     (i : PhaseVar n) : phaseExponent a p i = Sum.elim a p i := rfl</span>
+<span id="L159"><a href="#L159">159</a> </span>
+<span id="L160"><a href="#L160">160</a> theorem oldIndex_injective {n : ℕ} :</span>
+<span id="L161"><a href="#L161">161</a>     Function.Injective (@Stafford38FixedSourceChallenge.oldIndex n) := by</span>
+<span id="L162"><a href="#L162">162</a>   intro i j h</span>
+<span id="L163"><a href="#L163">163</a>   cases i with</span>
+<span id="L164"><a href="#L164">164</a>   | inl i =&gt;</span>
+<span id="L165"><a href="#L165">165</a>       cases j with</span>
+<span id="L166"><a href="#L166">166</a>       | inl j =&gt; simp [Stafford38FixedSourceChallenge.oldIndex, Stafford38FixedSourceChallenge.oldIndex] at h; subst j; rfl</span>
+<span id="L167"><a href="#L167">167</a>       | inr j =&gt; simp [Stafford38FixedSourceChallenge.oldIndex, Stafford38FixedSourceChallenge.oldIndex] at h</span>
+<span id="L168"><a href="#L168">168</a>   | inr i =&gt;</span>
+<span id="L169"><a href="#L169">169</a>       cases j with</span>
+<span id="L170"><a href="#L170">170</a>       | inl j =&gt; simp [Stafford38FixedSourceChallenge.oldIndex, Stafford38FixedSourceChallenge.oldIndex] at h</span>
+<span id="L171"><a href="#L171">171</a>       | inr j =&gt; simp [Stafford38FixedSourceChallenge.oldIndex, Stafford38FixedSourceChallenge.oldIndex] at h; subst j; rfl</span>
+<span id="L172"><a href="#L172">172</a> </span>
+<span id="L173"><a href="#L173">173</a> theorem phaseExponent_succ (n : ℕ) (a p : Fin (n + 1) → ℕ) :</span>
+<span id="L174"><a href="#L174">174</a>     phaseExponent a p =</span>
+<span id="L175"><a href="#L175">175</a>       Finsupp.single (.inr (0 : Fin (n + 1))) (p 0) +</span>
+<span id="L176"><a href="#L176">176</a>         Finsupp.single (.inl (0 : Fin (n + 1))) (a 0) +</span>
+<span id="L177"><a href="#L177">177</a>         Finsupp.mapDomain Stafford38FixedSourceChallenge.oldIndex</span>
+<span id="L178"><a href="#L178">178</a>           (phaseExponent (fun i =&gt; a i.succ) (fun i =&gt; p i.succ)) := by</span>
+<span id="L179"><a href="#L179">179</a>   ext i</span>
+<span id="L180"><a href="#L180">180</a>   cases i with</span>
+<span id="L181"><a href="#L181">181</a>   | inl i =&gt;</span>
+<span id="L182"><a href="#L182">182</a>       refine Fin.cases ?_ (fun j =&gt; ?_) i</span>
+<span id="L183"><a href="#L183">183</a>       · rw [Finsupp.add_apply, Finsupp.add_apply,</span>
+<span id="L184"><a href="#L184">184</a>           Finsupp.mapDomain_notin_range]</span>
+<span id="L185"><a href="#L185">185</a>         · simp [phaseExponent]</span>
+<span id="L186"><a href="#L186">186</a>         · rintro ⟨j, hj⟩</span>
+<span id="L187"><a href="#L187">187</a>           cases j with</span>
+<span id="L188"><a href="#L188">188</a>           | inl j =&gt; exact Fin.succ_ne_zero j (Sum.inl.inj hj)</span>
+<span id="L189"><a href="#L189">189</a>           | inr j =&gt; simp [Stafford38FixedSourceChallenge.oldIndex, Stafford38FixedSourceChallenge.oldIndex] at hj</span>
+<span id="L190"><a href="#L190">190</a>       · change a j.succ = _ + _ +</span>
+<span id="L191"><a href="#L191">191</a>           Finsupp.mapDomain Stafford38FixedSourceChallenge.oldIndex</span>
+<span id="L192"><a href="#L192">192</a>             (phaseExponent (fun i =&gt; a i.succ) (fun i =&gt; p i.succ))</span>
+<span id="L193"><a href="#L193">193</a>               (Stafford38FixedSourceChallenge.oldIndex (.inl j))</span>
+<span id="L194"><a href="#L194">194</a>         rw [Finsupp.mapDomain_apply_of_injective oldIndex_injective]</span>
+<span id="L195"><a href="#L195">195</a>         simp [phaseExponent, Stafford38FixedSourceChallenge.oldIndex, Stafford38FixedSourceChallenge.oldIndex, Finsupp.single_apply,</span>
+<span id="L196"><a href="#L196">196</a>           Fin.succ_ne_zero]</span>
+<span id="L197"><a href="#L197">197</a>   | inr i =&gt;</span>
+<span id="L198"><a href="#L198">198</a>       refine Fin.cases ?_ (fun j =&gt; ?_) i</span>
+<span id="L199"><a href="#L199">199</a>       · rw [Finsupp.add_apply, Finsupp.add_apply,</span>
+<span id="L200"><a href="#L200">200</a>           Finsupp.mapDomain_notin_range]</span>
+<span id="L201"><a href="#L201">201</a>         · simp [phaseExponent]</span>
+<span id="L202"><a href="#L202">202</a>         · rintro ⟨j, hj⟩</span>
+<span id="L203"><a href="#L203">203</a>           cases j with</span>
+<span id="L204"><a href="#L204">204</a>           | inl j =&gt; simp [Stafford38FixedSourceChallenge.oldIndex, Stafford38FixedSourceChallenge.oldIndex] at hj</span>
+<span id="L205"><a href="#L205">205</a>           | inr j =&gt; exact Fin.succ_ne_zero j (Sum.inr.inj hj)</span>
+<span id="L206"><a href="#L206">206</a>       · change p j.succ = _ + _ +</span>
+<span id="L207"><a href="#L207">207</a>           Finsupp.mapDomain Stafford38FixedSourceChallenge.oldIndex</span>
+<span id="L208"><a href="#L208">208</a>             (phaseExponent (fun i =&gt; a i.succ) (fun i =&gt; p i.succ))</span>
+<span id="L209"><a href="#L209">209</a>               (Stafford38FixedSourceChallenge.oldIndex (.inr j))</span>
+<span id="L210"><a href="#L210">210</a>         rw [Finsupp.mapDomain_apply_of_injective oldIndex_injective]</span>
+<span id="L211"><a href="#L211">211</a>         simp [phaseExponent, Stafford38FixedSourceChallenge.oldIndex, Stafford38FixedSourceChallenge.oldIndex, Finsupp.single_apply,</span>
+<span id="L212"><a href="#L212">212</a>           Fin.succ_ne_zero]</span>
+<span id="L213"><a href="#L213">213</a> </span>
+<span id="L214"><a href="#L214">214</a> /-- Ordered monomials in the iterated tower: all older pairs occur first, and</span>
+<span id="L215"><a href="#L215">215</a> within each pair the coordinate power precedes the momentum power. -/</span>
+<span id="L216"><a href="#L216">216</a> def iteratedOrderedMonomial :</span>
+<span id="L217"><a href="#L217">217</a>     (n : ℕ) → (Fin n → ℕ) → (Fin n → ℕ) → IteratedPairStage k n</span>
+<span id="L218"><a href="#L218">218</a>   | 0, _, _ =&gt; 1</span>
+<span id="L219"><a href="#L219">219</a>   | n + 1, a, p =&gt;</span>
+<span id="L220"><a href="#L220">220</a>       stageEmbedding k n</span>
+<span id="L221"><a href="#L221">221</a>           (iteratedOrderedMonomial n (fun i =&gt; a i.succ) (fun i =&gt; p i.succ)) *</span>
+<span id="L222"><a href="#L222">222</a>         stageCoordinate k n ^ a 0 * stageMomentum k n ^ p 0</span>
+<span id="L223"><a href="#L223">223</a> </span>
+<span id="L224"><a href="#L224">224</a> theorem symbolMonomial_succ (n : ℕ) (a p : Fin (n + 1) → ℕ) :</span>
+<span id="L225"><a href="#L225">225</a>     MvPolynomial.X (.inr (0 : Fin (n + 1))) ^ p 0 *</span>
+<span id="L226"><a href="#L226">226</a>         MvPolynomial.X (.inl (0 : Fin (n + 1))) ^ a 0 *</span>
+<span id="L227"><a href="#L227">227</a>         MvPolynomial.rename Stafford38FixedSourceChallenge.oldIndex</span>
+<span id="L228"><a href="#L228">228</a>           (MvPolynomial.monomial</span>
+<span id="L229"><a href="#L229">229</a>             (phaseExponent (fun i =&gt; a i.succ) (fun i =&gt; p i.succ)) 1) =</span>
+<span id="L230"><a href="#L230">230</a>       MvPolynomial.monomial (phaseExponent a p) (1 : k) := by</span>
+<span id="L231"><a href="#L231">231</a>   rw [MvPolynomial.X_pow_eq_monomial, MvPolynomial.X_pow_eq_monomial,</span>
+<span id="L232"><a href="#L232">232</a>     MvPolynomial.rename_monomial, MvPolynomial.monomial_mul,</span>
+<span id="L233"><a href="#L233">233</a>     MvPolynomial.monomial_mul, mul_one, mul_one, phaseExponent_succ]</span>
+<span id="L234"><a href="#L234">234</a> </span>
+<span id="L235"><a href="#L235">235</a> /-- Scalar-linear normal-form coordinates for the recursively iterated Ore</span>
+<span id="L236"><a href="#L236">236</a> tower. -/</span>
+<span id="L237"><a href="#L237">237</a> def iteratedNormalFormLinearEquiv :</span>
+<span id="L238"><a href="#L238">238</a>     (n : Nat) → IteratedPairStage k n ≃ₗ[k] SymbolRing k n</span>
+<span id="L239"><a href="#L239">239</a>   | 0 =&gt; (MvPolynomial.isEmptyAlgEquiv k (PhaseVar 0)).symm.toLinearEquiv</span>
+<span id="L240"><a href="#L240">240</a>   | n + 1 =&gt; by</span>
+<span id="L241"><a href="#L241">241</a>       letI : Algebra k (IteratedPairStage k n) :=</span>
+<span id="L242"><a href="#L242">242</a>         iteratedPairStageAlgebra k n</span>
+<span id="L243"><a href="#L243">243</a>       letI : Algebra k (CoordinateStage (B := IteratedPairStage k n)) :=</span>
+<span id="L244"><a href="#L244">244</a>         coordinateStageAlgebra</span>
+<span id="L245"><a href="#L245">245</a>       letI : Algebra k (PairStage (B := IteratedPairStage k n)) :=</span>
+<span id="L246"><a href="#L246">246</a>         pairStageAlgebra</span>
+<span id="L247"><a href="#L247">247</a>       change PairStage (B := IteratedPairStage k n) ≃ₗ[k] SymbolRing k (n + 1)</span>
+<span id="L248"><a href="#L248">248</a>       exact (pairNormalFormLinearEquiv</span>
+<span id="L249"><a href="#L249">249</a>         (normalOreAlgebra_algebraMap zeroDerivation (fun c =&gt; by</span>
+<span id="L250"><a href="#L250">250</a>           exact zeroDerivation_apply (algebraMap k (IteratedPairStage k n) c)))</span>
+<span id="L251"><a href="#L251">251</a>         (normalOreAlgebra_algebraMap coordinateDerivation</span>
+<span id="L252"><a href="#L252">252</a>           coordinateDerivation_algebraMap)</span>
+<span id="L253"><a href="#L253">253</a>         (iteratedNormalFormLinearEquiv n)).trans (flattenPairSymbols k n)</span>
+<span id="L254"><a href="#L254">254</a> </span>
+<span id="L255"><a href="#L255">255</a> @[simp] theorem iteratedNormalFormLinearEquiv_one :</span>
+<span id="L256"><a href="#L256">256</a>     ∀ n : Nat, iteratedNormalFormLinearEquiv k n 1 = 1 := by</span>
+<span id="L257"><a href="#L257">257</a>   intro n</span>
+<span id="L258"><a href="#L258">258</a>   induction n with</span>
+<span id="L259"><a href="#L259">259</a>   | zero =&gt;</span>
+<span id="L260"><a href="#L260">260</a>       rfl</span>
+<span id="L261"><a href="#L261">261</a>   | succ n ih =&gt;</span>
+<span id="L262"><a href="#L262">262</a>       letI : Algebra k (IteratedPairStage k n) :=</span>
+<span id="L263"><a href="#L263">263</a>         iteratedPairStageAlgebra k n</span>
+<span id="L264"><a href="#L264">264</a>       letI : Algebra k (CoordinateStage (B := IteratedPairStage k n)) :=</span>
+<span id="L265"><a href="#L265">265</a>         coordinateStageAlgebra</span>
+<span id="L266"><a href="#L266">266</a>       letI : Algebra k (PairStage (B := IteratedPairStage k n)) :=</span>
+<span id="L267"><a href="#L267">267</a>         pairStageAlgebra</span>
+<span id="L268"><a href="#L268">268</a>       let hInner : algebraMap k (CoordinateStage (B := IteratedPairStage k n)) =</span>
+<span id="L269"><a href="#L269">269</a>           (normalCoefficient zeroDerivation).comp</span>
+<span id="L270"><a href="#L270">270</a>             (algebraMap k (IteratedPairStage k n)) :=</span>
+<span id="L271"><a href="#L271">271</a>         normalOreAlgebra_algebraMap zeroDerivation (fun c : k =&gt; by</span>
+<span id="L272"><a href="#L272">272</a>           exact zeroDerivation_apply (algebraMap k (IteratedPairStage k n) c))</span>
+<span id="L273"><a href="#L273">273</a>       let hOuter : algebraMap k (PairStage (B := IteratedPairStage k n)) =</span>
+<span id="L274"><a href="#L274">274</a>           (normalCoefficient coordinateDerivation).comp</span>
+<span id="L275"><a href="#L275">275</a>             (algebraMap k (CoordinateStage (B := IteratedPairStage k n))) :=</span>
+<span id="L276"><a href="#L276">276</a>         normalOreAlgebra_algebraMap coordinateDerivation</span>
+<span id="L277"><a href="#L277">277</a>           (fun c : k =&gt; coordinateDerivation_algebraMap</span>
+<span id="L278"><a href="#L278">278</a>             (B := IteratedPairStage k n) c)</span>
+<span id="L279"><a href="#L279">279</a>       rw [iteratedNormalFormLinearEquiv]</span>
+<span id="L280"><a href="#L280">280</a>       change flattenPairSymbols k n</span>
+<span id="L281"><a href="#L281">281</a>         (pairNormalFormLinearEquiv hInner hOuter</span>
+<span id="L282"><a href="#L282">282</a>           (iteratedNormalFormLinearEquiv k n) 1) = 1</span>
+<span id="L283"><a href="#L283">283</a>       have hone : (1 : PairStage (B := IteratedPairStage k n)) =</span>
+<span id="L284"><a href="#L284">284</a>           pairCoefficient (B := IteratedPairStage k n)</span>
+<span id="L285"><a href="#L285">285</a>             (1 : IteratedPairStage k n) := by</span>
+<span id="L286"><a href="#L286">286</a>         exact (pairCoefficient (B := IteratedPairStage k n)).map_one.symm</span>
+<span id="L287"><a href="#L287">287</a>       rw [hone, pairNormalFormLinearEquiv_coefficient, ih]</span>
+<span id="L288"><a href="#L288">288</a>       exact flattenPairSymbols_one k n</span>
+<span id="L289"><a href="#L289">289</a> </span>
+<span id="L290"><a href="#L290">290</a> /-- The recursive normal-form coordinate map sends each named Weyl generator</span>
+<span id="L291"><a href="#L291">291</a> to its corresponding commutative symbol variable. -/</span>
+<span id="L292"><a href="#L292">292</a> @[simp] theorem iteratedNormalFormLinearEquiv_generator :</span>
+<span id="L293"><a href="#L293">293</a>     ∀ (n : Nat) (i : PhaseVar n),</span>
+<span id="L294"><a href="#L294">294</a>       iteratedNormalFormLinearEquiv k n (iteratedGenerator k n i) =</span>
+<span id="L295"><a href="#L295">295</a>         MvPolynomial.X i := by</span>
+<span id="L296"><a href="#L296">296</a>   intro n</span>
+<span id="L297"><a href="#L297">297</a>   induction n with</span>
+<span id="L298"><a href="#L298">298</a>   | zero =&gt;</span>
+<span id="L299"><a href="#L299">299</a>       intro i</span>
+<span id="L300"><a href="#L300">300</a>       exact Sum.elim Fin.elim0 Fin.elim0 i</span>
+<span id="L301"><a href="#L301">301</a>   | succ n ih =&gt;</span>
+<span id="L302"><a href="#L302">302</a>       letI : Algebra k (IteratedPairStage k n) :=</span>
+<span id="L303"><a href="#L303">303</a>         iteratedPairStageAlgebra k n</span>
+<span id="L304"><a href="#L304">304</a>       letI : Algebra k (CoordinateStage (B := IteratedPairStage k n)) :=</span>
+<span id="L305"><a href="#L305">305</a>         coordinateStageAlgebra</span>
+<span id="L306"><a href="#L306">306</a>       letI : Algebra k (PairStage (B := IteratedPairStage k n)) :=</span>
+<span id="L307"><a href="#L307">307</a>         pairStageAlgebra</span>
+<span id="L308"><a href="#L308">308</a>       let hInner : algebraMap k (CoordinateStage (B := IteratedPairStage k n)) =</span>
+<span id="L309"><a href="#L309">309</a>           (normalCoefficient zeroDerivation).comp</span>
+<span id="L310"><a href="#L310">310</a>             (algebraMap k (IteratedPairStage k n)) :=</span>
+<span id="L311"><a href="#L311">311</a>         normalOreAlgebra_algebraMap zeroDerivation (fun c : k =&gt; by</span>
+<span id="L312"><a href="#L312">312</a>           exact zeroDerivation_apply (algebraMap k (IteratedPairStage k n) c))</span>
+<span id="L313"><a href="#L313">313</a>       let hOuter : algebraMap k (PairStage (B := IteratedPairStage k n)) =</span>
+<span id="L314"><a href="#L314">314</a>           (normalCoefficient coordinateDerivation).comp</span>
+<span id="L315"><a href="#L315">315</a>             (algebraMap k (CoordinateStage (B := IteratedPairStage k n))) :=</span>
+<span id="L316"><a href="#L316">316</a>         normalOreAlgebra_algebraMap coordinateDerivation</span>
+<span id="L317"><a href="#L317">317</a>           (fun c : k =&gt; coordinateDerivation_algebraMap</span>
+<span id="L318"><a href="#L318">318</a>             (B := IteratedPairStage k n) c)</span>
+<span id="L319"><a href="#L319">319</a>       intro i</span>
+<span id="L320"><a href="#L320">320</a>       cases i with</span>
+<span id="L321"><a href="#L321">321</a>       | inl i =&gt;</span>
+<span id="L322"><a href="#L322">322</a>           refine Fin.cases ?_ (fun j =&gt; ?_) i</span>
+<span id="L323"><a href="#L323">323</a>           · change iteratedNormalFormLinearEquiv k (n + 1) (stageCoordinate k n) = _</span>
+<span id="L324"><a href="#L324">324</a>             rw [iteratedNormalFormLinearEquiv]</span>
+<span id="L325"><a href="#L325">325</a>             change flattenPairSymbols k n</span>
+<span id="L326"><a href="#L326">326</a>               (pairNormalFormLinearEquiv hInner hOuter</span>
+<span id="L327"><a href="#L327">327</a>                 (iteratedNormalFormLinearEquiv k n) pairCoordinate) = _</span>
+<span id="L328"><a href="#L328">328</a>             rw [pairNormalFormLinearEquiv_coordinate _ _ _</span>
+<span id="L329"><a href="#L329">329</a>               (iteratedNormalFormLinearEquiv_one k n)]</span>
+<span id="L330"><a href="#L330">330</a>             exact flattenPairSymbols_coordinate k n</span>
+<span id="L331"><a href="#L331">331</a>           · change iteratedNormalFormLinearEquiv k (n + 1)</span>
+<span id="L332"><a href="#L332">332</a>               (stageEmbedding k n (iteratedCoordinate k n j)) = _</span>
+<span id="L333"><a href="#L333">333</a>             rw [iteratedNormalFormLinearEquiv]</span>
+<span id="L334"><a href="#L334">334</a>             change flattenPairSymbols k n</span>
+<span id="L335"><a href="#L335">335</a>               (pairNormalFormLinearEquiv hInner hOuter</span>
+<span id="L336"><a href="#L336">336</a>                 (iteratedNormalFormLinearEquiv k n)</span>
+<span id="L337"><a href="#L337">337</a>                 (pairCoefficient (iteratedCoordinate k n j))) = _</span>
+<span id="L338"><a href="#L338">338</a>             have hij := ih (.inl j)</span>
+<span id="L339"><a href="#L339">339</a>             change iteratedNormalFormLinearEquiv k n (iteratedCoordinate k n j) =</span>
+<span id="L340"><a href="#L340">340</a>               MvPolynomial.X (.inl j) at hij</span>
+<span id="L341"><a href="#L341">341</a>             rw [pairNormalFormLinearEquiv_coefficient, hij,</span>
+<span id="L342"><a href="#L342">342</a>               flattenPairSymbols_oldGenerator]</span>
+<span id="L343"><a href="#L343">343</a>             rfl</span>
+<span id="L344"><a href="#L344">344</a> </span>
+<span id="L345"><a href="#L345">345</a>       | inr i =&gt;</span>
+<span id="L346"><a href="#L346">346</a>           refine Fin.cases ?_ (fun j =&gt; ?_) i</span>
+<span id="L347"><a href="#L347">347</a>           · change iteratedNormalFormLinearEquiv k (n + 1) (stageMomentum k n) = _</span>
+<span id="L348"><a href="#L348">348</a>             rw [iteratedNormalFormLinearEquiv]</span>
+<span id="L349"><a href="#L349">349</a>             change flattenPairSymbols k n</span>
+<span id="L350"><a href="#L350">350</a>               (pairNormalFormLinearEquiv hInner hOuter</span>
+<span id="L351"><a href="#L351">351</a>                 (iteratedNormalFormLinearEquiv k n) pairMomentum) = _</span>
+<span id="L352"><a href="#L352">352</a>             rw [pairNormalFormLinearEquiv_momentum _ _ _</span>
+<span id="L353"><a href="#L353">353</a>               (iteratedNormalFormLinearEquiv_one k n)]</span>
+<span id="L354"><a href="#L354">354</a>             exact flattenPairSymbols_momentum k n</span>
+<span id="L355"><a href="#L355">355</a>           · change iteratedNormalFormLinearEquiv k (n + 1)</span>
+<span id="L356"><a href="#L356">356</a>               (stageEmbedding k n (iteratedMomentum k n j)) = _</span>
+<span id="L357"><a href="#L357">357</a>             rw [iteratedNormalFormLinearEquiv]</span>
+<span id="L358"><a href="#L358">358</a>             change flattenPairSymbols k n</span>
+<span id="L359"><a href="#L359">359</a>               (pairNormalFormLinearEquiv hInner hOuter</span>
+<span id="L360"><a href="#L360">360</a>                 (iteratedNormalFormLinearEquiv k n)</span>
+<span id="L361"><a href="#L361">361</a>                 (pairCoefficient (iteratedMomentum k n j))) = _</span>
+<span id="L362"><a href="#L362">362</a>             have hij := ih (.inr j)</span>
+<span id="L363"><a href="#L363">363</a>             change iteratedNormalFormLinearEquiv k n (iteratedMomentum k n j) =</span>
+<span id="L364"><a href="#L364">364</a>               MvPolynomial.X (.inr j) at hij</span>
+<span id="L365"><a href="#L365">365</a>             rw [pairNormalFormLinearEquiv_coefficient, hij,</span>
+<span id="L366"><a href="#L366">366</a>               flattenPairSymbols_oldGenerator]</span>
+<span id="L367"><a href="#L367">367</a>             rfl</span>
+<span id="L368"><a href="#L368">368</a> </span>
+<span id="L369"><a href="#L369">369</a> /-- Every recursively ordered product of the named iterated generators has</span>
+<span id="L370"><a href="#L370">370</a> exactly the corresponding commutative symbol monomial as its normal form. -/</span>
+<span id="L371"><a href="#L371">371</a> theorem iteratedOrderedMonomial_normal :</span>
+<span id="L372"><a href="#L372">372</a>     ∀ (n : ℕ) (a p : Fin n → ℕ),</span>
+<span id="L373"><a href="#L373">373</a>       iteratedNormalFormLinearEquiv k n (iteratedOrderedMonomial k n a p) =</span>
+<span id="L374"><a href="#L374">374</a>         MvPolynomial.monomial (phaseExponent a p) 1 := by</span>
+<span id="L375"><a href="#L375">375</a>   intro n</span>
+<span id="L376"><a href="#L376">376</a>   induction n with</span>
+<span id="L377"><a href="#L377">377</a>   | zero =&gt;</span>
+<span id="L378"><a href="#L378">378</a>       intro a p</span>
+<span id="L379"><a href="#L379">379</a>       change 1 = MvPolynomial.monomial (phaseExponent a p) 1</span>
+<span id="L380"><a href="#L380">380</a>       have hz : phaseExponent a p = 0 := by</span>
+<span id="L381"><a href="#L381">381</a>         ext i</span>
+<span id="L382"><a href="#L382">382</a>         exact Sum.elim Fin.elim0 Fin.elim0 i</span>
+<span id="L383"><a href="#L383">383</a>       rw [hz]</span>
+<span id="L384"><a href="#L384">384</a>       simp [MvPolynomial.monomial_zero']</span>
+<span id="L385"><a href="#L385">385</a>   | succ n ih =&gt;</span>
+<span id="L386"><a href="#L386">386</a>       letI : Algebra k (IteratedPairStage k n) :=</span>
+<span id="L387"><a href="#L387">387</a>         iteratedPairStageAlgebra k n</span>
+<span id="L388"><a href="#L388">388</a>       letI : Algebra k (CoordinateStage (B := IteratedPairStage k n)) :=</span>
+<span id="L389"><a href="#L389">389</a>         coordinateStageAlgebra</span>
+<span id="L390"><a href="#L390">390</a>       letI : Algebra k (PairStage (B := IteratedPairStage k n)) :=</span>
+<span id="L391"><a href="#L391">391</a>         pairStageAlgebra</span>
+<span id="L392"><a href="#L392">392</a>       let hInner : algebraMap k (CoordinateStage (B := IteratedPairStage k n)) =</span>
+<span id="L393"><a href="#L393">393</a>           (normalCoefficient zeroDerivation).comp</span>
+<span id="L394"><a href="#L394">394</a>             (algebraMap k (IteratedPairStage k n)) :=</span>
+<span id="L395"><a href="#L395">395</a>         normalOreAlgebra_algebraMap zeroDerivation (fun c : k =&gt; by</span>
+<span id="L396"><a href="#L396">396</a>           exact zeroDerivation_apply (algebraMap k (IteratedPairStage k n) c))</span>
+<span id="L397"><a href="#L397">397</a>       let hOuter : algebraMap k (PairStage (B := IteratedPairStage k n)) =</span>
+<span id="L398"><a href="#L398">398</a>           (normalCoefficient coordinateDerivation).comp</span>
+<span id="L399"><a href="#L399">399</a>             (algebraMap k (CoordinateStage (B := IteratedPairStage k n))) :=</span>
+<span id="L400"><a href="#L400">400</a>         normalOreAlgebra_algebraMap coordinateDerivation</span>
+<span id="L401"><a href="#L401">401</a>           (fun c : k =&gt; coordinateDerivation_algebraMap</span>
+<span id="L402"><a href="#L402">402</a>             (B := IteratedPairStage k n) c)</span>
+<span id="L403"><a href="#L403">403</a>       intro a p</span>
+<span id="L404"><a href="#L404">404</a>       rw [iteratedOrderedMonomial, iteratedNormalFormLinearEquiv]</span>
+<span id="L405"><a href="#L405">405</a>       change flattenPairSymbols k n</span>
+<span id="L406"><a href="#L406">406</a>         (pairNormalFormLinearEquiv hInner hOuter</span>
+<span id="L407"><a href="#L407">407</a>           (iteratedNormalFormLinearEquiv k n)</span>
+<span id="L408"><a href="#L408">408</a>           (pairCoefficient (B := IteratedPairStage k n)</span>
+<span id="L409"><a href="#L409">409</a>               (iteratedOrderedMonomial k n</span>
+<span id="L410"><a href="#L410">410</a>                 (fun i =&gt; a i.succ) (fun i =&gt; p i.succ)) *</span>
+<span id="L411"><a href="#L411">411</a>             pairCoordinate (B := IteratedPairStage k n) ^ a 0 *</span>
+<span id="L412"><a href="#L412">412</a>             pairMomentum (B := IteratedPairStage k n) ^ p 0)) = _</span>
+<span id="L413"><a href="#L413">413</a>       rw [pairNormalFormLinearEquiv_orderedMonomial,</span>
+<span id="L414"><a href="#L414">414</a>         ih (fun i =&gt; a i.succ) (fun i =&gt; p i.succ),</span>
+<span id="L415"><a href="#L415">415</a>         flattenPairSymbols_monomial, symbolMonomial_succ]</span>
+<span id="L416"><a href="#L416">416</a> </span>
+<span id="L417"><a href="#L417">417</a> /-- Append powers of the newest coordinate and momentum to an arbitrary old</span>
+<span id="L418"><a href="#L418">418</a> coefficient in normal order. -/</span>
+<span id="L419"><a href="#L419">419</a> def iteratedCoefficientOrdered (n a p : ℕ) (z : IteratedPairStage k n) :</span>
+<span id="L420"><a href="#L420">420</a>     IteratedPairStage k (n + 1) :=</span>
+<span id="L421"><a href="#L421">421</a>   stageEmbedding k n z * stageCoordinate k n ^ a * stageMomentum k n ^ p</span>
+<span id="L422"><a href="#L422">422</a> </span>
+<span id="L423"><a href="#L423">423</a> /-- Appending a normal-ordered newest pair shifts the old symbol polynomial by</span>
+<span id="L424"><a href="#L424">424</a> the corresponding two monomial powers. -/</span>
+<span id="L425"><a href="#L425">425</a> theorem iteratedNormalFormLinearEquiv_coefficient_ordered</span>
+<span id="L426"><a href="#L426">426</a>     (n a p : ℕ) (z : IteratedPairStage k n) :</span>
+<span id="L427"><a href="#L427">427</a>     iteratedNormalFormLinearEquiv k (n + 1)</span>
+<span id="L428"><a href="#L428">428</a>         (iteratedCoefficientOrdered k n a p z) =</span>
+<span id="L429"><a href="#L429">429</a>       MvPolynomial.X (.inr (0 : Fin (n + 1))) ^ p *</span>
+<span id="L430"><a href="#L430">430</a>         MvPolynomial.X (.inl (0 : Fin (n + 1))) ^ a *</span>
+<span id="L431"><a href="#L431">431</a>         MvPolynomial.rename Stafford38FixedSourceChallenge.oldIndex (iteratedNormalFormLinearEquiv k n z) := by</span>
+<span id="L432"><a href="#L432">432</a>   letI : Algebra k (IteratedPairStage k n) := iteratedPairStageAlgebra k n</span>
+<span id="L433"><a href="#L433">433</a>   letI : Algebra k (CoordinateStage (B := IteratedPairStage k n)) :=</span>
+<span id="L434"><a href="#L434">434</a>     coordinateStageAlgebra</span>
+<span id="L435"><a href="#L435">435</a>   letI : Algebra k (PairStage (B := IteratedPairStage k n)) := pairStageAlgebra</span>
+<span id="L436"><a href="#L436">436</a>   let hInner : algebraMap k (CoordinateStage (B := IteratedPairStage k n)) =</span>
+<span id="L437"><a href="#L437">437</a>       (normalCoefficient zeroDerivation).comp</span>
+<span id="L438"><a href="#L438">438</a>         (algebraMap k (IteratedPairStage k n)) :=</span>
+<span id="L439"><a href="#L439">439</a>     normalOreAlgebra_algebraMap zeroDerivation (fun c : k =&gt; by</span>
+<span id="L440"><a href="#L440">440</a>       exact zeroDerivation_apply (algebraMap k (IteratedPairStage k n) c))</span>
+<span id="L441"><a href="#L441">441</a>   let hOuter : algebraMap k (PairStage (B := IteratedPairStage k n)) =</span>
+<span id="L442"><a href="#L442">442</a>       (normalCoefficient coordinateDerivation).comp</span>
+<span id="L443"><a href="#L443">443</a>         (algebraMap k (CoordinateStage (B := IteratedPairStage k n))) :=</span>
+<span id="L444"><a href="#L444">444</a>     normalOreAlgebra_algebraMap coordinateDerivation</span>
+<span id="L445"><a href="#L445">445</a>       (fun c : k =&gt; coordinateDerivation_algebraMap</span>
+<span id="L446"><a href="#L446">446</a>         (B := IteratedPairStage k n) c)</span>
+<span id="L447"><a href="#L447">447</a>   rw [iteratedCoefficientOrdered, iteratedNormalFormLinearEquiv]</span>
+<span id="L448"><a href="#L448">448</a>   change flattenPairSymbols k n</span>
+<span id="L449"><a href="#L449">449</a>       (pairNormalFormLinearEquiv (B := IteratedPairStage k n)</span>
+<span id="L450"><a href="#L450">450</a>         hInner hOuter (iteratedNormalFormLinearEquiv k n)</span>
+<span id="L451"><a href="#L451">451</a>         (stageEmbedding k n z * stageCoordinate k n ^ a *</span>
+<span id="L452"><a href="#L452">452</a>           stageMomentum k n ^ p)) = _</span>
+<span id="L453"><a href="#L453">453</a>   unfold stageEmbedding stageCoordinate stageMomentum</span>
+<span id="L454"><a href="#L454">454</a>   have hpair := pairNormalFormLinearEquiv_orderedMonomial hInner hOuter</span>
+<span id="L455"><a href="#L455">455</a>     (iteratedNormalFormLinearEquiv k n) z a p</span>
+<span id="L456"><a href="#L456">456</a>   have hflat := congrArg (flattenPairSymbols k n) hpair</span>
+<span id="L457"><a href="#L457">457</a>   rw [flattenPairSymbols_monomial] at hflat</span>
+<span id="L458"><a href="#L458">458</a>   exact hflat</span>
+<span id="L459"><a href="#L459">459</a> </span>
+<span id="L460"><a href="#L460">460</a> /-- Normal-form coordinates for the quotient presentation, obtained by</span>
+<span id="L461"><a href="#L461">461</a> transport through the presented/iterated algebra equivalence. -/</span>
+<span id="L462"><a href="#L462">462</a> def presentedNormalFormLinearEquiv (n : Nat) :</span>
+<span id="L463"><a href="#L463">463</a>     WeylAlg k n ≃ₗ[k] SymbolRing k n :=</span>
+<span id="L464"><a href="#L464">464</a>   (presentedIteratedEquiv k n).toLinearEquiv.trans</span>
+<span id="L465"><a href="#L465">465</a>     (iteratedNormalFormLinearEquiv k n)</span>
+<span id="L466"><a href="#L466">466</a> </span>
+<span id="L467"><a href="#L467">467</a> @[simp] theorem presentedNormalFormLinearEquiv_one (n : Nat) :</span>
+<span id="L468"><a href="#L468">468</a>     presentedNormalFormLinearEquiv k n 1 = 1 := by</span>
+<span id="L469"><a href="#L469">469</a>   rw [presentedNormalFormLinearEquiv, LinearEquiv.trans_apply,</span>
+<span id="L470"><a href="#L470">470</a>     AlgEquiv.toLinearEquiv_apply, map_one, iteratedNormalFormLinearEquiv_one]</span>
+<span id="L471"><a href="#L471">471</a> </span>
+<span id="L472"><a href="#L472">472</a> /-- The transported normal-form coordinates agree with the named generators</span>
+<span id="L473"><a href="#L473">473</a> of the quotient presentation. -/</span>
+<span id="L474"><a href="#L474">474</a> @[simp] theorem presentedNormalFormLinearEquiv_generator (n : Nat)</span>
+<span id="L475"><a href="#L475">475</a>     (i : PhaseVar n) :</span>
+<span id="L476"><a href="#L476">476</a>     presentedNormalFormLinearEquiv k n</span>
+<span id="L477"><a href="#L477">477</a>         (freeWeylGenerator (Matrix.J (Fin n) k) i) =</span>
+<span id="L478"><a href="#L478">478</a>       MvPolynomial.X i := by</span>
+<span id="L479"><a href="#L479">479</a>   rw [presentedNormalFormLinearEquiv, LinearEquiv.trans_apply,</span>
+<span id="L480"><a href="#L480">480</a>     AlgEquiv.toLinearEquiv_apply, presentedIteratedEquiv_generator,</span>
+<span id="L481"><a href="#L481">481</a>     iteratedNormalFormLinearEquiv_generator]</span>
+<span id="L482"><a href="#L482">482</a> </span>
+<span id="L483"><a href="#L483">483</a> /-- Append powers of the newest named coordinate and momentum to an arbitrary</span>
+<span id="L484"><a href="#L484">484</a> old presentation element in normal order. -/</span>
+<span id="L485"><a href="#L485">485</a> def presentedCoefficientOrdered (n a p : ℕ) (z : WeylAlg k n) :</span>
+<span id="L486"><a href="#L486">486</a>     WeylAlg k (n + 1) :=</span>
+<span id="L487"><a href="#L487">487</a>   previousWeylEmbedding k n z * presentedCoordinate k n ^ a *</span>
+<span id="L488"><a href="#L488">488</a>     presentedMomentum k n ^ p</span>
+<span id="L489"><a href="#L489">489</a> </span>
+<span id="L490"><a href="#L490">490</a> /-- Normal-form coordinates of an arbitrary old presentation element followed</span>
+<span id="L491"><a href="#L491">491</a> by powers of the newest named coordinate and momentum. -/</span>
+<span id="L492"><a href="#L492">492</a> theorem presentedNormalFormLinearEquiv_previous_ordered</span>
+<span id="L493"><a href="#L493">493</a>     (n a p : ℕ) (z : WeylAlg k n) :</span>
+<span id="L494"><a href="#L494">494</a>     presentedNormalFormLinearEquiv k (n + 1)</span>
+<span id="L495"><a href="#L495">495</a>         (presentedCoefficientOrdered k n a p z) =</span>
+<span id="L496"><a href="#L496">496</a>       MvPolynomial.X (.inr (0 : Fin (n + 1))) ^ p *</span>
+<span id="L497"><a href="#L497">497</a>         MvPolynomial.X (.inl (0 : Fin (n + 1))) ^ a *</span>
+<span id="L498"><a href="#L498">498</a>         MvPolynomial.rename Stafford38FixedSourceChallenge.oldIndex</span>
+<span id="L499"><a href="#L499">499</a>           (presentedNormalFormLinearEquiv k n z) := by</span>
+<span id="L500"><a href="#L500">500</a>   letI : Algebra k (IteratedPairStage k n) := iteratedPairStageAlgebra k n</span>
+<span id="L501"><a href="#L501">501</a>   letI : Algebra k (CoordinateStage (B := IteratedPairStage k n)) :=</span>
+<span id="L502"><a href="#L502">502</a>     coordinateStageAlgebra</span>
+<span id="L503"><a href="#L503">503</a>   letI : Algebra k (PairStage (B := IteratedPairStage k n)) := pairStageAlgebra</span>
+<span id="L504"><a href="#L504">504</a>   rw [presentedCoefficientOrdered]</span>
+<span id="L505"><a href="#L505">505</a>   rw [presentedNormalFormLinearEquiv, LinearEquiv.trans_apply,</span>
+<span id="L506"><a href="#L506">506</a>     AlgEquiv.toLinearEquiv_apply]</span>
+<span id="L507"><a href="#L507">507</a>   have hmap : presentedIteratedEquiv k (n + 1)</span>
+<span id="L508"><a href="#L508">508</a>         (previousWeylEmbedding k n z *</span>
+<span id="L509"><a href="#L509">509</a>           presentedCoordinate k n ^ a * presentedMomentum k n ^ p) =</span>
+<span id="L510"><a href="#L510">510</a>       presentedIteratedEquiv k (n + 1) (previousWeylEmbedding k n z) *</span>
+<span id="L511"><a href="#L511">511</a>         presentedIteratedEquiv k (n + 1) (presentedCoordinate k n) ^ a *</span>
+<span id="L512"><a href="#L512">512</a>         presentedIteratedEquiv k (n + 1) (presentedMomentum k n) ^ p := by</span>
+<span id="L513"><a href="#L513">513</a>     simp only [map_mul, map_pow]</span>
+<span id="L514"><a href="#L514">514</a>   rw [hmap]</span>
+<span id="L515"><a href="#L515">515</a>   change iteratedNormalFormLinearEquiv k (n + 1)</span>
+<span id="L516"><a href="#L516">516</a>       (presentedToIterated k (n + 1) (previousWeylEmbedding k n z) *</span>
+<span id="L517"><a href="#L517">517</a>         presentedToIterated k (n + 1) (presentedCoordinate k n) ^ a *</span>
+<span id="L518"><a href="#L518">518</a>         presentedToIterated k (n + 1) (presentedMomentum k n) ^ p) = _</span>
+<span id="L519"><a href="#L519">519</a>   have hprevious := DFunLike.congr_fun (presentedToIterated_previous k n) z</span>
+<span id="L520"><a href="#L520">520</a>   rw [AlgHom.comp_apply, AlgHom.comp_apply] at hprevious</span>
+<span id="L521"><a href="#L521">521</a>   rw [hprevious, presentedToIterated_coordinate,</span>
+<span id="L522"><a href="#L522">522</a>     presentedToIterated_momentum]</span>
+<span id="L523"><a href="#L523">523</a>   change iteratedNormalFormLinearEquiv k (n + 1)</span>
+<span id="L524"><a href="#L524">524</a>     (iteratedCoefficientOrdered k n a p (presentedToIterated k n z)) = _</span>
+<span id="L525"><a href="#L525">525</a>   rw [iteratedNormalFormLinearEquiv_coefficient_ordered]</span>
+<span id="L526"><a href="#L526">526</a>   rfl</span>
+<span id="L527"><a href="#L527">527</a> </span>
+<span id="L528"><a href="#L528">528</a> /-- Exact normal-ordering formula for two newest-pair blocks.  Every correction</span>
+<span id="L529"><a href="#L529">529</a> term lowers both the coordinate and momentum exponents by the same amount. -/</span>
+<span id="L530"><a href="#L530">530</a> theorem presentedCoefficientOrdered_mul</span>
+<span id="L531"><a href="#L531">531</a>     (n a b c d : ℕ) (z₁ z₂ : WeylAlg k n) :</span>
+<span id="L532"><a href="#L532">532</a>     presentedCoefficientOrdered k n a b z₁ *</span>
+<span id="L533"><a href="#L533">533</a>         presentedCoefficientOrdered k n c d z₂ =</span>
+<span id="L534"><a href="#L534">534</a>       ∑ i ∈ Finset.range (b + 1),</span>
+<span id="L535"><a href="#L535">535</a>         if i ≤ c then</span>
+<span id="L536"><a href="#L536">536</a>           (b.choose i * c.descFactorial i) •</span>
+<span id="L537"><a href="#L537">537</a>             presentedCoefficientOrdered k n (a + c - i) (b + d - i) (z₁ * z₂)</span>
+<span id="L538"><a href="#L538">538</a>         else 0 := by</span>
+<span id="L539"><a href="#L539">539</a>   let X := presentedCoordinate k n</span>
+<span id="L540"><a href="#L540">540</a>   let P := presentedMomentum k n</span>
+<span id="L541"><a href="#L541">541</a>   let Z₁ := previousWeylEmbedding k n z₁</span>
+<span id="L542"><a href="#L542">542</a>   let Z₂ := previousWeylEmbedding k n z₂</span>
+<span id="L543"><a href="#L543">543</a>   have hX : Commute X Z₂ := presentedCoordinate_commutes_previous k n z₂</span>
+<span id="L544"><a href="#L544">544</a>   have hP : Commute P Z₂ := presentedMomentum_commutes_previous k n z₂</span>
+<span id="L545"><a href="#L545">545</a>   have hblock : Commute (X ^ a * P ^ b) Z₂ :=</span>
+<span id="L546"><a href="#L546">546</a>     (hX.pow_left a).mul_left (hP.pow_left b)</span>
+<span id="L547"><a href="#L547">547</a>   have hPX : P * X - X * P = 1 := by</span>
+<span id="L548"><a href="#L548">548</a>     rw [show P * X = X * P + 1 from presentedMomentum_mul_coordinate k n]</span>
+<span id="L549"><a href="#L549">549</a>     noncomm_ring</span>
+<span id="L550"><a href="#L550">550</a>   rw [presentedCoefficientOrdered, presentedCoefficientOrdered]</span>
+<span id="L551"><a href="#L551">551</a>   change (Z₁ * X ^ a * P ^ b) * (Z₂ * X ^ c * P ^ d) = _</span>
+<span id="L552"><a href="#L552">552</a>   calc</span>
+<span id="L553"><a href="#L553">553</a>     (Z₁ * X ^ a * P ^ b) * (Z₂ * X ^ c * P ^ d) =</span>
+<span id="L554"><a href="#L554">554</a>         Z₁ * ((X ^ a * P ^ b) * Z₂) * (X ^ c * P ^ d) := by</span>
+<span id="L555"><a href="#L555">555</a>       noncomm_ring</span>
+<span id="L556"><a href="#L556">556</a>     _ = (Z₁ * Z₂ * X ^ a) * (P ^ b * X ^ c) * P ^ d := by</span>
+<span id="L557"><a href="#L557">557</a>       rw [hblock.eq]</span>
+<span id="L558"><a href="#L558">558</a>       noncomm_ring</span>
+<span id="L559"><a href="#L559">559</a>     _ = (Z₁ * Z₂ * X ^ a) *</span>
+<span id="L560"><a href="#L560">560</a>           (∑ i ∈ Finset.range (b + 1),</span>
+<span id="L561"><a href="#L561">561</a>             if i ≤ c then</span>
+<span id="L562"><a href="#L562">562</a>               (b.choose i * c.descFactorial i) •</span>
+<span id="L563"><a href="#L563">563</a>                 (X ^ (c - i) * P ^ (b - i))</span>
+<span id="L564"><a href="#L564">564</a>             else 0) * P ^ d := by</span>
+<span id="L565"><a href="#L565">565</a>       rw [OreAmbient.commutator_pow_mul_pow P X hPX b c]</span>
+<span id="L566"><a href="#L566">566</a>     _ = _ := by</span>
+<span id="L567"><a href="#L567">567</a>       rw [Finset.mul_sum, Finset.sum_mul]</span>
+<span id="L568"><a href="#L568">568</a>       apply Finset.sum_congr rfl</span>
+<span id="L569"><a href="#L569">569</a>       intro i hi</span>
+<span id="L570"><a href="#L570">570</a>       have hib : i ≤ b := by</span>
+<span id="L571"><a href="#L571">571</a>         have := Finset.mem_range.mp hi</span>
+<span id="L572"><a href="#L572">572</a>         omega</span>
+<span id="L573"><a href="#L573">573</a>       by_cases hic : i ≤ c</span>
+<span id="L574"><a href="#L574">574</a>       · simp only [if_pos hic, OreAmbient.mul_nsmul_left,</span>
+<span id="L575"><a href="#L575">575</a>           OreAmbient.nsmul_mul_right, mul_nsmul]</span>
+<span id="L576"><a href="#L576">576</a>         congr 1</span>
+<span id="L577"><a href="#L577">577</a>         congr 1</span>
+<span id="L578"><a href="#L578">578</a>         change (Z₁ * Z₂ * X ^ a) * (X ^ (c - i) * P ^ (b - i)) * P ^ d =</span>
+<span id="L579"><a href="#L579">579</a>           previousWeylEmbedding k n (z₁ * z₂) * X ^ (a + c - i) *</span>
+<span id="L580"><a href="#L580">580</a>             P ^ (b + d - i)</span>
+<span id="L581"><a href="#L581">581</a>         rw [map_mul]</span>
+<span id="L582"><a href="#L582">582</a>         rw [show a + c - i = a + (c - i) by omega,</span>
+<span id="L583"><a href="#L583">583</a>           show b + d - i = (b - i) + d by omega,</span>
+<span id="L584"><a href="#L584">584</a>           pow_add, pow_add]</span>
+<span id="L585"><a href="#L585">585</a>         noncomm_ring</span>
+<span id="L586"><a href="#L586">586</a>       · simp [hic]</span>
+<span id="L587"><a href="#L587">587</a> </span>
+<span id="L588"><a href="#L588">588</a> -- Compile-time API contract: the exact contraction range, coefficient, and</span>
+<span id="L589"><a href="#L589">589</a> -- exponent loss are part of the public normal-ordering statement.</span>
+<span id="L590"><a href="#L590">590</a> example (n a b c d : ℕ) (z₁ z₂ : WeylAlg k n) :</span>
+<span id="L591"><a href="#L591">591</a>     presentedCoefficientOrdered k n a b z₁ *</span>
+<span id="L592"><a href="#L592">592</a>         presentedCoefficientOrdered k n c d z₂ =</span>
+<span id="L593"><a href="#L593">593</a>       ∑ i ∈ Finset.range (b + 1),</span>
+<span id="L594"><a href="#L594">594</a>         if i ≤ c then</span>
+<span id="L595"><a href="#L595">595</a>           (b.choose i * c.descFactorial i) •</span>
+<span id="L596"><a href="#L596">596</a>             presentedCoefficientOrdered k n (a + c - i) (b + d - i) (z₁ * z₂)</span>
+<span id="L597"><a href="#L597">597</a>         else 0 :=</span>
+<span id="L598"><a href="#L598">598</a>   presentedCoefficientOrdered_mul k n a b c d z₁ z₂</span>
+<span id="L599"><a href="#L599">599</a> </span>
+<span id="L600"><a href="#L600">600</a> /-- Ordered monomials built recursively from the named generators in the</span>
+<span id="L601"><a href="#L601">601</a> quotient presentation.  Older coordinate/momentum pairs occur first; within</span>
+<span id="L602"><a href="#L602">602</a> each pair the coordinate power precedes the momentum power. -/</span>
+<span id="L603"><a href="#L603">603</a> def presentedOrderedMonomial :</span>
+<span id="L604"><a href="#L604">604</a>     (n : ℕ) → (Fin n → ℕ) → (Fin n → ℕ) → WeylAlg k n</span>
+<span id="L605"><a href="#L605">605</a>   | 0, _, _ =&gt; 1</span>
+<span id="L606"><a href="#L606">606</a>   | n + 1, a, p =&gt;</span>
+<span id="L607"><a href="#L607">607</a>       previousWeylEmbedding k n</span>
+<span id="L608"><a href="#L608">608</a>           (presentedOrderedMonomial n</span>
+<span id="L609"><a href="#L609">609</a>             (fun i =&gt; a i.succ) (fun i =&gt; p i.succ)) *</span>
+<span id="L610"><a href="#L610">610</a>         presentedCoordinate k n ^ a 0 * presentedMomentum k n ^ p 0</span>
+<span id="L611"><a href="#L611">611</a> </span>
+<span id="L612"><a href="#L612">612</a> /-- The presentation/Ore equivalence preserves the recursively ordered</span>
+<span id="L613"><a href="#L613">613</a> monomials, not merely the degree-one generators. -/</span>
+<span id="L614"><a href="#L614">614</a> theorem presentedIteratedEquiv_orderedMonomial :</span>
+<span id="L615"><a href="#L615">615</a>     ∀ (n : ℕ) (a p : Fin n → ℕ),</span>
+<span id="L616"><a href="#L616">616</a>       presentedIteratedEquiv k n (presentedOrderedMonomial k n a p) =</span>
+<span id="L617"><a href="#L617">617</a>         iteratedOrderedMonomial k n a p := by</span>
+<span id="L618"><a href="#L618">618</a>   intro n</span>
+<span id="L619"><a href="#L619">619</a>   induction n with</span>
+<span id="L620"><a href="#L620">620</a>   | zero =&gt;</span>
+<span id="L621"><a href="#L621">621</a>       intro a p</span>
+<span id="L622"><a href="#L622">622</a>       simp [presentedOrderedMonomial, iteratedOrderedMonomial]</span>
+<span id="L623"><a href="#L623">623</a>   | succ n ih =&gt;</span>
+<span id="L624"><a href="#L624">624</a>       intro a p</span>
+<span id="L625"><a href="#L625">625</a>       rw [presentedOrderedMonomial, iteratedOrderedMonomial, map_mul, map_mul,</span>
+<span id="L626"><a href="#L626">626</a>         map_pow, map_pow, presentedIteratedEquiv]</span>
+<span id="L627"><a href="#L627">627</a>       change</span>
+<span id="L628"><a href="#L628">628</a>         presentedToIterated k (n + 1)</span>
+<span id="L629"><a href="#L629">629</a>               (previousWeylEmbedding k n</span>
+<span id="L630"><a href="#L630">630</a>                 (presentedOrderedMonomial k n</span>
+<span id="L631"><a href="#L631">631</a>                   (fun i =&gt; a i.succ) (fun i =&gt; p i.succ))) *</span>
+<span id="L632"><a href="#L632">632</a>             presentedToIterated k (n + 1) (presentedCoordinate k n) ^ a 0 *</span>
+<span id="L633"><a href="#L633">633</a>           presentedToIterated k (n + 1) (presentedMomentum k n) ^ p 0 = _</span>
+<span id="L634"><a href="#L634">634</a>       have hprevious := DFunLike.congr_fun</span>
+<span id="L635"><a href="#L635">635</a>         (presentedToIterated_previous k n)</span>
+<span id="L636"><a href="#L636">636</a>         (presentedOrderedMonomial k n</span>
+<span id="L637"><a href="#L637">637</a>           (fun i =&gt; a i.succ) (fun i =&gt; p i.succ))</span>
+<span id="L638"><a href="#L638">638</a>       rw [AlgHom.comp_apply, AlgHom.comp_apply] at hprevious</span>
+<span id="L639"><a href="#L639">639</a>       have hih := ih (fun i =&gt; a i.succ) (fun i =&gt; p i.succ)</span>
+<span id="L640"><a href="#L640">640</a>       change presentedToIterated k n</span>
+<span id="L641"><a href="#L641">641</a>           (presentedOrderedMonomial k n</span>
+<span id="L642"><a href="#L642">642</a>             (fun i =&gt; a i.succ) (fun i =&gt; p i.succ)) = _ at hih</span>
+<span id="L643"><a href="#L643">643</a>       rw [hprevious, hih, presentedToIterated_coordinate,</span>
+<span id="L644"><a href="#L644">644</a>         presentedToIterated_momentum]</span>
+<span id="L645"><a href="#L645">645</a>       rfl</span>
+<span id="L646"><a href="#L646">646</a> </span>
+<span id="L647"><a href="#L647">647</a> /-- Every ordered product of named presentation generators has the expected</span>
+<span id="L648"><a href="#L648">648</a> commutative symbol monomial as its checked normal form. -/</span>
+<span id="L649"><a href="#L649">649</a> theorem presentedOrderedMonomial_normal (n : ℕ) (a p : Fin n → ℕ) :</span>
+<span id="L650"><a href="#L650">650</a>     presentedNormalFormLinearEquiv k n</span>
+<span id="L651"><a href="#L651">651</a>         (presentedOrderedMonomial k n a p) =</span>
+<span id="L652"><a href="#L652">652</a>       MvPolynomial.monomial (phaseExponent a p) 1 := by</span>
+<span id="L653"><a href="#L653">653</a>   rw [presentedNormalFormLinearEquiv, LinearEquiv.trans_apply,</span>
+<span id="L654"><a href="#L654">654</a>     AlgEquiv.toLinearEquiv_apply, presentedIteratedEquiv_orderedMonomial,</span>
+<span id="L655"><a href="#L655">655</a>     iteratedOrderedMonomial_normal]</span>
+<span id="L656"><a href="#L656">656</a> </span>
+<span id="L657"><a href="#L657">657</a> /-- A free-module basis on the presented Weyl algebra, pulled back from the</span>
+<span id="L658"><a href="#L658">658</a> standard monomial basis of the symbol polynomial space. -/</span>
+<span id="L659"><a href="#L659">659</a> def presentedNormalFormBasis (n : Nat) :</span>
+<span id="L660"><a href="#L660">660</a>     Module.Basis (PhaseVar n →₀ ℕ) k (WeylAlg k n) :=</span>
+<span id="L661"><a href="#L661">661</a>   (MvPolynomial.basisMonomials (PhaseVar n) k).map</span>
+<span id="L662"><a href="#L662">662</a>     (presentedNormalFormLinearEquiv k n).symm</span>
+<span id="L663"><a href="#L663">663</a> </span>
+<span id="L664"><a href="#L664">664</a> @[simp] theorem presentedNormalFormBasis_apply (n : Nat)</span>
+<span id="L665"><a href="#L665">665</a>     (m : PhaseVar n →₀ ℕ) :</span>
+<span id="L666"><a href="#L666">666</a>     presentedNormalFormBasis k n m =</span>
+<span id="L667"><a href="#L667">667</a>       (presentedNormalFormLinearEquiv k n).symm (MvPolynomial.monomial m 1) := by</span>
+<span id="L668"><a href="#L668">668</a>   rfl</span>
+<span id="L669"><a href="#L669">669</a> </span>
+<span id="L670"><a href="#L670">670</a> /-- Split a finite phase exponent into its coordinate and momentum parts. -/</span>
+<span id="L671"><a href="#L671">671</a> theorem phaseExponent_split {n : ℕ} (m : PhaseVar n →₀ ℕ) :</span>
+<span id="L672"><a href="#L672">672</a>     phaseExponent (fun i =&gt; m (.inl i)) (fun i =&gt; m (.inr i)) = m := by</span>
+<span id="L673"><a href="#L673">673</a>   ext i</span>
+<span id="L674"><a href="#L674">674</a>   cases i &lt;;&gt; rfl</span>
+<span id="L675"><a href="#L675">675</a> </span>
+<span id="L676"><a href="#L676">676</a> /-- The transported normal-form basis consists exactly of the recursively</span>
+<span id="L677"><a href="#L677">677</a> ordered products of the named Weyl generators. -/</span>
+<span id="L678"><a href="#L678">678</a> theorem presentedNormalFormBasis_eq_orderedMonomial (n : ℕ)</span>
+<span id="L679"><a href="#L679">679</a>     (m : PhaseVar n →₀ ℕ) :</span>
+<span id="L680"><a href="#L680">680</a>     presentedNormalFormBasis k n m =</span>
+<span id="L681"><a href="#L681">681</a>       presentedOrderedMonomial k n</span>
+<span id="L682"><a href="#L682">682</a>         (fun i =&gt; m (.inl i)) (fun i =&gt; m (.inr i)) := by</span>
+<span id="L683"><a href="#L683">683</a>   apply (presentedNormalFormLinearEquiv k n).injective</span>
+<span id="L684"><a href="#L684">684</a>   rw [presentedNormalFormBasis_apply, LinearEquiv.apply_symm_apply,</span>
+<span id="L685"><a href="#L685">685</a>     presentedOrderedMonomial_normal, phaseExponent_split]</span>
+<span id="L686"><a href="#L686">686</a> </span>
+<span id="L687"><a href="#L687">687</a> /-- The PBW basis of the presented Weyl algebra, indexed by coordinate and</span>
+<span id="L688"><a href="#L688">688</a> momentum exponent vectors. -/</span>
+<span id="L689"><a href="#L689">689</a> def presentedPBWBasis (n : Nat) :</span>
+<span id="L690"><a href="#L690">690</a>     Module.Basis (PhaseVar n →₀ ℕ) k (WeylAlg k n) :=</span>
+<span id="L691"><a href="#L691">691</a>   presentedNormalFormBasis k n</span>
+<span id="L692"><a href="#L692">692</a> </span>
+<span id="L693"><a href="#L693">693</a> @[simp] theorem presentedPBWBasis_apply (n : ℕ)</span>
+<span id="L694"><a href="#L694">694</a>     (m : PhaseVar n →₀ ℕ) :</span>
+<span id="L695"><a href="#L695">695</a>     presentedPBWBasis k n m =</span>
+<span id="L696"><a href="#L696">696</a>       presentedOrderedMonomial k n</span>
+<span id="L697"><a href="#L697">697</a>         (fun i =&gt; m (.inl i)) (fun i =&gt; m (.inr i)) := by</span>
+<span id="L698"><a href="#L698">698</a>   exact presentedNormalFormBasis_eq_orderedMonomial k n m</span>
+<span id="L699"><a href="#L699">699</a> </span>
+<span id="L700"><a href="#L700">700</a> #print axioms iteratedNormalFormLinearEquiv</span>
+<span id="L701"><a href="#L701">701</a> #print axioms iteratedNormalFormLinearEquiv_one</span>
+<span id="L702"><a href="#L702">702</a> #print axioms iteratedNormalFormLinearEquiv_generator</span>
+<span id="L703"><a href="#L703">703</a> #print axioms iteratedOrderedMonomial_normal</span>
+<span id="L704"><a href="#L704">704</a> #print axioms iteratedNormalFormLinearEquiv_coefficient_ordered</span>
+<span id="L705"><a href="#L705">705</a> #print axioms presentedNormalFormLinearEquiv</span>
+<span id="L706"><a href="#L706">706</a> #print axioms presentedNormalFormLinearEquiv_one</span>
+<span id="L707"><a href="#L707">707</a> #print axioms presentedNormalFormLinearEquiv_generator</span>
+<span id="L708"><a href="#L708">708</a> #print axioms presentedNormalFormLinearEquiv_previous_ordered</span>
+<span id="L709"><a href="#L709">709</a> #print axioms AlgebraicAnalysis.OreDivision.OreAmbient.commutator_pow_mul_pow</span>
+<span id="L710"><a href="#L710">710</a> #print axioms presentedCoefficientOrdered_mul</span>
+<span id="L711"><a href="#L711">711</a> #print axioms presentedIteratedEquiv_orderedMonomial</span>
+<span id="L712"><a href="#L712">712</a> #print axioms presentedOrderedMonomial_normal</span>
+<span id="L713"><a href="#L713">713</a> #print axioms presentedNormalFormBasis</span>
+<span id="L714"><a href="#L714">714</a> #print axioms presentedNormalFormBasis_apply</span>
+<span id="L715"><a href="#L715">715</a> #print axioms presentedNormalFormBasis_eq_orderedMonomial</span>
+<span id="L716"><a href="#L716">716</a> #print axioms presentedPBWBasis</span>
+<span id="L717"><a href="#L717">717</a> #print axioms presentedPBWBasis_apply</span>
+<span id="L718"><a href="#L718">718</a> </span>
+<span id="L719"><a href="#L719">719</a> end</span>
+<span id="L720"><a href="#L720">720</a> </span>
+<span id="L721"><a href="#L721">721</a> end Stafford38.WeylPBW</span>
+<span id="L722"><a href="#L722">722</a> </span></pre>

@@ -1,0 +1,870 @@
+AlgebraicAnalysis.BaseLocalizedKoszulPositivity.localized_length_cokernel_gt_kernel.{u_1, u_2, u_3} {R : Type u_1}
+  {C : Type u_2} {E : Type u_3} [CommRing R] [CommRing C] [Algebra R C] [AddCommGroup E] [Module R E] [Module C E]
+  [IsScalarTower R C E] [IsNoetherianRing R] [IsNoetherianRing C] [Module.Finite C E] (x : C)
+  [Module.Finite R ↥(↑R ((LinearMap.lsmul C E) x)).ker] [Module.Finite R (E ⧸ (↑R ((LinearMap.lsmul C E) x)).range)]
+  (q : PrimeSpectrum R) (hqmem : q ∈ Module.support R (E ⧸ (↑R ((LinearMap.lsmul C E) x)).range))
+  (hqmin :
+    ∀ p ∈ Module.support R (E ⧸ (↑R ((LinearMap.lsmul C E) x)).range), p.asIdeal ≤ q.asIdeal → q.asIdeal ≤ p.asIdeal)
+  (havoid : ∀ p ∈ (Module.annihilator C E).minimalPrimes, x ∉ p) :
+  Module.length (Localization q.asIdeal.primeCompl)
+      (LocalizedModule q.asIdeal.primeCompl (E ⧸ (↑R ((LinearMap.lsmul C E) x)).range)) >
+    Module.length (Localization q.asIdeal.primeCompl)
+      (LocalizedModule q.asIdeal.primeCompl ↥(↑R ((LinearMap.lsmul C E) x)).ker)
+'AlgebraicAnalysis.BaseLocalizedKoszulPositivity.localized_length_cokernel_gt_kernel' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+AlgebraicAnalysis.exists_uniform_subsingleton_localized.{u_1, u_2, u_3} {R : Type u_1} [CommRing R] (S : Submonoid R)
+  {U : Type u_2} [AddCommMonoid U] [Module R U] {V : ℕ → Type u_3} [(r : ℕ) → AddCommMonoid (V r)]
+  [(r : ℕ) → Module R (V r)] (b : (r : ℕ) → U →ₗ[R] V r) (hmono : ∀ (r s : ℕ), r ≤ s → (b r).ker ≤ (b s).ker)
+  (hpoint : ∀ (u : U), ∃ r, (b r) u = 0) (hsurj : ∀ (r : ℕ), Function.Surjective ⇑(b r))
+  [IsNoetherian (Localization S) (LocalizedModule S U)] : ∃ r, Subsingleton (LocalizedModule S (V r))
+'AlgebraicAnalysis.exists_uniform_subsingleton_localized' depends on axioms: [propext, Classical.choice, Quot.sound]
+AlgebraicAnalysis.localized_kernel_and_cokernel_isFiniteLength.{u_1, u_2, u_3} {R : Type u_1} {C : Type u_2}
+  {E : Type u_3} [CommRing R] [CommRing C] [Algebra R C] [AddCommGroup E] [Module C E] [Module R E]
+  [IsScalarTower R C E] [IsNoetherianRing R] [IsNoetherianRing C] [Module.Finite C E] (f : Module.End C E)
+  [Module.Finite R ↥(↑R f).ker] [Module.Finite R (E ⧸ (↑R f).range)] (q : PrimeSpectrum R)
+  (hqmem : q ∈ Module.support R (E ⧸ (↑R f).range))
+  (hq : ∀ p ∈ Module.support R (E ⧸ (↑R f).range), p.asIdeal ≤ q.asIdeal → q.asIdeal ≤ p.asIdeal) :
+  IsFiniteLength (Localization q.asIdeal.primeCompl) (LocalizedModule q.asIdeal.primeCompl (E ⧸ (↑R f).range)) ∧
+    IsFiniteLength (Localization q.asIdeal.primeCompl) (LocalizedModule q.asIdeal.primeCompl ↥(↑R f).ker)
+'AlgebraicAnalysis.localized_kernel_and_cokernel_isFiniteLength' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Stafford.exists_eulerPolynomial_x_pow_mul_d_pow.{u_1} {A : Type u_1} [Ring A] [Algebra ℚ A] (x d : A)
+  (h : d * x = x * d + 1) (n : ℕ) : ∃ f, (Stafford.eulerPolynomialEval x d) f = x ^ n * d ^ n
+'Stafford.exists_eulerPolynomial_x_pow_mul_d_pow' depends on axioms: [propext, Classical.choice, Quot.sound]
+Stafford38.Characteristic.BaseRelativePoisson.IsBaseRelativePoisson.{u_1} {k : Type u_1} [Field k] {n : ℕ}
+  (J : Ideal (Stafford38.Characteristic.SymbolRing k n)) : Prop
+'Stafford38.Characteristic.BaseRelativePoisson.IsBaseRelativePoisson' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Stafford38.Characteristic.BaseRelativePoisson.zeroSection_stable_under_differential_translation_of_isBaseRelativePoisson.{u_1}
+  {k : Type u_1} [Field k] {n : ℕ} [CharZero k] (J : Ideal (Stafford38.Characteristic.SymbolRing k n))
+  (hJ : Stafford38.Characteristic.BaseRelativePoisson.IsBaseRelativePoisson J) (y : Fin n → k)
+  (hzero : ∀ g ∈ J, (MvPolynomial.eval (Stafford38.Geometry.CoisotropicTranslation.zeroSectionPoint y)) g = 0)
+  (f : MvPolynomial (Fin n) k) (hf : Stafford38.Geometry.CoisotropicTranslation.baseLift f ∈ J)
+  (g : Stafford38.Characteristic.SymbolRing k n) (hg : g ∈ J) (t : k) :
+  (MvPolynomial.eval (Stafford38.Geometry.CoisotropicTranslation.differentialTranslatePoint y f t)) g = 0
+'Stafford38.Characteristic.BaseRelativePoisson.zeroSection_stable_under_differential_translation_of_isBaseRelativePoisson' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Stafford38.Characteristic.CanonicalGabberInvolutivityInterface.WeylAssociatedGradedRadicalInvolutivity.{u} : Prop
+'Stafford38.Characteristic.CanonicalGabberInvolutivityInterface.WeylAssociatedGradedRadicalInvolutivity' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Stafford38.Characteristic.CanonicalKoszulContradiction.canonical_support_avoidance.{u_1} (k : Type u_1) [Field k]
+  [CharZero k] [Algebra ℚ k] (n N : ℕ) (d : Stafford38Challenge.WeylAlg k (n + 1)) (hN : 0 < N)
+  (hd : Stafford38.WeylPBWMonicBridge.IsPBWMonicAt k (Sum.inr 0) N d) :
+  Disjoint
+    (Stafford38.CharacteristicTransposedFilteredModuleSupport.transposedOrderAssociatedGradedSupport k
+      (Stafford38.WeylEulerResidue.canonicalRightIdeal (Stafford38.WeylIteratedEquivalence.presentedCoordinate k n) d
+        N))
+    (PrimeSpectrum.zeroLocus {MvPolynomial.X (Sum.inl 0)})
+'Stafford38.Characteristic.CanonicalKoszulContradiction.canonical_support_avoidance' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Stafford38.Characteristic.CanonicalKoszulContradiction.coordinate_cokernel_subsingleton.{u_1} (k : Type u_1) [Field k]
+  [CharZero k] [Algebra ℚ k] (n N : ℕ) (d : Stafford38Challenge.WeylAlg k (n + 1)) (hN : 0 < N)
+  (hd : Stafford38.WeylPBWMonicBridge.IsPBWMonicAt k (Sum.inr 0) N d) :
+  Subsingleton
+    (Stafford38.Characteristic.CanonicalGradedTangentialEquivalences.Graded k n N d ⧸
+      (Stafford38.Characteristic.CanonicalOldTangentialFiniteness.oldCoordinateMap n
+          (Stafford38.Characteristic.CanonicalGradedTangentialEquivalences.Graded k n N d)).range)
+'Stafford38.Characteristic.CanonicalKoszulContradiction.coordinate_cokernel_subsingleton' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Stafford38.Characteristic.CanonicalKoszulContradiction.no_minimal_coordinate_cokernel_support.{u_1} (k : Type u_1)
+  [Field k] [CharZero k] [Algebra ℚ k] (n N : ℕ) (d : Stafford38Challenge.WeylAlg k (n + 1)) (hN : 0 < N)
+  (hd : Stafford38.WeylPBWMonicBridge.IsPBWMonicAt k (Sum.inr 0) N d)
+  (q : PrimeSpectrum (Stafford38.Characteristic.CanonicalGradedTangentialEquivalences.T k n))
+  (hqmem :
+    q ∈
+      Module.support (Stafford38.Characteristic.CanonicalGradedTangentialEquivalences.T k n)
+        (Stafford38.Characteristic.CanonicalGradedTangentialEquivalences.Graded k n N d ⧸
+          (Stafford38.Characteristic.CanonicalOldTangentialFiniteness.oldCoordinateMap n
+              (Stafford38.Characteristic.CanonicalGradedTangentialEquivalences.Graded k n N d)).range))
+  (hqmin :
+    ∀
+      p ∈
+        Module.support (Stafford38.Characteristic.CanonicalGradedTangentialEquivalences.T k n)
+          (Stafford38.Characteristic.CanonicalGradedTangentialEquivalences.Graded k n N d ⧸
+            (Stafford38.Characteristic.CanonicalOldTangentialFiniteness.oldCoordinateMap n
+                (Stafford38.Characteristic.CanonicalGradedTangentialEquivalences.Graded k n N d)).range),
+      p.asIdeal ≤ q.asIdeal → q.asIdeal ≤ p.asIdeal) :
+  False
+'Stafford38.Characteristic.CanonicalKoszulContradiction.no_minimal_coordinate_cokernel_support' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Stafford38.Characteristic.CanonicalOldTangentialFiniteness.canonical_finite_old_coordinate_kernel_cokernel.{u_1}
+  {k : Type u_1} [Field k] {n N : ℕ} {d : Stafford38Challenge.WeylAlg k (n + 1)}
+  (hd : Stafford38.WeylPBWMonicBridge.IsPBWMonicAt k (Sum.inr 0) N d) :
+  let E :=
+    Stafford38.CharacteristicAssociatedGradedModule.OrderAssociatedGradedModule k
+      (Stafford38.WeylEulerResidue.canonicalRightIdeal (Stafford38.WeylIteratedEquivalence.presentedCoordinate k n) d
+        N);
+  Module.Finite (Stafford38.Characteristic.CanonicalOldTangentialFiniteness.oldTangentialCoeffRing n)
+      ↥(Stafford38.Characteristic.CanonicalOldTangentialFiniteness.oldCoordinateMap n E).ker ∧
+    Module.Finite (Stafford38.Characteristic.CanonicalOldTangentialFiniteness.oldTangentialCoeffRing n)
+      (E ⧸ (Stafford38.Characteristic.CanonicalOldTangentialFiniteness.oldCoordinateMap n E).range)
+'Stafford38.Characteristic.CanonicalOldTangentialFiniteness.canonical_finite_old_coordinate_kernel_cokernel' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Stafford38.Characteristic.CanonicalPageEulerInequality.canonicalPage_length_target_le_source.{u_1} (k : Type u_1)
+  [Field k] [Algebra ℚ k] (n N : ℕ) (d : Stafford38Challenge.WeylAlg k (n + 1))
+  (hd : Stafford38.WeylPBWMonicBridge.IsPBWMonicAt k (Sum.inr 0) N d) (S : Submonoid (MvPolynomial (Fin n ⊕ Fin n) k))
+  (hA0 :
+    IsFiniteLength (Localization S)
+      (LocalizedModule S ((Stafford38.Characteristic.CanonicalTangentialTotalAction.complex k n N d hd).SourceTotal 1)))
+  (hC0 :
+    IsFiniteLength (Localization S)
+      (LocalizedModule S
+        ((Stafford38.Characteristic.CanonicalTangentialTotalAction.complex k n N d hd).TargetTotal 1))) :
+  Module.length (Localization S)
+      (LocalizedModule S
+        ((Stafford38.Characteristic.CanonicalTangentialTotalAction.complex k n N d hd).TargetTotal 1)) ≤
+    Module.length (Localization S)
+      (LocalizedModule S ((Stafford38.Characteristic.CanonicalTangentialTotalAction.complex k n N d hd).SourceTotal 1))
+'Stafford38.Characteristic.CanonicalPageEulerInequality.canonicalPage_length_target_le_source' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Stafford38.Characteristic.CanonicalTangentialSymbolFiniteness.canonical_orderAssociatedGradedModule_finite_tangential_coordinate.{u_1}
+  {k : Type u_1} [Field k] {n N : ℕ} {d : Stafford38Challenge.WeylAlg k (n + 1)}
+  (hd : Stafford38.WeylPBWMonicBridge.IsPBWMonicAt k (Sum.inr 0) N d) :
+  let E :=
+    Stafford38.CharacteristicAssociatedGradedModule.OrderAssociatedGradedModule k
+      (Stafford38.WeylEulerResidue.canonicalRightIdeal (Stafford38.WeylIteratedEquivalence.presentedCoordinate k n) d
+        N);
+  Module.Finite (Stafford38.Characteristic.CanonicalTangentialSymbolFiniteness.tangentialCoeffRing n)
+      ↥(Stafford38.Characteristic.CanonicalTangentialSymbolFiniteness.tangentialCoordinateMap n E).ker ∧
+    Module.Finite (Stafford38.Characteristic.CanonicalTangentialSymbolFiniteness.tangentialCoeffRing n)
+      (E ⧸ (Stafford38.Characteristic.CanonicalTangentialSymbolFiniteness.tangentialCoordinateMap n E).range)
+'Stafford38.Characteristic.CanonicalTangentialSymbolFiniteness.canonical_orderAssociatedGradedModule_finite_tangential_coordinate' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Stafford38.Characteristic.GabberGlobalAssembly.minimalPrime_isInvolutive.{u} (k : Type u) [Field k] [CharZero k] {n : ℕ}
+  (I : Stafford38.EulerSurjectivity.RightIdeal (Stafford38Challenge.WeylAlg k n))
+  (P : Ideal (Stafford38.Characteristic.SymbolRing k n)) [P.IsPrime]
+  (hP :
+    P ∈
+      (Module.annihilator (Stafford38.Characteristic.SymbolRing k n)
+          (Stafford38.CharacteristicAssociatedGradedModule.OrderAssociatedGradedModule k I)).minimalPrimes) :
+  Stafford38.Characteristic.PostScalarExtensionPoisson.IsInvolutive P
+'Stafford38.Characteristic.GabberGlobalAssembly.minimalPrime_isInvolutive' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Stafford38.Characteristic.GabberGlobalAssembly.weylAssociatedGradedRadicalInvolutivity.{u} :
+  Stafford38.Characteristic.CanonicalGabberInvolutivityInterface.WeylAssociatedGradedRadicalInvolutivity
+'Stafford38.Characteristic.GabberGlobalAssembly.weylAssociatedGradedRadicalInvolutivity' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Stafford38.Characteristic.GeometricSupportDescent.map_scalarPolynomialMap_eq_top_iff.{u_1, u_2} {k : Type u_1} [Field k]
+  {σ : Type u_2} [Finite σ] (J : Ideal (MvPolynomial σ k)) :
+  Ideal.map (Stafford38.Geometry.ScalarExtensionPoints.scalarPolynomialMap σ) J = ⊤ ↔ J = ⊤
+'Stafford38.Characteristic.GeometricSupportDescent.map_scalarPolynomialMap_eq_top_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Stafford38.Characteristic.NoncharacteristicMinimalPrime.canonical_minimalPrime_mem_of_normalCoordinate_false.{u_1}
+  {k : Type u_1} [Field k] [CharZero k] {n N : ℕ} (d : Stafford38Challenge.WeylAlg k (n + 1)) (hN : 0 < N)
+  (hd : Stafford38.WeylPBWMonicBridge.IsPBWMonicAt k (Sum.inr 0) N d)
+  {P : Ideal (Stafford38.Characteristic.SymbolRing k (n + 1))}
+  (hP :
+    P ∈
+      (Module.annihilator (Stafford38.Characteristic.SymbolRing k (n + 1))
+          (Stafford38.CharacteristicAssociatedGradedModule.OrderAssociatedGradedModule k
+            (Stafford38.WeylEulerResidue.canonicalRightIdeal
+              (Stafford38.WeylIteratedEquivalence.presentedCoordinate k n) d N))).minimalPrimes) :
+  MvPolynomial.X (Sum.inl 0) ∉ P
+'Stafford38.Characteristic.NoncharacteristicMinimalPrime.canonical_minimalPrime_mem_of_normalCoordinate_false' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Stafford38.Characteristic.NormalSymbolPolynomial.canonicalNormalPolynomial_monic.{u_1} {k : Type u_1} [Field k]
+  {n N : ℕ} {d : Stafford38Challenge.WeylAlg k (n + 1)}
+  (hd : Stafford38.WeylPBWMonicBridge.IsPBWMonicAt k (Sum.inr 0) N d) :
+  (Stafford38.Characteristic.NormalSymbolPolynomial.canonicalNormalPolynomial d).Monic
+'Stafford38.Characteristic.NormalSymbolPolynomial.canonicalNormalPolynomial_monic' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Stafford38.Characteristic.NormalSymbolPolynomial.normalSymbolAlgEquiv.{u_1} {k : Type u_1} [Field k] (n : ℕ) :
+  Stafford38.Characteristic.SymbolRing k (n + 1) ≃ₐ[k] Polynomial (MvPolynomial { v // v ≠ Sum.inr 0 } k)
+'Stafford38.Characteristic.NormalSymbolPolynomial.normalSymbolAlgEquiv' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Stafford38.Characteristic.PaperLocalizedInvolutivity.minimalPrimes_isInvolutive_of_radical_isInvolutive_viaLocalization.{u_1}
+  {k : Type u_1} [Field k] {n : ℕ} (J : Ideal Stafford38.Characteristic.LocalizedPartialDerivation.R)
+  (hJ : Stafford38.Characteristic.PostScalarExtensionPoisson.IsInvolutive J.radical)
+  (P : Ideal Stafford38.Characteristic.LocalizedPartialDerivation.R) :
+  P ∈ J.minimalPrimes → Stafford38.Characteristic.PostScalarExtensionPoisson.IsInvolutive P
+'Stafford38.Characteristic.PaperLocalizedInvolutivity.minimalPrimes_isInvolutive_of_radical_isInvolutive_viaLocalization' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Stafford38.Characteristic.PostScalarExtensionPoisson.IsInvolutive.{u} {k : Type u} [Field k] {n : ℕ}
+  (J : Ideal (Stafford38.Characteristic.SymbolRing k n)) : Prop
+'Stafford38.Characteristic.PostScalarExtensionPoisson.IsInvolutive' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Stafford38.Characteristic.SymbolRing.{u_1} (k : Type u_1) [CommRing k] (n : ℕ) : Type u_1
+'Stafford38.Characteristic.SymbolRing' depends on axioms: [propext, Classical.choice, Quot.sound]
+Stafford38.Characteristic.poissonBracket.{u_1} {k : Type u_1} [CommRing k] {n : ℕ}
+  (f g : Stafford38.Characteristic.SymbolRing k n) : Stafford38.Characteristic.SymbolRing k n
+'Stafford38.Characteristic.poissonBracket' depends on axioms: [propext, Classical.choice, Quot.sound]
+Stafford38.CharacteristicAssociatedGradedModule.annihilator_orderAssociatedGradedModule.{u} (k : Type u) [Field k]
+  {n : ℕ} (I : Stafford38.EulerSurjectivity.RightIdeal (Stafford38Challenge.WeylAlg k n)) :
+  Module.annihilator (Stafford38.Characteristic.SymbolRing k n)
+      (Stafford38.CharacteristicAssociatedGradedModule.OrderAssociatedGradedModule k I) =
+    Stafford38.CharacteristicInitialIdeal.orderInitialIdeal k I
+'Stafford38.CharacteristicAssociatedGradedModule.annihilator_orderAssociatedGradedModule' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Stafford38.CharacteristicCanonicalCertificate.exists_fixedSource_certificate_of_orderCharacteristicSupport_eq_empty.{u}
+  (k : Type u) [Field k] (n N : ℕ) (d : Stafford38Challenge.WeylAlg k (n + 1))
+  (hsupport :
+    Stafford38.CharacteristicInitialIdeal.orderCharacteristicSupport k
+        (Stafford38.WeylEulerResidue.canonicalRightIdeal (Stafford38.WeylIteratedEquivalence.presentedCoordinate k n) d
+          N) =
+      ∅) :
+  ∃ R S, 1 = d * R + Stafford38.WeylIteratedEquivalence.presentedCoordinate k n ^ N * d * S
+'Stafford38.CharacteristicCanonicalCertificate.exists_fixedSource_certificate_of_orderCharacteristicSupport_eq_empty' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Stafford38.CharacteristicEmptySupportVanishing.orderInitialIdeal_eq_top_iff_rightQuotient_subsingleton.{u} (k : Type u)
+  [Field k] {n : ℕ} (I : Stafford38.EulerSurjectivity.RightIdeal (Stafford38Challenge.WeylAlg k n)) :
+  Stafford38.CharacteristicInitialIdeal.orderInitialIdeal k I = ⊤ ↔
+    Subsingleton (Stafford38.EulerSurjectivity.RightQuotient I)
+'Stafford38.CharacteristicEmptySupportVanishing.orderInitialIdeal_eq_top_iff_rightQuotient_subsingleton' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Stafford38.CharacteristicInitialIdeal.canonical_orderCharacteristicSupport_subset_principal_zeroLocus.{u} (k : Type u)
+  [Field k] (n N : ℕ) {d : Stafford38Challenge.WeylAlg k (n + 1)}
+  (hd : Stafford38.WeylPBWMonicBridge.IsPBWMonicAt k (Sum.inr 0) N d) :
+  Stafford38.CharacteristicInitialIdeal.orderCharacteristicSupport k
+      (Stafford38.WeylEulerResidue.canonicalRightIdeal (Stafford38.WeylIteratedEquivalence.presentedCoordinate k n) d
+        N) ⊆
+    PrimeSpectrum.zeroLocus
+      {(Stafford38.WeylLeadingSymbol.presentedPrincipalComponent k Stafford38.WeylFiltration.orderWeight N) d}
+'Stafford38.CharacteristicInitialIdeal.canonical_orderCharacteristicSupport_subset_principal_zeroLocus' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Stafford38.CharacteristicInitialIdeal.canonical_orderPrincipalComponent_isFibreOnly.{u} (k : Type u) [Field k] (n N : ℕ)
+  {d : Stafford38Challenge.WeylAlg k (n + 1)} (hd : Stafford38.WeylPBWMonicBridge.IsPBWMonicAt k (Sum.inr 0) N d) :
+  Stafford38.CharacteristicInitialIdeal.IsFibreOnly k
+    ((Stafford38.WeylLeadingSymbol.presentedPrincipalComponent k Stafford38.WeylFiltration.orderWeight N) d)
+'Stafford38.CharacteristicInitialIdeal.canonical_orderPrincipalComponent_isFibreOnly' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Stafford38.CharacteristicInitialIdeal.canonical_orderPrincipalComponent_mem_initialIdeal.{u} (k : Type u) [Field k]
+  (n N : ℕ) {d : Stafford38Challenge.WeylAlg k (n + 1)}
+  (hd : Stafford38.WeylPBWMonicBridge.IsPBWMonicAt k (Sum.inr 0) N d) :
+  (Stafford38.WeylLeadingSymbol.presentedPrincipalComponent k Stafford38.WeylFiltration.orderWeight N) d ∈
+    Stafford38.CharacteristicInitialIdeal.orderInitialIdeal k
+      (Stafford38.WeylEulerResidue.canonicalRightIdeal (Stafford38.WeylIteratedEquivalence.presentedCoordinate k n) d N)
+'Stafford38.CharacteristicInitialIdeal.canonical_orderPrincipalComponent_mem_initialIdeal' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Stafford38.CharacteristicInitialIdeal.orderCharacteristicSupport.{u} (k : Type u) [Field k] {n : ℕ}
+  (I : Stafford38.EulerSurjectivity.RightIdeal (Stafford38Challenge.WeylAlg k n)) :
+  Set (PrimeSpectrum (Stafford38.Characteristic.SymbolRing k n))
+'Stafford38.CharacteristicInitialIdeal.orderCharacteristicSupport' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Stafford38.CharacteristicInitialIdeal.orderInitialIdeal.{u} (k : Type u) [Field k] {n : ℕ}
+  (I : Stafford38.EulerSurjectivity.RightIdeal (Stafford38Challenge.WeylAlg k n)) :
+  Ideal (Stafford38.Characteristic.SymbolRing k n)
+'Stafford38.CharacteristicInitialIdeal.orderInitialIdeal' depends on axioms: [propext, Classical.choice, Quot.sound]
+Stafford38.CharacteristicPaperSymplecticBasis.exists_symplectic_basis.{u, v} {k : Type u} {V : Type v} [Field k]
+  [AddCommGroup V] [Module k V] (n : ℕ) (B : LinearMap.BilinForm k V) [Module.Finite k V]
+  (hAlt : ∀ (x : V), (B x) x = 0) (hB : B.Nondegenerate) (hdim : Module.finrank k V = 2 * n) :
+  ∃ b,
+    (∀ (i j : Fin n), (B (b (Sum.inl i))) (b (Sum.inr j)) = if i = j then 1 else 0) ∧
+      (∀ (i j : Fin n), (B (b (Sum.inl i))) (b (Sum.inl j)) = 0) ∧
+        ∀ (i j : Fin n), (B (b (Sum.inr i))) (b (Sum.inr j)) = 0
+'Stafford38.CharacteristicPaperSymplecticBasis.exists_symplectic_basis' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Stafford38.CharacteristicPaperSymplecticBasis.exists_symplectic_basis_with_pair.{u, v} {k : Type u} {V : Type v}
+  [Field k] [AddCommGroup V] [Module k V] (n : ℕ) (B : LinearMap.BilinForm k V) [Module.Finite k V]
+  (hAlt : ∀ (x : V), (B x) x = 0) (hB : B.Nondegenerate) (hdim : Module.finrank k V = 2 * (n + 1)) (v w : V)
+  (hvw : (B v) w = 1) :
+  ∃ b,
+    (∀ (i j : Fin (n + 1)), (B (b (Sum.inl i))) (b (Sum.inr j)) = if i = j then 1 else 0) ∧
+      (∀ (i j : Fin (n + 1)), (B (b (Sum.inl i))) (b (Sum.inl j)) = 0) ∧
+        (∀ (i j : Fin (n + 1)), (B (b (Sum.inr i))) (b (Sum.inr j)) = 0) ∧ b (Sum.inl 0) = v ∧ b (Sum.inr 0) = w
+'Stafford38.CharacteristicPaperSymplecticBasis.exists_symplectic_basis_with_pair' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Stafford38.CharacteristicSymplecticCompletion.exists_symplectic_chart_matrices.{u} (k : Type u) [Field k] [CharZero k]
+  {n N : ℕ} (t : Stafford38Challenge.PhaseVar n) {P : Stafford38.Characteristic.SymbolRing k n}
+  (hP : MvPolynomial.IsHomogeneous P N) (hne : P ≠ 0) (hN : 0 < N) :
+  ∃ M Ninv,
+    M * Stafford38Challenge.standardForm k n * M.transpose = Stafford38Challenge.standardForm k n ∧
+      Ninv * Stafford38Challenge.standardForm k n * Ninv.transpose = Stafford38Challenge.standardForm k n ∧
+        M * Ninv = 1 ∧
+          Ninv * M = 1 ∧
+            MvPolynomial.coeff (Finsupp.single () N)
+                ((Stafford38.CharacteristicHomogeneousChart.axisPolynomial k t)
+                  ((Stafford38.CharacteristicLinearAction.symbolLinearAlgHom k M) P)) ≠
+              0
+'Stafford38.CharacteristicSymplecticCompletion.exists_symplectic_chart_matrices' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Stafford38.CharacteristicSymplecticCompletion.exists_symplectic_mulVec_eq.{u} (k : Type u) [Field k] {n : ℕ}
+  {e v : Stafford38Challenge.PhaseVar n → k} (he : e ≠ 0) (hv : v ≠ 0) :
+  ∃ M ∈ Matrix.symplecticGroup (Fin n) k, M.mulVec e = v
+'Stafford38.CharacteristicSymplecticCompletion.exists_symplectic_mulVec_eq' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Stafford38.CharacteristicSymplecticCompletion.phasePairing.{u} (k : Type u) [Field k] {n : ℕ}
+  (u v : Stafford38Challenge.PhaseVar n → k) : k
+'Stafford38.CharacteristicSymplecticCompletion.phasePairing' depends on axioms: [propext, Classical.choice, Quot.sound]
+Stafford38.EulerSurjectivity.rightMul_surjective_of_euler_normal.{u_1} {A : Type u_1} [Ring A]
+  (I : Stafford38.EulerSurjectivity.RightIdeal A) (R : Subring A) (x p : A) (hnormal : ∀ (r : ↥R), ∃ s, x * ↑r = ↑s * x)
+  (hE : x * p ∈ R) (hresidue : ∃ U, 1 + ↑U * x ∈ I) (hgenerate : Subring.closure (↑R ∪ {p}) = ⊤) :
+  Function.Surjective (Stafford38.EulerSurjectivity.rightMul I x)
+'Stafford38.EulerSurjectivity.rightMul_surjective_of_euler_normal' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Stafford38.Evolution.evolutionaryCorollary.{u_1, u_2} {D : Type u_1} [Ring D] {x p : D} (k : Type u_2) [Field k]
+  [CharZero k] [Algebra k D] (hw : p * x = x * p + 1) {r : ℕ} (hr : 0 < r) (terms : List (D × ℕ))
+  (hx : ∀ t ∈ terms, t.1 * x = x * t.1) (hp : ∀ t ∈ terms, t.1 * p = p * t.1) {d : D}
+  (hd : d = p ^ r - Stafford38.Evolution.potentialSum x terms) : ∃ R S, 1 = d * R + x ^ r * d * S
+'Stafford38.Evolution.evolutionaryCorollary' depends on axioms: [propext, Classical.choice, Quot.sound]
+Stafford38.FixedSource.universalFixedSourceStatement_of_canonicalSupportVanishing.{u}
+  (hvanish : Stafford38.UniversalAssembly.CanonicalSupportVanishing) :
+  Stafford38FixedSourceChallenge.UniversalFixedSourceStatement
+'Stafford38.FixedSource.universalFixedSourceStatement_of_canonicalSupportVanishing' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Stafford38.FoundationClosure.canonicalSupportVanishingViaGeneralCoisotropic.{u} :
+  Stafford38.UniversalAssembly.CanonicalSupportVanishing
+'Stafford38.FoundationClosure.canonicalSupportVanishingViaGeneralCoisotropic' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Stafford38.Geometry.ConormalAxisContradiction.canonical_orderPrincipalComponent_eval_pureMomentumAxis.{u_1}
+  {k : Type u_1} [Field k] (n N : ℕ) {d : Stafford38Challenge.WeylAlg k (n + 1)}
+  (hd : Stafford38.WeylPBWMonicBridge.IsPBWMonicAt k (Sum.inr 0) N d) :
+  (MvPolynomial.eval (Stafford38.CharacteristicHomogeneousChart.axisPoint k (Sum.inr 0)))
+      ((Stafford38.WeylLeadingSymbol.presentedPrincipalComponent k Stafford38.WeylFiltration.orderWeight N) d) =
+    1
+'Stafford38.Geometry.ConormalAxisContradiction.canonical_orderPrincipalComponent_eval_pureMomentumAxis' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Stafford38.Geometry.ConormalAxisContradiction.canonical_orderPrincipalComponent_isHomogeneous.{u_1} {k : Type u_1}
+  [Field k] (n N : ℕ) {d : Stafford38Challenge.WeylAlg k (n + 1)}
+  (hd : Stafford38.WeylPBWMonicBridge.IsPBWMonicAt k (Sum.inr 0) N d) :
+  MvPolynomial.IsHomogeneous
+    ((Stafford38.WeylLeadingSymbol.presentedPrincipalComponent k Stafford38.WeylFiltration.orderWeight N) d) N
+'Stafford38.Geometry.ConormalAxisContradiction.canonical_orderPrincipalComponent_isHomogeneous' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Stafford38.Geometry.ConormalScalarExtensionVanishing.scalarExtension_vanishing.{u_1, u_2} {k : Type u_1} {K : Type u_2}
+  [Field k] [IsAlgClosed k] [Field K] [Algebra k K] {n : ℕ} (I : Ideal (MvPolynomial (Fin n) k))
+  (P : Stafford38.Characteristic.SymbolRing k n)
+  (hP : ∀ q ∈ Stafford38.Geometry.AffineConormalClosure.equationConormalLocus I, (MvPolynomial.eval q) P = 0)
+  (q : Stafford38Challenge.PhaseVar n → K)
+  (hq :
+    q ∈
+      Stafford38.Geometry.AffineConormalClosure.equationConormalLocus
+        (Ideal.map (Stafford38.Geometry.ScalarExtensionPoints.scalarPolynomialMap (Fin n)) I)) :
+  MvPolynomial.eval₂ (algebraMap k K) q P = 0
+'Stafford38.Geometry.ConormalScalarExtensionVanishing.scalarExtension_vanishing' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Stafford38.Geometry.DivisorTangentLattice.VisibleDivisorFrame.exists_maximalIdeal_coefficients.{u, v, w, x, y}
+  {k : Type u} {V : Type v} {F : Type w} {Ω : Type x} [CommRing k] [CommRing V] [IsLocalRing V] [Field F] [Algebra k F]
+  [Algebra V F] [AddCommGroup Ω] [Module k Ω] [Module F Ω] [Module V Ω] [IsScalarTower V F Ω] {d : Derivation k F Ω}
+  {ι : Type y} [Fintype ι] (D : Stafford38.Geometry.DivisorTangentLattice.VisibleDivisorFrame d ι)
+  (hinj : Function.Injective ⇑(algebraMap V F)) :
+  ∃ c,
+    (∀ (j : ι), c j ∈ IsLocalRing.maximalIdeal V) ∧
+      d ((algebraMap V F) D.Q₁ / (algebraMap V F) D.Q₀) =
+        ∑ j, c j • d ((algebraMap V F) (D.Q j) / (algebraMap V F) D.Q₀)
+'Stafford38.Geometry.DivisorTangentLattice.VisibleDivisorFrame.exists_maximalIdeal_coefficients' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Stafford38.Geometry.GeneralAsymptoticConormal.coordinate_axis_mem_projective_conormal_directions.{u} {k : Type u}
+  [Field k] [IsAlgClosed k] [CharZero k] {m : ℕ} (hm : 0 < m) (I : PrimeSpectrum (MvPolynomial (Fin m) k))
+  (havoid : ∀ y ∈ MvPolynomial.zeroLocus k I.asIdeal, y ⟨0, hm⟩ ≠ 0) :
+  Projectivization.mk k (fun i => if i = ⟨0, hm⟩ then 1 else 0) ⋯ ∈
+    Stafford38.Geometry.ProjectiveConormalDirections.projectiveHomogeneousClosure
+      (Stafford38.Geometry.ProjectiveConormalDirections.projectivizedDirectionSet
+        (Stafford38.Geometry.ProjectiveConormalDirections.smoothConormalDirectionSet I.asIdeal))
+'Stafford38.Geometry.GeneralAsymptoticConormal.coordinate_axis_mem_projective_conormal_directions' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Stafford38.Geometry.GeneralAsymptoticConormal.coordinate_axis_mem_smooth_fibre_closure.{u} {k : Type u} [Field k]
+  [IsAlgClosed k] [CharZero k] {m : ℕ} (hm : 0 < m) (I : PrimeSpectrum (MvPolynomial (Fin m) k))
+  (havoid : ∀ y ∈ MvPolynomial.zeroLocus k I.asIdeal, y ⟨0, hm⟩ ≠ 0) :
+  (fun i => if i = ⟨0, hm⟩ then 1 else 0) ∈
+    MvPolynomial.zeroLocus k
+      (MvPolynomial.vanishingIdeal k
+        (Stafford38.Geometry.ProjectiveConormalDirections.smoothConormalFibreProjection I.asIdeal))
+'Stafford38.Geometry.GeneralAsymptoticConormal.coordinate_axis_mem_smooth_fibre_closure' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Stafford38.Geometry.GeneralAsymptoticLaurentAxis.exists_groundConormalAxis_of_prime_coordinate_avoidance.{u}
+  {k : Type u} [Field k] [IsAlgClosed k] [CharZero k] {m : ℕ} (hm : 0 < m) (P : PrimeSpectrum (MvPolynomial (Fin m) k))
+  (havoid : ∀ y ∈ MvPolynomial.zeroLocus k P.asIdeal, y ⟨0, hm⟩ ≠ 0) :
+  ∃ K x x_1 y xi,
+    (Sum.elim y fun i => (algebraMap (PowerSeries K) (LaurentSeries K)) (xi i)) ∈
+        Stafford38.Geometry.LaurentConormalResidueExtension.groundEquationConormalLocus P.asIdeal ∧
+      Stafford38.GeometryRetractionSpecialization.residueColumn xi = fun i => if i = ⟨0, hm⟩ then 1 else 0
+'Stafford38.Geometry.GeneralAsymptoticLaurentAxis.exists_groundConormalAxis_of_prime_coordinate_avoidance' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Stafford38.Geometry.GeneralCoisotropicCanonicalAdapter.algebraicallyClosedCanonicalSupportVanishing_of_generalCoisotropic.{u}
+  (hunit : Stafford38.CanonicalSupportVanishingReduction.CanonicalStrictUnitCoordinatePreimage) :
+  Stafford38.CanonicalSupportVanishingReduction.AlgebraicallyClosedCanonicalSupportVanishing
+'Stafford38.Geometry.GeneralCoisotropicCanonicalAdapter.algebraicallyClosedCanonicalSupportVanishing_of_generalCoisotropic' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Stafford38.Geometry.GeneralCoisotropicExclusion.exists_zero_base_coordinate.{u} {k : Type u} [Field k] [IsAlgClosed k]
+  [CharZero k] {m : ℕ} (hm : 0 < m) (J : Ideal (Stafford38.Characteristic.SymbolRing k m)) (hproper : J ≠ ⊤)
+  (hrad : J.IsRadical) (hhom : Ideal.IsHomogeneous Stafford38.Geometry.GeneralConormalContainment.orderDecomposition J)
+  (hpoisson : Stafford38.Characteristic.BaseRelativePoisson.IsBaseRelativePoisson J) (P : MvPolynomial (Fin m) k)
+  (hP : Stafford38.Geometry.LaurentConormalDirection.fibreLift P ∈ J)
+  (haxis : (MvPolynomial.eval fun i => if i = ⟨0, hm⟩ then 1 else 0) P ≠ 0) :
+  ∃ q ∈ MvPolynomial.zeroLocus k J, q (Sum.inl ⟨0, hm⟩) = 0
+'Stafford38.Geometry.GeneralCoisotropicExclusion.exists_zero_base_coordinate' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Stafford38.Geometry.GeneralCoisotropicSets.exists_zero_base_coordinate_of_isFibreConical.{u_2} {k : Type u_2} [Field k]
+  [IsAlgClosed k] [CharZero k] {m : ℕ} (hm : 0 < m) (W : Set (Stafford38Challenge.PhaseVar m → k))
+  (hnonempty : W.Nonempty) (hclosed : ∃ L, W = MvPolynomial.zeroLocus k L)
+  (hW : Stafford38.Geometry.FibreConicalVanishingIdeal.IsFibreConical W)
+  (hpoisson :
+    ∀ f ∈ MvPolynomial.vanishingIdeal k W,
+      ∀ g ∈ MvPolynomial.vanishingIdeal k W,
+        Stafford38.Characteristic.poissonBracket f g ∈ MvPolynomial.vanishingIdeal k W)
+  (P : MvPolynomial (Fin m) k)
+  (hP : Stafford38.Geometry.LaurentConormalDirection.fibreLift P ∈ MvPolynomial.vanishingIdeal k W)
+  (haxis : (MvPolynomial.eval fun i => if i = ⟨0, hm⟩ then 1 else 0) P ≠ 0) : ∃ q ∈ W, q (Sum.inl ⟨0, hm⟩) = 0
+'Stafford38.Geometry.GeneralCoisotropicSets.exists_zero_base_coordinate_of_isFibreConical' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Stafford38.Geometry.GeneralCoisotropicSetsTest.exact_complex_manuscript_coisotropic_consumer {n : ℕ} (hn : 0 < n)
+  (W : Set (Stafford38Challenge.PhaseVar n → ℂ)) (hnonempty : W.Nonempty)
+  (hclosed : ∃ L, W = MvPolynomial.zeroLocus ℂ L)
+  (hscale : ∀ q ∈ W, ∀ (a : ℂ), a ≠ 0 → (Sum.elim (fun i => q (Sum.inl i)) fun i => a * q (Sum.inr i)) ∈ W)
+  (hbracket :
+    ∀ f ∈ MvPolynomial.vanishingIdeal ℂ W,
+      ∀ g ∈ MvPolynomial.vanishingIdeal ℂ W,
+        Stafford38.Characteristic.poissonBracket f g ∈ MvPolynomial.vanishingIdeal ℂ W)
+  (P : MvPolynomial (Fin n) ℂ) (hPpoint : ∀ q ∈ W, (MvPolynomial.eval fun i => q (Sum.inr i)) P = 0)
+  (haxis : (MvPolynomial.eval fun i => if i = ⟨0, hn⟩ then 1 else 0) P ≠ 0)
+  (havoid : ∀ q ∈ W, q (Sum.inl ⟨0, hn⟩) ≠ 0) : False
+'Stafford38.Geometry.GeneralCoisotropicSetsTest.exact_complex_manuscript_coisotropic_consumer' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Stafford38.Geometry.GeneralCoisotropicSetsTest.zeroSectionIdealOne_not_isPoisson.{u_1} {k : Type u_1} [Field k] :
+  ¬Stafford38.Characteristic.IsPoisson (Stafford38.Geometry.GeneralCoisotropicSetsTest.zeroSectionIdealOne k)
+'Stafford38.Geometry.GeneralCoisotropicSetsTest.zeroSectionIdealOne_not_isPoisson' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Stafford38.Geometry.GeneralComponentConormalContainment.equationConormalClosure_minimalPrime_subset_zeroLocus.{u}
+  {k : Type u} [Field k] [IsAlgClosed k] [CharZero k] {n : ℕ} (J : Ideal (Stafford38.Characteristic.SymbolRing k n))
+  (hJrad : J.IsRadical) (hhom : Ideal.IsHomogeneous Stafford38.Geometry.GeneralConormalContainment.orderDecomposition J)
+  (hJpoisson : Stafford38.Characteristic.BaseRelativePoisson.IsBaseRelativePoisson J)
+  (P : Ideal (MvPolynomial (Fin n) k))
+  (hP : P ∈ (Ideal.comap Stafford38.Geometry.CoisotropicTranslation.baseLift J).minimalPrimes) :
+  Stafford38.Geometry.AffineConormalClosure.equationConormalClosure P ⊆ MvPolynomial.zeroLocus k J
+'Stafford38.Geometry.GeneralComponentConormalContainment.equationConormalClosure_minimalPrime_subset_zeroLocus' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Stafford38.Geometry.GeneralConormalAxis.exists_groundConormalAxis_of_minimalPrime_unit_transcendental.{u} {k : Type u}
+  [Field k] [CharZero k] {m : ℕ} (hm : 0 < m) (I : Ideal (MvPolynomial (Fin m) k)) (hI : I.IsRadical)
+  (P : PrimeSpectrum (MvPolynomial (Fin m) k)) (hP : P.asIdeal ∈ I.minimalPrimes)
+  (hunit : ∃ g, MvPolynomial.X ⟨0, hm⟩ * g - 1 ∈ P.asIdeal)
+  (htrans : Transcendental k (Stafford38.Geometry.AffineComponentCoordinateSplit.componentCoordinate P ⟨0, hm⟩)) :
+  ∃ K x x_1 y xi,
+    (Sum.elim y fun i => (algebraMap (PowerSeries K) (LaurentSeries K)) (xi i)) ∈
+        Stafford38.Geometry.LaurentConormalResidueExtension.groundEquationConormalLocus I ∧
+      Stafford38.GeometryRetractionSpecialization.residueColumn xi = fun i => if i = ⟨0, hm⟩ then 1 else 0
+'Stafford38.Geometry.GeneralConormalAxis.exists_groundConormalAxis_of_minimalPrime_unit_transcendental' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Stafford38.Geometry.GeneralDivisorialVisibleFrame.generalDivisorialVisibleFrameExistence.{u} {k : Type u} [Field k]
+  [CharZero k] {m : ℕ} (hm : 0 < m) (P : PrimeSpectrum (MvPolynomial (Fin m) k))
+  (hunit : ∃ g, MvPolynomial.X ⟨0, hm⟩ * g - 1 ∈ P.asIdeal)
+  (htrans : Transcendental k (Stafford38.Geometry.AffineComponentCoordinateSplit.componentCoordinate P ⟨0, hm⟩)) :
+  Stafford38.Geometry.ExactVisibleDivisorFrameInterface.HasNormalizedCompatibleVisibleFrame P hm
+'Stafford38.Geometry.GeneralDivisorialVisibleFrame.generalDivisorialVisibleFrameExistence' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Stafford38.Geometry.GeneralDivisorialVisibleFrame.generalDivisorialVisibleFrameWithResidueAlgebraicity.{u} {k : Type u}
+  [Field k] [CharZero k] {m : ℕ} (hm : 0 < m) (P : PrimeSpectrum (MvPolynomial (Fin m) k))
+  (hunit : ∃ g, MvPolynomial.X ⟨0, hm⟩ * g - 1 ∈ P.asIdeal)
+  (htrans : Transcendental k (Stafford38.Geometry.AffineComponentCoordinateSplit.componentCoordinate P ⟨0, hm⟩)) :
+  Nonempty (Stafford38.Geometry.GeneralDivisorialVisibleFrame.GeneralDivisorialVisibleFrameWitness hm P)
+'Stafford38.Geometry.GeneralDivisorialVisibleFrame.generalDivisorialVisibleFrameWithResidueAlgebraicity' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Stafford38.Geometry.GeneralTangentLimitCriterion.exists_axis_laurent_smooth_conormal_direction.{u_1, u_2} {k : Type u_1}
+  [Field k] {n dimY : ℕ} {κ : Type u_2} [Fintype κ] [DecidableEq κ] [IsAlgClosed k] (I : Ideal (MvPolynomial (Fin n) k))
+  (q : Fin (n + 1) → PowerSeries k) (B : Matrix (Fin (n + 1)) κ (PowerSeries k))
+  (D : Stafford38.Geometry.GeneralTangentLimitCriterion.Input I q B) :
+  ∃ ell,
+    Stafford38.GeometryRetractionSpecialization.rowMul ell B = 0 ∧
+      Stafford38.GeometryRetractionSpecialization.residueColumn ell =
+          Stafford38.GeometryPowerSeriesTangentLimit.axisRow D.axis.succ ∧
+        have phase :=
+          Sum.elim
+            (Stafford38.Geometry.ProjectiveConormalDehomogenization.dehomogenizedPoint
+              (Stafford38.Geometry.FormalDivisorLaurentConormal.laurentColumn q))
+            fun i => (algebraMap (PowerSeries k) (LaurentSeries k)) (ell i.succ);
+        phase ∈ Stafford38.Geometry.GeneralTangentLimitCriterion.smoothEquationConormalLocus I ∧
+          (Stafford38.GeometryRetractionSpecialization.residueColumn fun i => ell i.succ) ∈
+              Stafford38.Geometry.LaurentConormalDirection.extensionFibreClosure
+                (Stafford38.Geometry.GeneralTangentLimitCriterion.smoothEquationConormalLocus I) ∧
+            Projectivization.mk k (fun i => if i = D.axis then 1 else 0) ⋯ ∈
+              Stafford38.Geometry.ProjectiveConormalDirections.projectiveHomogeneousClosure
+                (Stafford38.Geometry.ProjectiveConormalDirections.projectivizedDirectionSet
+                  (Stafford38.Geometry.ProjectiveConormalDirections.smoothConormalDirectionSet I))
+'Stafford38.Geometry.GeneralTangentLimitCriterion.exists_axis_laurent_smooth_conormal_direction' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Stafford38.Geometry.GeneralTangentLimitCriterion.tangent_limit_criterion_of_directSummand.{u_1} {k : Type u_1} [Field k]
+  {n dimY : ℕ} [IsAlgClosed k] (I : Ideal (MvPolynomial (Fin n) k)) (q : Fin (n + 1) → PowerSeries k)
+  (L : Submodule (PowerSeries k) (Fin (n + 1) → PowerSeries k))
+  (D : Stafford38.Geometry.GeneralTangentLimitCriterion.DirectSummandInput I q L) :
+  Projectivization.mk k (fun i => if i = D.axis then 1 else 0) ⋯ ∈
+    Stafford38.Geometry.ProjectiveConormalDirections.projectiveHomogeneousClosure
+      (Stafford38.Geometry.ProjectiveConormalDirections.projectivizedDirectionSet
+        (Stafford38.Geometry.ProjectiveConormalDirections.smoothConormalDirectionSet I))
+'Stafford38.Geometry.GeneralTangentLimitCriterion.tangent_limit_criterion_of_directSummand' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Stafford38.Geometry.LaurentConormalDirection.residue_mem_extensionFibreClosure_of_laurent_generic.{u_1} {k : Type u_1}
+  [Field k] {n : ℕ} (S : Set (Stafford38Challenge.PhaseVar n → LaurentSeries k)) (y : Fin n → LaurentSeries k)
+  (xi : Fin n → PowerSeries k)
+  (hgeneric : (Sum.elim y fun i => (algebraMap (PowerSeries k) (LaurentSeries k)) (xi i)) ∈ S) :
+  Stafford38.GeometryRetractionSpecialization.residueColumn xi ∈
+    Stafford38.Geometry.LaurentConormalDirection.extensionFibreClosure S
+'Stafford38.Geometry.LaurentConormalDirection.residue_mem_extensionFibreClosure_of_laurent_generic' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Stafford38.Geometry.PaperActualWitnessConormalData.exists_regularizedOneRowConormalData_of_actual_witness.{u}
+  {k : Type u} [Field k] [CharZero k] {m : ℕ} (hm : 0 < m) (I : Ideal (MvPolynomial (Fin m) k)) (hI : I.IsRadical)
+  (P : PrimeSpectrum (MvPolynomial (Fin m) k)) (hP : P.asIdeal ∈ I.minimalPrimes)
+  (w : Stafford38.Geometry.GeneralDivisorialVisibleFrame.GeneralDivisorialVisibleFrameWitness hm P)
+  (hunit : ∃ g, MvPolynomial.X ⟨0, hm⟩ * g - 1 ∈ P.asIdeal) :
+  let C := w.column;
+  let W := C.W;
+  let V := W.place.valuation.toSubring;
+  let κ := IsLocalRing.ResidueField ↥V;
+  Nonempty
+    (Stafford38.Geometry.CanonicalNonconstantFiniteGradientProductionProof.RegularizedOneRowConormalData hm I fun a =>
+      (Stafford38.Geometry.RetainedProjectiveCompletion.retainedToCompletedPowerSeries W) (C.q a))
+'Stafford38.Geometry.PaperActualWitnessConormalData.exists_regularizedOneRowConormalData_of_actual_witness' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Stafford38.Geometry.PaperSameWitnessTangentDimension.tangent_finrank_le_residue_add_one_of_witness.{u} {k : Type u}
+  [Field k] [CharZero k] {m : ℕ} (hm : 0 < m) (P : PrimeSpectrum (MvPolynomial (Fin m) k))
+  (w : Stafford38.Geometry.GeneralDivisorialVisibleFrame.GeneralDivisorialVisibleFrameWitness hm P) :
+  Stafford38.Geometry.PaperSameWitnessTangentDimension.tangent_finrank_goal hm P w
+'Stafford38.Geometry.PaperSameWitnessTangentDimension.tangent_finrank_le_residue_add_one_of_witness' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Stafford38.Geometry.ProjectiveConormalDirections.projectiveHomogeneousClosure.{u_1} {k : Type u_1} [Field k] {n : ℕ}
+  (T : Set (Projectivization k (Fin n → k))) : Set (Projectivization k (Fin n → k))
+'Stafford38.Geometry.ProjectiveConormalDirections.projectiveHomogeneousClosure' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Stafford38.Geometry.ProjectiveConormalDirections.smoothConormalDirectionSet.{u_1} {k : Type u_1} [Field k] {n : ℕ}
+  (I : Ideal (MvPolynomial (Fin n) k)) : Set (Fin n → k)
+'Stafford38.Geometry.ProjectiveConormalDirections.smoothConormalDirectionSet' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Stafford38.Geometry.SmoothConormalFibreVanishing.fibreLift_mem_vanishingIdeal_equationConormal.{u_1} {k : Type u_1}
+  [Field k] [IsAlgClosed k] {n : ℕ} (I : Ideal (MvPolynomial (Fin n) k)) (hI : I.IsPrime) (P : MvPolynomial (Fin n) k)
+  (hP :
+    P ∈
+      MvPolynomial.vanishingIdeal k
+        (Stafford38.Geometry.ProjectiveConormalDirections.smoothConormalFibreProjection I)) :
+  Stafford38.Geometry.LaurentConormalDirection.fibreLift P ∈
+    MvPolynomial.vanishingIdeal k (Stafford38.Geometry.AffineConormalClosure.equationConormalLocus I)
+'Stafford38.Geometry.SmoothConormalFibreVanishing.fibreLift_mem_vanishingIdeal_equationConormal' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Stafford38.LeftHandedCorollary.leftHanded_of_universalStatement.{u} (h : Stafford38Challenge.UniversalStatement) :
+  Stafford38.LeftHandedCorollary.LeftHandedStatement
+'Stafford38.LeftHandedCorollary.leftHanded_of_universalStatement' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Stafford38.LocalizationCorollaries.s38_rightOreLocalization.{u} {R : Type u} [Ring R] {S : Submonoid R}
+  [OreLocalization.OreSet (AlgebraicAnalysis.OreRightLocalization.oppositeSubmonoid S)]
+  (hR : Stafford38.LocalizationCorollaries.S38 R) :
+  Stafford38.LocalizationCorollaries.S38 (AlgebraicAnalysis.OreRightLocalization.RightOreLocalization R S)
+'Stafford38.LocalizationCorollaries.s38_rightOreLocalization' depends on axioms: [propext, Quot.sound]
+Stafford38.LocalizedDifferentialCorollaries.s38_unconditional_localized_differential.{u} {k : Type u} [Field k]
+  [CharZero k] {n : ℕ} (S : Submonoid Stafford38.LocalizedDifferentialCorollaries.A) (B : Type u) [CommRing B]
+  [Algebra Stafford38.LocalizedDifferentialCorollaries.A B] [Algebra k B]
+  [IsScalarTower k Stafford38.LocalizedDifferentialCorollaries.A B] [IsLocalization S B] :
+  Stafford38.LocalizationCorollaries.S38 ↥(Stafford38.LocalizedDifferentialCorollaries.D B)
+'Stafford38.LocalizedDifferentialCorollaries.s38_unconditional_localized_differential' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Stafford38.NoncharacteristicHyperplane.IsNoncharacteristic.{u_1} {k : Type u_1} [Field k] (n : ℕ)
+  (J : Ideal (Stafford38.Characteristic.SymbolRing k (n + 1))) : Prop
+'Stafford38.NoncharacteristicHyperplane.IsNoncharacteristic' depends on axioms: [propext, Classical.choice, Quot.sound]
+Stafford38.NoncharacteristicHyperplane.canonicalSupport_conormal_subset_zeroSection.{u_1} {k : Type u_1} [Field k]
+  {n N : ℕ} (d : Stafford38Challenge.WeylAlg k (n + 1))
+  (hd : Stafford38.WeylPBWMonicBridge.IsPBWMonicAt k (Sum.inr 0) N d)
+  {p : PrimeSpectrum (Stafford38.Characteristic.SymbolRing k (n + 1))}
+  (hp :
+    p ∈
+      Stafford38.CharacteristicInitialIdeal.orderCharacteristicSupport k
+        (Stafford38.WeylEulerResidue.canonicalRightIdeal (Stafford38.WeylIteratedEquivalence.presentedCoordinate k n) d
+          N))
+  (htan : ∀ (i : Fin (n + 1)), i ≠ 0 → MvPolynomial.X (Sum.inr i) ∈ p.asIdeal) : MvPolynomial.X (Sum.inr 0) ∈ p.asIdeal
+'Stafford38.NoncharacteristicHyperplane.canonicalSupport_conormal_subset_zeroSection' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Stafford38.NoncharacteristicHyperplane.canonical_isNoncharacteristic_annihilator.{u_1} {k : Type u_1} [Field k]
+  {n N : ℕ} {d : Stafford38Challenge.WeylAlg k (n + 1)}
+  (hd : Stafford38.WeylPBWMonicBridge.IsPBWMonicAt k (Sum.inr 0) N d) :
+  Stafford38.NoncharacteristicHyperplane.IsNoncharacteristic n
+    (Module.annihilator (Stafford38.Characteristic.SymbolRing k (n + 1))
+      (Stafford38.CharacteristicAssociatedGradedModule.OrderAssociatedGradedModule k
+        (Stafford38.WeylEulerResidue.canonicalRightIdeal (Stafford38.WeylIteratedEquivalence.presentedCoordinate k n) d
+          N)))
+'Stafford38.NoncharacteristicHyperplane.canonical_isNoncharacteristic_annihilator' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Stafford38.NoncharacteristicHypersurface.canonical_principal_hypersurface_finite.{u_1} {k : Type u_1} [Field k]
+  {n N : ℕ} {d : Stafford38Challenge.WeylAlg k (n + 1)}
+  (hd : Stafford38.WeylPBWMonicBridge.IsPBWMonicAt k (Sum.inr 0) N d) :
+  Module.Finite (Stafford38.Characteristic.CanonicalOldTangentialFiniteness.oldTangentialCoeffRing n)
+    (Stafford38.Characteristic.SymbolRing k (n + 1) ⧸
+      Stafford38.NoncharacteristicHypersurface.canonicalPrincipalHypersurfaceIdeal n N d)
+'Stafford38.NoncharacteristicHypersurface.canonical_principal_hypersurface_finite' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Stafford38.SpecializedNoncharacteristicEquality.transposedSupport_disjoint_axis_iff.{u} (k : Type u) [Field k] (n N : ℕ)
+  (d : Stafford38Challenge.WeylAlg k (n + 1)) :
+  Disjoint
+      (Stafford38.CharacteristicTransposedFilteredModuleSupport.transposedOrderAssociatedGradedSupport k
+        (Stafford38.SpecializedNoncharacteristicEquality.CanonicalIdeal k n N d))
+      (Stafford38.SpecializedNoncharacteristicEquality.AxisZeroLocus k n) ↔
+    Disjoint
+      (Module.support (Stafford38.Characteristic.SymbolRing k (n + 1))
+        (Stafford38.CharacteristicAssociatedGradedModule.OrderAssociatedGradedModule k
+          (Stafford38.SpecializedNoncharacteristicEquality.CanonicalIdeal k n N d)))
+      (Stafford38.SpecializedNoncharacteristicEquality.AxisZeroLocus k n)
+'Stafford38.SpecializedNoncharacteristicEquality.transposedSupport_disjoint_axis_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Stafford38.TorsionCyclicity.exists_span_adjusted_pair.{u, v} {A : Type u} {M : Type v} [Ring A] [AddCommGroup M]
+  [Module Aᵐᵒᵖ M] (hmul : ∀ (a b : A), a ≠ 0 → b ≠ 0 → a * b ≠ 0)
+  (hone : ∀ (d : A), d ≠ 0 → ∃ F R S, 1 = d * R + F * d * S) (htorsion : Stafford38.TorsionCyclicity.IsRightTorsion)
+  (x y : M) : ∃ F, Aᵐᵒᵖ ∙ (x - MulOpposite.op F • y) = Submodule.span Aᵐᵒᵖ {x, y}
+'Stafford38.TorsionCyclicity.exists_span_adjusted_pair' depends on axioms: [propext, Classical.choice, Quot.sound]
+Stafford38.TorsionCyclicity.exists_span_singleton_eq_span_pair.{u, v} {A : Type u} {M : Type v} [Ring A]
+  [AddCommGroup M] [Module Aᵐᵒᵖ M] (hmul : ∀ (a b : A), a ≠ 0 → b ≠ 0 → a * b ≠ 0)
+  (hone : ∀ (d : A), d ≠ 0 → ∃ F R S, 1 = d * R + F * d * S) (htorsion : Stafford38.TorsionCyclicity.IsRightTorsion)
+  (x y : M) : ∃ z, Aᵐᵒᵖ ∙ z = Submodule.span Aᵐᵒᵖ {x, y}
+'Stafford38.TorsionCyclicity.exists_span_singleton_eq_span_pair' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Stafford38.TorsionCyclicity.weyl_isCyclic_of_isRightTorsion.{u, v} (k : Type u) [Field k] [CharZero k] (n : ℕ)
+  (M : Type v) [AddCommGroup M] [Module (Stafford38Challenge.WeylAlg k n)ᵐᵒᵖ M]
+  [Module.Finite (Stafford38Challenge.WeylAlg k n)ᵐᵒᵖ M] (hM : Stafford38.TorsionCyclicity.IsRightTorsion) :
+  ∃ z, (Stafford38Challenge.WeylAlg k n)ᵐᵒᵖ ∙ z = ⊤
+'Stafford38.TorsionCyclicity.weyl_isCyclic_of_isRightTorsion' depends on axioms: [propext, Classical.choice, Quot.sound]
+Stafford38.UniversalAssembly.universalStatement_of_canonicalSupportVanishing.{u}
+  (hvanish : Stafford38.UniversalAssembly.CanonicalSupportVanishing) : Stafford38Challenge.UniversalStatement
+'Stafford38.UniversalAssembly.universalStatement_of_canonicalSupportVanishing' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Stafford38.Weyl.EulerProductIdentities.eval_fallingEulerProduct.{u_1} {A : Type u_1} [Ring A] [Algebra ℚ A] (x d : A)
+  (h : d * x = x * d + 1) (n : ℕ) :
+  (Stafford.eulerPolynomialEval x d) (∏ i ∈ Finset.range n, (Polynomial.X - Polynomial.C ↑i)) = x ^ n * d ^ n
+'Stafford38.Weyl.EulerProductIdentities.eval_fallingEulerProduct' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Stafford38.Weyl.EulerProductIdentities.eval_risingEulerProduct.{u_1} {A : Type u_1} [Ring A] [Algebra ℚ A] (x d : A)
+  (h : d * x = x * d + 1) (n : ℕ) :
+  (Stafford.eulerPolynomialEval x d) (∏ i ∈ Finset.range n, (Polynomial.X + Polynomial.C ↑(i + 1))) = d ^ n * x ^ n
+'Stafford38.Weyl.EulerProductIdentities.eval_risingEulerProduct' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Stafford38.Weyl.FilteredScalarLifting.canonicalSupportDescent.{u} :
+  Stafford38.CanonicalSupportVanishingReduction.CanonicalSupportDescent
+'Stafford38.Weyl.FilteredScalarLifting.canonicalSupportDescent' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Stafford38.Weyl.FilteredScalarLifting.presentedWeylScalarExtension_map_orderInitialIdeal_eq.{u, v} {k : Type u}
+  {K : Type v} [Field k] [Field K] [Algebra k K] (n N : ℕ) (d : Stafford38Challenge.WeylAlg k (n + 1)) :
+  Ideal.map (Stafford38.Weyl.PresentedScalarExtension.symbolScalarExtension (n + 1)).toRingHom
+      (Stafford38.CharacteristicInitialIdeal.orderInitialIdeal k
+        (Stafford38.WeylEulerResidue.canonicalRightIdeal (Stafford38.WeylIteratedEquivalence.presentedCoordinate k n) d
+          N)) =
+    Stafford38.CharacteristicInitialIdeal.orderInitialIdeal K
+      (Stafford38.WeylEulerResidue.canonicalRightIdeal (Stafford38.WeylIteratedEquivalence.presentedCoordinate K n)
+        ((Stafford38.Weyl.PresentedScalarExtension.presentedWeylScalarExtension (n + 1)) d) N)
+'Stafford38.Weyl.FilteredScalarLifting.presentedWeylScalarExtension_map_orderInitialIdeal_eq' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Stafford38.Weyl.FilteredScalarLifting.target_orderInitialIdeal_le_map_source_orderInitialIdeal.{u, v} {k : Type u}
+  {K : Type v} [Field k] [Field K] [Algebra k K] (n N : ℕ) (d : Stafford38Challenge.WeylAlg k (n + 1)) :
+  Stafford38.CharacteristicInitialIdeal.orderInitialIdeal K
+      (Stafford38.WeylEulerResidue.canonicalRightIdeal (Stafford38.WeylIteratedEquivalence.presentedCoordinate K n)
+        ((Stafford38.Weyl.PresentedScalarExtension.presentedWeylScalarExtension (n + 1)) d) N) ≤
+    Ideal.map (Stafford38.Weyl.PresentedScalarExtension.symbolScalarExtension (n + 1)).toRingHom
+      (Stafford38.CharacteristicInitialIdeal.orderInitialIdeal k
+        (Stafford38.WeylEulerResidue.canonicalRightIdeal (Stafford38.WeylIteratedEquivalence.presentedCoordinate k n) d
+          N))
+'Stafford38.Weyl.FilteredScalarLifting.target_orderInitialIdeal_le_map_source_orderInitialIdeal' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Stafford38.Weyl.PresentedScalarExtension.presentedWeylScalarExtension_map_orderInitialIdeal_le.{u, v} {k : Type u}
+  {K : Type v} [Field k] [Field K] [Algebra k K] (n N : ℕ) (d : Stafford38Challenge.WeylAlg k (n + 1)) :
+  Ideal.map (Stafford38.Weyl.PresentedScalarExtension.symbolScalarExtension (n + 1)).toRingHom
+      (Stafford38.CharacteristicInitialIdeal.orderInitialIdeal k
+        (Stafford38.WeylEulerResidue.canonicalRightIdeal (Stafford38.WeylIteratedEquivalence.presentedCoordinate k n) d
+          N)) ≤
+    Stafford38.CharacteristicInitialIdeal.orderInitialIdeal K
+      (Stafford38.WeylEulerResidue.canonicalRightIdeal (Stafford38.WeylIteratedEquivalence.presentedCoordinate K n)
+        ((Stafford38.Weyl.PresentedScalarExtension.presentedWeylScalarExtension (n + 1)) d) N)
+'Stafford38.Weyl.PresentedScalarExtension.presentedWeylScalarExtension_map_orderInitialIdeal_le' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Stafford38.WeylDomain.mul_ne_zero.{u} {k : Type u} [Field k] {n : ℕ} {a b : Stafford38Challenge.WeylAlg k n}
+  (ha : a ≠ 0) (hb : b ≠ 0) : a * b ≠ 0
+'Stafford38.WeylDomain.mul_ne_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+Stafford38.WeylEulerRemainder.closure_pairOldSubring_union_coordinate_momentum_eq_top.{u_1} (B : Type u_1) [Ring B]
+  [Algebra ℚ B] :
+  Subring.closure
+      (↑(Stafford38.WeylEulerSubring.pairOldSubring B) ∪
+        {Stafford38.OrePairStage.pairCoordinate, Stafford38.OrePairStage.pairMomentum}) =
+    ⊤
+'Stafford38.WeylEulerRemainder.closure_pairOldSubring_union_coordinate_momentum_eq_top' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Stafford38.WeylEulerRemainder.positiveEulerResidue_eq_eulerSubring_mul_coordinate.{u_1} (B : Type u_1) [Ring B]
+  [Algebra ℚ B] (d sigma : ↥Stafford38.OrePairStage.PairStage) (N : ℕ)
+  (hd : d = Stafford38.OrePairStage.pairMomentum ^ N + sigma)
+  (hpositive : Stafford38.WeylEulerRemainder.HasPositiveCoordinateFactor B N sigma) :
+  ∃ U,
+    1 + ↑U * Stafford38.OrePairStage.pairCoordinate ∈
+      Stafford38.WeylEulerResidue.canonicalRightIdeal Stafford38.OrePairStage.pairCoordinate d N
+'Stafford38.WeylEulerRemainder.positiveEulerResidue_eq_eulerSubring_mul_coordinate' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Stafford38.WeylEulerRemainder.presentedPositiveEulerResidue.{u} (k : Type u) [Field k] [Algebra ℚ k] (n N : ℕ)
+  {d : Stafford38Challenge.WeylAlg k (n + 1)} (hd : Stafford38.WeylPBWMonicBridge.IsPBWMonicAt k (Sum.inr 0) N d) :
+  ∃ U,
+    1 + ↑U * Stafford38.OrePairStage.pairCoordinate ∈
+      Stafford38.WeylEulerResidue.canonicalRightIdeal Stafford38.OrePairStage.pairCoordinate
+        ((Stafford38.WeylIteratedEquivalence.presentedToIterated k (n + 1)) d) N
+'Stafford38.WeylEulerRemainder.presentedPositiveEulerResidue' depends on axioms: [propext, Classical.choice, Quot.sound]
+Stafford38.WeylEulerResidue.canonicalRightIdeal.{u_1} {A : Type u_1} [Ring A] (x d : A) (N : ℕ) : Submodule Aᵐᵒᵖ A
+'Stafford38.WeylEulerResidue.canonicalRightIdeal' depends on axioms: [propext, Quot.sound]
+Stafford38.WeylEulerResidue.positiveEulerResidue_identity.{u_1} {A : Type u_1} [Ring A] (x p d sigma u v : A) (N : ℕ)
+  (hd : d = p ^ N + sigma) (hbezout : p ^ N * x ^ N * u + x ^ N * p ^ N * v = 1) :
+  d * (x ^ N * u) + x ^ N * d * v = 1 + (sigma * x ^ N * u + x ^ N * sigma * v)
+'Stafford38.WeylEulerResidue.positiveEulerResidue_identity' depends on axioms: [propext]
+Stafford38.WeylEulerSubring.coordinate_normal_eulerSubring.{u_1} {A : Type u_1} [Ring A] (C : Subring A) (x p : A)
+  (hweyl : p * x = x * p + 1) (hcomm : ∀ (c : ↥C), x * ↑c = ↑c * x)
+  (r : ↥(Stafford38.WeylEulerSubring.eulerSubring C x p)) : ∃ s, x * ↑r = ↑s * x
+'Stafford38.WeylEulerSubring.coordinate_normal_eulerSubring' depends on axioms: [propext, Classical.choice, Quot.sound]
+Stafford38.WeylEulerSubring.eulerSubring.{u_1} {A : Type u_1} [Ring A] (C : Subring A) (x p : A) : Subring A
+'Stafford38.WeylEulerSubring.eulerSubring' depends on axioms: [propext, Classical.choice, Quot.sound]
+Stafford38.WeylFiltration.bernsteinPiece.{u} (k : Type u) [Field k] (n N : ℕ) :
+  Submodule k (Stafford38Challenge.WeylAlg k n)
+'Stafford38.WeylFiltration.bernsteinPiece' depends on axioms: [propext, Classical.choice, Quot.sound]
+Stafford38.WeylFiltration.orderPiece.{u} (k : Type u) [Field k] (n N : ℕ) :
+  Submodule k (Stafford38Challenge.WeylAlg k n)
+'Stafford38.WeylFiltration.orderPiece' depends on axioms: [propext, Classical.choice, Quot.sound]
+Stafford38.WeylIteratedEquivalence.presentedIteratedEquiv.{u} (k : Type u) [Field k] (n : ℕ) :
+  Stafford38Challenge.WeylAlg k n ≃ₐ[k] Stafford38.OreIteratedPairStage.IteratedPairStage k n
+'Stafford38.WeylIteratedEquivalence.presentedIteratedEquiv' depends on axioms: [propext, Classical.choice, Quot.sound]
+Stafford38.WeylMonicNormalization.exists_normalized_symplectic_image.{u} (k : Type u) [Field k] [CharZero k] {n N : ℕ}
+  (t : Stafford38Challenge.PhaseVar n) {d : Stafford38Challenge.WeylAlg k n}
+  (hd : d ∈ Stafford38.WeylFiltration.bernsteinPiece k n N)
+  (hP :
+    MvPolynomial.IsHomogeneous
+      ((Stafford38.WeylLeadingSymbol.presentedPrincipalComponent k Stafford38.WeylFiltration.bernsteinWeight N) d) N)
+  (hPne :
+    (Stafford38.WeylLeadingSymbol.presentedPrincipalComponent k Stafford38.WeylFiltration.bernsteinWeight N) d ≠ 0)
+  (hN : 0 < N) : Stafford38.WeylMonicNormalization.HasNormalizedSymplecticChart k t N d
+'Stafford38.WeylMonicNormalization.exists_normalized_symplectic_image' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Stafford38.WeylMonicNormalization.scalar_or_normalized_symplectic_image.{u} (k : Type u) [Field k] [CharZero k] {n : ℕ}
+  (hn : 0 < n) {d : Stafford38Challenge.WeylAlg k n} (hd : d ≠ 0) :
+  (∃ c, c ≠ 0 ∧ d = (algebraMap k (Stafford38Challenge.WeylAlg k n)) c) ∨
+    ∃ N, 0 < N ∧ Stafford38.WeylMonicNormalization.HasNormalizedSymplecticChart k (Sum.inr ⟨0, hn⟩) N d
+'Stafford38.WeylMonicNormalization.scalar_or_normalized_symplectic_image' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Stafford38.WeylOuterOreMonic.presentedOuterPolynomial.{u} (k : Type u) [Field k] (n : ℕ)
+  (d : Stafford38Challenge.WeylAlg k (n + 1)) : Polynomial ↥Stafford38.OreCoordinateStage.CoordinateStage
+'Stafford38.WeylOuterOreMonic.presentedOuterPolynomial' depends on axioms: [propext, Classical.choice, Quot.sound]
+Stafford38.WeylPBWMonicBridge.IsPBWMonicAt.{u} (k : Type u) [Field k] {n : ℕ} (t : Stafford38Challenge.PhaseVar n)
+  (N : ℕ) (d : Stafford38Challenge.WeylAlg k n) : Prop
+'Stafford38.WeylPBWMonicBridge.IsPBWMonicAt' depends on axioms: [propext, Classical.choice, Quot.sound]
+Stafford38.WeylPaperRightMonic.presentedOuter_right_monic_decomposition.{u} (k : Type u) [Field k] (n N : ℕ)
+  (d : Stafford38Challenge.WeylAlg k (n + 1)) (hd : Stafford38.WeylPBWMonicBridge.IsPBWMonicAt k (Sum.inr 0) N d) :
+  ∃ a,
+    (∀ j < N, a j ∈ Stafford38.WeylPaperRightMonic.coordinateBernsteinPiece k n (N - j)) ∧
+      (Stafford38.WeylIteratedEquivalence.presentedToIterated k (n + 1)) d =
+        AlgebraicAnalysis.OreRightPBW.rightPBWMonomial Stafford38.OreCoordinateStage.coordinateDerivation N +
+          ∑ j ∈ Finset.range N,
+            MulOpposite.op (a j) •
+              AlgebraicAnalysis.OreRightPBW.rightPBWMonomial Stafford38.OreCoordinateStage.coordinateDerivation j
+'Stafford38.WeylPaperRightMonic.presentedOuter_right_monic_decomposition' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Stafford38.WeylQuotientTransport.presentedCanonicalRightQuotient_rightMul_coordinate_surjective.{u} {k : Type u}
+  [Field k] [Algebra ℚ k] (n N : ℕ) {d : Stafford38Challenge.WeylAlg k (n + 1)}
+  (hd : Stafford38.WeylPBWMonicBridge.IsPBWMonicAt k (Sum.inr 0) N d) :
+  Function.Surjective
+    (Stafford38.EulerSurjectivity.rightMul (Stafford38.WeylQuotientTransport.presentedCanonicalRightIdeal n N d)
+      (Stafford38.WeylIteratedEquivalence.presentedCoordinate k n))
+'Stafford38.WeylQuotientTransport.presentedCanonicalRightQuotient_rightMul_coordinate_surjective' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Stafford38.WeylSymbolCompatibility.standardSymplecticAlgHom_principal_compatibility.{u} (k : Type u) [Field k] {n N : ℕ}
+  (M : Matrix (Stafford38Challenge.PhaseVar n) (Stafford38Challenge.PhaseVar n) k)
+  (hM : M * Stafford38Challenge.standardForm k n * M.transpose = Stafford38Challenge.standardForm k n)
+  {z : Stafford38Challenge.WeylAlg k n} (hz : z ∈ Stafford38.WeylFiltration.bernsteinPiece k n N) :
+  (Stafford38.WeylLeadingSymbol.presentedPrincipalComponent k Stafford38.WeylFiltration.bernsteinWeight N)
+      ((Stafford38.WeylSymplectic.standardSymplecticAlgHom k M hM) z) =
+    (Stafford38.CharacteristicLinearAction.symbolLinearAlgHom k M)
+      ((Stafford38.WeylLeadingSymbol.presentedPrincipalComponent k Stafford38.WeylFiltration.bernsteinWeight N) z)
+'Stafford38.WeylSymbolCompatibility.standardSymplecticAlgHom_principal_compatibility' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Stafford38.WeylSymplectic.standardSymplecticAlgEquivOfInverse.{u} (k : Type u) [Field k] {n : ℕ}
+  (M N : Matrix (Fin n ⊕ Fin n) (Fin n ⊕ Fin n) k)
+  (hM : M * Stafford38Challenge.standardForm k n * M.transpose = Stafford38Challenge.standardForm k n)
+  (hN : N * Stafford38Challenge.standardForm k n * N.transpose = Stafford38Challenge.standardForm k n) (hMN : M * N = 1)
+  (hNM : N * M = 1) :
+  Stafford.FreeWeyl k (Fin n ⊕ Fin n) (Stafford38Challenge.standardForm k n) ≃ₐ[k]
+    Stafford.FreeWeyl k (Fin n ⊕ Fin n) (Stafford38Challenge.standardForm k n)
+'Stafford38.WeylSymplectic.standardSymplecticAlgEquivOfInverse' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Stafford38.WeylSymplectic.standardSymplecticAlgHom.{u} (k : Type u) [Field k] {n : ℕ}
+  (M : Matrix (Fin n ⊕ Fin n) (Fin n ⊕ Fin n) k)
+  (hM : M * Stafford38Challenge.standardForm k n * M.transpose = Stafford38Challenge.standardForm k n) :
+  Stafford.FreeWeyl k (Fin n ⊕ Fin n) (Stafford38Challenge.standardForm k n) →ₐ[k]
+    Stafford.FreeWeyl k (Fin n ⊕ Fin n) (Stafford38Challenge.standardForm k n)
+'Stafford38.WeylSymplectic.standardSymplecticAlgHom' depends on axioms: [propext, Classical.choice, Quot.sound]
+Stafford38.universalFixedSourceStatement.{u} : Stafford38FixedSourceChallenge.UniversalFixedSourceStatement
+'Stafford38.universalFixedSourceStatement' depends on axioms: [propext, Classical.choice, Quot.sound]
+Stafford38.universalStatement.{u} : Stafford38Challenge.UniversalStatement
+'Stafford38.universalStatement' depends on axioms: [propext, Classical.choice, Quot.sound]
+Stafford38Challenge.UniversalStatement.{u} : Prop
+'Stafford38Challenge.UniversalStatement' depends on axioms: [propext, Quot.sound]
+Stafford38CorollaryChallenge.torsionCyclicStatement.{u, v} : Prop
+'Stafford38CorollaryChallenge.torsionCyclicStatement' depends on axioms: [propext, Classical.choice, Quot.sound]
+Stafford38FixedSourceChallenge.IsLinearWeylCoordinate.{u} (k : Type u) [Field k] (n : ℕ)
+  (ell : Stafford38Challenge.WeylAlg k (n + 1)) : Prop
+'Stafford38FixedSourceChallenge.IsLinearWeylCoordinate' depends on axioms: [propext, Classical.choice, Quot.sound]
+Stafford38FixedSourceChallenge.UniversalFixedSourceStatement.{u} : Prop
+'Stafford38FixedSourceChallenge.UniversalFixedSourceStatement' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Stafford38FixedSourceChallenge.bernsteinDegree.{u} (k : Type u) [Field k] {n : ℕ}
+  (d : Stafford38Challenge.WeylAlg k n) : ℕ
+'Stafford38FixedSourceChallenge.bernsteinDegree' depends on axioms: [propext, Classical.choice, Quot.sound]

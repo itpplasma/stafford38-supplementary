@@ -1,0 +1,30 @@
+Acceptance excerpt; complete local log sha256: 940ed8370007939e46744a4b013fa8a0873a75fef503df055eae8a72f5177450
+root: Stafford38Challenge.universalStatement; declarations reached: 1052; forbidden hits: 0; unavailable dependencies: 321
+root: Stafford38Challenge.universalStatement; declarations reached: 5294; forbidden hits: 0; unavailable dependencies: 1479
+root: Stafford38Challenge.universalStatement; declarations reached: 11548; forbidden hits: 0; unavailable dependencies: 1268
+root: Stafford38Challenge.universalStatement; declarations reached: 18561; forbidden hits: 0; unavailable dependencies: 1280
+required declarations reached: [Stafford38.Geometry.SameWitness.coordinate_axis_mem_smooth_fibre_closure]
+root: Stafford38Challenge.universalStatement; declarations reached: 26389; forbidden hits: 0; unavailable dependencies: 1187
+required declarations reached: [Stafford38.Geometry.SameWitness.coordinate_axis_mem_smooth_fibre_closure]
+root: Stafford38Challenge.universalStatement; declarations reached: 32466; forbidden hits: 0; unavailable dependencies: 1108
+required declarations reached: [Stafford38.Geometry.SameWitness.coordinate_axis_mem_smooth_fibre_closure]
+root: Stafford38Challenge.universalStatement; declarations reached: 39611; forbidden hits: 0; unavailable dependencies: 975
+required declarations reached: [Stafford38.Geometry.SameWitness.coordinate_axis_mem_smooth_fibre_closure]
+root: Stafford38Challenge.universalStatement; declarations reached: 46169; forbidden hits: 0; unavailable dependencies: 457
+required declarations reached: [Stafford38.Geometry.SameWitness.coordinate_axis_mem_smooth_fibre_closure]
+root: Stafford38Challenge.universalStatement; declarations reached: 50076; forbidden hits: 0; unavailable dependencies: 494
+required declarations reached: [Stafford38.Geometry.SameWitness.coordinate_axis_mem_smooth_fibre_closure]
+root: Stafford38Challenge.universalStatement; declarations reached: 52802; forbidden hits: 0; unavailable dependencies: 268
+required declarations reached: [Stafford38.Geometry.SameWitness.coordinate_axis_mem_smooth_fibre_closure]
+root: Stafford38Challenge.universalStatement; declarations reached: 54269; forbidden hits: 0; unavailable dependencies: 204
+required declarations reached: [Stafford38.Geometry.SameWitness.coordinate_axis_mem_smooth_fibre_closure]
+root: Stafford38Challenge.universalStatement; declarations reached: 54799; forbidden hits: 0; unavailable dependencies: 23
+required declarations reached: [Stafford38.Geometry.SameWitness.coordinate_axis_mem_smooth_fibre_closure]
+root: Stafford38Challenge.universalStatement; declarations reached: 54849; forbidden hits: 0; unavailable dependencies: 8
+required declarations reached: [Stafford38.Geometry.SameWitness.coordinate_axis_mem_smooth_fibre_closure]
+root: Stafford38Challenge.universalStatement; declarations reached: 54860; forbidden hits: 0; unavailable dependencies: 0
+required declarations reached: [Stafford38.Geometry.SameWitness.coordinate_axis_mem_smooth_fibre_closure]
+dependency route passed: Stafford38Challenge.universalStatement reaches Stafford38.Geometry.SameWitness.coordinate_axis_mem_smooth_fibre_closure and excludes Stafford38.Geometry.AlternativeAsymptoticConormal.coordinate_axis_mem_smooth_fibre_closure
+root: Stafford38FixedSourceChallenge.universalFixedSourceStatement; declarations reached: 54878; forbidden hits: 0; unavailable dependencies: 0
+required declarations reached: [Stafford38.Geometry.SameWitness.coordinate_axis_mem_smooth_fibre_closure]
+dependency route passed: Stafford38FixedSourceChallenge.universalFixedSourceStatement reaches Stafford38.Geometry.SameWitness.coordinate_axis_mem_smooth_fibre_closure and excludes Stafford38.Geometry.AlternativeAsymptoticConormal.coordinate_axis_mem_smooth_fibre_closure

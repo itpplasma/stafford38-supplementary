@@ -1,0 +1,72 @@
+<!doctype html><meta charset="utf-8"><title>Stafford38/Geometry/AlternativeAsymptoticConormal.lean</title><style>body{font:14px monospace}pre span{display:block}pre span:target{background:#fff0ad}a{color:#666}pre{white-space:pre-wrap}</style><h1>Stafford38/Geometry/AlternativeAsymptoticConormal.lean</h1><p>This project (Stafford38) · 0403af3f0b1a7f84d2027121932723f67bd279ae</p><pre><span id="L1"><a href="#L1">1</a> module</span>
+<span id="L2"><a href="#L2">2</a> public import Stafford38.Geometry.GeneralAsymptoticLaurentAxis</span>
+<span id="L3"><a href="#L3">3</a> public import Stafford38.Geometry.SmoothConormalFibreVanishing</span>
+<span id="L4"><a href="#L4">4</a> public import Stafford38.Geometry.ConormalScalarExtensionVanishing</span>
+<span id="L5"><a href="#L5">5</a> </span>
+<span id="L6"><a href="#L6">6</a> @[expose] public section</span>
+<span id="L7"><a href="#L7">7</a> </span>
+<span id="L8"><a href="#L8">8</a> /-!</span>
+<span id="L9"><a href="#L9">9</a> # Generic/Laurent proof of the coordinate-axis closure</span>
+<span id="L10"><a href="#L10">10</a> </span>
+<span id="L11"><a href="#L11">11</a> This separately named result preserves the verified generic-prime and Laurent</span>
+<span id="L12"><a href="#L12">12</a> residue argument. The main theorem remains in `GeneralAsymptoticConormal` and</span>
+<span id="L13"><a href="#L13">13</a> uses the retained-witness route.</span>
+<span id="L14"><a href="#L14">14</a> -/</span>
+<span id="L15"><a href="#L15">15</a> </span>
+<span id="L16"><a href="#L16">16</a> namespace Stafford38.Geometry.AlternativeAsymptoticConormal</span>
+<span id="L17"><a href="#L17">17</a> </span>
+<span id="L18"><a href="#L18">18</a> open Stafford38.Geometry.ProjectiveConormalDirections</span>
+<span id="L19"><a href="#L19">19</a> open Stafford38.Geometry.GeneralAsymptoticLaurentAxis</span>
+<span id="L20"><a href="#L20">20</a> open Stafford38.Geometry.SmoothConormalFibreVanishing</span>
+<span id="L21"><a href="#L21">21</a> open Stafford38.Geometry.ConormalScalarExtensionVanishing</span>
+<span id="L22"><a href="#L22">22</a> open Stafford38.Geometry.LaurentConormalDirection</span>
+<span id="L23"><a href="#L23">23</a> open Stafford38.Geometry.LaurentConormalResidueExtension</span>
+<span id="L24"><a href="#L24">24</a> open Stafford38.Geometry.ScalarExtensionPoints</span>
+<span id="L25"><a href="#L25">25</a> open Stafford38.GeometryRetractionSpecialization</span>
+<span id="L26"><a href="#L26">26</a> </span>
+<span id="L27"><a href="#L27">27</a> noncomputable section</span>
+<span id="L28"><a href="#L28">28</a> </span>
+<span id="L29"><a href="#L29">29</a> universe u</span>
+<span id="L30"><a href="#L30">30</a> </span>
+<span id="L31"><a href="#L31">31</a> /-- The historical generic-prime/Laurent proof, retained as a separately</span>
+<span id="L32"><a href="#L32">32</a> named route for the unchanged Stafford challenge. -/</span>
+<span id="L33"><a href="#L33">33</a> theorem coordinate_axis_mem_smooth_fibre_closure</span>
+<span id="L34"><a href="#L34">34</a>     {k : Type u} [Field k] [IsAlgClosed k] [CharZero k]</span>
+<span id="L35"><a href="#L35">35</a>     {m : ℕ} (hm : 0 &lt; m)</span>
+<span id="L36"><a href="#L36">36</a>     (I : PrimeSpectrum (MvPolynomial (Fin m) k))</span>
+<span id="L37"><a href="#L37">37</a>     (havoid : ∀ y ∈ MvPolynomial.zeroLocus k I.asIdeal, y ⟨0, hm⟩ ≠ 0) :</span>
+<span id="L38"><a href="#L38">38</a>     (fun i : Fin m =&gt; if i = ⟨0, hm⟩ then (1 : k) else 0) ∈</span>
+<span id="L39"><a href="#L39">39</a>       MvPolynomial.zeroLocus k</span>
+<span id="L40"><a href="#L40">40</a>         (MvPolynomial.vanishingIdeal k (smoothConormalFibreProjection I.asIdeal)) := by</span>
+<span id="L41"><a href="#L41">41</a>   obtain ⟨K, hK, hAlg, y, xi, hgeneric, hres⟩ :=</span>
+<span id="L42"><a href="#L42">42</a>     exists_groundConormalAxis_of_prime_coordinate_avoidance hm I havoid</span>
+<span id="L43"><a href="#L43">43</a>   letI := hK</span>
+<span id="L44"><a href="#L44">44</a>   letI := hAlg</span>
+<span id="L45"><a href="#L45">45</a>   intro P hP</span>
+<span id="L46"><a href="#L46">46</a>   have hfull := fibreLift_mem_vanishingIdeal_equationConormal I.asIdeal I.isPrime P hP</span>
+<span id="L47"><a href="#L47">47</a>   have hvan : ∀ q ∈ groundEquationConormalLocus (k := k) (K := K) I.asIdeal,</span>
+<span id="L48"><a href="#L48">48</a>       MvPolynomial.eval₂ (groundLaurentMap (k := k) (K := K)) q (fibreLift P) = 0 := by</span>
+<span id="L49"><a href="#L49">49</a>     letI : Algebra k (LaurentSeries K) :=</span>
+<span id="L50"><a href="#L50">50</a>       (groundLaurentMap (k := k) (K := K)).toAlgebra</span>
+<span id="L51"><a href="#L51">51</a>     intro q hq</span>
+<span id="L52"><a href="#L52">52</a>     exact scalarExtension_vanishing I.asIdeal (fibreLift P) hfull q hq</span>
+<span id="L53"><a href="#L53">53</a>   have hpoly := residueFibreLift_mem_extensionValuedVanishingIdeal_of_ground_vanishing</span>
+<span id="L54"><a href="#L54">54</a>     I.asIdeal P hvan</span>
+<span id="L55"><a href="#L55">55</a>   have hclosure := residue_mem_residueExtensionFibreClosure_of_laurent_generic</span>
+<span id="L56"><a href="#L56">56</a>     (K := K) (groundEquationConormalLocus (k := k) (K := K) I.asIdeal) y xi hgeneric</span>
+<span id="L57"><a href="#L57">57</a>   have hzero := hclosure _ hpoly</span>
+<span id="L58"><a href="#L58">58</a>   have hzero' : MvPolynomial.eval₂ (algebraMap k K) (residueColumn xi) P = 0 := by</span>
+<span id="L59"><a href="#L59">59</a>     simpa [scalarPolynomialMap] using hzero</span>
+<span id="L60"><a href="#L60">60</a>   rw [hres] at hzero'</span>
+<span id="L61"><a href="#L61">61</a>   apply (FaithfulSMul.algebraMap_injective k K)</span>
+<span id="L62"><a href="#L62">62</a>   rw [map_zero]</span>
+<span id="L63"><a href="#L63">63</a>   change (algebraMap k K) (MvPolynomial.eval</span>
+<span id="L64"><a href="#L64">64</a>     (fun i : Fin m =&gt; if i = ⟨0, hm⟩ then (1 : k) else 0) P) = 0</span>
+<span id="L65"><a href="#L65">65</a>   rw [MvPolynomial.eval₂_comp]</span>
+<span id="L66"><a href="#L66">66</a>   simpa [Function.comp_def] using hzero'</span>
+<span id="L67"><a href="#L67">67</a> </span>
+<span id="L68"><a href="#L68">68</a> #print axioms coordinate_axis_mem_smooth_fibre_closure</span>
+<span id="L69"><a href="#L69">69</a> </span>
+<span id="L70"><a href="#L70">70</a> end</span>
+<span id="L71"><a href="#L71">71</a> end Stafford38.Geometry.AlternativeAsymptoticConormal</span>
+<span id="L72"><a href="#L72">72</a> </span></pre>

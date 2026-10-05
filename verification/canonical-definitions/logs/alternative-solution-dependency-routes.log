@@ -1,0 +1,33 @@
+Acceptance excerpt; complete local log sha256: 9a1815057741c36b57501c04b94541fbb6e806afc3121ee699cb31e53a93861e
+root: Stafford38Challenge.universalStatement; declarations reached: 1052; forbidden hits: 0; unavailable dependencies: 321
+root: Stafford38Challenge.universalStatement; declarations reached: 5294; forbidden hits: 0; unavailable dependencies: 1479
+root: Stafford38Challenge.universalStatement; declarations reached: 11548; forbidden hits: 0; unavailable dependencies: 1268
+required declarations reached: [Stafford38.Geometry.AlternativeAsymptoticConormal.coordinate_axis_mem_smooth_fibre_closure]
+root: Stafford38Challenge.universalStatement; declarations reached: 18831; forbidden hits: 0; unavailable dependencies: 1432
+required declarations reached: [Stafford38.Geometry.AlternativeAsymptoticConormal.coordinate_axis_mem_smooth_fibre_closure]
+root: Stafford38Challenge.universalStatement; declarations reached: 27217; forbidden hits: 0; unavailable dependencies: 1013
+required declarations reached: [Stafford38.Geometry.AlternativeAsymptoticConormal.coordinate_axis_mem_smooth_fibre_closure]
+root: Stafford38Challenge.universalStatement; declarations reached: 33617; forbidden hits: 0; unavailable dependencies: 896
+required declarations reached: [Stafford38.Geometry.AlternativeAsymptoticConormal.coordinate_axis_mem_smooth_fibre_closure]
+root: Stafford38Challenge.universalStatement; declarations reached: 38100; forbidden hits: 0; unavailable dependencies: 567
+required declarations reached: [Stafford38.Geometry.AlternativeAsymptoticConormal.coordinate_axis_mem_smooth_fibre_closure]
+root: Stafford38Challenge.universalStatement; declarations reached: 41482; forbidden hits: 0; unavailable dependencies: 248
+required declarations reached: [Stafford38.Geometry.AlternativeAsymptoticConormal.coordinate_axis_mem_smooth_fibre_closure]
+root: Stafford38Challenge.universalStatement; declarations reached: 44415; forbidden hits: 0; unavailable dependencies: 272
+required declarations reached: [Stafford38.Geometry.AlternativeAsymptoticConormal.coordinate_axis_mem_smooth_fibre_closure]
+root: Stafford38Challenge.universalStatement; declarations reached: 46124; forbidden hits: 0; unavailable dependencies: 141
+required declarations reached: [Stafford38.Geometry.AlternativeAsymptoticConormal.coordinate_axis_mem_smooth_fibre_closure]
+root: Stafford38Challenge.universalStatement; declarations reached: 47072; forbidden hits: 0; unavailable dependencies: 114
+required declarations reached: [Stafford38.Geometry.AlternativeAsymptoticConormal.coordinate_axis_mem_smooth_fibre_closure]
+root: Stafford38Challenge.universalStatement; declarations reached: 47448; forbidden hits: 0; unavailable dependencies: 29
+required declarations reached: [Stafford38.Geometry.AlternativeAsymptoticConormal.coordinate_axis_mem_smooth_fibre_closure]
+root: Stafford38Challenge.universalStatement; declarations reached: 47651; forbidden hits: 0; unavailable dependencies: 1
+required declarations reached: [Stafford38.Geometry.AlternativeAsymptoticConormal.coordinate_axis_mem_smooth_fibre_closure]
+root: Stafford38FixedSourceChallenge.universalFixedSourceStatement; declarations reached: 47669; forbidden hits: 0; unavailable dependencies: 1
+required declarations reached: [Stafford38.Geometry.AlternativeAsymptoticConormal.coordinate_axis_mem_smooth_fibre_closure]
+root: Stafford38Challenge.universalStatement; declarations reached: 47651; forbidden hits: 0; unavailable dependencies: 0
+required declarations reached: [Stafford38.Geometry.AlternativeAsymptoticConormal.coordinate_axis_mem_smooth_fibre_closure]
+dependency route passed: Stafford38Challenge.universalStatement reaches Stafford38.Geometry.AlternativeAsymptoticConormal.coordinate_axis_mem_smooth_fibre_closure and excludes Stafford38.Geometry.SameWitness.coordinate_axis_mem_smooth_fibre_closure
+root: Stafford38FixedSourceChallenge.universalFixedSourceStatement; declarations reached: 47669; forbidden hits: 0; unavailable dependencies: 0
+required declarations reached: [Stafford38.Geometry.AlternativeAsymptoticConormal.coordinate_axis_mem_smooth_fibre_closure]
+dependency route passed: Stafford38FixedSourceChallenge.universalFixedSourceStatement reaches Stafford38.Geometry.AlternativeAsymptoticConormal.coordinate_axis_mem_smooth_fibre_closure and excludes Stafford38.Geometry.SameWitness.coordinate_axis_mem_smooth_fibre_closure

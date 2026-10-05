@@ -1,0 +1,26 @@
+<!doctype html><meta charset="utf-8"><title>FixedSourceSolution.lean</title><style>body{font:14px monospace}pre span{display:block}pre span:target{background:#fff0ad}a{color:#666}pre{white-space:pre-wrap}</style><h1>FixedSourceSolution.lean</h1><p>This project (Stafford38) · 0403af3f0b1a7f84d2027121932723f67bd279ae</p><pre><span id="L1"><a href="#L1">1</a> module</span>
+<span id="L2"><a href="#L2">2</a> public import Stafford38.FoundationClosure</span>
+<span id="L3"><a href="#L3">3</a> public import Stafford38.FixedSourceChallengeTransport</span>
+<span id="L4"><a href="#L4">4</a> </span>
+<span id="L5"><a href="#L5">5</a> @[expose] public section</span>
+<span id="L6"><a href="#L6">6</a> </span>
+<span id="L7"><a href="#L7">7</a> open Stafford38FixedSourceChallenge (UniversalFixedSourceStatement)</span>
+<span id="L8"><a href="#L8">8</a> </span>
+<span id="L9"><a href="#L9">9</a> /-!</span>
+<span id="L10"><a href="#L10">10</a> # Solution for the exact-source challenge</span>
+<span id="L11"><a href="#L11">11</a> </span>
+<span id="L12"><a href="#L12">12</a> The substantive development proves the canonical fixed-source proposition</span>
+<span id="L13"><a href="#L13">13</a> directly, using its intrinsic degree and linear-coordinate predicate.</span>
+<span id="L14"><a href="#L14">14</a> -/</span>
+<span id="L15"><a href="#L15">15</a> </span>
+<span id="L16"><a href="#L16">16</a> namespace Stafford38FixedSourceChallenge</span>
+<span id="L17"><a href="#L17">17</a> </span>
+<span id="L18"><a href="#L18">18</a> universe u</span>
+<span id="L19"><a href="#L19">19</a> </span>
+<span id="L20"><a href="#L20">20</a> theorem universalFixedSourceStatement : UniversalFixedSourceStatement :=</span>
+<span id="L21"><a href="#L21">21</a>   Stafford38.universalFixedSourceStatement</span>
+<span id="L22"><a href="#L22">22</a> </span>
+<span id="L23"><a href="#L23">23</a> end Stafford38FixedSourceChallenge</span>
+<span id="L24"><a href="#L24">24</a> </span>
+<span id="L25"><a href="#L25">25</a> #print axioms Stafford38FixedSourceChallenge.universalFixedSourceStatement</span>
+<span id="L26"><a href="#L26">26</a> </span></pre>

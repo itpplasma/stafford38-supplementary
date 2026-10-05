@@ -1,0 +1,16 @@
+Local preflight against Palomar source policy 65f0154ed776cd26c224254aa57b379137f28b0d: 581 Lean files satisfy module-header, UTF-8, symlink, and 10000-line checks (not a Palomar service-runner receipt)
+pins: Lean leanprover/lean4:v4.35.0-rc3 (470d5ce1400764999581fd26d5d72b00d990b0f4), Mathlib c55e6e786f49471c72fbddbec5415808896aec1e, AlgebraicAnalysis bbbbf3fc358ca8100b158cec4cf47f336ab70163; all four Palomar configs passed
+Palomar uses bundled Lean 4.35.0-rc3 tools and bwrap; recorded at .lake/palomar-tools/revisions.txt
+Supplementary literal pair consumer: exact statement and permitted axioms passed
+Literal consumers and import/axiom audits: 313 reports passed
+Paper-linked declarations: 109 canonical names and axiom reports passed; historical manuscript references preserved
+source audit: one deliberate placeholder in each Challenge; neither Solution imports either Challenge; no other sorry, admit, or axiom declaration
+axiom audit: 37 declarations use only ['Classical.choice', 'Quot.sound', 'propext']
+Challenge: audited 3529 loaded modules
+CorollaryChallenge: audited 3530 loaded modules
+Solution: audited 5381 loaded modules
+FixedSourceChallenge: audited 3529 loaded modules
+FixedSourceSolution: audited 5382 loaded modules
+AlternativeSolution: audited 5381 loaded modules
+AlternativeFixedSourceSolution: audited 5382 loaded modules
+Stafford38 verification passed

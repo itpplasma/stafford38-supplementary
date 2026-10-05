@@ -1,0 +1,100 @@
+<!doctype html><meta charset="utf-8"><title>Stafford38/FoundationClosure.lean</title><style>body{font:14px monospace}pre span{display:block}pre span:target{background:#fff0ad}a{color:#666}pre{white-space:pre-wrap}</style><h1>Stafford38/FoundationClosure.lean</h1><p>This project (Stafford38) · 0403af3f0b1a7f84d2027121932723f67bd279ae</p><pre><span id="L1"><a href="#L1">1</a> module</span>
+<span id="L2"><a href="#L2">2</a> public import Stafford38.Characteristic.CanonicalKoszulContradiction</span>
+<span id="L3"><a href="#L3">3</a> public import Stafford38.Characteristic.CanonicalGabberInvolutivityInterface</span>
+<span id="L4"><a href="#L4">4</a> public import Stafford38.Geometry.ExactDivisorialVisibleFrameExistence</span>
+<span id="L5"><a href="#L5">5</a> public import Stafford38.PaperInputs</span>
+<span id="L6"><a href="#L6">6</a> public import Stafford38.Geometry.GeneralCoisotropicCanonicalAdapter</span>
+<span id="L7"><a href="#L7">7</a> public import Stafford38.Weyl.PaperQuotientDescent</span>
+<span id="L8"><a href="#L8">8</a> </span>
+<span id="L9"><a href="#L9">9</a> @[expose] public section</span>
+<span id="L10"><a href="#L10">10</a> </span>
+<span id="L11"><a href="#L11">11</a> open Stafford38Challenge (UniversalStatement)</span>
+<span id="L12"><a href="#L12">12</a> </span>
+<span id="L13"><a href="#L13">13</a> /-! The paper's three assembly interfaces and both universal statements are</span>
+<span id="L14"><a href="#L14">14</a> proved from Lean and Mathlib without project or literature axioms. The final</span>
+<span id="L15"><a href="#L15">15</a> canonical-support proof uses the general coisotropic-set theorem.</span>
+<span id="L16"><a href="#L16">16</a> </span>
+<span id="L17"><a href="#L17">17</a> ## References and proof context</span>
+<span id="L18"><a href="#L18">18</a> </span>
+<span id="L19"><a href="#L19">19</a> [Sta78] J. T. Stafford, *Module Structure of Weyl Algebras*, Journal of the London Mathematical Society (2) 18 (1978), 429–442.</span>
+<span id="L20"><a href="#L20">20</a> https://doi.org/10.1112/jlms/s2-18.3.429</span>
+<span id="L21"><a href="#L21">21</a> </span>
+<span id="L22"><a href="#L22">22</a> Conjecture 3.8, p. 438, is the source problem. This project proves the general case and exact-degree strengthening. See docs/literature.md for the imported involutivity and visible-frame route.</span>
+<span id="L23"><a href="#L23">23</a> -/</span>
+<span id="L24"><a href="#L24">24</a> </span>
+<span id="L25"><a href="#L25">25</a> namespace Stafford38.FoundationClosure</span>
+<span id="L26"><a href="#L26">26</a> </span>
+<span id="L27"><a href="#L27">27</a> universe u</span>
+<span id="L28"><a href="#L28">28</a> </span>
+<span id="L29"><a href="#L29">29</a> theorem canonicalNoncharacteristicSupportAvoidance :</span>
+<span id="L30"><a href="#L30">30</a>     PaperInputs.CanonicalNoncharacteristicSupportAvoidance.{u} := by</span>
+<span id="L31"><a href="#L31">31</a>   intro k _ _ _ n N d hN hd</span>
+<span id="L32"><a href="#L32">32</a>   exact Characteristic.CanonicalKoszulContradiction.canonical_support_avoidance</span>
+<span id="L33"><a href="#L33">33</a>     k n N d hN hd</span>
+<span id="L34"><a href="#L34">34</a> </span>
+<span id="L35"><a href="#L35">35</a> def inputs : PaperInputs.Inputs.{u} where</span>
+<span id="L36"><a href="#L36">36</a>   noncharacteristicApplication := canonicalNoncharacteristicSupportAvoidance</span>
+<span id="L37"><a href="#L37">37</a>   residueExtensionSymbolControl :=</span>
+<span id="L38"><a href="#L38">38</a>     Characteristic.CanonicalGabberInvolutivityInterface.canonicalResidueExtensionSymbolControl_of_associatedGradedRadical</span>
+<span id="L39"><a href="#L39">39</a>       Characteristic.GabberGlobalAssembly.weylAssociatedGradedRadicalInvolutivity</span>
+<span id="L40"><a href="#L40">40</a>   higherDimensionalVisibleDivisorFrameProduction :=</span>
+<span id="L41"><a href="#L41">41</a>     Geometry.ExactDivisorialVisibleFrameExistence.higherDimensionalCanonicalVisibleDivisorFrameProduction</span>
+<span id="L42"><a href="#L42">42</a> </span>
+<span id="L43"><a href="#L43">43</a> theorem canonicalSupportVanishingViaGeneralCoisotropic :</span>
+<span id="L44"><a href="#L44">44</a>     UniversalAssembly.CanonicalSupportVanishing.{u} := by</span>
+<span id="L45"><a href="#L45">45</a>   let hunit : CanonicalSupportVanishingReduction.CanonicalStrictUnitCoordinatePreimage.{u} := by</span>
+<span id="L46"><a href="#L46">46</a>     intro k _ _ _ n N d hN hd</span>
+<span id="L47"><a href="#L47">47</a>     exact SpecializedNoncharacteristicEquality.strictUnitCoordinatePreimage_of_transposedSupport_disjoint_axis</span>
+<span id="L48"><a href="#L48">48</a>       k n N d (canonicalNoncharacteristicSupportAvoidance k n N d hN hd)</span>
+<span id="L49"><a href="#L49">49</a>   exact Stafford38.PaperQuotientDescent.canonicalSupportDescent_via_quotient</span>
+<span id="L50"><a href="#L50">50</a>     (Geometry.GeneralCoisotropicCanonicalAdapter.algebraicallyClosedCanonicalSupportVanishing_of_generalCoisotropic</span>
+<span id="L51"><a href="#L51">51</a>       hunit)</span>
+<span id="L52"><a href="#L52">52</a> </span>
+<span id="L53"><a href="#L53">53</a> theorem canonicalSupportVanishingViaGenericLaurent :</span>
+<span id="L54"><a href="#L54">54</a>     UniversalAssembly.CanonicalSupportVanishing.{u} := by</span>
+<span id="L55"><a href="#L55">55</a>   let hunit : CanonicalSupportVanishingReduction.CanonicalStrictUnitCoordinatePreimage.{u} := by</span>
+<span id="L56"><a href="#L56">56</a>     intro k _ _ _ n N d hN hd</span>
+<span id="L57"><a href="#L57">57</a>     exact SpecializedNoncharacteristicEquality.strictUnitCoordinatePreimage_of_transposedSupport_disjoint_axis</span>
+<span id="L58"><a href="#L58">58</a>       k n N d (canonicalNoncharacteristicSupportAvoidance k n N d hN hd)</span>
+<span id="L59"><a href="#L59">59</a>   exact Stafford38.PaperQuotientDescent.canonicalSupportDescent_via_quotient</span>
+<span id="L60"><a href="#L60">60</a>     (Geometry.GeneralCoisotropicCanonicalAdapter.algebraicallyClosedCanonicalSupportVanishing_genericLaurent</span>
+<span id="L61"><a href="#L61">61</a>       hunit)</span>
+<span id="L62"><a href="#L62">62</a> </span>
+<span id="L63"><a href="#L63">63</a> end Stafford38.FoundationClosure</span>
+<span id="L64"><a href="#L64">64</a> </span>
+<span id="L65"><a href="#L65">65</a> namespace Stafford38</span>
+<span id="L66"><a href="#L66">66</a> </span>
+<span id="L67"><a href="#L67">67</a> universe u</span>
+<span id="L68"><a href="#L68">68</a> </span>
+<span id="L69"><a href="#L69">69</a> theorem universalStatement : UniversalStatement.{u} :=</span>
+<span id="L70"><a href="#L70">70</a>   UniversalAssembly.universalStatement_of_canonicalSupportVanishing</span>
+<span id="L71"><a href="#L71">71</a>     FoundationClosure.canonicalSupportVanishingViaGeneralCoisotropic</span>
+<span id="L72"><a href="#L72">72</a> </span>
+<span id="L73"><a href="#L73">73</a> theorem universalFixedSourceStatement : Stafford38FixedSourceChallenge.UniversalFixedSourceStatement.{u} :=</span>
+<span id="L74"><a href="#L74">74</a>   FixedSource.universalFixedSourceStatement_of_canonicalSupportVanishing</span>
+<span id="L75"><a href="#L75">75</a>     FoundationClosure.canonicalSupportVanishingViaGeneralCoisotropic</span>
+<span id="L76"><a href="#L76">76</a> </span>
+<span id="L77"><a href="#L77">77</a> #print axioms universalStatement</span>
+<span id="L78"><a href="#L78">78</a> #print axioms universalFixedSourceStatement</span>
+<span id="L79"><a href="#L79">79</a> </span>
+<span id="L80"><a href="#L80">80</a> end Stafford38</span>
+<span id="L81"><a href="#L81">81</a> </span>
+<span id="L82"><a href="#L82">82</a> namespace Stafford38.GenericLaurentVariant</span>
+<span id="L83"><a href="#L83">83</a> </span>
+<span id="L84"><a href="#L84">84</a> universe u</span>
+<span id="L85"><a href="#L85">85</a> </span>
+<span id="L86"><a href="#L86">86</a> /-- Challenge theorem assembled through the historical generic/Laurent route. -/</span>
+<span id="L87"><a href="#L87">87</a> theorem universalStatement : UniversalStatement.{u} :=</span>
+<span id="L88"><a href="#L88">88</a>   UniversalAssembly.universalStatement_of_canonicalSupportVanishing</span>
+<span id="L89"><a href="#L89">89</a>     FoundationClosure.canonicalSupportVanishingViaGenericLaurent</span>
+<span id="L90"><a href="#L90">90</a> </span>
+<span id="L91"><a href="#L91">91</a> /-- Fixed-source strengthening assembled through the same historical route. -/</span>
+<span id="L92"><a href="#L92">92</a> theorem universalFixedSourceStatement : Stafford38FixedSourceChallenge.UniversalFixedSourceStatement.{u} :=</span>
+<span id="L93"><a href="#L93">93</a>   FixedSource.universalFixedSourceStatement_of_canonicalSupportVanishing</span>
+<span id="L94"><a href="#L94">94</a>     FoundationClosure.canonicalSupportVanishingViaGenericLaurent</span>
+<span id="L95"><a href="#L95">95</a> </span>
+<span id="L96"><a href="#L96">96</a> #print axioms universalStatement</span>
+<span id="L97"><a href="#L97">97</a> #print axioms universalFixedSourceStatement</span>
+<span id="L98"><a href="#L98">98</a> </span>
+<span id="L99"><a href="#L99">99</a> end Stafford38.GenericLaurentVariant</span>
+<span id="L100"><a href="#L100">100</a> </span></pre>

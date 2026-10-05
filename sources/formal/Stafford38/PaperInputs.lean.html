@@ -1,0 +1,96 @@
+<!doctype html><meta charset="utf-8"><title>Stafford38/PaperInputs.lean</title><style>body{font:14px monospace}pre span{display:block}pre span:target{background:#fff0ad}a{color:#666}pre{white-space:pre-wrap}</style><h1>Stafford38/PaperInputs.lean</h1><p>This project (Stafford38) · 0403af3f0b1a7f84d2027121932723f67bd279ae</p><pre><span id="L1"><a href="#L1">1</a> module</span>
+<span id="L2"><a href="#L2">2</a> public import Stafford38.Characteristic.SpecializedNoncharacteristicEquality</span>
+<span id="L3"><a href="#L3">3</a> public import Stafford38.Geometry.CanonicalNonconstantFiniteGradientProduction</span>
+<span id="L4"><a href="#L4">4</a> public import Stafford38.Geometry.CanonicalVisibleDivisorFrameProduction</span>
+<span id="L5"><a href="#L5">5</a> public import Stafford38.Weyl.FilteredScalarLifting</span>
+<span id="L6"><a href="#L6">6</a> public import Stafford38.FixedSourceAssembly</span>
+<span id="L7"><a href="#L7">7</a> </span>
+<span id="L8"><a href="#L8">8</a> @[expose] public section</span>
+<span id="L9"><a href="#L9">9</a> </span>
+<span id="L10"><a href="#L10">10</a> open Stafford38Challenge (WeylAlg)</span>
+<span id="L11"><a href="#L11">11</a> </span>
+<span id="L12"><a href="#L12">12</a> /-!</span>
+<span id="L13"><a href="#L13">13</a> # Typed assembly interfaces for the paper proof</span>
+<span id="L14"><a href="#L14">14</a> </span>
+<span id="L15"><a href="#L15">15</a> This module packages three application interfaces used by the canonical Weyl</span>
+<span id="L16"><a href="#L16">16</a> construction. The first two include the characteristic-support and symbol</span>
+<span id="L17"><a href="#L17">17</a> dictionaries; the third supplies a retained boundary place with a visible</span>
+<span id="L18"><a href="#L18">18</a> divisor frame on each nonconstant component.</span>
+<span id="L19"><a href="#L19">19</a> </span>
+<span id="L20"><a href="#L20">20</a> `Stafford38.FoundationClosure` proves every field and imports this module on</span>
+<span id="L21"><a href="#L21">21</a> the ordinary root dependency path. No field is installed as an axiom or</span>
+<span id="L22"><a href="#L22">22</a> typeclass. The assembly theorems here remain conditional when considered in</span>
+<span id="L23"><a href="#L23">23</a> isolation; their hypotheses are discharged by the unconditional development.</span>
+<span id="L24"><a href="#L24">24</a> -/</span>
+<span id="L25"><a href="#L25">25</a> </span>
+<span id="L26"><a href="#L26">26</a> namespace Stafford38.PaperInputs</span>
+<span id="L27"><a href="#L27">27</a> </span>
+<span id="L28"><a href="#L28">28</a> open Stafford38.CanonicalSupportVanishingReduction</span>
+<span id="L29"><a href="#L29">29</a> open Stafford38.Characteristic</span>
+<span id="L30"><a href="#L30">30</a> open Stafford38.CharacteristicTransposedFilteredModuleSupport</span>
+<span id="L31"><a href="#L31">31</a> open Stafford38.EulerSurjectivity</span>
+<span id="L32"><a href="#L32">32</a> open Stafford38.SpecializedNoncharacteristicEquality</span>
+<span id="L33"><a href="#L33">33</a> open Stafford38.Geometry.CanonicalResidueExtensionAssembly</span>
+<span id="L34"><a href="#L34">34</a> open Stafford38.Geometry.CanonicalNonconstantFiniteGradientProduction</span>
+<span id="L35"><a href="#L35">35</a> open Stafford38.Geometry.CanonicalVisibleDivisorFrameProduction</span>
+<span id="L36"><a href="#L36">36</a> open Stafford38.WeylIteratedEquivalence</span>
+<span id="L37"><a href="#L37">37</a> open Stafford38.WeylEulerResidue</span>
+<span id="L38"><a href="#L38">38</a> open Stafford38.WeylPBWMonicBridge</span>
+<span id="L39"><a href="#L39">39</a> open Stafford38.Weyl.FilteredScalarLifting</span>
+<span id="L40"><a href="#L40">40</a> </span>
+<span id="L41"><a href="#L41">41</a> universe u</span>
+<span id="L42"><a href="#L42">42</a> </span>
+<span id="L43"><a href="#L43">43</a> /-- Exact Stafford-specific output of the noncharacteristic inverse-image</span>
+<span id="L44"><a href="#L44">44</a> application.  This is support avoidance, not the stronger filtered predecessor</span>
+<span id="L45"><a href="#L45">45</a> to which it is converted by a separate trust-zero algebraic theorem. -/</span>
+<span id="L46"><a href="#L46">46</a> def CanonicalNoncharacteristicSupportAvoidance : Prop :=</span>
+<span id="L47"><a href="#L47">47</a>   ∀ (k : Type u) [Field k] [CharZero k] [IsAlgClosed k] (n N : ℕ)</span>
+<span id="L48"><a href="#L48">48</a>     (d : WeylAlg k (n + 1)),</span>
+<span id="L49"><a href="#L49">49</a>     0 &lt; N → IsPBWMonicAt k (.inr (0 : Fin (n + 1))) N d →</span>
+<span id="L50"><a href="#L50">50</a>       Disjoint</span>
+<span id="L51"><a href="#L51">51</a>         (transposedOrderAssociatedGradedSupport k</span>
+<span id="L52"><a href="#L52">52</a>           (canonicalRightIdeal (presentedCoordinate k n) d N))</span>
+<span id="L53"><a href="#L53">53</a>         (PrimeSpectrum.zeroLocus</span>
+<span id="L54"><a href="#L54">54</a>           ({MvPolynomial.X (.inl (0 : Fin (n + 1)))} :</span>
+<span id="L55"><a href="#L55">55</a>             Set (SymbolRing k (n + 1))))</span>
+<span id="L56"><a href="#L56">56</a> </span>
+<span id="L57"><a href="#L57">57</a> /-- Assembly interfaces whose fields are proved in `Stafford38.FoundationClosure`. -/</span>
+<span id="L58"><a href="#L58">58</a> structure Inputs : Prop where</span>
+<span id="L59"><a href="#L59">59</a>   noncharacteristicApplication :</span>
+<span id="L60"><a href="#L60">60</a>     CanonicalNoncharacteristicSupportAvoidance.{u}</span>
+<span id="L61"><a href="#L61">61</a>   residueExtensionSymbolControl :</span>
+<span id="L62"><a href="#L62">62</a>     CanonicalResidueExtensionSymbolControl.{u}</span>
+<span id="L63"><a href="#L63">63</a>   higherDimensionalVisibleDivisorFrameProduction :</span>
+<span id="L64"><a href="#L64">64</a>     HigherDimensionalCanonicalVisibleDivisorFrameProduction.{u}</span>
+<span id="L65"><a href="#L65">65</a> </span>
+<span id="L66"><a href="#L66">66</a> /-- Canonical support vanishes under the three explicit paper inputs.</span>
+<span id="L67"><a href="#L67">67</a> This theorem is conditional and introduces no project axiom. -/</span>
+<span id="L68"><a href="#L68">68</a> theorem canonicalSupportVanishing_of_inputs (h : Inputs.{u}) :</span>
+<span id="L69"><a href="#L69">69</a>     Stafford38.UniversalAssembly.CanonicalSupportVanishing.{u} := by</span>
+<span id="L70"><a href="#L70">70</a>   let hunit : CanonicalStrictUnitCoordinatePreimage.{u} := by</span>
+<span id="L71"><a href="#L71">71</a>     intro k _ _ _ n N d hN hd</span>
+<span id="L72"><a href="#L72">72</a>     exact strictUnitCoordinatePreimage_of_transposedSupport_disjoint_axis</span>
+<span id="L73"><a href="#L73">73</a>       k n N d (h.noncharacteristicApplication k n N d hN hd)</span>
+<span id="L74"><a href="#L74">74</a>   exact canonicalSupportDescent</span>
+<span id="L75"><a href="#L75">75</a>       (algebraicallyClosedCanonicalSupportVanishing_of_residueExtension_rankSplit</span>
+<span id="L76"><a href="#L76">76</a>         hunit h.residueExtensionSymbolControl</span>
+<span id="L77"><a href="#L77">77</a>           (higherDimensionalCanonicalResidueExtensionConormalAxisProduction_of_nonconstantFiniteGradient</span>
+<span id="L78"><a href="#L78">78</a>             (higherDimensionalCanonicalResidueExtensionNonconstantFiniteGradientProduction_of_visibleDivisorFrame</span>
+<span id="L79"><a href="#L79">79</a>               h.higherDimensionalVisibleDivisorFrameProduction)))</span>
+<span id="L80"><a href="#L80">80</a> </span>
+<span id="L81"><a href="#L81">81</a> /-- The universal identity under the explicit paper inputs. -/</span>
+<span id="L82"><a href="#L82">82</a> theorem universalStatement_of_inputs (h : Inputs.{u}) :</span>
+<span id="L83"><a href="#L83">83</a>     Stafford38Challenge.UniversalStatement.{u} :=</span>
+<span id="L84"><a href="#L84">84</a>   Stafford38.UniversalAssembly.universalStatement_of_canonicalSupportVanishing</span>
+<span id="L85"><a href="#L85">85</a>     (canonicalSupportVanishing_of_inputs h)</span>
+<span id="L86"><a href="#L86">86</a> </span>
+<span id="L87"><a href="#L87">87</a> /-- The stronger paper statement, with the exact Bernstein exponent. -/</span>
+<span id="L88"><a href="#L88">88</a> theorem universalFixedSourceStatement_of_inputs (h : Inputs.{u}) :</span>
+<span id="L89"><a href="#L89">89</a>     Stafford38FixedSourceChallenge.UniversalFixedSourceStatement.{u} :=</span>
+<span id="L90"><a href="#L90">90</a>   Stafford38.FixedSource.universalFixedSourceStatement_of_canonicalSupportVanishing</span>
+<span id="L91"><a href="#L91">91</a>     (canonicalSupportVanishing_of_inputs h)</span>
+<span id="L92"><a href="#L92">92</a> </span>
+<span id="L93"><a href="#L93">93</a> #print axioms universalStatement_of_inputs</span>
+<span id="L94"><a href="#L94">94</a> </span>
+<span id="L95"><a href="#L95">95</a> end Stafford38.PaperInputs</span>
+<span id="L96"><a href="#L96">96</a> </span></pre>

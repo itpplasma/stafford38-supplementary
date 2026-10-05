@@ -1,0 +1,77 @@
+<!doctype html><meta charset="utf-8"><title>Stafford38/Geometry/SameWitness/ChartGroundMap.lean</title><style>body{font:14px monospace}pre span{display:block}pre span:target{background:#fff0ad}a{color:#666}pre{white-space:pre-wrap}</style><h1>Stafford38/Geometry/SameWitness/ChartGroundMap.lean</h1><p>This project (Stafford38) · 0403af3f0b1a7f84d2027121932723f67bd279ae</p><pre><span id="L1"><a href="#L1">1</a> module</span>
+<span id="L2"><a href="#L2">2</a> public import Stafford38.Geometry.A0ChartFormalEtale</span>
+<span id="L3"><a href="#L3">3</a> public import Stafford38.Geometry.AffineComponentCoordinateSplit</span>
+<span id="L4"><a href="#L4">4</a> public import Stafford38.Geometry.EtaleGenericOpenExtraAwayB</span>
+<span id="L5"><a href="#L5">5</a> public import Stafford38.Geometry.ProjectiveChartSameFieldOverlap</span>
+<span id="L6"><a href="#L6">6</a> public import Mathlib.RingTheory.Localization.Away.Basic</span>
+<span id="L7"><a href="#L7">7</a> </span>
+<span id="L8"><a href="#L8">8</a> @[expose] public section</span>
+<span id="L9"><a href="#L9">9</a> </span>
+<span id="L10"><a href="#L10">10</a> set_option autoImplicit false</span>
+<span id="L11"><a href="#L11">11</a> set_option maxHeartbeats 1600000</span>
+<span id="L12"><a href="#L12">12</a> set_option linter.style.haveILetI false</span>
+<span id="L13"><a href="#L13">13</a> </span>
+<span id="L14"><a href="#L14">14</a> noncomputable section</span>
+<span id="L15"><a href="#L15">15</a> </span>
+<span id="L16"><a href="#L16">16</a> namespace Stafford38.Geometry.SameWitness</span>
+<span id="L17"><a href="#L17">17</a> </span>
+<span id="L18"><a href="#L18">18</a> open Stafford38.Geometry.A0ChartFormalEtale</span>
+<span id="L19"><a href="#L19">19</a> open Stafford38.Geometry.AffineComponentCoordinateSplit</span>
+<span id="L20"><a href="#L20">20</a> open Stafford38.Geometry.EtaleGenericOpenTransport</span>
+<span id="L21"><a href="#L21">21</a> open Stafford38.Geometry.ProjectiveChartSameFieldOverlap</span>
+<span id="L22"><a href="#L22">22</a> </span>
+<span id="L23"><a href="#L23">23</a> universe u v w</span>
+<span id="L24"><a href="#L24">24</a> </span>
+<span id="L25"><a href="#L25">25</a> /-- The original-affine chart map into the common open is the identity on the</span>
+<span id="L26"><a href="#L26">26</a> ground field: it commutes with `k` mapped through the original affine chart</span>
+<span id="L27"><a href="#L27">27</a> algebra and `k` mapped through the ground ring `Q`. -/</span>
+<span id="L28"><a href="#L28">28</a> theorem originalAffineChartToCommonOpen_groundMap</span>
+<span id="L29"><a href="#L29">29</a>     {k : Type u} [Field k] {m : ℕ}</span>
+<span id="L30"><a href="#L30">30</a>     {Q : Type v} [CommRing Q] [Algebra k Q]</span>
+<span id="L31"><a href="#L31">31</a>     {B : Type w} [CommRing B] [Algebra Q B]</span>
+<span id="L32"><a href="#L32">32</a>     (P : PrimeSpectrum (MvPolynomial (Fin m) k)) (j : Fin m)</span>
+<span id="L33"><a href="#L33">33</a>     (hxj : componentCoordinate P j ≠ 0)</span>
+<span id="L34"><a href="#L34">34</a>     (hsel : SelectedAffineChartQuotient (k := k) P j ≃ₐ[k] Q)</span>
+<span id="L35"><a href="#L35">35</a>     (M : Ideal B) [M.IsPrime] (f : Q)</span>
+<span id="L36"><a href="#L36">36</a>     (e : Localization.Away f ≃ₐ[Q]</span>
+<span id="L37"><a href="#L37">37</a>       Localization.Away (algebraMap Q B f)) :</span>
+<span id="L38"><a href="#L38">38</a>     let g := hsel (selectedAffineChartDenominator P j)</span>
+<span id="L39"><a href="#L39">39</a>     let Cq := genericOpenRing M f e</span>
+<span id="L40"><a href="#L40">40</a>     let U := genericOpenExtraAwayB M f e g</span>
+<span id="L41"><a href="#L41">41</a>     letI : Semiring U := (inferInstance : CommSemiring U).toSemiring</span>
+<span id="L42"><a href="#L42">42</a>     letI : Algebra Q Cq := inferInstance</span>
+<span id="L43"><a href="#L43">43</a>     letI : Algebra Q U := Algebra.compHom U (algebraMap Q Cq)</span>
+<span id="L44"><a href="#L44">44</a>     (originalAffineChartToCommonOpen P j hxj hsel M f e).comp</span>
+<span id="L45"><a href="#L45">45</a>         (algebraMap k (OriginalAffineChartQuotient (k := k) P)) =</span>
+<span id="L46"><a href="#L46">46</a>       (algebraMap Q U).comp (algebraMap k Q) := by</span>
+<span id="L47"><a href="#L47">47</a>   dsimp only</span>
+<span id="L48"><a href="#L48">48</a>   let g := hsel (selectedAffineChartDenominator P j)</span>
+<span id="L49"><a href="#L49">49</a>   let Cq := genericOpenRing M f e</span>
+<span id="L50"><a href="#L50">50</a>   let U := genericOpenExtraAwayB M f e g</span>
+<span id="L51"><a href="#L51">51</a>   letI : Semiring U := (inferInstance : CommSemiring U).toSemiring</span>
+<span id="L52"><a href="#L52">52</a>   letI : Algebra Q Cq := inferInstance</span>
+<span id="L53"><a href="#L53">53</a>   letI : Algebra Q U := Algebra.compHom U (algebraMap Q Cq)</span>
+<span id="L54"><a href="#L54">54</a>   let A₀ := OriginalAffineChartQuotient (k := k) P</span>
+<span id="L55"><a href="#L55">55</a>   let S₀ := OriginalAffineChartLocalization (k := k) P j</span>
+<span id="L56"><a href="#L56">56</a>   let T := Localization.Away g</span>
+<span id="L57"><a href="#L57">57</a>   let overlap : S₀ ≃ₐ[k] T :=</span>
+<span id="L58"><a href="#L58">58</a>     (originalAffineChartOverlapEquiv P j hxj).trans</span>
+<span id="L59"><a href="#L59">59</a>       (selectedChartAwayEquivOfQuotientEquiv P j hsel)</span>
+<span id="L60"><a href="#L60">60</a>   have hz : genericOpenBMap M f e (algebraMap Q B g) = algebraMap Q Cq g :=</span>
+<span id="L61"><a href="#L61">61</a>     genericOpenBMap_base_eq M f e g</span>
+<span id="L62"><a href="#L62">62</a>   letI : IsLocalization.Away (algebraMap Q Cq g) U := by</span>
+<span id="L63"><a href="#L63">63</a>     rw [← hz]</span>
+<span id="L64"><a href="#L64">64</a>     infer_instance</span>
+<span id="L65"><a href="#L65">65</a>   let ψ : T →+* U := IsLocalization.Away.map</span>
+<span id="L66"><a href="#L66">66</a>     (S := T) (Q := U) (algebraMap Q Cq) g</span>
+<span id="L67"><a href="#L67">67</a>   apply RingHom.ext</span>
+<span id="L68"><a href="#L68">68</a>   intro c</span>
+<span id="L69"><a href="#L69">69</a>   change ψ (overlap (algebraMap A₀ S₀ (algebraMap k A₀ c))) =</span>
+<span id="L70"><a href="#L70">70</a>     algebraMap Q U (algebraMap k Q c)</span>
+<span id="L71"><a href="#L71">71</a>   rw [← IsScalarTower.algebraMap_apply k A₀ S₀ c, overlap.commutes]</span>
+<span id="L72"><a href="#L72">72</a>   rw [IsScalarTower.algebraMap_apply k Q T c]</span>
+<span id="L73"><a href="#L73">73</a>   simp [ψ, IsLocalization.Away.map]</span>
+<span id="L74"><a href="#L74">74</a>   rfl</span>
+<span id="L75"><a href="#L75">75</a> </span>
+<span id="L76"><a href="#L76">76</a> end Stafford38.Geometry.SameWitness</span>
+<span id="L77"><a href="#L77">77</a> </span></pre>

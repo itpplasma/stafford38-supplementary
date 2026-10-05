@@ -1,0 +1,23 @@
+<!doctype html><meta charset="utf-8"><title>tests/TorsionCyclicityConsumer.lean</title><style>body{font:14px monospace}pre span{display:block}pre span:target{background:#fff0ad}a{color:#666}pre{white-space:pre-wrap}</style><h1>tests/TorsionCyclicityConsumer.lean</h1><p>This project (Stafford38) · 0403af3f0b1a7f84d2027121932723f67bd279ae</p><pre><span id="L1"><a href="#L1">1</a> module</span>
+<span id="L2"><a href="#L2">2</a> public import CorollaryChallenge</span>
+<span id="L3"><a href="#L3">3</a> public import Stafford38.TorsionCyclicity</span>
+<span id="L4"><a href="#L4">4</a> </span>
+<span id="L5"><a href="#L5">5</a> @[expose] public section</span>
+<span id="L6"><a href="#L6">6</a> </span>
+<span id="L7"><a href="#L7">7</a> /-! An independent consumer checks the literal Mathlib-only corollary statement. -/</span>
+<span id="L8"><a href="#L8">8</a> </span>
+<span id="L9"><a href="#L9">9</a> namespace Stafford38CorollaryChallenge</span>
+<span id="L10"><a href="#L10">10</a> </span>
+<span id="L11"><a href="#L11">11</a> /-- The substantive right-module theorem proves the standalone corollary</span>
+<span id="L12"><a href="#L12">12</a> statement in the shared `RingQuot` presentation. -/</span>
+<span id="L13"><a href="#L13">13</a> theorem torsionCyclicStatement_consumer : torsionCyclicStatement := by</span>
+<span id="L14"><a href="#L14">14</a>   intro k _ _ n M _ _ _ hM</span>
+<span id="L15"><a href="#L15">15</a>   have hM' : Stafford38.TorsionCyclicity.IsRightTorsion</span>
+<span id="L16"><a href="#L16">16</a>       (A := Stafford38Challenge.WeylAlg k n) (M := M) := hM</span>
+<span id="L17"><a href="#L17">17</a>   exact Stafford38.TorsionCyclicity.weyl_isCyclic_of_isRightTorsion</span>
+<span id="L18"><a href="#L18">18</a>     (k := k) (n := n) (M := M) hM'</span>
+<span id="L19"><a href="#L19">19</a> </span>
+<span id="L20"><a href="#L20">20</a> #print axioms torsionCyclicStatement_consumer</span>
+<span id="L21"><a href="#L21">21</a> </span>
+<span id="L22"><a href="#L22">22</a> end Stafford38CorollaryChallenge</span>
+<span id="L23"><a href="#L23">23</a> </span></pre>

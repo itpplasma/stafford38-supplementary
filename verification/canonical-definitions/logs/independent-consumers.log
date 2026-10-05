@@ -1,0 +1,1817 @@
+'exactDegreePaperConsumer' depends on axioms: [propext, Classical.choice, Quot.sound]
+'leftPaperConsumer' depends on axioms: [propext, Classical.choice, Quot.sound]
+'evolutionConsumer' depends on axioms: [propext, Classical.choice, Quot.sound]
+'orePaperConsumer' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Stafford38.Evolution.tensorEvolutionaryCorollary' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Stafford38.Geometry.ComponentProjectiveChartKernel.canonicalComponentChartEquationGenericPointMap' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.ComponentProjectiveChartKernel.canonicalComponentChartEquationGenericPointMap_mk' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.ComponentProjectiveChartKernel.canonicalComponentChartEquationGenericPointMap_comp_mk' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.ComponentProjectiveChartKernel.canonicalComponentChartEquationGenericPointMap_unique' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.DefinitionOwnerRepairConsumer.chartMap_generator' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.DefinitionOwnerRepairConsumer.chartMap_unique' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.DefinitionOwnerRepairConsumer.reduction_ad_formula' depends on axioms: [propext, Quot.sound]
+tests/ActualCommonOpenColumnGlueConsumer.lean:45:2: warning: `simp` already closes the goal
+
+Hint: Use `simp` instead of `simpa`:
+  [apply] simp
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+'Stafford38.Geometry.ActualCommonOpenColumnGlueConsumer.literal_unit_column' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.ActualCommonOpenColumnGlue.pointLocal_commonOpen_column' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.ActualCommonOpenColumnGlue.actual_integral_column_commonOpen_eq_pointLocal' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Stafford38.Geometry.ActualWitnessCommonOpenColumnGlue.actual_witness_commonOpen_eq_pointLocal.{u} {k : Type u} [Field k]
+  [CharZero k] {m : ℕ} (hm : 0 < m) (P : PrimeSpectrum (MvPolynomial (Fin m) k))
+  (w : Stafford38.Geometry.GeneralDivisorialVisibleFrame.GeneralDivisorialVisibleFrameWitness hm P) (j : Fin m)
+  (hchart : w.column.chart = j.succ)
+  (M :
+    Ideal
+      ↥(integralClosure
+          (↥(Algebra.adjoin k
+                (Set.range
+                  (Stafford38.Geometry.ComponentProjectiveChartKernel.chartGenericPoint P j.succ
+                    (Stafford38.Geometry.ProjectiveChartSameFieldOverlap.SelectedAffineCoordinateEquiv j)))).toSubring)
+          (Stafford38.Geometry.ComponentProjectiveClosure.ComponentFractionField P)))
+  [M.IsPrime]
+  (f :
+    ↥(Algebra.adjoin k
+        (Set.range
+          (Stafford38.Geometry.ComponentProjectiveChartKernel.chartGenericPoint P j.succ
+            (Stafford38.Geometry.ProjectiveChartSameFieldOverlap.SelectedAffineCoordinateEquiv j)))))
+  (e :
+    Localization.Away
+        f ≃ₐ[↥(Algebra.adjoin k
+          (Set.range
+            (Stafford38.Geometry.ComponentProjectiveChartKernel.chartGenericPoint P j.succ
+              (Stafford38.Geometry.ProjectiveChartSameFieldOverlap.SelectedAffineCoordinateEquiv j))))]
+      Localization.Away
+        ((algebraMap
+            ↥(Algebra.adjoin k
+                (Set.range
+                  (Stafford38.Geometry.ComponentProjectiveChartKernel.chartGenericPoint P j.succ
+                    (Stafford38.Geometry.ProjectiveChartSameFieldOverlap.SelectedAffineCoordinateEquiv j))))
+            ↥(integralClosure
+                (↥(Algebra.adjoin k
+                      (Set.range
+                        (Stafford38.Geometry.ComponentProjectiveChartKernel.chartGenericPoint P j.succ
+                          (Stafford38.Geometry.ProjectiveChartSameFieldOverlap.SelectedAffineCoordinateEquiv
+                            j)))).toSubring)
+                (Stafford38.Geometry.ComponentProjectiveClosure.ComponentFractionField P)))
+          f)) :
+  let F := Stafford38.Geometry.ComponentProjectiveClosure.ComponentFractionField P;
+  let W := w.column.W;
+  have V := W.place.valuation.toSubring;
+  let Q :=
+    Algebra.adjoin k
+      (Set.range
+        (Stafford38.Geometry.ComponentProjectiveChartKernel.chartGenericPoint P j.succ
+          (Stafford38.Geometry.ProjectiveChartSameFieldOverlap.SelectedAffineCoordinateEquiv j)));
+  let B := integralClosure (↥Q.toSubring) F;
+  have hxj := ⋯;
+  have hsel :=
+    Stafford38.Geometry.ChartGenericPointFractionRing.componentChartEquationQuotient_equiv_genericSubalgebra P j.succ
+      (Stafford38.Geometry.ProjectiveChartSameFieldOverlap.SelectedAffineCoordinateEquiv j) ⋯;
+  have g := hsel (Stafford38.Geometry.ProjectiveChartSameFieldOverlap.selectedAffineChartDenominator P j);
+  let Cq := Stafford38.Geometry.EtaleGenericOpenTransport.genericOpenRing M f e;
+  let U := Stafford38.Geometry.EtaleGenericOpenTransport.genericOpenExtraAwayB M f e g;
+  have qU := fun i =>
+    Fin.cases ((algebraMap Cq U) ((algebraMap (↥Q) Cq) g))
+      (fun i =>
+        if hij : i = j then 1
+        else
+          (algebraMap Cq U)
+            ((algebraMap (↥Q) Cq)
+              (hsel (Stafford38.Geometry.ProjectiveChartSameFieldOverlap.selectedAffineChartVariableClass P j i hij))))
+      i;
+  ∃ qQ,
+    qQ j.succ = 1 ∧
+      (∀ (a : Fin (m + 1)), ↑(qQ a) = ↑(w.column.q a)) ∧
+        ∀ (a : Fin (m + 1)),
+          qU a =
+            (Stafford38.Geometry.ActualCommonOpenCompletionDerivation.pointLocalToCommonOpen M f e g)
+              ((algebraMap (↥B) (Localization.AtPrime M))
+                ((Stafford38.Geometry.SelectedResidueCoefficientLocalization.chartSubalgebraToIntegralClosure Q)
+                  (qQ a)))
+'Stafford38.Geometry.ActualWitnessCommonOpenColumnGlue.actual_witness_commonOpen_eq_pointLocal' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Stafford38.Geometry.ActualWitnessSelectedChartIndex.exists_succ_chart_index.{u} {k : Type u} [Field k] [CharZero k]
+  {m : ℕ} (hm : 0 < m) (P : PrimeSpectrum (MvPolynomial (Fin m) k))
+  (w : Stafford38.Geometry.GeneralDivisorialVisibleFrame.GeneralDivisorialVisibleFrameWitness hm P) :
+  ∃ j, w.column.chart = j.succ
+'Stafford38.Geometry.ActualWitnessSelectedChartIndex.exists_succ_chart_index' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Stafford38.Geometry.ActualSameWitnessDivisorNumerator.actualParameterOutput.{u} {k : Type u} [Field k] [CharZero k]
+  {m : ℕ} (hm : 0 < m) (P : PrimeSpectrum (MvPolynomial (Fin m) k))
+  (w : Stafford38.Geometry.GeneralDivisorialVisibleFrame.GeneralDivisorialVisibleFrameWitness hm P) : Prop
+Stafford38.Geometry.ActualSameWitnessDivisorNumerator.exists_actual_parameter_with_retained_orders.{u} {k : Type u}
+  [Field k] [CharZero k] {m : ℕ} (hm : 0 < m) (P : PrimeSpectrum (MvPolynomial (Fin m) k))
+  (w : Stafford38.Geometry.GeneralDivisorialVisibleFrame.GeneralDivisorialVisibleFrameWitness hm P) :
+  Stafford38.Geometry.ActualSameWitnessDivisorNumerator.actualParameterOutput hm P w
+'Stafford38.Geometry.ActualSameWitnessDivisorNumerator.exists_actual_parameter_with_retained_orders' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.ActualSameWitnessDivisorNumerator.selected_basis_and_parameter_output' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Stafford38.Geometry.ActualPointAxisLift.exists_actual_point_axis_lift.{u} {k B : Type u} [Field k] [Infinite k]
+  [CharZero k] [CommRing B] [IsDomain B] [Algebra k B] [Algebra.FiniteType k B] {d n : ℕ} (M : Ideal B) [M.IsMaximal]
+  (eM : (B ⧸ M) ≃ₐ[k] k) (f : MvPolynomial (Option (Fin d)) k →ₐ[k] B) [Algebra (MvPolynomial (Option (Fin d)) k) B]
+  [IsScalarTower k (MvPolynomial (Option (Fin d)) k) B] [Algebra.EssFiniteType (MvPolynomial (Option (Fin d)) k) B]
+  [Algebra.FormallyEtale (MvPolynomial (Option (Fin d)) k) (Localization.AtPrime M)]
+  (hmap : algebraMap (MvPolynomial (Option (Fin d)) k) B = f.toRingHom) (s bad : B) (hs : f (MvPolynomial.X none) = s)
+  (hsM : s ∈ M) (hbad : bad ≠ 0) (qB : Fin (n + 1) → B) (chart : Fin (n + 1)) (axis : Fin n) (hqchart : qB chart = 1)
+  (a b : ℕ) (ha : 0 < a) (hab : a < b) (u₀ u₁ : Localization.AtPrime M) (hu₀ : IsUnit u₀) (hu₁ : IsUnit u₁)
+  (hq₀ : (algebraMap B (Localization.AtPrime M)) (qB 0) = (algebraMap B (Localization.AtPrime M)) s ^ a * u₀)
+  (hq₁ : (algebraMap B (Localization.AtPrime M)) (qB axis.succ) = (algebraMap B (Localization.AtPrime M)) s ^ b * u₁)
+  (rows : Fin d ↪ Fin (n + 1)) (hrows : ∀ (j : Fin d), f (MvPolynomial.X (some j)) = qB (rows j)) :
+  ∃ α,
+    Stafford38.Geometry.SmoothLocalTiltedArcAxisLift.tiltedArc α
+          ((Stafford38.Geometry.PrescribedGroundPointUnitPowerChart.localToFinSuccPowerSeries M eM)
+                ((algebraMap B (Localization.AtPrime M)) bad) *
+              (Stafford38.Geometry.PrescribedGroundPointUnitPowerChart.localToFinSuccPowerSeries M eM)
+                ((algebraMap B (Localization.AtPrime M)) (qB 0)) *
+            (Stafford38.Geometry.PrescribedGroundPointUnitPowerChart.localToFinSuccPowerSeries M eM)
+              ((algebraMap B (Localization.AtPrime M)) (qB axis.succ))) ≠
+        0 ∧
+      Stafford38.Geometry.SmoothLocalTiltedArcAxisLift.SelectedCoordinateAxisLiftData
+        (fun i =>
+          (Stafford38.Geometry.PrescribedGroundPointUnitPowerChart.localToFinSuccPowerSeries M eM)
+            ((algebraMap B (Localization.AtPrime M)) (qB i)))
+        rows chart 0 axis.succ a b
+        (fun j => Stafford38.Geometry.PrescribedAffineResidueCompletion.residueCoordinates M eM (some j)) α
+        ((Stafford38.Geometry.PrescribedGroundPointUnitPowerChart.localToFinSuccPowerSeries M eM) u₀)
+        ((Stafford38.Geometry.PrescribedGroundPointUnitPowerChart.localToFinSuccPowerSeries M eM) u₁)
+'Stafford38.Geometry.ActualPointAxisLift.exists_actual_point_axis_lift' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Stafford38.Geometry.ActualSelectedNormalizationDivisorEtale.formallyEtale_at_selected_actual_normalization_center_core.{u}
+  {k : Type u} [Field k] [CharZero k] {m : ℕ} (hm : 0 < m) (P : PrimeSpectrum (MvPolynomial (Fin m) k))
+  (w : Stafford38.Geometry.GeneralDivisorialVisibleFrame.GeneralDivisorialVisibleFrameWitness hm P) :
+  let C := w.column;
+  let W := C.W;
+  have F := Stafford38.Geometry.ComponentProjectiveClosure.ComponentFractionField P;
+  let U := W.place.valuation;
+  let V := U.toSubring;
+  let κ := IsLocalRing.ResidueField ↥V;
+  let B := Stafford38.Geometry.ActualSelectedNormalizationDivisorEtale.actualSelectedNormalization P w;
+  have coeff := Stafford38.Geometry.ActualSelectedNormalizationDivisorEtale.actualSelectedNormalizationCoefficients P w;
+  ∀ (hQV : (Stafford38.Geometry.ActualSelectedNormalizationDivisorEtale.actualSelectedChartAlgebra P w).toSubring ≤ V)
+    (t : Set κ),
+    t.Finite →
+      IsTranscendenceBasis k Subtype.val →
+        ∀ (index : ↑t → Fin m),
+          Function.Injective index →
+            (∀ (z : ↑t),
+                (IsLocalRing.residue ↥V)
+                    (w.column.q
+                      ↑((Stafford38.Geometry.AsymptoticChartArcAdapter.chartAffineCoordinateEquiv w.column.chart)
+                          (index z))) =
+                  ↑z) →
+              ∀ (s : ↥B)
+                (hP_B :
+                  (Stafford38.Geometry.ActualSelectedNormalizationDivisorEtale.actualSelectedNormalizationCenterPrime P
+                      w hQV).IsPrime),
+                s ≠ 0 →
+                  s ∈
+                      Stafford38.Geometry.ActualSelectedNormalizationDivisorEtale.actualSelectedNormalizationCenterPrime
+                        P w hQV →
+                    Ideal.span
+                          (Set.singleton
+                            ((algebraMap (↥B)
+                                (Localization.AtPrime
+                                  (Stafford38.Geometry.ActualSelectedNormalizationDivisorEtale.actualSelectedNormalizationCenterPrime
+                                    P w hQV)))
+                              s)) =
+                        IsLocalRing.maximalIdeal
+                          (Localization.AtPrime
+                            (Stafford38.Geometry.ActualSelectedNormalizationDivisorEtale.actualSelectedNormalizationCenterPrime
+                              P w hQV)) →
+                      ∀ (fOption : MvPolynomial (Option ↑t) k →ₐ[k] ↥B),
+                        fOption (MvPolynomial.X none) = s →
+                          (∀ (z : ↑t),
+                              fOption (MvPolynomial.X (some z)) =
+                                Stafford38.Geometry.ActualSelectedNormalizationDivisorEtale.actualSelectedNormalizationRows
+                                  P w index z) →
+                            Stafford38.Geometry.ActualSelectedNormalizationDivisorEtale.ActualOptionEtaleCertificate k
+                              (↑t) (↥B)
+                              (Stafford38.Geometry.ActualSelectedNormalizationDivisorEtale.actualSelectedNormalizationCenterPrime
+                                P w hQV)
+                              s
+                              (Stafford38.Geometry.ActualSelectedNormalizationDivisorEtale.actualSelectedNormalizationRows
+                                P w index)
+                              fOption
+'Stafford38.Geometry.ActualSelectedNormalizationDivisorEtale.formallyEtale_at_selected_actual_normalization_center_core' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Stafford38.Geometry.ActualSameWitnessGroundPointCompletion.actualSameWitnessGroundPointOutput.{u} {k : Type u} [Field k]
+  [CharZero k] [IsAlgClosed k] {m : ℕ} (hm : 0 < m) (P : PrimeSpectrum (MvPolynomial (Fin m) k))
+  (w : Stafford38.Geometry.GeneralDivisorialVisibleFrame.GeneralDivisorialVisibleFrameWitness hm P) : Prop
+'Stafford38.Geometry.ActualSameWitnessGroundPointCompletion.exists_actual_same_witness_groundpoint_chart' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.EtaleCotangentBasis.coordinateDerivation_algebraMap' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.SameWitness.AffineFibreClosureConsumer.axis_in_original_affine_conormal_fibre_closure' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.SameWitness.axis_mem_smoothConormalFibreProjection_closure_of_groundPointOutput' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+tests/ActualSameWitnessOriginalPrimeConsumer.lean:46:10: warning: `simp` already closes the goal
+
+Hint: Use `simp` instead of `simpa`:
+  [apply] simp at hzero
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+'Stafford38IndependentOriginalPrimeConsumer.original_prime_coordinate_avoidance_affine_endpoint' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.SameWitness.coordinate_axis_mem_smooth_fibre_closure' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38IndependentOriginalPrimeConsumer.original_prime_coordinate_avoidance_projective_endpoint' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.ActualCommonOpenArcCompatibility.genericArcToExtraAway_comp_commonOpenMap' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.ActualCommonOpenArcCompatibility.pointArc_factors_ne_zero_of_tiltedProduct' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.ActualCommonOpenArcCompatibility.commonOpen_factors_ne_zero_of_tiltedProduct' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'actual_numerator_survives_common_open' depends on axioms: [propext, Classical.choice, Quot.sound]
+Stafford38.Geometry.ActualPointCommonOpenAssembly.pointLocalArc_unit_of_not_mem.{u} {k B : Type u} [Field k] {d : ℕ}
+  [CommRing B] [Algebra k B] [Algebra (MvPolynomial (Option (Fin d)) k) B]
+  [IsScalarTower k (MvPolynomial (Option (Fin d)) k) B] [Algebra.EssFiniteType (MvPolynomial (Option (Fin d)) k) B]
+  (M : Ideal B) [M.IsMaximal] (eM : (B ⧸ M) ≃ₐ[k] k) (α : Fin d → k)
+  [Algebra.FormallyEtale (MvPolynomial (Option (Fin d)) k) (Localization.AtPrime M)] (b : B) (hb : b ∉ M) :
+  IsUnit
+    ((Stafford38.Geometry.ActualCommonOpenCompletionDerivation.originalToPointLocalFinSuccArcLaurentSeries M eM α) b)
+'Stafford38.Geometry.ActualPointCommonOpenAssembly.pointLocalArc_unit_of_not_mem' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Stafford38.Geometry.ActualPointCommonOpenAssembly.exists_directSummandInput_of_selected_axis_lift.{u} {k E : Type u}
+  [Field k] [CommRing E] {n d : ℕ} {I : Ideal (MvPolynomial (Fin n) k)} [Algebra k E]
+  [Algebra (MvPolynomial (Fin n) k ⧸ I) E] [Algebra (MvPolynomial (Fin n) k) E]
+  [Algebra (MvPolynomial (Option (Fin d)) k) E] [IsScalarTower k (MvPolynomial (Fin n) k ⧸ I) E]
+  [IsScalarTower k (MvPolynomial (Fin n) k) E] [IsScalarTower k (MvPolynomial (Option (Fin d)) k) E]
+  [IsScalarTower (MvPolynomial (Fin n) k) (MvPolynomial (Fin n) k ⧸ I) E]
+  [Algebra.FormallyEtale (MvPolynomial (Fin n) k ⧸ I) E] [Algebra.FormallyEtale (MvPolynomial (Option (Fin d)) k) E]
+  (rho : E →+* LaurentSeries k) (hground : rho.comp (algebraMap k E) = algebraMap k (LaurentSeries k))
+  (qC : Fin (n + 1) → E) (qPre : Fin (n + 1) → MvPowerSeries (Fin (d + 1)) k) (rows : Fin d ↪ Fin (n + 1))
+  (chart : Fin (n + 1)) (axis : Fin n) (a b : ℕ) (beta alpha : Fin d → k) (u₀ u₁ : MvPowerSeries (Fin (d + 1)) k)
+  (hqchartPre : qPre chart = 1)
+  (hdata :
+    Stafford38.Geometry.SmoothLocalTiltedArcAxisLift.SelectedCoordinateAxisLiftData qPre rows chart 0 axis.succ a b beta
+      alpha u₀ u₁)
+  (hposition :
+    ∀ (i : Fin (n + 1)),
+      rho (qC i) =
+        (algebraMap (PowerSeries k) (LaurentSeries k))
+          (Stafford38.Geometry.SmoothLocalTiltedArcAxisLift.tiltedArc alpha (qPre i)))
+  (htransverse :
+    ∀ (j : Fin d) (i : Fin (n + 1)),
+      (Stafford38.Geometry.EtaleCotangentBasis.coordinateDerivation (some j)) (qC i) =
+        (algebraMap (PowerSeries k) (LaurentSeries k))
+          (Stafford38.Geometry.SmoothLocalTiltedArcAxisLift.tiltedTransverseDerivativeMatrix alpha qPre i j))
+  (hraw :
+    ∀ (i : Fin (n + 1)),
+      (algebraMap (PowerSeries k) (LaurentSeries k))
+          (PowerSeries.derivative (Stafford38.Geometry.SmoothLocalTiltedArcAxisLift.tiltedArc alpha (qPre i))) =
+        (Stafford38.Geometry.EtaleCotangentBasis.coordinateDerivation none) (qC i) +
+          ∑ j,
+            (algebraMap (PowerSeries k) (LaurentSeries k)) (PowerSeries.C (alpha j)) *
+              (Stafford38.Geometry.EtaleCotangentBasis.coordinateDerivation (some j)) (qC i))
+  (hchart :
+    ∀ (i : Fin n),
+      qC i.succ = qC 0 * (algebraMap (MvPolynomial (Fin n) k ⧸ I) E) ((Ideal.Quotient.mk I) (MvPolynomial.X i)))
+  (hprime : I.IsPrime)
+  (hclosure :
+    Stafford38.Geometry.ProjectiveConormalDehomogenization.dehomogenizedPoint
+        (Stafford38.Geometry.FormalDivisorLaurentConormal.laurentColumn fun i =>
+          Stafford38.Geometry.SmoothLocalTiltedArcAxisLift.tiltedArc alpha (qPre i)) ∈
+      MvPolynomial.zeroLocus (LaurentSeries k)
+        (Ideal.map (Stafford38.Geometry.ScalarExtensionPoints.scalarPolynomialMap (Fin n)) I))
+  (hsmooth :
+    Stafford38.Geometry.SmoothAffineConormal.SmoothAffinePoint
+      (Ideal.map (Stafford38.Geometry.ScalarExtensionPoints.scalarPolynomialMap (Fin n)) I)
+      (Stafford38.Geometry.ProjectiveConormalDehomogenization.dehomogenizedPoint
+        (Stafford38.Geometry.FormalDivisorLaurentConormal.laurentColumn fun i =>
+          Stafford38.Geometry.SmoothLocalTiltedArcAxisLift.tiltedArc alpha (qPre i)))) :
+  ∃ tau C,
+    C *
+          Stafford38.GeometryFormalDivisorTangent.formalTangentMatrix
+            (fun i => Stafford38.Geometry.SmoothLocalTiltedArcAxisLift.tiltedArc alpha (qPre i))
+            (Stafford38.Geometry.SmoothLocalTiltedArcAxisLift.tiltedTransverseDerivativeMatrix alpha qPre) tau =
+        1 ∧
+      (∀ (j : Stafford38.GeometryFormalDivisorTangent.FormalTangentColumn (Fin d)),
+          PowerSeries.constantCoeff
+              (Stafford38.GeometryFormalDivisorTangent.formalTangentMatrix
+                (fun i => Stafford38.Geometry.SmoothLocalTiltedArcAxisLift.tiltedArc alpha (qPre i))
+                (Stafford38.Geometry.SmoothLocalTiltedArcAxisLift.tiltedTransverseDerivativeMatrix alpha qPre) tau
+                axis.succ j) =
+            0) ∧
+        ∃ D, D.axis = axis
+'Stafford38.Geometry.ActualPointCommonOpenAssembly.exists_directSummandInput_of_selected_axis_lift' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Stafford38.Geometry.DirectSummandInputOfActualChart.directSummandInput_of_actual_chart_columns.{u} {k E : Type u}
+  [Field k] [CommRing E] {n d : ℕ} {I : Ideal (MvPolynomial (Fin n) k)} [Algebra k E]
+  [Algebra (MvPolynomial (Fin n) k ⧸ I) E] [Algebra (MvPolynomial (Fin n) k) E]
+  [Algebra (MvPolynomial (Option (Fin d)) k) E] [IsScalarTower k (MvPolynomial (Fin n) k ⧸ I) E]
+  [IsScalarTower k (MvPolynomial (Fin n) k) E] [IsScalarTower k (MvPolynomial (Option (Fin d)) k) E]
+  [IsScalarTower (MvPolynomial (Fin n) k) (MvPolynomial (Fin n) k ⧸ I) E]
+  [Algebra.FormallyEtale (MvPolynomial (Fin n) k ⧸ I) E] [Algebra.FormallyEtale (MvPolynomial (Option (Fin d)) k) E]
+  (rho : E →+* LaurentSeries k) (hground : rho.comp (algebraMap k E) = algebraMap k (LaurentSeries k))
+  (qC : Fin (n + 1) → E) (q : Fin (n + 1) → PowerSeries k) (Z : Matrix (Fin (n + 1)) (Fin d) (PowerSeries k))
+  (tau : Fin (n + 1) → PowerSeries k) (alpha : Fin d → PowerSeries k) (c : ℕ)
+  (hcorrection : ∀ (i : Fin (n + 1)), PowerSeries.derivative (q i) - Z.mulVec alpha i = PowerSeries.X ^ c * tau i)
+  (hposition : ∀ (i : Fin (n + 1)), rho (qC i) = (algebraMap (PowerSeries k) (LaurentSeries k)) (q i))
+  (htransverse :
+    ∀ (j : Fin d) (i : Fin (n + 1)),
+      (Stafford38.Geometry.EtaleCotangentBasis.coordinateDerivation (some j)) (qC i) =
+        (algebraMap (PowerSeries k) (LaurentSeries k)) (Z i j))
+  (hraw :
+    ∀ (i : Fin (n + 1)),
+      (algebraMap (PowerSeries k) (LaurentSeries k)) (PowerSeries.derivative (q i)) =
+        (Stafford38.Geometry.EtaleCotangentBasis.coordinateDerivation none) (qC i) +
+          ∑ j,
+            (algebraMap (PowerSeries k) (LaurentSeries k)) (alpha j) *
+              (Stafford38.Geometry.EtaleCotangentBasis.coordinateDerivation (some j)) (qC i))
+  (hq0chart : (algebraMap E (LaurentSeries k)) (qC 0) ≠ 0)
+  (hchart :
+    ∀ (i : Fin n),
+      qC i.succ = qC 0 * (algebraMap (MvPolynomial (Fin n) k ⧸ I) E) ((Ideal.Quotient.mk I) (MvPolynomial.X i)))
+  (chart : Fin (n + 1)) (hqchart : q chart = 1) (hq0 : q 0 ≠ 0) (axis : Fin n)
+  (C : Matrix (Stafford38.GeometryFormalDivisorTangent.FormalTangentColumn (Fin d)) (Fin (n + 1)) (PowerSeries k))
+  (hCB : C * Stafford38.GeometryFormalDivisorTangent.formalTangentMatrix q Z tau = 1)
+  (haxis :
+    ∀ (j : Stafford38.GeometryFormalDivisorTangent.FormalTangentColumn (Fin d)),
+      PowerSeries.constantCoeff (Stafford38.GeometryFormalDivisorTangent.formalTangentMatrix q Z tau axis.succ j) = 0)
+  (hprime : I.IsPrime)
+  (hclosure :
+    Stafford38.Geometry.ProjectiveConormalDehomogenization.dehomogenizedPoint
+        (Stafford38.Geometry.FormalDivisorLaurentConormal.laurentColumn q) ∈
+      MvPolynomial.zeroLocus (LaurentSeries k)
+        (Ideal.map (Stafford38.Geometry.ScalarExtensionPoints.scalarPolynomialMap (Fin n)) I))
+  (hsmooth :
+    Stafford38.Geometry.SmoothAffineConormal.SmoothAffinePoint
+      (Ideal.map (Stafford38.Geometry.ScalarExtensionPoints.scalarPolynomialMap (Fin n)) I)
+      (Stafford38.Geometry.ProjectiveConormalDehomogenization.dehomogenizedPoint
+        (Stafford38.Geometry.FormalDivisorLaurentConormal.laurentColumn q))) :
+  ∃ D, D.axis = axis
+'Stafford38.Geometry.DirectSummandInputOfActualChart.directSummandInput_of_actual_chart_columns' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'FiniteParameterTangentConsumer.optionChart_generates_actualCone' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'FiniteParameterTangentConsumer.oneParameter_span' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Stafford38.Geometry.EtaleTangentChartSpan.FiniteParameters.tangentVector_eq_sum_parameterDerivations' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.EtaleTangentChartSpan.FiniteParameters.zariskiTangentSpace_eq_span_parameterDerivations' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'literal_option_normalized_projective_cone_oracle' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Stafford38CorollaryChallengeOwnerConsumer.cyclicity_statement_uses_canonical_owners' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'actualLocalizedOperatorConsumer' depends on axioms: [propext, Classical.choice, Quot.sound]
+'actualPrincipalOpenConsumer' depends on axioms: [propext, Classical.choice, Quot.sound]
+'actualPartialLaurentConsumer' depends on axioms: [propext, Classical.choice, Quot.sound]
+'actualRationalOperatorConsumer' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Stafford38FixedSourceChallengeConsumer.unit_degree_intrinsic' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38FixedSourceChallengeConsumer.unit_degree' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Stafford38FixedSourceChallengeConsumer.coordinate_degree' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Stafford38FixedSourceChallengeConsumer.rank_one_unit_consumer' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38FixedSourceChallengeConsumer.rank_one_coordinate_consumer' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38CorollaryChallenge.torsionCyclicStatement_consumer' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'rankOne_literal_restricted_coordinate_ring_finite' depends on axioms: [propext, Classical.choice, Quot.sound]
+'rankOne_conormal_support_zero_momentum' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Stafford38.PaperEulerGrading.orderedPBWMonomial_eulerWeight' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Stafford38.PaperEulerGrading.pairEulerSubring_eq_closure_nonnegativeEulerPBWMonomials' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.PaperEulerGrading.orderedPBWMonomial_positive_eulerFactor' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.PaperEulerGrading.presentedCanonicalQuotient_rightMul_coordinate_surjective' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.WeylQuotientTransport.presentedCanonicalRightQuotient_rightMul_coordinate_surjective' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.PaperHamiltonianFlow.paperHamiltonianFlow_preserves_commonZero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.PaperHamiltonianFlow.paperHamiltonianFlows_preserve_commonZero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.PaperHamiltonianFlow.affineConormal_coordinatePoint_isCommonZero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.PaperCyclicity.exists_span_singleton_eq_span_pair_via_matrix' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.PaperCyclicity.paper_matrix_pair_spans' depends on axioms: [propext, Quot.sound]
+'Stafford38.PaperCyclicity.exists_common_right_annihilator_of_torsion' depends on axioms: [propext, Quot.sound]
+'Stafford38.PaperCyclicity.span_adjusted_pair_eq_span_pair_via_matrix' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.PaperCyclicity.paper_torsion_module_is_cyclic' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Stafford38.TorsionCyclicity.weyl_isCyclic_of_isRightTorsion' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Stafford38.PaperQuotientDescent.canonicalRightQuotient_scalarExtension_equiv' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.PaperQuotientDescent.canonicalRightQuotient_subsingleton_of_scalarExtension' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.PaperQuotientDescent.canonicalSupport_empty_of_scalarExtension_empty' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.PaperQuotientDescent.canonicalAssociatedGraded_annihilator_scalarExtension' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.PaperQuotientDescent.canonicalSupportDescent_via_quotient' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.FoundationClosure.canonicalSupportVanishingViaGeneralCoisotropic' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.universalStatement' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Stafford38.LinearAlgebra.SymplecticComplement.pairComplementData' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.LinearAlgebra.PairReplacement.matrix_pair_spans' depends on axioms: [propext, Quot.sound]
+'Stafford38.LinearAlgebra.PairReplacement.span_adjusted_pair_eq_span_pair' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.LinearAlgebra.PairReplacement.finite_torsion_module_is_cyclic' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'paperBasis_literal_plane_oracle' depends on axioms: [propext, Classical.choice, Quot.sound]
+'rightMonic_degreeOne_literal_oracle' depends on axioms: [propext, Classical.choice, Quot.sound]
+'generic_first_coefficient_reads_linear_term' depends on axioms: [propext, Classical.choice, Quot.sound]
+'arcVelocity_reads_linear_term' depends on axioms: [propext, Classical.choice, Quot.sound]
+'projectiveFirstJet_reads_linear_term' depends on axioms: [propext, Classical.choice, Quot.sound]
+'first_coefficient_is_derivative_at_constant_term' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Stafford38.Geometry.PowerSeriesArcTangency.arcVelocity_eq_constantCoeff_derivative' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'arcVelocity_uses_canonical_first_coefficient' depends on axioms: [propext, Classical.choice, Quot.sound]
+'projectiveFirstJet_uses_canonical_first_coefficient' depends on axioms: [propext, Classical.choice, Quot.sound]
+'reduction_predicate_keeps_exact_certificate' depends on axioms: [propext, Quot.sound]
+'challenge_uses_canonical_predicate' depends on axioms: [propext, Quot.sound]
+'challenge_keeps_original_operator_order' depends on axioms: [propext, Quot.sound]
+'old_reduction_api_still_targets_canonical_predicate' depends on axioms: [propext, Classical.choice, Quot.sound]
+'projectiveChart_middle_literal_oracle' depends on axioms: [propext, Classical.choice, Quot.sound]
+'projectiveChart_middle_ideal_literal_oracle' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Stafford38.Geometry.ProjectiveChartCoordinates.eval_eq_zero_of_mem_dehomogenizedEquationIdeal' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'projectiveChart_zero_literal_oracle' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Stafford38.Geometry.ProjectiveChartCoordinates.eval_dehomogenizeProjectiveChart' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.ProjectiveChartCoordinates.insertProjectiveChart_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.ProjectiveChartCoordinates.insertProjectiveChart_zero_transport' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.ProjectiveChartCoordinates.dehomogenizeProjectiveChart_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.ProjectiveChartCoordinates.dehomogenizeProjectiveChart_zero_transport' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.PaperCompletedResidueDerivationFrame.exists_completed_derivation_frame_of_residue_coordinates' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.PaperCompletedResidueDerivationFrame.exists_projective_derivation_frame_of_residue_coordinates' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.PaperRetainedChartAssembly.exists_retained_projective_derivation_columns' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.PaperRetainedChartAssembly.component_equations_vanish_after_point_transport' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.PaperRetainedChartAssembly.component_generic_kernel_after_point_transport' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'dvr_center_consumer' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Stafford38.Geometry.ProjectiveDVRCenter.dvr_eq_of_dominated_by_valuationSubring' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'generic_chart_tangent_literal_oracle' depends on axioms: [propext, Classical.choice, Quot.sound]
+'arbitrary_chart_tangent_literal_oracle' depends on axioms: [propext, Classical.choice, Quot.sound]
+'zero_chart_tangent_literal_oracle' depends on axioms: [propext, Classical.choice, Quot.sound]
+'zero_chart_second_coordinate_literal_oracle' depends on axioms: [propext, Classical.choice, Quot.sound]
+'chart_one_quotient_difference_literal_oracle' depends on axioms: [propext, Classical.choice, Quot.sound]
+'chart_zero_quotient_difference_literal_oracle' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Stafford38.Geometry.PaperDivisorTangent.projectiveTangentCone_eq_span_of_position_and_tangent' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.GeneralDivisorialVisibleFrame.generalDivisorialVisibleFrameWithResidueAlgebraicity' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.GeneralDivisorialVisibleFrame.generalDivisorialVisibleFrameExistence' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.GeneralDivisorialVisibleFrame.witness_q0_residue_consumer' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.GeneralDivisorialVisibleFrame.witness_retained_halg_consumer' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Stafford38.Geometry.PaperSameWitnessTangentDimension.tangent_finrank_goal.{u} {k : Type u} [Field k] [CharZero k]
+  {m : ℕ} (hm : 0 < m) (P : PrimeSpectrum (MvPolynomial (Fin m) k))
+  (w : Stafford38.Geometry.GeneralDivisorialVisibleFrame.GeneralDivisorialVisibleFrameWitness hm P) : Prop
+Stafford38.Geometry.PaperSameWitnessTangentDimension.tangent_finrank_le_residue_add_one_of_witness.{u} {k : Type u}
+  [Field k] [CharZero k] {m : ℕ} (hm : 0 < m) (P : PrimeSpectrum (MvPolynomial (Fin m) k))
+  (w : Stafford38.Geometry.GeneralDivisorialVisibleFrame.GeneralDivisorialVisibleFrameWitness hm P) :
+  Stafford38.Geometry.PaperSameWitnessTangentDimension.tangent_finrank_goal hm P w
+'Stafford38.Geometry.PaperSameWitnessTangentDimension.tangent_finrank_le_residue_add_one_of_witness' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Stafford38.Geometry.GeneralConormalAxis.exists_groundConormalAxis_of_minimalPrime_unit_transcendental.{u} {k : Type u}
+  [Field k] [CharZero k] {m : ℕ} (hm : 0 < m) (I : Ideal (MvPolynomial (Fin m) k)) (hI : I.IsRadical)
+  (P : PrimeSpectrum (MvPolynomial (Fin m) k)) (hP : P.asIdeal ∈ I.minimalPrimes)
+  (hunit : ∃ g, MvPolynomial.X ⟨0, hm⟩ * g - 1 ∈ P.asIdeal)
+  (htrans : Transcendental k (Stafford38.Geometry.AffineComponentCoordinateSplit.componentCoordinate P ⟨0, hm⟩)) :
+  ∃ K x x_1 y xi,
+    (Sum.elim y fun i => (algebraMap (PowerSeries K) (LaurentSeries K)) (xi i)) ∈
+        Stafford38.Geometry.LaurentConormalResidueExtension.groundEquationConormalLocus I ∧
+      Stafford38.GeometryRetractionSpecialization.residueColumn xi = fun i => if i = ⟨0, hm⟩ then 1 else 0
+'Stafford38.Geometry.GeneralConormalAxis.exists_groundConormalAxis_of_minimalPrime_unit_transcendental' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'paper_actual_axis_literal_consumer' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Stafford38.Geometry.PaperRetainedChartWitnessColumns.columns_of_visible_witness' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.PaperActualDivisorTangent.exists_regularizedOneRowConormalData_of_actual_columns' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.PaperActualWitnessConormalData.exists_regularizedOneRowConormalData_of_actual_witness' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Tests.ProjectiveDivisorChartBridgeConsumer.chart_membership_iff_generic_ratio_evaluation' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Tests.ProjectiveDivisorChartBridgeConsumer.maximal_height_bound_from_polynomial_normalization' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+tests/ResidueBasisLocalizationConsumer.lean:27:2: warning: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+'Stafford38.Geometry.ResidueBasisLocalization.finiteType_fractionField_localization' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.ResidueBasisLocalization.fractionField_localization_isDomain' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.ResidueBasisLocalization.ker_isMaximal_of_algebraic_residue' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+tests/ResidueBasisLocalizationConsumer.lean:42:2: warning: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+'rational_evaluation_kernel' depends on axioms: [propext, Classical.choice, Quot.sound]
+'retained_chart_map_kernel_exact' depends on axioms: [propext, Classical.choice, Quot.sound]
+tests/ChartGenericPointFractionRingConsumer.lean:35:2: warning: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+tests/ChartGenericPointFractionRingConsumer.lean:37:2: warning: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+'chart_function_field_element_is_quotient_of_chart_classes' depends on axioms: [propext, Classical.choice, Quot.sound]
+tests/ChartNormalizationFiniteTypeConsumer.lean:45:2: warning: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+tests/ChartNormalizationFiniteTypeConsumer.lean:50:2: warning: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+tests/ChartNormalizationFiniteTypeConsumer.lean:51:2: warning: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+tests/ChartNormalizationFiniteTypeConsumer.lean:54:2: warning: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+tests/ChartNormalizationFiniteTypeConsumer.lean:55:2: warning: Try this: 
+  haveI̵
+
+The goal is a proposition, so `have` is preferred over `haveI`.
+The difference between `have` and `haveI` is that `haveI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+tests/ChartNormalizationFiniteTypeConsumer.lean:56:2: warning: Try this: 
+  haveI̵
+
+The goal is a proposition, so `have` is preferred over `haveI`.
+The difference between `have` and `haveI` is that `haveI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+tests/ChartNormalizationFiniteTypeConsumer.lean:57:2: warning: Try this: 
+  haveI̵
+
+The goal is a proposition, so `have` is preferred over `haveI`.
+The difference between `have` and `haveI` is that `haveI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+'chart_normalization_finite_type_over_ground' depends on axioms: [propext, Classical.choice, Quot.sound]
+'projective_normalization_finite_consumer' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Stafford38.Geometry.ProjectiveChartNormalizationCenter.integralClosureCenter_ne_bot_of_nonzero_maximal' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.ProjectiveChartNormalizationCenter.localRing_at_integralClosureCenter_le_valuationSubring' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.ProjectiveChartNormalizationFinite.finite_integralClosure_in_fractionField' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'normalization_center_nonzero_consumer' depends on axioms: [propext, Classical.choice, Quot.sound]
+'normalization_center_prime_consumer' depends on axioms: [propext, Classical.choice, Quot.sound]
+'normalization_center_residue_kernel_consumer' depends on axioms: [propext, Classical.choice, Quot.sound]
+'normalization_center_domination_consumer' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Stafford38.Geometry.localRing_at_contracted_maximalIdeal_le_valuationSubring' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.TiltedArcAvoidanceConsumer.zero_tilt_coefficient_one_oracle' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.TiltedArcAvoidance.exists_eval_ne_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Stafford38.Geometry.TiltedArcAvoidance.exists_eval_ne_zero_first_one' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.TiltedArcAvoidance.exists_tilt_subst_ne_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+tests/Geometry/SmoothLocalTiltedArcAxisConsumer.lean:73:8: warning: `simp` already closes the goal
+
+Hint: Use `simp` instead of `simpa`:
+  [apply] simp [literalBad] at hc
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+'literal_tilted_lift_reads_returned_conormal' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Stafford38.Geometry.FormallyEtaleCompletionEquivalenceConsumer.identityCompletionEquiv' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Stafford38.Geometry.kaehlerDifferentialBasisOfTranscendenceBasis.{u} (k L : Type u) [Field k] [CharZero k] [Field L]
+  [Algebra k L] (ι : Type u) [Fintype ι] (x : ι → L) (hx : IsTranscendenceBasis k x) : Module.Basis ι L Ω[L⁄k]
+Stafford38.Geometry.kaehlerFinrankOfTranscendenceBasis.{u} (k L : Type u) [Field k] [CharZero k] [Field L] [Algebra k L]
+  (ι : Type u) [Fintype ι] (x : ι → L) (hx : IsTranscendenceBasis k x) : Module.finrank L Ω[L⁄k] = Fintype.card ι
+Stafford38.Geometry.kaehlerFiniteOfTranscendenceBasis.{u} (k L : Type u) [Field k] [CharZero k] [Field L] [Algebra k L]
+  (ι : Type u) [Fintype ι] (x : ι → L) (hx : IsTranscendenceBasis k x) : Module.Finite L Ω[L⁄k]
+'Stafford38.Geometry.kaehlerDifferentialBasisOfTranscendenceBasis' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.kaehlerFinrankOfTranscendenceBasis' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Stafford38.Geometry.kaehlerFiniteOfTranscendenceBasis' depends on axioms: [propext, Classical.choice, Quot.sound]
+Stafford38.Geometry.SameWitnessTranscendenceDegreeBound.component_trdeg_le_residue_trdeg_add_one_of_witness.{u}
+  {k : Type u} [Field k] [CharZero k] {m : ℕ} (hm : 0 < m) (P : PrimeSpectrum (MvPolynomial (Fin m) k))
+  (w : GeneralDivisorialVisibleFrameWitness hm P) :
+  let C := w.column;
+  let W := C.W;
+  let F := ComponentFractionField P;
+  let V := W.place.valuation.toSubring;
+  let κ := ResidueField ↥V;
+  Algebra.trdeg k F ≤ Algebra.trdeg k κ + 1
+'Stafford38.Geometry.SameWitnessTranscendenceDegreeBound.component_trdeg_le_residue_trdeg_add_one_of_witness' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Stafford38.Geometry.DVRParameterSmoothness.isEtaleAt_of_polynomial_uniformizer.{u, v} {E : Type u} {S : Type v}
+  [Field E] [CommRing S] [IsDomain S] [Algebra E S] [Algebra (Polynomial E) S] [IsScalarTower E (Polynomial E) S]
+  [Algebra.FiniteType E S] (p : Ideal S) [p.IsPrime] (hX0 : (algebraMap (Polynomial E) S) Polynomial.X ≠ 0)
+  (hparam :
+    Ideal.map (algebraMap (Polynomial E) (Localization.AtPrime p))
+        (Stafford38.Geometry.AsymptoticDivisorExistence.coordinateZeroPrime E) =
+      IsLocalRing.maximalIdeal (Localization.AtPrime p))
+  (hsepE : Algebra.IsSeparable E p.ResidueField) : Algebra.IsEtaleAt (Polynomial E) p
+Stafford38.Geometry.DVRParameterSmoothness.formallyEtale_localization_of_polynomial_uniformizer.{u, v} {E : Type u}
+  {S : Type v} [Field E] [CommRing S] [IsDomain S] [Algebra E S] [Algebra (Polynomial E) S]
+  [IsScalarTower E (Polynomial E) S] [Algebra.FiniteType E S] (p : Ideal S) [p.IsPrime]
+  (hX0 : (algebraMap (Polynomial E) S) Polynomial.X ≠ 0)
+  (hparam :
+    Ideal.map (algebraMap (Polynomial E) (Localization.AtPrime p))
+        (Stafford38.Geometry.AsymptoticDivisorExistence.coordinateZeroPrime E) =
+      IsLocalRing.maximalIdeal (Localization.AtPrime p))
+  (hsepE : Algebra.IsSeparable E p.ResidueField) : Algebra.FormallyEtale (Polynomial E) (Localization.AtPrime p)
+Stafford38.Geometry.DVRParameterSmoothness.isEtaleAt_of_polynomial_uniformizer_of_maximal.{u, v} {E : Type u}
+  {S : Type v} [Field E] [PerfectField E] [CommRing S] [IsDomain S] [Algebra E S] [Algebra (Polynomial E) S]
+  [IsScalarTower E (Polynomial E) S] [Algebra.FiniteType E S] (p : Ideal S) [p.IsPrime] [p.IsMaximal]
+  (hX0 : (algebraMap (Polynomial E) S) Polynomial.X ≠ 0)
+  (hparam :
+    Ideal.map (algebraMap (Polynomial E) (Localization.AtPrime p))
+        (Stafford38.Geometry.AsymptoticDivisorExistence.coordinateZeroPrime E) =
+      IsLocalRing.maximalIdeal (Localization.AtPrime p)) :
+  Algebra.IsEtaleAt (Polynomial E) p
+Stafford38.Geometry.DVRParameterSmoothness.isSmoothAt_of_polynomial_uniformizer_of_maximal.{u, v} {E : Type u}
+  {S : Type v} [Field E] [PerfectField E] [CommRing S] [IsDomain S] [Algebra E S] [Algebra (Polynomial E) S]
+  [IsScalarTower E (Polynomial E) S] [Algebra.FiniteType E S] (p : Ideal S) [p.IsPrime] [p.IsMaximal]
+  (hX0 : (algebraMap (Polynomial E) S) Polynomial.X ≠ 0)
+  (hparam :
+    Ideal.map (algebraMap (Polynomial E) (Localization.AtPrime p))
+        (Stafford38.Geometry.AsymptoticDivisorExistence.coordinateZeroPrime E) =
+      IsLocalRing.maximalIdeal (Localization.AtPrime p)) :
+  Algebra.IsSmoothAt E p
+'Stafford38.Geometry.DVRParameterSmoothness.isEtaleAt_of_polynomial_uniformizer_of_maximal' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.PrescribedEtaleGroundPointConsumer.polynomial_zero_point_oracle' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.PrescribedEtaleGroundPoint.formallyEtale_atPrime_of_away' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.PrescribedEtaleGroundPoint.exists_standardEtale_neighborhood_and_formallyEtale_ground_point' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.PrescribedEtaleGroundPoint.exists_standardEtale_neighborhood_and_formallyEtale_ground_point_avoiding' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Stafford38.Geometry.DVRUniformizerNumerator.exists_numerator_of_dvr_localization.{u} {B : Type u} [CommRing B]
+  [IsDomain B] (P : Ideal B) [P.IsPrime] [IsDiscreteValuationRing (Localization.AtPrime P)] :
+  ∃ π,
+    Irreducible π ∧
+      ∃ a b,
+        a ≠ 0 ∧
+          a ∈ P ∧
+            IsLocalization.mk' (Localization.AtPrime P) a b = π ∧
+              Ideal.span {(algebraMap B (Localization.AtPrime P)) a} = IsLocalRing.maximalIdeal (Localization.AtPrime P)
+'Stafford38.Geometry.DVRUniformizerNumerator.exists_numerator_of_dvr_localization' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.PaperUnitPowerFactorizationConsumer.concrete_common_open_factorization' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.PaperUnitPowerFactorizationConsumer.explicit_common_open_oracle' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.PaperUnitPowerFactorization.exists_common_away_unit_power_factorizations' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.ProjectiveCoefficientLocalization.coordinateMap_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.ProjectiveCoefficientLocalization.coordinateMap_succ' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.ProjectiveCoefficientLocalization.coordinateMap_isLocalization' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.ProjectiveCoefficientLocalization.coordinateMap_formallyEtale' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.ProjectiveCoefficientLocalization.fractionCoordinateMap_isLocalization' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.ProjectiveCoefficientLocalization.fractionCoordinateMap_formallyEtale' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+MvPolynomial.instIsDomainOfIsCancelAdd
+FractionRing.field (A d)
+OreLocalization.instAlgebra
+OreLocalization.instAlgebra
+OreLocalization.instIsScalarTower
+Localization.isLocalization
+'Stafford38.Geometry.ProjectiveCoefficientLocalizationGenericConsumer.selected_index_localization' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.ProjectiveCoefficientLocalizationGenericConsumer.selected_index_formally_etale' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.ProjectiveCoefficientLocalizationGenericConsumer.distinguished_parameter_image' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.ProjectiveCoefficientLocalizationGenericConsumer.selected_coefficient_image' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.ProjectiveCoefficientLocalizationGenericConsumer.none_is_not_a_denominator' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.ProjectiveCoefficientLocalizationGenericConsumer.legacy_fin_formally_etale' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.ActualChartValuationImage.chartGenericPointSubalgebra_le_valuationSubring' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.ActualSelectedResidueBasis.exists_selected_residue_basis_indices' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.ActualSelectedResidueBasis.exists_actual_selected_residue_basis' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.SelectedResidueCoefficientLocalization.selected_lifts_algebraicallyIndependent' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.SelectedResidueCoefficientLocalization.selectedCoefficientResidueMap_injective' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.SelectedResidueCoefficientLocalization.exists_selected_fraction_field_maps' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Stafford38.Geometry.SelectedResidueCoefficientLocalization.exists_selected_fraction_field_maps.{u} {k F : Type u}
+  [Field k] [Field F] [Algebra k F] (Q : Subalgebra k F) (V : ValuationSubring F) [IsLocalRing ↥V.toSubring]
+  [Algebra k ↥V.toSubring] (hground : ∀ (c : k), ↑((algebraMap k ↥V.toSubring) c) = (algebraMap k F) c)
+  [Algebra k (IsLocalRing.ResidueField ↥V.toSubring)]
+  [IsScalarTower k (↥V.toSubring) (IsLocalRing.ResidueField ↥V.toSubring)] (hQV : Q.toSubring ≤ V.toSubring)
+  {t : Set (IsLocalRing.ResidueField ↥V.toSubring)} (htb : IsTranscendenceBasis k Subtype.val) (x : ↑t → ↥Q)
+  (hx : ∀ (z : ↑t), (IsLocalRing.residue ↥V.toSubring) ⟨↑(x z), ⋯⟩ = ↑z) :
+  have A := Algebra.adjoin k (Set.range x);
+  let E := FractionRing (MvPolynomial (↑t) k);
+  ∃ eA fA iA g fE,
+    Function.Injective ⇑g ∧
+      g.fieldRange = IntermediateField.adjoin k (Set.range fun z => ↑z) ∧
+        (∀ (z : ↑t), ↑(eA (MvPolynomial.X z)) = x z) ∧
+          (∀ (z : ↑t), fA (eA (MvPolynomial.X z)) = ⟨↑(x z), ⋯⟩) ∧
+            (∀ (z : ↑t), g ((algebraMap (MvPolynomial (↑t) k) E) (MvPolynomial.X z)) = ↑z) ∧
+              (∀ (p : MvPolynomial (↑t) k), iA (eA p) = (algebraMap (MvPolynomial (↑t) k) E) p) ∧
+                (IsLocalRing.residue ↥V.toSubring).comp fE.toRingHom = g.toRingHom ∧ fE.comp iA.toRingHom = fA.toRingHom
+'Stafford38.Geometry.SelectedResidueCoefficientLocalization.exists_localization_map_of_residue_injective' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.SelectedResidueCoefficientLocalization.exists_chart_normalization_localization_map' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Stafford38.Geometry.SelectedResidueCoefficientLocalization.exists_chart_normalization_localization_map.{u}
+  {k F : Type u} [Field k] [Field F] [Algebra k F] (Q : Subalgebra k F) (V : ValuationSubring F)
+  [IsLocalRing ↥V.toSubring] [Algebra k ↥V.toSubring] [Algebra k (IsLocalRing.ResidueField ↥V.toSubring)]
+  [IsScalarTower k (↥V.toSubring) (IsLocalRing.ResidueField ↥V.toSubring)]
+  (hground : ∀ (c : k), ↑((algebraMap k ↥V.toSubring) c) = (algebraMap k F) c) (hQV : Q.toSubring ≤ V.toSubring)
+  {t : Set (IsLocalRing.ResidueField ↥V.toSubring)} (htb : IsTranscendenceBasis k Subtype.val) (x : ↑t → ↥Q)
+  (hx : ∀ (z : ↑t), (IsLocalRing.residue ↥V.toSubring) ⟨↑(x z), ⋯⟩ = ↑z) :
+  have A := Algebra.adjoin k (Set.range x);
+  let B := integralClosure (↥Q.toSubring) F;
+  ∃ j fB fLoc,
+    (∀ (a : ↥A), ↑(j a) = ↑↑a) ∧
+      (∀ (b : ↥B), ↑(fB b) = ↑b) ∧
+        fLoc.comp (algebraMap (↥B) (Localization (Submonoid.map j (nonZeroDivisors ↥A)))) = fB ∧
+          fB.comp j =
+            (Stafford38.Geometry.SelectedResidueCoefficientLocalization.chartAlgebraToValuation Q V hground hQV).comp
+              A.val.toRingHom
+'Stafford38.Geometry.ActualChartCenterNonzero.actual_chart_normalization_center_ne_bot' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+tests/FiniteBirationalAwayActualConsumer.lean:58:2: warning: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+tests/FiniteBirationalAwayActualConsumer.lean:61:2: warning: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+tests/FiniteBirationalAwayActualConsumer.lean:64:2: warning: Try this: 
+  haveI̵
+
+The goal is a proposition, so `have` is preferred over `haveI`.
+The difference between `have` and `haveI` is that `haveI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+'actual_chart_normalization_is_away_equiv' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Stafford38.Geometry.SameWitnessRelativeTranscendenceDegreeConsumer.finiteBasisLocalParameterConsumer' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.MvPolynomialFractionFieldBasisConsumer.canonicalFractionFieldBasis' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.MvPolynomialFractionFieldBasisConsumer.canonicalFractionFieldFiniteTrdeg' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.MvPolynomialFractionFieldGenericConsumer.tail_variables_are_a_basis' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.MvPolynomialFractionFieldGenericConsumer.tail_fraction_field_has_finite_trdeg' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.MvPolynomialFractionFieldGenericConsumer.tail_fraction_field_variables_algebraic_extension' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.EtaleCotangentBasis.basisOfFormallyEtale' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.EtaleCotangentBasis.basisOfFormallyEtale_apply' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.EtaleCotangentBasis.basisAfterPoint' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Stafford38.Geometry.EtaleCotangentBasis.basisAfterPoint_apply' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.EtaleCotangentBasis.coordinateDerivation' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.EtaleCotangentBasis.coordinateDerivation_apply_parameter' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.EtaleCotangentBasis.derivationFromValues_apply_parameter' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.EtaleCotangentBasis.derivation_eq_from_parameter_values' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.EtaleCotangentBasis.derivation_eq_sum_coordinateDerivations' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.EtaleTangentKernel.derivation_eq_sum_pderiv' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.EtaleTangentKernel.derivationVector_mem_zariskiTangentSpace_of_vanishes' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.EtaleTangentKernel.chartDerivation_mem_zariskiTangentSpace' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.EtaleTangentKernel.mkDerivation_vanishes_of_mem_zariskiTangentSpace' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.EtaleTangentChartSpan.tangentVector_eq_sum_parameterDerivations' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.EtaleDerivationExtension.extendDerivation' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.EtaleDerivationExtension.extendDerivation_algebraMap' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.ActualSelectedResidueBasisRowExclusion.transcendenceBasis_value_ne_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.ActualSelectedResidueBasisRowExclusion.selected_basis_rows_avoid_zero_one_chart' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.ActualSelectedResidueBasisRowExclusion.witness_q1_residue_eq_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Stafford38.Geometry.ActualWitnessStrictOrderGap.exists_actual_witness_strict_orderGap.{u} {k : Type u} [Field k]
+  [CharZero k] {m : ℕ} (hm : 0 < m) (P : PrimeSpectrum (MvPolynomial (Fin m) k))
+  (w : Stafford38.Geometry.GeneralDivisorialVisibleFrame.GeneralDivisorialVisibleFrameWitness hm P) :
+  let C := w.column;
+  let W := C.W;
+  let V := W.place.valuation.toSubring;
+  ∀ (π : ↥V),
+    Irreducible π →
+      ∃ a r b u₀ ur u₁,
+        0 < a ∧
+          0 < r ∧
+            b = a + r ∧
+              a < b ∧
+                C.q 0 = ↑u₀ * π ^ a ∧ W.place.parameter = ↑ur * π ^ r ∧ u₁ = u₀ * ur ∧ C.q ⟨0, hm⟩.succ = ↑u₁ * π ^ b
+'Stafford38.Geometry.ActualWitnessStrictOrderGap.exists_actual_witness_strict_orderGap' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.GeneralTangentLimitCriterion.exists_axis_laurent_smooth_conormal_direction_with_fibre_closure' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.GeneralTangentLimitCriterion.exists_axis_laurent_smooth_conormal_direction' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.GeneralTangentLimitCriterion.tangent_limit_criterion_of_directSummand_with_fibre_closure' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.GeneralTangentLimitCriterion.tangent_limit_criterion_of_directSummand' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Stafford38.Geometry.GeneralTangentLimitCriterion.tangent_limit_criterion_of_directSummand_with_fibre_closure.{u_1}
+  {k : Type u_1} [Field k] {n dimY : ℕ} [IsAlgClosed k] (I : Ideal (MvPolynomial (Fin n) k))
+  (q : Fin (n + 1) → PowerSeries k) (L : Submodule (PowerSeries k) (Fin (n + 1) → PowerSeries k))
+  (D : Stafford38.Geometry.GeneralTangentLimitCriterion.DirectSummandInput I q L) :
+  (fun i => if i = D.axis then 1 else 0) ∈
+      MvPolynomial.zeroLocus k
+        (MvPolynomial.vanishingIdeal k
+          (Stafford38.Geometry.ProjectiveConormalDirections.smoothConormalFibreProjection I)) ∧
+    Projectivization.mk k (fun i => if i = D.axis then 1 else 0) ⋯ ∈
+      Stafford38.Geometry.ProjectiveConormalDirections.projectiveHomogeneousClosure
+        (Stafford38.Geometry.ProjectiveConormalDirections.projectivizedDirectionSet
+          (Stafford38.Geometry.ProjectiveConormalDirections.smoothConormalDirectionSet I))
+'Stafford38.Geometry.ProjectiveChartNormalizationBridge.componentChartClosedRingEquivAny' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.ProjectiveChartNormalizationBridge.componentChartEquationIdeal_map_eq_any' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.OptionCoordinateEtaleCompositionConsumer.polynomial_target_finitePresentation' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.OptionCoordinateEtaleCompositionConsumer.selected_local_chart_formallyEtale' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.OptionCoordinateEtaleComposition.formallyEtale_of_optionCoordinate_generator_images' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.OptionCoordinateEtaleComposition.finitePresentation_of_finiteType_target' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.FieldEquivFiniteType.fractionField_of_equiv_domain' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.FieldEquivFiniteType.exists_localized_fractionField_map' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.FieldEquivFiniteType.exists_fractionField_map_to_localization' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.FieldEquivFiniteType.exists_finiteType_selected_localization' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.FieldEquivFiniteType.exists_finiteType_domain_fractionField_localization' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.FieldEquivFiniteType.fractionField_map_coherence' depends on axioms: [propext, Quot.sound]
+'Stafford38.Geometry.FieldEquivFiniteType.finiteType_of_equiv_base' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Stafford38.Geometry.FieldEquivFiniteType.localized_domain_isDomain.{u_1, u_2, u_3} {k : Type u_1} {R : Type u_2}
+  {B : Type u_3} [Field k] [CommRing R] [IsDomain R] [CommRing B] [IsDomain B] [Algebra k R] [Algebra k B] [Algebra R B]
+  [IsScalarTower k R B] (hinj : Function.Injective ⇑(algebraMap R B)) :
+  IsDomain (Localization (Algebra.algebraMapSubmonoid B (nonZeroDivisors R)))
+'Stafford38.Geometry.UnitPowerNonzeroPrimeOracle.nonzero_prime_common_open' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.CoefficientRegularityOracle.constants_two_three_multiply_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.CoefficientRegularityOracle.constant_three_nonzero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.CoefficientRegularityOracle.constant_two_not_regular' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.AffinePointCompletion.powerSeriesCompletionAtPoint' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.AdicCompletionMap.mapOfRingHom_comp' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Stafford38.Geometry.FormallyEtaleCompletion.exists_formalSmooth_lift_to_baseCompletion' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.FormallyEtaleCompletion.extendFormalSmoothLift' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.AffinePointCompletion.powerSeriesCompletionAtPoint' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.AdicCompletionRingEquiv.ofRingEquiv' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Stafford38.Geometry.PrescribedGroundPointPowerSeriesMapConsumer.twoCoordinateLinearCombination' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.PrescribedGroundPointPowerSeriesMap.localToPowerSeries' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.PrescribedGroundPointPowerSeriesMap.originalAlgebraToPowerSeries_coordinate' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.PrescribedGroundPointPowerSeriesMap.originalAlgebraToPowerSeriesArc_coordinate' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Stafford38.Geometry.SmoothLocalDirectSummandAdapter.directSummandInput_of_tiltedAxisLiftFields.{u_1} {k : Type u_1}
+  [Field k] {n d : ℕ} (I : Ideal (MvPolynomial (Fin n) k)) (q : Fin (n + 1) → MvPowerSeries (Fin (d + 1)) k)
+  (α : Fin d → k) (chart : Fin (n + 1)) (axis : Fin n) (a : ℕ) (u₀ : MvPowerSeries (Fin (d + 1)) k)
+  (hqchart : q chart = 1)
+  (hqzero :
+    SmoothLocalTiltedArcAxisLift.tiltedArc α (q 0) = PowerSeries.X ^ a * SmoothLocalTiltedArcAxisLift.tiltedArc α u₀)
+  (hu₀ : PowerSeries.constantCoeff (SmoothLocalTiltedArcAxisLift.tiltedArc α u₀) ≠ 0)
+  (tau : Fin (n + 1) → PowerSeries k)
+  (C : Matrix (GeometryFormalDivisorTangent.FormalTangentColumn (Fin d)) (Fin (n + 1)) (PowerSeries k))
+  (hCB :
+    C *
+        GeometryFormalDivisorTangent.formalTangentMatrix (fun i => SmoothLocalTiltedArcAxisLift.tiltedArc α (q i))
+          (SmoothLocalTiltedArcAxisLift.tiltedTransverseDerivativeMatrix α q) tau =
+      1)
+  (haxis :
+    ∀ (j : GeometryFormalDivisorTangent.FormalTangentColumn (Fin d)),
+      PowerSeries.constantCoeff
+          (GeometryFormalDivisorTangent.formalTangentMatrix (fun i => SmoothLocalTiltedArcAxisLift.tiltedArc α (q i))
+            (SmoothLocalTiltedArcAxisLift.tiltedTransverseDerivativeMatrix α q) tau axis.succ j) =
+        0)
+  (hprime : I.IsPrime)
+  (hclosure :
+    ProjectiveConormalDehomogenization.dehomogenizedPoint
+        (FormalDivisorLaurentConormal.laurentColumn fun i => SmoothLocalTiltedArcAxisLift.tiltedArc α (q i)) ∈
+      MvPolynomial.zeroLocus (LaurentSeries k) (Ideal.map (ScalarExtensionPoints.scalarPolynomialMap (Fin n)) I))
+  (hsmooth :
+    SmoothAffineConormal.SmoothAffinePoint (Ideal.map (ScalarExtensionPoints.scalarPolynomialMap (Fin n)) I)
+      (ProjectiveConormalDehomogenization.dehomogenizedPoint
+        (FormalDivisorLaurentConormal.laurentColumn fun i => SmoothLocalTiltedArcAxisLift.tiltedArc α (q i))))
+  (hcone :
+    GeneralTangentLimitCriterion.genericFibre
+        (PaperDivisorTangent.normalizedTangentLattice (fun i => SmoothLocalTiltedArcAxisLift.tiltedArc α (q i))
+          (SmoothLocalTiltedArcAxisLift.tiltedTransverseDerivativeMatrix α q) tau) =
+      GeneralTangentLimitCriterion.projectiveTangentCone
+        (FormalDivisorLaurentConormal.laurentColumn fun i => SmoothLocalTiltedArcAxisLift.tiltedArc α (q i))
+        (AffineConormalSpan.zariskiTangentSpace
+          (ProjectiveConormalDehomogenization.dehomogenizedPoint
+            (FormalDivisorLaurentConormal.laurentColumn fun i => SmoothLocalTiltedArcAxisLift.tiltedArc α (q i)))
+          (Ideal.map (ScalarExtensionPoints.scalarPolynomialMap (Fin n)) I))) :
+  Nonempty
+    (GeneralTangentLimitCriterion.DirectSummandInput I (fun i => SmoothLocalTiltedArcAxisLift.tiltedArc α (q i))
+      (PaperDivisorTangent.normalizedTangentLattice (fun i => SmoothLocalTiltedArcAxisLift.tiltedArc α (q i))
+        (SmoothLocalTiltedArcAxisLift.tiltedTransverseDerivativeMatrix α q) tau))
+Stafford38.Geometry.SmoothLocalDirectSummandAdapter.exists_directSummandInput_of_tilted_local_axis_lift.{u_1}
+  {k : Type u_1} [Field k] [Infinite k] [CharZero k] {n d : ℕ} (I : Ideal (MvPolynomial (Fin n) k))
+  (q : Fin (n + 1) → MvPowerSeries (Fin (d + 1)) k) (bad : MvPowerSeries (Fin (d + 1)) k) (hbad : bad ≠ 0)
+  (rows : Fin d ↪ Fin (n + 1)) (chart : Fin (n + 1)) (axis : Fin n) (a b : ℕ) (u₀ u₁ : MvPowerSeries (Fin (d + 1)) k)
+  (hqchart : q chart = 1) (ha : 0 < a) (hab : a < b) (hqzero : q 0 = MvPowerSeries.X 0 ^ a * u₀)
+  (hu₀ : MvPowerSeries.constantCoeff u₀ ≠ 0) (hqaxis : q axis.succ = MvPowerSeries.X 0 ^ b * u₁)
+  (hu₁ : MvPowerSeries.constantCoeff u₁ ≠ 0)
+  (hminor :
+    MvPowerSeries.constantCoeff
+        (GeometrySplitTangentMatrix.selectedMinor (SmoothLocalTiltedArcAxisLift.localTransverseDerivativeMatrix q)
+            rows).det ≠
+      0)
+  (hprime : I.IsPrime)
+  (hclosure :
+    ∀ (α : Fin d → k),
+      SmoothLocalTiltedArcAxisLift.tiltedArc α bad ≠ 0 →
+        ProjectiveConormalDehomogenization.dehomogenizedPoint
+            (FormalDivisorLaurentConormal.laurentColumn fun i => SmoothLocalTiltedArcAxisLift.tiltedArc α (q i)) ∈
+          MvPolynomial.zeroLocus (LaurentSeries k) (Ideal.map (ScalarExtensionPoints.scalarPolynomialMap (Fin n)) I))
+  (hsmooth :
+    ∀ (α : Fin d → k),
+      SmoothLocalTiltedArcAxisLift.tiltedArc α bad ≠ 0 →
+        SmoothAffineConormal.SmoothAffinePoint (Ideal.map (ScalarExtensionPoints.scalarPolynomialMap (Fin n)) I)
+          (ProjectiveConormalDehomogenization.dehomogenizedPoint
+            (FormalDivisorLaurentConormal.laurentColumn fun i => SmoothLocalTiltedArcAxisLift.tiltedArc α (q i))))
+  (hcone :
+    ∀ (α : Fin d → k),
+      SmoothLocalTiltedArcAxisLift.tiltedArc α bad ≠ 0 →
+        ∀ (lambda : Fin d → PowerSeries k) (c : ℕ) (tau : Fin (n + 1) → PowerSeries k)
+          (C : Matrix (GeometryFormalDivisorTangent.FormalTangentColumn (Fin d)) (Fin (n + 1)) (PowerSeries k)),
+          (∀ (i : Fin (n + 1)),
+              PowerSeries.derivative (SmoothLocalTiltedArcAxisLift.tiltedArc α (q i)) -
+                  (SmoothLocalTiltedArcAxisLift.tiltedTransverseDerivativeMatrix α q).mulVec lambda i =
+                PowerSeries.X ^ c * tau i) →
+            C *
+                  GeometryFormalDivisorTangent.formalTangentMatrix
+                    (fun i => SmoothLocalTiltedArcAxisLift.tiltedArc α (q i))
+                    (SmoothLocalTiltedArcAxisLift.tiltedTransverseDerivativeMatrix α q) tau =
+                1 →
+              (∀ (j : GeometryFormalDivisorTangent.FormalTangentColumn (Fin d)),
+                  PowerSeries.constantCoeff
+                      (GeometryFormalDivisorTangent.formalTangentMatrix
+                        (fun i => SmoothLocalTiltedArcAxisLift.tiltedArc α (q i))
+                        (SmoothLocalTiltedArcAxisLift.tiltedTransverseDerivativeMatrix α q) tau axis.succ j) =
+                    0) →
+                GeneralTangentLimitCriterion.genericFibre
+                    (PaperDivisorTangent.normalizedTangentLattice
+                      (fun i => SmoothLocalTiltedArcAxisLift.tiltedArc α (q i))
+                      (SmoothLocalTiltedArcAxisLift.tiltedTransverseDerivativeMatrix α q) tau) =
+                  GeneralTangentLimitCriterion.projectiveTangentCone
+                    (FormalDivisorLaurentConormal.laurentColumn fun i => SmoothLocalTiltedArcAxisLift.tiltedArc α (q i))
+                    (AffineConormalSpan.zariskiTangentSpace
+                      (ProjectiveConormalDehomogenization.dehomogenizedPoint
+                        (FormalDivisorLaurentConormal.laurentColumn fun i =>
+                          SmoothLocalTiltedArcAxisLift.tiltedArc α (q i)))
+                      (Ideal.map (ScalarExtensionPoints.scalarPolynomialMap (Fin n)) I))) :
+  ∃ α tau,
+    Nonempty
+      (GeneralTangentLimitCriterion.DirectSummandInput I (fun i => SmoothLocalTiltedArcAxisLift.tiltedArc α (q i))
+        (PaperDivisorTangent.normalizedTangentLattice (fun i => SmoothLocalTiltedArcAxisLift.tiltedArc α (q i))
+          (SmoothLocalTiltedArcAxisLift.tiltedTransverseDerivativeMatrix α q) tau))
+'Stafford38.Geometry.SmoothLocalDirectSummandAdapter.directSummandInput_of_tiltedAxisLiftFields' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.SmoothLocalDirectSummandAdapter.exists_directSummandInput_of_tilted_local_axis_lift' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.GeneralConstantCoordinateAxis.coordinate_axis_mem_smooth_fibre_closure_of_coordinate_algebraic' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'corrected_velocity_span_example' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Stafford38.Geometry.CorrectedVelocitySpan.span_range_union_singleton_eq_of_corrected_velocity' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.CorrectedVelocitySpan.span_map_range_union_singleton_eq_of_corrected_velocity' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'original_affine_open_survives_homogenization' depends on axioms: [propext, Classical.choice, Quot.sound]
+'original_affine_open_survives_laurent_arc' depends on axioms: [propext, Classical.choice, Quot.sound]
+'rational_homogenized_coordinate_oracle' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Stafford38.Geometry.HomogenizedAffineEvaluation.map_homogenizeAtZero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.SmoothAffinePointScalarExtensionConsumer.original_arc_point_avoiding_open_is_smooth' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.SmoothAffinePointScalarExtension.exists_generic_smooth_open_point_criterion' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.SmoothAffinePointScalarExtensionConsumer.rationalArcField_point_is_smooth' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.PrescribedGroundPointUnitPowerChart.exists_prescribed_ground_point_chart_with_unit_powers' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.PrescribedGroundPointUnitPowerConsumer.x2_x3_have_prescribed_ground_chart' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.SelectedCorrectionConsumer.constant_correction_preserves_explicit_orders' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.GeometryFormalDivisorTangent.exists_primitive_formalDivisorTangent_of_selected_correction' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.GeometryFormalDivisorTangent.exists_formalDivisorTangent_residue_injective_of_selected_correction' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.GeometryFormalDivisorAxisLift.exists_formalDivisorAxisLift_of_selected_correction' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Stafford38.Geometry.ActualSmoothOpenChartNumerator.exists_nonzero_homogenized_numerator.{u} {k : Type u} [Field k]
+  [CharZero k] {m : ℕ} (hm : 0 < m) (P : PrimeSpectrum (MvPolynomial (Fin m) k))
+  (w : GeneralDivisorialVisibleFrameWitness hm P) (p : MvPolynomial (Fin m) k)
+  (hp : (Ideal.Quotient.mk P.asIdeal) p ≠ 0) :
+  let C := w.column;
+  have e := Stafford38.Geometry.AsymptoticChartArcAdapter.chartAffineCoordinateEquiv C.chart;
+  let F := Stafford38.Geometry.ComponentProjectiveClosure.ComponentFractionField P;
+  have Q :=
+    Algebra.adjoin k (Set.range (Stafford38.Geometry.ComponentProjectiveChartKernel.chartGenericPoint P C.chart e));
+  ∃ r,
+    ↑r =
+        (MvPolynomial.eval fun a => ↑(C.q a))
+          ((MvPolynomial.map (algebraMap k F))
+            (Stafford38.Geometry.LocalizedProjectiveChartTransition.homogenizeAtZero p)) ∧
+      ↑r =
+          ↑(C.q 0) ^ ((MvPolynomial.map (algebraMap k F)) p).totalDegree *
+            (Stafford38.Geometry.ComponentProjectiveClosure.componentAffineGenericPointMap P) p ∧
+        r ≠ 0
+'Stafford38.Geometry.ActualSmoothOpenChartNumerator.exists_nonzero_homogenized_numerator' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Stafford38.Geometry.ActualChartValuationImage.normalizedCoordinate_mem_chartGenericPointSubalgebra.{u} {k : Type u}
+  [Field k] [CharZero k] {m : ℕ} (hm : 0 < m) (P : PrimeSpectrum (MvPolynomial (Fin m) k))
+  (w : Stafford38.Geometry.GeneralDivisorialVisibleFrame.GeneralDivisorialVisibleFrameWitness hm P) :
+  let C := w.column;
+  let W := C.W;
+  have F := Stafford38.Geometry.ComponentProjectiveClosure.ComponentFractionField P;
+  have V := W.place.valuation.toSubring;
+  ∀ (a : Fin (m + 1)),
+    ↑(C.q a) ∈
+      Algebra.adjoin k
+        (Set.range
+          (Stafford38.Geometry.ComponentProjectiveChartKernel.chartGenericPoint P C.chart
+            (Stafford38.Geometry.AsymptoticChartArcAdapter.chartAffineCoordinateEquiv C.chart)))
+Stafford38.Geometry.ActualChartValuationImage.exists_actual_normalizedProjectiveColumn.{u} {k : Type u} [Field k]
+  [CharZero k] {m : ℕ} (hm : 0 < m) (P : PrimeSpectrum (MvPolynomial (Fin m) k))
+  (w : Stafford38.Geometry.GeneralDivisorialVisibleFrame.GeneralDivisorialVisibleFrameWitness hm P) :
+  let C := w.column;
+  let W := C.W;
+  have F := Stafford38.Geometry.ComponentProjectiveClosure.ComponentFractionField P;
+  have V := W.place.valuation.toSubring;
+  have e := Stafford38.Geometry.AsymptoticChartArcAdapter.chartAffineCoordinateEquiv C.chart;
+  have Q :=
+    Algebra.adjoin k (Set.range (Stafford38.Geometry.ComponentProjectiveChartKernel.chartGenericPoint P C.chart e));
+  ∃ qQ,
+    qQ C.chart = 1 ∧
+      (∀ (a : Fin (m + 1)), ↑(qQ a) = ↑(C.q a)) ∧
+        ∀ (i : Fin m), ↑(qQ ↑(e i)) = Stafford38.Geometry.ComponentProjectiveChartKernel.chartGenericPoint P C.chart e i
+Stafford38.Geometry.SelectedResidueCoefficientLocalization.chartSubalgebraToIntegralClosure.{u} {k F : Type u} [Field k]
+  [Field F] [Algebra k F] (Q : Subalgebra k F) : ↥Q →+* ↥(integralClosure (↥Q.toSubring) F)
+Stafford38.Geometry.ActualSmoothOpenChartNumerator.exists_actual_normalizedProjectiveColumn_in_integralClosure.{u}
+  {k : Type u} [Field k] [CharZero k] {m : ℕ} (hm : 0 < m) (P : PrimeSpectrum (MvPolynomial (Fin m) k))
+  (w : Stafford38.Geometry.GeneralDivisorialVisibleFrame.GeneralDivisorialVisibleFrameWitness hm P) :
+  let C := w.column;
+  let W := C.W;
+  let F := Stafford38.Geometry.ComponentProjectiveClosure.ComponentFractionField P;
+  have V := W.place.valuation.toSubring;
+  have e := Stafford38.Geometry.AsymptoticChartArcAdapter.chartAffineCoordinateEquiv C.chart;
+  let Q :=
+    Algebra.adjoin k (Set.range (Stafford38.Geometry.ComponentProjectiveChartKernel.chartGenericPoint P C.chart e));
+  have B := integralClosure (↥Q.toSubring) F;
+  ∃ qB,
+    qB C.chart = 1 ∧
+      (∀ (a : Fin (m + 1)), ↑(qB a) = ↑(C.q a)) ∧
+        ∀ (i : Fin m), ↑(qB ↑(e i)) = Stafford38.Geometry.ComponentProjectiveChartKernel.chartGenericPoint P C.chart e i
+'Stafford38.Geometry.ActualChartValuationImage.normalizedCoordinate_mem_chartGenericPointSubalgebra' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.ActualChartValuationImage.exists_actual_normalizedProjectiveColumn' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.SelectedResidueCoefficientLocalization.chartSubalgebraToIntegralClosure' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.ActualSmoothOpenChartNumerator.exists_actual_normalizedProjectiveColumn_in_integralClosure' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.LocalizationInStagesAtPrime.polynomial_fraction_field_stage_point' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Stafford38.Geometry.SmoothLocalTiltedArcAxisLift.tilted_local_axis_lift_of_selected_coordinate_rows_on_arc.{u, v}
+  {k : Type u} [Field k] [CharZero k] {d : ℕ} {ι : Type v} [Fintype ι] [DecidableEq ι]
+  (q : ι → MvPowerSeries (Fin (d + 1)) k) (rows : Fin d ↪ ι) (chart zero axis : ι) (a b : ℕ) (β α : Fin d → k)
+  (u₀ u₁ : MvPowerSeries (Fin (d + 1)) k) (hqchart : q chart = 1) (ha : 0 < a) (hab : a < b)
+  (hqzero : q zero = MvPowerSeries.X 0 ^ a * u₀) (hu₀ : MvPowerSeries.constantCoeff u₀ ≠ 0)
+  (hqaxis : q axis = MvPowerSeries.X 0 ^ b * u₁) (hu₁ : MvPowerSeries.constantCoeff u₁ ≠ 0)
+  (hrows : ∀ (j : Fin d), q (rows j) = MvPowerSeries.C (β j) + MvPowerSeries.X j.succ) :
+  Stafford38.Geometry.SmoothLocalTiltedArcAxisLift.SelectedCoordinateAxisLiftData q rows chart zero axis a b β α u₀ u₁
+Stafford38.Geometry.SmoothLocalTiltedArcAxisLift.exists_tilted_local_axis_lift_of_selected_coordinate_rows.{u, v}
+  {k : Type u} [Field k] [Infinite k] [CharZero k] {d : ℕ} {ι : Type v} [Fintype ι] [DecidableEq ι]
+  (q : ι → MvPowerSeries (Fin (d + 1)) k) (bad : MvPowerSeries (Fin (d + 1)) k) (hbad : bad ≠ 0) (rows : Fin d ↪ ι)
+  (chart zero axis : ι) (a b : ℕ) (β : Fin d → k) (u₀ u₁ : MvPowerSeries (Fin (d + 1)) k) (hqchart : q chart = 1)
+  (ha : 0 < a) (hab : a < b) (hqzero : q zero = MvPowerSeries.X 0 ^ a * u₀) (hu₀ : MvPowerSeries.constantCoeff u₀ ≠ 0)
+  (hqaxis : q axis = MvPowerSeries.X 0 ^ b * u₁) (hu₁ : MvPowerSeries.constantCoeff u₁ ≠ 0)
+  (hrows : ∀ (j : Fin d), q (rows j) = MvPowerSeries.C (β j) + MvPowerSeries.X j.succ) :
+  ∃ α,
+    Stafford38.Geometry.SmoothLocalTiltedArcAxisLift.tiltedArc α bad ≠ 0 ∧
+      Stafford38.Geometry.SmoothLocalTiltedArcAxisLift.SelectedCoordinateAxisLiftData q rows chart zero axis a b β α u₀
+        u₁
+'Stafford38.Geometry.SmoothLocalTiltedArcAxisLift.tilted_local_axis_lift_of_selected_coordinate_rows_on_arc' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.SmoothLocalTiltedArcAxisLift.exists_tilted_local_axis_lift_of_selected_coordinate_rows' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'rational_affine_line_tangent_oracle' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Stafford38.Geometry.EtaleTangentChartSpan.zariskiTangentSpace_eq_span_parameterDerivations' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'nonlinear_projective_derivation_oracle' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Stafford38.Geometry.ProjectiveConormalDehomogenization.dehomogenizedTangentColumn_derivation' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.LocalizationStageFractionCoefficients.fractionRingToAtPrime_polynomial_X_add_two' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.LocalizationStageFractionCoefficients.polynomial_fraction_field_stage_coefficients' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.LocalizationStageFractionCoefficients.polynomial_identity_parameter_oracle' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Stafford38.Geometry.EtaleGenericOpenTransport.formallyEtale_genericOpenRing_of_pointLocal.{u, v, u_1} {R : Type u_1}
+  [CommRing R] {Q : Type u} [CommRing Q] {B : Type v} [CommRing B] [Algebra Q B] [Algebra R B] (M : Ideal B) [M.IsPrime]
+  (f : Q) (e : Localization.Away f ≃ₐ[Q] Localization.Away ((algebraMap Q B) f))
+  [Algebra.FormallyEtale R (Localization.AtPrime M)] :
+  Algebra.FormallyEtale R (Stafford38.Geometry.EtaleGenericOpenTransport.genericOpenRing M f e)
+Stafford38.Geometry.EtaleGenericOpenTransport.formallyEtale_genericOpenExtraAway_of_pointLocal.{u, v, u_1}
+  {R : Type u_1} [CommRing R] {Q : Type u} [CommRing Q] {B : Type v} [CommRing B] [Algebra Q B] [Algebra R B]
+  (M : Ideal B) [M.IsPrime] (f : Q) (e : Localization.Away f ≃ₐ[Q] Localization.Away ((algebraMap Q B) f)) (g : Q)
+  [Algebra.FormallyEtale R (Localization.AtPrime M)] :
+  let Cq := Stafford38.Geometry.EtaleGenericOpenTransport.genericOpenRing M f e;
+  let C :=
+    Localization.Away ((Stafford38.Geometry.EtaleGenericOpenTransport.genericOpenBMap M f e) ((algebraMap Q B) g));
+  Algebra.FormallyEtale R C
+'Stafford38.Geometry.EtaleGenericOpenTransport.formallyEtale_genericOpenRing_of_pointLocal' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.EtaleGenericOpenTransport.formallyEtale_genericOpenExtraAway_of_pointLocal' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.EtaleGenericOpenTransport.genericOpenExtraAwayEquiv_pointLocalAwayB' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+tests/Geometry/ExtraAwayBNoRtoQOracle.lean:37:2: warning: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+tests/Geometry/ExtraAwayBNoRtoQOracle.lean:49:2: warning: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+ExtraAwayBNoRtoQOracle.no_algebra : ¬Nonempty (Algebra B ℤ)
+ExtraAwayBNoRtoQOracle.actual_B_only_instance :
+  Algebra.FormallyEtale B (Localization.Away ((genericOpenBMap M 2 e) ((algebraMap ℤ B) 1)))
+'ExtraAwayBNoRtoQOracle.no_algebra' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ExtraAwayBNoRtoQOracle.actual_B_only_instance' depends on axioms: [propext, Classical.choice, Quot.sound]
+tests/Geometry/EtaleProjectiveTangentComparisonConsumer.lean:102:8: warning: `if_false` has been deprecated: Use `ite_false` instead
+
+Hint: Replace the deprecated name:
+  i̵f̵_̵f̵a̵l̵s̵e̵i̲t̲e̲_̲f̲a̲l̲s̲e̲
+tests/Geometry/EtaleProjectiveTangentComparisonConsumer.lean:109:25: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+'rational_projective_tangent_cone_oracle' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Stafford38.Geometry.EtaleProjectiveTangentComparison.projectiveTangentCone_eq_span_chartDerivation_columns' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.ProjectiveChartSameFieldOverlapConsumer.original_coordinate_action' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.ProjectiveChartSameFieldOverlapConsumer.reverse_coordinate_action' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.ProjectiveChartSameFieldOverlapConsumer.common_function_field_action' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+tests/PrescribedCompletionDerivationCommutationConsumer.lean:93:4: warning: `simp` already closes the goal
+
+Hint: Use `simp` instead of `simpa`:
+  [apply] simp [D, smul_eq_mul]
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+tests/PrescribedCompletionDerivationCommutationConsumer.lean:164:4: warning: `simp` already closes the goal
+
+Hint: Use `simp` instead of `simpa`:
+  [apply] simp [smul_eq_mul]
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+tests/PrescribedCompletionDerivationCommutationConsumer.lean:174:4: warning: `simp` already closes the goal
+
+Hint: Use `simp` instead of `simpa`:
+  [apply] simp [smul_eq_mul]
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+'actual_prescribed_completion_commutes_with_every_parameter_derivation' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'actual_option_completion_commutes_with_reindexed_derivation' depends on axioms: [propext, Classical.choice, Quot.sound]
+'actual_option_nonlinear_rational_completion_derivative_oracle' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'actual_tilted_arc_derivative_is_full_parameter_direction' depends on axioms: [propext, Classical.choice, Quot.sound]
+'actual_tilted_arc_derivative_lands_in_canonical_laurent_field' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'actual_nonlinear_rational_element_derivative_oracle' depends on axioms: [propext, Classical.choice, Quot.sound]
+Stafford38.Geometry.ActualOptionColumnBinding.exists_actual_option_coordinate_map.{u} {k : Type u} [Field k]
+  [CharZero k] {m d : ℕ} (hm : 0 < m) (P : PrimeSpectrum (MvPolynomial (Fin m) k))
+  (w : Stafford38.Geometry.GeneralDivisorialVisibleFrame.GeneralDivisorialVisibleFrameWitness hm P)
+  (index : Fin d → Fin m)
+  (s :
+    ↥(integralClosure
+        (↥(Algebra.adjoin k
+              (Set.range
+                (Stafford38.Geometry.ComponentProjectiveChartKernel.chartGenericPoint P w.column.chart
+                  (Stafford38.Geometry.AsymptoticChartArcAdapter.chartAffineCoordinateEquiv
+                    w.column.chart)))).toSubring)
+        (Stafford38.Geometry.ComponentProjectiveClosure.ComponentFractionField P))) :
+  let C := w.column;
+  have W := C.W;
+  let F := Stafford38.Geometry.ComponentProjectiveClosure.ComponentFractionField P;
+  let e := Stafford38.Geometry.AsymptoticChartArcAdapter.chartAffineCoordinateEquiv C.chart;
+  let Q :=
+    Algebra.adjoin k (Set.range (Stafford38.Geometry.ComponentProjectiveChartKernel.chartGenericPoint P C.chart e));
+  let B := integralClosure (↥Q.toSubring) F;
+  have coeff :=
+    (Stafford38.Geometry.SelectedResidueCoefficientLocalization.chartSubalgebraToIntegralClosure Q).comp
+      (algebraMap k ↥Q);
+  ∃ qB f,
+    qB C.chart = 1 ∧
+      (∀ (a : Fin (m + 1)), ↑(qB a) = ↑(C.q a)) ∧
+        (∀ (i : Fin m),
+            ↑(qB ↑(e i)) = Stafford38.Geometry.ComponentProjectiveChartKernel.chartGenericPoint P C.chart e i) ∧
+          f (MvPolynomial.X none) = s ∧
+            (∀ (i : Fin d), f (MvPolynomial.X (some i)) = qB ↑(e (index i))) ∧ ∀ (c : k), f (MvPolynomial.C c) = coeff c
+Stafford38.Geometry.ActualOptionColumnBinding.actualOptionCoordinateMap_scalarTower.{u} {k B : Type u} [CommSemiring k]
+  [CommSemiring B] [Algebra k B] (d : ℕ) (values : Option (Fin d) → B) :
+  have f := actualOptionCoordinateAlgebraMap d values;
+  IsScalarTower k (MvPolynomial (Option (Fin d)) k) B
+Stafford38.Geometry.ActualOptionColumnBinding.actual_normalized_column_map_eq_retained.{u} {k : Type u} [Field k]
+  [CharZero k] {m : ℕ} (hm : 0 < m) (P : PrimeSpectrum (MvPolynomial (Fin m) k))
+  (w : Stafford38.Geometry.GeneralDivisorialVisibleFrame.GeneralDivisorialVisibleFrameWitness hm P) :
+  let C := w.column;
+  let F := Stafford38.Geometry.ComponentProjectiveClosure.ComponentFractionField P;
+  let echart := Stafford38.Geometry.AsymptoticChartArcAdapter.chartAffineCoordinateEquiv C.chart;
+  let Q :=
+    Algebra.adjoin k
+      (Set.range (Stafford38.Geometry.ComponentProjectiveChartKernel.chartGenericPoint P C.chart echart));
+  let B := integralClosure (↥Q.toSubring) F;
+  let V := C.W.place.valuation.toSubring;
+  ∀ (center : PrimeSpectrum ↥B) (e : Localization.AtPrime center.asIdeal ≃+* ↥V),
+    (∀ (b : ↥B), ↑(e ((algebraMap (↥B) (Localization.AtPrime center.asIdeal)) b)) = ↑b) →
+      have qB := actualNormalizedProjectiveColumnInIntegralClosure hm P w;
+      e ((algebraMap (↥B) (Localization.AtPrime center.asIdeal)) (qB 0)) = C.q 0 ∧
+        e ((algebraMap (↥B) (Localization.AtPrime center.asIdeal)) (qB ⟨0, hm⟩.succ)) = C.q ⟨0, hm⟩.succ
+Stafford38.Geometry.ActualOptionColumnBinding.retained_frame_coordinate_orders.{u} {k : Type u} [Field k] [CharZero k]
+  {m : ℕ} (hm : 0 < m) (P : PrimeSpectrum (MvPolynomial (Fin m) k))
+  (w : Stafford38.Geometry.GeneralDivisorialVisibleFrame.GeneralDivisorialVisibleFrameWitness hm P) :
+  let C := w.column;
+  let W := C.W;
+  let F := Stafford38.Geometry.ComponentProjectiveClosure.ComponentFractionField P;
+  let V := W.place.valuation.toSubring;
+  have D := w.differential.core.D;
+  C.q 0 = Stafford38.Geometry.CompletedDVRPowerSeries.chosenUniformizer ↥V ^ D.a * D.u ∧
+    C.q ⟨0, hm⟩.succ = Stafford38.Geometry.CompletedDVRPowerSeries.chosenUniformizer ↥V ^ (D.a + D.e) * D.w
+'Stafford38.Geometry.ActualOptionColumnBinding.exists_actual_option_coordinate_map' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.ActualOptionColumnBinding.actual_normalized_column_map_eq_retained' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.ActualOptionColumnBinding.retained_frame_coordinate_orders' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.ActualDivisorUniformizerNumerator.exists_numerator_with_two_unit_power_factorizations' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.ActualDivisorUniformizerNumerator.exists_numerator_with_two_unit_power_factorizations_and_span' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.A0ChartFormalEtale.formallyEtale_originalAffineChartToCommonOpen' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Stafford38.Geometry.A0ChartFormalEtale.originalAffineChartToCommonOpen.{u, v, w} {k : Type u} [Field k] {m : ℕ}
+  {Q : Type v} [CommRing Q] [Algebra k Q] {B : Type w} [CommRing B] [Algebra Q B]
+  (P : PrimeSpectrum (MvPolynomial (Fin m) k)) (j : Fin m)
+  (hxj : Stafford38.Geometry.AffineComponentCoordinateSplit.componentCoordinate P j ≠ 0)
+  (hsel : Stafford38.Geometry.ProjectiveChartSameFieldOverlap.SelectedAffineChartQuotient P j ≃ₐ[k] Q) (M : Ideal B)
+  [M.IsPrime] (f : Q) (e : Localization.Away f ≃ₐ[Q] Localization.Away ((algebraMap Q B) f)) :
+  let C :=
+    Stafford38.Geometry.EtaleGenericOpenTransport.genericOpenExtraAwayB M f e
+      (hsel (Stafford38.Geometry.ProjectiveChartSameFieldOverlap.selectedAffineChartDenominator P j));
+  Stafford38.Geometry.ProjectiveChartSameFieldOverlap.OriginalAffineChartQuotient P →+* C
+Stafford38.Geometry.LocalNormalizationCenterEquivalence.exists_localization_equiv_of_height_one.{u} {K : Type u}
+  [Field K] (R : Subring K) (V : ValuationSubring K) (hRV : R ≤ V.toSubring)
+  [hNoeth : IsNoetherianRing ↥(integralClosure (↥R) K).toSubring]
+  [hIntegrallyClosed : IsIntegrallyClosed ↥(integralClosure (↥R) K).toSubring]
+  [hFractionRing : IsFractionRing (↥(integralClosure (↥R) K).toSubring) K]
+  (hp : (Stafford38.Geometry.ProjectiveChartNormalizationCenter.integralClosureCenter R V hRV).IsPrime)
+  (hh : (Stafford38.Geometry.ProjectiveChartNormalizationCenter.integralClosureCenter R V hRV).height = 1) :
+  let B := (integralClosure (↥R) K).toSubring;
+  let p := Stafford38.Geometry.ProjectiveChartNormalizationCenter.integralClosureCenter R V hRV;
+  ∃ e, ∀ (b : ↥B), ↑(e ((algebraMap (↥B) (Localization.AtPrime p)) b)) = ↑b
+'Stafford38.Geometry.LocalNormalizationCenterEquivalence.exists_localization_equiv_of_height_one' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.GenericFibreMatrixColumnsConsumer.rational_one_mem_generic_fibre' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.GenericFibreMatrixColumnsConsumer.columns_identify_same_generic_fibre' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.GeneralTangentLimitCriterion.genericFibre_eq_span_matrixColumns' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.ActualResidueCenterHeight.height_one_of_localized_algebraic_residue' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.ActualChartResidueMapCoherence.residue_map_coherence' depends on axioms: [propext, Quot.sound]
+'Stafford38.Geometry.ActualNormalizationCenterResidueKernel.residue_kernel_eq_canonical_center_comap' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.ActualChartNormalizationCenter.actual_chart_normalization_center_height_one_of_basis' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.ActualChartNormalizationCenter.actual_chart_normalization_center_height_one_of_selected_basis' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.ActualChartNormalizationCenter.subalgebraToSubringRingEquiv' depends on axioms: [propext,
+ Quot.sound]
+'Stafford38.Geometry.ActualNormalizationDivisorEtale.formallyEtale_at_actual_normalization_center_of_specified_parameter' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.ActualNormalizationDivisorEtale.formallyEtale_at_actual_normalization_center' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.ActualOptionCoordinateEtaleConsumer.actual_map_formallyEtale' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.ActualOptionCoordinateEtaleConsumer.mixed_coordinate_behavior' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.A0NormalizedProjectiveCoordinatesConsumer.canonical_chart_coordinate_consumer' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+tests/Geometry/CorrectedNormalizedTangentLatticeConcreteOracle.lean:66:6: warning: This simp argument is unused:
+  PowerSeries.derivative_pow
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [q, tau, Z, lambda, hC2, Matrix.mulVec, dotProduct, PowerSeries.derivative_X]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+tests/Geometry/CorrectedNormalizedTangentLatticeConcreteOracle.lean:68:6: warning: This simp argument is unused:
+  PowerSeries.derivative_pow
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [q, tau, Z, lambda, hC3, Matrix.mulVec, dotProduct, PowerSeries.derivative_X]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+tests/Geometry/CorrectedNormalizedTangentLatticeConcreteOracle.lean:74:6: warning: This simp argument is unused:
+  PowerSeries.derivative_C
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [q, tau, Z, lambda, Matrix.mulVec, dotProduct]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+tests/Geometry/CorrectedNormalizedTangentLatticeConcreteOracle.lean:66:60: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+tests/Geometry/CorrectedNormalizedTangentLatticeConcreteOracle.lean:68:60: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+tests/Geometry/CorrectedNormalizedTangentLatticeConcreteOracle.lean:96:4: warning: `simp` already closes the goal
+
+Hint: Use `simp` instead of `simpa`:
+  [apply] simp [xL, A]
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+Try this:
+  [apply] ring_nf
+  
+  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
+    
+  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
+Try this:
+  [apply] ring_nf
+  
+  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
+    
+  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
+'Stafford38.Geometry.CorrectedNormalizedTangentLattice.ConcreteOracle.powerSeriesX_not_unit' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.CorrectedNormalizedTangentLattice.ConcreteOracle.tau_has_explicit_raw_span_coefficients' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.CorrectedNormalizedTangentLattice.ConcreteOracle.example_generic_fibre_identity' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.GeneralTangentLimitCriterion.tangent_limit_affine_fibre_closure_of_directSummand' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'GeneralTangentLimitAffineClosureConsumer.eval_eq_zero_of_directSummand_affine_closure' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Stafford38.Geometry.GeneralTangentLimitCriterion.tangent_limit_criterion_of_directSummand.{u_1} {k : Type u_1} [Field k]
+  {n dimY : ℕ} [IsAlgClosed k] (I : Ideal (MvPolynomial (Fin n) k)) (q : Fin (n + 1) → PowerSeries k)
+  (L : Submodule (PowerSeries k) (Fin (n + 1) → PowerSeries k)) (D : DirectSummandInput I q L) :
+  Projectivization.mk k (fun i => if i = D.axis then 1 else 0) ⋯ ∈
+    projectiveHomogeneousClosure (projectivizedDirectionSet (smoothConormalDirectionSet I))
+'Stafford38.Geometry.ActualCenterParameterTransport.atPrimeEquiv' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.ActualCenterParameterTransport.span_transport_across_ring_equiv' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.ActualCenterParameterTransport.transport_parameter_and_two_orders' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.ActualCommonOpenCompletionDerivationConsumer.originalParameter_derivation_bridge' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.ActualCommonOpenCompletionDerivationConsumer.canonicalLaurentArc_preserves_ground' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+tests/Geometry/ActualWitnessSelectedChartBindingConsumer.lean:98:2: warning: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+tests/Geometry/ActualWitnessSelectedChartBindingConsumer.lean:99:2: warning: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+tests/Geometry/ActualWitnessSelectedChartBindingConsumer.lean:100:2: warning: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+tests/Geometry/ActualWitnessSelectedChartBindingConsumer.lean:101:2: warning: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+'Stafford38.Geometry.ActualWitnessSelectedChartBindingConsumer.actual_retained_witness_projective_relation' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+tests/Geometry/PrescribedCompletionInjectivityConsumer.lean:38:4: warning: `simp` already closes the goal
+
+Hint: Use `simp` instead of `simpa`:
+  [apply] simp at h
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+'PrescribedCompletionInjectivityConsumer.source_nonzero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'PrescribedCompletionInjectivityConsumer.parameter_linear_coefficient' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Stafford38.Geometry.ActualOptionGroundPointCompletion.exists_groundPoint_chart_from_option_map.{u_1, u_2, u_3}
+  {k : Type u_1} {B : Type u_2} {σ : Type u_3} [Field k] [IsAlgClosed k] [CommRing B] [Algebra k B] [IsDomain B]
+  [Algebra.FiniteType k B] [Fintype σ] (P : Ideal B) [P.IsPrime] (fOption : MvPolynomial (Option σ) k →ₐ[k] B)
+  (s q₀ q₁ : B) (qRow : σ → B) (hnone : fOption (MvPolynomial.X none) = s) (hsP : s ∈ P)
+  (hsome : ∀ (z : σ), fOption (MvPolynomial.X (some z)) = qRow z) (τ : Fin (Fintype.card σ) ≃ σ)
+  (hEt :
+    let Rσ := MvPolynomial (Option σ) k;
+    Algebra.FormallyEtale Rσ (Localization.AtPrime P))
+  (e₀ e₁ : ℕ) (hOrders : 0 < e₀ ∧ e₀ < e₁) (u₀ u₁ : Localization.AtPrime P) (hu₀ : IsUnit u₀) (hu₁ : IsUnit u₁)
+  (h₀ : (algebraMap B (Localization.AtPrime P)) q₀ = (algebraMap B (Localization.AtPrime P)) s ^ e₀ * u₀)
+  (h₁ : (algebraMap B (Localization.AtPrime P)) q₁ = (algebraMap B (Localization.AtPrime P)) s ^ e₁ * u₁) :
+  Stafford38.Geometry.ActualOptionGroundPointCompletion.GroundPointChartOutput P fOption s q₀ q₁ qRow τ e₀ e₁
+'Stafford38.Geometry.ActualOptionGroundPointCompletion.exists_groundPoint_chart_from_option_map' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+tests/FiniteTypeCurveHeightConsumer.lean:20:2: warning: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+tests/FiniteTypeCurveHeightConsumer.lean:39:2: warning: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+'Stafford38.Geometry.FiniteTypeCurveHeightConsumer.polynomial_maximal_height_le_one' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.FiniteTypeCurveHeightConsumer.polynomial_localized_maximal_center_height_eq_one' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]

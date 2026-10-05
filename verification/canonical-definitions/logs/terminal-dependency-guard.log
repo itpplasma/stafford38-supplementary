@@ -1,0 +1,19 @@
+Acceptance excerpt; complete local log sha256: 2f9c31ef04fad346b6a32b7a8ef61d2a08d46e29cc297d23ea9825bc10e1fabc
+root: Stafford38.universalStatement; declarations reached: 1051; forbidden hits: 0; unavailable dependencies: 321
+root: Stafford38.universalStatement; declarations reached: 5293; forbidden hits: 0; unavailable dependencies: 1479
+root: Stafford38.universalStatement; declarations reached: 11547; forbidden hits: 0; unavailable dependencies: 1268
+root: Stafford38.universalStatement; declarations reached: 18560; forbidden hits: 0; unavailable dependencies: 1280
+root: Stafford38.universalStatement; declarations reached: 26388; forbidden hits: 0; unavailable dependencies: 1187
+root: Stafford38.universalStatement; declarations reached: 32465; forbidden hits: 0; unavailable dependencies: 1108
+root: Stafford38.universalStatement; declarations reached: 39610; forbidden hits: 0; unavailable dependencies: 975
+root: Stafford38.universalStatement; declarations reached: 46168; forbidden hits: 0; unavailable dependencies: 457
+root: Stafford38.universalStatement; declarations reached: 50075; forbidden hits: 0; unavailable dependencies: 494
+root: Stafford38.universalStatement; declarations reached: 52801; forbidden hits: 0; unavailable dependencies: 268
+root: Stafford38.universalStatement; declarations reached: 54268; forbidden hits: 0; unavailable dependencies: 204
+root: Stafford38.universalStatement; declarations reached: 54798; forbidden hits: 0; unavailable dependencies: 23
+root: Stafford38.universalStatement; declarations reached: 54848; forbidden hits: 0; unavailable dependencies: 8
+root: Stafford38.universalStatement; declarations reached: 54859; forbidden hits: 0; unavailable dependencies: 0
+root: Stafford38Challenge.universalStatement; declarations reached: 54860; forbidden hits: 0; unavailable dependencies: 0
+root: Stafford38.universalFixedSourceStatement; declarations reached: 54877; forbidden hits: 0; unavailable dependencies: 0
+root: Stafford38FixedSourceChallenge.universalFixedSourceStatement; declarations reached: 54878; forbidden hits: 0; unavailable dependencies: 0
+strict dependency guard passed for all 4 terminal roots

@@ -1,0 +1,71 @@
+<!doctype html><meta charset="utf-8"><title>Stafford38/Geometry/GeneralConstantCoordinateAxis.lean</title><style>body{font:14px monospace}pre span{display:block}pre span:target{background:#fff0ad}a{color:#666}pre{white-space:pre-wrap}</style><h1>Stafford38/Geometry/GeneralConstantCoordinateAxis.lean</h1><p>This project (Stafford38) · 0403af3f0b1a7f84d2027121932723f67bd279ae</p><pre><span id="L1"><a href="#L1">1</a> module</span>
+<span id="L2"><a href="#L2">2</a> public import Stafford38.Geometry.AffineComponentCoordinateSplit</span>
+<span id="L3"><a href="#L3">3</a> public import Stafford38.Geometry.ConstantCoordinateConormal</span>
+<span id="L4"><a href="#L4">4</a> public import Mathlib.RingTheory.Nullstellensatz</span>
+<span id="L5"><a href="#L5">5</a> public import Stafford38.Geometry.SmoothConormalFibreVanishing</span>
+<span id="L6"><a href="#L6">6</a> </span>
+<span id="L7"><a href="#L7">7</a> @[expose] public section</span>
+<span id="L8"><a href="#L8">8</a> </span>
+<span id="L9"><a href="#L9">9</a> namespace Stafford38.Geometry.GeneralConstantCoordinateAxis</span>
+<span id="L10"><a href="#L10">10</a> </span>
+<span id="L11"><a href="#L11">11</a> open Stafford38.Geometry.AffineComponentCoordinateSplit</span>
+<span id="L12"><a href="#L12">12</a> open Stafford38.Geometry.ConstantCoordinateConormal</span>
+<span id="L13"><a href="#L13">13</a> </span>
+<span id="L14"><a href="#L14">14</a> noncomputable section</span>
+<span id="L15"><a href="#L15">15</a> </span>
+<span id="L16"><a href="#L16">16</a> universe u</span>
+<span id="L17"><a href="#L17">17</a> </span>
+<span id="L18"><a href="#L18">18</a> theorem exists_constant_coordinate_equation_and_pure_axis</span>
+<span id="L19"><a href="#L19">19</a>     {k : Type u} [Field k] [IsAlgClosed k] [CharZero k]</span>
+<span id="L20"><a href="#L20">20</a>     {m : ℕ} (hm : 0 &lt; m)</span>
+<span id="L21"><a href="#L21">21</a>     (P : PrimeSpectrum (MvPolynomial (Fin m) k))</span>
+<span id="L22"><a href="#L22">22</a>     (halg : IsAlgebraic k (componentCoordinate P ⟨0, hm⟩)) :</span>
+<span id="L23"><a href="#L23">23</a>     ∃ (c : k) (y : Fin m → k),</span>
+<span id="L24"><a href="#L24">24</a>       MvPolynomial.X ⟨0, hm⟩ - MvPolynomial.C c ∈ P.asIdeal ∧</span>
+<span id="L25"><a href="#L25">25</a>       (∀ f ∈ P.asIdeal, MvPolynomial.eval y f = 0) ∧</span>
+<span id="L26"><a href="#L26">26</a>       Sum.elim y (fun j ↦ if j = ⟨0, hm⟩ then 1 else 0) ∈</span>
+<span id="L27"><a href="#L27">27</a>         Stafford38.Geometry.AffineConormalClosure.equationConormalLocus</span>
+<span id="L28"><a href="#L28">28</a>           P.asIdeal := by</span>
+<span id="L29"><a href="#L29">29</a>   obtain ⟨c, hc⟩ | htrans :=</span>
+<span id="L30"><a href="#L30">30</a>     coordinate_constant_or_transcendental P ⟨0, hm⟩</span>
+<span id="L31"><a href="#L31">31</a>   · obtain ⟨M, hMmax, hPM⟩ := Ideal.exists_le_maximal P.asIdeal P.isPrime.ne_top</span>
+<span id="L32"><a href="#L32">32</a>     obtain ⟨y, hMy⟩ :=</span>
+<span id="L33"><a href="#L33">33</a>       MvPolynomial.isMaximal_iff_eq_vanishingIdeal_singleton.mp hMmax</span>
+<span id="L34"><a href="#L34">34</a>     have hy : ∀ f ∈ P.asIdeal, MvPolynomial.eval y f = 0 := by</span>
+<span id="L35"><a href="#L35">35</a>       intro f hf</span>
+<span id="L36"><a href="#L36">36</a>       have hfM : f ∈ M := hPM hf</span>
+<span id="L37"><a href="#L37">37</a>       rw [hMy, MvPolynomial.mem_vanishingIdeal_singleton_iff] at hfM</span>
+<span id="L38"><a href="#L38">38</a>       exact hfM</span>
+<span id="L39"><a href="#L39">39</a>     refine ⟨c, y, hc, hy, ?_⟩</span>
+<span id="L40"><a href="#L40">40</a>     exact constantCoordinate_phasePoint_mem_equationConormalLocus</span>
+<span id="L41"><a href="#L41">41</a>       P.asIdeal y hy ⟨0, hm⟩ c hc</span>
+<span id="L42"><a href="#L42">42</a>   · exact False.elim (htrans halg)</span>
+<span id="L43"><a href="#L43">43</a> </span>
+<span id="L44"><a href="#L44">44</a> open Stafford38.Geometry.SmoothConormalFibreVanishing</span>
+<span id="L45"><a href="#L45">45</a> open Stafford38.Geometry.ProjectiveConormalDirections</span>
+<span id="L46"><a href="#L46">46</a> open Stafford38.Geometry.LaurentConormalDirection</span>
+<span id="L47"><a href="#L47">47</a> </span>
+<span id="L48"><a href="#L48">48</a> /-- A constant-coordinate component contributes the coordinate axis directly</span>
+<span id="L49"><a href="#L49">49</a>  to the ground-field smooth conormal fibre closure. No Laurent arc is needed. -/</span>
+<span id="L50"><a href="#L50">50</a> theorem coordinate_axis_mem_smooth_fibre_closure_of_coordinate_algebraic</span>
+<span id="L51"><a href="#L51">51</a>     {k : Type*} [Field k] [IsAlgClosed k] [CharZero k]</span>
+<span id="L52"><a href="#L52">52</a>     {m : ℕ} (hm : 0 &lt; m)</span>
+<span id="L53"><a href="#L53">53</a>     (P : PrimeSpectrum (MvPolynomial (Fin m) k))</span>
+<span id="L54"><a href="#L54">54</a>     (halg : IsAlgebraic k (componentCoordinate P ⟨0, hm⟩)) :</span>
+<span id="L55"><a href="#L55">55</a>     (fun i : Fin m =&gt; if i = ⟨0, hm⟩ then (1 : k) else 0) ∈</span>
+<span id="L56"><a href="#L56">56</a>       MvPolynomial.zeroLocus k</span>
+<span id="L57"><a href="#L57">57</a>         (MvPolynomial.vanishingIdeal k (smoothConormalFibreProjection P.asIdeal)) := by</span>
+<span id="L58"><a href="#L58">58</a>   obtain ⟨c, y, hc, hy, hpoint⟩ :=</span>
+<span id="L59"><a href="#L59">59</a>     exists_constant_coordinate_equation_and_pure_axis hm P halg</span>
+<span id="L60"><a href="#L60">60</a>   intro f hf</span>
+<span id="L61"><a href="#L61">61</a>   have hfull := fibreLift_mem_vanishingIdeal_equationConormal P.asIdeal P.isPrime f hf</span>
+<span id="L62"><a href="#L62">62</a>   have hz := hfull (Sum.elim y (fun i =&gt; if i = ⟨0, hm⟩ then 1 else 0)) hpoint</span>
+<span id="L63"><a href="#L63">63</a>   simpa [fibreLift, MvPolynomial.eval_rename, Function.comp_def] using hz</span>
+<span id="L64"><a href="#L64">64</a> </span>
+<span id="L65"><a href="#L65">65</a> </span>
+<span id="L66"><a href="#L66">66</a> #print axioms exists_constant_coordinate_equation_and_pure_axis</span>
+<span id="L67"><a href="#L67">67</a> </span>
+<span id="L68"><a href="#L68">68</a> end</span>
+<span id="L69"><a href="#L69">69</a> </span>
+<span id="L70"><a href="#L70">70</a> end Stafford38.Geometry.GeneralConstantCoordinateAxis</span>
+<span id="L71"><a href="#L71">71</a> </span></pre>

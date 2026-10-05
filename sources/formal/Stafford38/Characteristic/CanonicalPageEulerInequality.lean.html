@@ -1,0 +1,71 @@
+<!doctype html><meta charset="utf-8"><title>Stafford38/Characteristic/CanonicalPageEulerInequality.lean</title><style>body{font:14px monospace}pre span{display:block}pre span:target{background:#fff0ad}a{color:#666}pre{white-space:pre-wrap}</style><h1>Stafford38/Characteristic/CanonicalPageEulerInequality.lean</h1><p>This project (Stafford38) · 0403af3f0b1a7f84d2027121932723f67bd279ae</p><pre><span id="L1"><a href="#L1">1</a> module</span>
+<span id="L2"><a href="#L2">2</a> public import Stafford38.Characteristic.CanonicalTangentialSuccessors</span>
+<span id="L3"><a href="#L3">3</a> public import Stafford38.Characteristic.CanonicalTangentialBoundaryMaps</span>
+<span id="L4"><a href="#L4">4</a> public import Stafford38.Characteristic.LocalizedKernelCokernelEquivalences</span>
+<span id="L5"><a href="#L5">5</a> public import Stafford38.Characteristic.UniformBoundaryVanishing</span>
+<span id="L6"><a href="#L6">6</a> public import Stafford38.Characteristic.TwoTermPageLength</span>
+<span id="L7"><a href="#L7">7</a> </span>
+<span id="L8"><a href="#L8">8</a> @[expose] public section</span>
+<span id="L9"><a href="#L9">9</a> </span>
+<span id="L10"><a href="#L10">10</a> open Stafford38Challenge (WeylAlg)</span>
+<span id="L11"><a href="#L11">11</a> set_option maxHeartbeats 800000</span>
+<span id="L12"><a href="#L12">12</a> </span>
+<span id="L13"><a href="#L13">13</a> namespace Stafford38.Characteristic.CanonicalPageEulerInequality</span>
+<span id="L14"><a href="#L14">14</a> open Stafford38.Characteristic</span>
+<span id="L15"><a href="#L15">15</a> open Stafford38.Characteristic.FilteredTwoTermPages</span>
+<span id="L16"><a href="#L16">16</a> open Stafford38.Characteristic.CanonicalTangentialTotalAction</span>
+<span id="L17"><a href="#L17">17</a> open Stafford38.Characteristic.LocalizedKernelCokernelEquivalences</span>
+<span id="L18"><a href="#L18">18</a> open Stafford38.Characteristic.TwoTermPageLength</span>
+<span id="L19"><a href="#L19">19</a> open Stafford38.WeylPBWMonicBridge</span>
+<span id="L20"><a href="#L20">20</a> open Stafford38.WeylIteratedEquivalence</span>
+<span id="L21"><a href="#L21">21</a> noncomputable section</span>
+<span id="L22"><a href="#L22">22</a> variable (k : Type*) [Field k] [Algebra ℚ k]</span>
+<span id="L23"><a href="#L23">23</a> variable (n N : ℕ) (d : WeylAlg k (n + 1))</span>
+<span id="L24"><a href="#L24">24</a> variable (hd : IsPBWMonicAt k (.inr (0 : Fin (n + 1))) N d)</span>
+<span id="L25"><a href="#L25">25</a> variable (S : Submonoid (MvPolynomial (Fin n ⊕ Fin n) k))</span>
+<span id="L26"><a href="#L26">26</a> attribute [local instance] sourceModule targetModule</span>
+<span id="L27"><a href="#L27">27</a> theorem canonicalPage_length_target_le_source : ∀</span>
+<span id="L28"><a href="#L28">28</a>     (hA0 : IsFiniteLength (Localization S)</span>
+<span id="L29"><a href="#L29">29</a>       (LocalizedModule S ((complex k n N d hd).SourceTotal 1)))</span>
+<span id="L30"><a href="#L30">30</a>     (hC0 : IsFiniteLength (Localization S)</span>
+<span id="L31"><a href="#L31">31</a>       (LocalizedModule S ((complex k n N d hd).TargetTotal 1))),</span>
+<span id="L32"><a href="#L32">32</a>     Module.length (Localization S) (LocalizedModule S ((complex k n N d hd).TargetTotal 1)) ≤</span>
+<span id="L33"><a href="#L33">33</a>       Module.length (Localization S) (LocalizedModule S ((complex k n N d hd).SourceTotal 1)) := by</span>
+<span id="L34"><a href="#L34">34</a>   intro hA0 hC0</span>
+<span id="L35"><a href="#L35">35</a>   let A : ℕ → Type _ := fun r =&gt; LocalizedModule S ((complex k n N d hd).SourceTotal (r+1))</span>
+<span id="L36"><a href="#L36">36</a>   let C : ℕ → Type _ := fun r =&gt; LocalizedModule S ((complex k n N d hd).TargetTotal (r+1))</span>
+<span id="L37"><a href="#L37">37</a>   letI : ∀ r, AddCommGroup (A r) := fun r =&gt; by dsimp only [A]; infer_instance</span>
+<span id="L38"><a href="#L38">38</a>   letI : ∀ r, Module (Localization S) (A r) := fun r =&gt; by dsimp only [A]; infer_instance</span>
+<span id="L39"><a href="#L39">39</a>   letI : ∀ r, AddCommGroup (C r) := fun r =&gt; by dsimp only [C]; infer_instance</span>
+<span id="L40"><a href="#L40">40</a>   letI : ∀ r, Module (Localization S) (C r) := fun r =&gt; by dsimp only [C]; infer_instance</span>
+<span id="L41"><a href="#L41">41</a>   let dd : ∀ r, A r →ₗ[Localization S] C r := fun r =&gt;</span>
+<span id="L42"><a href="#L42">42</a>     localizedMap S (tangentialDrop k n N d hd (r+1))</span>
+<span id="L43"><a href="#L43">43</a>   have hA0' : IsFiniteLength (Localization S) (A 0) := by simpa [A] using hA0</span>
+<span id="L44"><a href="#L44">44</a>   have hC0' : IsFiniteLength (Localization S) (C 0) := by simpa [C] using hC0</span>
+<span id="L45"><a href="#L45">45</a>   have hs : ∀ r, A (r+1) ≃ₗ[Localization S] LinearMap.ker (dd r) := by</span>
+<span id="L46"><a href="#L46">46</a>     intro r</span>
+<span id="L47"><a href="#L47">47</a>     dsimp only [A, dd]</span>
+<span id="L48"><a href="#L48">48</a>     exact (localizedEquiv</span>
+<span id="L49"><a href="#L49">49</a>       (U := (complex k n N d hd).SourceTotal ((r + 1) + 1))</span>
+<span id="L50"><a href="#L50">50</a>       (V := LinearMap.ker (tangentialDrop k n N d hd (r + 1))) S</span>
+<span id="L51"><a href="#L51">51</a>       (tangentialSourceSuccEquiv k n N d hd (r+1))).trans</span>
+<span id="L52"><a href="#L52">52</a>         (localizedKernelEquiv S (tangentialDrop k n N d hd (r+1)))</span>
+<span id="L53"><a href="#L53">53</a>   have ht : ∀ r, C (r+1) ≃ₗ[Localization S] C r ⧸ LinearMap.range (dd r) := by</span>
+<span id="L54"><a href="#L54">54</a>     intro r</span>
+<span id="L55"><a href="#L55">55</a>     dsimp only [C, dd]</span>
+<span id="L56"><a href="#L56">56</a>     exact (localizedEquiv S (tangentialTargetSuccEquiv k n N d hd (r+1))).trans</span>
+<span id="L57"><a href="#L57">57</a>       (localizedCokernelEquiv S (tangentialDrop k n N d hd (r+1)))</span>
+<span id="L58"><a href="#L58">58</a>   letI : IsNoetherian (Localization S)</span>
+<span id="L59"><a href="#L59">59</a>       (LocalizedModule S ((complex k n N d hd).TargetTotal 1)) :=</span>
+<span id="L60"><a href="#L60">60</a>     (isFiniteLength_iff_isNoetherian_isArtinian.mp hC0).1</span>
+<span id="L61"><a href="#L61">61</a>   obtain ⟨N', hN'⟩ := exists_uniform_subsingleton_localized S</span>
+<span id="L62"><a href="#L62">62</a>     (fun r =&gt; tangentialBoundaryMap k n N d hd r)</span>
+<span id="L63"><a href="#L63">63</a>     (tangentialBoundaryMap_ker_mono k n N d hd)</span>
+<span id="L64"><a href="#L64">64</a>     (fun z =&gt; tangentialBoundaryMap_eventually_zero k n N d hd z)</span>
+<span id="L65"><a href="#L65">65</a>     (fun r =&gt; tangentialBoundaryMap_surjective k n N d hd r)</span>
+<span id="L66"><a href="#L66">66</a>   simpa [A, C] using twoTermPage_length_target_le_source A C hA0' hC0' dd hs ht N'</span>
+<span id="L67"><a href="#L67">67</a>  #print axioms canonicalPage_length_target_le_source</span>
+<span id="L68"><a href="#L68">68</a> </span>
+<span id="L69"><a href="#L69">69</a> end</span>
+<span id="L70"><a href="#L70">70</a> end Stafford38.Characteristic.CanonicalPageEulerInequality</span>
+<span id="L71"><a href="#L71">71</a> </span></pre>

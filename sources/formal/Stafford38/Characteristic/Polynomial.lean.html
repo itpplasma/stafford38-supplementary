@@ -1,0 +1,51 @@
+<!doctype html><meta charset="utf-8"><title>Stafford38/Characteristic/Polynomial.lean</title><style>body{font:14px monospace}pre span{display:block}pre span:target{background:#fff0ad}a{color:#666}pre{white-space:pre-wrap}</style><h1>Stafford38/Characteristic/Polynomial.lean</h1><p>This project (Stafford38) · 0403af3f0b1a7f84d2027121932723f67bd279ae</p><pre><span id="L1"><a href="#L1">1</a> module</span>
+<span id="L2"><a href="#L2">2</a> public import Mathlib.Algebra.MvPolynomial.PDeriv</span>
+<span id="L3"><a href="#L3">3</a> public import Stafford38.ChallengeDefinitions</span>
+<span id="L4"><a href="#L4">4</a> </span>
+<span id="L5"><a href="#L5">5</a> @[expose] public section</span>
+<span id="L6"><a href="#L6">6</a> </span>
+<span id="L7"><a href="#L7">7</a> open Stafford38Challenge (PhaseVar)</span>
+<span id="L8"><a href="#L8">8</a> </span>
+<span id="L9"><a href="#L9">9</a> /-!</span>
+<span id="L10"><a href="#L10">10</a> # Polynomial phase space for characteristic support</span>
+<span id="L11"><a href="#L11">11</a> </span>
+<span id="L12"><a href="#L12">12</a> The order symbol ring of the `n`th Weyl algebra has base variables of fibre</span>
+<span id="L13"><a href="#L13">13</a> weight zero and cotangent variables of fibre weight one. This file introduces</span>
+<span id="L14"><a href="#L14">14</a> that ring and its canonical polynomial Poisson bracket without assuming any</span>
+<span id="L15"><a href="#L15">15</a> characteristic-variety theorem.</span>
+<span id="L16"><a href="#L16">16</a> -/</span>
+<span id="L17"><a href="#L17">17</a> </span>
+<span id="L18"><a href="#L18">18</a> namespace Stafford38.Characteristic</span>
+<span id="L19"><a href="#L19">19</a> </span>
+<span id="L20"><a href="#L20">20</a> /-- Coordinate ring of affine cotangent space. -/</span>
+<span id="L21"><a href="#L21">21</a> abbrev SymbolRing (k : Type*) [CommRing k] (n : ℕ) :=</span>
+<span id="L22"><a href="#L22">22</a>   MvPolynomial (PhaseVar n) k</span>
+<span id="L23"><a href="#L23">23</a> </span>
+<span id="L24"><a href="#L24">24</a> /-- Fibre degree: base variables have weight zero and covariables weight one. -/</span>
+<span id="L25"><a href="#L25">25</a> def fibreWeight {n : ℕ} : PhaseVar n → ℕ</span>
+<span id="L26"><a href="#L26">26</a>   | Sum.inl _ =&gt; 0</span>
+<span id="L27"><a href="#L27">27</a>   | Sum.inr _ =&gt; 1</span>
+<span id="L28"><a href="#L28">28</a> </span>
+<span id="L29"><a href="#L29">29</a> /-- The standard Poisson bracket on affine cotangent space. -/</span>
+<span id="L30"><a href="#L30">30</a> noncomputable def poissonBracket</span>
+<span id="L31"><a href="#L31">31</a>     {k : Type*} [CommRing k] {n : ℕ}</span>
+<span id="L32"><a href="#L32">32</a>     (f g : SymbolRing k n) : SymbolRing k n :=</span>
+<span id="L33"><a href="#L33">33</a>   ∑ i : Fin n,</span>
+<span id="L34"><a href="#L34">34</a>     (MvPolynomial.pderiv (Sum.inl i : PhaseVar n) f *</span>
+<span id="L35"><a href="#L35">35</a>         MvPolynomial.pderiv (Sum.inr i : PhaseVar n) g -</span>
+<span id="L36"><a href="#L36">36</a>       MvPolynomial.pderiv (Sum.inr i : PhaseVar n) f *</span>
+<span id="L37"><a href="#L37">37</a>         MvPolynomial.pderiv (Sum.inl i : PhaseVar n) g)</span>
+<span id="L38"><a href="#L38">38</a> </span>
+<span id="L39"><a href="#L39">39</a> /-- An ideal is Poisson when it is stable under bracketing with every symbol. -/</span>
+<span id="L40"><a href="#L40">40</a> def IsPoisson</span>
+<span id="L41"><a href="#L41">41</a>     {k : Type*} [CommRing k] {n : ℕ}</span>
+<span id="L42"><a href="#L42">42</a>     (J : Ideal (SymbolRing k n)) : Prop :=</span>
+<span id="L43"><a href="#L43">43</a>   ∀ f ∈ J, ∀ g, poissonBracket f g ∈ J</span>
+<span id="L44"><a href="#L44">44</a> </span>
+<span id="L45"><a href="#L45">45</a> @[simp] theorem poissonBracket_self</span>
+<span id="L46"><a href="#L46">46</a>     {k : Type*} [CommRing k] {n : ℕ} (f : SymbolRing k n) :</span>
+<span id="L47"><a href="#L47">47</a>     poissonBracket f f = 0 := by</span>
+<span id="L48"><a href="#L48">48</a>   simp [poissonBracket, mul_comm]</span>
+<span id="L49"><a href="#L49">49</a> </span>
+<span id="L50"><a href="#L50">50</a> end Stafford38.Characteristic</span>
+<span id="L51"><a href="#L51">51</a> </span></pre>

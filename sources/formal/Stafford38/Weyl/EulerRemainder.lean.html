@@ -1,0 +1,458 @@
+<!doctype html><meta charset="utf-8"><title>Stafford38/Weyl/EulerRemainder.lean</title><style>body{font:14px monospace}pre span{display:block}pre span:target{background:#fff0ad}a{color:#666}pre{white-space:pre-wrap}</style><h1>Stafford38/Weyl/EulerRemainder.lean</h1><p>This project (Stafford38) · 0403af3f0b1a7f84d2027121932723f67bd279ae</p><pre><span id="L1"><a href="#L1">1</a> module</span>
+<span id="L2"><a href="#L2">2</a> public import AlgebraicAnalysis.Ore.Associativity</span>
+<span id="L3"><a href="#L3">3</a> public import Stafford38.Weyl.EulerSubring</span>
+<span id="L4"><a href="#L4">4</a> public import Stafford38.Weyl.EulerResidue</span>
+<span id="L5"><a href="#L5">5</a> public import Stafford38.Weyl.OuterOreMonic</span>
+<span id="L6"><a href="#L6">6</a> </span>
+<span id="L7"><a href="#L7">7</a> @[expose] public section</span>
+<span id="L8"><a href="#L8">8</a> </span>
+<span id="L9"><a href="#L9">9</a> open Stafford38Challenge (WeylAlg)</span>
+<span id="L10"><a href="#L10">10</a> </span>
+<span id="L11"><a href="#L11">11</a> /-!</span>
+<span id="L12"><a href="#L12">12</a> # Positive outer-Ore remainders</span>
+<span id="L13"><a href="#L13">13</a> </span>
+<span id="L14"><a href="#L14">14</a> An element whose outer momentum support is strictly below `N` acquires a</span>
+<span id="L15"><a href="#L15">15</a> right coordinate factor after multiplication by `x^N` on either side.  The</span>
+<span id="L16"><a href="#L16">16</a> cofactors remain in the concrete Euler subring.</span>
+<span id="L17"><a href="#L17">17</a> -/</span>
+<span id="L18"><a href="#L18">18</a> </span>
+<span id="L19"><a href="#L19">19</a> namespace Stafford38.WeylEulerRemainder</span>
+<span id="L20"><a href="#L20">20</a> </span>
+<span id="L21"><a href="#L21">21</a> open Polynomial</span>
+<span id="L22"><a href="#L22">22</a> open Stafford</span>
+<span id="L23"><a href="#L23">23</a> open AlgebraicAnalysis</span>
+<span id="L24"><a href="#L24">24</a> open AlgebraicAnalysis.OreDivision</span>
+<span id="L25"><a href="#L25">25</a> open AlgebraicAnalysis.OreAssociativity</span>
+<span id="L26"><a href="#L26">26</a> open Stafford38.OreCoordinateStage</span>
+<span id="L27"><a href="#L27">27</a> open Stafford38.OrePairStage</span>
+<span id="L28"><a href="#L28">28</a> open Stafford38.WeylEulerSubring</span>
+<span id="L29"><a href="#L29">29</a> open Stafford38.WeylEulerResidue</span>
+<span id="L30"><a href="#L30">30</a> open Stafford38.EulerSurjectivity</span>
+<span id="L31"><a href="#L31">31</a> </span>
+<span id="L32"><a href="#L32">32</a> noncomputable section</span>
+<span id="L33"><a href="#L33">33</a> </span>
+<span id="L34"><a href="#L34">34</a> set_option maxHeartbeats 1000000</span>
+<span id="L35"><a href="#L35">35</a> set_option synthInstance.maxHeartbeats 100000</span>
+<span id="L36"><a href="#L36">36</a> </span>
+<span id="L37"><a href="#L37">37</a> variable (B : Type*) [Ring B] [Algebra ℚ B]</span>
+<span id="L38"><a href="#L38">38</a> </span>
+<span id="L39"><a href="#L39">39</a> local instance : Algebra ℚ (CoordinateStage (B := B)) :=</span>
+<span id="L40"><a href="#L40">40</a>   coordinateStageAlgebra</span>
+<span id="L41"><a href="#L41">41</a> </span>
+<span id="L42"><a href="#L42">42</a> local instance : Algebra ℚ (PairStage (B := B)) :=</span>
+<span id="L43"><a href="#L43">43</a>   pairStageAlgebra</span>
+<span id="L44"><a href="#L44">44</a> </span>
+<span id="L45"><a href="#L45">45</a> /-- Both products by `x^N` have a right `x` factor with cofactor in the Euler</span>
+<span id="L46"><a href="#L46">46</a> subring. -/</span>
+<span id="L47"><a href="#L47">47</a> def HasPositiveCoordinateFactor (N : ℕ) (z : PairStage (B := B)) : Prop :=</span>
+<span id="L48"><a href="#L48">48</a>   ∃ U V : pairEulerSubring B,</span>
+<span id="L49"><a href="#L49">49</a>     z * pairCoordinate ^ N = (U : PairStage (B := B)) * pairCoordinate ∧</span>
+<span id="L50"><a href="#L50">50</a>     pairCoordinate ^ N * z = (V : PairStage (B := B)) * pairCoordinate</span>
+<span id="L51"><a href="#L51">51</a> </span>
+<span id="L52"><a href="#L52">52</a> omit [Algebra ℚ B] in</span>
+<span id="L53"><a href="#L53">53</a> lemma hasPositiveCoordinateFactor_zero (N : ℕ) :</span>
+<span id="L54"><a href="#L54">54</a>     HasPositiveCoordinateFactor B N 0 := by</span>
+<span id="L55"><a href="#L55">55</a>   exact ⟨0, 0, by simp, by simp⟩</span>
+<span id="L56"><a href="#L56">56</a> </span>
+<span id="L57"><a href="#L57">57</a> omit [Algebra ℚ B] in</span>
+<span id="L58"><a href="#L58">58</a> lemma hasPositiveCoordinateFactor_add {N : ℕ} {z w : PairStage (B := B)}</span>
+<span id="L59"><a href="#L59">59</a>     (hz : HasPositiveCoordinateFactor B N z)</span>
+<span id="L60"><a href="#L60">60</a>     (hw : HasPositiveCoordinateFactor B N w) :</span>
+<span id="L61"><a href="#L61">61</a>     HasPositiveCoordinateFactor B N (z + w) := by</span>
+<span id="L62"><a href="#L62">62</a>   obtain ⟨Uz, Vz, hz₁, hz₂⟩ := hz</span>
+<span id="L63"><a href="#L63">63</a>   obtain ⟨Uw, Vw, hw₁, hw₂⟩ := hw</span>
+<span id="L64"><a href="#L64">64</a>   refine ⟨Uz + Uw, Vz + Vw, ?_, ?_⟩</span>
+<span id="L65"><a href="#L65">65</a>   · simpa only [add_mul, Subring.coe_add] using congrArg₂ (· + ·) hz₁ hw₁</span>
+<span id="L66"><a href="#L66">66</a>   · simpa only [mul_add, add_mul, Subring.coe_add] using congrArg₂ (· + ·) hz₂ hw₂</span>
+<span id="L67"><a href="#L67">67</a> </span>
+<span id="L68"><a href="#L68">68</a> omit [Algebra ℚ B] in</span>
+<span id="L69"><a href="#L69">69</a> lemma pairCoordinate_pow_mul_coefficient (b : B) : ∀ N : ℕ,</span>
+<span id="L70"><a href="#L70">70</a>     pairCoordinate ^ N * pairCoefficient b =</span>
+<span id="L71"><a href="#L71">71</a>       pairCoefficient b * pairCoordinate ^ N</span>
+<span id="L72"><a href="#L72">72</a>   | 0 =&gt; by simp</span>
+<span id="L73"><a href="#L73">73</a>   | N + 1 =&gt; by</span>
+<span id="L74"><a href="#L74">74</a>       calc</span>
+<span id="L75"><a href="#L75">75</a>         pairCoordinate ^ (N + 1) * pairCoefficient b =</span>
+<span id="L76"><a href="#L76">76</a>             (pairCoordinate ^ N * pairCoordinate) * pairCoefficient b := by</span>
+<span id="L77"><a href="#L77">77</a>               rw [pow_succ]</span>
+<span id="L78"><a href="#L78">78</a>         _ = pairCoordinate ^ N * (pairCoordinate * pairCoefficient b) := by</span>
+<span id="L79"><a href="#L79">79</a>               rw [mul_assoc]</span>
+<span id="L80"><a href="#L80">80</a>         _ = pairCoordinate ^ N * (pairCoefficient b * pairCoordinate) := by</span>
+<span id="L81"><a href="#L81">81</a>               rw [pairCoordinate_mul_coefficient]</span>
+<span id="L82"><a href="#L82">82</a>         _ = (pairCoordinate ^ N * pairCoefficient b) * pairCoordinate := by</span>
+<span id="L83"><a href="#L83">83</a>               rw [mul_assoc]</span>
+<span id="L84"><a href="#L84">84</a>         _ = pairCoefficient b * pairCoordinate ^ (N + 1) := by</span>
+<span id="L85"><a href="#L85">85</a>               rw [pairCoordinate_pow_mul_coefficient b N, pow_succ, mul_assoc]</span>
+<span id="L86"><a href="#L86">86</a> </span>
+<span id="L87"><a href="#L87">87</a> set_option maxHeartbeats 800000 in</span>
+<span id="L88"><a href="#L88">88</a> /-- A single ordered monomial with outer momentum exponent below `N` has the</span>
+<span id="L89"><a href="#L89">89</a> two required positive factorizations. -/</span>
+<span id="L90"><a href="#L90">90</a> theorem pairOrderedMonomial_hasPositiveCoordinateFactor</span>
+<span id="L91"><a href="#L91">91</a>     (b : B) (a j N : ℕ) (hjN : j &lt; N) :</span>
+<span id="L92"><a href="#L92">92</a>     HasPositiveCoordinateFactor B N</span>
+<span id="L93"><a href="#L93">93</a>       (pairCoefficient b * pairCoordinate ^ a * pairMomentum ^ j) := by</span>
+<span id="L94"><a href="#L94">94</a>   obtain ⟨f, hf⟩ := exists_eulerPolynomial_d_pow_mul_x_pow</span>
+<span id="L95"><a href="#L95">95</a>     (A := PairStage (B := B)) pairCoordinate pairMomentum</span>
+<span id="L96"><a href="#L96">96</a>     pairMomentum_mul_coordinate j</span>
+<span id="L97"><a href="#L97">97</a>   have hpoly : eulerPolynomialEval pairCoordinate pairMomentum f ∈</span>
+<span id="L98"><a href="#L98">98</a>       pairEulerSubring B :=</span>
+<span id="L99"><a href="#L99">99</a>     eulerPolynomialEval_mem_eulerSubring (pairOldSubring B)</span>
+<span id="L100"><a href="#L100">100</a>       pairCoordinate pairMomentum (rational_mem_pairOldSubring B) f</span>
+<span id="L101"><a href="#L101">101</a>   have hb : pairCoefficient b ∈ pairEulerSubring B :=</span>
+<span id="L102"><a href="#L102">102</a>     coefficient_mem_eulerSubring (pairOldSubring B)</span>
+<span id="L103"><a href="#L103">103</a>       pairCoordinate pairMomentum ⟨pairCoefficient b, ⟨b, rfl⟩⟩</span>
+<span id="L104"><a href="#L104">104</a>   have hxa : pairCoordinate ^ a ∈ pairEulerSubring B :=</span>
+<span id="L105"><a href="#L105">105</a>     (pairEulerSubring B).pow_mem</span>
+<span id="L106"><a href="#L106">106</a>       (coordinate_mem_eulerSubring (pairOldSubring B)</span>
+<span id="L107"><a href="#L107">107</a>         pairCoordinate pairMomentum) a</span>
+<span id="L108"><a href="#L108">108</a>   have hxleft : pairCoordinate ^ (N - j - 1) ∈ pairEulerSubring B :=</span>
+<span id="L109"><a href="#L109">109</a>     (pairEulerSubring B).pow_mem</span>
+<span id="L110"><a href="#L110">110</a>       (coordinate_mem_eulerSubring (pairOldSubring B)</span>
+<span id="L111"><a href="#L111">111</a>         pairCoordinate pairMomentum) (N - j - 1)</span>
+<span id="L112"><a href="#L112">112</a>   let U : pairEulerSubring B :=</span>
+<span id="L113"><a href="#L113">113</a>     ⟨pairCoefficient b * pairCoordinate ^ a *</span>
+<span id="L114"><a href="#L114">114</a>         eulerPolynomialEval pairCoordinate pairMomentum f *</span>
+<span id="L115"><a href="#L115">115</a>           pairCoordinate ^ (N - j - 1),</span>
+<span id="L116"><a href="#L116">116</a>       (pairEulerSubring B).mul_mem</span>
+<span id="L117"><a href="#L117">117</a>         ((pairEulerSubring B).mul_mem</span>
+<span id="L118"><a href="#L118">118</a>           ((pairEulerSubring B).mul_mem hb hxa) hpoly) hxleft⟩</span>
+<span id="L119"><a href="#L119">119</a>   obtain ⟨V, hV⟩ :=</span>
+<span id="L120"><a href="#L120">120</a>     pairOrderedMonomial_eq_eulerSubring_mul_coordinate B b (N + a) j</span>
+<span id="L121"><a href="#L121">121</a>       (by omega)</span>
+<span id="L122"><a href="#L122">122</a>   refine ⟨U, V, ?_, ?_⟩</span>
+<span id="L123"><a href="#L123">123</a>   · have hpowN : (pairCoordinate (B := B)) ^ N =</span>
+<span id="L124"><a href="#L124">124</a>         pairCoordinate ^ j * pairCoordinate ^ (N - j) := by</span>
+<span id="L125"><a href="#L125">125</a>       rw [← pow_add, Nat.add_sub_of_le (Nat.le_of_lt hjN)]</span>
+<span id="L126"><a href="#L126">126</a>     have hpowDiff : (pairCoordinate (B := B)) ^ (N - j) =</span>
+<span id="L127"><a href="#L127">127</a>         pairCoordinate ^ (N - j - 1) * pairCoordinate := by</span>
+<span id="L128"><a href="#L128">128</a>       calc</span>
+<span id="L129"><a href="#L129">129</a>         pairCoordinate ^ (N - j) =</span>
+<span id="L130"><a href="#L130">130</a>             pairCoordinate ^ ((N - j - 1) + 1) := by congr 1; omega</span>
+<span id="L131"><a href="#L131">131</a>         _ = pairCoordinate ^ (N - j - 1) * pairCoordinate := by</span>
+<span id="L132"><a href="#L132">132</a>           rw [pow_add, pow_one]</span>
+<span id="L133"><a href="#L133">133</a>     change</span>
+<span id="L134"><a href="#L134">134</a>       (pairCoefficient b * pairCoordinate ^ a * pairMomentum ^ j) *</span>
+<span id="L135"><a href="#L135">135</a>           pairCoordinate ^ N =</span>
+<span id="L136"><a href="#L136">136</a>         (pairCoefficient b * pairCoordinate ^ a *</span>
+<span id="L137"><a href="#L137">137</a>             eulerPolynomialEval pairCoordinate pairMomentum f *</span>
+<span id="L138"><a href="#L138">138</a>               pairCoordinate ^ (N - j - 1)) * pairCoordinate</span>
+<span id="L139"><a href="#L139">139</a>     calc</span>
+<span id="L140"><a href="#L140">140</a>       (pairCoefficient b * pairCoordinate ^ a * pairMomentum ^ j) *</span>
+<span id="L141"><a href="#L141">141</a>           pairCoordinate ^ N =</span>
+<span id="L142"><a href="#L142">142</a>         pairCoefficient b * pairCoordinate ^ a *</span>
+<span id="L143"><a href="#L143">143</a>           (pairMomentum ^ j * pairCoordinate ^ j) *</span>
+<span id="L144"><a href="#L144">144</a>             pairCoordinate ^ (N - j) := by</span>
+<span id="L145"><a href="#L145">145</a>               rw [hpowN]</span>
+<span id="L146"><a href="#L146">146</a>               simp only [mul_assoc]</span>
+<span id="L147"><a href="#L147">147</a>       _ = pairCoefficient b * pairCoordinate ^ a *</span>
+<span id="L148"><a href="#L148">148</a>           eulerPolynomialEval pairCoordinate pairMomentum f *</span>
+<span id="L149"><a href="#L149">149</a>             pairCoordinate ^ (N - j) := by</span>
+<span id="L150"><a href="#L150">150</a>               rw [hf]</span>
+<span id="L151"><a href="#L151">151</a>       _ = (pairCoefficient b * pairCoordinate ^ a *</span>
+<span id="L152"><a href="#L152">152</a>             eulerPolynomialEval pairCoordinate pairMomentum f *</span>
+<span id="L153"><a href="#L153">153</a>               pairCoordinate ^ (N - j - 1)) * pairCoordinate := by</span>
+<span id="L154"><a href="#L154">154</a>               rw [hpowDiff]</span>
+<span id="L155"><a href="#L155">155</a>               simp only [mul_assoc]</span>
+<span id="L156"><a href="#L156">156</a>   · calc</span>
+<span id="L157"><a href="#L157">157</a>       pairCoordinate ^ N *</span>
+<span id="L158"><a href="#L158">158</a>           (pairCoefficient b * pairCoordinate ^ a * pairMomentum ^ j) =</span>
+<span id="L159"><a href="#L159">159</a>         pairCoefficient b * pairCoordinate ^ (N + a) * pairMomentum ^ j := by</span>
+<span id="L160"><a href="#L160">160</a>           calc</span>
+<span id="L161"><a href="#L161">161</a>             pairCoordinate ^ N *</span>
+<span id="L162"><a href="#L162">162</a>                 (pairCoefficient b * pairCoordinate ^ a * pairMomentum ^ j) =</span>
+<span id="L163"><a href="#L163">163</a>               (pairCoordinate ^ N * pairCoefficient b) *</span>
+<span id="L164"><a href="#L164">164</a>                 pairCoordinate ^ a * pairMomentum ^ j := by</span>
+<span id="L165"><a href="#L165">165</a>                   simp only [mul_assoc]</span>
+<span id="L166"><a href="#L166">166</a>             _ = (pairCoefficient b * pairCoordinate ^ N) *</span>
+<span id="L167"><a href="#L167">167</a>                 pairCoordinate ^ a * pairMomentum ^ j := by</span>
+<span id="L168"><a href="#L168">168</a>                   rw [pairCoordinate_pow_mul_coefficient B b N]</span>
+<span id="L169"><a href="#L169">169</a>             _ = pairCoefficient b * pairCoordinate ^ (N + a) *</span>
+<span id="L170"><a href="#L170">170</a>                 pairMomentum ^ j := by</span>
+<span id="L171"><a href="#L171">171</a>                   rw [pow_add]</span>
+<span id="L172"><a href="#L172">172</a>                   simp only [mul_assoc]</span>
+<span id="L173"><a href="#L173">173</a>       _ = (V : PairStage (B := B)) * pairCoordinate := hV</span>
+<span id="L174"><a href="#L174">174</a> </span>
+<span id="L175"><a href="#L175">175</a> private lemma coordinateCoefficientTerm_hasPositive</span>
+<span id="L176"><a href="#L176">176</a>     (c : CoordinateStage (B := B)) (j N : ℕ) (hjN : j &lt; N) :</span>
+<span id="L177"><a href="#L177">177</a>     HasPositiveCoordinateFactor B N</span>
+<span id="L178"><a href="#L178">178</a>       (normalCoefficient coordinateDerivation c * pairMomentum ^ j) := by</span>
+<span id="L179"><a href="#L179">179</a>   let q := (normalFormAddEquiv (zeroDerivation (B := B))).symm c</span>
+<span id="L180"><a href="#L180">180</a>   have hc : c = normalForm (zeroDerivation (B := B)) q := by</span>
+<span id="L181"><a href="#L181">181</a>     exact (normalFormAddEquiv (zeroDerivation (B := B))).apply_symm_apply c |&gt;.symm</span>
+<span id="L182"><a href="#L182">182</a>   rw [hc]</span>
+<span id="L183"><a href="#L183">183</a>   induction q using Polynomial.induction_on' with</span>
+<span id="L184"><a href="#L184">184</a>   | add q r hq hr =&gt;</span>
+<span id="L185"><a href="#L185">185</a>       rw [normalForm_add,</span>
+<span id="L186"><a href="#L186">186</a>         (normalCoefficient (coordinateDerivation (B := B))).map_add, add_mul]</span>
+<span id="L187"><a href="#L187">187</a>       exact hasPositiveCoordinateFactor_add (B := B) hq hr</span>
+<span id="L188"><a href="#L188">188</a>   | monomial a b =&gt;</span>
+<span id="L189"><a href="#L189">189</a>       rw [normalForm_monomial,</span>
+<span id="L190"><a href="#L190">190</a>         (normalCoefficient (coordinateDerivation (B := B))).map_mul,</span>
+<span id="L191"><a href="#L191">191</a>         (normalCoefficient (coordinateDerivation (B := B))).map_pow]</span>
+<span id="L192"><a href="#L192">192</a>       exact pairOrderedMonomial_hasPositiveCoordinateFactor B b a j N hjN</span>
+<span id="L193"><a href="#L193">193</a> </span>
+<span id="L194"><a href="#L194">194</a> /-- Every element whose outer momentum support lies below `N` has both</span>
+<span id="L195"><a href="#L195">195</a> positive right-coordinate factorizations. -/</span>
+<span id="L196"><a href="#L196">196</a> theorem hasPositiveCoordinateFactor_of_outer_support</span>
+<span id="L197"><a href="#L197">197</a>     (z : PairStage (B := B)) (N : ℕ)</span>
+<span id="L198"><a href="#L198">198</a>     (hsupport : ∀ j ∈</span>
+<span id="L199"><a href="#L199">199</a>       ((normalFormAddEquiv coordinateDerivation).symm z).support, j &lt; N) :</span>
+<span id="L200"><a href="#L200">200</a>     HasPositiveCoordinateFactor B N z := by</span>
+<span id="L201"><a href="#L201">201</a>   let q := (normalFormAddEquiv coordinateDerivation).symm z</span>
+<span id="L202"><a href="#L202">202</a>   have hz : z = normalForm coordinateDerivation q := by</span>
+<span id="L203"><a href="#L203">203</a>     exact (normalFormAddEquiv coordinateDerivation).apply_symm_apply z |&gt;.symm</span>
+<span id="L204"><a href="#L204">204</a>   rw [hz, ← Polynomial.sum_monomial_eq q]</span>
+<span id="L205"><a href="#L205">205</a>   change HasPositiveCoordinateFactor B N</span>
+<span id="L206"><a href="#L206">206</a>     (normalFormAddHom (coordinateDerivation (B := B))</span>
+<span id="L207"><a href="#L207">207</a>       (∑ j ∈ q.support, Polynomial.monomial j (q.coeff j)))</span>
+<span id="L208"><a href="#L208">208</a>   rw [map_sum]</span>
+<span id="L209"><a href="#L209">209</a>   refine Finset.sum_induction (M := PairStage (B := B))</span>
+<span id="L210"><a href="#L210">210</a>     (fun j =&gt; normalFormAddHom (coordinateDerivation (B := B))</span>
+<span id="L211"><a href="#L211">211</a>       (Polynomial.monomial j (q.coeff j)))</span>
+<span id="L212"><a href="#L212">212</a>     (HasPositiveCoordinateFactor B N) ?_ ?_ ?_</span>
+<span id="L213"><a href="#L213">213</a>   · intro a b ha hb</span>
+<span id="L214"><a href="#L214">214</a>     exact hasPositiveCoordinateFactor_add (B := B) ha hb</span>
+<span id="L215"><a href="#L215">215</a>   · exact hasPositiveCoordinateFactor_zero B N</span>
+<span id="L216"><a href="#L216">216</a>   · intro j hj</span>
+<span id="L217"><a href="#L217">217</a>     change HasPositiveCoordinateFactor B N</span>
+<span id="L218"><a href="#L218">218</a>       (normalForm (coordinateDerivation (B := B))</span>
+<span id="L219"><a href="#L219">219</a>         (Polynomial.monomial j (q.coeff j)))</span>
+<span id="L220"><a href="#L220">220</a>     rw [normalForm_monomial]</span>
+<span id="L221"><a href="#L221">221</a>     exact coordinateCoefficientTerm_hasPositive B (q.coeff j) j N</span>
+<span id="L222"><a href="#L222">222</a>       (hsupport j hj)</span>
+<span id="L223"><a href="#L223">223</a> </span>
+<span id="L224"><a href="#L224">224</a> omit [Algebra ℚ B] in</span>
+<span id="L225"><a href="#L225">225</a> lemma support_sub_X_pow_lt</span>
+<span id="L226"><a href="#L226">226</a>     (H : Polynomial (CoordinateStage (B := B))) (N : ℕ)</span>
+<span id="L227"><a href="#L227">227</a>     (hN : H.coeff N = 1)</span>
+<span id="L228"><a href="#L228">228</a>     (hgt : ∀ j, N &lt; j → H.coeff j = 0) :</span>
+<span id="L229"><a href="#L229">229</a>     ∀ j ∈ (H - Polynomial.X ^ N).support, j &lt; N := by</span>
+<span id="L230"><a href="#L230">230</a>   intro j hj</span>
+<span id="L231"><a href="#L231">231</a>   by_contra hnot</span>
+<span id="L232"><a href="#L232">232</a>   have hle : N ≤ j := Nat.le_of_not_gt hnot</span>
+<span id="L233"><a href="#L233">233</a>   have hcoeff : (H - Polynomial.X ^ N).coeff j = 0 := by</span>
+<span id="L234"><a href="#L234">234</a>     rcases hle.eq_or_lt with rfl | hlt</span>
+<span id="L235"><a href="#L235">235</a>     · simp [hN]</span>
+<span id="L236"><a href="#L236">236</a>     · rw [Polynomial.coeff_sub, hgt j hlt]</span>
+<span id="L237"><a href="#L237">237</a>       simp [Polynomial.coeff_X_pow, hlt.ne']</span>
+<span id="L238"><a href="#L238">238</a>   exact (Polynomial.mem_support_iff.mp hj) hcoeff</span>
+<span id="L239"><a href="#L239">239</a> </span>
+<span id="L240"><a href="#L240">240</a> /-- Subtracting the monic outer power leaves an element to which the positive</span>
+<span id="L241"><a href="#L241">241</a> factor theorem applies. -/</span>
+<span id="L242"><a href="#L242">242</a> theorem normalForm_sub_X_pow_hasPositiveCoordinateFactor</span>
+<span id="L243"><a href="#L243">243</a>     (H : Polynomial (CoordinateStage (B := B))) (N : ℕ)</span>
+<span id="L244"><a href="#L244">244</a>     (hN : H.coeff N = 1)</span>
+<span id="L245"><a href="#L245">245</a>     (hgt : ∀ j, N &lt; j → H.coeff j = 0) :</span>
+<span id="L246"><a href="#L246">246</a>     HasPositiveCoordinateFactor B N</span>
+<span id="L247"><a href="#L247">247</a>       (normalForm (coordinateDerivation (B := B))</span>
+<span id="L248"><a href="#L248">248</a>         (H - Polynomial.X ^ N)) := by</span>
+<span id="L249"><a href="#L249">249</a>   apply hasPositiveCoordinateFactor_of_outer_support B</span>
+<span id="L250"><a href="#L250">250</a>   intro j hj</span>
+<span id="L251"><a href="#L251">251</a>   change j ∈ ((normalFormAddEquiv (coordinateDerivation (B := B))).symm</span>
+<span id="L252"><a href="#L252">252</a>     ((normalFormAddEquiv (coordinateDerivation (B := B)))</span>
+<span id="L253"><a href="#L253">253</a>       (H - Polynomial.X ^ N))).support at hj</span>
+<span id="L254"><a href="#L254">254</a>   rw [(normalFormAddEquiv (coordinateDerivation (B := B))).symm_apply_apply] at hj</span>
+<span id="L255"><a href="#L255">255</a>   exact support_sub_X_pow_lt B H N hN hgt j hj</span>
+<span id="L256"><a href="#L256">256</a> </span>
+<span id="L257"><a href="#L257">257</a> /-- The positive-factor interface turns the explicit Euler residue into the</span>
+<span id="L258"><a href="#L258">258</a> exact shaped residue consumed by quotient surjectivity. -/</span>
+<span id="L259"><a href="#L259">259</a> theorem positiveEulerResidue_eq_eulerSubring_mul_coordinate</span>
+<span id="L260"><a href="#L260">260</a>     (d sigma : PairStage (B := B)) (N : ℕ)</span>
+<span id="L261"><a href="#L261">261</a>     (hd : d = pairMomentum ^ N + sigma)</span>
+<span id="L262"><a href="#L262">262</a>     (hpositive : HasPositiveCoordinateFactor B N sigma) :</span>
+<span id="L263"><a href="#L263">263</a>     ∃ U : pairEulerSubring B,</span>
+<span id="L264"><a href="#L264">264</a>       1 + (U : PairStage (B := B)) * pairCoordinate ∈</span>
+<span id="L265"><a href="#L265">265</a>         canonicalRightIdeal pairCoordinate d N := by</span>
+<span id="L266"><a href="#L266">266</a>   obtain ⟨u, v, hmem⟩ := positiveEulerResidue_polynomial_mem</span>
+<span id="L267"><a href="#L267">267</a>     pairCoordinate pairMomentum d sigma N pairMomentum_mul_coordinate hd</span>
+<span id="L268"><a href="#L268">268</a>   obtain ⟨U, V, hright, hleft⟩ := hpositive</span>
+<span id="L269"><a href="#L269">269</a>   obtain ⟨su, hsu⟩ := coordinate_mul_eulerPolynomial</span>
+<span id="L270"><a href="#L270">270</a>     (pairOldSubring B) pairCoordinate pairMomentum</span>
+<span id="L271"><a href="#L271">271</a>     pairMomentum_mul_coordinate (pairOldSubring_commutes_coordinate B)</span>
+<span id="L272"><a href="#L272">272</a>     (rational_mem_pairOldSubring B) u</span>
+<span id="L273"><a href="#L273">273</a>   obtain ⟨sv, hsv⟩ := coordinate_mul_eulerPolynomial</span>
+<span id="L274"><a href="#L274">274</a>     (pairOldSubring B) pairCoordinate pairMomentum</span>
+<span id="L275"><a href="#L275">275</a>     pairMomentum_mul_coordinate (pairOldSubring_commutes_coordinate B)</span>
+<span id="L276"><a href="#L276">276</a>     (rational_mem_pairOldSubring B) v</span>
+<span id="L277"><a href="#L277">277</a>   refine ⟨U * su + V * sv, ?_⟩</span>
+<span id="L278"><a href="#L278">278</a>   convert hmem using 1</span>
+<span id="L279"><a href="#L279">279</a>   simp only [Subring.coe_add, Subring.coe_mul, add_mul]</span>
+<span id="L280"><a href="#L280">280</a>   rw [hright, hleft]</span>
+<span id="L281"><a href="#L281">281</a>   simp only [mul_assoc]</span>
+<span id="L282"><a href="#L282">282</a>   rw [hsu, hsv]</span>
+<span id="L283"><a href="#L283">283</a> </span>
+<span id="L284"><a href="#L284">284</a> omit [Algebra ℚ B] in</span>
+<span id="L285"><a href="#L285">285</a> private lemma coordinateCoefficient_mem_pairGeneratorSubring</span>
+<span id="L286"><a href="#L286">286</a>     (c : CoordinateStage (B := B)) :</span>
+<span id="L287"><a href="#L287">287</a>     normalCoefficient coordinateDerivation c ∈</span>
+<span id="L288"><a href="#L288">288</a>       Subring.closure (((pairOldSubring B : Subring (PairStage (B := B))) :</span>
+<span id="L289"><a href="#L289">289</a>         Set (PairStage (B := B))) ∪ {pairCoordinate, pairMomentum}) := by</span>
+<span id="L290"><a href="#L290">290</a>   let q := (normalFormAddEquiv (zeroDerivation (B := B))).symm c</span>
+<span id="L291"><a href="#L291">291</a>   have hc : c = normalForm (zeroDerivation (B := B)) q := by</span>
+<span id="L292"><a href="#L292">292</a>     exact (normalFormAddEquiv (zeroDerivation (B := B))).apply_symm_apply c |&gt;.symm</span>
+<span id="L293"><a href="#L293">293</a>   rw [hc]</span>
+<span id="L294"><a href="#L294">294</a>   induction q using Polynomial.induction_on' with</span>
+<span id="L295"><a href="#L295">295</a>   | add q r hq hr =&gt;</span>
+<span id="L296"><a href="#L296">296</a>       rw [normalForm_add,</span>
+<span id="L297"><a href="#L297">297</a>         (normalCoefficient (coordinateDerivation (B := B))).map_add]</span>
+<span id="L298"><a href="#L298">298</a>       exact Subring.add_mem _ hq hr</span>
+<span id="L299"><a href="#L299">299</a>   | monomial a b =&gt;</span>
+<span id="L300"><a href="#L300">300</a>       rw [normalForm_monomial,</span>
+<span id="L301"><a href="#L301">301</a>         (normalCoefficient (coordinateDerivation (B := B))).map_mul,</span>
+<span id="L302"><a href="#L302">302</a>         (normalCoefficient (coordinateDerivation (B := B))).map_pow]</span>
+<span id="L303"><a href="#L303">303</a>       apply Subring.mul_mem</span>
+<span id="L304"><a href="#L304">304</a>       · apply Subring.subset_closure</span>
+<span id="L305"><a href="#L305">305</a>         exact Or.inl ⟨b, rfl⟩</span>
+<span id="L306"><a href="#L306">306</a>       · apply Subring.pow_mem</span>
+<span id="L307"><a href="#L307">307</a>         apply Subring.subset_closure</span>
+<span id="L308"><a href="#L308">308</a>         exact Or.inr (Or.inl rfl)</span>
+<span id="L309"><a href="#L309">309</a> </span>
+<span id="L310"><a href="#L310">310</a> /-- The old coefficient ring together with the new coordinate and momentum</span>
+<span id="L311"><a href="#L311">311</a> generates the complete pair stage. -/</span>
+<span id="L312"><a href="#L312">312</a> theorem closure_pairOldSubring_union_coordinate_momentum_eq_top :</span>
+<span id="L313"><a href="#L313">313</a>     Subring.closure (((pairOldSubring B : Subring (PairStage (B := B))) :</span>
+<span id="L314"><a href="#L314">314</a>       Set (PairStage (B := B))) ∪ {pairCoordinate, pairMomentum}) = ⊤ := by</span>
+<span id="L315"><a href="#L315">315</a>   apply top_unique</span>
+<span id="L316"><a href="#L316">316</a>   intro z hz</span>
+<span id="L317"><a href="#L317">317</a>   let q := (normalFormAddEquiv (coordinateDerivation (B := B))).symm z</span>
+<span id="L318"><a href="#L318">318</a>   have hzq : z = normalForm coordinateDerivation q := by</span>
+<span id="L319"><a href="#L319">319</a>     exact (normalFormAddEquiv coordinateDerivation).apply_symm_apply z |&gt;.symm</span>
+<span id="L320"><a href="#L320">320</a>   rw [hzq]</span>
+<span id="L321"><a href="#L321">321</a>   induction q using Polynomial.induction_on' with</span>
+<span id="L322"><a href="#L322">322</a>   | add q r hq hr =&gt;</span>
+<span id="L323"><a href="#L323">323</a>       rw [normalForm_add]</span>
+<span id="L324"><a href="#L324">324</a>       exact Subring.add_mem _ hq hr</span>
+<span id="L325"><a href="#L325">325</a>   | monomial j c =&gt;</span>
+<span id="L326"><a href="#L326">326</a>       rw [normalForm_monomial]</span>
+<span id="L327"><a href="#L327">327</a>       apply Subring.mul_mem</span>
+<span id="L328"><a href="#L328">328</a>       · exact coordinateCoefficient_mem_pairGeneratorSubring B c</span>
+<span id="L329"><a href="#L329">329</a>       · apply Subring.pow_mem</span>
+<span id="L330"><a href="#L330">330</a>         apply Subring.subset_closure</span>
+<span id="L331"><a href="#L331">331</a>         exact Or.inr (Or.inr rfl)</span>
+<span id="L332"><a href="#L332">332</a> </span>
+<span id="L333"><a href="#L333">333</a> #print axioms pairOrderedMonomial_hasPositiveCoordinateFactor</span>
+<span id="L334"><a href="#L334">334</a> #print axioms hasPositiveCoordinateFactor_of_outer_support</span>
+<span id="L335"><a href="#L335">335</a> #print axioms normalForm_sub_X_pow_hasPositiveCoordinateFactor</span>
+<span id="L336"><a href="#L336">336</a> #print axioms positiveEulerResidue_eq_eulerSubring_mul_coordinate</span>
+<span id="L337"><a href="#L337">337</a> #print axioms closure_pairOldSubring_union_coordinate_momentum_eq_top</span>
+<span id="L338"><a href="#L338">338</a> </span>
+<span id="L339"><a href="#L339">339</a> section Presented</span>
+<span id="L340"><a href="#L340">340</a> </span>
+<span id="L341"><a href="#L341">341</a> open Stafford38.OreIteratedPairStage</span>
+<span id="L342"><a href="#L342">342</a> open Stafford38.WeylIteratedEquivalence</span>
+<span id="L343"><a href="#L343">343</a> open Stafford38.WeylOuterOreMonic</span>
+<span id="L344"><a href="#L344">344</a> open Stafford38.WeylPBWMonicBridge</span>
+<span id="L345"><a href="#L345">345</a> </span>
+<span id="L346"><a href="#L346">346</a> universe u</span>
+<span id="L347"><a href="#L347">347</a> </span>
+<span id="L348"><a href="#L348">348</a> variable (k : Type u) [Field k] [Algebra ℚ k]</span>
+<span id="L349"><a href="#L349">349</a> </span>
+<span id="L350"><a href="#L350">350</a> local instance iteratedRatAlgebra :</span>
+<span id="L351"><a href="#L351">351</a>     (n : ℕ) → Algebra ℚ (IteratedPairStage k n)</span>
+<span id="L352"><a href="#L352">352</a>   | 0 =&gt; by</span>
+<span id="L353"><a href="#L353">353</a>       change Algebra ℚ k</span>
+<span id="L354"><a href="#L354">354</a>       infer_instance</span>
+<span id="L355"><a href="#L355">355</a>   | n + 1 =&gt; by</span>
+<span id="L356"><a href="#L356">356</a>       letI : Algebra ℚ (IteratedPairStage k n) := iteratedRatAlgebra n</span>
+<span id="L357"><a href="#L357">357</a>       change Algebra ℚ (PairStage (B := IteratedPairStage k n))</span>
+<span id="L358"><a href="#L358">358</a>       exact pairStageAlgebra</span>
+<span id="L359"><a href="#L359">359</a> </span>
+<span id="L360"><a href="#L360">360</a> local instance (n : ℕ) : Algebra k (IteratedPairStage k n) :=</span>
+<span id="L361"><a href="#L361">361</a>   iteratedPairStageAlgebra k n</span>
+<span id="L362"><a href="#L362">362</a> </span>
+<span id="L363"><a href="#L363">363</a> local instance (n : ℕ) :</span>
+<span id="L364"><a href="#L364">364</a>     Algebra ℚ (CoordinateStage (B := IteratedPairStage k n)) :=</span>
+<span id="L365"><a href="#L365">365</a>   coordinateStageAlgebra</span>
+<span id="L366"><a href="#L366">366</a> </span>
+<span id="L367"><a href="#L367">367</a> local instance (n : ℕ) :</span>
+<span id="L368"><a href="#L368">368</a>     Algebra ℚ (PairStage (B := IteratedPairStage k n)) :=</span>
+<span id="L369"><a href="#L369">369</a>   pairStageAlgebra</span>
+<span id="L370"><a href="#L370">370</a> </span>
+<span id="L371"><a href="#L371">371</a> /-- The concrete remainder of a normalized presented Weyl operator satisfies</span>
+<span id="L372"><a href="#L372">372</a> both positive-coordinate factorizations. -/</span>
+<span id="L373"><a href="#L373">373</a> theorem presentedRemainder_hasPositiveCoordinateFactor</span>
+<span id="L374"><a href="#L374">374</a>     (n N : ℕ) {d : WeylAlg k (n + 1)}</span>
+<span id="L375"><a href="#L375">375</a>     (hd : IsPBWMonicAt k (.inr (0 : Fin (n + 1))) N d) :</span>
+<span id="L376"><a href="#L376">376</a>     HasPositiveCoordinateFactor (IteratedPairStage k n) N</span>
+<span id="L377"><a href="#L377">377</a>       (presentedToIterated k (n + 1) d - stageMomentum k n ^ N) := by</span>
+<span id="L378"><a href="#L378">378</a>   let H := presentedOuterPolynomial k n d</span>
+<span id="L379"><a href="#L379">379</a>   have hpositive := normalForm_sub_X_pow_hasPositiveCoordinateFactor</span>
+<span id="L380"><a href="#L380">380</a>     (IteratedPairStage k n) H N</span>
+<span id="L381"><a href="#L381">381</a>     (outer_coeff_eq_one_at_bound k n N hd)</span>
+<span id="L382"><a href="#L382">382</a>     (fun j hj =&gt; outer_coeff_eq_zero_of_exponent_gt k n N hd hj)</span>
+<span id="L383"><a href="#L383">383</a>   have hnormal :</span>
+<span id="L384"><a href="#L384">384</a>       normalForm (coordinateDerivation (B := IteratedPairStage k n))</span>
+<span id="L385"><a href="#L385">385</a>           (H - Polynomial.X ^ N) =</span>
+<span id="L386"><a href="#L386">386</a>         presentedToIterated k (n + 1) d - stageMomentum k n ^ N := by</span>
+<span id="L387"><a href="#L387">387</a>     change normalFormAddHom coordinateDerivation (H - Polynomial.X ^ N) = _</span>
+<span id="L388"><a href="#L388">388</a>     have hH : normalForm (coordinateDerivation (B := IteratedPairStage k n)) H =</span>
+<span id="L389"><a href="#L389">389</a>         presentedToIterated k (n + 1) d := by</span>
+<span id="L390"><a href="#L390">390</a>       exact (normalFormAddEquiv coordinateDerivation).apply_symm_apply _</span>
+<span id="L391"><a href="#L391">391</a>     have hH' : normalFormAddHom coordinateDerivation H =</span>
+<span id="L392"><a href="#L392">392</a>         presentedToIterated k (n + 1) d := hH</span>
+<span id="L393"><a href="#L393">393</a>     rw [map_sub, hH']</span>
+<span id="L394"><a href="#L394">394</a>     congr 1</span>
+<span id="L395"><a href="#L395">395</a>     rw [Polynomial.X_pow_eq_monomial]</span>
+<span id="L396"><a href="#L396">396</a>     change normalForm coordinateDerivation (Polynomial.monomial N 1) = _</span>
+<span id="L397"><a href="#L397">397</a>     rw [normalForm_monomial]</span>
+<span id="L398"><a href="#L398">398</a>     rw [map_one, one_mul]</span>
+<span id="L399"><a href="#L399">399</a>     change pairMomentum (B := IteratedPairStage k n) ^ N =</span>
+<span id="L400"><a href="#L400">400</a>       stageMomentum k n ^ N</span>
+<span id="L401"><a href="#L401">401</a>     rfl</span>
+<span id="L402"><a href="#L402">402</a>   rw [hnormal] at hpositive</span>
+<span id="L403"><a href="#L403">403</a>   exact hpositive</span>
+<span id="L404"><a href="#L404">404</a> </span>
+<span id="L405"><a href="#L405">405</a> /-- The normalized presented operator has the exact positive Euler residue in</span>
+<span id="L406"><a href="#L406">406</a> its literal canonical right ideal. -/</span>
+<span id="L407"><a href="#L407">407</a> theorem presentedPositiveEulerResidue</span>
+<span id="L408"><a href="#L408">408</a>     (n N : ℕ) {d : WeylAlg k (n + 1)}</span>
+<span id="L409"><a href="#L409">409</a>     (hd : IsPBWMonicAt k (.inr (0 : Fin (n + 1))) N d) :</span>
+<span id="L410"><a href="#L410">410</a>     ∃ U : pairEulerSubring (IteratedPairStage k n),</span>
+<span id="L411"><a href="#L411">411</a>       1 + (U : PairStage (B := IteratedPairStage k n)) * pairCoordinate ∈</span>
+<span id="L412"><a href="#L412">412</a>         canonicalRightIdeal (pairCoordinate (B := IteratedPairStage k n))</span>
+<span id="L413"><a href="#L413">413</a>           (presentedToIterated k (n + 1) d) N := by</span>
+<span id="L414"><a href="#L414">414</a>   let sigma := presentedToIterated k (n + 1) d - stageMomentum k n ^ N</span>
+<span id="L415"><a href="#L415">415</a>   have hdecomp : presentedToIterated k (n + 1) d =</span>
+<span id="L416"><a href="#L416">416</a>       stageMomentum k n ^ N + sigma := by</span>
+<span id="L417"><a href="#L417">417</a>     simp [sigma]</span>
+<span id="L418"><a href="#L418">418</a>   have hpositive : HasPositiveCoordinateFactor (IteratedPairStage k n) N sigma :=</span>
+<span id="L419"><a href="#L419">419</a>     presentedRemainder_hasPositiveCoordinateFactor k n N hd</span>
+<span id="L420"><a href="#L420">420</a>   exact positiveEulerResidue_eq_eulerSubring_mul_coordinate</span>
+<span id="L421"><a href="#L421">421</a>     (IteratedPairStage k n) (presentedToIterated k (n + 1) d) sigma N</span>
+<span id="L422"><a href="#L422">422</a>       hdecomp hpositive</span>
+<span id="L423"><a href="#L423">423</a> </span>
+<span id="L424"><a href="#L424">424</a> /-- Right multiplication by the selected coordinate is onto the concrete</span>
+<span id="L425"><a href="#L425">425</a> canonical quotient. -/</span>
+<span id="L426"><a href="#L426">426</a> theorem presentedCanonicalQuotient_rightMul_coordinate_surjective</span>
+<span id="L427"><a href="#L427">427</a>     (n N : ℕ) {d : WeylAlg k (n + 1)}</span>
+<span id="L428"><a href="#L428">428</a>     (hd : IsPBWMonicAt k (.inr (0 : Fin (n + 1))) N d) :</span>
+<span id="L429"><a href="#L429">429</a>     Function.Surjective</span>
+<span id="L430"><a href="#L430">430</a>       (rightMul</span>
+<span id="L431"><a href="#L431">431</a>         (canonicalRightIdeal (pairCoordinate (B := IteratedPairStage k n))</span>
+<span id="L432"><a href="#L432">432</a>           (presentedToIterated k (n + 1) d) N)</span>
+<span id="L433"><a href="#L433">433</a>         (pairCoordinate (B := IteratedPairStage k n))) := by</span>
+<span id="L434"><a href="#L434">434</a>   apply rightMul_surjective_of_euler_normal</span>
+<span id="L435"><a href="#L435">435</a>     (R := pairEulerSubring (IteratedPairStage k n))</span>
+<span id="L436"><a href="#L436">436</a>     (p := pairMomentum (B := IteratedPairStage k n))</span>
+<span id="L437"><a href="#L437">437</a>   · exact coordinate_normal_eulerSubring</span>
+<span id="L438"><a href="#L438">438</a>       (pairOldSubring (IteratedPairStage k n))</span>
+<span id="L439"><a href="#L439">439</a>       pairCoordinate pairMomentum</span>
+<span id="L440"><a href="#L440">440</a>       (stageMomentum_mul_coordinate k n)</span>
+<span id="L441"><a href="#L441">441</a>       (pairOldSubring_commutes_coordinate (IteratedPairStage k n))</span>
+<span id="L442"><a href="#L442">442</a>   · exact euler_mem_eulerSubring</span>
+<span id="L443"><a href="#L443">443</a>       (pairOldSubring (IteratedPairStage k n))</span>
+<span id="L444"><a href="#L444">444</a>       pairCoordinate pairMomentum</span>
+<span id="L445"><a href="#L445">445</a>   · exact presentedPositiveEulerResidue k n N hd</span>
+<span id="L446"><a href="#L446">446</a>   · apply closure_eulerSubring_union_momentum_eq_top</span>
+<span id="L447"><a href="#L447">447</a>     exact closure_pairOldSubring_union_coordinate_momentum_eq_top</span>
+<span id="L448"><a href="#L448">448</a>       (IteratedPairStage k n)</span>
+<span id="L449"><a href="#L449">449</a> </span>
+<span id="L450"><a href="#L450">450</a> #print axioms presentedRemainder_hasPositiveCoordinateFactor</span>
+<span id="L451"><a href="#L451">451</a> #print axioms presentedPositiveEulerResidue</span>
+<span id="L452"><a href="#L452">452</a> #print axioms presentedCanonicalQuotient_rightMul_coordinate_surjective</span>
+<span id="L453"><a href="#L453">453</a> </span>
+<span id="L454"><a href="#L454">454</a> end Presented</span>
+<span id="L455"><a href="#L455">455</a> </span>
+<span id="L456"><a href="#L456">456</a> end</span>
+<span id="L457"><a href="#L457">457</a> end Stafford38.WeylEulerRemainder</span>
+<span id="L458"><a href="#L458">458</a> </span></pre>

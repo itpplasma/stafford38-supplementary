@@ -1,0 +1,60 @@
+<!doctype html><meta charset="utf-8"><title>Stafford38/Geometry/GeneralAsymptoticConormal.lean</title><style>body{font:14px monospace}pre span{display:block}pre span:target{background:#fff0ad}a{color:#666}pre{white-space:pre-wrap}</style><h1>Stafford38/Geometry/GeneralAsymptoticConormal.lean</h1><p>This project (Stafford38) · 0403af3f0b1a7f84d2027121932723f67bd279ae</p><pre><span id="L1"><a href="#L1">1</a> module</span>
+<span id="L2"><a href="#L2">2</a> public import Stafford38.Geometry.GeneralAsymptoticLaurentAxis</span>
+<span id="L3"><a href="#L3">3</a> public import Stafford38.Geometry.SmoothConormalFibreVanishing</span>
+<span id="L4"><a href="#L4">4</a> public import Stafford38.Geometry.ConormalScalarExtensionVanishing</span>
+<span id="L5"><a href="#L5">5</a> public import Stafford38.Geometry.SameWitness.OriginalPrimeAxis</span>
+<span id="L6"><a href="#L6">6</a> </span>
+<span id="L7"><a href="#L7">7</a> @[expose] public section</span>
+<span id="L8"><a href="#L8">8</a> </span>
+<span id="L9"><a href="#L9">9</a> /-!</span>
+<span id="L10"><a href="#L10">10</a> # Asymptotic conormal directions of coordinate-avoiding varieties</span>
+<span id="L11"><a href="#L11">11</a> </span>
+<span id="L12"><a href="#L12">12</a> The boundary witness specializes only in the fibre coordinates. Its base</span>
+<span id="L13"><a href="#L13">13</a> coordinates may have poles. Smooth-locus density and scalar-extension</span>
+<span id="L14"><a href="#L14">14</a> vanishing relate that witness to the ground-field projective direction set.</span>
+<span id="L15"><a href="#L15">15</a> -/</span>
+<span id="L16"><a href="#L16">16</a> </span>
+<span id="L17"><a href="#L17">17</a> namespace Stafford38.Geometry.GeneralAsymptoticConormal</span>
+<span id="L18"><a href="#L18">18</a> </span>
+<span id="L19"><a href="#L19">19</a> open Stafford38.Geometry.GeneralAsymptoticLaurentAxis</span>
+<span id="L20"><a href="#L20">20</a> open Stafford38.Geometry.SmoothConormalFibreVanishing</span>
+<span id="L21"><a href="#L21">21</a> open Stafford38.Geometry.ProjectiveConormalDirections</span>
+<span id="L22"><a href="#L22">22</a> open Stafford38.Geometry.ConormalScalarExtensionVanishing</span>
+<span id="L23"><a href="#L23">23</a> open Stafford38.Geometry.LaurentConormalDirection</span>
+<span id="L24"><a href="#L24">24</a> open Stafford38.Geometry.LaurentConormalResidueExtension</span>
+<span id="L25"><a href="#L25">25</a> open Stafford38.Geometry.ScalarExtensionPoints</span>
+<span id="L26"><a href="#L26">26</a> open Stafford38.GeometryRetractionSpecialization</span>
+<span id="L27"><a href="#L27">27</a> </span>
+<span id="L28"><a href="#L28">28</a> noncomputable section</span>
+<span id="L29"><a href="#L29">29</a> </span>
+<span id="L30"><a href="#L30">30</a> universe u</span>
+<span id="L31"><a href="#L31">31</a> </span>
+<span id="L32"><a href="#L32">32</a> theorem coordinate_axis_mem_smooth_fibre_closure</span>
+<span id="L33"><a href="#L33">33</a>     {k : Type u} [Field k] [IsAlgClosed k] [CharZero k]</span>
+<span id="L34"><a href="#L34">34</a>     {m : ℕ} (hm : 0 &lt; m)</span>
+<span id="L35"><a href="#L35">35</a>     (I : PrimeSpectrum (MvPolynomial (Fin m) k))</span>
+<span id="L36"><a href="#L36">36</a>     (havoid : ∀ y ∈ MvPolynomial.zeroLocus k I.asIdeal, y ⟨0, hm⟩ ≠ 0) :</span>
+<span id="L37"><a href="#L37">37</a>     (fun i : Fin m =&gt; if i = ⟨0, hm⟩ then (1 : k) else 0) ∈</span>
+<span id="L38"><a href="#L38">38</a>       MvPolynomial.zeroLocus k</span>
+<span id="L39"><a href="#L39">39</a>         (MvPolynomial.vanishingIdeal k (smoothConormalFibreProjection I.asIdeal)) := by</span>
+<span id="L40"><a href="#L40">40</a>   exact Stafford38.Geometry.SameWitness.coordinate_axis_mem_smooth_fibre_closure hm I havoid</span>
+<span id="L41"><a href="#L41">41</a> </span>
+<span id="L42"><a href="#L42">42</a> theorem coordinate_axis_mem_projective_conormal_directions</span>
+<span id="L43"><a href="#L43">43</a>     {k : Type u} [Field k] [IsAlgClosed k] [CharZero k]</span>
+<span id="L44"><a href="#L44">44</a>     {m : ℕ} (hm : 0 &lt; m)</span>
+<span id="L45"><a href="#L45">45</a>     (I : PrimeSpectrum (MvPolynomial (Fin m) k))</span>
+<span id="L46"><a href="#L46">46</a>     (havoid : ∀ y ∈ MvPolynomial.zeroLocus k I.asIdeal, y ⟨0, hm⟩ ≠ 0) :</span>
+<span id="L47"><a href="#L47">47</a>     Projectivization.mk k</span>
+<span id="L48"><a href="#L48">48</a>         (fun i : Fin m =&gt; if i = ⟨0, hm⟩ then (1 : k) else 0)</span>
+<span id="L49"><a href="#L49">49</a>         (by intro h; have := congrFun h ⟨0, hm⟩; simpa using this) ∈</span>
+<span id="L50"><a href="#L50">50</a>       projectiveHomogeneousClosure</span>
+<span id="L51"><a href="#L51">51</a>         (projectivizedDirectionSet (smoothConormalDirectionSet I.asIdeal)) := by</span>
+<span id="L52"><a href="#L52">52</a>   exact mk_mem_projectiveHomogeneousClosure_of_fibre_zeroLocus I.asIdeal _ _</span>
+<span id="L53"><a href="#L53">53</a>     (coordinate_axis_mem_smooth_fibre_closure hm I havoid)</span>
+<span id="L54"><a href="#L54">54</a> </span>
+<span id="L55"><a href="#L55">55</a> #print axioms coordinate_axis_mem_smooth_fibre_closure</span>
+<span id="L56"><a href="#L56">56</a> #print axioms coordinate_axis_mem_projective_conormal_directions</span>
+<span id="L57"><a href="#L57">57</a> </span>
+<span id="L58"><a href="#L58">58</a> end</span>
+<span id="L59"><a href="#L59">59</a> end Stafford38.Geometry.GeneralAsymptoticConormal</span>
+<span id="L60"><a href="#L60">60</a> </span></pre>

@@ -1,0 +1,126 @@
+<!doctype html><meta charset="utf-8"><title>Stafford38/Geometry/SameWitness/AxisLiftFromGroundPoint.lean</title><style>body{font:14px monospace}pre span{display:block}pre span:target{background:#fff0ad}a{color:#666}pre{white-space:pre-wrap}</style><h1>Stafford38/Geometry/SameWitness/AxisLiftFromGroundPoint.lean</h1><p>This project (Stafford38) · 0403af3f0b1a7f84d2027121932723f67bd279ae</p><pre><span id="L1"><a href="#L1">1</a> module</span>
+<span id="L2"><a href="#L2">2</a> public import Stafford38.Geometry.ActualSameWitnessGroundPointCompletion</span>
+<span id="L3"><a href="#L3">3</a> public import Stafford38.Geometry.ActualPointAxisLift</span>
+<span id="L4"><a href="#L4">4</a> public import Stafford38.Geometry.SameWitness.AwayFactorToAtPrime</span>
+<span id="L5"><a href="#L5">5</a> </span>
+<span id="L6"><a href="#L6">6</a> @[expose] public section</span>
+<span id="L7"><a href="#L7">7</a> </span>
+<span id="L8"><a href="#L8">8</a> set_option autoImplicit false</span>
+<span id="L9"><a href="#L9">9</a> set_option maxHeartbeats 1600000</span>
+<span id="L10"><a href="#L10">10</a> set_option linter.style.haveILetI false</span>
+<span id="L11"><a href="#L11">11</a> </span>
+<span id="L12"><a href="#L12">12</a> noncomputable section</span>
+<span id="L13"><a href="#L13">13</a> </span>
+<span id="L14"><a href="#L14">14</a> namespace Stafford38.Geometry.SameWitness</span>
+<span id="L15"><a href="#L15">15</a> </span>
+<span id="L16"><a href="#L16">16</a> open Stafford38.Geometry.ActualOptionGroundPointCompletion</span>
+<span id="L17"><a href="#L17">17</a> open Stafford38.Geometry.ActualPointAxisLift</span>
+<span id="L18"><a href="#L18">18</a> open Stafford38.Geometry.SmoothLocalTiltedArcAxisLift</span>
+<span id="L19"><a href="#L19">19</a> open Stafford38.Geometry.PrescribedGroundPointUnitPowerChart</span>
+<span id="L20"><a href="#L20">20</a> </span>
+<span id="L21"><a href="#L21">21</a> universe u v</span>
+<span id="L22"><a href="#L22">22</a> </span>
+<span id="L23"><a href="#L23">23</a> /-- Extract the chosen maximal point and the same tilted arc from the</span>
+<span id="L24"><a href="#L24">24</a> closed-ground-point output. The two divisor factorizations are transported</span>
+<span id="L25"><a href="#L25">25</a> from its single away open to the local ring at that same point. -/</span>
+<span id="L26"><a href="#L26">26</a> theorem exists_axis_lift_of_groundPointChartOutput</span>
+<span id="L27"><a href="#L27">27</a>     {k : Type u} [Field k] [CharZero k] [IsAlgClosed k]</span>
+<span id="L28"><a href="#L28">28</a>     {B : Type u} [CommRing B] [Algebra k B] [IsDomain B]</span>
+<span id="L29"><a href="#L29">29</a>     [Algebra.FiniteType k B] {σ : Type v} [Fintype σ]</span>
+<span id="L30"><a href="#L30">30</a>     (P : Ideal B) [P.IsPrime]</span>
+<span id="L31"><a href="#L31">31</a>     (fOption : MvPolynomial (Option σ) k →ₐ[k] B)</span>
+<span id="L32"><a href="#L32">32</a>     (s q₀ q₁ : B) (qRow : σ → B)</span>
+<span id="L33"><a href="#L33">33</a>     (hnone : fOption (MvPolynomial.X none) = s)</span>
+<span id="L34"><a href="#L34">34</a>     (hsP : s ∈ P)</span>
+<span id="L35"><a href="#L35">35</a>     (hsome : ∀ z, fOption (MvPolynomial.X (some z)) = qRow z)</span>
+<span id="L36"><a href="#L36">36</a>     (τ : Fin (Fintype.card σ) ≃ σ) (e₀ e₁ : ℕ)</span>
+<span id="L37"><a href="#L37">37</a>     (hOutput : GroundPointChartOutput P fOption s q₀ q₁ qRow τ e₀ e₁)</span>
+<span id="L38"><a href="#L38">38</a>     {n : ℕ} (qB : Fin (n + 1) → B) (chart : Fin (n + 1)) (axis : Fin n)</span>
+<span id="L39"><a href="#L39">39</a>     (hqchart : qB chart = 1)</span>
+<span id="L40"><a href="#L40">40</a>     (hzero : qB 0 = q₀) (haxis : qB axis.succ = q₁)</span>
+<span id="L41"><a href="#L41">41</a>     (rows : Fin (Fintype.card σ) ↪ Fin (n + 1))</span>
+<span id="L42"><a href="#L42">42</a>     (hrows : ∀ i, qRow (τ i) = qB (rows i))</span>
+<span id="L43"><a href="#L43">43</a>     (bad : B) (hbad : bad ≠ 0) :</span>
+<span id="L44"><a href="#L44">44</a>     ∃ (M : Ideal B) (hM : M.IsMaximal) (eM : (B ⧸ M) ≃ₐ[k] k)</span>
+<span id="L45"><a href="#L45">45</a>       (fUnit : B) (hfUnitM : fUnit ∉ M),</span>
+<span id="L46"><a href="#L46">46</a>       let R := MvPolynomial (Option (Fin (Fintype.card σ))) k</span>
+<span id="L47"><a href="#L47">47</a>       let fFin : R →ₐ[k] B := fOption.comp (MvPolynomial.renameEquiv k τ.optionCongr).toAlgHom</span>
+<span id="L48"><a href="#L48">48</a>       letI : Algebra R B := fFin.toRingHom.toAlgebra</span>
+<span id="L49"><a href="#L49">49</a>       letI : IsScalarTower k R B := IsScalarTower.of_algebraMap_eq' (by</span>
+<span id="L50"><a href="#L50">50</a>         ext c</span>
+<span id="L51"><a href="#L51">51</a>         exact (fFin.commutes c).symm)</span>
+<span id="L52"><a href="#L52">52</a>       letI : Algebra.EssFiniteType R B := Algebra.EssFiniteType.of_comp k R B</span>
+<span id="L53"><a href="#L53">53</a>       letI : Algebra R (Localization.AtPrime M) := inferInstance</span>
+<span id="L54"><a href="#L54">54</a>       ∃ (u₀ u₁ : Localization.AtPrime M) (hu₀ : IsUnit u₀) (hu₁ : IsUnit u₁)</span>
+<span id="L55"><a href="#L55">55</a>         (hq₀ : algebraMap B (Localization.AtPrime M) (qB 0) =</span>
+<span id="L56"><a href="#L56">56</a>           (algebraMap B (Localization.AtPrime M) s) ^ e₀ * u₀)</span>
+<span id="L57"><a href="#L57">57</a>         (hq₁ : algebraMap B (Localization.AtPrime M) (qB axis.succ) =</span>
+<span id="L58"><a href="#L58">58</a>           (algebraMap B (Localization.AtPrime M) s) ^ e₁ * u₁)</span>
+<span id="L59"><a href="#L59">59</a>         (hEtM : Algebra.FormallyEtale R (Localization.AtPrime M))</span>
+<span id="L60"><a href="#L60">60</a>         (α : Fin (Fintype.card σ) → k),</span>
+<span id="L61"><a href="#L61">61</a>         tiltedArc (k := k) α</span>
+<span id="L62"><a href="#L62">62</a>           ((localToFinSuccPowerSeries (k := k) (B := B)</span>
+<span id="L63"><a href="#L63">63</a>               (d := Fintype.card σ) M eM (algebraMap B (Localization.AtPrime M) bad)) *</span>
+<span id="L64"><a href="#L64">64</a>             localToFinSuccPowerSeries (k := k) (B := B)</span>
+<span id="L65"><a href="#L65">65</a>               (d := Fintype.card σ) M eM</span>
+<span id="L66"><a href="#L66">66</a>               (algebraMap B (Localization.AtPrime M) (qB 0)) *</span>
+<span id="L67"><a href="#L67">67</a>             localToFinSuccPowerSeries (k := k) (B := B)</span>
+<span id="L68"><a href="#L68">68</a>               (d := Fintype.card σ) M eM</span>
+<span id="L69"><a href="#L69">69</a>               (algebraMap B (Localization.AtPrime M) (qB axis.succ))) ≠ 0 ∧</span>
+<span id="L70"><a href="#L70">70</a>         SelectedCoordinateAxisLiftData</span>
+<span id="L71"><a href="#L71">71</a>           (fun i =&gt; localToFinSuccPowerSeries (k := k) (B := B)</span>
+<span id="L72"><a href="#L72">72</a>             (d := Fintype.card σ) M eM (algebraMap B (Localization.AtPrime M) (qB i)))</span>
+<span id="L73"><a href="#L73">73</a>           rows chart 0 axis.succ e₀ e₁</span>
+<span id="L74"><a href="#L74">74</a>           (fun j =&gt; Stafford38.Geometry.PrescribedAffineResidueCompletion.residueCoordinates</span>
+<span id="L75"><a href="#L75">75</a>             M eM (some j)) α</span>
+<span id="L76"><a href="#L76">76</a>           (localToFinSuccPowerSeries (k := k) (B := B)</span>
+<span id="L77"><a href="#L77">77</a>             (d := Fintype.card σ) M eM</span>
+<span id="L78"><a href="#L78">78</a>             u₀)</span>
+<span id="L79"><a href="#L79">79</a>           (localToFinSuccPowerSeries (k := k) (B := B)</span>
+<span id="L80"><a href="#L80">80</a>             (d := Fintype.card σ) M eM</span>
+<span id="L81"><a href="#L81">81</a>             u₁) := by</span>
+<span id="L82"><a href="#L82">82</a>   classical</span>
+<span id="L83"><a href="#L83">83</a>   unfold GroundPointChartOutput at hOutput</span>
+<span id="L84"><a href="#L84">84</a>   rcases hOutput with ⟨fUnit, fEtale, M, hM, eM, v₀, v₁, chartMap, U₀, U₁,</span>
+<span id="L85"><a href="#L85">85</a>     hfUnitP, hfUnitM, hPM, hfEtaleP, hfEtaleM, hStandard,</span>
+<span id="L86"><a href="#L86">86</a>     hv₀, hv₁, hAway₀, hAway₁, hOrders, hU₀, hU₁, hcc₀, hcc₁,</span>
+<span id="L87"><a href="#L87">87</a>     hsChart, hrowChart, hq₀Chart, hq₁Chart, hEtM, hchartEq⟩</span>
+<span id="L88"><a href="#L88">88</a>   let R := MvPolynomial (Option (Fin (Fintype.card σ))) k</span>
+<span id="L89"><a href="#L89">89</a>   let fFin : R →ₐ[k] B := fOption.comp (MvPolynomial.renameEquiv k τ.optionCongr).toAlgHom</span>
+<span id="L90"><a href="#L90">90</a>   letI : Algebra R B := fFin.toRingHom.toAlgebra</span>
+<span id="L91"><a href="#L91">91</a>   letI : IsScalarTower k R B := IsScalarTower.of_algebraMap_eq' (by</span>
+<span id="L92"><a href="#L92">92</a>     ext c</span>
+<span id="L93"><a href="#L93">93</a>     exact (fFin.commutes c).symm)</span>
+<span id="L94"><a href="#L94">94</a>   letI : M.IsMaximal := hM</span>
+<span id="L95"><a href="#L95">95</a>   letI : Algebra R (Localization.AtPrime M) := inferInstance</span>
+<span id="L96"><a href="#L96">96</a>   have hEt' : Algebra.FormallyEtale R (Localization.AtPrime M) := hEtM</span>
+<span id="L97"><a href="#L97">97</a>   letI : Algebra.FormallyEtale R (Localization.AtPrime M) := hEt'</span>
+<span id="L98"><a href="#L98">98</a>   letI : Algebra.EssFiniteType R B := Algebra.EssFiniteType.of_comp k R B</span>
+<span id="L99"><a href="#L99">99</a>   have hmap : algebraMap R B = fFin.toRingHom :=</span>
+<span id="L100"><a href="#L100">100</a>     RingHom.algebraMap_toAlgebra fFin.toRingHom</span>
+<span id="L101"><a href="#L101">101</a>   have hnoneFin : fFin (MvPolynomial.X (R := k) none) = s := by</span>
+<span id="L102"><a href="#L102">102</a>     simp [fFin, MvPolynomial.renameEquiv, MvPolynomial.rename_X, hnone]</span>
+<span id="L103"><a href="#L103">103</a>   have hrowsFin (i : Fin (Fintype.card σ)) :</span>
+<span id="L104"><a href="#L104">104</a>       fFin (MvPolynomial.X (R := k) (some i)) = qB (rows i) := by</span>
+<span id="L105"><a href="#L105">105</a>     calc</span>
+<span id="L106"><a href="#L106">106</a>       fFin (MvPolynomial.X (R := k) (some i)) = qRow (τ i) := by</span>
+<span id="L107"><a href="#L107">107</a>         simp [fFin, MvPolynomial.renameEquiv, MvPolynomial.rename_X, hsome]</span>
+<span id="L108"><a href="#L108">108</a>       _ = qB (rows i) := hrows i</span>
+<span id="L109"><a href="#L109">109</a>   have hq₀ : algebraMap B (Localization.Away fUnit) (qB 0) =</span>
+<span id="L110"><a href="#L110">110</a>       (algebraMap B (Localization.Away fUnit) s) ^ e₀ * v₀ := by</span>
+<span id="L111"><a href="#L111">111</a>     simpa [hzero] using hAway₀</span>
+<span id="L112"><a href="#L112">112</a>   have hq₁ : algebraMap B (Localization.Away fUnit) (qB axis.succ) =</span>
+<span id="L113"><a href="#L113">113</a>       (algebraMap B (Localization.Away fUnit) s) ^ e₁ * v₁ := by</span>
+<span id="L114"><a href="#L114">114</a>     simpa [haxis] using hAway₁</span>
+<span id="L115"><a href="#L115">115</a>   obtain ⟨u₀, u₁, hu₀, hu₁, hq₀M, hq₁M⟩ :=</span>
+<span id="L116"><a href="#L116">116</a>     SameWitness.pair_factorizations_to_atPrime M fUnit hfUnitM s (qB 0)</span>
+<span id="L117"><a href="#L117">117</a>       (qB axis.succ) e₀ e₁ v₀ v₁ hv₀ hv₁ hq₀ hq₁</span>
+<span id="L118"><a href="#L118">118</a>   have hsM : s ∈ M := hPM hsP</span>
+<span id="L119"><a href="#L119">119</a>   obtain ⟨α, havoid, hdata⟩ :=</span>
+<span id="L120"><a href="#L120">120</a>     exists_actual_point_axis_lift M eM fFin hmap s bad hnoneFin hsM hbad qB chart axis</span>
+<span id="L121"><a href="#L121">121</a>       hqchart e₀ e₁ hOrders.1 hOrders.2 u₀ u₁ hu₀ hu₁ hq₀M hq₁M rows hrowsFin</span>
+<span id="L122"><a href="#L122">122</a>   exact ⟨M, hM, eM, fUnit, hfUnitM, u₀, u₁, hu₀, hu₁, hq₀M, hq₁M,</span>
+<span id="L123"><a href="#L123">123</a>     hEt', α, havoid, hdata⟩</span>
+<span id="L124"><a href="#L124">124</a> </span>
+<span id="L125"><a href="#L125">125</a> end Stafford38.Geometry.SameWitness</span>
+<span id="L126"><a href="#L126">126</a> </span></pre>

@@ -1,7 +1,7 @@
 {
-  "version": "2026-10-04-v0.2.2-reader",
+  "version": "0.2.3-canonical-review",
   "paper": "9f6ca3241edcf88da42a3a000f25514d105e2f30",
-  "formal": "f9448d6307fa25aff9d9f94ce0a9c7f9b03e63ff",
-  "generator": "844c3d5ad88ad1c6",
-  "release_version": "0.2.2"
+  "formal": "0403af3f0b1a7f84d2027121932723f67bd279ae",
+  "generator": "a43eab8a24e1fe6d",
+  "release_version": "0.2.3-canonical-review"
 }

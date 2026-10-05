@@ -1,0 +1,98 @@
+<!doctype html><meta charset="utf-8"><title>Stafford38/Characteristic/BaseRelativePoisson.lean</title><style>body{font:14px monospace}pre span{display:block}pre span:target{background:#fff0ad}a{color:#666}pre{white-space:pre-wrap}</style><h1>Stafford38/Characteristic/BaseRelativePoisson.lean</h1><p>This project (Stafford38) · 0403af3f0b1a7f84d2027121932723f67bd279ae</p><pre><span id="L1"><a href="#L1">1</a> module</span>
+<span id="L2"><a href="#L2">2</a> public import Stafford38.Geometry.CoisotropicTranslation</span>
+<span id="L3"><a href="#L3">3</a> </span>
+<span id="L4"><a href="#L4">4</a> @[expose] public section</span>
+<span id="L5"><a href="#L5">5</a> </span>
+<span id="L6"><a href="#L6">6</a> /-!</span>
+<span id="L7"><a href="#L7">7</a> # Base-relative Poisson closure</span>
+<span id="L8"><a href="#L8">8</a> </span>
+<span id="L9"><a href="#L9">9</a> The vertical-translation argument needs brackets whose left entry comes from</span>
+<span id="L10"><a href="#L10">10</a> the base-coordinate ring. This file defines that fragment and proves its</span>
+<span id="L11"><a href="#L11">11</a> consequences for Hamiltonian iteration and fibre-line translation. It does</span>
+<span id="L12"><a href="#L12">12</a> not assert that a particular ideal has the property; the unconditional</span>
+<span id="L13"><a href="#L13">13</a> canonical-support proof is assembled in `FoundationClosure`.</span>
+<span id="L14"><a href="#L14">14</a> -/</span>
+<span id="L15"><a href="#L15">15</a> </span>
+<span id="L16"><a href="#L16">16</a> namespace Stafford38.Characteristic.BaseRelativePoisson</span>
+<span id="L17"><a href="#L17">17</a> </span>
+<span id="L18"><a href="#L18">18</a> open Stafford38.Characteristic</span>
+<span id="L19"><a href="#L19">19</a> open Stafford38.Geometry.CoisotropicTranslation</span>
+<span id="L20"><a href="#L20">20</a> </span>
+<span id="L21"><a href="#L21">21</a> noncomputable section</span>
+<span id="L22"><a href="#L22">22</a> </span>
+<span id="L23"><a href="#L23">23</a> variable {k : Type*} [Field k] {n : ℕ}</span>
+<span id="L24"><a href="#L24">24</a> </span>
+<span id="L25"><a href="#L25">25</a> /--</span>
+<span id="L26"><a href="#L26">26</a> The exact base-relative fragment of Poisson involutivity:</span>
+<span id="L27"><a href="#L27">27</a> `{J ∩ k[x], J} ⊆ J`, expressed using the canonical base embedding.</span>
+<span id="L28"><a href="#L28">28</a> -/</span>
+<span id="L29"><a href="#L29">29</a> def IsBaseRelativePoisson (J : Ideal (SymbolRing k n)) : Prop :=</span>
+<span id="L30"><a href="#L30">30</a>   ∀ f : MvPolynomial (Fin n) k, baseLift f ∈ J →</span>
+<span id="L31"><a href="#L31">31</a>     ∀ g ∈ J, poissonBracket (baseLift f) g ∈ J</span>
+<span id="L32"><a href="#L32">32</a> </span>
+<span id="L33"><a href="#L33">33</a> /-- Full Poisson closure implies the base-relative fragment. -/</span>
+<span id="L34"><a href="#L34">34</a> theorem IsPoisson.isBaseRelativePoisson</span>
+<span id="L35"><a href="#L35">35</a>     (J : Ideal (SymbolRing k n)) (hJ : IsPoisson J) :</span>
+<span id="L36"><a href="#L36">36</a>     IsBaseRelativePoisson J := by</span>
+<span id="L37"><a href="#L37">37</a>   intro f hf g hg</span>
+<span id="L38"><a href="#L38">38</a>   exact hJ (baseLift f) hf g</span>
+<span id="L39"><a href="#L39">39</a> </span>
+<span id="L40"><a href="#L40">40</a> /-- Base-relative closure is preserved through all iterated Hamiltonian brackets. -/</span>
+<span id="L41"><a href="#L41">41</a> theorem hamiltonIter_mem_of_isBaseRelativePoisson</span>
+<span id="L42"><a href="#L42">42</a>     (J : Ideal (SymbolRing k n)) (hJ : IsBaseRelativePoisson J)</span>
+<span id="L43"><a href="#L43">43</a>     (f : MvPolynomial (Fin n) k) (hf : baseLift f ∈ J)</span>
+<span id="L44"><a href="#L44">44</a>     (g : SymbolRing k n) (hg : g ∈ J) :</span>
+<span id="L45"><a href="#L45">45</a>     ∀ m, hamiltonIter f m g ∈ J := by</span>
+<span id="L46"><a href="#L46">46</a>   intro m</span>
+<span id="L47"><a href="#L47">47</a>   induction m with</span>
+<span id="L48"><a href="#L48">48</a>   | zero =&gt; exact hg</span>
+<span id="L49"><a href="#L49">49</a>   | succ m hm =&gt; exact hJ f hf (hamiltonIter f m g) hm</span>
+<span id="L50"><a href="#L50">50</a> </span>
+<span id="L51"><a href="#L51">51</a> /--</span>
+<span id="L52"><a href="#L52">52</a> The fibre-line polynomial vanishes under the exact base-relative Gabber</span>
+<span id="L53"><a href="#L53">53</a> fragment; full Poisson closure is not needed.</span>
+<span id="L54"><a href="#L54">54</a> -/</span>
+<span id="L55"><a href="#L55">55</a> theorem fibreLinePolynomial_eq_zero_of_isBaseRelativePoisson</span>
+<span id="L56"><a href="#L56">56</a>     [CharZero k]</span>
+<span id="L57"><a href="#L57">57</a>     (J : Ideal (SymbolRing k n)) (hJ : IsBaseRelativePoisson J)</span>
+<span id="L58"><a href="#L58">58</a>     (y : Fin n → k)</span>
+<span id="L59"><a href="#L59">59</a>     (hzero : ∀ g ∈ J, MvPolynomial.eval (zeroSectionPoint y) g = 0)</span>
+<span id="L60"><a href="#L60">60</a>     (f : MvPolynomial (Fin n) k) (hf : baseLift f ∈ J)</span>
+<span id="L61"><a href="#L61">61</a>     (g : SymbolRing k n) (hg : g ∈ J) :</span>
+<span id="L62"><a href="#L62">62</a>     fibreLinePolynomial y (differentialAt y f) g = 0 := by</span>
+<span id="L63"><a href="#L63">63</a>   apply polynomial_eq_zero_of_eval_iterate_derivative_zero</span>
+<span id="L64"><a href="#L64">64</a>   intro m</span>
+<span id="L65"><a href="#L65">65</a>   rw [iterate_derivative_fibreLinePolynomial, eval_zero_fibreLinePolynomial]</span>
+<span id="L66"><a href="#L66">66</a>   exact hzero _ (hamiltonIter_mem_of_isBaseRelativePoisson J hJ f hf g hg m)</span>
+<span id="L67"><a href="#L67">67</a> </span>
+<span id="L68"><a href="#L68">68</a> /--</span>
+<span id="L69"><a href="#L69">69</a> A zero-section common zero remains a common zero after translation by</span>
+<span id="L70"><a href="#L70">70</a> `t df_y`, assuming only `{J ∩ k[x], J} ⊆ J`.</span>
+<span id="L71"><a href="#L71">71</a> -/</span>
+<span id="L72"><a href="#L72">72</a> theorem zeroSection_stable_under_differential_translation_of_isBaseRelativePoisson</span>
+<span id="L73"><a href="#L73">73</a>     [CharZero k]</span>
+<span id="L74"><a href="#L74">74</a>     (J : Ideal (SymbolRing k n)) (hJ : IsBaseRelativePoisson J)</span>
+<span id="L75"><a href="#L75">75</a>     (y : Fin n → k)</span>
+<span id="L76"><a href="#L76">76</a>     (hzero : ∀ g ∈ J, MvPolynomial.eval (zeroSectionPoint y) g = 0)</span>
+<span id="L77"><a href="#L77">77</a>     (f : MvPolynomial (Fin n) k) (hf : baseLift f ∈ J)</span>
+<span id="L78"><a href="#L78">78</a>     (g : SymbolRing k n) (hg : g ∈ J) (t : k) :</span>
+<span id="L79"><a href="#L79">79</a>     MvPolynomial.eval (differentialTranslatePoint y f t) g = 0 := by</span>
+<span id="L80"><a href="#L80">80</a>   have heval :</span>
+<span id="L81"><a href="#L81">81</a>       MvPolynomial.eval (differentialTranslatePoint y f t) g =</span>
+<span id="L82"><a href="#L82">82</a>         MvPolynomial.eval (Sum.elim y (fun i =&gt; t * differentialAt y f i)) g := by</span>
+<span id="L83"><a href="#L83">83</a>     apply MvPolynomial.eval₂_congr</span>
+<span id="L84"><a href="#L84">84</a>     intro i c hi hc</span>
+<span id="L85"><a href="#L85">85</a>     rcases i with i | i &lt;;&gt; simp [differentialTranslatePoint, affineFibreTranslatePoint]</span>
+<span id="L86"><a href="#L86">86</a>   rw [heval, ← eval_fibreLinePolynomial]</span>
+<span id="L87"><a href="#L87">87</a>   rw [fibreLinePolynomial_eq_zero_of_isBaseRelativePoisson J hJ y hzero f hf g hg]</span>
+<span id="L88"><a href="#L88">88</a>   exact Polynomial.eval_zero</span>
+<span id="L89"><a href="#L89">89</a> </span>
+<span id="L90"><a href="#L90">90</a> #print axioms IsPoisson.isBaseRelativePoisson</span>
+<span id="L91"><a href="#L91">91</a> #print axioms hamiltonIter_mem_of_isBaseRelativePoisson</span>
+<span id="L92"><a href="#L92">92</a> #print axioms fibreLinePolynomial_eq_zero_of_isBaseRelativePoisson</span>
+<span id="L93"><a href="#L93">93</a> #print axioms zeroSection_stable_under_differential_translation_of_isBaseRelativePoisson</span>
+<span id="L94"><a href="#L94">94</a> </span>
+<span id="L95"><a href="#L95">95</a> end</span>
+<span id="L96"><a href="#L96">96</a> </span>
+<span id="L97"><a href="#L97">97</a> end Stafford38.Characteristic.BaseRelativePoisson</span>
+<span id="L98"><a href="#L98">98</a> </span></pre>

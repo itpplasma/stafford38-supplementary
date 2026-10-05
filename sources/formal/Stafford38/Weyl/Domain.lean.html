@@ -1,0 +1,45 @@
+<!doctype html><meta charset="utf-8"><title>Stafford38/Weyl/Domain.lean</title><style>body{font:14px monospace}pre span{display:block}pre span:target{background:#fff0ad}a{color:#666}pre{white-space:pre-wrap}</style><h1>Stafford38/Weyl/Domain.lean</h1><p>This project (Stafford38) · 0403af3f0b1a7f84d2027121932723f67bd279ae</p><pre><span id="L1"><a href="#L1">1</a> module</span>
+<span id="L2"><a href="#L2">2</a> public import Stafford38.Statement</span>
+<span id="L3"><a href="#L3">3</a> public import Stafford38.Weyl.MonicNormalization</span>
+<span id="L4"><a href="#L4">4</a> </span>
+<span id="L5"><a href="#L5">5</a> @[expose] public section</span>
+<span id="L6"><a href="#L6">6</a> </span>
+<span id="L7"><a href="#L7">7</a> /-!</span>
+<span id="L8"><a href="#L8">8</a> # The presented Weyl algebra is a domain</span>
+<span id="L9"><a href="#L9">9</a> </span>
+<span id="L10"><a href="#L10">10</a> The Bernstein principal component is multiplicative. A nonzero element has a</span>
+<span id="L11"><a href="#L11">11</a> nonzero top Bernstein component, so the product of two nonzero elements cannot</span>
+<span id="L12"><a href="#L12">12</a> vanish.</span>
+<span id="L13"><a href="#L13">13</a> -/</span>
+<span id="L14"><a href="#L14">14</a> </span>
+<span id="L15"><a href="#L15">15</a> namespace Stafford38.WeylDomain</span>
+<span id="L16"><a href="#L16">16</a> </span>
+<span id="L17"><a href="#L17">17</a> open Stafford38.WeylFiltration</span>
+<span id="L18"><a href="#L18">18</a> open Stafford38.WeylIteratedEquivalence</span>
+<span id="L19"><a href="#L19">19</a> open Stafford38.WeylLeadingSymbol</span>
+<span id="L20"><a href="#L20">20</a> open Stafford38.WeylMonicNormalization</span>
+<span id="L21"><a href="#L21">21</a> </span>
+<span id="L22"><a href="#L22">22</a> universe u</span>
+<span id="L23"><a href="#L23">23</a> </span>
+<span id="L24"><a href="#L24">24</a> /-- The product of two nonzero elements of a Weyl algebra is nonzero. -/</span>
+<span id="L25"><a href="#L25">25</a> theorem mul_ne_zero {k : Type u} [Field k] {n : ℕ}</span>
+<span id="L26"><a href="#L26">26</a>     {a b : Stafford38Challenge.WeylAlg k n} (ha : a ≠ 0) (hb : b ≠ 0) :</span>
+<span id="L27"><a href="#L27">27</a>     a * b ≠ 0 := by</span>
+<span id="L28"><a href="#L28">28</a>   obtain ⟨N, haN, hsa⟩ := exists_top_bernstein_piece k ha</span>
+<span id="L29"><a href="#L29">29</a>   obtain ⟨M, hbM, hsb⟩ := exists_top_bernstein_piece k hb</span>
+<span id="L30"><a href="#L30">30</a>   have htop := presentedPrincipalComponent_mul_bernstein k haN hbM</span>
+<span id="L31"><a href="#L31">31</a>   have hsymbol :</span>
+<span id="L32"><a href="#L32">32</a>       presentedPrincipalComponent k (@bernsteinWeight n) N a *</span>
+<span id="L33"><a href="#L33">33</a>           presentedPrincipalComponent k (@bernsteinWeight n) M b ≠ 0 :=</span>
+<span id="L34"><a href="#L34">34</a>     _root_.mul_ne_zero hsa hsb</span>
+<span id="L35"><a href="#L35">35</a>   intro hab</span>
+<span id="L36"><a href="#L36">36</a>   have hzero :</span>
+<span id="L37"><a href="#L37">37</a>       presentedPrincipalComponent k (@bernsteinWeight n) (N + M) (a * b) = 0 := by</span>
+<span id="L38"><a href="#L38">38</a>     simp [hab]</span>
+<span id="L39"><a href="#L39">39</a>   rw [htop] at hzero</span>
+<span id="L40"><a href="#L40">40</a>   exact hsymbol hzero</span>
+<span id="L41"><a href="#L41">41</a> </span>
+<span id="L42"><a href="#L42">42</a> #print axioms mul_ne_zero</span>
+<span id="L43"><a href="#L43">43</a> </span>
+<span id="L44"><a href="#L44">44</a> end Stafford38.WeylDomain</span>
+<span id="L45"><a href="#L45">45</a> </span></pre>

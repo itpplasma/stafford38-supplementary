@@ -1,0 +1,376 @@
+<!doctype html><meta charset="utf-8"><title>Stafford38/Characteristic/BGab001CoefficientFieldTrace.lean</title><style>body{font:14px monospace}pre span{display:block}pre span:target{background:#fff0ad}a{color:#666}pre{white-space:pre-wrap}</style><h1>Stafford38/Characteristic/BGab001CoefficientFieldTrace.lean</h1><p>This project (Stafford38) · 0403af3f0b1a7f84d2027121932723f67bd279ae</p><pre><span id="L1"><a href="#L1">1</a> module</span>
+<span id="L2"><a href="#L2">2</a> public import Stafford38.Characteristic.SourceActionCommutatorExpansion</span>
+<span id="L3"><a href="#L3">3</a> public import Mathlib.RingTheory.Finiteness.NilpotentKer</span>
+<span id="L4"><a href="#L4">4</a> public import Mathlib.RingTheory.HopkinsLevitzki</span>
+<span id="L5"><a href="#L5">5</a> </span>
+<span id="L6"><a href="#L6">6</a> @[expose] public section</span>
+<span id="L7"><a href="#L7">7</a> </span>
+<span id="L8"><a href="#L8">8</a> /-!</span>
+<span id="L9"><a href="#L9">9</a> # Actual traces using coefficient-field corrections</span>
+<span id="L10"><a href="#L10">10</a> </span>
+<span id="L11"><a href="#L11">11</a> The first-order source equations can be chosen with correction coefficients</span>
+<span id="L12"><a href="#L12">12</a> in the coefficient field. Their commutators then have their actual matrix</span>
+<span id="L13"><a href="#L13">13</a> traces. The remaining source matrix has arbitrary special-fibre coefficients,</span>
+<span id="L14"><a href="#L14">14</a> but sends each basis vector to a strictly deeper maximal-ideal layer. This</span>
+<span id="L15"><a href="#L15">15</a> is sufficient to kill its diagonal without replacing coefficients by residues.</span>
+<span id="L16"><a href="#L16">16</a> -/</span>
+<span id="L17"><a href="#L17">17</a> </span>
+<span id="L18"><a href="#L18">18</a> namespace Stafford38.Characteristic.BGab001CoefficientFieldTrace</span>
+<span id="L19"><a href="#L19">19</a> </span>
+<span id="L20"><a href="#L20">20</a> open Matrix</span>
+<span id="L21"><a href="#L21">21</a> open Stafford38.Characteristic.ArtinianAdaptedBasisTraceAdapter</span>
+<span id="L22"><a href="#L22">22</a> open Stafford38.Characteristic.ConcreteEquation33SourceMatrices</span>
+<span id="L23"><a href="#L23">23</a> open Stafford38.Characteristic.ConcreteInducedZAction</span>
+<span id="L24"><a href="#L24">24</a> open Stafford38.Characteristic.SourceActionCommutatorExpansion</span>
+<span id="L25"><a href="#L25">25</a> </span>
+<span id="L26"><a href="#L26">26</a> noncomputable section</span>
+<span id="L27"><a href="#L27">27</a> </span>
+<span id="L28"><a href="#L28">28</a> universe u</span>
+<span id="L29"><a href="#L29">29</a> variable {K R V : Type u} [Field K] [CommRing R] [Algebra K R]</span>
+<span id="L30"><a href="#L30">30</a> variable [IsLocalRing R] [AddCommGroup V] [Module K V] [Module R V]</span>
+<span id="L31"><a href="#L31">31</a> variable [IsScalarTower K R V] {n : ℕ}</span>
+<span id="L32"><a href="#L32">32</a> local notation &quot;ι&quot; =&gt; Fin (n + 1)</span>
+<span id="L33"><a href="#L33">33</a> </span>
+<span id="L34"><a href="#L34">34</a> /-- An arbitrary ring coefficient cannot bring a vector from a deeper adic</span>
+<span id="L35"><a href="#L35">35</a> layer back to the diagonal of an adapted basis. -/</span>
+<span id="L36"><a href="#L36">36</a> theorem repr_smul_eq_zero_of_level_lt</span>
+<span id="L37"><a href="#L37">37</a>     (b : Module.Basis ι K V) (level : ι → ℕ)</span>
+<span id="L38"><a href="#L38">38</a>     (hb : IsMaximalIdealFiltrationAdapted (IsLocalRing.maximalIdeal R) b level)</span>
+<span id="L39"><a href="#L39">39</a>     (a : R) (i j : ι) (hij : level i &lt; level j) :</span>
+<span id="L40"><a href="#L40">40</a>     b.repr (a • b j) i = 0 := by</span>
+<span id="L41"><a href="#L41">41</a>   have hj : b j ∈ (IsLocalRing.maximalIdeal R) ^ level j •</span>
+<span id="L42"><a href="#L42">42</a>       (⊤ : Submodule R V) := by</span>
+<span id="L43"><a href="#L43">43</a>     have hs : b j ∈ Submodule.span K (b '' {l | level j ≤ level l}) :=</span>
+<span id="L44"><a href="#L44">44</a>       (b.self_mem_span_image).mpr (show level j ≤ level j from le_rfl)</span>
+<span id="L45"><a href="#L45">45</a>     rw [← hb.power_span (level j)] at hs</span>
+<span id="L46"><a href="#L46">46</a>     exact hs</span>
+<span id="L47"><a href="#L47">47</a>   have ha := ((IsLocalRing.maximalIdeal R) ^ level j •</span>
+<span id="L48"><a href="#L48">48</a>       (⊤ : Submodule R V)).smul_mem a hj</span>
+<span id="L49"><a href="#L49">49</a>   have hs : a • b j ∈ Submodule.span K (b '' {l | level j ≤ level l}) := by</span>
+<span id="L50"><a href="#L50">50</a>     rw [← hb.power_span (level j)]</span>
+<span id="L51"><a href="#L51">51</a>     exact ha</span>
+<span id="L52"><a href="#L52">52</a>   by_contra hne</span>
+<span id="L53"><a href="#L53">53</a>   have hi := b.repr_support_subset_of_mem_span _ hs</span>
+<span id="L54"><a href="#L54">54</a>     (Finsupp.mem_support_iff.mpr hne)</span>
+<span id="L55"><a href="#L55">55</a>   exact (not_le_of_gt hij) hi</span>
+<span id="L56"><a href="#L56">56</a> </span>
+<span id="L57"><a href="#L57">57</a> /-- The diagonal of a whole source row vanishes when every nonzero entry</span>
+<span id="L58"><a href="#L58">58</a> points to a strictly deeper layer. No term is reduced to the residue field. -/</span>
+<span id="L59"><a href="#L59">59</a> theorem repr_deeper_source_row_diagonal_eq_zero</span>
+<span id="L60"><a href="#L60">60</a>     (b : Module.Basis ι K V) (level : ι → ℕ)</span>
+<span id="L61"><a href="#L61">61</a>     (hb : IsMaximalIdealFiltrationAdapted (IsLocalRing.maximalIdeal R) b level)</span>
+<span id="L62"><a href="#L62">62</a>     (M : Matrix ι ι R)</span>
+<span id="L63"><a href="#L63">63</a>     (hM : ∀ i j, level j ≤ level i → M i j = 0) (i : ι) :</span>
+<span id="L64"><a href="#L64">64</a>     b.repr (∑ j, M i j • b j) i = 0 := by</span>
+<span id="L65"><a href="#L65">65</a>   rw [map_sum, Finsupp.finsetSum_apply]</span>
+<span id="L66"><a href="#L66">66</a>   apply Finset.sum_eq_zero</span>
+<span id="L67"><a href="#L67">67</a>   intro j _</span>
+<span id="L68"><a href="#L68">68</a>   by_cases hij : level j ≤ level i</span>
+<span id="L69"><a href="#L69">69</a>   · simp [hM i j hij]</span>
+<span id="L70"><a href="#L70">70</a>   · exact repr_smul_eq_zero_of_level_lt b level hb _ i j (lt_of_not_ge hij)</span>
+<span id="L71"><a href="#L71">71</a> </span>
+<span id="L72"><a href="#L72">72</a> /-- Actual action trace from a deeper-layer remainder and a coefficient-field</span>
+<span id="L73"><a href="#L73">73</a> correction. This consumes action on basis vectors, not a residue matrix. -/</span>
+<span id="L74"><a href="#L74">74</a> theorem actual_trace_eq_correction_trace</span>
+<span id="L75"><a href="#L75">75</a>     (b : Module.Basis ι K V) (level : ι → ℕ)</span>
+<span id="L76"><a href="#L76">76</a>     (hb : IsMaximalIdealFiltrationAdapted (IsLocalRing.maximalIdeal R) b level)</span>
+<span id="L77"><a href="#L77">77</a>     (T : Module.End K V) (M : Matrix ι ι R) (Q : Matrix ι ι K)</span>
+<span id="L78"><a href="#L78">78</a>     (hM : ∀ i j, level j ≤ level i → M i j = 0)</span>
+<span id="L79"><a href="#L79">79</a>     (hT : ∀ i, T (b i) = (∑ j, M i j • b j) + ∑ j, Q i j • b j) :</span>
+<span id="L80"><a href="#L80">80</a>     Matrix.trace (LinearMap.toMatrix b b T) = Matrix.trace Q := by</span>
+<span id="L81"><a href="#L81">81</a>   unfold Matrix.trace</span>
+<span id="L82"><a href="#L82">82</a>   apply Finset.sum_congr rfl</span>
+<span id="L83"><a href="#L83">83</a>   intro i _</span>
+<span id="L84"><a href="#L84">84</a>   change LinearMap.toMatrix b b T i i = Q i i</span>
+<span id="L85"><a href="#L85">85</a>   rw [LinearMap.toMatrix_apply, hT i, map_add, Finsupp.add_apply,</span>
+<span id="L86"><a href="#L86">86</a>     repr_deeper_source_row_diagonal_eq_zero b level hb M hM i, zero_add]</span>
+<span id="L87"><a href="#L87">87</a>   simp [Finsupp.single_apply]</span>
+<span id="L88"><a href="#L88">88</a> </span>
+<span id="L89"><a href="#L89">89</a> /-- Both correction commutators have trace zero over the coefficient field. -/</span>
+<span id="L90"><a href="#L90">90</a> theorem actual_trace_eq_zero_of_coefficientField_corrections</span>
+<span id="L91"><a href="#L91">91</a>     (b : Module.Basis ι K V) (level : ι → ℕ)</span>
+<span id="L92"><a href="#L92">92</a>     (hb : IsMaximalIdealFiltrationAdapted (IsLocalRing.maximalIdeal R) b level)</span>
+<span id="L93"><a href="#L93">93</a>     (T : Module.End K V) (M : Matrix ι ι R)</span>
+<span id="L94"><a href="#L94">94</a>     (A B Gamma Theta : Matrix ι ι K)</span>
+<span id="L95"><a href="#L95">95</a>     (hM : ∀ i j, level j ≤ level i → M i j = 0)</span>
+<span id="L96"><a href="#L96">96</a>     (hT : ∀ i, T (b i) = (∑ j, M i j • b j) +</span>
+<span id="L97"><a href="#L97">97</a>       ∑ j, (B * Gamma - Gamma * B + (Theta * A - A * Theta)) i j • b j) :</span>
+<span id="L98"><a href="#L98">98</a>     Matrix.trace (LinearMap.toMatrix b b T) = 0 := by</span>
+<span id="L99"><a href="#L99">99</a>   rw [actual_trace_eq_correction_trace b level hb T M _ hM hT,</span>
+<span id="L100"><a href="#L100">100</a>     Matrix.trace_add, Matrix.trace_sub, Matrix.trace_sub,</span>
+<span id="L101"><a href="#L101">101</a>     Matrix.trace_mul_comm B Gamma, Matrix.trace_mul_comm Theta A]</span>
+<span id="L102"><a href="#L102">102</a>   ring</span>
+<span id="L103"><a href="#L103">103</a> </span>
+<span id="L104"><a href="#L104">104</a> /-- The source-row matrix of a maximal-ideal action points strictly deeper</span>
+<span id="L105"><a href="#L105">105</a> in the adapted filtration, independently of the ordering within a layer. -/</span>
+<span id="L106"><a href="#L106">106</a> theorem source_coefficients_deeper</span>
+<span id="L107"><a href="#L107">107</a>     (b : Module.Basis ι K V) (level : ι → ℕ)</span>
+<span id="L108"><a href="#L108">108</a>     (hb : IsMaximalIdealFiltrationAdapted (IsLocalRing.maximalIdeal R) b level)</span>
+<span id="L109"><a href="#L109">109</a>     (a : R) (ha : a ∈ IsLocalRing.maximalIdeal R) :</span>
+<span id="L110"><a href="#L110">110</a>     ∀ i j, level j ≤ level i → b.repr (a • b i) j = 0 := by</span>
+<span id="L111"><a href="#L111">111</a>   intro i j hij</span>
+<span id="L112"><a href="#L112">112</a>   have hi : b i ∈ (IsLocalRing.maximalIdeal R) ^ level i •</span>
+<span id="L113"><a href="#L113">113</a>       (⊤ : Submodule R V) := by</span>
+<span id="L114"><a href="#L114">114</a>     have hs : b i ∈ Submodule.span K (b '' {l | level i ≤ level l}) :=</span>
+<span id="L115"><a href="#L115">115</a>       (b.self_mem_span_image).mpr (show level i ≤ level i from le_rfl)</span>
+<span id="L116"><a href="#L116">116</a>     rw [← hb.power_span (level i)] at hs</span>
+<span id="L117"><a href="#L117">117</a>     exact hs</span>
+<span id="L118"><a href="#L118">118</a>   have hs : a • b i ∈ Submodule.span K (b '' {l | level i + 1 ≤ level l}) := by</span>
+<span id="L119"><a href="#L119">119</a>     rw [← hb.power_span (level i + 1)]</span>
+<span id="L120"><a href="#L120">120</a>     exact maximalIdeal_smul_mem_succ_power ha hi</span>
+<span id="L121"><a href="#L121">121</a>   by_contra hne</span>
+<span id="L122"><a href="#L122">122</a>   have hj := b.repr_support_subset_of_mem_span _ hs</span>
+<span id="L123"><a href="#L123">123</a>     (Finsupp.mem_support_iff.mpr hne)</span>
+<span id="L124"><a href="#L124">124</a>   change level i + 1 ≤ level j at hj</span>
+<span id="L125"><a href="#L125">125</a>   omega</span>
+<span id="L126"><a href="#L126">126</a> </span>
+<span id="L127"><a href="#L127">127</a> section SourceRing</span>
+<span id="L128"><a href="#L128">128</a> variable {B W : Type u} [Ring B] [AddCommGroup W] [Module B W]</span>
+<span id="L129"><a href="#L129">129</a> </span>
+<span id="L130"><a href="#L130">130</a> private theorem deeper_mul</span>
+<span id="L131"><a href="#L131">131</a>     (level : ι → ℕ) (M N : Matrix ι ι B)</span>
+<span id="L132"><a href="#L132">132</a>     (hM : ∀ i j, level j ≤ level i → M i j = 0)</span>
+<span id="L133"><a href="#L133">133</a>     (hN : ∀ i j, level j ≤ level i → N i j = 0) :</span>
+<span id="L134"><a href="#L134">134</a>     ∀ i j, level j ≤ level i → (M * N) i j = 0 := by</span>
+<span id="L135"><a href="#L135">135</a>   intro i j hij</span>
+<span id="L136"><a href="#L136">136</a>   rw [Matrix.mul_apply]</span>
+<span id="L137"><a href="#L137">137</a>   apply Finset.sum_eq_zero</span>
+<span id="L138"><a href="#L138">138</a>   intro l _</span>
+<span id="L139"><a href="#L139">139</a>   by_cases hl : level l ≤ level i</span>
+<span id="L140"><a href="#L140">140</a>   · rw [hM i l hl, zero_mul]</span>
+<span id="L141"><a href="#L141">141</a>   · rw [hN l j (hij.trans (le_of_lt (lt_of_not_ge hl))), mul_zero]</span>
+<span id="L142"><a href="#L142">142</a> </span>
+<span id="L143"><a href="#L143">143</a> /-- Gabber's local trace step from the actual square-zero module. Both</span>
+<span id="L144"><a href="#L144">144</a> first-order correction matrices are produced over the coefficient field;</span>
+<span id="L145"><a href="#L145">145</a> all parameter cofactors are produced with their deeper-layer support. -/</span>
+<span id="L146"><a href="#L146">146</a> theorem actual_commutator_cofactor_trace_eq_zero</span>
+<span id="L147"><a href="#L147">147</a>     (S : LeftPrincipalParameterReduction (B := B) (Abar := R))</span>
+<span id="L148"><a href="#L148">148</a>     (rho : W →+ V) (hrho : Function.Surjective rho)</span>
+<span id="L149"><a href="#L149">149</a>     (hact : ∀ a w, rho (a • w) = S.modParameter a • rho w)</span>
+<span id="L150"><a href="#L150">150</a>     (hker : AddMonoidHom.ker rho =</span>
+<span id="L151"><a href="#L151">151</a>       AddMonoidHom.range (parameterAct (W := W) S.parameter))</span>
+<span id="L152"><a href="#L152">152</a>     (hexact : AddMonoidHom.ker (parameterAct (W := W) S.parameter) =</span>
+<span id="L153"><a href="#L153">153</a>       AddMonoidHom.range (parameterAct (W := W) S.parameter))</span>
+<span id="L154"><a href="#L154">154</a>     (hc2 : S.parameter * S.parameter = 0)</span>
+<span id="L155"><a href="#L155">155</a>     (b : Module.Basis ι K V) (level : ι → ℕ)</span>
+<span id="L156"><a href="#L156">156</a>     (hb : IsMaximalIdealFiltrationAdapted (IsLocalRing.maximalIdeal R) b level)</span>
+<span id="L157"><a href="#L157">157</a>     (x y z : B) (hx : S.modParameter x ∈ IsLocalRing.maximalIdeal R)</span>
+<span id="L158"><a href="#L158">158</a>     (hy : S.modParameter y ∈ IsLocalRing.maximalIdeal R)</span>
+<span id="L159"><a href="#L159">159</a>     (hxy : x * y - y * x = S.parameter * z) :</span>
+<span id="L160"><a href="#L160">160</a>     Matrix.trace (LinearMap.toMatrix b b</span>
+<span id="L161"><a href="#L161">161</a>       (leftMultiplicationEnd (K := K) (V := V) (S.modParameter z))) = 0 := by</span>
+<span id="L162"><a href="#L162">162</a>   classical</span>
+<span id="L163"><a href="#L163">163</a>   let Ax := leftMultiplicationEnd (K := K) (V := V) (S.modParameter x)</span>
+<span id="L164"><a href="#L164">164</a>   let By := leftMultiplicationEnd (K := K) (V := V) (S.modParameter y)</span>
+<span id="L165"><a href="#L165">165</a>   let A0 := (LinearMap.toMatrix b b Ax)ᵀ</span>
+<span id="L166"><a href="#L166">166</a>   let B0 := (LinearMap.toMatrix b b By)ᵀ</span>
+<span id="L167"><a href="#L167">167</a>   let A := liftedSourceActionMatrix S b Ax</span>
+<span id="L168"><a href="#L168">168</a>   let Bm := liftedSourceActionMatrix S b By</span>
+<span id="L169"><a href="#L169">169</a>   have hAmap : A.map S.modParameter = A0.map (algebraMap K R) := by</span>
+<span id="L170"><a href="#L170">170</a>     rw [liftedSourceActionMatrix_map, sourceActionCoefficients_eq_transpose_toMatrix_map]</span>
+<span id="L171"><a href="#L171">171</a>   have hBmap : Bm.map S.modParameter = B0.map (algebraMap K R) := by</span>
+<span id="L172"><a href="#L172">172</a>     rw [liftedSourceActionMatrix_map, sourceActionCoefficients_eq_transpose_toMatrix_map]</span>
+<span id="L173"><a href="#L173">173</a>   obtain ⟨Gamma, GammaK, hGamma, heqx⟩ :=</span>
+<span id="L174"><a href="#L174">174</a>     exists_firstOrderSourceActionMatrix_over_coefficientField S rho hrho hact hker hc2 b x</span>
+<span id="L175"><a href="#L175">175</a>   obtain ⟨Theta, ThetaK, hTheta, heqy⟩ :=</span>
+<span id="L176"><a href="#L176">176</a>     exists_firstOrderSourceActionMatrix_over_coefficientField S rho hrho hact hker hc2 b y</span>
+<span id="L177"><a href="#L177">177</a>   have hAz : ∀ i j, level j ≤ level i → A i j = 0 := by</span>
+<span id="L178"><a href="#L178">178</a>     intro i j hij</span>
+<span id="L179"><a href="#L179">179</a>     simp [A, liftedSourceActionMatrix, liftMatrix, sourceActionCoefficients, Ax,</span>
+<span id="L180"><a href="#L180">180</a>       source_coefficients_deeper b level hb _ hx i j hij]</span>
+<span id="L181"><a href="#L181">181</a>   have hBz : ∀ i j, level j ≤ level i → Bm i j = 0 := by</span>
+<span id="L182"><a href="#L182">182</a>     intro i j hij</span>
+<span id="L183"><a href="#L183">183</a>     simp [Bm, liftedSourceActionMatrix, liftMatrix, sourceActionCoefficients, By,</span>
+<span id="L184"><a href="#L184">184</a>       source_coefficients_deeper b level hb _ hy i j hij]</span>
+<span id="L185"><a href="#L185">185</a>   have hcomm : Bm.map S.modParameter * A.map S.modParameter =</span>
+<span id="L186"><a href="#L186">186</a>       A.map S.modParameter * Bm.map S.modParameter := by</span>
+<span id="L187"><a href="#L187">187</a>     rw [hAmap, hBmap, ← Matrix.map_mul, ← Matrix.map_mul]</span>
+<span id="L188"><a href="#L188">188</a>     congr 1</span>
+<span id="L189"><a href="#L189">189</a>     dsimp [A0, B0]</span>
+<span id="L190"><a href="#L190">190</a>     rw [← Matrix.transpose_mul, ← Matrix.transpose_mul,</span>
+<span id="L191"><a href="#L191">191</a>       ← LinearMap.toMatrix_mul, ← LinearMap.toMatrix_mul]</span>
+<span id="L192"><a href="#L192">192</a>     congr 2</span>
+<span id="L193"><a href="#L193">193</a>     ext v</span>
+<span id="L194"><a href="#L194">194</a>     exact smul_comm _ _ v</span>
+<span id="L195"><a href="#L195">195</a>   let X := factorMatrix S (scalarMatrixCommutator x Bm)</span>
+<span id="L196"><a href="#L196">196</a>   let Y := factorMatrix S (scalarMatrixCommutator y A)</span>
+<span id="L197"><a href="#L197">197</a>   let Omega := factorMatrix S (sourceMatrixCommutator Bm A)</span>
+<span id="L198"><a href="#L198">198</a>   have hXz : ∀ i j, level j ≤ level i → X i j = 0 := by</span>
+<span id="L199"><a href="#L199">199</a>     intro i j hij</span>
+<span id="L200"><a href="#L200">200</a>     simp [X, factorMatrix, scalarMatrixCommutator, hBz i j hij]</span>
+<span id="L201"><a href="#L201">201</a>   have hYz : ∀ i j, level j ≤ level i → Y i j = 0 := by</span>
+<span id="L202"><a href="#L202">202</a>     intro i j hij</span>
+<span id="L203"><a href="#L203">203</a>     simp [Y, factorMatrix, scalarMatrixCommutator, hAz i j hij]</span>
+<span id="L204"><a href="#L204">204</a>   have hOz : ∀ i j, level j ≤ level i → Omega i j = 0 := by</span>
+<span id="L205"><a href="#L205">205</a>     intro i j hij</span>
+<span id="L206"><a href="#L206">206</a>     simp [Omega, factorMatrix, sourceMatrixCommutator,</span>
+<span id="L207"><a href="#L207">207</a>       deeper_mul level Bm A hBz hAz i j hij, deeper_mul level A Bm hAz hBz i j hij]</span>
+<span id="L208"><a href="#L208">208</a>   let Rem := (X - Y + Omega).map S.modParameter</span>
+<span id="L209"><a href="#L209">209</a>   have hRem : ∀ i j, level j ≤ level i → Rem i j = 0 := by</span>
+<span id="L210"><a href="#L210">210</a>     intro i j hij</span>
+<span id="L211"><a href="#L211">211</a>     simp [Rem, Matrix.map_apply, hXz i j hij, hYz i j hij, hOz i j hij]</span>
+<span id="L212"><a href="#L212">212</a>   have hfc : S.modParameter S.parameter = 0 := by</span>
+<span id="L213"><a href="#L213">213</a>     apply (S.kernel_left _).mpr</span>
+<span id="L214"><a href="#L214">214</a>     exact ⟨1, mul_one _⟩</span>
+<span id="L215"><a href="#L215">215</a>   have heq (i : ι) := rho_commutator_on_source_equations</span>
+<span id="L216"><a href="#L216">216</a>     S.parameter x y z S.modParameter rho S.parameter_comm hc2 hfc hxy hact hexact</span>
+<span id="L217"><a href="#L217">217</a>     A Bm Gamma Theta X Y Omega (liftedBasisVector rho hrho b) heqx heqy</span>
+<span id="L218"><a href="#L218">218</a>     (parameter_mul_factorMatrix S _ (scalarMatrixCommutator_map_eq_zero S x Bm))</span>
+<span id="L219"><a href="#L219">219</a>     (parameter_mul_factorMatrix S _ (scalarMatrixCommutator_map_eq_zero S y A))</span>
+<span id="L220"><a href="#L220">220</a>     (parameter_mul_factorMatrix S _ (sourceMatrixCommutator_map_eq_zero S Bm A hcomm)) i</span>
+<span id="L221"><a href="#L221">221</a>   let Q := B0 * GammaK - GammaK * B0 + (ThetaK * A0 - A0 * ThetaK)</span>
+<span id="L222"><a href="#L222">222</a>   have hmap : (sourceExpansionMatrix X Y Omega A Bm Gamma Theta).map S.modParameter =</span>
+<span id="L223"><a href="#L223">223</a>       Rem + Q.map (algebraMap K R) := by</span>
+<span id="L224"><a href="#L224">224</a>     have hAe i j := congrArg (fun M : Matrix ι ι R ↦ M i j) hAmap</span>
+<span id="L225"><a href="#L225">225</a>     have hBe i j := congrArg (fun M : Matrix ι ι R ↦ M i j) hBmap</span>
+<span id="L226"><a href="#L226">226</a>     have hGe i j := congrArg (fun M : Matrix ι ι R ↦ M i j) hGamma</span>
+<span id="L227"><a href="#L227">227</a>     have hTe i j := congrArg (fun M : Matrix ι ι R ↦ M i j) hTheta</span>
+<span id="L228"><a href="#L228">228</a>     simp only [Matrix.map_apply] at hAe hBe hGe hTe</span>
+<span id="L229"><a href="#L229">229</a>     ext i j</span>
+<span id="L230"><a href="#L230">230</a>     simp only [sourceExpansionMatrix, Rem, Q, Matrix.map_apply, Matrix.add_apply,</span>
+<span id="L231"><a href="#L231">231</a>       Matrix.sub_apply, Matrix.mul_apply, map_add, map_sub, map_sum, map_mul,</span>
+<span id="L232"><a href="#L232">232</a>       hAe, hBe, hGe, hTe]</span>
+<span id="L233"><a href="#L233">233</a>     abel</span>
+<span id="L234"><a href="#L234">234</a>   apply actual_trace_eq_zero_of_coefficientField_corrections b level hb _ Rem</span>
+<span id="L235"><a href="#L235">235</a>     A0 B0 GammaK ThetaK hRem</span>
+<span id="L236"><a href="#L236">236</a>   intro i</span>
+<span id="L237"><a href="#L237">237</a>   have heqi := heq i</span>
+<span id="L238"><a href="#L238">238</a>   simp only [rho_liftedBasisVector] at heqi</span>
+<span id="L239"><a href="#L239">239</a>   exact heqi.trans (by</span>
+<span id="L240"><a href="#L240">240</a>     change (∑ j, ((sourceExpansionMatrix X Y Omega A Bm Gamma Theta).map</span>
+<span id="L241"><a href="#L241">241</a>       S.modParameter) i j • b j) = _</span>
+<span id="L242"><a href="#L242">242</a>     rw [hmap]</span>
+<span id="L243"><a href="#L243">243</a>     simp only [Matrix.add_apply, Matrix.map_apply, add_smul, Finset.sum_add_distrib,</span>
+<span id="L244"><a href="#L244">244</a>       IsScalarTower.algebraMap_smul]</span>
+<span id="L245"><a href="#L245">245</a>     simp only [Q, Matrix.add_apply, add_smul, Finset.sum_add_distrib])</span>
+<span id="L246"><a href="#L246">246</a> </span>
+<span id="L247"><a href="#L247">247</a> /-- The local membership conclusion after choosing a coefficient field and</span>
+<span id="L248"><a href="#L248">248</a> an adapted basis. The residue scalar is forced to zero by the actual trace. -/</span>
+<span id="L249"><a href="#L249">249</a> theorem commutator_cofactor_mem_maximalIdeal</span>
+<span id="L250"><a href="#L250">250</a>     [CharZero K] [IsArtinianRing R]</span>
+<span id="L251"><a href="#L251">251</a>     (S : LeftPrincipalParameterReduction (B := B) (Abar := R))</span>
+<span id="L252"><a href="#L252">252</a>     (rho : W →+ V) (hrho : Function.Surjective rho)</span>
+<span id="L253"><a href="#L253">253</a>     (hact : ∀ a w, rho (a • w) = S.modParameter a • rho w)</span>
+<span id="L254"><a href="#L254">254</a>     (hker : AddMonoidHom.ker rho =</span>
+<span id="L255"><a href="#L255">255</a>       AddMonoidHom.range (parameterAct (W := W) S.parameter))</span>
+<span id="L256"><a href="#L256">256</a>     (hexact : AddMonoidHom.ker (parameterAct (W := W) S.parameter) =</span>
+<span id="L257"><a href="#L257">257</a>       AddMonoidHom.range (parameterAct (W := W) S.parameter))</span>
+<span id="L258"><a href="#L258">258</a>     (hc2 : S.parameter * S.parameter = 0)</span>
+<span id="L259"><a href="#L259">259</a>     (b : Module.Basis ι K V) (level : ι → ℕ)</span>
+<span id="L260"><a href="#L260">260</a>     (hb : IsMaximalIdealFiltrationAdapted (IsLocalRing.maximalIdeal R) b level)</span>
+<span id="L261"><a href="#L261">261</a>     (hcoeff : Function.Surjective</span>
+<span id="L262"><a href="#L262">262</a>       ((IsLocalRing.residue R).comp (algebraMap K R)))</span>
+<span id="L263"><a href="#L263">263</a>     (x y z : B) (hx : S.modParameter x ∈ IsLocalRing.maximalIdeal R)</span>
+<span id="L264"><a href="#L264">264</a>     (hy : S.modParameter y ∈ IsLocalRing.maximalIdeal R)</span>
+<span id="L265"><a href="#L265">265</a>     (hxy : x * y - y * x = S.parameter * z) :</span>
+<span id="L266"><a href="#L266">266</a>     S.modParameter z ∈ IsLocalRing.maximalIdeal R := by</span>
+<span id="L267"><a href="#L267">267</a>   obtain ⟨q, hq⟩ := hcoeff (IsLocalRing.residue R (S.modParameter z))</span>
+<span id="L268"><a href="#L268">268</a>   let r := S.modParameter z - algebraMap K R q</span>
+<span id="L269"><a href="#L269">269</a>   have hr : r ∈ IsLocalRing.maximalIdeal R := by</span>
+<span id="L270"><a href="#L270">270</a>     rw [← IsLocalRing.residue_eq_zero_iff]</span>
+<span id="L271"><a href="#L271">271</a>     change IsLocalRing.residue R (S.modParameter z - algebraMap K R q) = 0</span>
+<span id="L272"><a href="#L272">272</a>     rw [map_sub, show IsLocalRing.residue R (algebraMap K R q) =</span>
+<span id="L273"><a href="#L273">273</a>       IsLocalRing.residue R (S.modParameter z) from hq, sub_self]</span>
+<span id="L274"><a href="#L274">274</a>   have hz : S.modParameter z = algebraMap K R q + r := by dsimp [r]; ring</span>
+<span id="L275"><a href="#L275">275</a>   have htrace := actual_commutator_cofactor_trace_eq_zero</span>
+<span id="L276"><a href="#L276">276</a>     S rho hrho hact hker hexact hc2 b level hb x y z hx hy hxy</span>
+<span id="L277"><a href="#L277">277</a>   have hq0 := Stafford38.Characteristic.ArtinianTriangularTrace.scalar_eq_zero_of_trace_identity</span>
+<span id="L278"><a href="#L278">278</a>     q _ _ (leftMultiplicationMatrix_isNilpotent b hr) htrace</span>
+<span id="L279"><a href="#L279">279</a>     (leftMultiplicationMatrix_decomposition b q r (S.modParameter z) hz).symm</span>
+<span id="L280"><a href="#L280">280</a>   simpa [r, hq0] using hr</span>
+<span id="L281"><a href="#L281">281</a> </span>
+<span id="L282"><a href="#L282">282</a> /-- An Artinian local algebra is finite over a coefficient field. -/</span>
+<span id="L283"><a href="#L283">283</a> theorem finite_over_coefficientField [IsArtinianRing R]</span>
+<span id="L284"><a href="#L284">284</a>     (hcoeff : Function.Surjective</span>
+<span id="L285"><a href="#L285">285</a>       ((IsLocalRing.residue R).comp (algebraMap K R))) : Module.Finite K R := by</span>
+<span id="L286"><a href="#L286">286</a>   let m := IsLocalRing.maximalIdeal R</span>
+<span id="L287"><a href="#L287">287</a>   letI : Module.Finite K (R ⧸ m) :=</span>
+<span id="L288"><a href="#L288">288</a>     Module.Finite.of_surjective (Algebra.linearMap K (R ⧸ m)) hcoeff</span>
+<span id="L289"><a href="#L289">289</a>   apply Module.finite_of_surjective_of_ker_le_nilradical</span>
+<span id="L290"><a href="#L290">290</a>     (Ideal.Quotient.mkₐ K m) Ideal.Quotient.mk_surjective</span>
+<span id="L291"><a href="#L291">291</a>   · have hker : RingHom.ker (Ideal.Quotient.mkₐ K m) = m := by</span>
+<span id="L292"><a href="#L292">292</a>       ext z</span>
+<span id="L293"><a href="#L293">293</a>       exact Ideal.Quotient.eq_zero_iff_mem</span>
+<span id="L294"><a href="#L294">294</a>     rw [hker]</span>
+<span id="L295"><a href="#L295">295</a>     exact (Ideal.FG.isNilpotent_iff_le_nilradical</span>
+<span id="L296"><a href="#L296">296</a>       (IsNoetherian.noetherian m)).mp</span>
+<span id="L297"><a href="#L297">297</a>       (Stafford38.Characteristic.ArtinianCoefficientField.maximalIdeal_isNilpotent (R := R))</span>
+<span id="L298"><a href="#L298">298</a>   · exact IsNoetherian.noetherian _</span>
+<span id="L299"><a href="#L299">299</a> </span>
+<span id="L300"><a href="#L300">300</a> /-- Local Gabber membership with the finite-dimensional basis constructed</span>
+<span id="L301"><a href="#L301">301</a> from the finite special-fibre module. No action matrix or trace is supplied. -/</span>
+<span id="L302"><a href="#L302">302</a> theorem artinian_local_commutator_cofactor_mem_maximalIdeal</span>
+<span id="L303"><a href="#L303">303</a>     [CharZero K] [IsArtinianRing R] [Module.Finite R V] [Nontrivial V]</span>
+<span id="L304"><a href="#L304">304</a>     (S : LeftPrincipalParameterReduction (B := B) (Abar := R))</span>
+<span id="L305"><a href="#L305">305</a>     (rho : W →+ V) (hrho : Function.Surjective rho)</span>
+<span id="L306"><a href="#L306">306</a>     (hact : ∀ a w, rho (a • w) = S.modParameter a • rho w)</span>
+<span id="L307"><a href="#L307">307</a>     (hker : AddMonoidHom.ker rho =</span>
+<span id="L308"><a href="#L308">308</a>       AddMonoidHom.range (parameterAct (W := W) S.parameter))</span>
+<span id="L309"><a href="#L309">309</a>     (hexact : AddMonoidHom.ker (parameterAct (W := W) S.parameter) =</span>
+<span id="L310"><a href="#L310">310</a>       AddMonoidHom.range (parameterAct (W := W) S.parameter))</span>
+<span id="L311"><a href="#L311">311</a>     (hc2 : S.parameter * S.parameter = 0)</span>
+<span id="L312"><a href="#L312">312</a>     (hcoeff : Function.Surjective</span>
+<span id="L313"><a href="#L313">313</a>       ((IsLocalRing.residue R).comp (algebraMap K R)))</span>
+<span id="L314"><a href="#L314">314</a>     (x y z : B) (hx : S.modParameter x ∈ IsLocalRing.maximalIdeal R)</span>
+<span id="L315"><a href="#L315">315</a>     (hy : S.modParameter y ∈ IsLocalRing.maximalIdeal R)</span>
+<span id="L316"><a href="#L316">316</a>     (hxy : x * y - y * x = S.parameter * z) :</span>
+<span id="L317"><a href="#L317">317</a>     S.modParameter z ∈ IsLocalRing.maximalIdeal R := by</span>
+<span id="L318"><a href="#L318">318</a>   letI : Module.Finite K R := finite_over_coefficientField hcoeff</span>
+<span id="L319"><a href="#L319">319</a>   letI : Module.Finite K V := Module.Finite.trans R V</span>
+<span id="L320"><a href="#L320">320</a>   obtain ⟨n, hn⟩ := Nat.exists_eq_succ_of_ne_zero</span>
+<span id="L321"><a href="#L321">321</a>     (ne_of_gt (Module.finrank_pos (R := K) (M := V)))</span>
+<span id="L322"><a href="#L322">322</a>   obtain ⟨b, level, hb⟩ :=</span>
+<span id="L323"><a href="#L323">323</a>     Stafford38.Characteristic.ArtinianAdaptedBasisExistence.exists_maximalIdealFiltrationAdaptedBasis</span>
+<span id="L324"><a href="#L324">324</a>       (K := K) (R := R) (V := V) hn</span>
+<span id="L325"><a href="#L325">325</a>   exact commutator_cofactor_mem_maximalIdeal S rho hrho hact hker hexact hc2</span>
+<span id="L326"><a href="#L326">326</a>     b level hb hcoeff x y z hx hy hxy</span>
+<span id="L327"><a href="#L327">327</a> </span>
+<span id="L328"><a href="#L328">328</a> end SourceRing</span>
+<span id="L329"><a href="#L329">329</a> </span>
+<span id="L330"><a href="#L330">330</a> section CoefficientFieldProduction</span>
+<span id="L331"><a href="#L331">331</a> </span>
+<span id="L332"><a href="#L332">332</a> variable {B W : Type u}</span>
+<span id="L333"><a href="#L333">333</a> variable [Ring B] [AddCommGroup W] [Module B W]</span>
+<span id="L334"><a href="#L334">334</a> </span>
+<span id="L335"><a href="#L335">335</a> omit [Algebra K R] [Module K V] [IsScalarTower K R V] in</span>
+<span id="L336"><a href="#L336">336</a> /-- Proposition 3.2 for a nonzero finite special fibre: the coefficient</span>
+<span id="L337"><a href="#L337">337</a> field, finite basis, source corrections, and actual trace are all produced. -/</span>
+<span id="L338"><a href="#L338">338</a> theorem artinian_local_cofactor_mem_maximalIdeal</span>
+<span id="L339"><a href="#L339">339</a>     (F : Type u) [Field F] [CharZero F] [Algebra F R]</span>
+<span id="L340"><a href="#L340">340</a>     [IsArtinianRing R] [Module.Finite R V] [Nontrivial V]</span>
+<span id="L341"><a href="#L341">341</a>     (S : LeftPrincipalParameterReduction (B := B) (Abar := R))</span>
+<span id="L342"><a href="#L342">342</a>     (rho : W →+ V) (hrho : Function.Surjective rho)</span>
+<span id="L343"><a href="#L343">343</a>     (hact : ∀ a w, rho (a • w) = S.modParameter a • rho w)</span>
+<span id="L344"><a href="#L344">344</a>     (hker : AddMonoidHom.ker rho =</span>
+<span id="L345"><a href="#L345">345</a>       AddMonoidHom.range (parameterAct (W := W) S.parameter))</span>
+<span id="L346"><a href="#L346">346</a>     (hexact : AddMonoidHom.ker (parameterAct (W := W) S.parameter) =</span>
+<span id="L347"><a href="#L347">347</a>       AddMonoidHom.range (parameterAct (W := W) S.parameter))</span>
+<span id="L348"><a href="#L348">348</a>     (hc2 : S.parameter * S.parameter = 0)</span>
+<span id="L349"><a href="#L349">349</a>     (x y z : B) (hx : S.modParameter x ∈ IsLocalRing.maximalIdeal R)</span>
+<span id="L350"><a href="#L350">350</a>     (hy : S.modParameter y ∈ IsLocalRing.maximalIdeal R)</span>
+<span id="L351"><a href="#L351">351</a>     (hxy : x * y - y * x = S.parameter * z) :</span>
+<span id="L352"><a href="#L352">352</a>     S.modParameter z ∈ IsLocalRing.maximalIdeal R := by</span>
+<span id="L353"><a href="#L353">353</a>   let κ := IsLocalRing.ResidueField R</span>
+<span id="L354"><a href="#L354">354</a>   obtain ⟨s, hs⟩ := Stafford38.Characteristic.ArtinianCoefficientField.exists_residue_section F R</span>
+<span id="L355"><a href="#L355">355</a>   letI : CharZero κ := charZero_of_injective_algebraMap (algebraMap F κ).injective</span>
+<span id="L356"><a href="#L356">356</a>   letI : Algebra κ R := s.toRingHom.toAlgebra</span>
+<span id="L357"><a href="#L357">357</a>   letI : Module κ V := Module.compHom V (algebraMap κ R)</span>
+<span id="L358"><a href="#L358">358</a>   letI : IsScalarTower κ R V := IsScalarTower.of_algebraMap_smul fun _ _ ↦ rfl</span>
+<span id="L359"><a href="#L359">359</a>   have hcoeff : Function.Surjective</span>
+<span id="L360"><a href="#L360">360</a>       ((IsLocalRing.residue R).comp (algebraMap κ R)) := fun a ↦ ⟨a, hs a⟩</span>
+<span id="L361"><a href="#L361">361</a>   exact artinian_local_commutator_cofactor_mem_maximalIdeal</span>
+<span id="L362"><a href="#L362">362</a>     S rho hrho hact hker hexact hc2 hcoeff x y z hx hy hxy</span>
+<span id="L363"><a href="#L363">363</a> </span>
+<span id="L364"><a href="#L364">364</a> end CoefficientFieldProduction</span>
+<span id="L365"><a href="#L365">365</a> </span>
+<span id="L366"><a href="#L366">366</a> #print axioms repr_smul_eq_zero_of_level_lt</span>
+<span id="L367"><a href="#L367">367</a> #print axioms repr_deeper_source_row_diagonal_eq_zero</span>
+<span id="L368"><a href="#L368">368</a> #print axioms actual_trace_eq_zero_of_coefficientField_corrections</span>
+<span id="L369"><a href="#L369">369</a> #print axioms actual_commutator_cofactor_trace_eq_zero</span>
+<span id="L370"><a href="#L370">370</a> #print axioms commutator_cofactor_mem_maximalIdeal</span>
+<span id="L371"><a href="#L371">371</a> #print axioms artinian_local_commutator_cofactor_mem_maximalIdeal</span>
+<span id="L372"><a href="#L372">372</a> #print axioms artinian_local_cofactor_mem_maximalIdeal</span>
+<span id="L373"><a href="#L373">373</a> </span>
+<span id="L374"><a href="#L374">374</a> end</span>
+<span id="L375"><a href="#L375">375</a> end Stafford38.Characteristic.BGab001CoefficientFieldTrace</span>
+<span id="L376"><a href="#L376">376</a> </span></pre>

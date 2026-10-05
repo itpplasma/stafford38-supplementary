@@ -1,0 +1,69 @@
+<!doctype html><meta charset="utf-8"><title>Stafford38/Geometry/SameWitness/AwayFactorToAtPrime.lean</title><style>body{font:14px monospace}pre span{display:block}pre span:target{background:#fff0ad}a{color:#666}pre{white-space:pre-wrap}</style><h1>Stafford38/Geometry/SameWitness/AwayFactorToAtPrime.lean</h1><p>This project (Stafford38) · 0403af3f0b1a7f84d2027121932723f67bd279ae</p><pre><span id="L1"><a href="#L1">1</a> module</span>
+<span id="L2"><a href="#L2">2</a> public import Mathlib.RingTheory.Localization.Away.Basic</span>
+<span id="L3"><a href="#L3">3</a> public import Mathlib.RingTheory.Localization.AtPrime.Basic</span>
+<span id="L4"><a href="#L4">4</a> </span>
+<span id="L5"><a href="#L5">5</a> @[expose] public section</span>
+<span id="L6"><a href="#L6">6</a> </span>
+<span id="L7"><a href="#L7">7</a> set_option autoImplicit false</span>
+<span id="L8"><a href="#L8">8</a> </span>
+<span id="L9"><a href="#L9">9</a> noncomputable section</span>
+<span id="L10"><a href="#L10">10</a> </span>
+<span id="L11"><a href="#L11">11</a> namespace Stafford38.Geometry.SameWitness</span>
+<span id="L12"><a href="#L12">12</a> </span>
+<span id="L13"><a href="#L13">13</a> universe u</span>
+<span id="L14"><a href="#L14">14</a> </span>
+<span id="L15"><a href="#L15">15</a> /-- Transport a unit-power factorization from an away localization to the</span>
+<span id="L16"><a href="#L16">16</a> localization at a prime avoiding its denominator. -/</span>
+<span id="L17"><a href="#L17">17</a> theorem factorization_to_atPrime</span>
+<span id="L18"><a href="#L18">18</a>     {B : Type u} [CommRing B] (M : Ideal B) [M.IsPrime]</span>
+<span id="L19"><a href="#L19">19</a>     (f : B) (hf : f ∉ M) (q s : B) (n : ℕ)</span>
+<span id="L20"><a href="#L20">20</a>     (v : Localization.Away f) (hv : IsUnit v)</span>
+<span id="L21"><a href="#L21">21</a>     (h : algebraMap B (Localization.Away f) q =</span>
+<span id="L22"><a href="#L22">22</a>       (algebraMap B (Localization.Away f) s) ^ n * v) :</span>
+<span id="L23"><a href="#L23">23</a>     ∃ u : Localization.AtPrime M, IsUnit u ∧</span>
+<span id="L24"><a href="#L24">24</a>       algebraMap B (Localization.AtPrime M) q =</span>
+<span id="L25"><a href="#L25">25</a>         (algebraMap B (Localization.AtPrime M) s) ^ n * u := by</span>
+<span id="L26"><a href="#L26">26</a>   let ψ : Localization.Away f →+* Localization.AtPrime M :=</span>
+<span id="L27"><a href="#L27">27</a>     IsLocalization.Away.lift f</span>
+<span id="L28"><a href="#L28">28</a>       (IsLocalization.map_units (Localization.AtPrime M)</span>
+<span id="L29"><a href="#L29">29</a>         (M := M.primeCompl) ⟨f, hf⟩)</span>
+<span id="L30"><a href="#L30">30</a>   have hψ : ψ.comp (algebraMap B (Localization.Away f)) =</span>
+<span id="L31"><a href="#L31">31</a>       algebraMap B (Localization.AtPrime M) :=</span>
+<span id="L32"><a href="#L32">32</a>     IsLocalization.Away.lift_comp (R := B) (S := Localization.Away f)</span>
+<span id="L33"><a href="#L33">33</a>       (P := Localization.AtPrime M) (x := f) _</span>
+<span id="L34"><a href="#L34">34</a>   have hψb (b : B) :</span>
+<span id="L35"><a href="#L35">35</a>       ψ (algebraMap B (Localization.Away f) b) =</span>
+<span id="L36"><a href="#L36">36</a>         algebraMap B (Localization.AtPrime M) b := by</span>
+<span id="L37"><a href="#L37">37</a>     exact DFunLike.congr_fun hψ b</span>
+<span id="L38"><a href="#L38">38</a>   refine ⟨ψ v, hv.map ψ, ?_⟩</span>
+<span id="L39"><a href="#L39">39</a>   have hh := congrArg ψ h</span>
+<span id="L40"><a href="#L40">40</a>   calc</span>
+<span id="L41"><a href="#L41">41</a>     algebraMap B (Localization.AtPrime M) q =</span>
+<span id="L42"><a href="#L42">42</a>         ψ (algebraMap B (Localization.Away f) q) := (hψb q).symm</span>
+<span id="L43"><a href="#L43">43</a>     _ = ψ ((algebraMap B (Localization.Away f) s) ^ n * v) := hh</span>
+<span id="L44"><a href="#L44">44</a>     _ = algebraMap B (Localization.AtPrime M) s ^ n * ψ v := by</span>
+<span id="L45"><a href="#L45">45</a>       rw [map_mul, map_pow, hψb]</span>
+<span id="L46"><a href="#L46">46</a> </span>
+<span id="L47"><a href="#L47">47</a> /-- Transport both divisor-order factorizations from the one ground-point</span>
+<span id="L48"><a href="#L48">48</a> away open to its local ring. -/</span>
+<span id="L49"><a href="#L49">49</a> theorem pair_factorizations_to_atPrime</span>
+<span id="L50"><a href="#L50">50</a>     {B : Type u} [CommRing B] (M : Ideal B) [M.IsPrime]</span>
+<span id="L51"><a href="#L51">51</a>     (f : B) (hf : f ∉ M) (s q₀ q₁ : B) (e₀ e₁ : ℕ)</span>
+<span id="L52"><a href="#L52">52</a>     (v₀ v₁ : Localization.Away f)</span>
+<span id="L53"><a href="#L53">53</a>     (hv₀ : IsUnit v₀) (hv₁ : IsUnit v₁)</span>
+<span id="L54"><a href="#L54">54</a>     (h₀ : algebraMap B (Localization.Away f) q₀ =</span>
+<span id="L55"><a href="#L55">55</a>       (algebraMap B (Localization.Away f) s) ^ e₀ * v₀)</span>
+<span id="L56"><a href="#L56">56</a>     (h₁ : algebraMap B (Localization.Away f) q₁ =</span>
+<span id="L57"><a href="#L57">57</a>       (algebraMap B (Localization.Away f) s) ^ e₁ * v₁) :</span>
+<span id="L58"><a href="#L58">58</a>     ∃ u₀ u₁ : Localization.AtPrime M,</span>
+<span id="L59"><a href="#L59">59</a>       IsUnit u₀ ∧ IsUnit u₁ ∧</span>
+<span id="L60"><a href="#L60">60</a>       algebraMap B (Localization.AtPrime M) q₀ =</span>
+<span id="L61"><a href="#L61">61</a>         (algebraMap B (Localization.AtPrime M) s) ^ e₀ * u₀ ∧</span>
+<span id="L62"><a href="#L62">62</a>       algebraMap B (Localization.AtPrime M) q₁ =</span>
+<span id="L63"><a href="#L63">63</a>         (algebraMap B (Localization.AtPrime M) s) ^ e₁ * u₁ := by</span>
+<span id="L64"><a href="#L64">64</a>   obtain ⟨u₀, hu₀, hq₀⟩ := factorization_to_atPrime M f hf q₀ s e₀ v₀ hv₀ h₀</span>
+<span id="L65"><a href="#L65">65</a>   obtain ⟨u₁, hu₁, hq₁⟩ := factorization_to_atPrime M f hf q₁ s e₁ v₁ hv₁ h₁</span>
+<span id="L66"><a href="#L66">66</a>   exact ⟨u₀, u₁, hu₀, hu₁, hq₀, hq₁⟩</span>
+<span id="L67"><a href="#L67">67</a> </span>
+<span id="L68"><a href="#L68">68</a> end Stafford38.Geometry.SameWitness</span>
+<span id="L69"><a href="#L69">69</a> </span></pre>

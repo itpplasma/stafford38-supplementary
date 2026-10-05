@@ -1,0 +1,232 @@
+<!doctype html><meta charset="utf-8"><title>Stafford38/Characteristic/GeometricSupportDescent.lean</title><style>body{font:14px monospace}pre span{display:block}pre span:target{background:#fff0ad}a{color:#666}pre{white-space:pre-wrap}</style><h1>Stafford38/Characteristic/GeometricSupportDescent.lean</h1><p>This project (Stafford38) · 0403af3f0b1a7f84d2027121932723f67bd279ae</p><pre><span id="L1"><a href="#L1">1</a> module</span>
+<span id="L2"><a href="#L2">2</a> public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure</span>
+<span id="L3"><a href="#L3">3</a> public import Mathlib.RingTheory.MvPolynomial</span>
+<span id="L4"><a href="#L4">4</a> public import Mathlib.RingTheory.Spectrum.Prime.RingHom</span>
+<span id="L5"><a href="#L5">5</a> public import Stafford38.Geometry.ScalarExtensionPoints</span>
+<span id="L6"><a href="#L6">6</a> </span>
+<span id="L7"><a href="#L7">7</a> @[expose] public section</span>
+<span id="L8"><a href="#L8">8</a> </span>
+<span id="L9"><a href="#L9">9</a> open Stafford38Challenge (WeylAlg PhaseVar)</span>
+<span id="L10"><a href="#L10">10</a> </span>
+<span id="L11"><a href="#L11">11</a> /-!</span>
+<span id="L12"><a href="#L12">12</a> # Geometric points and support after algebraic closure</span>
+<span id="L13"><a href="#L13">13</a> </span>
+<span id="L14"><a href="#L14">14</a> For finitely many polynomial variables over an arbitrary field, a proper</span>
+<span id="L15"><a href="#L15">15</a> ideal has a common zero in the algebraic closure.  This file records the</span>
+<span id="L16"><a href="#L16">16</a> result with the coefficient map and its map/comap consequences explicit.</span>
+<span id="L17"><a href="#L17">17</a> </span>
+<span id="L18"><a href="#L18">18</a> The proof chooses a maximal ideal above the given ideal, uses Zariski's lemma</span>
+<span id="L19"><a href="#L19">19</a> to make its residue field algebraic over the ground field, and embeds that</span>
+<span id="L20"><a href="#L20">20</a> residue field into the algebraic closure.  It does not use characteristic</span>
+<span id="L21"><a href="#L21">21</a> varieties, Gabber's theorem, or asymptotic geometry.</span>
+<span id="L22"><a href="#L22">22</a> -/</span>
+<span id="L23"><a href="#L23">23</a> </span>
+<span id="L24"><a href="#L24">24</a> namespace Stafford38.Characteristic.GeometricSupportDescent</span>
+<span id="L25"><a href="#L25">25</a> </span>
+<span id="L26"><a href="#L26">26</a> open Stafford38.Geometry.ScalarExtensionPoints</span>
+<span id="L27"><a href="#L27">27</a> open Stafford38.Characteristic</span>
+<span id="L28"><a href="#L28">28</a> open Stafford38.CharacteristicInitialIdeal</span>
+<span id="L29"><a href="#L29">29</a> open Stafford38.WeylIteratedEquivalence</span>
+<span id="L30"><a href="#L30">30</a> open Stafford38.EulerSurjectivity</span>
+<span id="L31"><a href="#L31">31</a> </span>
+<span id="L32"><a href="#L32">32</a> noncomputable section</span>
+<span id="L33"><a href="#L33">33</a> </span>
+<span id="L34"><a href="#L34">34</a> variable {k : Type*} [Field k]</span>
+<span id="L35"><a href="#L35">35</a> variable {σ : Type*} [Finite σ]</span>
+<span id="L36"><a href="#L36">36</a> </span>
+<span id="L37"><a href="#L37">37</a> /-- A proper ideal in a finite-variable polynomial ring has a common zero in</span>
+<span id="L38"><a href="#L38">38</a> the algebraic closure of the coefficient field. -/</span>
+<span id="L39"><a href="#L39">39</a> theorem exists_algebraicClosure_zero_of_ne_top</span>
+<span id="L40"><a href="#L40">40</a>     (J : Ideal (MvPolynomial σ k)) (hJ : J ≠ ⊤) :</span>
+<span id="L41"><a href="#L41">41</a>     ∃ q : σ → AlgebraicClosure k,</span>
+<span id="L42"><a href="#L42">42</a>       q ∈ MvPolynomial.zeroLocus (AlgebraicClosure k)</span>
+<span id="L43"><a href="#L43">43</a>         (J.map (scalarPolynomialMap</span>
+<span id="L44"><a href="#L44">44</a>           (k := k) (K := AlgebraicClosure k) σ)) := by</span>
+<span id="L45"><a href="#L45">45</a>   obtain ⟨M, hMmax, hJM⟩ := Ideal.exists_le_maximal J hJ</span>
+<span id="L46"><a href="#L46">46</a>   letI : M.IsMaximal := hMmax</span>
+<span id="L47"><a href="#L47">47</a>   let Q := MvPolynomial σ k ⧸ M</span>
+<span id="L48"><a href="#L48">48</a>   letI : Field Q := Ideal.Quotient.field M</span>
+<span id="L49"><a href="#L49">49</a>   letI : Module.IsTorsionFree k Q :=</span>
+<span id="L50"><a href="#L50">50</a>     Module.isTorsionFree_iff_algebraMap_injective.mpr</span>
+<span id="L51"><a href="#L51">51</a>       (MvPolynomial.quotient_mk_comp_C_injective σ k M hMmax.ne_top)</span>
+<span id="L52"><a href="#L52">52</a>   have hIntegral :</span>
+<span id="L53"><a href="#L53">53</a>       RingHom.IsIntegral</span>
+<span id="L54"><a href="#L54">54</a>         ((Ideal.Quotient.mk M).comp (MvPolynomial.C : k →+* MvPolynomial σ k)) :=</span>
+<span id="L55"><a href="#L55">55</a>     MvPolynomial.comp_C_integral_of_surjective_of_isJacobsonRing</span>
+<span id="L56"><a href="#L56">56</a>       (Ideal.Quotient.mk M) Ideal.Quotient.mk_surjective</span>
+<span id="L57"><a href="#L57">57</a>   letI : Algebra.IsIntegral k Q := ⟨hIntegral⟩</span>
+<span id="L58"><a href="#L58">58</a>   letI : Algebra.IsAlgebraic k Q := Algebra.IsIntegral.isAlgebraic</span>
+<span id="L59"><a href="#L59">59</a>   let φ : Q →ₐ[k] AlgebraicClosure k := IsAlgClosed.lift</span>
+<span id="L60"><a href="#L60">60</a>   let q : σ → AlgebraicClosure k := fun i =&gt; φ (Ideal.Quotient.mk M (MvPolynomial.X i))</span>
+<span id="L61"><a href="#L61">61</a>   refine ⟨q, (mem_zeroLocus_map_iff J q).2 ?_⟩</span>
+<span id="L62"><a href="#L62">62</a>   intro f hf</span>
+<span id="L63"><a href="#L63">63</a>   let ψ : MvPolynomial σ k →+* AlgebraicClosure k :=</span>
+<span id="L64"><a href="#L64">64</a>     φ.toRingHom.comp (Ideal.Quotient.mk M)</span>
+<span id="L65"><a href="#L65">65</a>   have hψ : ψ f = 0 := by</span>
+<span id="L66"><a href="#L66">66</a>     change φ (Ideal.Quotient.mk M f) = 0</span>
+<span id="L67"><a href="#L67">67</a>     rw [Ideal.Quotient.eq_zero_iff_mem.mpr (hJM hf), map_zero]</span>
+<span id="L68"><a href="#L68">68</a>   have hcoeff : ψ.comp MvPolynomial.C =</span>
+<span id="L69"><a href="#L69">69</a>       algebraMap k (AlgebraicClosure k) := by</span>
+<span id="L70"><a href="#L70">70</a>     ext a</span>
+<span id="L71"><a href="#L71">71</a>     change φ (Ideal.Quotient.mk M (MvPolynomial.C a)) =</span>
+<span id="L72"><a href="#L72">72</a>       algebraMap k (AlgebraicClosure k) a</span>
+<span id="L73"><a href="#L73">73</a>     rw [show Ideal.Quotient.mk M (MvPolynomial.C a) = algebraMap k Q a from rfl]</span>
+<span id="L74"><a href="#L74">74</a>     exact φ.commutes a</span>
+<span id="L75"><a href="#L75">75</a>   rw [MvPolynomial.map_mvPolynomial_eq_eval₂ ψ] at hψ</span>
+<span id="L76"><a href="#L76">76</a>   rw [hcoeff] at hψ</span>
+<span id="L77"><a href="#L77">77</a>   simpa [ψ, q] using hψ</span>
+<span id="L78"><a href="#L78">78</a> </span>
+<span id="L79"><a href="#L79">79</a> /-- Over the algebraic closure, geometric emptiness is exactly the unit-ideal</span>
+<span id="L80"><a href="#L80">80</a> condition on the original ground-field ideal. -/</span>
+<span id="L81"><a href="#L81">81</a> theorem algebraicClosure_zeroLocus_eq_empty_iff</span>
+<span id="L82"><a href="#L82">82</a>     (J : Ideal (MvPolynomial σ k)) :</span>
+<span id="L83"><a href="#L83">83</a>     MvPolynomial.zeroLocus (AlgebraicClosure k)</span>
+<span id="L84"><a href="#L84">84</a>         (J.map (scalarPolynomialMap</span>
+<span id="L85"><a href="#L85">85</a>           (k := k) (K := AlgebraicClosure k) σ)) = ∅ ↔</span>
+<span id="L86"><a href="#L86">86</a>       J = ⊤ := by</span>
+<span id="L87"><a href="#L87">87</a>   constructor</span>
+<span id="L88"><a href="#L88">88</a>   · intro hzero</span>
+<span id="L89"><a href="#L89">89</a>     by_contra hJ</span>
+<span id="L90"><a href="#L90">90</a>     obtain ⟨q, hq⟩ := exists_algebraicClosure_zero_of_ne_top J hJ</span>
+<span id="L91"><a href="#L91">91</a>     rw [hzero] at hq</span>
+<span id="L92"><a href="#L92">92</a>     exact hq</span>
+<span id="L93"><a href="#L93">93</a>   · rintro rfl</span>
+<span id="L94"><a href="#L94">94</a>     change MvPolynomial.zeroLocus (AlgebraicClosure k)</span>
+<span id="L95"><a href="#L95">95</a>       ((⊤ : Ideal (MvPolynomial σ k)).map</span>
+<span id="L96"><a href="#L96">96</a>         (scalarPolynomialMap</span>
+<span id="L97"><a href="#L97">97</a>           (k := k) (K := AlgebraicClosure k) σ)) =</span>
+<span id="L98"><a href="#L98">98</a>         (⊥ : Set (σ → AlgebraicClosure k))</span>
+<span id="L99"><a href="#L99">99</a>     rw [Ideal.map_top, MvPolynomial.zeroLocus_top]</span>
+<span id="L100"><a href="#L100">100</a> </span>
+<span id="L101"><a href="#L101">101</a> /-- Scalar extension to the algebraic closure reflects and preserves the</span>
+<span id="L102"><a href="#L102">102</a> unit ideal for finite-variable polynomial rings. -/</span>
+<span id="L103"><a href="#L103">103</a> theorem map_scalarPolynomialMap_eq_top_iff</span>
+<span id="L104"><a href="#L104">104</a>     (J : Ideal (MvPolynomial σ k)) :</span>
+<span id="L105"><a href="#L105">105</a>     J.map (scalarPolynomialMap</span>
+<span id="L106"><a href="#L106">106</a>         (k := k) (K := AlgebraicClosure k) σ) = ⊤ ↔</span>
+<span id="L107"><a href="#L107">107</a>       J = ⊤ := by</span>
+<span id="L108"><a href="#L108">108</a>   constructor</span>
+<span id="L109"><a href="#L109">109</a>   · intro hmap</span>
+<span id="L110"><a href="#L110">110</a>     apply (algebraicClosure_zeroLocus_eq_empty_iff J).mp</span>
+<span id="L111"><a href="#L111">111</a>     rw [hmap]</span>
+<span id="L112"><a href="#L112">112</a>     exact MvPolynomial.zeroLocus_top</span>
+<span id="L113"><a href="#L113">113</a>   · rintro rfl</span>
+<span id="L114"><a href="#L114">114</a>     exact Ideal.map_top _</span>
+<span id="L115"><a href="#L115">115</a> </span>
+<span id="L116"><a href="#L116">116</a> /-- A nonempty ground-field prime-spectrum zero locus yields a geometric</span>
+<span id="L117"><a href="#L117">117</a> point after passing to the algebraic closure. -/</span>
+<span id="L118"><a href="#L118">118</a> theorem exists_algebraicClosure_zero_of_mem_primeZeroLocus</span>
+<span id="L119"><a href="#L119">119</a>     (J : Ideal (MvPolynomial σ k))</span>
+<span id="L120"><a href="#L120">120</a>     (p : PrimeSpectrum (MvPolynomial σ k))</span>
+<span id="L121"><a href="#L121">121</a>     (hp : p ∈ PrimeSpectrum.zeroLocus (J : Set (MvPolynomial σ k))) :</span>
+<span id="L122"><a href="#L122">122</a>     ∃ q : σ → AlgebraicClosure k,</span>
+<span id="L123"><a href="#L123">123</a>       q ∈ MvPolynomial.zeroLocus (AlgebraicClosure k)</span>
+<span id="L124"><a href="#L124">124</a>         (J.map (scalarPolynomialMap</span>
+<span id="L125"><a href="#L125">125</a>           (k := k) (K := AlgebraicClosure k) σ)) := by</span>
+<span id="L126"><a href="#L126">126</a>   apply exists_algebraicClosure_zero_of_ne_top J</span>
+<span id="L127"><a href="#L127">127</a>   intro hJ</span>
+<span id="L128"><a href="#L128">128</a>   subst J</span>
+<span id="L129"><a href="#L129">129</a>   exact p.2.ne_top (by simpa using hp)</span>
+<span id="L130"><a href="#L130">130</a> </span>
+<span id="L131"><a href="#L131">131</a> /-- A geometric point gives a prime of the original polynomial ring by</span>
+<span id="L132"><a href="#L132">132</a> contracting its evaluation kernel.  The displayed equality records the exact</span>
+<span id="L133"><a href="#L133">133</a> map/comap orientation. -/</span>
+<span id="L134"><a href="#L134">134</a> def groundPrimeOfAlgebraicClosurePoint (q : σ → AlgebraicClosure k) :</span>
+<span id="L135"><a href="#L135">135</a>     PrimeSpectrum (MvPolynomial σ k) :=</span>
+<span id="L136"><a href="#L136">136</a>   PrimeSpectrum.comap (scalarPolynomialMap</span>
+<span id="L137"><a href="#L137">137</a>     (k := k) (K := AlgebraicClosure k) σ)</span>
+<span id="L138"><a href="#L138">138</a>     (MvPolynomial.pointToPoint q)</span>
+<span id="L139"><a href="#L139">139</a> </span>
+<span id="L140"><a href="#L140">140</a> theorem groundPrimeOfAlgebraicClosurePoint_asIdeal</span>
+<span id="L141"><a href="#L141">141</a>     (q : σ → AlgebraicClosure k) :</span>
+<span id="L142"><a href="#L142">142</a>     (groundPrimeOfAlgebraicClosurePoint (k := k) q).asIdeal =</span>
+<span id="L143"><a href="#L143">143</a>       (MvPolynomial.vanishingIdeal (AlgebraicClosure k) {q}).comap</span>
+<span id="L144"><a href="#L144">144</a>         (scalarPolynomialMap</span>
+<span id="L145"><a href="#L145">145</a>           (k := k) (K := AlgebraicClosure k) σ) :=</span>
+<span id="L146"><a href="#L146">146</a>   rfl</span>
+<span id="L147"><a href="#L147">147</a> </span>
+<span id="L148"><a href="#L148">148</a> /-- Conversely, a geometric zero of the extended ideal contracts to a prime</span>
+<span id="L149"><a href="#L149">149</a> of the ground polynomial ring containing the original ideal. -/</span>
+<span id="L150"><a href="#L150">150</a> theorem groundPrimeOfAlgebraicClosurePoint_mem_zeroLocus</span>
+<span id="L151"><a href="#L151">151</a>     (J : Ideal (MvPolynomial σ k)) (q : σ → AlgebraicClosure k)</span>
+<span id="L152"><a href="#L152">152</a>     (hq : q ∈ MvPolynomial.zeroLocus (AlgebraicClosure k)</span>
+<span id="L153"><a href="#L153">153</a>       (J.map (scalarPolynomialMap</span>
+<span id="L154"><a href="#L154">154</a>         (k := k) (K := AlgebraicClosure k) σ))) :</span>
+<span id="L155"><a href="#L155">155</a>     groundPrimeOfAlgebraicClosurePoint (k := k) q ∈</span>
+<span id="L156"><a href="#L156">156</a>       PrimeSpectrum.zeroLocus (J : Set (MvPolynomial σ k)) := by</span>
+<span id="L157"><a href="#L157">157</a>   rw [PrimeSpectrum.mem_zeroLocus]</span>
+<span id="L158"><a href="#L158">158</a>   intro f hf</span>
+<span id="L159"><a href="#L159">159</a>   change scalarPolynomialMap</span>
+<span id="L160"><a href="#L160">160</a>       (k := k) (K := AlgebraicClosure k) σ f ∈</span>
+<span id="L161"><a href="#L161">161</a>     MvPolynomial.vanishingIdeal (AlgebraicClosure k) {q}</span>
+<span id="L162"><a href="#L162">162</a>   rw [MvPolynomial.mem_vanishingIdeal_singleton_iff]</span>
+<span id="L163"><a href="#L163">163</a>   exact hq _ (Ideal.mem_map_of_mem _ hf)</span>
+<span id="L164"><a href="#L164">164</a> </span>
+<span id="L165"><a href="#L165">165</a> /-- Thus nonemptiness of the prime-spectrum support and nonemptiness of the</span>
+<span id="L166"><a href="#L166">166</a> algebraic-closure geometric zero locus are equivalent. -/</span>
+<span id="L167"><a href="#L167">167</a> theorem primeZeroLocus_nonempty_iff_algebraicClosure_zeroLocus_nonempty</span>
+<span id="L168"><a href="#L168">168</a>     (J : Ideal (MvPolynomial σ k)) :</span>
+<span id="L169"><a href="#L169">169</a>     Set.Nonempty (PrimeSpectrum.zeroLocus (J : Set (MvPolynomial σ k))) ↔</span>
+<span id="L170"><a href="#L170">170</a>       Set.Nonempty (MvPolynomial.zeroLocus (AlgebraicClosure k)</span>
+<span id="L171"><a href="#L171">171</a>         (J.map (scalarPolynomialMap</span>
+<span id="L172"><a href="#L172">172</a>           (k := k) (K := AlgebraicClosure k) σ))) := by</span>
+<span id="L173"><a href="#L173">173</a>   constructor</span>
+<span id="L174"><a href="#L174">174</a>   · rintro ⟨p, hp⟩</span>
+<span id="L175"><a href="#L175">175</a>     exact exists_algebraicClosure_zero_of_mem_primeZeroLocus J p hp</span>
+<span id="L176"><a href="#L176">176</a>   · rintro ⟨q, hq⟩</span>
+<span id="L177"><a href="#L177">177</a>     exact ⟨groundPrimeOfAlgebraicClosurePoint (k := k) q,</span>
+<span id="L178"><a href="#L178">178</a>       groundPrimeOfAlgebraicClosurePoint_mem_zeroLocus J q hq⟩</span>
+<span id="L179"><a href="#L179">179</a> </span>
+<span id="L180"><a href="#L180">180</a> /-- Project-facing form: a proper order initial ideal has a geometric point</span>
+<span id="L181"><a href="#L181">181</a> after coefficient extension to the algebraic closure. -/</span>
+<span id="L182"><a href="#L182">182</a> theorem exists_algebraicClosure_orderInitialZero_of_ne_top</span>
+<span id="L183"><a href="#L183">183</a>     {n : ℕ} (I : RightIdeal (WeylAlg k n))</span>
+<span id="L184"><a href="#L184">184</a>     (hI : orderInitialIdeal k I ≠ ⊤) :</span>
+<span id="L185"><a href="#L185">185</a>     ∃ q : PhaseVar n → AlgebraicClosure k,</span>
+<span id="L186"><a href="#L186">186</a>       q ∈ MvPolynomial.zeroLocus (AlgebraicClosure k)</span>
+<span id="L187"><a href="#L187">187</a>         ((orderInitialIdeal k I).map</span>
+<span id="L188"><a href="#L188">188</a>           (scalarPolynomialMap</span>
+<span id="L189"><a href="#L189">189</a>             (k := k) (K := AlgebraicClosure k) (PhaseVar n))) :=</span>
+<span id="L190"><a href="#L190">190</a>   exists_algebraicClosure_zero_of_ne_top (orderInitialIdeal k I) hI</span>
+<span id="L191"><a href="#L191">191</a> </span>
+<span id="L192"><a href="#L192">192</a> /-- The literal prime-spectrum order support is nonempty exactly when the</span>
+<span id="L193"><a href="#L193">193</a> extended order initial ideal has an algebraic-closure-valued point. -/</span>
+<span id="L194"><a href="#L194">194</a> theorem orderCharacteristicSupport_nonempty_iff_geometric_nonempty</span>
+<span id="L195"><a href="#L195">195</a>     {n : ℕ} (I : RightIdeal (WeylAlg k n)) :</span>
+<span id="L196"><a href="#L196">196</a>     Set.Nonempty (orderCharacteristicSupport k I) ↔</span>
+<span id="L197"><a href="#L197">197</a>       Set.Nonempty (MvPolynomial.zeroLocus (AlgebraicClosure k)</span>
+<span id="L198"><a href="#L198">198</a>         ((orderInitialIdeal k I).map</span>
+<span id="L199"><a href="#L199">199</a>           (scalarPolynomialMap</span>
+<span id="L200"><a href="#L200">200</a>             (k := k) (K := AlgebraicClosure k) (PhaseVar n)))) := by</span>
+<span id="L201"><a href="#L201">201</a>   rw [orderCharacteristicSupport_eq_zeroLocus]</span>
+<span id="L202"><a href="#L202">202</a>   exact primeZeroLocus_nonempty_iff_algebraicClosure_zeroLocus_nonempty</span>
+<span id="L203"><a href="#L203">203</a>     (orderInitialIdeal k I)</span>
+<span id="L204"><a href="#L204">204</a> </span>
+<span id="L205"><a href="#L205">205</a> /-- Geometric emptiness over the algebraic closure descends all the way to</span>
+<span id="L206"><a href="#L206">206</a> the unit order initial ideal and hence to empty prime-spectrum support. -/</span>
+<span id="L207"><a href="#L207">207</a> theorem geometric_orderInitialZeroLocus_empty_iff_support_empty</span>
+<span id="L208"><a href="#L208">208</a>     {n : ℕ} (I : RightIdeal (WeylAlg k n)) :</span>
+<span id="L209"><a href="#L209">209</a>     MvPolynomial.zeroLocus (AlgebraicClosure k)</span>
+<span id="L210"><a href="#L210">210</a>         ((orderInitialIdeal k I).map</span>
+<span id="L211"><a href="#L211">211</a>           (scalarPolynomialMap</span>
+<span id="L212"><a href="#L212">212</a>             (k := k) (K := AlgebraicClosure k) (PhaseVar n))) = ∅ ↔</span>
+<span id="L213"><a href="#L213">213</a>       orderCharacteristicSupport k I = ∅ := by</span>
+<span id="L214"><a href="#L214">214</a>   rw [algebraicClosure_zeroLocus_eq_empty_iff,</span>
+<span id="L215"><a href="#L215">215</a>     orderCharacteristicSupport_eq_empty_iff]</span>
+<span id="L216"><a href="#L216">216</a> </span>
+<span id="L217"><a href="#L217">217</a> #print axioms exists_algebraicClosure_zero_of_ne_top</span>
+<span id="L218"><a href="#L218">218</a> #print axioms algebraicClosure_zeroLocus_eq_empty_iff</span>
+<span id="L219"><a href="#L219">219</a> #print axioms map_scalarPolynomialMap_eq_top_iff</span>
+<span id="L220"><a href="#L220">220</a> #print axioms exists_algebraicClosure_zero_of_mem_primeZeroLocus</span>
+<span id="L221"><a href="#L221">221</a> #print axioms groundPrimeOfAlgebraicClosurePoint</span>
+<span id="L222"><a href="#L222">222</a> #print axioms groundPrimeOfAlgebraicClosurePoint_asIdeal</span>
+<span id="L223"><a href="#L223">223</a> #print axioms groundPrimeOfAlgebraicClosurePoint_mem_zeroLocus</span>
+<span id="L224"><a href="#L224">224</a> #print axioms primeZeroLocus_nonempty_iff_algebraicClosure_zeroLocus_nonempty</span>
+<span id="L225"><a href="#L225">225</a> #print axioms exists_algebraicClosure_orderInitialZero_of_ne_top</span>
+<span id="L226"><a href="#L226">226</a> #print axioms orderCharacteristicSupport_nonempty_iff_geometric_nonempty</span>
+<span id="L227"><a href="#L227">227</a> #print axioms geometric_orderInitialZeroLocus_empty_iff_support_empty</span>
+<span id="L228"><a href="#L228">228</a> </span>
+<span id="L229"><a href="#L229">229</a> end</span>
+<span id="L230"><a href="#L230">230</a> </span>
+<span id="L231"><a href="#L231">231</a> end Stafford38.Characteristic.GeometricSupportDescent</span>
+<span id="L232"><a href="#L232">232</a> </span></pre>

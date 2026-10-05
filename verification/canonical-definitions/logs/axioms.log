@@ -1,0 +1,95 @@
+'Stafford38.Weyl.EulerProductIdentities.eval_fallingEulerProduct' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Weyl.EulerProductIdentities.eval_risingEulerProduct' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.NoncharacteristicHypersurface.normalMomentumPolynomialEquiv_normalCoordinate' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.NoncharacteristicHypersurface.normalMomentumPolynomialEquiv_tangentialMap' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.NoncharacteristicHypersurface.canonical_principal_hypersurface_finite' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.WeylDomain.mul_ne_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Stafford38.TorsionCyclicity.exists_span_singleton_eq_span_pair' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.TorsionCyclicity.weyl_isCyclic_of_isRightTorsion' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Stafford38.NoncharacteristicHyperplane.canonical_isNoncharacteristic_annihilator' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.NoncharacteristicHyperplane.canonicalSupport_conormal_subset_zeroSection' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.NoncharacteristicHyperplane.cokerToRestrictedCoordinateRing_surjective' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.NoncharacteristicHyperplane.canonical_finite_restrictedCoordinateQuotient' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.NoncharacteristicHyperplane.cokerToRestrictedCoordinateRing_mk' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.NoncharacteristicHyperplane.cokerToRestrictedCoordinateRing_injective' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.NoncharacteristicHyperplane.cokerToRestrictedCoordinateRingEquiv' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.NoncharacteristicHyperplane.isNoncharacteristic_iff_finite_restrictedCoordinateQuotient' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.universalStatement' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Stafford38.universalFixedSourceStatement' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Stafford38FixedSourceChallenge.universalFixedSourceStatement' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.LocalizationCorollaries.s38_rightOreLocalization' depends on axioms: [propext, Quot.sound]
+'Stafford38.LeftHandedCorollary.leftHanded_of_universalStatement' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.LocalizedDifferentialCorollaries.s38_unconditional_localized_differential' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.LocalizedDifferentialCorollaries.s38_principal_open_differential' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.LocalizedDifferentialCorollaries.s38_partial_laurent_differential' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.LocalizedDifferentialCorollaries.s38_fraction_ring_differential' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Evolution.evolutionaryCorollary' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Stafford38.Evolution.tensorEvolutionaryCorollary' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Stafford38.Geometry.GeneralTangentLimitCriterion.tangent_limit_criterion_of_directSummand' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.GeneralAsymptoticConormal.coordinate_axis_mem_projective_conormal_directions' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.GeneralCoisotropicSets.exists_zero_base_coordinate_of_isFibreConical' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.GeneralCoisotropicSets.smoothConormalClosure_minimalPrime_subset_of_isFibreConical' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.GeneralCoisotropicCanonicalAdapter.algebraicallyClosedCanonicalSupportVanishing_of_generalCoisotropic' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.TorsionCyclicity.span_adjusted_pair_eq_span_pair' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Stafford38.Geometry.GeneralTangentLimitCriterionTest.paper_shape_consumer' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.GeneralCoisotropicSetsTest.exact_complex_manuscript_coisotropic_consumer' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.GeneralCoisotropicSetsTest.zeroSectionIdealOne_isInvolutive' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Stafford38.Geometry.GeneralCoisotropicSetsTest.zeroSectionIdealOne_not_isPoisson' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]

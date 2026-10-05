@@ -1,0 +1,371 @@
+<!doctype html><meta charset="utf-8"><title>Stafford38/Geometry/CoisotropicTranslation.lean</title><style>body{font:14px monospace}pre span{display:block}pre span:target{background:#fff0ad}a{color:#666}pre{white-space:pre-wrap}</style><h1>Stafford38/Geometry/CoisotropicTranslation.lean</h1><p>This project (Stafford38) · 0403af3f0b1a7f84d2027121932723f67bd279ae</p><pre><span id="L1"><a href="#L1">1</a> module</span>
+<span id="L2"><a href="#L2">2</a> public import Stafford38.Characteristic.Polynomial</span>
+<span id="L3"><a href="#L3">3</a> </span>
+<span id="L4"><a href="#L4">4</a> @[expose] public section</span>
+<span id="L5"><a href="#L5">5</a> </span>
+<span id="L6"><a href="#L6">6</a> open Stafford38Challenge (PhaseVar)</span>
+<span id="L7"><a href="#L7">7</a> </span>
+<span id="L8"><a href="#L8">8</a> /-!</span>
+<span id="L9"><a href="#L9">9</a> # Poisson closure and vertical translation</span>
+<span id="L10"><a href="#L10">10</a> </span>
+<span id="L11"><a href="#L11">11</a> This file proves a polynomial statement used by the coisotropic part of the</span>
+<span id="L12"><a href="#L12">12</a> Stafford argument.  If a Poisson ideal vanishes at a point of the zero section</span>
+<span id="L13"><a href="#L13">13</a> and contains a polynomial in the base variables, then it also vanishes after</span>
+<span id="L14"><a href="#L14">14</a> the fibre coordinate is translated by any scalar multiple of the differential</span>
+<span id="L15"><a href="#L15">15</a> of that base polynomial at the point.</span>
+<span id="L16"><a href="#L16">16</a> </span>
+<span id="L17"><a href="#L17">17</a> Only polynomial rings, ideals, partial derivatives, and evaluation maps occur</span>
+<span id="L18"><a href="#L18">18</a> here.  In particular, no variety, characteristic support, conormal bundle, or</span>
+<span id="L19"><a href="#L19">19</a> geometric integration theorem is represented by these declarations.</span>
+<span id="L20"><a href="#L20">20</a> -/</span>
+<span id="L21"><a href="#L21">21</a> </span>
+<span id="L22"><a href="#L22">22</a> namespace Stafford38.Geometry.CoisotropicTranslation</span>
+<span id="L23"><a href="#L23">23</a> </span>
+<span id="L24"><a href="#L24">24</a> open Stafford38.Characteristic</span>
+<span id="L25"><a href="#L25">25</a> </span>
+<span id="L26"><a href="#L26">26</a> noncomputable section</span>
+<span id="L27"><a href="#L27">27</a> </span>
+<span id="L28"><a href="#L28">28</a> variable {k : Type*} [Field k] {n : ℕ}</span>
+<span id="L29"><a href="#L29">29</a> </span>
+<span id="L30"><a href="#L30">30</a> /-- Embed a polynomial in the base coordinates into the phase-space ring. -/</span>
+<span id="L31"><a href="#L31">31</a> def baseLift : MvPolynomial (Fin n) k →ₐ[k] SymbolRing k n :=</span>
+<span id="L32"><a href="#L32">32</a>   MvPolynomial.rename Sum.inl</span>
+<span id="L33"><a href="#L33">33</a> </span>
+<span id="L34"><a href="#L34">34</a> /-- Evaluate the differential of a base polynomial at a base point. -/</span>
+<span id="L35"><a href="#L35">35</a> def differentialAt (y : Fin n → k) (f : MvPolynomial (Fin n) k) (i : Fin n) : k :=</span>
+<span id="L36"><a href="#L36">36</a>   MvPolynomial.eval y (MvPolynomial.pderiv i f)</span>
+<span id="L37"><a href="#L37">37</a> </span>
+<span id="L38"><a href="#L38">38</a> /-- The polynomial obtained by evaluating a phase-space polynomial along the</span>
+<span id="L39"><a href="#L39">39</a> arbitrary affine fibre line `(y, xi + t v)`. -/</span>
+<span id="L40"><a href="#L40">40</a> def affineFibreLinePolynomial</span>
+<span id="L41"><a href="#L41">41</a>     (y xi v : Fin n → k) (g : SymbolRing k n) : Polynomial k :=</span>
+<span id="L42"><a href="#L42">42</a>   MvPolynomial.aeval</span>
+<span id="L43"><a href="#L43">43</a>     (Sum.elim (fun i =&gt; Polynomial.C (y i))</span>
+<span id="L44"><a href="#L44">44</a>       (fun i =&gt; Polynomial.C (xi i) + Polynomial.C (v i) * Polynomial.X)) g</span>
+<span id="L45"><a href="#L45">45</a> </span>
+<span id="L46"><a href="#L46">46</a> /-- The point on the affine fibre line `(y, xi + t v)`. -/</span>
+<span id="L47"><a href="#L47">47</a> def affineFibreTranslatePoint</span>
+<span id="L48"><a href="#L48">48</a>     (y xi v : Fin n → k) (t : k) : PhaseVar n → k</span>
+<span id="L49"><a href="#L49">49</a>   | Sum.inl i =&gt; y i</span>
+<span id="L50"><a href="#L50">50</a>   | Sum.inr i =&gt; xi i + t * v i</span>
+<span id="L51"><a href="#L51">51</a> </span>
+<span id="L52"><a href="#L52">52</a> @[simp] theorem affineFibreTranslatePoint_inl</span>
+<span id="L53"><a href="#L53">53</a>     (y xi v : Fin n → k) (t : k) (i : Fin n) :</span>
+<span id="L54"><a href="#L54">54</a>     affineFibreTranslatePoint y xi v t (Sum.inl i) = y i := rfl</span>
+<span id="L55"><a href="#L55">55</a> </span>
+<span id="L56"><a href="#L56">56</a> @[simp] theorem affineFibreTranslatePoint_inr</span>
+<span id="L57"><a href="#L57">57</a>     (y xi v : Fin n → k) (t : k) (i : Fin n) :</span>
+<span id="L58"><a href="#L58">58</a>     affineFibreTranslatePoint y xi v t (Sum.inr i) = xi i + t * v i := rfl</span>
+<span id="L59"><a href="#L59">59</a> </span>
+<span id="L60"><a href="#L60">60</a> /-- The zero-section point over `y`. -/</span>
+<span id="L61"><a href="#L61">61</a> def zeroSectionPoint (y : Fin n → k) : PhaseVar n → k</span>
+<span id="L62"><a href="#L62">62</a>   | Sum.inl i =&gt; y i</span>
+<span id="L63"><a href="#L63">63</a>   | Sum.inr _ =&gt; 0</span>
+<span id="L64"><a href="#L64">64</a> </span>
+<span id="L65"><a href="#L65">65</a> /-- The zero-fibre specialization of `affineFibreTranslatePoint`, translating</span>
+<span id="L66"><a href="#L66">66</a> `(y, 0)` by `t df_y`. -/</span>
+<span id="L67"><a href="#L67">67</a> abbrev differentialTranslatePoint</span>
+<span id="L68"><a href="#L68">68</a>     (y : Fin n → k) (f : MvPolynomial (Fin n) k) (t : k) : PhaseVar n → k :=</span>
+<span id="L69"><a href="#L69">69</a>   affineFibreTranslatePoint y (fun _ =&gt; 0) (differentialAt y f) t</span>
+<span id="L70"><a href="#L70">70</a> </span>
+<span id="L71"><a href="#L71">71</a> theorem differentialTranslatePoint_eq_affineFibreTranslatePoint_zero</span>
+<span id="L72"><a href="#L72">72</a>     (y : Fin n → k) (f : MvPolynomial (Fin n) k) (t : k) :</span>
+<span id="L73"><a href="#L73">73</a>     differentialTranslatePoint y f t =</span>
+<span id="L74"><a href="#L74">74</a>       affineFibreTranslatePoint y (fun _ =&gt; 0) (differentialAt y f) t := rfl</span>
+<span id="L75"><a href="#L75">75</a> </span>
+<span id="L76"><a href="#L76">76</a> /-- The polynomial line `t ↦ g(y, t v)` in the fibre over `y`, the</span>
+<span id="L77"><a href="#L77">77</a> zero-fibre specialization of `affineFibreLinePolynomial`. -/</span>
+<span id="L78"><a href="#L78">78</a> abbrev fibreLinePolynomial</span>
+<span id="L79"><a href="#L79">79</a>     (y v : Fin n → k) (g : SymbolRing k n) : Polynomial k :=</span>
+<span id="L80"><a href="#L80">80</a>   affineFibreLinePolynomial y (fun _ =&gt; 0) v g</span>
+<span id="L81"><a href="#L81">81</a> </span>
+<span id="L82"><a href="#L82">82</a> theorem fibreLinePolynomial_eq_affineFibreLinePolynomial_zero</span>
+<span id="L83"><a href="#L83">83</a>     (y v : Fin n → k) (g : SymbolRing k n) :</span>
+<span id="L84"><a href="#L84">84</a>     fibreLinePolynomial y v g = affineFibreLinePolynomial y (fun _ =&gt; 0) v g := rfl</span>
+<span id="L85"><a href="#L85">85</a> </span>
+<span id="L86"><a href="#L86">86</a> /-- Directional derivative in the fibre variables. -/</span>
+<span id="L87"><a href="#L87">87</a> def verticalDeriv (v : Fin n → k) (g : SymbolRing k n) : SymbolRing k n :=</span>
+<span id="L88"><a href="#L88">88</a>   ∑ i, MvPolynomial.C (v i) * MvPolynomial.pderiv (Sum.inr i) g</span>
+<span id="L89"><a href="#L89">89</a> </span>
+<span id="L90"><a href="#L90">90</a> @[simp] theorem verticalDeriv_C (v : Fin n → k) (a : k) :</span>
+<span id="L91"><a href="#L91">91</a>     verticalDeriv v (MvPolynomial.C a) = 0 := by</span>
+<span id="L92"><a href="#L92">92</a>   simp [verticalDeriv]</span>
+<span id="L93"><a href="#L93">93</a> </span>
+<span id="L94"><a href="#L94">94</a> theorem verticalDeriv_add (v : Fin n → k) (g h : SymbolRing k n) :</span>
+<span id="L95"><a href="#L95">95</a>     verticalDeriv v (g + h) = verticalDeriv v g + verticalDeriv v h := by</span>
+<span id="L96"><a href="#L96">96</a>   simp [verticalDeriv, mul_add, Finset.sum_add_distrib]</span>
+<span id="L97"><a href="#L97">97</a> </span>
+<span id="L98"><a href="#L98">98</a> theorem verticalDeriv_mul (v : Fin n → k) (g h : SymbolRing k n) :</span>
+<span id="L99"><a href="#L99">99</a>     verticalDeriv v (g * h) = verticalDeriv v g * h + g * verticalDeriv v h := by</span>
+<span id="L100"><a href="#L100">100</a>   simp only [verticalDeriv, MvPolynomial.pderiv_mul, mul_add,</span>
+<span id="L101"><a href="#L101">101</a>     Finset.sum_add_distrib]</span>
+<span id="L102"><a href="#L102">102</a>   apply congrArg₂ (· + ·)</span>
+<span id="L103"><a href="#L103">103</a>   · rw [Finset.sum_mul]</span>
+<span id="L104"><a href="#L104">104</a>     apply Finset.sum_congr rfl</span>
+<span id="L105"><a href="#L105">105</a>     intro i hi</span>
+<span id="L106"><a href="#L106">106</a>     ac_rfl</span>
+<span id="L107"><a href="#L107">107</a>   · rw [Finset.mul_sum]</span>
+<span id="L108"><a href="#L108">108</a>     apply Finset.sum_congr rfl</span>
+<span id="L109"><a href="#L109">109</a>     intro i hi</span>
+<span id="L110"><a href="#L110">110</a>     ac_rfl</span>
+<span id="L111"><a href="#L111">111</a> </span>
+<span id="L112"><a href="#L112">112</a> @[simp] theorem verticalDeriv_X_base (v : Fin n → k) (i : Fin n) :</span>
+<span id="L113"><a href="#L113">113</a>     verticalDeriv v (MvPolynomial.X (Sum.inl i)) = 0 := by</span>
+<span id="L114"><a href="#L114">114</a>   simp [verticalDeriv]</span>
+<span id="L115"><a href="#L115">115</a> </span>
+<span id="L116"><a href="#L116">116</a> @[simp] theorem verticalDeriv_X_fibre (v : Fin n → k) (i : Fin n) :</span>
+<span id="L117"><a href="#L117">117</a>     verticalDeriv v (MvPolynomial.X (Sum.inr i)) = MvPolynomial.C (v i) := by</span>
+<span id="L118"><a href="#L118">118</a>   classical</span>
+<span id="L119"><a href="#L119">119</a>   simp [verticalDeriv, Pi.single_apply]</span>
+<span id="L120"><a href="#L120">120</a> </span>
+<span id="L121"><a href="#L121">121</a> @[simp] theorem fibreLinePolynomial_C</span>
+<span id="L122"><a href="#L122">122</a>     (y v : Fin n → k) (a : k) :</span>
+<span id="L123"><a href="#L123">123</a>     fibreLinePolynomial y v (MvPolynomial.C a) = Polynomial.C a := by</span>
+<span id="L124"><a href="#L124">124</a>   simp [fibreLinePolynomial, affineFibreLinePolynomial]</span>
+<span id="L125"><a href="#L125">125</a> </span>
+<span id="L126"><a href="#L126">126</a> @[simp] theorem fibreLinePolynomial_zero (y v : Fin n → k) :</span>
+<span id="L127"><a href="#L127">127</a>     fibreLinePolynomial y v 0 = 0 := by</span>
+<span id="L128"><a href="#L128">128</a>   simp [fibreLinePolynomial, affineFibreLinePolynomial]</span>
+<span id="L129"><a href="#L129">129</a> </span>
+<span id="L130"><a href="#L130">130</a> @[simp] theorem fibreLinePolynomial_add</span>
+<span id="L131"><a href="#L131">131</a>     (y v : Fin n → k) (g h : SymbolRing k n) :</span>
+<span id="L132"><a href="#L132">132</a>     fibreLinePolynomial y v (g + h) =</span>
+<span id="L133"><a href="#L133">133</a>       fibreLinePolynomial y v g + fibreLinePolynomial y v h := by</span>
+<span id="L134"><a href="#L134">134</a>   simp [fibreLinePolynomial, affineFibreLinePolynomial]</span>
+<span id="L135"><a href="#L135">135</a> </span>
+<span id="L136"><a href="#L136">136</a> @[simp] theorem fibreLinePolynomial_mul</span>
+<span id="L137"><a href="#L137">137</a>     (y v : Fin n → k) (g h : SymbolRing k n) :</span>
+<span id="L138"><a href="#L138">138</a>     fibreLinePolynomial y v (g * h) =</span>
+<span id="L139"><a href="#L139">139</a>       fibreLinePolynomial y v g * fibreLinePolynomial y v h := by</span>
+<span id="L140"><a href="#L140">140</a>   simp [fibreLinePolynomial, affineFibreLinePolynomial]</span>
+<span id="L141"><a href="#L141">141</a> </span>
+<span id="L142"><a href="#L142">142</a> theorem fibreLinePolynomial_sum {ι : Type*} [Fintype ι]</span>
+<span id="L143"><a href="#L143">143</a>     (y v : Fin n → k) (g : ι → SymbolRing k n) :</span>
+<span id="L144"><a href="#L144">144</a>     fibreLinePolynomial y v (∑ i, g i) = ∑ i, fibreLinePolynomial y v (g i) := by</span>
+<span id="L145"><a href="#L145">145</a>   simp [fibreLinePolynomial, affineFibreLinePolynomial]</span>
+<span id="L146"><a href="#L146">146</a> </span>
+<span id="L147"><a href="#L147">147</a> @[simp] theorem fibreLinePolynomial_X_base</span>
+<span id="L148"><a href="#L148">148</a>     (y v : Fin n → k) (i : Fin n) :</span>
+<span id="L149"><a href="#L149">149</a>     fibreLinePolynomial y v (MvPolynomial.X (Sum.inl i)) = Polynomial.C (y i) := by</span>
+<span id="L150"><a href="#L150">150</a>   simp [fibreLinePolynomial, affineFibreLinePolynomial]</span>
+<span id="L151"><a href="#L151">151</a> </span>
+<span id="L152"><a href="#L152">152</a> @[simp] theorem fibreLinePolynomial_X_fibre</span>
+<span id="L153"><a href="#L153">153</a>     (y v : Fin n → k) (i : Fin n) :</span>
+<span id="L154"><a href="#L154">154</a>     fibreLinePolynomial y v (MvPolynomial.X (Sum.inr i)) =</span>
+<span id="L155"><a href="#L155">155</a>       Polynomial.C (v i) * Polynomial.X := by</span>
+<span id="L156"><a href="#L156">156</a>   simp [fibreLinePolynomial, affineFibreLinePolynomial]</span>
+<span id="L157"><a href="#L157">157</a> </span>
+<span id="L158"><a href="#L158">158</a> /-- Evaluating the affine fibre-line polynomial at time `t` is evaluation at</span>
+<span id="L159"><a href="#L159">159</a> `(y, xi + t v)`. -/</span>
+<span id="L160"><a href="#L160">160</a> theorem eval_affineFibreLinePolynomial (y xi v : Fin n → k)</span>
+<span id="L161"><a href="#L161">161</a>     (g : SymbolRing k n) (t : k) :</span>
+<span id="L162"><a href="#L162">162</a>     Polynomial.eval t (affineFibreLinePolynomial y xi v g) =</span>
+<span id="L163"><a href="#L163">163</a>       MvPolynomial.eval (Sum.elim y (fun i =&gt; xi i + t * v i)) g := by</span>
+<span id="L164"><a href="#L164">164</a>   change Polynomial.aeval t</span>
+<span id="L165"><a href="#L165">165</a>       (MvPolynomial.aeval (Sum.elim</span>
+<span id="L166"><a href="#L166">166</a>         (fun i =&gt; Polynomial.C (y i))</span>
+<span id="L167"><a href="#L167">167</a>         (fun i =&gt; Polynomial.C (xi i) + Polynomial.C (v i) * Polynomial.X)) g) = _</span>
+<span id="L168"><a href="#L168">168</a>   rw [MvPolynomial.comp_aeval_apply]</span>
+<span id="L169"><a href="#L169">169</a>   change MvPolynomial.aeval _ g = MvPolynomial.aeval _ g</span>
+<span id="L170"><a href="#L170">170</a>   apply DFunLike.congr_fun</span>
+<span id="L171"><a href="#L171">171</a>   apply MvPolynomial.algHom_ext</span>
+<span id="L172"><a href="#L172">172</a>   intro i</span>
+<span id="L173"><a href="#L173">173</a>   rcases i with i | i</span>
+<span id="L174"><a href="#L174">174</a>   · rw [MvPolynomial.aeval_X, MvPolynomial.aeval_X]</span>
+<span id="L175"><a href="#L175">175</a>     simp</span>
+<span id="L176"><a href="#L176">176</a>   · rw [MvPolynomial.aeval_X, MvPolynomial.aeval_X]</span>
+<span id="L177"><a href="#L177">177</a>     simp only [Sum.elim_inr, map_add, Polynomial.aeval_C, Polynomial.aeval_mul,</span>
+<span id="L178"><a href="#L178">178</a>       Polynomial.aeval_X]</span>
+<span id="L179"><a href="#L179">179</a>     simp</span>
+<span id="L180"><a href="#L180">180</a>     ring</span>
+<span id="L181"><a href="#L181">181</a> </span>
+<span id="L182"><a href="#L182">182</a> theorem derivative_fibreLinePolynomial</span>
+<span id="L183"><a href="#L183">183</a>     (y v : Fin n → k) (g : SymbolRing k n) :</span>
+<span id="L184"><a href="#L184">184</a>     Polynomial.derivative (fibreLinePolynomial y v g) =</span>
+<span id="L185"><a href="#L185">185</a>       fibreLinePolynomial y v (verticalDeriv v g) := by</span>
+<span id="L186"><a href="#L186">186</a>   induction g using MvPolynomial.induction_on with</span>
+<span id="L187"><a href="#L187">187</a>   | C a =&gt; simp [verticalDeriv]</span>
+<span id="L188"><a href="#L188">188</a>   | add p q hp hq =&gt;</span>
+<span id="L189"><a href="#L189">189</a>       simp only [fibreLinePolynomial_add, Polynomial.derivative_add, hp, hq]</span>
+<span id="L190"><a href="#L190">190</a>       rw [verticalDeriv_add, fibreLinePolynomial_add]</span>
+<span id="L191"><a href="#L191">191</a>   | mul_X p i hp =&gt;</span>
+<span id="L192"><a href="#L192">192</a>       rcases i with i | i</span>
+<span id="L193"><a href="#L193">193</a>       · simp only [fibreLinePolynomial_mul, fibreLinePolynomial_X_base, Polynomial.derivative_mul,</span>
+<span id="L194"><a href="#L194">194</a>           Polynomial.derivative_C, zero_mul, add_zero, hp]</span>
+<span id="L195"><a href="#L195">195</a>         simp [verticalDeriv_mul]</span>
+<span id="L196"><a href="#L196">196</a>       · simp only [fibreLinePolynomial_mul, fibreLinePolynomial_X_fibre, Polynomial.derivative_mul,</span>
+<span id="L197"><a href="#L197">197</a>           Polynomial.derivative_C, Polynomial.derivative_X, zero_mul, zero_add, mul_one, hp]</span>
+<span id="L198"><a href="#L198">198</a>         simp [verticalDeriv_mul]</span>
+<span id="L199"><a href="#L199">199</a> </span>
+<span id="L200"><a href="#L200">200</a> theorem eval_fibreLinePolynomial (y v : Fin n → k)</span>
+<span id="L201"><a href="#L201">201</a>     (g : SymbolRing k n) (t : k) :</span>
+<span id="L202"><a href="#L202">202</a>     Polynomial.eval t (fibreLinePolynomial y v g) =</span>
+<span id="L203"><a href="#L203">203</a>       MvPolynomial.eval (Sum.elim y (fun i =&gt; t * v i)) g := by</span>
+<span id="L204"><a href="#L204">204</a>   rw [fibreLinePolynomial_eq_affineFibreLinePolynomial_zero,</span>
+<span id="L205"><a href="#L205">205</a>     eval_affineFibreLinePolynomial]</span>
+<span id="L206"><a href="#L206">206</a>   apply MvPolynomial.eval₂_congr</span>
+<span id="L207"><a href="#L207">207</a>   intro i c hi hc</span>
+<span id="L208"><a href="#L208">208</a>   rcases i with i | i &lt;;&gt; simp</span>
+<span id="L209"><a href="#L209">209</a> </span>
+<span id="L210"><a href="#L210">210</a> theorem eval_zero_fibreLinePolynomial (y v : Fin n → k)</span>
+<span id="L211"><a href="#L211">211</a>     (g : SymbolRing k n) :</span>
+<span id="L212"><a href="#L212">212</a>     Polynomial.eval 0 (fibreLinePolynomial y v g) =</span>
+<span id="L213"><a href="#L213">213</a>       MvPolynomial.eval (zeroSectionPoint y) g := by</span>
+<span id="L214"><a href="#L214">214</a>   rw [eval_fibreLinePolynomial]</span>
+<span id="L215"><a href="#L215">215</a>   apply MvPolynomial.eval₂_congr</span>
+<span id="L216"><a href="#L216">216</a>   intro i c hi hc</span>
+<span id="L217"><a href="#L217">217</a>   rcases i with i | i &lt;;&gt; simp [zeroSectionPoint]</span>
+<span id="L218"><a href="#L218">218</a> </span>
+<span id="L219"><a href="#L219">219</a> theorem pderiv_baseLift_base (f : MvPolynomial (Fin n) k) (i : Fin n) :</span>
+<span id="L220"><a href="#L220">220</a>     MvPolynomial.pderiv (Sum.inl i) (baseLift f) =</span>
+<span id="L221"><a href="#L221">221</a>       baseLift (MvPolynomial.pderiv i f) := by</span>
+<span id="L222"><a href="#L222">222</a>   exact MvPolynomial.pderiv_rename Sum.inl_injective i f</span>
+<span id="L223"><a href="#L223">223</a> </span>
+<span id="L224"><a href="#L224">224</a> theorem pderiv_baseLift_fibre (f : MvPolynomial (Fin n) k) (i : Fin n) :</span>
+<span id="L225"><a href="#L225">225</a>     MvPolynomial.pderiv (Sum.inr i) (baseLift f) = 0 := by</span>
+<span id="L226"><a href="#L226">226</a>   apply MvPolynomial.pderiv_eq_zero_of_notMem_vars</span>
+<span id="L227"><a href="#L227">227</a>   intro hi</span>
+<span id="L228"><a href="#L228">228</a>   rcases MvPolynomial.mem_vars_rename Sum.inl f hi with ⟨j, hj, hji⟩</span>
+<span id="L229"><a href="#L229">229</a>   exact Sum.inl_ne_inr hji</span>
+<span id="L230"><a href="#L230">230</a> </span>
+<span id="L231"><a href="#L231">231</a> theorem fibreLinePolynomial_baseLift</span>
+<span id="L232"><a href="#L232">232</a>     (y v : Fin n → k) (f : MvPolynomial (Fin n) k) :</span>
+<span id="L233"><a href="#L233">233</a>     fibreLinePolynomial y v (baseLift f) = Polynomial.C (MvPolynomial.eval y f) := by</span>
+<span id="L234"><a href="#L234">234</a>   induction f using MvPolynomial.induction_on with</span>
+<span id="L235"><a href="#L235">235</a>   | C a =&gt; simp [baseLift, fibreLinePolynomial, differentialAt]</span>
+<span id="L236"><a href="#L236">236</a>   | add p q hp hq =&gt; simp only [map_add, fibreLinePolynomial_add, hp, hq,</span>
+<span id="L237"><a href="#L237">237</a>       MvPolynomial.eval_add, map_add]</span>
+<span id="L238"><a href="#L238">238</a>   | mul_X p j hp =&gt;</span>
+<span id="L239"><a href="#L239">239</a>       rw [map_mul, fibreLinePolynomial_mul, hp, MvPolynomial.eval_mul,</span>
+<span id="L240"><a href="#L240">240</a>         MvPolynomial.eval_X, map_mul]</span>
+<span id="L241"><a href="#L241">241</a>       simp [baseLift]</span>
+<span id="L242"><a href="#L242">242</a> </span>
+<span id="L243"><a href="#L243">243</a> theorem fibreLinePolynomial_baseLift_pderiv</span>
+<span id="L244"><a href="#L244">244</a>     (y v : Fin n → k) (f : MvPolynomial (Fin n) k) (i : Fin n) :</span>
+<span id="L245"><a href="#L245">245</a>     fibreLinePolynomial y v</span>
+<span id="L246"><a href="#L246">246</a>         (MvPolynomial.pderiv (Sum.inl i) (baseLift f)) =</span>
+<span id="L247"><a href="#L247">247</a>       Polynomial.C (differentialAt y f i) := by</span>
+<span id="L248"><a href="#L248">248</a>   rw [pderiv_baseLift_base, fibreLinePolynomial_baseLift]</span>
+<span id="L249"><a href="#L249">249</a>   rfl</span>
+<span id="L250"><a href="#L250">250</a> </span>
+<span id="L251"><a href="#L251">251</a> theorem fibreLinePolynomial_poissonBracket_baseLift</span>
+<span id="L252"><a href="#L252">252</a>     (y : Fin n → k) (f : MvPolynomial (Fin n) k) (g : SymbolRing k n) :</span>
+<span id="L253"><a href="#L253">253</a>     fibreLinePolynomial y (differentialAt y f) (poissonBracket (baseLift f) g) =</span>
+<span id="L254"><a href="#L254">254</a>       fibreLinePolynomial y (differentialAt y f)</span>
+<span id="L255"><a href="#L255">255</a>         (verticalDeriv (differentialAt y f) g) := by</span>
+<span id="L256"><a href="#L256">256</a>   simp only [poissonBracket, pderiv_baseLift_base, pderiv_baseLift_fibre, zero_mul,</span>
+<span id="L257"><a href="#L257">257</a>     sub_zero, verticalDeriv, fibreLinePolynomial_sum]</span>
+<span id="L258"><a href="#L258">258</a>   apply Finset.sum_congr rfl</span>
+<span id="L259"><a href="#L259">259</a>   intro i hi</span>
+<span id="L260"><a href="#L260">260</a>   simp [fibreLinePolynomial_mul, fibreLinePolynomial_baseLift, differentialAt]</span>
+<span id="L261"><a href="#L261">261</a> </span>
+<span id="L262"><a href="#L262">262</a> /-! ## Iterated Hamiltonian differentiation -/</span>
+<span id="L263"><a href="#L263">263</a> </span>
+<span id="L264"><a href="#L264">264</a> /-- Iteration of bracketing on the left by one base equation. -/</span>
+<span id="L265"><a href="#L265">265</a> def hamiltonIter (f : MvPolynomial (Fin n) k) : ℕ → SymbolRing k n → SymbolRing k n</span>
+<span id="L266"><a href="#L266">266</a>   | 0, g =&gt; g</span>
+<span id="L267"><a href="#L267">267</a>   | m + 1, g =&gt; poissonBracket (baseLift f) (hamiltonIter f m g)</span>
+<span id="L268"><a href="#L268">268</a> </span>
+<span id="L269"><a href="#L269">269</a> theorem iterate_derivative_fibreLinePolynomial</span>
+<span id="L270"><a href="#L270">270</a>     (y : Fin n → k) (f : MvPolynomial (Fin n) k)</span>
+<span id="L271"><a href="#L271">271</a>     (g : SymbolRing k n) (m : ℕ) :</span>
+<span id="L272"><a href="#L272">272</a>     (Polynomial.derivative^[m])</span>
+<span id="L273"><a href="#L273">273</a>         (fibreLinePolynomial y (differentialAt y f) g) =</span>
+<span id="L274"><a href="#L274">274</a>       fibreLinePolynomial y (differentialAt y f) (hamiltonIter f m g) := by</span>
+<span id="L275"><a href="#L275">275</a>   induction m with</span>
+<span id="L276"><a href="#L276">276</a>   | zero =&gt; rfl</span>
+<span id="L277"><a href="#L277">277</a>   | succ m hm =&gt;</span>
+<span id="L278"><a href="#L278">278</a>       rw [Function.iterate_succ_apply', hm, derivative_fibreLinePolynomial,</span>
+<span id="L279"><a href="#L279">279</a>         ← fibreLinePolynomial_poissonBracket_baseLift]</span>
+<span id="L280"><a href="#L280">280</a>       rfl</span>
+<span id="L281"><a href="#L281">281</a> </span>
+<span id="L282"><a href="#L282">282</a> theorem hamiltonIter_mem</span>
+<span id="L283"><a href="#L283">283</a>     (J : Ideal (SymbolRing k n)) (hJ : IsPoisson J)</span>
+<span id="L284"><a href="#L284">284</a>     (f : MvPolynomial (Fin n) k) (hf : baseLift f ∈ J)</span>
+<span id="L285"><a href="#L285">285</a>     (g : SymbolRing k n) (hg : g ∈ J) :</span>
+<span id="L286"><a href="#L286">286</a>     ∀ m, hamiltonIter f m g ∈ J := by</span>
+<span id="L287"><a href="#L287">287</a>   intro m</span>
+<span id="L288"><a href="#L288">288</a>   induction m with</span>
+<span id="L289"><a href="#L289">289</a>   | zero =&gt; exact hg</span>
+<span id="L290"><a href="#L290">290</a>   | succ m hm =&gt; exact hJ (baseLift f) hf (hamiltonIter f m g)</span>
+<span id="L291"><a href="#L291">291</a> </span>
+<span id="L292"><a href="#L292">292</a> theorem polynomial_eq_zero_of_eval_iterate_derivative_zero</span>
+<span id="L293"><a href="#L293">293</a>     [CharZero k]</span>
+<span id="L294"><a href="#L294">294</a>     (q : Polynomial k)</span>
+<span id="L295"><a href="#L295">295</a>     (h : ∀ m, Polynomial.eval 0 ((Polynomial.derivative^[m]) q) = 0) :</span>
+<span id="L296"><a href="#L296">296</a>     q = 0 := by</span>
+<span id="L297"><a href="#L297">297</a>   ext m</span>
+<span id="L298"><a href="#L298">298</a>   have hm0 : ((Polynomial.derivative^[m]) q).coeff 0 = 0 := by</span>
+<span id="L299"><a href="#L299">299</a>     rw [Polynomial.coeff_zero_eq_eval_zero]</span>
+<span id="L300"><a href="#L300">300</a>     exact h m</span>
+<span id="L301"><a href="#L301">301</a>   have hm : (Nat.factorial m : k) * q.coeff m = 0 := by</span>
+<span id="L302"><a href="#L302">302</a>     simpa only [Polynomial.coeff_iterate_derivative, zero_add,</span>
+<span id="L303"><a href="#L303">303</a>       Nat.descFactorial_self, nsmul_eq_mul] using hm0</span>
+<span id="L304"><a href="#L304">304</a>   have hc : q.coeff m = 0 :=</span>
+<span id="L305"><a href="#L305">305</a>     (mul_eq_zero.mp hm).resolve_left (by exact_mod_cast Nat.factorial_ne_zero m)</span>
+<span id="L306"><a href="#L306">306</a>   simpa using hc</span>
+<span id="L307"><a href="#L307">307</a> </span>
+<span id="L308"><a href="#L308">308</a> theorem fibreLinePolynomial_eq_zero_of_poisson</span>
+<span id="L309"><a href="#L309">309</a>     [CharZero k]</span>
+<span id="L310"><a href="#L310">310</a>     (J : Ideal (SymbolRing k n)) (hJ : IsPoisson J)</span>
+<span id="L311"><a href="#L311">311</a>     (y : Fin n → k)</span>
+<span id="L312"><a href="#L312">312</a>     (hzero : ∀ g ∈ J, MvPolynomial.eval (zeroSectionPoint y) g = 0)</span>
+<span id="L313"><a href="#L313">313</a>     (f : MvPolynomial (Fin n) k) (hf : baseLift f ∈ J)</span>
+<span id="L314"><a href="#L314">314</a>     (g : SymbolRing k n) (hg : g ∈ J) :</span>
+<span id="L315"><a href="#L315">315</a>     fibreLinePolynomial y (differentialAt y f) g = 0 := by</span>
+<span id="L316"><a href="#L316">316</a>   apply polynomial_eq_zero_of_eval_iterate_derivative_zero</span>
+<span id="L317"><a href="#L317">317</a>   intro m</span>
+<span id="L318"><a href="#L318">318</a>   rw [iterate_derivative_fibreLinePolynomial, eval_zero_fibreLinePolynomial]</span>
+<span id="L319"><a href="#L319">319</a>   exact hzero _ (hamiltonIter_mem J hJ f hf g hg m)</span>
+<span id="L320"><a href="#L320">320</a> </span>
+<span id="L321"><a href="#L321">321</a> /-! ## The exact translation statement -/</span>
+<span id="L322"><a href="#L322">322</a> </span>
+<span id="L323"><a href="#L323">323</a> /--</span>
+<span id="L324"><a href="#L324">324</a> A zero-section common zero of a Poisson ideal remains a common zero after</span>
+<span id="L325"><a href="#L325">325</a> vertical translation by `t df_y`, for every scalar `t`, whenever the base</span>
+<span id="L326"><a href="#L326">326</a> polynomial `f` belongs to the ideal.</span>
+<span id="L327"><a href="#L327">327</a> </span>
+<span id="L328"><a href="#L328">328</a> The radical hypothesis customary in the geometric application is unnecessary</span>
+<span id="L329"><a href="#L329">329</a> for this polynomial implication; see the wrapper below.</span>
+<span id="L330"><a href="#L330">330</a> -/</span>
+<span id="L331"><a href="#L331">331</a> theorem zeroSection_stable_under_differential_translation</span>
+<span id="L332"><a href="#L332">332</a>     [CharZero k]</span>
+<span id="L333"><a href="#L333">333</a>     (J : Ideal (SymbolRing k n)) (hJ : IsPoisson J)</span>
+<span id="L334"><a href="#L334">334</a>     (y : Fin n → k)</span>
+<span id="L335"><a href="#L335">335</a>     (hzero : ∀ g ∈ J, MvPolynomial.eval (zeroSectionPoint y) g = 0)</span>
+<span id="L336"><a href="#L336">336</a>     (f : MvPolynomial (Fin n) k) (hf : baseLift f ∈ J)</span>
+<span id="L337"><a href="#L337">337</a>     (g : SymbolRing k n) (hg : g ∈ J) (t : k) :</span>
+<span id="L338"><a href="#L338">338</a>     MvPolynomial.eval (differentialTranslatePoint y f t) g = 0 := by</span>
+<span id="L339"><a href="#L339">339</a>   have heval :</span>
+<span id="L340"><a href="#L340">340</a>       MvPolynomial.eval (differentialTranslatePoint y f t) g =</span>
+<span id="L341"><a href="#L341">341</a>         MvPolynomial.eval (Sum.elim y (fun i =&gt; t * differentialAt y f i)) g := by</span>
+<span id="L342"><a href="#L342">342</a>     apply MvPolynomial.eval₂_congr</span>
+<span id="L343"><a href="#L343">343</a>     intro i c hi hc</span>
+<span id="L344"><a href="#L344">344</a>     rcases i with i | i &lt;;&gt; simp [differentialTranslatePoint, affineFibreTranslatePoint]</span>
+<span id="L345"><a href="#L345">345</a>   rw [heval, ← eval_fibreLinePolynomial]</span>
+<span id="L346"><a href="#L346">346</a>   rw [fibreLinePolynomial_eq_zero_of_poisson J hJ y hzero f hf g hg]</span>
+<span id="L347"><a href="#L347">347</a>   exact Polynomial.eval_zero</span>
+<span id="L348"><a href="#L348">348</a> </span>
+<span id="L349"><a href="#L349">349</a> /-- The same statement with the radical hypothesis carried explicitly. -/</span>
+<span id="L350"><a href="#L350">350</a> theorem radicalPoisson_zeroSection_stable_under_differential_translation</span>
+<span id="L351"><a href="#L351">351</a>     [CharZero k]</span>
+<span id="L352"><a href="#L352">352</a>     (J : Ideal (SymbolRing k n)) (_hJrad : J.IsRadical) (hJ : IsPoisson J)</span>
+<span id="L353"><a href="#L353">353</a>     (y : Fin n → k)</span>
+<span id="L354"><a href="#L354">354</a>     (hzero : ∀ g ∈ J, MvPolynomial.eval (zeroSectionPoint y) g = 0)</span>
+<span id="L355"><a href="#L355">355</a>     (f : MvPolynomial (Fin n) k) (hf : baseLift f ∈ J)</span>
+<span id="L356"><a href="#L356">356</a>     (g : SymbolRing k n) (hg : g ∈ J) (t : k) :</span>
+<span id="L357"><a href="#L357">357</a>     MvPolynomial.eval (differentialTranslatePoint y f t) g = 0 :=</span>
+<span id="L358"><a href="#L358">358</a>   zeroSection_stable_under_differential_translation J hJ y hzero f hf g hg t</span>
+<span id="L359"><a href="#L359">359</a> </span>
+<span id="L360"><a href="#L360">360</a> #print axioms derivative_fibreLinePolynomial</span>
+<span id="L361"><a href="#L361">361</a> #print axioms fibreLinePolynomial_poissonBracket_baseLift</span>
+<span id="L362"><a href="#L362">362</a> #print axioms hamiltonIter_mem</span>
+<span id="L363"><a href="#L363">363</a> #print axioms polynomial_eq_zero_of_eval_iterate_derivative_zero</span>
+<span id="L364"><a href="#L364">364</a> #print axioms fibreLinePolynomial_eq_zero_of_poisson</span>
+<span id="L365"><a href="#L365">365</a> #print axioms zeroSection_stable_under_differential_translation</span>
+<span id="L366"><a href="#L366">366</a> #print axioms radicalPoisson_zeroSection_stable_under_differential_translation</span>
+<span id="L367"><a href="#L367">367</a> </span>
+<span id="L368"><a href="#L368">368</a> end</span>
+<span id="L369"><a href="#L369">369</a> </span>
+<span id="L370"><a href="#L370">370</a> end Stafford38.Geometry.CoisotropicTranslation</span>
+<span id="L371"><a href="#L371">371</a> </span></pre>

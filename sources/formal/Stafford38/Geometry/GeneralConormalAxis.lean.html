@@ -1,0 +1,102 @@
+<!doctype html><meta charset="utf-8"><title>Stafford38/Geometry/GeneralConormalAxis.lean</title><style>body{font:14px monospace}pre span{display:block}pre span:target{background:#fff0ad}a{color:#666}pre{white-space:pre-wrap}</style><h1>Stafford38/Geometry/GeneralConormalAxis.lean</h1><p>This project (Stafford38) · 0403af3f0b1a7f84d2027121932723f67bd279ae</p><pre><span id="L1"><a href="#L1">1</a> module</span>
+<span id="L2"><a href="#L2">2</a> public import Stafford38.Geometry.GeneralDivisorialVisibleFrame</span>
+<span id="L3"><a href="#L3">3</a> public import Stafford38.Geometry.FiniteGradientResidueExtension</span>
+<span id="L4"><a href="#L4">4</a> public import Stafford38.Geometry.PaperActualWitnessConormalData</span>
+<span id="L5"><a href="#L5">5</a> public import Stafford38.Geometry.CanonicalNonconstantFiniteGradientProductionProof</span>
+<span id="L6"><a href="#L6">6</a> public import Stafford38.Geometry.RetainedPlaceConormalTransport</span>
+<span id="L7"><a href="#L7">7</a> public import Stafford38.Geometry.RetainedProjectiveCompletion</span>
+<span id="L8"><a href="#L8">8</a> </span>
+<span id="L9"><a href="#L9">9</a> @[expose] public section</span>
+<span id="L10"><a href="#L10">10</a> </span>
+<span id="L11"><a href="#L11">11</a> /-!</span>
+<span id="L12"><a href="#L12">12</a> # Laurent conormal axes for arbitrary affine components</span>
+<span id="L13"><a href="#L13">13</a> </span>
+<span id="L14"><a href="#L14">14</a> The prime-component visible frame passes through the generic finite-gradient</span>
+<span id="L15"><a href="#L15">15</a> adapter to a Laurent equation-conormal point with the prescribed residue.</span>
+<span id="L16"><a href="#L16">16</a> This is an algebraic witness; the comparison with smooth projective conormal</span>
+<span id="L17"><a href="#L17">17</a> directions is a separate statement.</span>
+<span id="L18"><a href="#L18">18</a> </span>
+<span id="L19"><a href="#L19">19</a> </span>
+<span id="L20"><a href="#L20">20</a> ## References and proof context</span>
+<span id="L21"><a href="#L21">21</a> </span>
+<span id="L22"><a href="#L22">22</a> [HTT08] Ryoshi Hotta, Kiyoshi Takeuchi, and Toshiyuki Tanisaki, *D-Modules, Perverse Sheaves, and Representation Theory*, Progress in Mathematics 236, Birkhäuser, 2008.</span>
+<span id="L23"><a href="#L23">23</a> https://doi.org/10.1007/978-0-8176-4523-6</span>
+<span id="L24"><a href="#L24">24</a> </span>
+<span id="L25"><a href="#L25">25</a> Chapters 1–2 supply characteristic-variety context. The visible-frame and finite-gradient construction is project mathematics, not a cited theorem from this book. See docs/literature.md.</span>
+<span id="L26"><a href="#L26">26</a> -/</span>
+<span id="L27"><a href="#L27">27</a> </span>
+<span id="L28"><a href="#L28">28</a> namespace Stafford38.Geometry.GeneralConormalAxis</span>
+<span id="L29"><a href="#L29">29</a> </span>
+<span id="L30"><a href="#L30">30</a> open IsLocalRing</span>
+<span id="L31"><a href="#L31">31</a> open Stafford38.Geometry.AffineComponentCoordinateSplit</span>
+<span id="L32"><a href="#L32">32</a> open Stafford38.Geometry.AsymptoticDivisorExistence</span>
+<span id="L33"><a href="#L33">33</a> open Stafford38.Geometry.ComponentProjectiveClosure</span>
+<span id="L34"><a href="#L34">34</a> open Stafford38.Geometry.GeneralDivisorialVisibleFrame</span>
+<span id="L35"><a href="#L35">35</a> open Stafford38.Geometry.ExactVisibleDivisorFrameInterface</span>
+<span id="L36"><a href="#L36">36</a> open Stafford38.Geometry.CanonicalVisibleDivisorFrameProduction</span>
+<span id="L37"><a href="#L37">37</a> open Stafford38.Geometry.FiniteGradientResidueExtension</span>
+<span id="L38"><a href="#L38">38</a> open Stafford38.Geometry.CanonicalNonconstantFiniteGradientProductionProof</span>
+<span id="L39"><a href="#L39">39</a> open Stafford38.Geometry.PaperActualWitnessConormalData</span>
+<span id="L40"><a href="#L40">40</a> open Stafford38.Geometry.LaurentConormalResidueExtension</span>
+<span id="L41"><a href="#L41">41</a> open Stafford38.Geometry.RelativeCoefficientDVR</span>
+<span id="L42"><a href="#L42">42</a> open Stafford38.Geometry.ComponentFunctionFieldBoundary</span>
+<span id="L43"><a href="#L43">43</a> open Stafford38.Geometry.RetainedGroundMapIdentification</span>
+<span id="L44"><a href="#L44">44</a> open Stafford38.Geometry.RetainedPlaceConormalTransport</span>
+<span id="L45"><a href="#L45">45</a> open Stafford38.Geometry.RetainedProjectiveCompletion</span>
+<span id="L46"><a href="#L46">46</a> open Stafford38.Geometry.RelativeRetainedBoundaryPlace</span>
+<span id="L47"><a href="#L47">47</a> open Stafford38.GeometryRetractionSpecialization</span>
+<span id="L48"><a href="#L48">48</a> </span>
+<span id="L49"><a href="#L49">49</a> noncomputable section</span>
+<span id="L50"><a href="#L50">50</a> </span>
+<span id="L51"><a href="#L51">51</a> universe u</span>
+<span id="L52"><a href="#L52">52</a> </span>
+<span id="L53"><a href="#L53">53</a> theorem exists_groundConormalAxis_of_minimalPrime_unit_transcendental</span>
+<span id="L54"><a href="#L54">54</a>     {k : Type u} [Field k] [CharZero k]</span>
+<span id="L55"><a href="#L55">55</a>     {m : ℕ} (hm : 0 &lt; m)</span>
+<span id="L56"><a href="#L56">56</a>     (I : Ideal (MvPolynomial (Fin m) k)) (hI : I.IsRadical)</span>
+<span id="L57"><a href="#L57">57</a>     (P : PrimeSpectrum (MvPolynomial (Fin m) k))</span>
+<span id="L58"><a href="#L58">58</a>     (hP : P.asIdeal ∈ I.minimalPrimes)</span>
+<span id="L59"><a href="#L59">59</a>     (hunit : ∃ g : MvPolynomial (Fin m) k,</span>
+<span id="L60"><a href="#L60">60</a>       MvPolynomial.X ⟨0, hm⟩ * g - 1 ∈ P.asIdeal)</span>
+<span id="L61"><a href="#L61">61</a>     (htrans : Transcendental k (componentCoordinate P ⟨0, hm⟩)) :</span>
+<span id="L62"><a href="#L62">62</a>     ∃ (K : Type u) (_ : Field K) (_ : Algebra k K)</span>
+<span id="L63"><a href="#L63">63</a>       (y : Fin m → LaurentSeries K) (xi : Fin m → PowerSeries K),</span>
+<span id="L64"><a href="#L64">64</a>       Sum.elim y</span>
+<span id="L65"><a href="#L65">65</a>           (fun i ↦ algebraMap (PowerSeries K) (LaurentSeries K) (xi i)) ∈</span>
+<span id="L66"><a href="#L66">66</a>         groundEquationConormalLocus (k := k) (K := K) I ∧</span>
+<span id="L67"><a href="#L67">67</a>       residueColumn xi =</span>
+<span id="L68"><a href="#L68">68</a>         (fun i : Fin m ↦ if i = ⟨0, hm⟩ then 1 else 0) := by</span>
+<span id="L69"><a href="#L69">69</a>   classical</span>
+<span id="L70"><a href="#L70">70</a>   obtain ⟨w⟩ :=</span>
+<span id="L71"><a href="#L71">71</a>     generalDivisorialVisibleFrameWithResidueAlgebraicity hm P hunit htrans</span>
+<span id="L72"><a href="#L72">72</a>   let C := w.column</span>
+<span id="L73"><a href="#L73">73</a>   let W := C.W</span>
+<span id="L74"><a href="#L74">74</a>   let F := ComponentFractionField P</span>
+<span id="L75"><a href="#L75">75</a>   letI : Algebra (CoordinateZeroLocalRing W.coefficientField) F := W.ambientAlgebra</span>
+<span id="L76"><a href="#L76">76</a>   let V := W.place.valuation.toSubring</span>
+<span id="L77"><a href="#L77">77</a>   letI : IsDiscreteValuationRing V := W.place.isDiscrete</span>
+<span id="L78"><a href="#L78">78</a>   letI : IsLocalRing V := W.place.isDiscrete.toIsLocalRing</span>
+<span id="L79"><a href="#L79">79</a>   letI : Algebra W.coefficientField V :=</span>
+<span id="L80"><a href="#L80">80</a>     (relativeCoefficientMap W.coefficientField W.place).toAlgebra</span>
+<span id="L81"><a href="#L81">81</a>   let κ := ResidueField V</span>
+<span id="L82"><a href="#L82">82</a>   letI : Algebra k κ := retainedResidueGroundAlgebra P ⟨0, hm⟩ W</span>
+<span id="L83"><a href="#L83">83</a>   letI : CharZero κ :=</span>
+<span id="L84"><a href="#L84">84</a>     charZero_of_injective_algebraMap (FaithfulSMul.algebraMap_injective k κ)</span>
+<span id="L85"><a href="#L85">85</a>   let q : Fin (m + 1) → PowerSeries κ :=</span>
+<span id="L86"><a href="#L86">86</a>     fun a ↦ retainedToCompletedPowerSeries W (C.q a)</span>
+<span id="L87"><a href="#L87">87</a>   obtain ⟨data⟩ :=</span>
+<span id="L88"><a href="#L88">88</a>     exists_regularizedOneRowConormalData_of_actual_witness</span>
+<span id="L89"><a href="#L89">89</a>       hm I hI P hP w hunit</span>
+<span id="L90"><a href="#L90">90</a>   obtain ⟨certificate⟩ :=</span>
+<span id="L91"><a href="#L91">91</a>     finiteGradientBoundaryCertificateOver_of_regularizedOneRowConormalData</span>
+<span id="L92"><a href="#L92">92</a>       (k := k) (K := κ) hm I q data</span>
+<span id="L93"><a href="#L93">93</a>   obtain ⟨y, xi, hmem, hres⟩ :=</span>
+<span id="L94"><a href="#L94">94</a>     exists_groundConormalAxis_of_finiteGradientBoundaryCertificateOver</span>
+<span id="L95"><a href="#L95">95</a>       (k := k) (K := κ) hm I certificate</span>
+<span id="L96"><a href="#L96">96</a>   exact ⟨κ, inferInstance, inferInstance, y, xi, hmem, hres⟩</span>
+<span id="L97"><a href="#L97">97</a> </span>
+<span id="L98"><a href="#L98">98</a> #print axioms exists_groundConormalAxis_of_minimalPrime_unit_transcendental</span>
+<span id="L99"><a href="#L99">99</a> </span>
+<span id="L100"><a href="#L100">100</a> end</span>
+<span id="L101"><a href="#L101">101</a> end Stafford38.Geometry.GeneralConormalAxis</span>
+<span id="L102"><a href="#L102">102</a> </span></pre>

@@ -1,0 +1,341 @@
+<!doctype html><meta charset="utf-8"><title>Stafford38/Geometry/LaurentConormalResidueExtension.lean</title><style>body{font:14px monospace}pre span{display:block}pre span:target{background:#fff0ad}a{color:#666}pre{white-space:pre-wrap}</style><h1>Stafford38/Geometry/LaurentConormalResidueExtension.lean</h1><p>This project (Stafford38) · 0403af3f0b1a7f84d2027121932723f67bd279ae</p><pre><span id="L1"><a href="#L1">1</a> module</span>
+<span id="L2"><a href="#L2">2</a> public import Stafford38.Geometry.LaurentConormalDirection</span>
+<span id="L3"><a href="#L3">3</a> public import Stafford38.Geometry.ProjectiveDivisorOrderGap</span>
+<span id="L4"><a href="#L4">4</a> public import Stafford38.Geometry.ProjectiveEquationFormalChart</span>
+<span id="L5"><a href="#L5">5</a> public import Stafford38.Geometry.ProjectiveTangentInclusion</span>
+<span id="L6"><a href="#L6">6</a> </span>
+<span id="L7"><a href="#L7">7</a> @[expose] public section</span>
+<span id="L8"><a href="#L8">8</a> </span>
+<span id="L9"><a href="#L9">9</a> open Stafford38Challenge (PhaseVar)</span>
+<span id="L10"><a href="#L10">10</a> </span>
+<span id="L11"><a href="#L11">11</a> /-!</span>
+<span id="L12"><a href="#L12">12</a> # Laurent conormal specialization over a residue-field extension</span>
+<span id="L13"><a href="#L13">13</a> </span>
+<span id="L14"><a href="#L14">14</a> The residue field of a divisorial valuation need not be the original ground</span>
+<span id="L15"><a href="#L15">15</a> field.  This file separates the two coefficient roles which are easy to</span>
+<span id="L16"><a href="#L16">16</a> confuse in that situation:</span>
+<span id="L17"><a href="#L17">17</a> </span>
+<span id="L18"><a href="#L18">18</a> * `k` is the field of coefficients of the original equations and symbol;</span>
+<span id="L19"><a href="#L19">19</a> * `K` is the residue field of the boundary valuation, and the completed</span>
+<span id="L20"><a href="#L20">20</a>   coordinates live in `PowerSeries K` and `LaurentSeries K`.</span>
+<span id="L21"><a href="#L21">21</a> </span>
+<span id="L22"><a href="#L22">22</a> Ground coefficients use the canonical map `k -&gt; LaurentSeries K`; the theorem</span>
+<span id="L23"><a href="#L23">23</a> `groundLaurentComposite_eq_algebraMap` proves that it agrees with the tower</span>
+<span id="L24"><a href="#L24">24</a> composite `k -&gt; K -&gt; LaurentSeries K`.  The fibre closure itself is taken over `K`.</span>
+<span id="L25"><a href="#L25">25</a> The resulting contradiction uses only field and algebra-tower structure; in</span>
+<span id="L26"><a href="#L26">26</a> particular it does not require `K` to be algebraically closed and does not</span>
+<span id="L27"><a href="#L27">27</a> choose a map `K -&gt; k`.</span>
+<span id="L28"><a href="#L28">28</a> </span>
+<span id="L29"><a href="#L29">29</a> The final structure and consumer are a residue-extension version of the</span>
+<span id="L30"><a href="#L30">30</a> completed-boundary local interface.  They construct no projective chart,</span>
+<span id="L31"><a href="#L31">31</a> normalization, divisor, or tangent comparison.</span>
+<span id="L32"><a href="#L32">32</a> -/</span>
+<span id="L33"><a href="#L33">33</a> </span>
+<span id="L34"><a href="#L34">34</a> namespace Stafford38.Geometry.LaurentConormalResidueExtension</span>
+<span id="L35"><a href="#L35">35</a> </span>
+<span id="L36"><a href="#L36">36</a> open Stafford38</span>
+<span id="L37"><a href="#L37">37</a> open Stafford38.Characteristic</span>
+<span id="L38"><a href="#L38">38</a> open Stafford38.Geometry.AffineConormalClosure</span>
+<span id="L39"><a href="#L39">39</a> open Stafford38.Geometry.AffineConormalSpan</span>
+<span id="L40"><a href="#L40">40</a> open Stafford38.Geometry.LaurentConormalDirection</span>
+<span id="L41"><a href="#L41">41</a> open Stafford38.Geometry.ProjectiveConormalDehomogenization</span>
+<span id="L42"><a href="#L42">42</a> open Stafford38.Geometry.ProjectiveDivisorOrderGap</span>
+<span id="L43"><a href="#L43">43</a> open Stafford38.Geometry.ProjectiveEquationFormalChart</span>
+<span id="L44"><a href="#L44">44</a> open Stafford38.Geometry.ProjectiveTangentInclusion</span>
+<span id="L45"><a href="#L45">45</a> open Stafford38.GeometryPowerSeriesTangentLimit</span>
+<span id="L46"><a href="#L46">46</a> open Stafford38.Geometry.ScalarExtensionPoints</span>
+<span id="L47"><a href="#L47">47</a> open Stafford38.GeometryRetractionSpecialization</span>
+<span id="L48"><a href="#L48">48</a> open Stafford38.GeometryFormalDivisorTangent</span>
+<span id="L49"><a href="#L49">49</a> open Stafford38.GeometrySplitTangentMatrix</span>
+<span id="L50"><a href="#L50">50</a> open Stafford38.Geometry.FormalDivisorLaurentConormal</span>
+<span id="L51"><a href="#L51">51</a> </span>
+<span id="L52"><a href="#L52">52</a> noncomputable section</span>
+<span id="L53"><a href="#L53">53</a> </span>
+<span id="L54"><a href="#L54">54</a> universe u</span>
+<span id="L55"><a href="#L55">55</a> </span>
+<span id="L56"><a href="#L56">56</a> variable {k K : Type u} [Field k] [Field K] [Algebra k K]</span>
+<span id="L57"><a href="#L57">57</a> variable {n : ℕ}</span>
+<span id="L58"><a href="#L58">58</a> </span>
+<span id="L59"><a href="#L59">59</a> /-! ## The coefficient tower -/</span>
+<span id="L60"><a href="#L60">60</a> </span>
+<span id="L61"><a href="#L61">61</a> /-- The coefficient map used by equations over the ground field after</span>
+<span id="L62"><a href="#L62">62</a> completion at a boundary with residue field `K`. -/</span>
+<span id="L63"><a href="#L63">63</a> abbrev groundLaurentMap : k →+* LaurentSeries K :=</span>
+<span id="L64"><a href="#L64">64</a>   algebraMap k (LaurentSeries K)</span>
+<span id="L65"><a href="#L65">65</a> </span>
+<span id="L66"><a href="#L66">66</a> /-- The coefficient tower composite agrees with the canonical structure map.</span>
+<span id="L67"><a href="#L67">67</a> This bridge is needed because the tower instance is not available as a typeclass</span>
+<span id="L68"><a href="#L68">68</a> instance for arbitrary `k → K → LaurentSeries K`. -/</span>
+<span id="L69"><a href="#L69">69</a> theorem groundLaurentComposite_eq_algebraMap :</span>
+<span id="L70"><a href="#L70">70</a>     (algebraMap K (LaurentSeries K)).comp (algebraMap k K) =</span>
+<span id="L71"><a href="#L71">71</a>       groundLaurentMap (k := k) (K := K) := by</span>
+<span id="L72"><a href="#L72">72</a>   refine RingHom.ext fun a =&gt; ?_</span>
+<span id="L73"><a href="#L73">73</a>   simp only [RingHom.comp_apply, HahnSeries.algebraMap_apply',</span>
+<span id="L74"><a href="#L74">74</a>     PowerSeries.algebraMap_apply, Algebra.algebraMap_self_apply]</span>
+<span id="L75"><a href="#L75">75</a> </span>
+<span id="L76"><a href="#L76">76</a> /-- Fibre lift after extending the ground coefficients to `K`. -/</span>
+<span id="L77"><a href="#L77">77</a> def residueFibreLift (P : MvPolynomial (Fin n) k) :</span>
+<span id="L78"><a href="#L78">78</a>     MvPolynomial (PhaseVar n) K :=</span>
+<span id="L79"><a href="#L79">79</a>   fibreLift (scalarPolynomialMap (k := k) (K := K) (Fin n) P)</span>
+<span id="L80"><a href="#L80">80</a> </span>
+<span id="L81"><a href="#L81">81</a> /-- Extending first to `K` or using the ground coefficient map gives the same</span>
+<span id="L82"><a href="#L82">82</a> Laurent-series evaluation. -/</span>
+<span id="L83"><a href="#L83">83</a> theorem eval_residueFibreLift_eq_ground</span>
+<span id="L84"><a href="#L84">84</a>     (P : MvPolynomial (Fin n) k)</span>
+<span id="L85"><a href="#L85">85</a>     (q : PhaseVar n → LaurentSeries K) :</span>
+<span id="L86"><a href="#L86">86</a>     MvPolynomial.eval₂ (algebraMap K (LaurentSeries K)) q</span>
+<span id="L87"><a href="#L87">87</a>         (residueFibreLift (k := k) (K := K) P) =</span>
+<span id="L88"><a href="#L88">88</a>       MvPolynomial.eval₂ (groundLaurentMap (k := k) (K := K)) q</span>
+<span id="L89"><a href="#L89">89</a>         (fibreLift P) := by</span>
+<span id="L90"><a href="#L90">90</a>   change MvPolynomial.eval₂ (algebraMap K (LaurentSeries K)) q</span>
+<span id="L91"><a href="#L91">91</a>       (MvPolynomial.rename Sum.inr</span>
+<span id="L92"><a href="#L92">92</a>         (MvPolynomial.map (algebraMap k K) P)) = _</span>
+<span id="L93"><a href="#L93">93</a>   rw [← MvPolynomial.map_rename]</span>
+<span id="L94"><a href="#L94">94</a>   rw [MvPolynomial.eval₂_map]</span>
+<span id="L95"><a href="#L95">95</a>   rw [← groundLaurentComposite_eq_algebraMap (k := k) (K := K)]</span>
+<span id="L96"><a href="#L96">96</a>   rfl</span>
+<span id="L97"><a href="#L97">97</a> </span>
+<span id="L98"><a href="#L98">98</a> /-- Evaluation of a ground polynomial agrees with evaluation of its</span>
+<span id="L99"><a href="#L99">99</a> coefficient extension along the residue-field-to-Laurent map. -/</span>
+<span id="L100"><a href="#L100">100</a> theorem eval_residuePolynomialMap_eq_ground</span>
+<span id="L101"><a href="#L101">101</a>     (P : MvPolynomial (Fin n) k)</span>
+<span id="L102"><a href="#L102">102</a>     (v : Fin n → LaurentSeries K) :</span>
+<span id="L103"><a href="#L103">103</a>     MvPolynomial.eval₂ (algebraMap K (LaurentSeries K)) v</span>
+<span id="L104"><a href="#L104">104</a>         (scalarPolynomialMap (k := k) (K := K) (Fin n) P) =</span>
+<span id="L105"><a href="#L105">105</a>     MvPolynomial.eval₂ (groundLaurentMap (k := k) (K := K)) v P := by</span>
+<span id="L106"><a href="#L106">106</a>   change MvPolynomial.eval₂ (algebraMap K (LaurentSeries K)) v</span>
+<span id="L107"><a href="#L107">107</a>       (MvPolynomial.map (algebraMap k K) P) = _</span>
+<span id="L108"><a href="#L108">108</a>   rw [MvPolynomial.eval₂_map]</span>
+<span id="L109"><a href="#L109">109</a>   rw [← groundLaurentComposite_eq_algebraMap (k := k) (K := K)]</span>
+<span id="L110"><a href="#L110">110</a> </span>
+<span id="L111"><a href="#L111">111</a> /-- Fibre-only evaluation ignores the base part of a phase point, also for</span>
+<span id="L112"><a href="#L112">112</a> the explicit ground-to-Laurent coefficient map. -/</span>
+<span id="L113"><a href="#L113">113</a> theorem eval_ground_fibreLift</span>
+<span id="L114"><a href="#L114">114</a>     (P : MvPolynomial (Fin n) k)</span>
+<span id="L115"><a href="#L115">115</a>     (q : PhaseVar n → LaurentSeries K) :</span>
+<span id="L116"><a href="#L116">116</a>     MvPolynomial.eval₂ (groundLaurentMap (k := k) (K := K)) q</span>
+<span id="L117"><a href="#L117">117</a>         (fibreLift P) =</span>
+<span id="L118"><a href="#L118">118</a>       MvPolynomial.eval₂ (groundLaurentMap (k := k) (K := K))</span>
+<span id="L119"><a href="#L119">119</a>         (fun i ↦ q (Sum.inr i)) P := by</span>
+<span id="L120"><a href="#L120">120</a>   rw [fibreLift, MvPolynomial.eval₂_rename]</span>
+<span id="L121"><a href="#L121">121</a>   rfl</span>
+<span id="L122"><a href="#L122">122</a> </span>
+<span id="L123"><a href="#L123">123</a> /-! ## Fibre closure over the residue field -/</span>
+<span id="L124"><a href="#L124">124</a> </span>
+<span id="L125"><a href="#L125">125</a> /-- The projected closure of Laurent-valued phase points, with regular fibre</span>
+<span id="L126"><a href="#L126">126</a> residue, formed over `K`.  Its base coordinates may have poles. -/</span>
+<span id="L127"><a href="#L127">127</a> abbrev residueExtensionFibreClosure</span>
+<span id="L128"><a href="#L128">128</a>     (S : Set (PhaseVar n → LaurentSeries K)) : Set (Fin n → K) :=</span>
+<span id="L129"><a href="#L129">129</a>   extensionFibreClosure (k := K) (K := LaurentSeries K) S</span>
+<span id="L130"><a href="#L130">130</a> </span>
+<span id="L131"><a href="#L131">131</a> /-- The existing Laurent-residue theorem, instantiated over the residue field</span>
+<span id="L132"><a href="#L132">132</a> `K`.  No algebraic-closedness hypothesis occurs. -/</span>
+<span id="L133"><a href="#L133">133</a> theorem residue_mem_residueExtensionFibreClosure_of_laurent_generic</span>
+<span id="L134"><a href="#L134">134</a>     (S : Set (PhaseVar n → LaurentSeries K))</span>
+<span id="L135"><a href="#L135">135</a>     (y : Fin n → LaurentSeries K)</span>
+<span id="L136"><a href="#L136">136</a>     (xi : Fin n → PowerSeries K)</span>
+<span id="L137"><a href="#L137">137</a>     (hgeneric :</span>
+<span id="L138"><a href="#L138">138</a>       Sum.elim y</span>
+<span id="L139"><a href="#L139">139</a>           (fun i ↦ algebraMap (PowerSeries K) (LaurentSeries K) (xi i)) ∈ S) :</span>
+<span id="L140"><a href="#L140">140</a>     residueColumn xi ∈ residueExtensionFibreClosure (K := K) S := by</span>
+<span id="L141"><a href="#L141">141</a>   exact residue_mem_extensionFibreClosure_of_laurent_generic</span>
+<span id="L142"><a href="#L142">142</a>     (k := K) S y xi hgeneric</span>
+<span id="L143"><a href="#L143">143</a> </span>
+<span id="L144"><a href="#L144">144</a> /-! ## Ground-field contradiction -/</span>
+<span id="L145"><a href="#L145">145</a> </span>
+<span id="L146"><a href="#L146">146</a> /-- The scalar-extended equation-conormal locus associated with a ground</span>
+<span id="L147"><a href="#L147">147</a> ideal, using the canonical `k -&gt; LaurentSeries K` coefficient map. -/</span>
+<span id="L148"><a href="#L148">148</a> abbrev groundEquationConormalLocus</span>
+<span id="L149"><a href="#L149">149</a>     (I : Ideal (MvPolynomial (Fin n) k)) :</span>
+<span id="L150"><a href="#L150">150</a>     Set (PhaseVar n → LaurentSeries K) :=</span>
+<span id="L151"><a href="#L151">151</a>   equationConormalLocus</span>
+<span id="L152"><a href="#L152">152</a>     (I.map (scalarPolynomialMap (k := k) (K := LaurentSeries K) (Fin n)))</span>
+<span id="L153"><a href="#L153">153</a> </span>
+<span id="L154"><a href="#L154">154</a> /-- A fibre-only ground polynomial which vanishes on the whole completed</span>
+<span id="L155"><a href="#L155">155</a> equation-conormal locus also vanishes after extending its coefficients to</span>
+<span id="L156"><a href="#L156">156</a> `K` and evaluating at every regular fibre residue. -/</span>
+<span id="L157"><a href="#L157">157</a> theorem residueFibreLift_mem_extensionValuedVanishingIdeal_of_ground_vanishing</span>
+<span id="L158"><a href="#L158">158</a>     (I : Ideal (MvPolynomial (Fin n) k))</span>
+<span id="L159"><a href="#L159">159</a>     (P : MvPolynomial (Fin n) k)</span>
+<span id="L160"><a href="#L160">160</a>     (hvanishes :</span>
+<span id="L161"><a href="#L161">161</a>       ∀ q ∈ groundEquationConormalLocus (k := k) (K := K) I,</span>
+<span id="L162"><a href="#L162">162</a>         MvPolynomial.eval₂ (groundLaurentMap (k := k) (K := K)) q</span>
+<span id="L163"><a href="#L163">163</a>           (fibreLift P) = 0) :</span>
+<span id="L164"><a href="#L164">164</a>     scalarPolynomialMap (k := k) (K := K) (Fin n) P ∈</span>
+<span id="L165"><a href="#L165">165</a>       extensionValuedVanishingIdeal (k := K) (K := LaurentSeries K)</span>
+<span id="L166"><a href="#L166">166</a>         (fibreImage (groundEquationConormalLocus (k := k) (K := K) I)) := by</span>
+<span id="L167"><a href="#L167">167</a>   rw [mem_extensionValuedVanishingIdeal_iff]</span>
+<span id="L168"><a href="#L168">168</a>   intro q hq</span>
+<span id="L169"><a href="#L169">169</a>   rcases hq with ⟨z, hz, rfl⟩</span>
+<span id="L170"><a href="#L170">170</a>   rw [eval_residuePolynomialMap_eq_ground]</span>
+<span id="L171"><a href="#L171">171</a>   rw [← eval_ground_fibreLift]</span>
+<span id="L172"><a href="#L172">172</a>   exact hvanishes z hz</span>
+<span id="L173"><a href="#L173">173</a> </span>
+<span id="L174"><a href="#L174">174</a> /-- Exact contradiction consumer for a residue-field-valued boundary arc.</span>
+<span id="L175"><a href="#L175">175</a> </span>
+<span id="L176"><a href="#L176">176</a> The hypotheses deliberately use the composite coefficient map and an</span>
+<span id="L177"><a href="#L177">177</a> `eval₂ (algebraMap k K)` axis value.  The theorem requires neither</span>
+<span id="L178"><a href="#L178">178</a> `IsAlgClosed K` nor a retraction from `K` to `k`. -/</span>
+<span id="L179"><a href="#L179">179</a> theorem false_of_ground_fibreOnly_symbol_one_on_residue_and_vanishing</span>
+<span id="L180"><a href="#L180">180</a>     (I : Ideal (MvPolynomial (Fin n) k))</span>
+<span id="L181"><a href="#L181">181</a>     (P : MvPolynomial (Fin n) k)</span>
+<span id="L182"><a href="#L182">182</a>     (axis : Fin n → K)</span>
+<span id="L183"><a href="#L183">183</a>     (y : Fin n → LaurentSeries K)</span>
+<span id="L184"><a href="#L184">184</a>     (xi : Fin n → PowerSeries K)</span>
+<span id="L185"><a href="#L185">185</a>     (hgeneric :</span>
+<span id="L186"><a href="#L186">186</a>       Sum.elim y</span>
+<span id="L187"><a href="#L187">187</a>           (fun i ↦ algebraMap (PowerSeries K) (LaurentSeries K) (xi i)) ∈</span>
+<span id="L188"><a href="#L188">188</a>         groundEquationConormalLocus (k := k) (K := K) I)</span>
+<span id="L189"><a href="#L189">189</a>     (hresidue : residueColumn xi = axis)</span>
+<span id="L190"><a href="#L190">190</a>     (hvanishes :</span>
+<span id="L191"><a href="#L191">191</a>       ∀ q ∈ groundEquationConormalLocus (k := k) (K := K) I,</span>
+<span id="L192"><a href="#L192">192</a>         MvPolynomial.eval₂ (groundLaurentMap (k := k) (K := K)) q</span>
+<span id="L193"><a href="#L193">193</a>           (fibreLift P) = 0)</span>
+<span id="L194"><a href="#L194">194</a>     (haxis : MvPolynomial.eval₂ (algebraMap k K) axis P = 1) : False := by</span>
+<span id="L195"><a href="#L195">195</a>   let S : Set (PhaseVar n → LaurentSeries K) :=</span>
+<span id="L196"><a href="#L196">196</a>     groundEquationConormalLocus (k := k) (K := K) I</span>
+<span id="L197"><a href="#L197">197</a>   have hP :</span>
+<span id="L198"><a href="#L198">198</a>       scalarPolynomialMap (k := k) (K := K) (Fin n) P ∈</span>
+<span id="L199"><a href="#L199">199</a>         extensionValuedVanishingIdeal (k := K) (K := LaurentSeries K)</span>
+<span id="L200"><a href="#L200">200</a>           (fibreImage S) := by</span>
+<span id="L201"><a href="#L201">201</a>     exact residueFibreLift_mem_extensionValuedVanishingIdeal_of_ground_vanishing</span>
+<span id="L202"><a href="#L202">202</a>       (k := k) (K := K) I P (by</span>
+<span id="L203"><a href="#L203">203</a>         simpa [S] using hvanishes)</span>
+<span id="L204"><a href="#L204">204</a>   have hclosure :</span>
+<span id="L205"><a href="#L205">205</a>       residueColumn xi ∈ residueExtensionFibreClosure (K := K) S :=</span>
+<span id="L206"><a href="#L206">206</a>     residue_mem_residueExtensionFibreClosure_of_laurent_generic</span>
+<span id="L207"><a href="#L207">207</a>       (K := K) S y xi (by simpa [S] using hgeneric)</span>
+<span id="L208"><a href="#L208">208</a>   have hzero :</span>
+<span id="L209"><a href="#L209">209</a>       MvPolynomial.eval (residueColumn xi)</span>
+<span id="L210"><a href="#L210">210</a>         (scalarPolynomialMap (k := k) (K := K) (Fin n) P) = 0 :=</span>
+<span id="L211"><a href="#L211">211</a>     hclosure _ hP</span>
+<span id="L212"><a href="#L212">212</a>   have hzero' :</span>
+<span id="L213"><a href="#L213">213</a>       MvPolynomial.eval₂ (algebraMap k K) (residueColumn xi) P = 0 := by</span>
+<span id="L214"><a href="#L214">214</a>     simpa [scalarPolynomialMap] using hzero</span>
+<span id="L215"><a href="#L215">215</a>   rw [hresidue, haxis] at hzero'</span>
+<span id="L216"><a href="#L216">216</a>   exact one_ne_zero hzero'</span>
+<span id="L217"><a href="#L217">217</a> </span>
+<span id="L218"><a href="#L218">218</a> /-! ## Completed-boundary adapter over `K` -/</span>
+<span id="L219"><a href="#L219">219</a> </span>
+<span id="L220"><a href="#L220">220</a> /-- A completed projective boundary chart whose residue coefficients are in</span>
+<span id="L221"><a href="#L221">221</a> `K`, while the target affine ideal remains defined over `k`.  Its formal</span>
+<span id="L222"><a href="#L222">222</a> tangent data are one fixed derivative-compatible geometric witness.  The</span>
+<span id="L223"><a href="#L223">223</a> one-sided tangent inclusion uses that same stored transverse column, never an</span>
+<span id="L224"><a href="#L224">224</a> alternative split column. -/</span>
+<span id="L225"><a href="#L225">225</a> structure CompletedProjectiveBoundaryChartOver</span>
+<span id="L226"><a href="#L226">226</a>     (m : ℕ) (hm : 0 &lt; m)</span>
+<span id="L227"><a href="#L227">227</a>     (I : Ideal (MvPolynomial (Fin m) k)) where</span>
+<span id="L228"><a href="#L228">228</a>   equationCount : ℕ</span>
+<span id="L229"><a href="#L229">229</a>   tangentCount : ℕ</span>
+<span id="L230"><a href="#L230">230</a>   equations : Fin equationCount →</span>
+<span id="L231"><a href="#L231">231</a>     MvPolynomial (Fin (m + 1)) (LaurentSeries K)</span>
+<span id="L232"><a href="#L232">232</a>   degree : Fin equationCount → ℕ</span>
+<span id="L233"><a href="#L233">233</a>   homogeneous : ∀ j, (equations j).IsHomogeneous (degree j)</span>
+<span id="L234"><a href="#L234">234</a>   q : Fin (m + 1) → PowerSeries K</span>
+<span id="L235"><a href="#L235">235</a>   Z : Matrix (Fin (m + 1)) (Fin tangentCount) (PowerSeries K)</span>
+<span id="L236"><a href="#L236">236</a>   rows : Fin tangentCount ↪ Fin (m + 1)</span>
+<span id="L237"><a href="#L237">237</a>   chart : Fin (m + 1)</span>
+<span id="L238"><a href="#L238">238</a>   zero : Fin (m + 1)</span>
+<span id="L239"><a href="#L239">239</a>   axis : Fin (m + 1)</span>
+<span id="L240"><a href="#L240">240</a>   ratio : PowerSeries K</span>
+<span id="L241"><a href="#L241">241</a>   q_chart : q chart = 1</span>
+<span id="L242"><a href="#L242">242</a>   Z_chart : ∀ j, Z chart j = 0</span>
+<span id="L243"><a href="#L243">243</a>   q_zero_ne : q zero ≠ 0</span>
+<span id="L244"><a href="#L244">244</a>   q_origin_ne : q 0 ≠ 0</span>
+<span id="L245"><a href="#L245">245</a>   ratio_ne : ratio ≠ 0</span>
+<span id="L246"><a href="#L246">246</a>   q_zero_vanish : PowerSeries.constantCoeff (q zero) = 0</span>
+<span id="L247"><a href="#L247">247</a>   ratio_vanish : PowerSeries.constantCoeff ratio = 0</span>
+<span id="L248"><a href="#L248">248</a>   q_axis : q axis = q zero * ratio</span>
+<span id="L249"><a href="#L249">249</a>   Z_zero_dvd : ∀ j, q zero ∣ Z zero j</span>
+<span id="L250"><a href="#L250">250</a>   Z_axis_dvd : ∀ j, q axis ∣ Z axis j</span>
+<span id="L251"><a href="#L251">251</a>   selected_minor_nonzero :</span>
+<span id="L252"><a href="#L252">252</a>     PowerSeries.constantCoeff (selectedMinor Z rows).det ≠ 0</span>
+<span id="L253"><a href="#L253">253</a>   equations_vanish :</span>
+<span id="L254"><a href="#L254">254</a>     ∀ j, MvPolynomial.eval (laurentColumn q) (equations j) = 0</span>
+<span id="L255"><a href="#L255">255</a>   ideal_containment :</span>
+<span id="L256"><a href="#L256">256</a>     I.map (scalarPolynomialMap (k := k) (K := LaurentSeries K) (Fin m)) ≤</span>
+<span id="L257"><a href="#L257">257</a>       dehomogenizedEquationIdeal equations</span>
+<span id="L258"><a href="#L258">258</a>   axis_is_first_fibre : axis = Fin.succ ⟨0, hm⟩</span>
+<span id="L259"><a href="#L259">259</a>   tau : Fin (m + 1) → PowerSeries K</span>
+<span id="L260"><a href="#L260">260</a>   C : Matrix (FormalTangentColumn (Fin tangentCount))</span>
+<span id="L261"><a href="#L261">261</a>     (Fin (m + 1)) (PowerSeries K)</span>
+<span id="L262"><a href="#L262">262</a>   ell : Fin (m + 1) → PowerSeries K</span>
+<span id="L263"><a href="#L263">263</a>   left_inverse : C * formalTangentMatrix q Z tau = 1</span>
+<span id="L264"><a href="#L264">264</a>   annihilation : rowMul ell (formalTangentMatrix q Z tau) = 0</span>
+<span id="L265"><a href="#L265">265</a>   residue_axis : residueColumn ell = axisRow (k := K) axis</span>
+<span id="L266"><a href="#L266">266</a>   tangent_inclusion :</span>
+<span id="L267"><a href="#L267">267</a>     zariskiTangentSpace (dehomogenizedPoint (laurentColumn q))</span>
+<span id="L268"><a href="#L268">268</a>         (I.map (scalarPolynomialMap (k := k) (K := LaurentSeries K) (Fin m))) ≤</span>
+<span id="L269"><a href="#L269">269</a>       dehomogenizedTangentSpan (laurentColumn q)</span>
+<span id="L270"><a href="#L270">270</a>         (laurentNonpositionTangentMatrix Z tau)</span>
+<span id="L271"><a href="#L271">271</a> </span>
+<span id="L272"><a href="#L272">272</a> /-- The residue-extension completed chart supplies a Laurent equation-</span>
+<span id="L273"><a href="#L273">273</a> conormal point with pure first fibre residue. -/</span>
+<span id="L274"><a href="#L274">274</a> theorem exists_conormalAxis_of_completedProjectiveBoundaryChartOver</span>
+<span id="L275"><a href="#L275">275</a>     [CharZero K]</span>
+<span id="L276"><a href="#L276">276</a>     {m : ℕ} (hm : 0 &lt; m)</span>
+<span id="L277"><a href="#L277">277</a>     (I : Ideal (MvPolynomial (Fin m) k))</span>
+<span id="L278"><a href="#L278">278</a>     (W : CompletedProjectiveBoundaryChartOver (k := k) (K := K) m hm I) :</span>
+<span id="L279"><a href="#L279">279</a>     ∃ (y : Fin m → LaurentSeries K)</span>
+<span id="L280"><a href="#L280">280</a>       (xi : Fin m → PowerSeries K),</span>
+<span id="L281"><a href="#L281">281</a>       Sum.elim y</span>
+<span id="L282"><a href="#L282">282</a>           (fun i ↦ algebraMap (PowerSeries K) (LaurentSeries K) (xi i)) ∈</span>
+<span id="L283"><a href="#L283">283</a>         groundEquationConormalLocus (k := k) (K := K) I ∧</span>
+<span id="L284"><a href="#L284">284</a>       residueColumn xi =</span>
+<span id="L285"><a href="#L285">285</a>         (fun i : Fin m ↦ if i = ⟨0, hm⟩ then 1 else 0) := by</span>
+<span id="L286"><a href="#L286">286</a>   classical</span>
+<span id="L287"><a href="#L287">287</a>   let Iext := I.map (scalarPolynomialMap (k := k) (K := LaurentSeries K) (Fin m))</span>
+<span id="L288"><a href="#L288">288</a>   have hbase : ∀ f ∈ Iext,</span>
+<span id="L289"><a href="#L289">289</a>       MvPolynomial.eval (dehomogenizedPoint (laurentColumn W.q)) f = 0 := by</span>
+<span id="L290"><a href="#L290">290</a>     intro f hf</span>
+<span id="L291"><a href="#L291">291</a>     exact eval_eq_zero_of_mem_dehomogenizedEquationIdeal</span>
+<span id="L292"><a href="#L292">292</a>       W.equations W.degree W.homogeneous (laurentColumn W.q)</span>
+<span id="L293"><a href="#L293">293</a>       (laurentColumn_ne_zero_of_ne_zero W.q W.q_origin_ne)</span>
+<span id="L294"><a href="#L294">294</a>       W.equations_vanish f (W.ideal_containment hf)</span>
+<span id="L295"><a href="#L295">295</a>   have htangent :</span>
+<span id="L296"><a href="#L296">296</a>       zariskiTangentSpace (dehomogenizedPoint (laurentColumn W.q)) Iext ≤</span>
+<span id="L297"><a href="#L297">297</a>         dehomogenizedTangentSpan (laurentColumn W.q)</span>
+<span id="L298"><a href="#L298">298</a>           (laurentNonpositionTangentMatrix W.Z W.tau) := by</span>
+<span id="L299"><a href="#L299">299</a>     exact W.tangent_inclusion</span>
+<span id="L300"><a href="#L300">300</a>   have hphase :=</span>
+<span id="L301"><a href="#L301">301</a>     laurentPhasePoint_mem_equationConormalLocus_of_zariski_le_span</span>
+<span id="L302"><a href="#L302">302</a>       Iext W.q W.ell W.Z W.tau W.q_origin_ne W.annihilation hbase htangent</span>
+<span id="L303"><a href="#L303">303</a>   refine ⟨dehomogenizedPoint (laurentColumn W.q),</span>
+<span id="L304"><a href="#L304">304</a>     (fun i : Fin m ↦ W.ell i.succ), ?_, ?_⟩</span>
+<span id="L305"><a href="#L305">305</a>   · simpa [Iext, groundEquationConormalLocus, laurentColumn] using hphase</span>
+<span id="L306"><a href="#L306">306</a>   · calc</span>
+<span id="L307"><a href="#L307">307</a>       residueColumn (fun i : Fin m ↦ W.ell i.succ) =</span>
+<span id="L308"><a href="#L308">308</a>           (fun i : Fin m ↦ residueColumn W.ell i.succ) :=</span>
+<span id="L309"><a href="#L309">309</a>         residueColumn_tail W.ell</span>
+<span id="L310"><a href="#L310">310</a>       _ = (fun i : Fin m ↦ axisRow (k := K) W.axis i.succ) := by</span>
+<span id="L311"><a href="#L311">311</a>         rw [W.residue_axis]</span>
+<span id="L312"><a href="#L312">312</a>       _ = (fun i : Fin m ↦ if i = ⟨0, hm⟩ then 1 else 0) := by</span>
+<span id="L313"><a href="#L313">313</a>         funext i</span>
+<span id="L314"><a href="#L314">314</a>         rw [W.axis_is_first_fibre]</span>
+<span id="L315"><a href="#L315">315</a>         by_cases hi : i = ⟨0, hm⟩</span>
+<span id="L316"><a href="#L316">316</a>         · subst i</span>
+<span id="L317"><a href="#L317">317</a>           simp [axisRow]</span>
+<span id="L318"><a href="#L318">318</a>         · have hne : i.succ ≠ Fin.succ ⟨0, hm⟩ := by</span>
+<span id="L319"><a href="#L319">319</a>             intro h</span>
+<span id="L320"><a href="#L320">320</a>             exact hi (Fin.succ_injective m h)</span>
+<span id="L321"><a href="#L321">321</a>           change (if i.succ = Fin.succ ⟨0, hm⟩ then 1 else 0) =</span>
+<span id="L322"><a href="#L322">322</a>             (if i = ⟨0, hm⟩ then 1 else 0)</span>
+<span id="L323"><a href="#L323">323</a>           rw [if_neg hne, if_neg hi]</span>
+<span id="L324"><a href="#L324">324</a> </span>
+<span id="L325"><a href="#L325">325</a> #print axioms groundLaurentMap</span>
+<span id="L326"><a href="#L326">326</a> #print axioms residueFibreLift</span>
+<span id="L327"><a href="#L327">327</a> #print axioms eval_residueFibreLift_eq_ground</span>
+<span id="L328"><a href="#L328">328</a> #print axioms eval_residuePolynomialMap_eq_ground</span>
+<span id="L329"><a href="#L329">329</a> #print axioms eval_ground_fibreLift</span>
+<span id="L330"><a href="#L330">330</a> #print axioms residueExtensionFibreClosure</span>
+<span id="L331"><a href="#L331">331</a> #print axioms residue_mem_residueExtensionFibreClosure_of_laurent_generic</span>
+<span id="L332"><a href="#L332">332</a> #print axioms groundEquationConormalLocus</span>
+<span id="L333"><a href="#L333">333</a> #print axioms residueFibreLift_mem_extensionValuedVanishingIdeal_of_ground_vanishing</span>
+<span id="L334"><a href="#L334">334</a> #print axioms false_of_ground_fibreOnly_symbol_one_on_residue_and_vanishing</span>
+<span id="L335"><a href="#L335">335</a> #print axioms CompletedProjectiveBoundaryChartOver</span>
+<span id="L336"><a href="#L336">336</a> #print axioms exists_conormalAxis_of_completedProjectiveBoundaryChartOver</span>
+<span id="L337"><a href="#L337">337</a> </span>
+<span id="L338"><a href="#L338">338</a> end</span>
+<span id="L339"><a href="#L339">339</a> </span>
+<span id="L340"><a href="#L340">340</a> end Stafford38.Geometry.LaurentConormalResidueExtension</span>
+<span id="L341"><a href="#L341">341</a> </span></pre>

@@ -1,0 +1,724 @@
+<!doctype html><meta charset="utf-8"><title>Stafford38/Geometry/SameWitness/CommonOpen.lean</title><style>body{font:14px monospace}pre span{display:block}pre span:target{background:#fff0ad}a{color:#666}pre{white-space:pre-wrap}</style><h1>Stafford38/Geometry/SameWitness/CommonOpen.lean</h1><p>This project (Stafford38) · 0403af3f0b1a7f84d2027121932723f67bd279ae</p><pre><span id="L1"><a href="#L1">1</a> module</span>
+<span id="L2"><a href="#L2">2</a> public import Stafford38.Geometry.SameWitness.CoordinatePresentation</span>
+<span id="L3"><a href="#L3">3</a> public import Stafford38.Geometry.SameWitness.AxisLiftFromGroundPoint</span>
+<span id="L4"><a href="#L4">4</a> public import Stafford38.Geometry.SameWitness.ChartGroundMap</span>
+<span id="L5"><a href="#L5">5</a> public import Stafford38.Geometry.A0NormalizedProjectiveCoordinates</span>
+<span id="L6"><a href="#L6">6</a> public import Stafford38.Geometry.ActualOptionColumnBinding</span>
+<span id="L7"><a href="#L7">7</a> public import Stafford38.Geometry.ActualCommonOpenColumnGlue</span>
+<span id="L8"><a href="#L8">8</a> public import Stafford38.Geometry.ActualCommonOpenArcCompatibility</span>
+<span id="L9"><a href="#L9">9</a> public import Stafford38.Geometry.ActualSameWitnessGroundPointCompletion</span>
+<span id="L10"><a href="#L10">10</a> public import Stafford38.Geometry.ActualSelectedNormalizationChartTransport</span>
+<span id="L11"><a href="#L11">11</a> public import Stafford38.Geometry.ActualWitnessSelectedChartBinding</span>
+<span id="L12"><a href="#L12">12</a> public import Stafford38.Geometry.ProjectiveChartSameFieldOverlap</span>
+<span id="L13"><a href="#L13">13</a> </span>
+<span id="L14"><a href="#L14">14</a> @[expose] public section</span>
+<span id="L15"><a href="#L15">15</a> </span>
+<span id="L16"><a href="#L16">16</a> set_option autoImplicit false</span>
+<span id="L17"><a href="#L17">17</a> set_option maxHeartbeats 1600000</span>
+<span id="L18"><a href="#L18">18</a> set_option linter.style.haveILetI false</span>
+<span id="L19"><a href="#L19">19</a> </span>
+<span id="L20"><a href="#L20">20</a> noncomputable section</span>
+<span id="L21"><a href="#L21">21</a> </span>
+<span id="L22"><a href="#L22">22</a> namespace Stafford38.Geometry.SameWitness</span>
+<span id="L23"><a href="#L23">23</a> </span>
+<span id="L24"><a href="#L24">24</a> open Stafford38.Geometry.ActualOptionGroundPointCompletion</span>
+<span id="L25"><a href="#L25">25</a> open Stafford38.Geometry.ActualSameWitnessGroundPointCompletion</span>
+<span id="L26"><a href="#L26">26</a> open Stafford38.Geometry.ActualPointAxisLift</span>
+<span id="L27"><a href="#L27">27</a> open Stafford38.Geometry.ActualOptionColumnBinding</span>
+<span id="L28"><a href="#L28">28</a> open Stafford38.Geometry.ActualCommonOpenColumnGlue</span>
+<span id="L29"><a href="#L29">29</a> open Stafford38.Geometry.ActualCommonOpenArcCompatibility</span>
+<span id="L30"><a href="#L30">30</a> open Stafford38.Geometry.A0NormalizedProjectiveCoordinates</span>
+<span id="L31"><a href="#L31">31</a> open Stafford38.Geometry.A0ChartFormalEtale</span>
+<span id="L32"><a href="#L32">32</a> open Stafford38.Geometry.ActualSelectedNormalizationDivisorEtale</span>
+<span id="L33"><a href="#L33">33</a> open Stafford38.Geometry.ActualSelectedNormalizationChartTransport</span>
+<span id="L34"><a href="#L34">34</a> open Stafford38.Geometry.ActualWitnessSelectedChartBinding</span>
+<span id="L35"><a href="#L35">35</a> open Stafford38.Geometry.ActualChartValuationImage</span>
+<span id="L36"><a href="#L36">36</a> open Stafford38.Geometry.ProjectiveChartSameFieldOverlap</span>
+<span id="L37"><a href="#L37">37</a> open Stafford38.Geometry.EtaleGenericOpenTransport</span>
+<span id="L38"><a href="#L38">38</a> open Stafford38.Geometry.GeneralDivisorialVisibleFrame</span>
+<span id="L39"><a href="#L39">39</a> open Stafford38.Geometry.SmoothLocalTiltedArcAxisLift</span>
+<span id="L40"><a href="#L40">40</a> open Stafford38.Geometry.ActualCommonOpenCompletionDerivation</span>
+<span id="L41"><a href="#L41">41</a> open Stafford38.Geometry.ComponentProjectiveClosure</span>
+<span id="L42"><a href="#L42">42</a> open Stafford38.Geometry.AffineComponentCoordinateSplit</span>
+<span id="L43"><a href="#L43">43</a> open Stafford38.Geometry.PrescribedGroundPointUnitPowerChart</span>
+<span id="L44"><a href="#L44">44</a> </span>
+<span id="L45"><a href="#L45">45</a> universe u</span>
+<span id="L46"><a href="#L46">46</a> </span>
+<span id="L47"><a href="#L47">47</a> -- Retain the witness's valuation action only while elaborating its columns.</span>
+<span id="L48"><a href="#L48">48</a> set_option quotPrecheck false in</span>
+<span id="L49"><a href="#L49">49</a> local notation:max &quot;retainedColumns&quot; hm:arg P:arg w:arg =&gt;</span>
+<span id="L50"><a href="#L50">50</a>   (letI : Algebra</span>
+<span id="L51"><a href="#L51">51</a>       (Stafford38.Geometry.AsymptoticDivisorExistence.CoordinateZeroLocalRing</span>
+<span id="L52"><a href="#L52">52</a>         (w).column.W.coefficientField)</span>
+<span id="L53"><a href="#L53">53</a>       (ComponentFractionField P) := (w).column.W.ambientAlgebra</span>
+<span id="L54"><a href="#L54">54</a>    letI : IsLocalRing (w).column.W.place.valuation.toSubring :=</span>
+<span id="L55"><a href="#L55">55</a>      (w).column.W.place.isDiscrete.toIsLocalRing</span>
+<span id="L56"><a href="#L56">56</a>    actualNormalizedProjectiveColumnInIntegralClosure hm P w)</span>
+<span id="L57"><a href="#L57">57</a> </span>
+<span id="L58"><a href="#L58">58</a> set_option quotPrecheck false in</span>
+<span id="L59"><a href="#L59">59</a> local notation:max &quot;retainedColumnValue&quot; P:arg w:arg a:arg =&gt;</span>
+<span id="L60"><a href="#L60">60</a>   (letI : Algebra</span>
+<span id="L61"><a href="#L61">61</a>       (Stafford38.Geometry.AsymptoticDivisorExistence.CoordinateZeroLocalRing</span>
+<span id="L62"><a href="#L62">62</a>         (w).column.W.coefficientField)</span>
+<span id="L63"><a href="#L63">63</a>       (ComponentFractionField P) := (w).column.W.ambientAlgebra</span>
+<span id="L64"><a href="#L64">64</a>    (((w).column.q a : (w).column.W.place.valuation.toSubring) : ComponentFractionField P))</span>
+<span id="L65"><a href="#L65">65</a> </span>
+<span id="L66"><a href="#L66">66</a> set_option quotPrecheck false in</span>
+<span id="L67"><a href="#L67">67</a> local notation:max &quot;retainedOrder&quot; P:arg w:arg =&gt;</span>
+<span id="L68"><a href="#L68">68</a>   (letI : Algebra</span>
+<span id="L69"><a href="#L69">69</a>       (Stafford38.Geometry.AsymptoticDivisorExistence.CoordinateZeroLocalRing</span>
+<span id="L70"><a href="#L70">70</a>         (w).column.W.coefficientField)</span>
+<span id="L71"><a href="#L71">71</a>       (ComponentFractionField P) := (w).column.W.ambientAlgebra</span>
+<span id="L72"><a href="#L72">72</a>    letI : IsLocalRing (w).column.W.place.valuation.toSubring :=</span>
+<span id="L73"><a href="#L73">73</a>      (w).column.W.place.isDiscrete.toIsLocalRing</span>
+<span id="L74"><a href="#L74">74</a>    (w).differential.core.D.a)</span>
+<span id="L75"><a href="#L75">75</a> </span>
+<span id="L76"><a href="#L76">76</a> set_option quotPrecheck false in</span>
+<span id="L77"><a href="#L77">77</a> local notation:max &quot;retainedGap&quot; P:arg w:arg =&gt;</span>
+<span id="L78"><a href="#L78">78</a>   (letI : Algebra</span>
+<span id="L79"><a href="#L79">79</a>       (Stafford38.Geometry.AsymptoticDivisorExistence.CoordinateZeroLocalRing</span>
+<span id="L80"><a href="#L80">80</a>         (w).column.W.coefficientField)</span>
+<span id="L81"><a href="#L81">81</a>       (ComponentFractionField P) := (w).column.W.ambientAlgebra</span>
+<span id="L82"><a href="#L82">82</a>    letI : IsLocalRing (w).column.W.place.valuation.toSubring :=</span>
+<span id="L83"><a href="#L83">83</a>      (w).column.W.place.isDiscrete.toIsLocalRing</span>
+<span id="L84"><a href="#L84">84</a>    (w).differential.core.D.e)</span>
+<span id="L85"><a href="#L85">85</a> </span>
+<span id="L86"><a href="#L86">86</a> /-- The factors of a tilted point-local arc remain nonzero after passage to</span>
+<span id="L87"><a href="#L87">87</a> its common open (paper proof, common-open step). -/</span>
+<span id="L88"><a href="#L88">88</a> def CommonOpenArcFactors</span>
+<span id="L89"><a href="#L89">89</a>     {k A Q : Type u} [Field k] [CommRing A] [CommRing Q]</span>
+<span id="L90"><a href="#L90">90</a>     [Algebra k A] [Algebra Q A] {d : ℕ}</span>
+<span id="L91"><a href="#L91">91</a>     [Algebra (MvPolynomial (Option (Fin d)) k) A]</span>
+<span id="L92"><a href="#L92">92</a>     [IsScalarTower k (MvPolynomial (Option (Fin d)) k) A]</span>
+<span id="L93"><a href="#L93">93</a>     [Algebra.EssFiniteType (MvPolynomial (Option (Fin d)) k) A]</span>
+<span id="L94"><a href="#L94">94</a>     (M : Ideal A) [M.IsMaximal]</span>
+<span id="L95"><a href="#L95">95</a>     [Algebra.FormallyEtale (MvPolynomial (Option (Fin d)) k) (Localization.AtPrime M)]</span>
+<span id="L96"><a href="#L96">96</a>     (f : Q) (e : Localization.Away f ≃ₐ[Q] Localization.Away (algebraMap Q A f))</span>
+<span id="L97"><a href="#L97">97</a>     (g : Q) (eM : (A ⧸ M) ≃ₐ[k] k) (alpha : Fin d → k)</span>
+<span id="L98"><a href="#L98">98</a>     (bad r q0 q1 : A) : Prop :=</span>
+<span id="L99"><a href="#L99">99</a>   let ρA := originalToPointLocalFinSuccArcLaurentSeries</span>
+<span id="L100"><a href="#L100">100</a>     (k := k) (d := d) (A := A) M eM alpha</span>
+<span id="L101"><a href="#L101">101</a>   ∃ (hf : IsUnit (ρA (algebraMap Q A f)))</span>
+<span id="L102"><a href="#L102">102</a>     (hg : IsUnit (ρA (algebraMap Q A g))),</span>
+<span id="L103"><a href="#L103">103</a>     let hunitM : ∀ b, b ∉ M → IsUnit (ρA b) := fun b hb =&gt; by</span>
+<span id="L104"><a href="#L104">104</a>       exact IsUnit.map</span>
+<span id="L105"><a href="#L105">105</a>         (pointLocalFinSuccArcLaurentSeries (k := k) (d := d) (A := A) M eM alpha).toRingHom</span>
+<span id="L106"><a href="#L106">106</a>         (IsLocalization.map_units (Localization.AtPrime M) (M := M.primeCompl) ⟨b, hb⟩)</span>
+<span id="L107"><a href="#L107">107</a>     let ρU := genericArcToGenericOpenExtraAwayB M f e ρA hf hunitM g hg</span>
+<span id="L108"><a href="#L108">108</a>     (ρU.comp (genericOpenExtraAwayBMap M f e g) = ρA) ∧</span>
+<span id="L109"><a href="#L109">109</a>     ((ρU.comp (genericOpenExtraAwayBMap M f e g)).comp</span>
+<span id="L110"><a href="#L110">110</a>       (algebraMap k A) = algebraMap k (LaurentSeries k)) ∧</span>
+<span id="L111"><a href="#L111">111</a>     (ρU (genericOpenExtraAwayBMap M f e g</span>
+<span id="L112"><a href="#L112">112</a>       bad) ≠ 0) ∧</span>
+<span id="L113"><a href="#L113">113</a>     (ρU (genericOpenExtraAwayBMap M f e g r) ≠ 0) ∧</span>
+<span id="L114"><a href="#L114">114</a>     (ρU (genericOpenExtraAwayBMap M f e g</span>
+<span id="L115"><a href="#L115">115</a>       q0) ≠ 0) ∧</span>
+<span id="L116"><a href="#L116">116</a>     (ρU (genericOpenExtraAwayBMap M f e g</span>
+<span id="L117"><a href="#L117">117</a>       q1) ≠ 0)</span>
+<span id="L118"><a href="#L118">118</a> </span>
+<span id="L119"><a href="#L119">119</a> /-- The tilted-product avoidance certificate yields the nonvanishing</span>
+<span id="L120"><a href="#L120">120</a> common-open factors (paper proof, common-open step). -/</span>
+<span id="L121"><a href="#L121">121</a> theorem commonOpenArcFactors_of_tiltedProduct</span>
+<span id="L122"><a href="#L122">122</a>     {k A Q : Type u} [Field k] [CommRing A] [CommRing Q]</span>
+<span id="L123"><a href="#L123">123</a>     [Algebra k A] [Algebra Q A] {d : ℕ}</span>
+<span id="L124"><a href="#L124">124</a>     [Algebra (MvPolynomial (Option (Fin d)) k) A]</span>
+<span id="L125"><a href="#L125">125</a>     [IsScalarTower k (MvPolynomial (Option (Fin d)) k) A]</span>
+<span id="L126"><a href="#L126">126</a>     [Algebra.EssFiniteType (MvPolynomial (Option (Fin d)) k) A]</span>
+<span id="L127"><a href="#L127">127</a>     (M : Ideal A) [M.IsMaximal]</span>
+<span id="L128"><a href="#L128">128</a>     [Algebra.FormallyEtale (MvPolynomial (Option (Fin d)) k) (Localization.AtPrime M)]</span>
+<span id="L129"><a href="#L129">129</a>     (f : Q) (e : Localization.Away f ≃ₐ[Q] Localization.Away (algebraMap Q A f))</span>
+<span id="L130"><a href="#L130">130</a>     (g : Q) (eM : (A ⧸ M) ≃ₐ[k] k) (alpha : Fin d → k)</span>
+<span id="L131"><a href="#L131">131</a>     (bad r q0 q1 : A)</span>
+<span id="L132"><a href="#L132">132</a>     (hbad : bad = algebraMap Q A f * r)</span>
+<span id="L133"><a href="#L133">133</a>     (hq0 : q0 = algebraMap Q A g)</span>
+<span id="L134"><a href="#L134">134</a>     (havoid : tiltedArc (k := k) alpha</span>
+<span id="L135"><a href="#L135">135</a>       (localToFinSuccPowerSeries (k := k) (B := A) (d := d) M eM</span>
+<span id="L136"><a href="#L136">136</a>           (algebraMap A (Localization.AtPrime M) bad) *</span>
+<span id="L137"><a href="#L137">137</a>        localToFinSuccPowerSeries (k := k) (B := A) (d := d) M eM</span>
+<span id="L138"><a href="#L138">138</a>           (algebraMap A (Localization.AtPrime M) q0) *</span>
+<span id="L139"><a href="#L139">139</a>        localToFinSuccPowerSeries (k := k) (B := A) (d := d) M eM</span>
+<span id="L140"><a href="#L140">140</a>           (algebraMap A (Localization.AtPrime M) q1)) ≠ 0) :</span>
+<span id="L141"><a href="#L141">141</a>     CommonOpenArcFactors M f e g eM alpha bad r q0 q1 := by</span>
+<span id="L142"><a href="#L142">142</a>   exact commonOpen_factors_ne_zero_of_tiltedProduct</span>
+<span id="L143"><a href="#L143">143</a>     M f e g eM alpha r bad q0 q1 hbad hq0 havoid</span>
+<span id="L144"><a href="#L144">144</a> </span>
+<span id="L145"><a href="#L145">145</a> </span>
+<span id="L146"><a href="#L146">146</a> /-- A finite-type coefficient algebra is essentially of finite type over</span>
+<span id="L147"><a href="#L147">147</a> any retained polynomial coordinate presentation. -/</span>
+<span id="L148"><a href="#L148">148</a> theorem essFiniteType_of_coordinateMap</span>
+<span id="L149"><a href="#L149">149</a>     {k B : Type u} [Field k] [CommRing B] [Algebra k B]</span>
+<span id="L150"><a href="#L150">150</a>     [Algebra.FiniteType k B] {d : ℕ}</span>
+<span id="L151"><a href="#L151">151</a>     (f : MvPolynomial (Option (Fin d)) k →ₐ[k] B) :</span>
+<span id="L152"><a href="#L152">152</a>     @Algebra.EssFiniteType (MvPolynomial (Option (Fin d)) k) B</span>
+<span id="L153"><a href="#L153">153</a>       _ _ f.toRingHom.toAlgebra := by</span>
+<span id="L154"><a href="#L154">154</a>   letI : Algebra (MvPolynomial (Option (Fin d)) k) B := f.toRingHom.toAlgebra</span>
+<span id="L155"><a href="#L155">155</a>   letI : IsScalarTower k (MvPolynomial (Option (Fin d)) k) B :=</span>
+<span id="L156"><a href="#L156">156</a>     IsScalarTower.of_algHom f</span>
+<span id="L157"><a href="#L157">157</a>   exact Algebra.EssFiniteType.of_comp k (MvPolynomial (Option (Fin d)) k) B</span>
+<span id="L158"><a href="#L158">158</a> </span>
+<span id="L159"><a href="#L159">159</a> /-- The maximal point, selected chart, and common-open maps built from one</span>
+<span id="L160"><a href="#L160">160</a> retained ground-point axis lift (paper proof, common-open step). -/</span>
+<span id="L161"><a href="#L161">161</a> structure CommonOpenPointData</span>
+<span id="L162"><a href="#L162">162</a>     {k : Type u} [Field k] [CharZero k] [IsAlgClosed k]</span>
+<span id="L163"><a href="#L163">163</a>     {m : ℕ} (hm : 0 &lt; m)</span>
+<span id="L164"><a href="#L164">164</a>     (P : PrimeSpectrum (MvPolynomial (Fin m) k))</span>
+<span id="L165"><a href="#L165">165</a>     (w : GeneralDivisorialVisibleFrameWitness hm P)</span>
+<span id="L166"><a href="#L166">166</a>     (setup : ChartSetup hm P w)</span>
+<span id="L167"><a href="#L167">167</a>     (coords : CoordinatePresentation hm P w setup) where</span>
+<span id="L168"><a href="#L168">168</a>   M : Ideal (actualSelectedNormalization P w)</span>
+<span id="L169"><a href="#L169">169</a>   [hM : M.IsMaximal]</span>
+<span id="L170"><a href="#L170">170</a>   eM :</span>
+<span id="L171"><a href="#L171">171</a>     letI : Algebra k (actualSelectedNormalization P w) := coords.coeff.toAlgebra</span>
+<span id="L172"><a href="#L172">172</a>     (actualSelectedNormalization P w ⧸ M) ≃ₐ[k] k</span>
+<span id="L173"><a href="#L173">173</a>   hEtM :</span>
+<span id="L174"><a href="#L174">174</a>     let R := MvPolynomial (Option (Fin (@Fintype.card coords.t coords.htFinite))) k</span>
+<span id="L175"><a href="#L175">175</a>     letI : Algebra k (actualSelectedNormalization P w) := coords.coeff.toAlgebra</span>
+<span id="L176"><a href="#L176">176</a>     letI : Algebra.FiniteType k (actualSelectedNormalization P w) := coords.hBfinite</span>
+<span id="L177"><a href="#L177">177</a>     letI : Algebra R (actualSelectedNormalization P w) :=</span>
+<span id="L178"><a href="#L178">178</a>       coords.fFin.toRingHom.toAlgebra</span>
+<span id="L179"><a href="#L179">179</a>     letI : IsScalarTower k R (actualSelectedNormalization P w) :=</span>
+<span id="L180"><a href="#L180">180</a>       IsScalarTower.of_algHom coords.fFin</span>
+<span id="L181"><a href="#L181">181</a>     letI : Algebra.EssFiniteType R (actualSelectedNormalization P w) :=</span>
+<span id="L182"><a href="#L182">182</a>       Algebra.EssFiniteType.of_comp k R (actualSelectedNormalization P w)</span>
+<span id="L183"><a href="#L183">183</a>     letI : Algebra R (Localization.AtPrime M) := inferInstance</span>
+<span id="L184"><a href="#L184">184</a>     Algebra.FormallyEtale R (Localization.AtPrime M)</span>
+<span id="L185"><a href="#L185">185</a>   fUnit : actualSelectedNormalization P w</span>
+<span id="L186"><a href="#L186">186</a>   hfUnitM : fUnit ∉ M</span>
+<span id="L187"><a href="#L187">187</a>   u0 : Localization.AtPrime M</span>
+<span id="L188"><a href="#L188">188</a>   u1 : Localization.AtPrime M</span>
+<span id="L189"><a href="#L189">189</a>   hu0 : IsUnit u0</span>
+<span id="L190"><a href="#L190">190</a>   hu1 : IsUnit u1</span>
+<span id="L191"><a href="#L191">191</a>   hq0M : algebraMap (actualSelectedNormalization P w) (Localization.AtPrime M)</span>
+<span id="L192"><a href="#L192">192</a>       ((retainedColumns hm P w) 0) =</span>
+<span id="L193"><a href="#L193">193</a>     (algebraMap (actualSelectedNormalization P w) (Localization.AtPrime M) coords.s) ^ (retainedOrder P w) * u0</span>
+<span id="L194"><a href="#L194">194</a>   hq1M : algebraMap (actualSelectedNormalization P w) (Localization.AtPrime M)</span>
+<span id="L195"><a href="#L195">195</a>       ((retainedColumns hm P w)</span>
+<span id="L196"><a href="#L196">196</a>         (Fin.succ (⟨0, hm⟩ : Fin m))) =</span>
+<span id="L197"><a href="#L197">197</a>     (algebraMap (actualSelectedNormalization P w) (Localization.AtPrime M) coords.s) ^</span>
+<span id="L198"><a href="#L198">198</a>       ((retainedOrder P w) + (retainedGap P w)) * u1</span>
+<span id="L199"><a href="#L199">199</a>   alpha : Fin (@Fintype.card coords.t coords.htFinite) → k</span>
+<span id="L200"><a href="#L200">200</a>   havoid :</span>
+<span id="L201"><a href="#L201">201</a>     let R := MvPolynomial (Option (Fin (@Fintype.card coords.t coords.htFinite))) k</span>
+<span id="L202"><a href="#L202">202</a>     letI : Algebra k (actualSelectedNormalization P w) := coords.coeff.toAlgebra</span>
+<span id="L203"><a href="#L203">203</a>     letI : Algebra.FiniteType k (actualSelectedNormalization P w) := coords.hBfinite</span>
+<span id="L204"><a href="#L204">204</a>     letI : Algebra R (actualSelectedNormalization P w) :=</span>
+<span id="L205"><a href="#L205">205</a>       coords.fFin.toRingHom.toAlgebra</span>
+<span id="L206"><a href="#L206">206</a>     letI : IsScalarTower k R (actualSelectedNormalization P w) :=</span>
+<span id="L207"><a href="#L207">207</a>       IsScalarTower.of_algHom coords.fFin</span>
+<span id="L208"><a href="#L208">208</a>     letI : Algebra.EssFiniteType R (actualSelectedNormalization P w) :=</span>
+<span id="L209"><a href="#L209">209</a>       Algebra.EssFiniteType.of_comp k R (actualSelectedNormalization P w)</span>
+<span id="L210"><a href="#L210">210</a>     letI : Algebra R (Localization.AtPrime M) := inferInstance</span>
+<span id="L211"><a href="#L211">211</a>     letI : Algebra.FormallyEtale R (Localization.AtPrime M) := hEtM</span>
+<span id="L212"><a href="#L212">212</a>     tiltedArc (k := k) alpha</span>
+<span id="L213"><a href="#L213">213</a>       (localToFinSuccPowerSeries (k := k)</span>
+<span id="L214"><a href="#L214">214</a>           (B := actualSelectedNormalization P w)</span>
+<span id="L215"><a href="#L215">215</a>           (d := @Fintype.card coords.t coords.htFinite) M eM</span>
+<span id="L216"><a href="#L216">216</a>           (algebraMap (actualSelectedNormalization P w) (Localization.AtPrime M)</span>
+<span id="L217"><a href="#L217">217</a>             (algebraMap _ (actualSelectedNormalization P w) setup.f *</span>
+<span id="L218"><a href="#L218">218</a>               algebraMap _ (actualSelectedNormalization P w) setup.r)) *</span>
+<span id="L219"><a href="#L219">219</a>        localToFinSuccPowerSeries (k := k)</span>
+<span id="L220"><a href="#L220">220</a>           (B := actualSelectedNormalization P w)</span>
+<span id="L221"><a href="#L221">221</a>           (d := @Fintype.card coords.t coords.htFinite) M eM</span>
+<span id="L222"><a href="#L222">222</a>           (algebraMap (actualSelectedNormalization P w) (Localization.AtPrime M)</span>
+<span id="L223"><a href="#L223">223</a>             ((retainedColumns hm P w) 0)) *</span>
+<span id="L224"><a href="#L224">224</a>        localToFinSuccPowerSeries (k := k)</span>
+<span id="L225"><a href="#L225">225</a>           (B := actualSelectedNormalization P w)</span>
+<span id="L226"><a href="#L226">226</a>           (d := @Fintype.card coords.t coords.htFinite) M eM</span>
+<span id="L227"><a href="#L227">227</a>           (algebraMap (actualSelectedNormalization P w) (Localization.AtPrime M)</span>
+<span id="L228"><a href="#L228">228</a>             ((retainedColumns hm P w)</span>
+<span id="L229"><a href="#L229">229</a>               (Fin.succ (⟨0, hm⟩ : Fin m))))) ≠ 0</span>
+<span id="L230"><a href="#L230">230</a>   hdata :</span>
+<span id="L231"><a href="#L231">231</a>     let R := MvPolynomial (Option (Fin (@Fintype.card coords.t coords.htFinite))) k</span>
+<span id="L232"><a href="#L232">232</a>     letI : Algebra k (actualSelectedNormalization P w) := coords.coeff.toAlgebra</span>
+<span id="L233"><a href="#L233">233</a>     letI : Algebra.FiniteType k (actualSelectedNormalization P w) := coords.hBfinite</span>
+<span id="L234"><a href="#L234">234</a>     letI : Algebra R (actualSelectedNormalization P w) :=</span>
+<span id="L235"><a href="#L235">235</a>       coords.fFin.toRingHom.toAlgebra</span>
+<span id="L236"><a href="#L236">236</a>     letI : IsScalarTower k R (actualSelectedNormalization P w) :=</span>
+<span id="L237"><a href="#L237">237</a>       IsScalarTower.of_algHom coords.fFin</span>
+<span id="L238"><a href="#L238">238</a>     letI : Algebra.EssFiniteType R (actualSelectedNormalization P w) :=</span>
+<span id="L239"><a href="#L239">239</a>       Algebra.EssFiniteType.of_comp k R (actualSelectedNormalization P w)</span>
+<span id="L240"><a href="#L240">240</a>     letI : Algebra R (Localization.AtPrime M) := inferInstance</span>
+<span id="L241"><a href="#L241">241</a>     letI : Algebra.FormallyEtale R (Localization.AtPrime M) := hEtM</span>
+<span id="L242"><a href="#L242">242</a>     SelectedCoordinateAxisLiftData</span>
+<span id="L243"><a href="#L243">243</a>       (fun a =&gt; localToFinSuccPowerSeries (k := k)</span>
+<span id="L244"><a href="#L244">244</a>         (B := actualSelectedNormalization P w)</span>
+<span id="L245"><a href="#L245">245</a>         (d := @Fintype.card coords.t coords.htFinite) M eM</span>
+<span id="L246"><a href="#L246">246</a>         (algebraMap (actualSelectedNormalization P w) (Localization.AtPrime M)</span>
+<span id="L247"><a href="#L247">247</a>           ((retainedColumns hm P w) a)))</span>
+<span id="L248"><a href="#L248">248</a>       coords.rows (Fin.succ setup.j) 0 (⟨0, hm⟩ : Fin m).succ</span>
+<span id="L249"><a href="#L249">249</a>       (retainedOrder P w)</span>
+<span id="L250"><a href="#L250">250</a>       ((retainedOrder P w) + (retainedGap P w))</span>
+<span id="L251"><a href="#L251">251</a>       (fun j =&gt; PrescribedAffineResidueCompletion.residueCoordinates</span>
+<span id="L252"><a href="#L252">252</a>         M eM (some j)) alpha</span>
+<span id="L253"><a href="#L253">253</a>       (localToFinSuccPowerSeries (k := k)</span>
+<span id="L254"><a href="#L254">254</a>         (B := actualSelectedNormalization P w)</span>
+<span id="L255"><a href="#L255">255</a>         (d := @Fintype.card coords.t coords.htFinite) M eM u0)</span>
+<span id="L256"><a href="#L256">256</a>       (localToFinSuccPowerSeries (k := k)</span>
+<span id="L257"><a href="#L257">257</a>         (B := actualSelectedNormalization P w)</span>
+<span id="L258"><a href="#L258">258</a>         (d := @Fintype.card coords.t coords.htFinite) M eM u1)</span>
+<span id="L259"><a href="#L259">259</a> </span>
+<span id="L260"><a href="#L260">260</a> /-- The selected quotient coordinates for the retained columns. -/</span>
+<span id="L261"><a href="#L261">261</a> structure CommonOpenChartData</span>
+<span id="L262"><a href="#L262">262</a>     {k : Type u} [Field k] [CharZero k] [IsAlgClosed k]</span>
+<span id="L263"><a href="#L263">263</a>     {m : ℕ} (hm : 0 &lt; m)</span>
+<span id="L264"><a href="#L264">264</a>     (P : PrimeSpectrum (MvPolynomial (Fin m) k))</span>
+<span id="L265"><a href="#L265">265</a>     (w : GeneralDivisorialVisibleFrameWitness hm P)</span>
+<span id="L266"><a href="#L266">266</a>     (setup : ChartSetup hm P w)</span>
+<span id="L267"><a href="#L267">267</a>     (coords : CoordinatePresentation hm P w setup) where</span>
+<span id="L268"><a href="#L268">268</a>   hxj : componentCoordinate P setup.j ≠ 0</span>
+<span id="L269"><a href="#L269">269</a>   hsel : SelectedAffineChartQuotient (k := k) P setup.j ≃ₐ[k]</span>
+<span id="L270"><a href="#L270">270</a>       actualSelectedChartAlgebra P w</span>
+<span id="L271"><a href="#L271">271</a>   qQ : Fin (m + 1) → actualSelectedChartAlgebra P w</span>
+<span id="L272"><a href="#L272">272</a>   hqchartQ : qQ (Fin.succ setup.j) = 1</span>
+<span id="L273"><a href="#L273">273</a>   hqQF : ∀ a, (qQ a : ComponentFractionField P) =</span>
+<span id="L274"><a href="#L274">274</a>       retainedColumnValue P w a</span>
+<span id="L275"><a href="#L275">275</a>   hq0 : qQ 0 = hsel (selectedAffineChartDenominator P setup.j)</span>
+<span id="L276"><a href="#L276">276</a>   hqvars : ∀ i : Fin m, ∀ hij : i ≠ setup.j,</span>
+<span id="L277"><a href="#L277">277</a>       qQ (Fin.succ i) =</span>
+<span id="L278"><a href="#L278">278</a>         hsel (selectedAffineChartVariableClass P setup.j i hij)</span>
+<span id="L279"><a href="#L279">279</a>   hqA : ∀ a, (retainedColumns hm P w) a =</span>
+<span id="L280"><a href="#L280">280</a>       algebraMap _ (actualSelectedNormalization P w) (qQ a)</span>
+<span id="L281"><a href="#L281">281</a> </span>
+<span id="L282"><a href="#L282">282</a> /-- The common-open maps and arc factors for the retained point and columns. -/</span>
+<span id="L283"><a href="#L283">283</a> structure CommonOpenMapData</span>
+<span id="L284"><a href="#L284">284</a>     {k : Type u} [Field k] [CharZero k] [IsAlgClosed k]</span>
+<span id="L285"><a href="#L285">285</a>     {m : ℕ} (hm : 0 &lt; m)</span>
+<span id="L286"><a href="#L286">286</a>     (P : PrimeSpectrum (MvPolynomial (Fin m) k))</span>
+<span id="L287"><a href="#L287">287</a>     (w : GeneralDivisorialVisibleFrameWitness hm P)</span>
+<span id="L288"><a href="#L288">288</a>     (setup : ChartSetup hm P w)</span>
+<span id="L289"><a href="#L289">289</a>     (coords : CoordinatePresentation hm P w setup)</span>
+<span id="L290"><a href="#L290">290</a>     (point : CommonOpenPointData hm P w setup coords) [point.M.IsMaximal]</span>
+<span id="L291"><a href="#L291">291</a>     (chart : CommonOpenChartData hm P w setup coords) where</span>
+<span id="L292"><a href="#L292">292</a>   hqUPoint :</span>
+<span id="L293"><a href="#L293">293</a>     let g := chart.hsel (selectedAffineChartDenominator P setup.j)</span>
+<span id="L294"><a href="#L294">294</a>     let Cq := genericOpenRing point.M setup.f setup.e</span>
+<span id="L295"><a href="#L295">295</a>     let U := genericOpenExtraAwayB point.M setup.f setup.e g</span>
+<span id="L296"><a href="#L296">296</a>     let qU : Fin (m + 1) → U := fun a =&gt;</span>
+<span id="L297"><a href="#L297">297</a>       algebraMap Cq U (algebraMap _ Cq (chart.qQ a))</span>
+<span id="L298"><a href="#L298">298</a>     let qT : Fin (m + 1) → Localization.AtPrime point.M := fun a =&gt;</span>
+<span id="L299"><a href="#L299">299</a>       algebraMap (actualSelectedNormalization P w) (Localization.AtPrime point.M)</span>
+<span id="L300"><a href="#L300">300</a>         ((retainedColumns hm P w) a)</span>
+<span id="L301"><a href="#L301">301</a>     ∀ a, qU a = pointLocalToCommonOpen</span>
+<span id="L302"><a href="#L302">302</a>       (A := actualSelectedNormalization P w) point.M setup.f setup.e g (qT a)</span>
+<span id="L303"><a href="#L303">303</a>   hchartU :</span>
+<span id="L304"><a href="#L304">304</a>     let g := chart.hsel (selectedAffineChartDenominator P setup.j)</span>
+<span id="L305"><a href="#L305">305</a>     let Cq := genericOpenRing point.M setup.f setup.e</span>
+<span id="L306"><a href="#L306">306</a>     let U := genericOpenExtraAwayB point.M setup.f setup.e g</span>
+<span id="L307"><a href="#L307">307</a>     let qU : Fin (m + 1) → U := fun a =&gt;</span>
+<span id="L308"><a href="#L308">308</a>       algebraMap Cq U (algebraMap _ Cq (chart.qQ a))</span>
+<span id="L309"><a href="#L309">309</a>     let φ := originalAffineChartToCommonOpen P setup.j chart.hxj chart.hsel point.M setup.f setup.e</span>
+<span id="L310"><a href="#L310">310</a>     ∀ i : Fin m, qU i.succ = qU 0 *</span>
+<span id="L311"><a href="#L311">311</a>       φ (Ideal.Quotient.mk P.asIdeal (MvPolynomial.X i))</span>
+<span id="L312"><a href="#L312">312</a>   hq0B : (retainedColumns hm P w) 0 =</span>
+<span id="L313"><a href="#L313">313</a>       algebraMap _ (actualSelectedNormalization P w)</span>
+<span id="L314"><a href="#L314">314</a>         (chart.hsel (selectedAffineChartDenominator P setup.j))</span>
+<span id="L315"><a href="#L315">315</a>   hbaseMap :</span>
+<span id="L316"><a href="#L316">316</a>     let g := chart.hsel (selectedAffineChartDenominator P setup.j)</span>
+<span id="L317"><a href="#L317">317</a>     let Cq := genericOpenRing point.M setup.f setup.e</span>
+<span id="L318"><a href="#L318">318</a>     let U := genericOpenExtraAwayB point.M setup.f setup.e g</span>
+<span id="L319"><a href="#L319">319</a>     (genericOpenExtraAwayBMap point.M setup.f setup.e g).comp</span>
+<span id="L320"><a href="#L320">320</a>       (algebraMap (actualSelectedChartAlgebra P w)</span>
+<span id="L321"><a href="#L321">321</a>         (actualSelectedNormalization P w)) =</span>
+<span id="L322"><a href="#L322">322</a>     (algebraMap Cq U).comp (algebraMap _ Cq)</span>
+<span id="L323"><a href="#L323">323</a> </span>
+<span id="L324"><a href="#L324">324</a> /-- The common-open construction retains bounded certificates for each step. -/</span>
+<span id="L325"><a href="#L325">325</a> structure CommonOpenArcCompatibility</span>
+<span id="L326"><a href="#L326">326</a>     {k : Type u} [Field k] [CharZero k] [IsAlgClosed k]</span>
+<span id="L327"><a href="#L327">327</a>     {m : ℕ} (hm : 0 &lt; m)</span>
+<span id="L328"><a href="#L328">328</a>     (P : PrimeSpectrum (MvPolynomial (Fin m) k))</span>
+<span id="L329"><a href="#L329">329</a>     (w : GeneralDivisorialVisibleFrameWitness hm P)</span>
+<span id="L330"><a href="#L330">330</a>     (setup : ChartSetup hm P w)</span>
+<span id="L331"><a href="#L331">331</a>     (coords : CoordinatePresentation hm P w setup)</span>
+<span id="L332"><a href="#L332">332</a>     (point : CommonOpenPointData hm P w setup coords) [point.M.IsMaximal]</span>
+<span id="L333"><a href="#L333">333</a>     (chart : CommonOpenChartData hm P w setup coords) where</span>
+<span id="L334"><a href="#L334">334</a>   hfactor :</span>
+<span id="L335"><a href="#L335">335</a>     let R := MvPolynomial (Option (Fin (@Fintype.card coords.t coords.htFinite))) k</span>
+<span id="L336"><a href="#L336">336</a>     letI : Algebra k (actualSelectedNormalization P w) := coords.coeff.toAlgebra</span>
+<span id="L337"><a href="#L337">337</a>     letI : Algebra.FiniteType k (actualSelectedNormalization P w) := coords.hBfinite</span>
+<span id="L338"><a href="#L338">338</a>     letI : Algebra R (actualSelectedNormalization P w) :=</span>
+<span id="L339"><a href="#L339">339</a>       coords.fFin.toRingHom.toAlgebra</span>
+<span id="L340"><a href="#L340">340</a>     letI : IsScalarTower k R (actualSelectedNormalization P w) :=</span>
+<span id="L341"><a href="#L341">341</a>       IsScalarTower.of_algHom coords.fFin</span>
+<span id="L342"><a href="#L342">342</a>     letI : Algebra.EssFiniteType R (actualSelectedNormalization P w) :=</span>
+<span id="L343"><a href="#L343">343</a>       Algebra.EssFiniteType.of_comp k R (actualSelectedNormalization P w)</span>
+<span id="L344"><a href="#L344">344</a>     letI : Algebra R (Localization.AtPrime point.M) := inferInstance</span>
+<span id="L345"><a href="#L345">345</a>     letI : Algebra.FormallyEtale R (Localization.AtPrime point.M) := point.hEtM</span>
+<span id="L346"><a href="#L346">346</a>     CommonOpenArcFactors (k := k) (d := @Fintype.card coords.t coords.htFinite)</span>
+<span id="L347"><a href="#L347">347</a>       (A := actualSelectedNormalization P w) point.M setup.f setup.e</span>
+<span id="L348"><a href="#L348">348</a>       (chart.hsel (selectedAffineChartDenominator P setup.j)) point.eM point.alpha</span>
+<span id="L349"><a href="#L349">349</a>       (algebraMap (actualSelectedChartAlgebra P w) (actualSelectedNormalization P w) setup.f *</span>
+<span id="L350"><a href="#L350">350</a>         algebraMap (actualSelectedChartAlgebra P w) (actualSelectedNormalization P w) setup.r)</span>
+<span id="L351"><a href="#L351">351</a>       (algebraMap (actualSelectedChartAlgebra P w) (actualSelectedNormalization P w) setup.r)</span>
+<span id="L352"><a href="#L352">352</a>       ((retainedColumns hm P w) 0)</span>
+<span id="L353"><a href="#L353">353</a>       ((retainedColumns hm P w) (Fin.succ (⟨0, hm⟩ : Fin m)))</span>
+<span id="L354"><a href="#L354">354</a> </span>
+<span id="L355"><a href="#L355">355</a> /-- The common open stores each independently elaborated mathematical certificate. -/</span>
+<span id="L356"><a href="#L356">356</a> structure CommonOpenData</span>
+<span id="L357"><a href="#L357">357</a>     {k : Type u} [Field k] [CharZero k] [IsAlgClosed k]</span>
+<span id="L358"><a href="#L358">358</a>     {m : ℕ} (hm : 0 &lt; m)</span>
+<span id="L359"><a href="#L359">359</a>     (P : PrimeSpectrum (MvPolynomial (Fin m) k))</span>
+<span id="L360"><a href="#L360">360</a>     (w : GeneralDivisorialVisibleFrameWitness hm P)</span>
+<span id="L361"><a href="#L361">361</a>     (setup : ChartSetup hm P w)</span>
+<span id="L362"><a href="#L362">362</a>     (coords : CoordinatePresentation hm P w setup) where</span>
+<span id="L363"><a href="#L363">363</a>   point : CommonOpenPointData hm P w setup coords</span>
+<span id="L364"><a href="#L364">364</a>   chart : CommonOpenChartData hm P w setup coords</span>
+<span id="L365"><a href="#L365">365</a>   maps :</span>
+<span id="L366"><a href="#L366">366</a>     letI : point.M.IsMaximal := point.hM</span>
+<span id="L367"><a href="#L367">367</a>     CommonOpenMapData hm P w setup coords point chart</span>
+<span id="L368"><a href="#L368">368</a>   arc :</span>
+<span id="L369"><a href="#L369">369</a>     letI : point.M.IsMaximal := point.hM</span>
+<span id="L370"><a href="#L370">370</a>     CommonOpenArcCompatibility hm P w setup coords point chart</span>
+<span id="L371"><a href="#L371">371</a> </span>
+<span id="L372"><a href="#L372">372</a> namespace CommonOpenData</span>
+<span id="L373"><a href="#L373">373</a> </span>
+<span id="L374"><a href="#L374">374</a> variable {k : Type u} [Field k] [CharZero k] [IsAlgClosed k]</span>
+<span id="L375"><a href="#L375">375</a>   {m : ℕ} {hm : 0 &lt; m} {P : PrimeSpectrum (MvPolynomial (Fin m) k)}</span>
+<span id="L376"><a href="#L376">376</a>   {w : GeneralDivisorialVisibleFrameWitness hm P} {setup : ChartSetup hm P w}</span>
+<span id="L377"><a href="#L377">377</a>   {coords : CoordinatePresentation hm P w setup}</span>
+<span id="L378"><a href="#L378">378</a> </span>
+<span id="L379"><a href="#L379">379</a> abbrev M (data : CommonOpenData hm P w setup coords) := data.point.M</span>
+<span id="L380"><a href="#L380">380</a> abbrev hM (data : CommonOpenData hm P w setup coords) := data.point.hM</span>
+<span id="L381"><a href="#L381">381</a> abbrev eM (data : CommonOpenData hm P w setup coords) := data.point.eM</span>
+<span id="L382"><a href="#L382">382</a> abbrev hEtM (data : CommonOpenData hm P w setup coords) := data.point.hEtM</span>
+<span id="L383"><a href="#L383">383</a> abbrev fUnit (data : CommonOpenData hm P w setup coords) := data.point.fUnit</span>
+<span id="L384"><a href="#L384">384</a> abbrev hfUnitM (data : CommonOpenData hm P w setup coords) := data.point.hfUnitM</span>
+<span id="L385"><a href="#L385">385</a> abbrev u0 (data : CommonOpenData hm P w setup coords) := data.point.u0</span>
+<span id="L386"><a href="#L386">386</a> abbrev u1 (data : CommonOpenData hm P w setup coords) := data.point.u1</span>
+<span id="L387"><a href="#L387">387</a> abbrev hu0 (data : CommonOpenData hm P w setup coords) := data.point.hu0</span>
+<span id="L388"><a href="#L388">388</a> abbrev hu1 (data : CommonOpenData hm P w setup coords) := data.point.hu1</span>
+<span id="L389"><a href="#L389">389</a> abbrev hq0M (data : CommonOpenData hm P w setup coords) := data.point.hq0M</span>
+<span id="L390"><a href="#L390">390</a> abbrev hq1M (data : CommonOpenData hm P w setup coords) := data.point.hq1M</span>
+<span id="L391"><a href="#L391">391</a> abbrev alpha (data : CommonOpenData hm P w setup coords) := data.point.alpha</span>
+<span id="L392"><a href="#L392">392</a> abbrev havoid (data : CommonOpenData hm P w setup coords) := data.point.havoid</span>
+<span id="L393"><a href="#L393">393</a> abbrev hdata (data : CommonOpenData hm P w setup coords) := data.point.hdata</span>
+<span id="L394"><a href="#L394">394</a> abbrev hxj (data : CommonOpenData hm P w setup coords) := data.chart.hxj</span>
+<span id="L395"><a href="#L395">395</a> abbrev hsel (data : CommonOpenData hm P w setup coords) := data.chart.hsel</span>
+<span id="L396"><a href="#L396">396</a> abbrev qQ (data : CommonOpenData hm P w setup coords) := data.chart.qQ</span>
+<span id="L397"><a href="#L397">397</a> abbrev hqchartQ (data : CommonOpenData hm P w setup coords) := data.chart.hqchartQ</span>
+<span id="L398"><a href="#L398">398</a> abbrev hqQF (data : CommonOpenData hm P w setup coords) := data.chart.hqQF</span>
+<span id="L399"><a href="#L399">399</a> abbrev hq0 (data : CommonOpenData hm P w setup coords) := data.chart.hq0</span>
+<span id="L400"><a href="#L400">400</a> abbrev hqvars (data : CommonOpenData hm P w setup coords) := data.chart.hqvars</span>
+<span id="L401"><a href="#L401">401</a> abbrev hqA (data : CommonOpenData hm P w setup coords) := data.chart.hqA</span>
+<span id="L402"><a href="#L402">402</a> abbrev hqUPoint (data : CommonOpenData hm P w setup coords) :=</span>
+<span id="L403"><a href="#L403">403</a>   letI : data.point.M.IsMaximal := data.point.hM</span>
+<span id="L404"><a href="#L404">404</a>   data.maps.hqUPoint</span>
+<span id="L405"><a href="#L405">405</a> abbrev hchartU (data : CommonOpenData hm P w setup coords) :=</span>
+<span id="L406"><a href="#L406">406</a>   letI : data.point.M.IsMaximal := data.point.hM</span>
+<span id="L407"><a href="#L407">407</a>   data.maps.hchartU</span>
+<span id="L408"><a href="#L408">408</a> abbrev hq0B (data : CommonOpenData hm P w setup coords) :=</span>
+<span id="L409"><a href="#L409">409</a>   letI : data.point.M.IsMaximal := data.point.hM</span>
+<span id="L410"><a href="#L410">410</a>   data.maps.hq0B</span>
+<span id="L411"><a href="#L411">411</a> abbrev hbaseMap (data : CommonOpenData hm P w setup coords) :=</span>
+<span id="L412"><a href="#L412">412</a>   letI : data.point.M.IsMaximal := data.point.hM</span>
+<span id="L413"><a href="#L413">413</a>   data.maps.hbaseMap</span>
+<span id="L414"><a href="#L414">414</a> </span>
+<span id="L415"><a href="#L415">415</a> abbrev hfactor (data : CommonOpenData hm P w setup coords) :=</span>
+<span id="L416"><a href="#L416">416</a>   letI : data.point.M.IsMaximal := data.point.hM</span>
+<span id="L417"><a href="#L417">417</a>   data.arc.hfactor</span>
+<span id="L418"><a href="#L418">418</a> </span>
+<span id="L419"><a href="#L419">419</a> end CommonOpenData</span>
+<span id="L420"><a href="#L420">420</a> </span>
+<span id="L421"><a href="#L421">421</a> noncomputable def CommonOpenData.g</span>
+<span id="L422"><a href="#L422">422</a>     {k : Type u} [Field k] [CharZero k] [IsAlgClosed k]</span>
+<span id="L423"><a href="#L423">423</a>     {m : ℕ} {hm : 0 &lt; m}</span>
+<span id="L424"><a href="#L424">424</a>     {P : PrimeSpectrum (MvPolynomial (Fin m) k)}</span>
+<span id="L425"><a href="#L425">425</a>     {w : GeneralDivisorialVisibleFrameWitness hm P}</span>
+<span id="L426"><a href="#L426">426</a>     {setup : ChartSetup hm P w}</span>
+<span id="L427"><a href="#L427">427</a>     {coords : CoordinatePresentation hm P w setup}</span>
+<span id="L428"><a href="#L428">428</a>     (data : CommonOpenData hm P w setup coords) : actualSelectedChartAlgebra P w :=</span>
+<span id="L429"><a href="#L429">429</a>   data.hsel (selectedAffineChartDenominator P setup.j)</span>
+<span id="L430"><a href="#L430">430</a> </span>
+<span id="L431"><a href="#L431">431</a> noncomputable abbrev CommonOpenData.Cq</span>
+<span id="L432"><a href="#L432">432</a>     {k : Type u} [Field k] [CharZero k] [IsAlgClosed k]</span>
+<span id="L433"><a href="#L433">433</a>     {m : ℕ} {hm : 0 &lt; m}</span>
+<span id="L434"><a href="#L434">434</a>     {P : PrimeSpectrum (MvPolynomial (Fin m) k)}</span>
+<span id="L435"><a href="#L435">435</a>     {w : GeneralDivisorialVisibleFrameWitness hm P}</span>
+<span id="L436"><a href="#L436">436</a>     {setup : ChartSetup hm P w}</span>
+<span id="L437"><a href="#L437">437</a>     {coords : CoordinatePresentation hm P w setup}</span>
+<span id="L438"><a href="#L438">438</a>     (data : CommonOpenData hm P w setup coords) : Type u := by</span>
+<span id="L439"><a href="#L439">439</a>   letI : data.M.IsMaximal := data.hM</span>
+<span id="L440"><a href="#L440">440</a>   exact genericOpenRing data.M setup.f setup.e</span>
+<span id="L441"><a href="#L441">441</a> </span>
+<span id="L442"><a href="#L442">442</a> noncomputable abbrev CommonOpenData.U</span>
+<span id="L443"><a href="#L443">443</a>     {k : Type u} [Field k] [CharZero k] [IsAlgClosed k]</span>
+<span id="L444"><a href="#L444">444</a>     {m : ℕ} {hm : 0 &lt; m}</span>
+<span id="L445"><a href="#L445">445</a>     {P : PrimeSpectrum (MvPolynomial (Fin m) k)}</span>
+<span id="L446"><a href="#L446">446</a>     {w : GeneralDivisorialVisibleFrameWitness hm P}</span>
+<span id="L447"><a href="#L447">447</a>     {setup : ChartSetup hm P w}</span>
+<span id="L448"><a href="#L448">448</a>     {coords : CoordinatePresentation hm P w setup}</span>
+<span id="L449"><a href="#L449">449</a>     (data : CommonOpenData hm P w setup coords) : Type u := by</span>
+<span id="L450"><a href="#L450">450</a>   letI : data.M.IsMaximal := data.hM</span>
+<span id="L451"><a href="#L451">451</a>   exact genericOpenExtraAwayB data.M setup.f setup.e data.g</span>
+<span id="L452"><a href="#L452">452</a> </span>
+<span id="L453"><a href="#L453">453</a> noncomputable def CommonOpenData.qU</span>
+<span id="L454"><a href="#L454">454</a>     {k : Type u} [Field k] [CharZero k] [IsAlgClosed k]</span>
+<span id="L455"><a href="#L455">455</a>     {m : ℕ} {hm : 0 &lt; m}</span>
+<span id="L456"><a href="#L456">456</a>     {P : PrimeSpectrum (MvPolynomial (Fin m) k)}</span>
+<span id="L457"><a href="#L457">457</a>     {w : GeneralDivisorialVisibleFrameWitness hm P}</span>
+<span id="L458"><a href="#L458">458</a>     {setup : ChartSetup hm P w}</span>
+<span id="L459"><a href="#L459">459</a>     {coords : CoordinatePresentation hm P w setup}</span>
+<span id="L460"><a href="#L460">460</a>     (data : CommonOpenData hm P w setup coords) : Fin (m + 1) → data.U := by</span>
+<span id="L461"><a href="#L461">461</a>   letI : data.M.IsMaximal := data.hM</span>
+<span id="L462"><a href="#L462">462</a>   exact fun a =&gt; algebraMap data.Cq data.U (algebraMap _ data.Cq (data.qQ a))</span>
+<span id="L463"><a href="#L463">463</a> </span>
+<span id="L464"><a href="#L464">464</a> noncomputable def CommonOpenData.qT</span>
+<span id="L465"><a href="#L465">465</a>     {k : Type u} [Field k] [CharZero k] [IsAlgClosed k]</span>
+<span id="L466"><a href="#L466">466</a>     {m : ℕ} {hm : 0 &lt; m}</span>
+<span id="L467"><a href="#L467">467</a>     {P : PrimeSpectrum (MvPolynomial (Fin m) k)}</span>
+<span id="L468"><a href="#L468">468</a>     {w : GeneralDivisorialVisibleFrameWitness hm P}</span>
+<span id="L469"><a href="#L469">469</a>     {setup : ChartSetup hm P w}</span>
+<span id="L470"><a href="#L470">470</a>     {coords : CoordinatePresentation hm P w setup}</span>
+<span id="L471"><a href="#L471">471</a>     (data : CommonOpenData hm P w setup coords) :</span>
+<span id="L472"><a href="#L472">472</a>       letI : data.M.IsMaximal := data.hM</span>
+<span id="L473"><a href="#L473">473</a>       Fin (m + 1) → Localization.AtPrime data.M := by</span>
+<span id="L474"><a href="#L474">474</a>   letI : data.M.IsMaximal := data.hM</span>
+<span id="L475"><a href="#L475">475</a>   exact fun a =&gt; algebraMap (actualSelectedNormalization P w) (Localization.AtPrime data.M)</span>
+<span id="L476"><a href="#L476">476</a>     ((retainedColumns hm P w) a)</span>
+<span id="L477"><a href="#L477">477</a> </span>
+<span id="L478"><a href="#L478">478</a> noncomputable def CommonOpenData.φ</span>
+<span id="L479"><a href="#L479">479</a>     {k : Type u} [Field k] [CharZero k] [IsAlgClosed k]</span>
+<span id="L480"><a href="#L480">480</a>     {m : ℕ} {hm : 0 &lt; m}</span>
+<span id="L481"><a href="#L481">481</a>     {P : PrimeSpectrum (MvPolynomial (Fin m) k)}</span>
+<span id="L482"><a href="#L482">482</a>     {w : GeneralDivisorialVisibleFrameWitness hm P}</span>
+<span id="L483"><a href="#L483">483</a>     {setup : ChartSetup hm P w}</span>
+<span id="L484"><a href="#L484">484</a>     {coords : CoordinatePresentation hm P w setup}</span>
+<span id="L485"><a href="#L485">485</a>     (data : CommonOpenData hm P w setup coords) :</span>
+<span id="L486"><a href="#L486">486</a>       OriginalAffineChartQuotient (k := k) P →+* data.U := by</span>
+<span id="L487"><a href="#L487">487</a>   letI : data.M.IsMaximal := data.hM</span>
+<span id="L488"><a href="#L488">488</a>   exact originalAffineChartToCommonOpen P setup.j data.hxj data.hsel</span>
+<span id="L489"><a href="#L489">489</a>     data.M setup.f setup.e</span>
+<span id="L490"><a href="#L490">490</a> </span>
+<span id="L491"><a href="#L491">491</a> /-- Express the retained columns in the selected affine quotient. -/</span>
+<span id="L492"><a href="#L492">492</a> theorem exists_selected_chart_coordinate_data</span>
+<span id="L493"><a href="#L493">493</a>     {k : Type u} [Field k] [CharZero k] [IsAlgClosed k] {m : ℕ}</span>
+<span id="L494"><a href="#L494">494</a>     (hm : 0 &lt; m)</span>
+<span id="L495"><a href="#L495">495</a>     (P : PrimeSpectrum (MvPolynomial (Fin m) k))</span>
+<span id="L496"><a href="#L496">496</a>     (w : GeneralDivisorialVisibleFrameWitness hm P)</span>
+<span id="L497"><a href="#L497">497</a>     (setup : ChartSetup hm P w)</span>
+<span id="L498"><a href="#L498">498</a>     (M : Ideal (actualSelectedNormalization P w)) [M.IsMaximal] :</span>
+<span id="L499"><a href="#L499">499</a>     ∃ hsel : SelectedAffineChartQuotient (k := k) P setup.j ≃ₐ[k]</span>
+<span id="L500"><a href="#L500">500</a>         actualSelectedChartAlgebra P w,</span>
+<span id="L501"><a href="#L501">501</a>       ∃ qQ : Fin (m + 1) → actualSelectedChartAlgebra P w,</span>
+<span id="L502"><a href="#L502">502</a>         qQ (Fin.succ setup.j) = 1 ∧</span>
+<span id="L503"><a href="#L503">503</a>         (∀ a, (qQ a : ComponentFractionField P) =</span>
+<span id="L504"><a href="#L504">504</a>           retainedColumnValue P w a) ∧</span>
+<span id="L505"><a href="#L505">505</a>         qQ 0 = hsel (selectedAffineChartDenominator P setup.j) ∧</span>
+<span id="L506"><a href="#L506">506</a>         (∀ i : Fin m, ∀ hij : i ≠ setup.j,</span>
+<span id="L507"><a href="#L507">507</a>           qQ (Fin.succ i) = hsel (selectedAffineChartVariableClass P setup.j i hij)) := by</span>
+<span id="L508"><a href="#L508">508</a>   let hsel : SelectedAffineChartQuotient (k := k) P setup.j ≃ₐ[k]</span>
+<span id="L509"><a href="#L509">509</a>       (actualSelectedChartAlgebra P w) :=</span>
+<span id="L510"><a href="#L510">510</a>     actual_witness_selected_chart_quotient_equiv P w setup.j setup.hchart</span>
+<span id="L511"><a href="#L511">511</a>   have hqCoordinates :=</span>
+<span id="L512"><a href="#L512">512</a>     actual_witness_selected_chart_q_coordinates_in_actual_algebra</span>
+<span id="L513"><a href="#L513">513</a>       hm P w setup.j setup.hchart</span>
+<span id="L514"><a href="#L514">514</a>   dsimp only at hqCoordinates</span>
+<span id="L515"><a href="#L515">515</a>   rcases hqCoordinates with ⟨qQ, hqchartQ, hqQF, hq0, hqvars⟩</span>
+<span id="L516"><a href="#L516">516</a>   exact ⟨hsel, qQ, hqchartQ, hqQF, hq0, hqvars⟩</span>
+<span id="L517"><a href="#L517">517</a> </span>
+<span id="L518"><a href="#L518">518</a> /-- Identify the selected columns with their images in the common open and</span>
+<span id="L519"><a href="#L519">519</a> the point-local route, and record the original chart map. -/</span>
+<span id="L520"><a href="#L520">520</a> theorem exists_common_open_map_data</span>
+<span id="L521"><a href="#L521">521</a>     {k : Type u} [Field k] [CharZero k] [IsAlgClosed k]</span>
+<span id="L522"><a href="#L522">522</a>     {m : ℕ} (hm : 0 &lt; m)</span>
+<span id="L523"><a href="#L523">523</a>     (P : PrimeSpectrum (MvPolynomial (Fin m) k))</span>
+<span id="L524"><a href="#L524">524</a>     (w : GeneralDivisorialVisibleFrameWitness hm P)</span>
+<span id="L525"><a href="#L525">525</a>     (setup : ChartSetup hm P w)</span>
+<span id="L526"><a href="#L526">526</a>     (M : Ideal (actualSelectedNormalization P w)) [M.IsMaximal]</span>
+<span id="L527"><a href="#L527">527</a>     (hsel : SelectedAffineChartQuotient (k := k) P setup.j ≃ₐ[k]</span>
+<span id="L528"><a href="#L528">528</a>       actualSelectedChartAlgebra P w)</span>
+<span id="L529"><a href="#L529">529</a>     (qQ : Fin (m + 1) → actualSelectedChartAlgebra P w)</span>
+<span id="L530"><a href="#L530">530</a>     (hqchartQ : qQ (Fin.succ setup.j) = 1)</span>
+<span id="L531"><a href="#L531">531</a>     (hqQF : ∀ a, (qQ a : ComponentFractionField P) =</span>
+<span id="L532"><a href="#L532">532</a>       retainedColumnValue P w a)</span>
+<span id="L533"><a href="#L533">533</a>     (hq0 : qQ 0 = hsel (selectedAffineChartDenominator P setup.j))</span>
+<span id="L534"><a href="#L534">534</a>     (hqvars : ∀ i : Fin m, ∀ hij : i ≠ setup.j,</span>
+<span id="L535"><a href="#L535">535</a>       qQ (Fin.succ i) = hsel (selectedAffineChartVariableClass P setup.j i hij)) :</span>
+<span id="L536"><a href="#L536">536</a>     let Q := actualSelectedChartAlgebra P w</span>
+<span id="L537"><a href="#L537">537</a>     let B := actualSelectedNormalization P w</span>
+<span id="L538"><a href="#L538">538</a>     let g := hsel (selectedAffineChartDenominator P setup.j)</span>
+<span id="L539"><a href="#L539">539</a>     let Cq := genericOpenRing M setup.f setup.e</span>
+<span id="L540"><a href="#L540">540</a>     let U := genericOpenExtraAwayB M setup.f setup.e g</span>
+<span id="L541"><a href="#L541">541</a>     let qU : Fin (m + 1) → U := fun a =&gt;</span>
+<span id="L542"><a href="#L542">542</a>       algebraMap Cq U (algebraMap Q Cq (qQ a))</span>
+<span id="L543"><a href="#L543">543</a>     let qT : Fin (m + 1) → Localization.AtPrime M := fun a =&gt;</span>
+<span id="L544"><a href="#L544">544</a>       algebraMap B (Localization.AtPrime M)</span>
+<span id="L545"><a href="#L545">545</a>         ((retainedColumns hm P w) a)</span>
+<span id="L546"><a href="#L546">546</a>     ∃ hxj : componentCoordinate P setup.j ≠ 0,</span>
+<span id="L547"><a href="#L547">547</a>       (∀ a, (retainedColumns hm P w) a = algebraMap Q B (qQ a)) ∧</span>
+<span id="L548"><a href="#L548">548</a>       (∀ a, qU a = pointLocalToCommonOpen (A := B) M setup.f setup.e g (qT a)) ∧</span>
+<span id="L549"><a href="#L549">549</a>       (∀ i : Fin m, qU i.succ = qU 0 *</span>
+<span id="L550"><a href="#L550">550</a>         originalAffineChartToCommonOpen P setup.j hxj hsel M setup.f setup.e</span>
+<span id="L551"><a href="#L551">551</a>           (Ideal.Quotient.mk P.asIdeal (MvPolynomial.X i))) ∧</span>
+<span id="L552"><a href="#L552">552</a>       (retainedColumns hm P w) 0 =</span>
+<span id="L553"><a href="#L553">553</a>         algebraMap Q B g ∧</span>
+<span id="L554"><a href="#L554">554</a>       (genericOpenExtraAwayBMap M setup.f setup.e g).comp</span>
+<span id="L555"><a href="#L555">555</a>           (algebraMap Q B) = (algebraMap Cq U).comp (algebraMap Q Cq) := by</span>
+<span id="L556"><a href="#L556">556</a>   dsimp only</span>
+<span id="L557"><a href="#L557">557</a>   let Q := actualSelectedChartAlgebra P w</span>
+<span id="L558"><a href="#L558">558</a>   let B := actualSelectedNormalization P w</span>
+<span id="L559"><a href="#L559">559</a>   let g := hsel (selectedAffineChartDenominator P setup.j)</span>
+<span id="L560"><a href="#L560">560</a>   let Cq := genericOpenRing M setup.f setup.e</span>
+<span id="L561"><a href="#L561">561</a>   let U := genericOpenExtraAwayB M setup.f setup.e g</span>
+<span id="L562"><a href="#L562">562</a>   let qU : Fin (m + 1) → U := fun a =&gt;</span>
+<span id="L563"><a href="#L563">563</a>     algebraMap Cq U (algebraMap Q Cq (qQ a))</span>
+<span id="L564"><a href="#L564">564</a>   let qB : Fin (m + 1) → B := (retainedColumns hm P w)</span>
+<span id="L565"><a href="#L565">565</a>   let qT : Fin (m + 1) → Localization.AtPrime M := fun a =&gt;</span>
+<span id="L566"><a href="#L566">566</a>     algebraMap B (Localization.AtPrime M) (qB a)</span>
+<span id="L567"><a href="#L567">567</a>   have hqBspec :=</span>
+<span id="L568"><a href="#L568">568</a>     letI : Algebra</span>
+<span id="L569"><a href="#L569">569</a>         (Stafford38.Geometry.AsymptoticDivisorExistence.CoordinateZeroLocalRing</span>
+<span id="L570"><a href="#L570">570</a>           w.column.W.coefficientField)</span>
+<span id="L571"><a href="#L571">571</a>         (ComponentFractionField P) := w.column.W.ambientAlgebra</span>
+<span id="L572"><a href="#L572">572</a>     letI : IsLocalRing w.column.W.place.valuation.toSubring :=</span>
+<span id="L573"><a href="#L573">573</a>       w.column.W.place.isDiscrete.toIsLocalRing</span>
+<span id="L574"><a href="#L574">574</a>     actualNormalizedProjectiveColumnInIntegralClosure_spec hm P w</span>
+<span id="L575"><a href="#L575">575</a>   have hqBf : ∀ a, ((qB a : B) : ComponentFractionField P) =</span>
+<span id="L576"><a href="#L576">576</a>       retainedColumnValue P w a := by</span>
+<span id="L577"><a href="#L577">577</a>     simpa [qB] using hqBspec.2.1</span>
+<span id="L578"><a href="#L578">578</a>   have hqA : ∀ a, qB a = algebraMap Q B (qQ a) := by</span>
+<span id="L579"><a href="#L579">579</a>     intro a</span>
+<span id="L580"><a href="#L580">580</a>     exact actualColumn_eq_chartImage Q qQ qB</span>
+<span id="L581"><a href="#L581">581</a>       (fun a =&gt; retainedColumnValue P w a)</span>
+<span id="L582"><a href="#L582">582</a>       hqQF hqBf a</span>
+<span id="L583"><a href="#L583">583</a>   have hqUPoint : ∀ a, qU a =</span>
+<span id="L584"><a href="#L584">584</a>       pointLocalToCommonOpen (A := B) M setup.f setup.e g (qT a) := by</span>
+<span id="L585"><a href="#L585">585</a>     have hroute := pointLocal_commonOpen_column (A := B) M setup.f setup.e g</span>
+<span id="L586"><a href="#L586">586</a>       qQ qB hqA qT (fun a =&gt; rfl)</span>
+<span id="L587"><a href="#L587">587</a>     intro a</span>
+<span id="L588"><a href="#L588">588</a>     exact (hroute a).symm</span>
+<span id="L589"><a href="#L589">589</a>   have hxj : componentCoordinate P setup.j ≠ 0 :=</span>
+<span id="L590"><a href="#L590">590</a>     actualWitness_selected_coordinate_ne_zero hm P w setup.j setup.hchart</span>
+<span id="L591"><a href="#L591">591</a>   let φ := originalAffineChartToCommonOpen P setup.j hxj hsel M setup.f setup.e</span>
+<span id="L592"><a href="#L592">592</a>   have hchartU := q_column_commonOpen_coordinates P setup.j hxj hsel M setup.f</span>
+<span id="L593"><a href="#L593">593</a>     setup.e qQ hqchartQ hq0 hqvars</span>
+<span id="L594"><a href="#L594">594</a>   have hq0B : qB 0 = algebraMap Q B g := by</span>
+<span id="L595"><a href="#L595">595</a>     exact (hqA 0).trans (congrArg (algebraMap Q B) hq0)</span>
+<span id="L596"><a href="#L596">596</a>   have hbaseMap : (genericOpenExtraAwayBMap M setup.f setup.e g).comp</span>
+<span id="L597"><a href="#L597">597</a>       (algebraMap Q B) =</span>
+<span id="L598"><a href="#L598">598</a>       (algebraMap Cq U).comp (algebraMap Q Cq) := by</span>
+<span id="L599"><a href="#L599">599</a>     apply RingHom.ext</span>
+<span id="L600"><a href="#L600">600</a>     intro x</span>
+<span id="L601"><a href="#L601">601</a>     change algebraMap Cq U</span>
+<span id="L602"><a href="#L602">602</a>         (genericOpenBMap M setup.f setup.e (algebraMap Q B x)) =</span>
+<span id="L603"><a href="#L603">603</a>       algebraMap Cq U (algebraMap Q Cq x)</span>
+<span id="L604"><a href="#L604">604</a>     exact congrArg (algebraMap Cq U) (genericOpenBMap_base_eq M setup.f setup.e x)</span>
+<span id="L605"><a href="#L605">605</a>   exact ⟨hxj, hqA, hqUPoint, hchartU, hq0B, hbaseMap⟩</span>
+<span id="L606"><a href="#L606">606</a> </span>
+<span id="L607"><a href="#L607">607</a> /-- The retained ground-point output determines its maximal point and</span>
+<span id="L608"><a href="#L608">608</a> chosen tilted coordinate axis (paper proof, common-open step). -/</span>
+<span id="L609"><a href="#L609">609</a> theorem nonempty_commonOpenPointData</span>
+<span id="L610"><a href="#L610">610</a>     {k : Type u} [Field k] [CharZero k] [IsAlgClosed k]</span>
+<span id="L611"><a href="#L611">611</a>     {m : ℕ} (hm : 0 &lt; m)</span>
+<span id="L612"><a href="#L612">612</a>     (P : PrimeSpectrum (MvPolynomial (Fin m) k))</span>
+<span id="L613"><a href="#L613">613</a>     (w : GeneralDivisorialVisibleFrameWitness hm P)</span>
+<span id="L614"><a href="#L614">614</a>     (setup : ChartSetup hm P w)</span>
+<span id="L615"><a href="#L615">615</a>     (coords : CoordinatePresentation hm P w setup)</span>
+<span id="L616"><a href="#L616">616</a>     : Nonempty (CommonOpenPointData hm P w setup coords) := by</span>
+<span id="L617"><a href="#L617">617</a>   classical</span>
+<span id="L618"><a href="#L618">618</a>   letI : Fintype coords.t := coords.htFinite</span>
+<span id="L619"><a href="#L619">619</a>   let Q := actualSelectedChartAlgebra P w</span>
+<span id="L620"><a href="#L620">620</a>   let B := actualSelectedNormalization P w</span>
+<span id="L621"><a href="#L621">621</a>   let qB : Fin (m + 1) → B := (retainedColumns hm P w)</span>
+<span id="L622"><a href="#L622">622</a>   let hQV := chartGenericPointSubalgebra_le_valuationSubring hm P w</span>
+<span id="L623"><a href="#L623">623</a>   let PB := actualSelectedNormalizationCenterPrime P w hQV</span>
+<span id="L624"><a href="#L624">624</a>   let bad : B := algebraMap Q B setup.f * algebraMap Q B setup.r</span>
+<span id="L625"><a href="#L625">625</a>   have hbad : bad ≠ 0 := setup.fB_mul_rB_ne_zero</span>
+<span id="L626"><a href="#L626">626</a>   obtain ⟨M, hM, eM, fUnit, hfUnitM, u0, u1, hu0, hu1, hq0M, hq1M,</span>
+<span id="L627"><a href="#L627">627</a>       hEtM, alpha, havoid, hdata⟩ :=</span>
+<span id="L628"><a href="#L628">628</a>     @exists_axis_lift_of_groundPointChartOutput k inferInstance inferInstance</span>
+<span id="L629"><a href="#L629">629</a>       inferInstance B inferInstance coords.coeff.toAlgebra inferInstance</span>
+<span id="L630"><a href="#L630">630</a>       coords.hBfinite coords.t coords.htFinite PB coords.hPB coords.fOption coords.s</span>
+<span id="L631"><a href="#L631">631</a>       (qB 0) (qB (Fin.succ (⟨0, hm⟩ : Fin m))) coords.qRow coords.hnone</span>
+<span id="L632"><a href="#L632">632</a>       coords.hsPB coords.hsome coords.τ (retainedOrder P w)</span>
+<span id="L633"><a href="#L633">633</a>       ((retainedOrder P w) + (retainedGap P w)) coords.hOutput</span>
+<span id="L634"><a href="#L634">634</a>       m qB w.column.chart (⟨0, hm⟩ : Fin m) coords.hqchartB</span>
+<span id="L635"><a href="#L635">635</a>       rfl rfl coords.rows coords.hrows bad hbad</span>
+<span id="L636"><a href="#L636">636</a>   exact ⟨{</span>
+<span id="L637"><a href="#L637">637</a>       M := M, hM := hM, eM := eM</span>
+<span id="L638"><a href="#L638">638</a>       hEtM := by simpa only [CoordinatePresentation.fFin] using hEtM</span>
+<span id="L639"><a href="#L639">639</a>       fUnit := fUnit, hfUnitM := hfUnitM</span>
+<span id="L640"><a href="#L640">640</a>       u0 := u0, u1 := u1</span>
+<span id="L641"><a href="#L641">641</a>       hu0 := hu0, hu1 := hu1</span>
+<span id="L642"><a href="#L642">642</a>       hq0M := hq0M, hq1M := hq1M</span>
+<span id="L643"><a href="#L643">643</a>       alpha := alpha</span>
+<span id="L644"><a href="#L644">644</a>       havoid := by simpa only [CoordinatePresentation.fFin] using havoid</span>
+<span id="L645"><a href="#L645">645</a>       hdata := by simpa only [CoordinatePresentation.fFin, setup.hchart] using hdata</span>
+<span id="L646"><a href="#L646">646</a>   }⟩</span>
+<span id="L647"><a href="#L647">647</a> </span>
+<span id="L648"><a href="#L648">648</a> /-- The retained point-local tilt extends to the selected common open</span>
+<span id="L649"><a href="#L649">649</a> with all factors nonzero (paper proof, common-open step). -/</span>
+<span id="L650"><a href="#L650">650</a> theorem nonempty_commonOpenArcCompatibility</span>
+<span id="L651"><a href="#L651">651</a>     {k : Type u} [Field k] [CharZero k] [IsAlgClosed k]</span>
+<span id="L652"><a href="#L652">652</a>     {m : ℕ} (hm : 0 &lt; m)</span>
+<span id="L653"><a href="#L653">653</a>     (P : PrimeSpectrum (MvPolynomial (Fin m) k))</span>
+<span id="L654"><a href="#L654">654</a>     (w : GeneralDivisorialVisibleFrameWitness hm P)</span>
+<span id="L655"><a href="#L655">655</a>     (setup : ChartSetup hm P w)</span>
+<span id="L656"><a href="#L656">656</a>     (coords : CoordinatePresentation hm P w setup)</span>
+<span id="L657"><a href="#L657">657</a>     (point : CommonOpenPointData hm P w setup coords)</span>
+<span id="L658"><a href="#L658">658</a>     (chart : CommonOpenChartData hm P w setup coords) :</span>
+<span id="L659"><a href="#L659">659</a>     letI : point.M.IsMaximal := point.hM</span>
+<span id="L660"><a href="#L660">660</a>     Nonempty (CommonOpenArcCompatibility hm P w setup coords point chart) := by</span>
+<span id="L661"><a href="#L661">661</a>   classical</span>
+<span id="L662"><a href="#L662">662</a>   letI : point.M.IsMaximal := point.hM</span>
+<span id="L663"><a href="#L663">663</a>   let Q := actualSelectedChartAlgebra P w</span>
+<span id="L664"><a href="#L664">664</a>   let B := actualSelectedNormalization P w</span>
+<span id="L665"><a href="#L665">665</a>   refine ⟨{ hfactor := ?_ }⟩</span>
+<span id="L666"><a href="#L666">666</a>   apply @commonOpenArcFactors_of_tiltedProduct k B Q</span>
+<span id="L667"><a href="#L667">667</a>     inferInstance inferInstance inferInstance coords.coeff.toAlgebra</span>
+<span id="L668"><a href="#L668">668</a>     (inferInstance : Algebra Q B) (@Fintype.card coords.t coords.htFinite)</span>
+<span id="L669"><a href="#L669">669</a>     (@RingHom.toAlgebra</span>
+<span id="L670"><a href="#L670">670</a>       (MvPolynomial (Option (Fin (@Fintype.card coords.t coords.htFinite))) k) B</span>
+<span id="L671"><a href="#L671">671</a>       inferInstance inferInstance</span>
+<span id="L672"><a href="#L672">672</a>       (@AlgHom.toRingHom k</span>
+<span id="L673"><a href="#L673">673</a>         (MvPolynomial (Option (Fin (@Fintype.card coords.t coords.htFinite))) k) B</span>
+<span id="L674"><a href="#L674">674</a>         inferInstance inferInstance inferInstance inferInstance</span>
+<span id="L675"><a href="#L675">675</a>         coords.coeff.toAlgebra coords.fFin))</span>
+<span id="L676"><a href="#L676">676</a>     (@IsScalarTower.of_algHom k</span>
+<span id="L677"><a href="#L677">677</a>       (MvPolynomial (Option (Fin (@Fintype.card coords.t coords.htFinite))) k) B</span>
+<span id="L678"><a href="#L678">678</a>       inferInstance inferInstance inferInstance inferInstance</span>
+<span id="L679"><a href="#L679">679</a>       coords.coeff.toAlgebra coords.fFin)</span>
+<span id="L680"><a href="#L680">680</a>     (@essFiniteType_of_coordinateMap k B inferInstance inferInstance</span>
+<span id="L681"><a href="#L681">681</a>       coords.coeff.toAlgebra coords.hBfinite</span>
+<span id="L682"><a href="#L682">682</a>       (@Fintype.card coords.t coords.htFinite) coords.fFin)</span>
+<span id="L683"><a href="#L683">683</a>     point.M point.hM point.hEtM</span>
+<span id="L684"><a href="#L684">684</a>   · rfl</span>
+<span id="L685"><a href="#L685">685</a>   · exact (chart.hqA 0).trans</span>
+<span id="L686"><a href="#L686">686</a>       (congrArg (algebraMap Q B) chart.hq0)</span>
+<span id="L687"><a href="#L687">687</a>   · exact point.havoid</span>
+<span id="L688"><a href="#L688">688</a> </span>
+<span id="L689"><a href="#L689">689</a> /-- Construct the common open by transporting the chosen axis lift to the</span>
+<span id="L690"><a href="#L690">690</a> selected affine chart and its extra-away localization. -/</span>
+<span id="L691"><a href="#L691">691</a> theorem nonempty_commonOpenData</span>
+<span id="L692"><a href="#L692">692</a>     {k : Type u} [Field k] [CharZero k] [IsAlgClosed k]</span>
+<span id="L693"><a href="#L693">693</a>     {m : ℕ} (hm : 0 &lt; m)</span>
+<span id="L694"><a href="#L694">694</a>     (P : PrimeSpectrum (MvPolynomial (Fin m) k))</span>
+<span id="L695"><a href="#L695">695</a>     (w : GeneralDivisorialVisibleFrameWitness hm P)</span>
+<span id="L696"><a href="#L696">696</a>     (setup : ChartSetup hm P w)</span>
+<span id="L697"><a href="#L697">697</a>     (coords : CoordinatePresentation hm P w setup)</span>
+<span id="L698"><a href="#L698">698</a>     (hpoint : actualSameWitnessGroundPointOutput hm P w) :</span>
+<span id="L699"><a href="#L699">699</a>     Nonempty (CommonOpenData hm P w setup coords) := by</span>
+<span id="L700"><a href="#L700">700</a>   classical</span>
+<span id="L701"><a href="#L701">701</a>   obtain ⟨point⟩ := nonempty_commonOpenPointData hm P w setup coords</span>
+<span id="L702"><a href="#L702">702</a>   letI : point.M.IsMaximal := point.hM</span>
+<span id="L703"><a href="#L703">703</a>   let Q := actualSelectedChartAlgebra P w</span>
+<span id="L704"><a href="#L704">704</a>   let B := actualSelectedNormalization P w</span>
+<span id="L705"><a href="#L705">705</a>   obtain ⟨hsel, qQ, hqchartQ, hqQF, hq0, hqvars⟩ :=</span>
+<span id="L706"><a href="#L706">706</a>     exists_selected_chart_coordinate_data hm P w setup point.M</span>
+<span id="L707"><a href="#L707">707</a>   obtain ⟨hxj, hqA, hqUPoint, hchartU, hq0B, hbaseMap⟩ :=</span>
+<span id="L708"><a href="#L708">708</a>     exists_common_open_map_data hm P w setup point.M hsel qQ hqchartQ hqQF hq0 hqvars</span>
+<span id="L709"><a href="#L709">709</a>   let chart : CommonOpenChartData hm P w setup coords := {</span>
+<span id="L710"><a href="#L710">710</a>     hxj := hxj, hsel := hsel, qQ := qQ</span>
+<span id="L711"><a href="#L711">711</a>     hqchartQ := hqchartQ, hqQF := hqQF</span>
+<span id="L712"><a href="#L712">712</a>     hq0 := hq0, hqvars := hqvars, hqA := hqA</span>
+<span id="L713"><a href="#L713">713</a>   }</span>
+<span id="L714"><a href="#L714">714</a>   let maps : CommonOpenMapData hm P w setup coords point chart := {</span>
+<span id="L715"><a href="#L715">715</a>     hqUPoint := hqUPoint, hchartU := hchartU</span>
+<span id="L716"><a href="#L716">716</a>     hq0B := hq0B, hbaseMap := hbaseMap</span>
+<span id="L717"><a href="#L717">717</a>   }</span>
+<span id="L718"><a href="#L718">718</a>   obtain ⟨arc⟩ := nonempty_commonOpenArcCompatibility hm P w setup coords point chart</span>
+<span id="L719"><a href="#L719">719</a>   exact ⟨{ point := point, chart := chart, maps := maps, arc := arc }⟩</span>
+<span id="L720"><a href="#L720">720</a> </span>
+<span id="L721"><a href="#L721">721</a> end Stafford38.Geometry.SameWitness</span>
+<span id="L722"><a href="#L722">722</a> </span>
+<span id="L723"><a href="#L723">723</a> end</span>
+<span id="L724"><a href="#L724">724</a> </span></pre>

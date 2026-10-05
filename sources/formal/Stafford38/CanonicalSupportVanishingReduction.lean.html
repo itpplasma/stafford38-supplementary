@@ -1,0 +1,195 @@
+<!doctype html><meta charset="utf-8"><title>Stafford38/CanonicalSupportVanishingReduction.lean</title><style>body{font:14px monospace}pre span{display:block}pre span:target{background:#fff0ad}a{color:#666}pre{white-space:pre-wrap}</style><h1>Stafford38/CanonicalSupportVanishingReduction.lean</h1><p>This project (Stafford38) · 0403af3f0b1a7f84d2027121932723f67bd279ae</p><pre><span id="L1"><a href="#L1">1</a> module</span>
+<span id="L2"><a href="#L2">2</a> public import Stafford38.UniversalAssembly</span>
+<span id="L3"><a href="#L3">3</a> public import Stafford38.Characteristic.CanonicalUnitCoordinatePreimage</span>
+<span id="L4"><a href="#L4">4</a> public import Stafford38.Geometry.ConormalAxisContradiction</span>
+<span id="L5"><a href="#L5">5</a> public import Stafford38.Geometry.LaurentConormalDirection</span>
+<span id="L6"><a href="#L6">6</a> </span>
+<span id="L7"><a href="#L7">7</a> @[expose] public section</span>
+<span id="L8"><a href="#L8">8</a> </span>
+<span id="L9"><a href="#L9">9</a> open Stafford38Challenge (WeylAlg)</span>
+<span id="L10"><a href="#L10">10</a> </span>
+<span id="L11"><a href="#L11">11</a> /-!</span>
+<span id="L12"><a href="#L12">12</a> # Conditional Laurent-direction skeleton for canonical support vanishing</span>
+<span id="L13"><a href="#L13">13</a> </span>
+<span id="L14"><a href="#L14">14</a> This file retains a conditional Laurent-direction assembly between the literal</span>
+<span id="L15"><a href="#L15">15</a> canonical quotient and `CanonicalSupportVanishing`. Its interfaces are</span>
+<span id="L16"><a href="#L16">16</a> discharged downstream; they do not mark gaps in the unconditional theorem.</span>
+<span id="L17"><a href="#L17">17</a> Over an algebraically</span>
+<span id="L18"><a href="#L18">18</a> closed field, one order-zero coordinate predecessor of the unit supplies axis</span>
+<span id="L19"><a href="#L19">19</a> avoidance, a Gabber/scalar-extension input makes the canonical fibre symbol</span>
+<span id="L20"><a href="#L20">20</a> vanish on the Laurent equation-conormal locus, and the asymptotic producer supplies a</span>
+<span id="L21"><a href="#L21">21</a> Laurent-generic conormal whose regular fibre residue is the forbidden pure</span>
+<span id="L22"><a href="#L22">22</a> momentum direction. A fourth input explicitly isolates descent from algebraic</span>
+<span id="L23"><a href="#L23">23</a> closure back to an arbitrary characteristic-zero field.</span>
+<span id="L24"><a href="#L24">24</a> </span>
+<span id="L25"><a href="#L25">25</a> No finite phase-space limit is asserted: the Laurent base coordinates may have</span>
+<span id="L26"><a href="#L26">26</a> poles, and only the fibre residue is specialized.</span>
+<span id="L27"><a href="#L27">27</a> -/</span>
+<span id="L28"><a href="#L28">28</a> </span>
+<span id="L29"><a href="#L29">29</a> namespace Stafford38.CanonicalSupportVanishingReduction</span>
+<span id="L30"><a href="#L30">30</a> </span>
+<span id="L31"><a href="#L31">31</a> open Stafford38</span>
+<span id="L32"><a href="#L32">32</a> open Stafford38.CanonicalAxisAvoidanceConsumer</span>
+<span id="L33"><a href="#L33">33</a> open Stafford38.CanonicalUnitCoordinatePreimage</span>
+<span id="L34"><a href="#L34">34</a> open Stafford38.Characteristic</span>
+<span id="L35"><a href="#L35">35</a> open Stafford38.Characteristic.BaseRelativePoisson</span>
+<span id="L36"><a href="#L36">36</a> open Stafford38.Characteristic.ReducedSupportIdeal</span>
+<span id="L37"><a href="#L37">37</a> open Stafford38.CharacteristicInitialIdeal</span>
+<span id="L38"><a href="#L38">38</a> open Stafford38.CharacteristicHomogeneousChart</span>
+<span id="L39"><a href="#L39">39</a> open Stafford38.Geometry.AffineConormalClosure</span>
+<span id="L40"><a href="#L40">40</a> open Stafford38.Geometry.ConormalAxisContradiction</span>
+<span id="L41"><a href="#L41">41</a> open Stafford38.Geometry.LaurentConormalDirection</span>
+<span id="L42"><a href="#L42">42</a> open Stafford38.Geometry.ScalarExtensionPoints</span>
+<span id="L43"><a href="#L43">43</a> open Stafford38.GeometryRetractionSpecialization</span>
+<span id="L44"><a href="#L44">44</a> open Stafford38.WeylEulerResidue</span>
+<span id="L45"><a href="#L45">45</a> open Stafford38.WeylIteratedEquivalence</span>
+<span id="L46"><a href="#L46">46</a> open Stafford38.WeylLeadingSymbol</span>
+<span id="L47"><a href="#L47">47</a> open Stafford38.WeylFiltration</span>
+<span id="L48"><a href="#L48">48</a> open Stafford38.WeylPBWMonicBridge</span>
+<span id="L49"><a href="#L49">49</a> </span>
+<span id="L50"><a href="#L50">50</a> noncomputable section</span>
+<span id="L51"><a href="#L51">51</a> </span>
+<span id="L52"><a href="#L52">52</a> universe u</span>
+<span id="L53"><a href="#L53">53</a> </span>
+<span id="L54"><a href="#L54">54</a> /-- Universal production of strict filtered coordinate cancellation for the</span>
+<span id="L55"><a href="#L55">55</a> literal canonical quotient. -/</span>
+<span id="L56"><a href="#L56">56</a> def CanonicalCoordinateCancellation : Prop :=</span>
+<span id="L57"><a href="#L57">57</a>   ∀ (k : Type u) [Field k] [CharZero k] [IsAlgClosed k] (n N : ℕ)</span>
+<span id="L58"><a href="#L58">58</a>     (d : WeylAlg k (n + 1)),</span>
+<span id="L59"><a href="#L59">59</a>     0 &lt; N → IsPBWMonicAt k (.inr (0 : Fin (n + 1))) N d →</span>
+<span id="L60"><a href="#L60">60</a>       CoordinateCancellation k n N d</span>
+<span id="L61"><a href="#L61">61</a> </span>
+<span id="L62"><a href="#L62">62</a> /-- Universal production of the weakest filtered input used by terminal axis</span>
+<span id="L63"><a href="#L63">63</a> avoidance: one order-zero coordinate predecessor of the quotient unit. -/</span>
+<span id="L64"><a href="#L64">64</a> def CanonicalStrictUnitCoordinatePreimage : Prop :=</span>
+<span id="L65"><a href="#L65">65</a>   ∀ (k : Type u) [Field k] [CharZero k] [IsAlgClosed k] (n N : ℕ)</span>
+<span id="L66"><a href="#L66">66</a>     (d : WeylAlg k (n + 1)),</span>
+<span id="L67"><a href="#L67">67</a>     0 &lt; N → IsPBWMonicAt k (.inr (0 : Fin (n + 1))) N d →</span>
+<span id="L68"><a href="#L68">68</a>       StrictUnitCoordinatePreimage k n N d</span>
+<span id="L69"><a href="#L69">69</a> </span>
+<span id="L70"><a href="#L70">70</a> /-- The pure momentum axis in the fibre-coordinate space. -/</span>
+<span id="L71"><a href="#L71">71</a> def pureMomentumFibreAxis (k : Type u) [Field k] (n : ℕ) :</span>
+<span id="L72"><a href="#L72">72</a>     Fin (n + 1) → k :=</span>
+<span id="L73"><a href="#L73">73</a>   fun i ↦ if i = 0 then 1 else 0</span>
+<span id="L74"><a href="#L74">74</a> </span>
+<span id="L75"><a href="#L75">75</a> /-- Packaged Laurent symbol control from Gabber, scalar extension, fibre-only</span>
+<span id="L76"><a href="#L76">76</a> symbol extraction, and the checked conormal containment. -/</span>
+<span id="L77"><a href="#L77">77</a> def CanonicalLaurentSymbolControl : Prop :=</span>
+<span id="L78"><a href="#L78">78</a>   ∀ (k : Type u) [Field k] [CharZero k] [IsAlgClosed k] (n N : ℕ)</span>
+<span id="L79"><a href="#L79">79</a>     (d : WeylAlg k (n + 1)),</span>
+<span id="L80"><a href="#L80">80</a>     0 &lt; N → IsPBWMonicAt k (.inr (0 : Fin (n + 1))) N d →</span>
+<span id="L81"><a href="#L81">81</a>       ∃ P : MvPolynomial (Fin (n + 1)) k,</span>
+<span id="L82"><a href="#L82">82</a>         fibreLift P = presentedPrincipalComponent k orderWeight N d ∧</span>
+<span id="L83"><a href="#L83">83</a>         ∀ q ∈ equationConormalLocus</span>
+<span id="L84"><a href="#L84">84</a>             ((reducedOrderBaseIdeal k</span>
+<span id="L85"><a href="#L85">85</a>               (canonicalRightIdeal (presentedCoordinate k n) d N)).map</span>
+<span id="L86"><a href="#L86">86</a>                 (scalarPolynomialMap</span>
+<span id="L87"><a href="#L87">87</a>                   (k := k) (K := LaurentSeries k) (Fin (n + 1)))),</span>
+<span id="L88"><a href="#L88">88</a>           MvPolynomial.eval₂ (algebraMap k (LaurentSeries k)) q</span>
+<span id="L89"><a href="#L89">89</a>             (fibreLift P) = 0</span>
+<span id="L90"><a href="#L90">90</a> </span>
+<span id="L91"><a href="#L91">91</a> /-- The remaining global geometric producer.  Its base coordinates stay in</span>
+<span id="L92"><a href="#L92">92</a> Laurent series; only its regular fibre covector specializes to the pure</span>
+<span id="L93"><a href="#L93">93</a> momentum axis. -/</span>
+<span id="L94"><a href="#L94">94</a> def CanonicalAsymptoticLaurentProducer : Prop :=</span>
+<span id="L95"><a href="#L95">95</a>   ∀ (k : Type u) [Field k] [CharZero k] [IsAlgClosed k] (n N : ℕ)</span>
+<span id="L96"><a href="#L96">96</a>     (d : WeylAlg k (n + 1)),</span>
+<span id="L97"><a href="#L97">97</a>     0 &lt; N → IsPBWMonicAt k (.inr (0 : Fin (n + 1))) N d →</span>
+<span id="L98"><a href="#L98">98</a>     Disjoint</span>
+<span id="L99"><a href="#L99">99</a>       (orderCharacteristicSupport k</span>
+<span id="L100"><a href="#L100">100</a>         (canonicalRightIdeal (presentedCoordinate k n) d N))</span>
+<span id="L101"><a href="#L101">101</a>       (PrimeSpectrum.zeroLocus</span>
+<span id="L102"><a href="#L102">102</a>         ({MvPolynomial.X (.inl (0 : Fin (n + 1)))} :</span>
+<span id="L103"><a href="#L103">103</a>           Set (SymbolRing k (n + 1)))) →</span>
+<span id="L104"><a href="#L104">104</a>     (orderCharacteristicSupport k</span>
+<span id="L105"><a href="#L105">105</a>       (canonicalRightIdeal (presentedCoordinate k n) d N)).Nonempty →</span>
+<span id="L106"><a href="#L106">106</a>     ∃ (y : Fin (n + 1) → LaurentSeries k)</span>
+<span id="L107"><a href="#L107">107</a>       (xi : Fin (n + 1) → PowerSeries k),</span>
+<span id="L108"><a href="#L108">108</a>       Sum.elim y</span>
+<span id="L109"><a href="#L109">109</a>           (fun i ↦ algebraMap (PowerSeries k) (LaurentSeries k) (xi i)) ∈</span>
+<span id="L110"><a href="#L110">110</a>         equationConormalLocus</span>
+<span id="L111"><a href="#L111">111</a>           ((reducedOrderBaseIdeal k</span>
+<span id="L112"><a href="#L112">112</a>             (canonicalRightIdeal (presentedCoordinate k n) d N)).map</span>
+<span id="L113"><a href="#L113">113</a>               (scalarPolynomialMap</span>
+<span id="L114"><a href="#L114">114</a>                 (k := k) (K := LaurentSeries k) (Fin (n + 1)))) ∧</span>
+<span id="L115"><a href="#L115">115</a>       residueColumn xi = pureMomentumFibreAxis k n</span>
+<span id="L116"><a href="#L116">116</a> </span>
+<span id="L117"><a href="#L117">117</a> /-- Canonical support vanishing restricted to algebraically closed</span>
+<span id="L118"><a href="#L118">118</a> characteristic-zero fields. -/</span>
+<span id="L119"><a href="#L119">119</a> def AlgebraicallyClosedCanonicalSupportVanishing : Prop :=</span>
+<span id="L120"><a href="#L120">120</a>   ∀ (k : Type u) [Field k] [CharZero k] [IsAlgClosed k] (n N : ℕ)</span>
+<span id="L121"><a href="#L121">121</a>     (d : WeylAlg k (n + 1)),</span>
+<span id="L122"><a href="#L122">122</a>     0 &lt; N → IsPBWMonicAt k (.inr (0 : Fin (n + 1))) N d →</span>
+<span id="L123"><a href="#L123">123</a>       orderCharacteristicSupport k</span>
+<span id="L124"><a href="#L124">124</a>         (canonicalRightIdeal (presentedCoordinate k n) d N) = ∅</span>
+<span id="L125"><a href="#L125">125</a> </span>
+<span id="L126"><a href="#L126">126</a> /-- The still-separate Weyl/base-change descent theorem.  This input must be</span>
+<span id="L127"><a href="#L127">127</a> proved by transporting the canonical quotient and its initial ideal through</span>
+<span id="L128"><a href="#L128">128</a> algebraic closure; geometric support descent alone does not supply it. -/</span>
+<span id="L129"><a href="#L129">129</a> def CanonicalSupportDescent : Prop :=</span>
+<span id="L130"><a href="#L130">130</a>   AlgebraicallyClosedCanonicalSupportVanishing.{u} →</span>
+<span id="L131"><a href="#L131">131</a>     Stafford38.UniversalAssembly.CanonicalSupportVanishing.{u}</span>
+<span id="L132"><a href="#L132">132</a> </span>
+<span id="L133"><a href="#L133">133</a> /-- The conditional contradiction skeleton over algebraically closed fields.</span>
+<span id="L134"><a href="#L134">134</a> Its asymptotic input must be proved from divisor geometry without using the</span>
+<span id="L135"><a href="#L135">135</a> desired support-vanishing conclusion. -/</span>
+<span id="L136"><a href="#L136">136</a> theorem algebraicallyClosedCanonicalSupportVanishing_of_three_inputs</span>
+<span id="L137"><a href="#L137">137</a>     (hunit : CanonicalStrictUnitCoordinatePreimage.{u})</span>
+<span id="L138"><a href="#L138">138</a>     (hcontrol : CanonicalLaurentSymbolControl.{u})</span>
+<span id="L139"><a href="#L139">139</a>     (hasymptotic : CanonicalAsymptoticLaurentProducer.{u}) :</span>
+<span id="L140"><a href="#L140">140</a>     AlgebraicallyClosedCanonicalSupportVanishing.{u} := by</span>
+<span id="L141"><a href="#L141">141</a>   intro k _ _ _ n N d hN hd</span>
+<span id="L142"><a href="#L142">142</a>   let I := canonicalRightIdeal (presentedCoordinate k n) d N</span>
+<span id="L143"><a href="#L143">143</a>   have hdisjoint : Disjoint</span>
+<span id="L144"><a href="#L144">144</a>       (orderCharacteristicSupport k I)</span>
+<span id="L145"><a href="#L145">145</a>       (PrimeSpectrum.zeroLocus</span>
+<span id="L146"><a href="#L146">146</a>         ({MvPolynomial.X (.inl (0 : Fin (n + 1)))} :</span>
+<span id="L147"><a href="#L147">147</a>           Set (SymbolRing k (n + 1)))) := by</span>
+<span id="L148"><a href="#L148">148</a>     exact</span>
+<span id="L149"><a href="#L149">149</a>       canonical_orderCharacteristicSupport_disjoint_coordinate_zeroLocus_of_strictUnit</span>
+<span id="L150"><a href="#L150">150</a>         k n N (hunit k n N d hN hd)</span>
+<span id="L151"><a href="#L151">151</a>   by_contra hsupp</span>
+<span id="L152"><a href="#L152">152</a>   have hnonempty : (orderCharacteristicSupport k I).Nonempty :=</span>
+<span id="L153"><a href="#L153">153</a>     Set.nonempty_iff_ne_empty.mpr hsupp</span>
+<span id="L154"><a href="#L154">154</a>   rcases hcontrol k n N d hN hd with ⟨P, hP, hvanishes⟩</span>
+<span id="L155"><a href="#L155">155</a>   rcases hasymptotic k n N d hN hd hdisjoint hnonempty with</span>
+<span id="L156"><a href="#L156">156</a>     ⟨y, xi, hgeneric, hresidue⟩</span>
+<span id="L157"><a href="#L157">157</a>   apply false_of_fibreOnly_symbol_one_on_residue_and_vanishes_on_laurentConormal</span>
+<span id="L158"><a href="#L158">158</a>     (reducedOrderBaseIdeal k I) P (pureMomentumFibreAxis k n) y xi</span>
+<span id="L159"><a href="#L159">159</a>     hgeneric hresidue hvanishes</span>
+<span id="L160"><a href="#L160">160</a>   have hcanonical := canonical_orderPrincipalComponent_eval_pureMomentumAxis</span>
+<span id="L161"><a href="#L161">161</a>     n N hd</span>
+<span id="L162"><a href="#L162">162</a>   have hsplit : Sum.elim (fun _ : Fin (n + 1) ↦ (0 : k))</span>
+<span id="L163"><a href="#L163">163</a>       (pureMomentumFibreAxis k n) =</span>
+<span id="L164"><a href="#L164">164</a>       axisPoint k (.inr (0 : Fin (n + 1))) := by</span>
+<span id="L165"><a href="#L165">165</a>     funext i</span>
+<span id="L166"><a href="#L166">166</a>     rcases i with i | i</span>
+<span id="L167"><a href="#L167">167</a>     · simp [axisPoint]</span>
+<span id="L168"><a href="#L168">168</a>     · simp [axisPoint, pureMomentumFibreAxis]</span>
+<span id="L169"><a href="#L169">169</a>   rw [← hP] at hcanonical</span>
+<span id="L170"><a href="#L170">170</a>   have heval := eval₂_fibreLift (K := k) P</span>
+<span id="L171"><a href="#L171">171</a>     (fun _ : Fin (n + 1) ↦ (0 : k)) (pureMomentumFibreAxis k n)</span>
+<span id="L172"><a href="#L172">172</a>   rw [hsplit] at heval</span>
+<span id="L173"><a href="#L173">173</a>   simpa only [← MvPolynomial.aeval_def, MvPolynomial.aeval_eq_eval] using</span>
+<span id="L174"><a href="#L174">174</a>     heval.symm.trans hcanonical</span>
+<span id="L175"><a href="#L175">175</a> </span>
+<span id="L176"><a href="#L176">176</a> /-- Consequently the exact Stafford statement follows from the three</span>
+<span id="L177"><a href="#L177">177</a> algebraically closed inputs and the separate support-descent theorem. -/</span>
+<span id="L178"><a href="#L178">178</a> theorem universalStatement_of_four_inputs</span>
+<span id="L179"><a href="#L179">179</a>     (hunit : CanonicalStrictUnitCoordinatePreimage.{u})</span>
+<span id="L180"><a href="#L180">180</a>     (hcontrol : CanonicalLaurentSymbolControl.{u})</span>
+<span id="L181"><a href="#L181">181</a>     (hasymptotic : CanonicalAsymptoticLaurentProducer.{u})</span>
+<span id="L182"><a href="#L182">182</a>     (hdescent : CanonicalSupportDescent.{u}) :</span>
+<span id="L183"><a href="#L183">183</a>     Stafford38Challenge.UniversalStatement.{u} :=</span>
+<span id="L184"><a href="#L184">184</a>   Stafford38.UniversalAssembly.universalStatement_of_canonicalSupportVanishing</span>
+<span id="L185"><a href="#L185">185</a>     (hdescent</span>
+<span id="L186"><a href="#L186">186</a>       (algebraicallyClosedCanonicalSupportVanishing_of_three_inputs</span>
+<span id="L187"><a href="#L187">187</a>         hunit hcontrol hasymptotic))</span>
+<span id="L188"><a href="#L188">188</a> </span>
+<span id="L189"><a href="#L189">189</a> #print axioms algebraicallyClosedCanonicalSupportVanishing_of_three_inputs</span>
+<span id="L190"><a href="#L190">190</a> #print axioms universalStatement_of_four_inputs</span>
+<span id="L191"><a href="#L191">191</a> </span>
+<span id="L192"><a href="#L192">192</a> end</span>
+<span id="L193"><a href="#L193">193</a> </span>
+<span id="L194"><a href="#L194">194</a> end Stafford38.CanonicalSupportVanishingReduction</span>
+<span id="L195"><a href="#L195">195</a> </span></pre>

@@ -1,0 +1,83 @@
+<!doctype html><meta charset="utf-8"><title>Stafford38/TorsionCyclicity.lean</title><style>body{font:14px monospace}pre span{display:block}pre span:target{background:#fff0ad}a{color:#666}pre{white-space:pre-wrap}</style><h1>Stafford38/TorsionCyclicity.lean</h1><p>This project (Stafford38) · 0403af3f0b1a7f84d2027121932723f67bd279ae</p><pre><span id="L1"><a href="#L1">1</a> module</span>
+<span id="L2"><a href="#L2">2</a> public import Stafford38.FoundationClosure</span>
+<span id="L3"><a href="#L3">3</a> public import Stafford38.Weyl.Domain</span>
+<span id="L4"><a href="#L4">4</a> public import Stafford38.TorsionModule</span>
+<span id="L5"><a href="#L5">5</a> public import Stafford38.PaperCyclicity</span>
+<span id="L6"><a href="#L6">6</a> public import Mathlib.LinearAlgebra.Span.Defs</span>
+<span id="L7"><a href="#L7">7</a> </span>
+<span id="L8"><a href="#L8">8</a> @[expose] public section</span>
+<span id="L9"><a href="#L9">9</a> </span>
+<span id="L10"><a href="#L10">10</a> /-!</span>
+<span id="L11"><a href="#L11">11</a> # Cyclicity of finitely generated torsion right Weyl modules</span>
+<span id="L12"><a href="#L12">12</a> </span>
+<span id="L13"><a href="#L13">13</a> The paper-facing matrix argument and its finite-generation induction are</span>
+<span id="L14"><a href="#L14">14</a> implemented in `PaperCyclicity`; this module retains the established public</span>
+<span id="L15"><a href="#L15">15</a> names as derived interfaces.</span>
+<span id="L16"><a href="#L16">16</a> -/</span>
+<span id="L17"><a href="#L17">17</a> </span>
+<span id="L18"><a href="#L18">18</a> namespace Stafford38.TorsionCyclicity</span>
+<span id="L19"><a href="#L19">19</a> </span>
+<span id="L20"><a href="#L20">20</a> universe u v</span>
+<span id="L21"><a href="#L21">21</a> </span>
+<span id="L22"><a href="#L22">22</a> variable {A : Type u} {M : Type v} [Ring A]</span>
+<span id="L23"><a href="#L23">23</a>   [AddCommGroup M] [Module Aᵐᵒᵖ M]</span>
+<span id="L24"><a href="#L24">24</a> </span>
+<span id="L25"><a href="#L25">25</a> /-- The paper's generator calculation for a specified common annihilator and</span>
+<span id="L26"><a href="#L26">26</a> certificate, derived from the canonical matrix proof. -/</span>
+<span id="L27"><a href="#L27">27</a> theorem span_adjusted_pair_eq_span_pair</span>
+<span id="L28"><a href="#L28">28</a>     (x y : M) (d F R S : A)</span>
+<span id="L29"><a href="#L29">29</a>     (hxann : (MulOpposite.op d : Aᵐᵒᵖ) • x = 0)</span>
+<span id="L30"><a href="#L30">30</a>     (hyann : (MulOpposite.op d : Aᵐᵒᵖ) • y = 0)</span>
+<span id="L31"><a href="#L31">31</a>     (hcert : (1 : A) = d * R + F * d * S) :</span>
+<span id="L32"><a href="#L32">32</a>     Submodule.span Aᵐᵒᵖ</span>
+<span id="L33"><a href="#L33">33</a>         ({x - (MulOpposite.op F : Aᵐᵒᵖ) • y} : Set M) =</span>
+<span id="L34"><a href="#L34">34</a>       Submodule.span Aᵐᵒᵖ ({x, y} : Set M) :=</span>
+<span id="L35"><a href="#L35">35</a>   Stafford38.PaperCyclicity.span_adjusted_pair_eq_span_pair_via_matrix</span>
+<span id="L36"><a href="#L36">36</a>     x y d F R S hxann hyann hcert</span>
+<span id="L37"><a href="#L37">37</a> </span>
+<span id="L38"><a href="#L38">38</a> /-- The paper generator collapses any torsion pair to one adjusted generator. -/</span>
+<span id="L39"><a href="#L39">39</a> theorem exists_span_adjusted_pair</span>
+<span id="L40"><a href="#L40">40</a>     (hmul : ∀ a b : A, a ≠ 0 → b ≠ 0 → a * b ≠ 0)</span>
+<span id="L41"><a href="#L41">41</a>     (hone : ∀ d : A, d ≠ 0 →</span>
+<span id="L42"><a href="#L42">42</a>       ∃ F R S : A, (1 : A) = d * R + F * d * S)</span>
+<span id="L43"><a href="#L43">43</a>     (htorsion : IsRightTorsion (A := A) (M := M)) (x y : M) :</span>
+<span id="L44"><a href="#L44">44</a>     ∃ F : A,</span>
+<span id="L45"><a href="#L45">45</a>       Submodule.span Aᵐᵒᵖ</span>
+<span id="L46"><a href="#L46">46</a>         ({x - (MulOpposite.op F : Aᵐᵒᵖ) • y} : Set M) =</span>
+<span id="L47"><a href="#L47">47</a>         Submodule.span Aᵐᵒᵖ ({x, y} : Set M) :=</span>
+<span id="L48"><a href="#L48">48</a>   Stafford38.PaperCyclicity.exists_span_adjusted_pair_via_matrix</span>
+<span id="L49"><a href="#L49">49</a>     hmul hone htorsion x y</span>
+<span id="L50"><a href="#L50">50</a> </span>
+<span id="L51"><a href="#L51">51</a> /-- Forget the displayed coefficient and keep the generated singleton. -/</span>
+<span id="L52"><a href="#L52">52</a> theorem exists_span_singleton_eq_span_pair</span>
+<span id="L53"><a href="#L53">53</a>     (hmul : ∀ a b : A, a ≠ 0 → b ≠ 0 → a * b ≠ 0)</span>
+<span id="L54"><a href="#L54">54</a>     (hone : ∀ d : A, d ≠ 0 →</span>
+<span id="L55"><a href="#L55">55</a>       ∃ F R S : A, (1 : A) = d * R + F * d * S)</span>
+<span id="L56"><a href="#L56">56</a>     (htorsion : IsRightTorsion (A := A) (M := M)) (x y : M) :</span>
+<span id="L57"><a href="#L57">57</a>     ∃ z : M,</span>
+<span id="L58"><a href="#L58">58</a>       Submodule.span Aᵐᵒᵖ ({z} : Set M) =</span>
+<span id="L59"><a href="#L59">59</a>         Submodule.span Aᵐᵒᵖ ({x, y} : Set M) :=</span>
+<span id="L60"><a href="#L60">60</a>   Stafford38.PaperCyclicity.exists_span_singleton_eq_span_pair_via_matrix</span>
+<span id="L61"><a href="#L61">61</a>     hmul hone htorsion x y</span>
+<span id="L62"><a href="#L62">62</a> </span>
+<span id="L63"><a href="#L63">63</a> /-- Every finitely generated torsion right module over a Weyl algebra is</span>
+<span id="L64"><a href="#L64">64</a> cyclic. The main theorem supplies the coefficient identity used at each</span>
+<span id="L65"><a href="#L65">65</a> pair-replacement step in the finite-generator induction. -/</span>
+<span id="L66"><a href="#L66">66</a> theorem weyl_isCyclic_of_isRightTorsion</span>
+<span id="L67"><a href="#L67">67</a>     (k : Type u) [Field k] [CharZero k] (n : ℕ)</span>
+<span id="L68"><a href="#L68">68</a>     (M : Type v) [AddCommGroup M]</span>
+<span id="L69"><a href="#L69">69</a>     [Module (Stafford38Challenge.WeylAlg k n)ᵐᵒᵖ M]</span>
+<span id="L70"><a href="#L70">70</a>     [Module.Finite (Stafford38Challenge.WeylAlg k n)ᵐᵒᵖ M]</span>
+<span id="L71"><a href="#L71">71</a>     (hM : IsRightTorsion (A := Stafford38Challenge.WeylAlg k n) (M := M)) :</span>
+<span id="L72"><a href="#L72">72</a>     ∃ z : M,</span>
+<span id="L73"><a href="#L73">73</a>       Submodule.span (Stafford38Challenge.WeylAlg k n)ᵐᵒᵖ ({z} : Set M) = ⊤ :=</span>
+<span id="L74"><a href="#L74">74</a>   Stafford38.PaperCyclicity.paper_torsion_module_is_cyclic</span>
+<span id="L75"><a href="#L75">75</a>     (k := k) (n := n) (M := M) hM</span>
+<span id="L76"><a href="#L76">76</a> </span>
+<span id="L77"><a href="#L77">77</a> #print axioms span_adjusted_pair_eq_span_pair</span>
+<span id="L78"><a href="#L78">78</a> #print axioms exists_span_adjusted_pair</span>
+<span id="L79"><a href="#L79">79</a> #print axioms exists_span_singleton_eq_span_pair</span>
+<span id="L80"><a href="#L80">80</a> #print axioms weyl_isCyclic_of_isRightTorsion</span>
+<span id="L81"><a href="#L81">81</a> </span>
+<span id="L82"><a href="#L82">82</a> end Stafford38.TorsionCyclicity</span>
+<span id="L83"><a href="#L83">83</a> </span></pre>

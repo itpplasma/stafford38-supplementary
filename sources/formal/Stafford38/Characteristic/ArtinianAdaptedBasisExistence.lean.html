@@ -1,0 +1,244 @@
+<!doctype html><meta charset="utf-8"><title>Stafford38/Characteristic/ArtinianAdaptedBasisExistence.lean</title><style>body{font:14px monospace}pre span{display:block}pre span:target{background:#fff0ad}a{color:#666}pre{white-space:pre-wrap}</style><h1>Stafford38/Characteristic/ArtinianAdaptedBasisExistence.lean</h1><p>This project (Stafford38) · 0403af3f0b1a7f84d2027121932723f67bd279ae</p><pre><span id="L1"><a href="#L1">1</a> module</span>
+<span id="L2"><a href="#L2">2</a> public import Stafford38.Characteristic.ArtinianAdaptedBasisTraceAdapter</span>
+<span id="L3"><a href="#L3">3</a> public import Mathlib.Data.Fintype.Sort</span>
+<span id="L4"><a href="#L4">4</a> public import Mathlib.Data.Prod.Lex</span>
+<span id="L5"><a href="#L5">5</a> </span>
+<span id="L6"><a href="#L6">6</a> @[expose] public section</span>
+<span id="L7"><a href="#L7">7</a> </span>
+<span id="L8"><a href="#L8">8</a> /-!</span>
+<span id="L9"><a href="#L9">9</a> # Existence of filtration-adapted bases</span>
+<span id="L10"><a href="#L10">10</a> </span>
+<span id="L11"><a href="#L11">11</a> This file constructs a basis adapted to a finite descending filtration of a</span>
+<span id="L12"><a href="#L12">12</a> finite-dimensional vector space.  The construction is elementary: starting</span>
+<span id="L13"><a href="#L13">13</a> at a zero layer, extend a linearly independent set one layer at a time, and</span>
+<span id="L14"><a href="#L14">14</a> label each newly added vector by the layer at which it appears.  A final</span>
+<span id="L15"><a href="#L15">15</a> sorting by decreasing labels gives the ordered `Fin` basis used by the</span>
+<span id="L16"><a href="#L16">16</a> Artinian trace argument.</span>
+<span id="L17"><a href="#L17">17</a> -/</span>
+<span id="L18"><a href="#L18">18</a> </span>
+<span id="L19"><a href="#L19">19</a> namespace Stafford38.Characteristic.ArtinianAdaptedBasisExistence</span>
+<span id="L20"><a href="#L20">20</a> </span>
+<span id="L21"><a href="#L21">21</a> open Stafford38.Characteristic.ArtinianAdaptedBasisTraceAdapter</span>
+<span id="L22"><a href="#L22">22</a> </span>
+<span id="L23"><a href="#L23">23</a> noncomputable section</span>
+<span id="L24"><a href="#L24">24</a> </span>
+<span id="L25"><a href="#L25">25</a> universe u</span>
+<span id="L26"><a href="#L26">26</a> </span>
+<span id="L27"><a href="#L27">27</a> section LinearFiltration</span>
+<span id="L28"><a href="#L28">28</a> </span>
+<span id="L29"><a href="#L29">29</a> variable {K V : Type u} [Field K] [AddCommGroup V] [Module K V]</span>
+<span id="L30"><a href="#L30">30</a> </span>
+<span id="L31"><a href="#L31">31</a> /-- Intermediate set-valued form of an adapted basis, valid from `start`</span>
+<span id="L32"><a href="#L32">32</a> onwards. -/</span>
+<span id="L33"><a href="#L33">33</a> private structure PartialAdaptedSet</span>
+<span id="L34"><a href="#L34">34</a>     (F : ℕ → Submodule K V) (start : ℕ) where</span>
+<span id="L35"><a href="#L35">35</a>   carrier : Set V</span>
+<span id="L36"><a href="#L36">36</a>   independent : LinearIndependent K ((↑) : carrier → V)</span>
+<span id="L37"><a href="#L37">37</a>   span_start : Submodule.span K carrier = F start</span>
+<span id="L38"><a href="#L38">38</a>   level : carrier → ℕ</span>
+<span id="L39"><a href="#L39">39</a>   start_le_level : ∀ i, start ≤ level i</span>
+<span id="L40"><a href="#L40">40</a>   span_level : ∀ t, start ≤ t →</span>
+<span id="L41"><a href="#L41">41</a>     F t = Submodule.span K (((↑) : carrier → V) '' {i | t ≤ level i})</span>
+<span id="L42"><a href="#L42">42</a> </span>
+<span id="L43"><a href="#L43">43</a> private noncomputable def partialAtBottom</span>
+<span id="L44"><a href="#L44">44</a>     (F : ℕ → Submodule K V) (hanti : Antitone F)</span>
+<span id="L45"><a href="#L45">45</a>     (N : ℕ) (hN : F N = ⊥) :</span>
+<span id="L46"><a href="#L46">46</a>     PartialAdaptedSet F N := by</span>
+<span id="L47"><a href="#L47">47</a>   refine</span>
+<span id="L48"><a href="#L48">48</a>     { carrier := ∅</span>
+<span id="L49"><a href="#L49">49</a>       independent := linearIndependent_empty K V</span>
+<span id="L50"><a href="#L50">50</a>       span_start := by simp [hN]</span>
+<span id="L51"><a href="#L51">51</a>       level := fun i =&gt; False.elim i.property</span>
+<span id="L52"><a href="#L52">52</a>       start_le_level := fun i =&gt; False.elim i.property</span>
+<span id="L53"><a href="#L53">53</a>       span_level := ?_ }</span>
+<span id="L54"><a href="#L54">54</a>   intro t hNt</span>
+<span id="L55"><a href="#L55">55</a>   have ht : F t = ⊥ := by</span>
+<span id="L56"><a href="#L56">56</a>     apply le_bot_iff.mp</span>
+<span id="L57"><a href="#L57">57</a>     rw [← hN]</span>
+<span id="L58"><a href="#L58">58</a>     exact hanti hNt</span>
+<span id="L59"><a href="#L59">59</a>   have hempty : {i : (∅ : Set V) | t ≤ False.elim i.property} = ∅ := by</span>
+<span id="L60"><a href="#L60">60</a>     ext i</span>
+<span id="L61"><a href="#L61">61</a>     exact False.elim i.property</span>
+<span id="L62"><a href="#L62">62</a>   simp [ht, hempty]</span>
+<span id="L63"><a href="#L63">63</a> </span>
+<span id="L64"><a href="#L64">64</a> private noncomputable def partialStep</span>
+<span id="L65"><a href="#L65">65</a>     (F : ℕ → Submodule K V) (hanti : Antitone F)</span>
+<span id="L66"><a href="#L66">66</a>     (t : ℕ) (old : PartialAdaptedSet F (t + 1)) :</span>
+<span id="L67"><a href="#L67">67</a>     PartialAdaptedSet F t := by</span>
+<span id="L68"><a href="#L68">68</a>   classical</span>
+<span id="L69"><a href="#L69">69</a>   let oldIn : old.carrier ⊆ (F t : Set V) := fun x hx =&gt;</span>
+<span id="L70"><a href="#L70">70</a>     hanti (Nat.le_succ t) (by</span>
+<span id="L71"><a href="#L71">71</a>       rw [← old.span_start]</span>
+<span id="L72"><a href="#L72">72</a>       exact Submodule.subset_span hx)</span>
+<span id="L73"><a href="#L73">73</a>   have hOld : LinearIndepOn K id old.carrier :=</span>
+<span id="L74"><a href="#L74">74</a>     linearIndependent_subtype_iff.mp old.independent</span>
+<span id="L75"><a href="#L75">75</a>   let next : Set V := hOld.extend oldIn</span>
+<span id="L76"><a href="#L76">76</a>   have holdNext : old.carrier ⊆ next :=</span>
+<span id="L77"><a href="#L77">77</a>     hOld.subset_extend oldIn</span>
+<span id="L78"><a href="#L78">78</a>   have hnextF : next ⊆ (F t : Set V) :=</span>
+<span id="L79"><a href="#L79">79</a>     hOld.extend_subset oldIn</span>
+<span id="L80"><a href="#L80">80</a>   have hind : LinearIndependent K ((↑) : next → V) := by</span>
+<span id="L81"><a href="#L81">81</a>     exact linearIndependent_subtype_iff.mpr</span>
+<span id="L82"><a href="#L82">82</a>       (hOld.linearIndepOn_extend oldIn)</span>
+<span id="L83"><a href="#L83">83</a>   let lev : next → ℕ := fun i =&gt;</span>
+<span id="L84"><a href="#L84">84</a>     if hi : (i : V) ∈ old.carrier then old.level ⟨i, hi⟩ else t</span>
+<span id="L85"><a href="#L85">85</a>   have hlev : ∀ i, t ≤ lev i := by</span>
+<span id="L86"><a href="#L86">86</a>     intro i</span>
+<span id="L87"><a href="#L87">87</a>     dsimp [lev]</span>
+<span id="L88"><a href="#L88">88</a>     split_ifs with hi</span>
+<span id="L89"><a href="#L89">89</a>     · exact le_trans (Nat.le_succ t) (old.start_le_level ⟨i, hi⟩)</span>
+<span id="L90"><a href="#L90">90</a>     · exact le_rfl</span>
+<span id="L91"><a href="#L91">91</a>   refine</span>
+<span id="L92"><a href="#L92">92</a>     { carrier := next</span>
+<span id="L93"><a href="#L93">93</a>       independent := hind</span>
+<span id="L94"><a href="#L94">94</a>       span_start := ?_</span>
+<span id="L95"><a href="#L95">95</a>       level := lev</span>
+<span id="L96"><a href="#L96">96</a>       start_le_level := hlev</span>
+<span id="L97"><a href="#L97">97</a>       span_level := ?_ }</span>
+<span id="L98"><a href="#L98">98</a>   · apply le_antisymm</span>
+<span id="L99"><a href="#L99">99</a>     · exact Submodule.span_le.mpr hnextF</span>
+<span id="L100"><a href="#L100">100</a>     · exact hOld.subset_span_extend oldIn</span>
+<span id="L101"><a href="#L101">101</a>   · intro u htu</span>
+<span id="L102"><a href="#L102">102</a>     rcases Nat.eq_or_lt_of_le htu with rfl | htu'</span>
+<span id="L103"><a href="#L103">103</a>     · have hall : (((↑) : next → V) '' {i | t ≤ lev i}) = next := by</span>
+<span id="L104"><a href="#L104">104</a>         ext x</span>
+<span id="L105"><a href="#L105">105</a>         constructor</span>
+<span id="L106"><a href="#L106">106</a>         · rintro ⟨i, -, rfl⟩</span>
+<span id="L107"><a href="#L107">107</a>           exact i.property</span>
+<span id="L108"><a href="#L108">108</a>         · intro hx</span>
+<span id="L109"><a href="#L109">109</a>           exact ⟨⟨x, hx⟩, hlev ⟨x, hx⟩, rfl⟩</span>
+<span id="L110"><a href="#L110">110</a>       rw [hall]</span>
+<span id="L111"><a href="#L111">111</a>       symm</span>
+<span id="L112"><a href="#L112">112</a>       apply le_antisymm</span>
+<span id="L113"><a href="#L113">113</a>       · exact Submodule.span_le.mpr hnextF</span>
+<span id="L114"><a href="#L114">114</a>       · exact hOld.subset_span_extend oldIn</span>
+<span id="L115"><a href="#L115">115</a>     · rw [old.span_level u (Nat.succ_le_iff.mpr htu')]</span>
+<span id="L116"><a href="#L116">116</a>       apply congrArg (Submodule.span K)</span>
+<span id="L117"><a href="#L117">117</a>       ext x</span>
+<span id="L118"><a href="#L118">118</a>       constructor</span>
+<span id="L119"><a href="#L119">119</a>       · rintro ⟨i, hi, rfl⟩</span>
+<span id="L120"><a href="#L120">120</a>         let j : next := ⟨(i : V), holdNext i.property⟩</span>
+<span id="L121"><a href="#L121">121</a>         refine ⟨j, ?_, rfl⟩</span>
+<span id="L122"><a href="#L122">122</a>         simpa [lev, j, i.property] using hi</span>
+<span id="L123"><a href="#L123">123</a>       · rintro ⟨i, hi, rfl⟩</span>
+<span id="L124"><a href="#L124">124</a>         have hiOld : (i : V) ∈ old.carrier := by</span>
+<span id="L125"><a href="#L125">125</a>           by_contra hn</span>
+<span id="L126"><a href="#L126">126</a>           have : lev i = t := dif_neg hn</span>
+<span id="L127"><a href="#L127">127</a>           change u ≤ lev i at hi</span>
+<span id="L128"><a href="#L128">128</a>           rw [this] at hi</span>
+<span id="L129"><a href="#L129">129</a>           exact (Nat.not_le_of_lt htu') hi</span>
+<span id="L130"><a href="#L130">130</a>         refine ⟨⟨(i : V), hiOld⟩, ?_, rfl⟩</span>
+<span id="L131"><a href="#L131">131</a>         simpa [lev, hiOld] using hi</span>
+<span id="L132"><a href="#L132">132</a> </span>
+<span id="L133"><a href="#L133">133</a> private noncomputable def partialAtZero</span>
+<span id="L134"><a href="#L134">134</a>     (F : ℕ → Submodule K V) (hanti : Antitone F)</span>
+<span id="L135"><a href="#L135">135</a>     (N : ℕ) (hN : F N = ⊥) :</span>
+<span id="L136"><a href="#L136">136</a>     PartialAdaptedSet F 0 :=</span>
+<span id="L137"><a href="#L137">137</a>   Nat.decreasingInduction</span>
+<span id="L138"><a href="#L138">138</a>     (motive := fun t _ =&gt; PartialAdaptedSet F t)</span>
+<span id="L139"><a href="#L139">139</a>     (fun t _ old =&gt; partialStep F hanti t old)</span>
+<span id="L140"><a href="#L140">140</a>     (partialAtBottom F hanti N hN)</span>
+<span id="L141"><a href="#L141">141</a>     (Nat.zero_le N)</span>
+<span id="L142"><a href="#L142">142</a> </span>
+<span id="L143"><a href="#L143">143</a> /-- Every finite descending filtration of a finite-dimensional vector space</span>
+<span id="L144"><a href="#L144">144</a> has a `Fin`-indexed basis ordered by decreasing filtration level. -/</span>
+<span id="L145"><a href="#L145">145</a> theorem exists_filtrationAdaptedBasis</span>
+<span id="L146"><a href="#L146">146</a>     [FiniteDimensional K V]</span>
+<span id="L147"><a href="#L147">147</a>     {n : ℕ} (hdim : Module.finrank K V = n + 1)</span>
+<span id="L148"><a href="#L148">148</a>     (F : ℕ → Submodule K V)</span>
+<span id="L149"><a href="#L149">149</a>     (hanti : Antitone F)</span>
+<span id="L150"><a href="#L150">150</a>     (hzero : F 0 = ⊤)</span>
+<span id="L151"><a href="#L151">151</a>     (heventually : ∃ N, F N = ⊥) :</span>
+<span id="L152"><a href="#L152">152</a>     ∃ (b : Module.Basis (Fin (n + 1)) K V) (level : Fin (n + 1) → ℕ),</span>
+<span id="L153"><a href="#L153">153</a>       Antitone level ∧</span>
+<span id="L154"><a href="#L154">154</a>       ∀ t, F t = Submodule.span K (b '' {i | t ≤ level i}) := by</span>
+<span id="L155"><a href="#L155">155</a>   classical</span>
+<span id="L156"><a href="#L156">156</a>   obtain ⟨N, hN⟩ := heventually</span>
+<span id="L157"><a href="#L157">157</a>   let data := partialAtZero F hanti N hN</span>
+<span id="L158"><a href="#L158">158</a>   have hspanTop : Submodule.span K data.carrier = ⊤ := data.span_start.trans hzero</span>
+<span id="L159"><a href="#L159">159</a>   let raw : Module.Basis data.carrier K V :=</span>
+<span id="L160"><a href="#L160">160</a>     Module.Basis.mk data.independent (by simpa using hspanTop.ge)</span>
+<span id="L161"><a href="#L161">161</a>   letI : Fintype data.carrier := FiniteDimensional.fintypeBasisIndex raw</span>
+<span id="L162"><a href="#L162">162</a>   have hcard : Fintype.card data.carrier = n + 1 := by</span>
+<span id="L163"><a href="#L163">163</a>     rw [← hdim, ← Module.finrank_eq_card_basis raw]</span>
+<span id="L164"><a href="#L164">164</a>   let rank : data.carrier ≃ Fin (n + 1) :=</span>
+<span id="L165"><a href="#L165">165</a>     Fintype.equivOfCardEq (hcard.trans (Fintype.card_fin (n + 1)).symm)</span>
+<span id="L166"><a href="#L166">166</a>   let key : data.carrier → (OrderDual ℕ ×ₗ Fin (n + 1)) :=</span>
+<span id="L167"><a href="#L167">167</a>     fun i =&gt; toLex ((data.level i : OrderDual ℕ), rank i)</span>
+<span id="L168"><a href="#L168">168</a>   have hkey : Function.Injective key := by</span>
+<span id="L169"><a href="#L169">169</a>     intro i j hij</span>
+<span id="L170"><a href="#L170">170</a>     apply rank.injective</span>
+<span id="L171"><a href="#L171">171</a>     exact congrArg (fun z =&gt; (ofLex z).2) hij</span>
+<span id="L172"><a href="#L172">172</a>   letI : LinearOrder data.carrier := LinearOrder.lift' key hkey</span>
+<span id="L173"><a href="#L173">173</a>   let sorted : Fin (n + 1) ≃o data.carrier :=</span>
+<span id="L174"><a href="#L174">174</a>     Fintype.orderIsoFinOfCardEq data.carrier hcard</span>
+<span id="L175"><a href="#L175">175</a>   let b : Module.Basis (Fin (n + 1)) K V := raw.reindex sorted.toEquiv.symm</span>
+<span id="L176"><a href="#L176">176</a>   let level : Fin (n + 1) → ℕ := fun i =&gt; data.level (sorted i)</span>
+<span id="L177"><a href="#L177">177</a>   refine ⟨b, level, ?_, ?_⟩</span>
+<span id="L178"><a href="#L178">178</a>   · intro i j hij</span>
+<span id="L179"><a href="#L179">179</a>     have hs : sorted i ≤ sorted j := sorted.monotone hij</span>
+<span id="L180"><a href="#L180">180</a>     have hs' : key (sorted i) ≤ key (sorted j) := hs</span>
+<span id="L181"><a href="#L181">181</a>     rw [Prod.Lex.toLex_le_toLex] at hs'</span>
+<span id="L182"><a href="#L182">182</a>     rcases hs' with hs | ⟨hs, -⟩</span>
+<span id="L183"><a href="#L183">183</a>     · exact Nat.le_of_lt hs</span>
+<span id="L184"><a href="#L184">184</a>     · exact le_of_eq (congrArg OrderDual.ofDual hs).symm</span>
+<span id="L185"><a href="#L185">185</a>   · intro t</span>
+<span id="L186"><a href="#L186">186</a>     rw [data.span_level t (Nat.zero_le t)]</span>
+<span id="L187"><a href="#L187">187</a>     congr 1</span>
+<span id="L188"><a href="#L188">188</a>     ext x</span>
+<span id="L189"><a href="#L189">189</a>     constructor</span>
+<span id="L190"><a href="#L190">190</a>     · rintro ⟨i, hi, rfl⟩</span>
+<span id="L191"><a href="#L191">191</a>       refine ⟨sorted.symm i, ?_, ?_⟩</span>
+<span id="L192"><a href="#L192">192</a>       · simpa [level] using hi</span>
+<span id="L193"><a href="#L193">193</a>       · simp [b, raw]</span>
+<span id="L194"><a href="#L194">194</a>     · rintro ⟨i, hi, rfl⟩</span>
+<span id="L195"><a href="#L195">195</a>       refine ⟨sorted i, ?_, ?_⟩</span>
+<span id="L196"><a href="#L196">196</a>       · simpa [level] using hi</span>
+<span id="L197"><a href="#L197">197</a>       · simp [b, raw]</span>
+<span id="L198"><a href="#L198">198</a> </span>
+<span id="L199"><a href="#L199">199</a> end LinearFiltration</span>
+<span id="L200"><a href="#L200">200</a> </span>
+<span id="L201"><a href="#L201">201</a> section ArtinianApplication</span>
+<span id="L202"><a href="#L202">202</a> </span>
+<span id="L203"><a href="#L203">203</a> variable {K R V : Type u}</span>
+<span id="L204"><a href="#L204">204</a> variable [Field K] [CommRing R] [Algebra K R] [IsLocalRing R]</span>
+<span id="L205"><a href="#L205">205</a> variable [IsArtinianRing R]</span>
+<span id="L206"><a href="#L206">206</a> variable [AddCommGroup V] [Module K V] [Module R V] [IsScalarTower K R V]</span>
+<span id="L207"><a href="#L207">207</a> variable [FiniteDimensional K V]</span>
+<span id="L208"><a href="#L208">208</a> </span>
+<span id="L209"><a href="#L209">209</a> local notation &quot;𝔪&quot; =&gt; IsLocalRing.maximalIdeal R</span>
+<span id="L210"><a href="#L210">210</a> </span>
+<span id="L211"><a href="#L211">211</a> /-- Maximal-ideal powers on a finite-dimensional module have the adapted</span>
+<span id="L212"><a href="#L212">212</a> basis required by the Artinian trace adapter. -/</span>
+<span id="L213"><a href="#L213">213</a> theorem exists_maximalIdealFiltrationAdaptedBasis</span>
+<span id="L214"><a href="#L214">214</a>     {n : ℕ} (hdim : Module.finrank K V = n + 1) :</span>
+<span id="L215"><a href="#L215">215</a>     ∃ (b : Module.Basis (Fin (n + 1)) K V) (level : Fin (n + 1) → ℕ),</span>
+<span id="L216"><a href="#L216">216</a>       IsMaximalIdealFiltrationAdapted 𝔪 b level := by</span>
+<span id="L217"><a href="#L217">217</a>   let F : ℕ → Submodule K V := fun t =&gt;</span>
+<span id="L218"><a href="#L218">218</a>     ((𝔪 ^ t • (⊤ : Submodule R V)).restrictScalars K)</span>
+<span id="L219"><a href="#L219">219</a>   have hanti : Antitone F := by</span>
+<span id="L220"><a href="#L220">220</a>     intro a b hab</span>
+<span id="L221"><a href="#L221">221</a>     exact (Submodule.restrictScalarsEmbedding K R V).monotone</span>
+<span id="L222"><a href="#L222">222</a>       (Submodule.smul_mono (Ideal.pow_le_pow_right hab) le_rfl)</span>
+<span id="L223"><a href="#L223">223</a>   have hzero : F 0 = ⊤ := by</span>
+<span id="L224"><a href="#L224">224</a>     ext v</span>
+<span id="L225"><a href="#L225">225</a>     simp [F]</span>
+<span id="L226"><a href="#L226">226</a>   obtain ⟨N, hN⟩ :=</span>
+<span id="L227"><a href="#L227">227</a>     Stafford38.Characteristic.ArtinianCoefficientField.maximalIdeal_isNilpotent</span>
+<span id="L228"><a href="#L228">228</a>       (R := R)</span>
+<span id="L229"><a href="#L229">229</a>   have hbottom : F N = ⊥ := by</span>
+<span id="L230"><a href="#L230">230</a>     ext v</span>
+<span id="L231"><a href="#L231">231</a>     simp [F, hN]</span>
+<span id="L232"><a href="#L232">232</a>   obtain ⟨b, level, hlevel, hspan⟩ :=</span>
+<span id="L233"><a href="#L233">233</a>     exists_filtrationAdaptedBasis hdim F hanti hzero ⟨N, hbottom⟩</span>
+<span id="L234"><a href="#L234">234</a>   exact ⟨b, level, ⟨hlevel, hspan⟩⟩</span>
+<span id="L235"><a href="#L235">235</a> </span>
+<span id="L236"><a href="#L236">236</a> #print axioms exists_filtrationAdaptedBasis</span>
+<span id="L237"><a href="#L237">237</a> #print axioms exists_maximalIdealFiltrationAdaptedBasis</span>
+<span id="L238"><a href="#L238">238</a> </span>
+<span id="L239"><a href="#L239">239</a> end ArtinianApplication</span>
+<span id="L240"><a href="#L240">240</a> </span>
+<span id="L241"><a href="#L241">241</a> end</span>
+<span id="L242"><a href="#L242">242</a> </span>
+<span id="L243"><a href="#L243">243</a> end Stafford38.Characteristic.ArtinianAdaptedBasisExistence</span>
+<span id="L244"><a href="#L244">244</a> </span></pre>

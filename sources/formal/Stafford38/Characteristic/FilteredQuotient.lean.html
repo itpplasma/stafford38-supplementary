@@ -1,0 +1,437 @@
+<!doctype html><meta charset="utf-8"><title>Stafford38/Characteristic/FilteredQuotient.lean</title><style>body{font:14px monospace}pre span{display:block}pre span:target{background:#fff0ad}a{color:#666}pre{white-space:pre-wrap}</style><h1>Stafford38/Characteristic/FilteredQuotient.lean</h1><p>This project (Stafford38) · 0403af3f0b1a7f84d2027121932723f67bd279ae</p><pre><span id="L1"><a href="#L1">1</a> module</span>
+<span id="L2"><a href="#L2">2</a> public import Stafford38.Characteristic.InitialIdeal</span>
+<span id="L3"><a href="#L3">3</a> public import Stafford38.Weyl.AssociatedGraded</span>
+<span id="L4"><a href="#L4">4</a> </span>
+<span id="L5"><a href="#L5">5</a> @[expose] public section</span>
+<span id="L6"><a href="#L6">6</a> </span>
+<span id="L7"><a href="#L7">7</a> open Stafford38Challenge (WeylAlg)</span>
+<span id="L8"><a href="#L8">8</a> </span>
+<span id="L9"><a href="#L9">9</a> /-!</span>
+<span id="L10"><a href="#L10">10</a> # Differential-order filtration on a right-ideal quotient</span>
+<span id="L11"><a href="#L11">11</a> </span>
+<span id="L12"><a href="#L12">12</a> This file constructs the filtration induced on the actual additive quotient</span>
+<span id="L13"><a href="#L13">13</a> by a right ideal and identifies each associated-graded piece with homogeneous</span>
+<span id="L14"><a href="#L14">14</a> symbols modulo the principal components of the filtered ideal. The</span>
+<span id="L15"><a href="#L15">15</a> degreewise quotient derived from `A / I` remains distinct from the cyclic</span>
+<span id="L16"><a href="#L16">16</a> `SymbolRing / orderInitialIdeal` model. These constructions feed the</span>
+<span id="L17"><a href="#L17">17</a> filtered-quotient development; the final support proof also has the checked</span>
+<span id="L18"><a href="#L18">18</a> `PaperQuotientDescent` route.</span>
+<span id="L19"><a href="#L19">19</a> -/</span>
+<span id="L20"><a href="#L20">20</a> </span>
+<span id="L21"><a href="#L21">21</a> namespace Stafford38.CharacteristicFilteredQuotient</span>
+<span id="L22"><a href="#L22">22</a> </span>
+<span id="L23"><a href="#L23">23</a> open Stafford38.Characteristic</span>
+<span id="L24"><a href="#L24">24</a> open Stafford38.CharacteristicInitialIdeal</span>
+<span id="L25"><a href="#L25">25</a> open Stafford38.EulerSurjectivity</span>
+<span id="L26"><a href="#L26">26</a> open Stafford38.WeylIteratedEquivalence</span>
+<span id="L27"><a href="#L27">27</a> open Stafford38.WeylFiltration</span>
+<span id="L28"><a href="#L28">28</a> open Stafford38.WeylAssociatedGraded</span>
+<span id="L29"><a href="#L29">29</a> open Stafford38.WeylLeadingSymbol</span>
+<span id="L30"><a href="#L30">30</a> </span>
+<span id="L31"><a href="#L31">31</a> noncomputable section</span>
+<span id="L32"><a href="#L32">32</a> </span>
+<span id="L33"><a href="#L33">33</a> set_option maxHeartbeats 1000000</span>
+<span id="L34"><a href="#L34">34</a> </span>
+<span id="L35"><a href="#L35">35</a> universe u</span>
+<span id="L36"><a href="#L36">36</a> </span>
+<span id="L37"><a href="#L37">37</a> variable (k : Type u) [Field k]</span>
+<span id="L38"><a href="#L38">38</a> </span>
+<span id="L39"><a href="#L39">39</a> /-!</span>
+<span id="L40"><a href="#L40">40</a> `WeylAlg` is a `RingQuot`, whose `AddCommMonoid` and `Ring` instances</span>
+<span id="L41"><a href="#L41">41</a> are declared independently.  The two induced `AddCommMonoid` structures on a</span>
+<span id="L42"><a href="#L42">42</a> submodule of it are definitionally equal but not syntactically identical, and</span>
+<span id="L43"><a href="#L43">43</a> since Lean 4.33 instance arguments are matched only up to instance</span>
+<span id="L44"><a href="#L44">44</a> transparency.  Mathlib's `Submodule.hasQuotient` expects the group-derived</span>
+<span id="L45"><a href="#L45">45</a> shape, so without the two alignments below no quotient `↥p ⧸ q` of a</span>
+<span id="L46"><a href="#L46">46</a> differential-order piece elaborates.  Both are `rfl`, so nothing about the</span>
+<span id="L47"><a href="#L47">47</a> `k`-module structure changes.</span>
+<span id="L48"><a href="#L48">48</a> -/</span>
+<span id="L49"><a href="#L49">49</a> </span>
+<span id="L50"><a href="#L50">50</a> local instance (priority := 10000) pieceAddCommMonoid {n : ℕ}</span>
+<span id="L51"><a href="#L51">51</a>     (p : Submodule k (WeylAlg k n)) : AddCommMonoid p :=</span>
+<span id="L52"><a href="#L52">52</a>   AddCommGroup.toAddCommMonoid</span>
+<span id="L53"><a href="#L53">53</a> </span>
+<span id="L54"><a href="#L54">54</a> local instance (priority := 10000) pieceModule {n : ℕ}</span>
+<span id="L55"><a href="#L55">55</a>     (p : Submodule k (WeylAlg k n)) : Module k p :=</span>
+<span id="L56"><a href="#L56">56</a>   Submodule.module p</span>
+<span id="L57"><a href="#L57">57</a> </span>
+<span id="L58"><a href="#L58">58</a> /-- A right ideal, regarded only as a `k`-linear subspace.  Its carrier is</span>
+<span id="L59"><a href="#L59">59</a> literally unchanged. -/</span>
+<span id="L60"><a href="#L60">60</a> abbrev rightIdealKSubmodule {A : Type*} [Ring A] [Algebra k A]</span>
+<span id="L61"><a href="#L61">61</a>     (I : RightIdeal A) : Submodule k A :=</span>
+<span id="L62"><a href="#L62">62</a>   I.restrictScalars k</span>
+<span id="L63"><a href="#L63">63</a> </span>
+<span id="L64"><a href="#L64">64</a> @[simp] theorem mem_rightIdealKSubmodule {A : Type*} [Ring A] [Algebra k A]</span>
+<span id="L65"><a href="#L65">65</a>     (I : RightIdeal A) (a : A) :</span>
+<span id="L66"><a href="#L66">66</a>     a ∈ rightIdealKSubmodule k I ↔ a ∈ I :=</span>
+<span id="L67"><a href="#L67">67</a>   Iff.rfl</span>
+<span id="L68"><a href="#L68">68</a> </span>
+<span id="L69"><a href="#L69">69</a> theorem rightIdealKSubmodule_eq_restrictScalars</span>
+<span id="L70"><a href="#L70">70</a>     {A : Type*} [Ring A] [Algebra k A] (I : RightIdeal A) :</span>
+<span id="L71"><a href="#L71">71</a>     rightIdealKSubmodule k I = I.restrictScalars k := by</span>
+<span id="L72"><a href="#L72">72</a>   ext a</span>
+<span id="L73"><a href="#L73">73</a>   rfl</span>
+<span id="L74"><a href="#L74">74</a> </span>
+<span id="L75"><a href="#L75">75</a> /-- The `k`-linear quotient used for the filtration is canonically the same</span>
+<span id="L76"><a href="#L76">76</a> underlying quotient as the regular right-module quotient. -/</span>
+<span id="L77"><a href="#L77">77</a> def filteredRightQuotientEquivRightQuotient</span>
+<span id="L78"><a href="#L78">78</a>     {A : Type*} [Ring A] [Algebra k A] (I : RightIdeal A) :</span>
+<span id="L79"><a href="#L79">79</a>     (A ⧸ rightIdealKSubmodule k I) ≃ₗ[k] RightQuotient I :=</span>
+<span id="L80"><a href="#L80">80</a>   Submodule.quotEquivOfEq _ _ (rightIdealKSubmodule_eq_restrictScalars k I) ≪≫ₗ</span>
+<span id="L81"><a href="#L81">81</a>     Submodule.Quotient.restrictScalarsEquiv k I</span>
+<span id="L82"><a href="#L82">82</a> </span>
+<span id="L83"><a href="#L83">83</a> variable {n : ℕ}</span>
+<span id="L84"><a href="#L84">84</a> </span>
+<span id="L85"><a href="#L85">85</a> /-- The additive quotient by the underlying `k`-subspace of a right ideal. -/</span>
+<span id="L86"><a href="#L86">86</a> abbrev FilteredRightQuotient (I : RightIdeal (WeylAlg k n)) :=</span>
+<span id="L87"><a href="#L87">87</a>   WeylAlg k n ⧸ rightIdealKSubmodule k I</span>
+<span id="L88"><a href="#L88">88</a> </span>
+<span id="L89"><a href="#L89">89</a> /-- Global alignment for the actual filtered quotient.  Lean 4.33 matches</span>
+<span id="L90"><a href="#L90">90</a> instance arguments only up to instance transparency, and the default</span>
+<span id="L91"><a href="#L91">91</a> `Submodule.Quotient.addCommMonoid` is not the additive monoid derived from the</span>
+<span id="L92"><a href="#L92">92</a> quotient's `AddCommGroup`.  Without this alignment the direct sum of the</span>
+<span id="L93"><a href="#L93">93</a> pieces below inherits an additive monoid that `Submodule.hasQuotient` cannot</span>
+<span id="L94"><a href="#L94">94</a> match, and `FilteredQuotientSpecialFibre` cannot state its quotient.  This is</span>
+<span id="L95"><a href="#L95">95</a> the same repair already made below for `QuotientOrderGradedPiece`. -/</span>
+<span id="L96"><a href="#L96">96</a> instance (priority := 10000) filteredRightQuotientAddCommMonoid</span>
+<span id="L97"><a href="#L97">97</a>     (I : RightIdeal (WeylAlg k n)) :</span>
+<span id="L98"><a href="#L98">98</a>     AddCommMonoid (FilteredRightQuotient k I) :=</span>
+<span id="L99"><a href="#L99">99</a>   AddCommGroup.toAddCommMonoid</span>
+<span id="L100"><a href="#L100">100</a> </span>
+<span id="L101"><a href="#L101">101</a> instance (priority := 10000) filteredRightQuotientModule</span>
+<span id="L102"><a href="#L102">102</a>     (I : RightIdeal (WeylAlg k n)) :</span>
+<span id="L103"><a href="#L103">103</a>     Module k (FilteredRightQuotient k I) :=</span>
+<span id="L104"><a href="#L104">104</a>   Submodule.Quotient.module _</span>
+<span id="L105"><a href="#L105">105</a> </span>
+<span id="L106"><a href="#L106">106</a> /-- The image of the differential-order piece in the actual quotient. -/</span>
+<span id="L107"><a href="#L107">107</a> def quotientOrderPiece (I : RightIdeal (WeylAlg k n)) (N : ℕ) :</span>
+<span id="L108"><a href="#L108">108</a>     Submodule k (FilteredRightQuotient k I) :=</span>
+<span id="L109"><a href="#L109">109</a>   (presentedWeightPiece k (@orderWeight n) N).map</span>
+<span id="L110"><a href="#L110">110</a>     (rightIdealKSubmodule k I).mkQ</span>
+<span id="L111"><a href="#L111">111</a> </span>
+<span id="L112"><a href="#L112">112</a> /-- The image of the strict lower differential-order piece in the actual</span>
+<span id="L113"><a href="#L113">113</a> quotient. -/</span>
+<span id="L114"><a href="#L114">114</a> def quotientOrderStrictLowerPiece (I : RightIdeal (WeylAlg k n)) (N : ℕ) :</span>
+<span id="L115"><a href="#L115">115</a>     Submodule k (FilteredRightQuotient k I) :=</span>
+<span id="L116"><a href="#L116">116</a>   (presentedStrictLowerPiece k orderWeight N).map</span>
+<span id="L117"><a href="#L117">117</a>     (rightIdealKSubmodule k I).mkQ</span>
+<span id="L118"><a href="#L118">118</a> </span>
+<span id="L119"><a href="#L119">119</a> theorem quotientOrderStrictLowerPiece_le</span>
+<span id="L120"><a href="#L120">120</a>     (I : RightIdeal (WeylAlg k n)) (N : ℕ) :</span>
+<span id="L121"><a href="#L121">121</a>     quotientOrderStrictLowerPiece k I N ≤ quotientOrderPiece k I N :=</span>
+<span id="L122"><a href="#L122">122</a>   Submodule.map_mono (presentedStrictLowerPiece_le k orderWeight)</span>
+<span id="L123"><a href="#L123">123</a> </span>
+<span id="L124"><a href="#L124">124</a> /-- The degree-`N` associated graded piece of the filtration induced on the</span>
+<span id="L125"><a href="#L125">125</a> actual quotient `A / I`. -/</span>
+<span id="L126"><a href="#L126">126</a> abbrev QuotientOrderGradedPiece</span>
+<span id="L127"><a href="#L127">127</a>     (I : RightIdeal (WeylAlg k n)) (N : ℕ) :=</span>
+<span id="L128"><a href="#L128">128</a>   quotientOrderPiece k I N ⧸</span>
+<span id="L129"><a href="#L129">129</a>     (quotientOrderStrictLowerPiece k I N).comap</span>
+<span id="L130"><a href="#L130">130</a>       (quotientOrderPiece k I N).subtype</span>
+<span id="L131"><a href="#L131">131</a> </span>
+<span id="L132"><a href="#L132">132</a> /-- The same global alignment for the actual graded pieces: they are the</span>
+<span id="L133"><a href="#L133">133</a> components of `QuotientOrderAssociatedGraded`, whose `AddCommGroup` instance</span>
+<span id="L134"><a href="#L134">134</a> needs the group-derived additive monoid on each component. -/</span>
+<span id="L135"><a href="#L135">135</a> instance (priority := 10000) quotientOrderGradedPieceAddCommMonoid</span>
+<span id="L136"><a href="#L136">136</a>     (I : RightIdeal (WeylAlg k n)) (N : ℕ) :</span>
+<span id="L137"><a href="#L137">137</a>     AddCommMonoid (QuotientOrderGradedPiece k I N) :=</span>
+<span id="L138"><a href="#L138">138</a>   AddCommGroup.toAddCommMonoid</span>
+<span id="L139"><a href="#L139">139</a> </span>
+<span id="L140"><a href="#L140">140</a> instance (priority := 10000) quotientOrderGradedPieceModule</span>
+<span id="L141"><a href="#L141">141</a>     (I : RightIdeal (WeylAlg k n)) (N : ℕ) :</span>
+<span id="L142"><a href="#L142">142</a>     Module k (QuotientOrderGradedPiece k I N) :=</span>
+<span id="L143"><a href="#L143">143</a>   Submodule.Quotient.module _</span>
+<span id="L144"><a href="#L144">144</a> </span>
+<span id="L145"><a href="#L145">145</a> /-- Relations in the degree-`N` filtered algebra piece: an element is zero in</span>
+<span id="L146"><a href="#L146">146</a> the quotient graded piece exactly when it lies in `I + F_{&lt;N} A`. -/</span>
+<span id="L147"><a href="#L147">147</a> def orderQuotientRelation</span>
+<span id="L148"><a href="#L148">148</a>     (I : RightIdeal (WeylAlg k n)) (N : ℕ) :</span>
+<span id="L149"><a href="#L149">149</a>     Submodule k (presentedWeightPiece k (@orderWeight n) N) :=</span>
+<span id="L150"><a href="#L150">150</a>   ((rightIdealKSubmodule k I) ⊔</span>
+<span id="L151"><a href="#L151">151</a>       presentedStrictLowerPiece k (@orderWeight n) N).comap</span>
+<span id="L152"><a href="#L152">152</a>     (presentedWeightPiece k (@orderWeight n) N).subtype</span>
+<span id="L153"><a href="#L153">153</a> </span>
+<span id="L154"><a href="#L154">154</a> /-- The canonical map from a filtered algebra piece to the corresponding</span>
+<span id="L155"><a href="#L155">155</a> filtered piece of the actual quotient. -/</span>
+<span id="L156"><a href="#L156">156</a> def orderPieceToQuotientPiece</span>
+<span id="L157"><a href="#L157">157</a>     (I : RightIdeal (WeylAlg k n)) (N : ℕ) :</span>
+<span id="L158"><a href="#L158">158</a>     presentedWeightPiece k (@orderWeight n) N →ₗ[k] quotientOrderPiece k I N :=</span>
+<span id="L159"><a href="#L159">159</a>   ((rightIdealKSubmodule k I).mkQ.comp</span>
+<span id="L160"><a href="#L160">160</a>     (presentedWeightPiece k (@orderWeight n) N).subtype).codRestrict</span>
+<span id="L161"><a href="#L161">161</a>       (quotientOrderPiece k I N) (fun z =&gt; ⟨z, z.property, rfl⟩)</span>
+<span id="L162"><a href="#L162">162</a> </span>
+<span id="L163"><a href="#L163">163</a> /-- The canonical map from a filtered algebra piece to the corresponding</span>
+<span id="L164"><a href="#L164">164</a> graded piece of the actual quotient. -/</span>
+<span id="L165"><a href="#L165">165</a> def orderPieceToQuotientGraded</span>
+<span id="L166"><a href="#L166">166</a>     (I : RightIdeal (WeylAlg k n)) (N : ℕ) :</span>
+<span id="L167"><a href="#L167">167</a>     presentedWeightPiece k (@orderWeight n) N →ₗ[k] QuotientOrderGradedPiece k I N :=</span>
+<span id="L168"><a href="#L168">168</a>   ((quotientOrderStrictLowerPiece k I N).comap</span>
+<span id="L169"><a href="#L169">169</a>       (quotientOrderPiece k I N).subtype).mkQ.comp</span>
+<span id="L170"><a href="#L170">170</a>     (orderPieceToQuotientPiece k I N)</span>
+<span id="L171"><a href="#L171">171</a> </span>
+<span id="L172"><a href="#L172">172</a> theorem orderPieceToQuotientGraded_surjective</span>
+<span id="L173"><a href="#L173">173</a>     (I : RightIdeal (WeylAlg k n)) (N : ℕ) :</span>
+<span id="L174"><a href="#L174">174</a>     Function.Surjective (orderPieceToQuotientGraded k I N) := by</span>
+<span id="L175"><a href="#L175">175</a>   intro q</span>
+<span id="L176"><a href="#L176">176</a>   refine Submodule.Quotient.induction_on _ q ?_</span>
+<span id="L177"><a href="#L177">177</a>   rintro ⟨q, hq⟩</span>
+<span id="L178"><a href="#L178">178</a>   obtain ⟨z, hz, rfl⟩ := hq</span>
+<span id="L179"><a href="#L179">179</a>   exact ⟨⟨z, hz⟩, rfl⟩</span>
+<span id="L180"><a href="#L180">180</a> </span>
+<span id="L181"><a href="#L181">181</a> /-- Exact kernel computation for the filtered quotient map. -/</span>
+<span id="L182"><a href="#L182">182</a> theorem ker_orderPieceToQuotientGraded</span>
+<span id="L183"><a href="#L183">183</a>     (I : RightIdeal (WeylAlg k n)) (N : ℕ) :</span>
+<span id="L184"><a href="#L184">184</a>     LinearMap.ker (orderPieceToQuotientGraded k I N) =</span>
+<span id="L185"><a href="#L185">185</a>       orderQuotientRelation k I N := by</span>
+<span id="L186"><a href="#L186">186</a>   ext z</span>
+<span id="L187"><a href="#L187">187</a>   rw [LinearMap.mem_ker]</span>
+<span id="L188"><a href="#L188">188</a>   change Submodule.Quotient.mk</span>
+<span id="L189"><a href="#L189">189</a>       (⟨(rightIdealKSubmodule k I).mkQ z,</span>
+<span id="L190"><a href="#L190">190</a>         ⟨z, z.property, rfl⟩⟩ : quotientOrderPiece k I N) = 0 ↔ _</span>
+<span id="L191"><a href="#L191">191</a>   rw [Submodule.Quotient.mk_eq_zero]</span>
+<span id="L192"><a href="#L192">192</a>   change (rightIdealKSubmodule k I).mkQ z ∈</span>
+<span id="L193"><a href="#L193">193</a>       quotientOrderStrictLowerPiece k I N ↔ _</span>
+<span id="L194"><a href="#L194">194</a>   change (z : WeylAlg k n) ∈</span>
+<span id="L195"><a href="#L195">195</a>     (quotientOrderStrictLowerPiece k I N).comap</span>
+<span id="L196"><a href="#L196">196</a>       (rightIdealKSubmodule k I).mkQ ↔ _</span>
+<span id="L197"><a href="#L197">197</a>   rw [quotientOrderStrictLowerPiece, Submodule.comap_map_mkQ]</span>
+<span id="L198"><a href="#L198">198</a>   rfl</span>
+<span id="L199"><a href="#L199">199</a> </span>
+<span id="L200"><a href="#L200">200</a> /-- The actual quotient graded piece is the filtered algebra piece modulo</span>
+<span id="L201"><a href="#L201">201</a> `I + F_{&lt;N} A`. -/</span>
+<span id="L202"><a href="#L202">202</a> def quotientOrderGradedPieceEquivRelation</span>
+<span id="L203"><a href="#L203">203</a>     (I : RightIdeal (WeylAlg k n)) (N : ℕ) :</span>
+<span id="L204"><a href="#L204">204</a>     (presentedWeightPiece k (@orderWeight n) N ⧸</span>
+<span id="L205"><a href="#L205">205</a>       orderQuotientRelation k I N) ≃ₗ[k]</span>
+<span id="L206"><a href="#L206">206</a>       QuotientOrderGradedPiece k I N := by</span>
+<span id="L207"><a href="#L207">207</a>   let hEq := ker_orderPieceToQuotientGraded k I N</span>
+<span id="L208"><a href="#L208">208</a>   let g : (presentedWeightPiece k (@orderWeight n) N ⧸</span>
+<span id="L209"><a href="#L209">209</a>       orderQuotientRelation k I N) →ₗ[k]</span>
+<span id="L210"><a href="#L210">210</a>       QuotientOrderGradedPiece k I N :=</span>
+<span id="L211"><a href="#L211">211</a>     (orderQuotientRelation k I N).liftQ</span>
+<span id="L212"><a href="#L212">212</a>       (orderPieceToQuotientGraded k I N) (le_of_eq hEq.symm)</span>
+<span id="L213"><a href="#L213">213</a>   apply LinearEquiv.ofBijective g</span>
+<span id="L214"><a href="#L214">214</a>   constructor</span>
+<span id="L215"><a href="#L215">215</a>   · intro q₁ q₂ h</span>
+<span id="L216"><a href="#L216">216</a>     obtain ⟨z, rfl⟩ := Submodule.Quotient.mk_surjective _ q₁</span>
+<span id="L217"><a href="#L217">217</a>     obtain ⟨w, rfl⟩ := Submodule.Quotient.mk_surjective _ q₂</span>
+<span id="L218"><a href="#L218">218</a>     apply (Submodule.Quotient.eq _).2</span>
+<span id="L219"><a href="#L219">219</a>     have hzw : orderPieceToQuotientGraded k I N z =</span>
+<span id="L220"><a href="#L220">220</a>         orderPieceToQuotientGraded k I N w := by</span>
+<span id="L221"><a href="#L221">221</a>       simpa [g] using h</span>
+<span id="L222"><a href="#L222">222</a>     have hzwdiff : z - w ∈</span>
+<span id="L223"><a href="#L223">223</a>         LinearMap.ker (orderPieceToQuotientGraded k I N) := by</span>
+<span id="L224"><a href="#L224">224</a>       have e := LinearMap.map_sub (orderPieceToQuotientGraded k I N) z w</span>
+<span id="L225"><a href="#L225">225</a>       rw [LinearMap.mem_ker, e, hzw, sub_self]</span>
+<span id="L226"><a href="#L226">226</a>     rw [ker_orderPieceToQuotientGraded k I N] at hzwdiff</span>
+<span id="L227"><a href="#L227">227</a>     exact hzwdiff</span>
+<span id="L228"><a href="#L228">228</a>   · intro q</span>
+<span id="L229"><a href="#L229">229</a>     obtain ⟨z, hz⟩ := orderPieceToQuotientGraded_surjective k I N q</span>
+<span id="L230"><a href="#L230">230</a>     exact ⟨Submodule.Quotient.mk z, by simpa [g] using hz⟩</span>
+<span id="L231"><a href="#L231">231</a> </span>
+<span id="L232"><a href="#L232">232</a> /-- Homogeneous symbol relations arising from `I + F_{&lt;N} A`.  The strict</span>
+<span id="L233"><a href="#L233">233</a> lower summand maps to zero, so these are precisely the degree-`N` principal</span>
+<span id="L234"><a href="#L234">234</a> components contributed by filtered elements of `I`. -/</span>
+<span id="L235"><a href="#L235">235</a> def orderSymbolRelation</span>
+<span id="L236"><a href="#L236">236</a>     (I : RightIdeal (WeylAlg k n)) (N : ℕ) :</span>
+<span id="L237"><a href="#L237">237</a>     Submodule k</span>
+<span id="L238"><a href="#L238">238</a>       (MvPolynomial.weightedHomogeneousSubmodule k (@orderWeight n) N) :=</span>
+<span id="L239"><a href="#L239">239</a>   (orderQuotientRelation k I N).map</span>
+<span id="L240"><a href="#L240">240</a>     (principalComponentOnPiece k (@orderWeight n) N)</span>
+<span id="L241"><a href="#L241">241</a> </span>
+<span id="L242"><a href="#L242">242</a> /-- Align the additive monoid structure on a degree-`N` symbol quotient with</span>
+<span id="L243"><a href="#L243">243</a> its additive group structure.  `Submodule.Quotient` declares the two</span>
+<span id="L244"><a href="#L244">244</a> independently, so `DirectSum`'s `AddCommGroup` instance, and hence</span>
+<span id="L245"><a href="#L245">245</a> `Submodule.liftQ` into the graded relation module, does not apply without</span>
+<span id="L246"><a href="#L246">246</a> this `rfl` alignment.  Unlike the alignments above this one is global,</span>
+<span id="L247"><a href="#L247">247</a> because `OrderSymbolRelationGraded` is assembled from these quotients in a</span>
+<span id="L248"><a href="#L248">248</a> later module. -/</span>
+<span id="L249"><a href="#L249">249</a> instance (priority := 10000) orderSymbolQuotientAddCommMonoid</span>
+<span id="L250"><a href="#L250">250</a>     (I : RightIdeal (WeylAlg k n)) (N : ℕ) :</span>
+<span id="L251"><a href="#L251">251</a>     AddCommMonoid</span>
+<span id="L252"><a href="#L252">252</a>       (MvPolynomial.weightedHomogeneousSubmodule k (@orderWeight n) N ⧸</span>
+<span id="L253"><a href="#L253">253</a>         orderSymbolRelation k I N) :=</span>
+<span id="L254"><a href="#L254">254</a>   AddCommGroup.toAddCommMonoid</span>
+<span id="L255"><a href="#L255">255</a> </span>
+<span id="L256"><a href="#L256">256</a> instance (priority := 10000) orderSymbolQuotientModule</span>
+<span id="L257"><a href="#L257">257</a>     (I : RightIdeal (WeylAlg k n)) (N : ℕ) :</span>
+<span id="L258"><a href="#L258">258</a>     Module k</span>
+<span id="L259"><a href="#L259">259</a>       (MvPolynomial.weightedHomogeneousSubmodule k (@orderWeight n) N ⧸</span>
+<span id="L260"><a href="#L260">260</a>         orderSymbolRelation k I N) :=</span>
+<span id="L261"><a href="#L261">261</a>   Submodule.Quotient.module _</span>
+<span id="L262"><a href="#L262">262</a> </span>
+<span id="L263"><a href="#L263">263</a> /-- Principal component, descended to the quotient by the exact source and</span>
+<span id="L264"><a href="#L264">264</a> target relation submodules. -/</span>
+<span id="L265"><a href="#L265">265</a> def quotientPrincipalComponentMap</span>
+<span id="L266"><a href="#L266">266</a>     (I : RightIdeal (WeylAlg k n)) (N : ℕ) :</span>
+<span id="L267"><a href="#L267">267</a>     (presentedWeightPiece k (@orderWeight n) N ⧸</span>
+<span id="L268"><a href="#L268">268</a>       orderQuotientRelation k I N) →ₗ[k]</span>
+<span id="L269"><a href="#L269">269</a>       (MvPolynomial.weightedHomogeneousSubmodule k (@orderWeight n) N ⧸</span>
+<span id="L270"><a href="#L270">270</a>         orderSymbolRelation k I N) :=</span>
+<span id="L271"><a href="#L271">271</a>   let f : presentedWeightPiece k (@orderWeight n) N →ₗ[k]</span>
+<span id="L272"><a href="#L272">272</a>       MvPolynomial.weightedHomogeneousSubmodule k (@orderWeight n) N :=</span>
+<span id="L273"><a href="#L273">273</a>     principalComponentOnPiece k (@orderWeight n) N</span>
+<span id="L274"><a href="#L274">274</a>   let h : orderQuotientRelation k I N ≤</span>
+<span id="L275"><a href="#L275">275</a>       (orderSymbolRelation k I N).comap f := by</span>
+<span id="L276"><a href="#L276">276</a>     intro z hz</span>
+<span id="L277"><a href="#L277">277</a>     change f z ∈ orderSymbolRelation k I N</span>
+<span id="L278"><a href="#L278">278</a>     exact ⟨z, hz, rfl⟩</span>
+<span id="L279"><a href="#L279">279</a>   Submodule.mapQ (p := orderQuotientRelation k I N)</span>
+<span id="L280"><a href="#L280">280</a>     (q := orderSymbolRelation k I N) f h</span>
+<span id="L281"><a href="#L281">281</a> </span>
+<span id="L282"><a href="#L282">282</a> theorem quotientPrincipalComponentMap_surjective</span>
+<span id="L283"><a href="#L283">283</a>     (I : RightIdeal (WeylAlg k n)) (N : ℕ) :</span>
+<span id="L284"><a href="#L284">284</a>     Function.Surjective (quotientPrincipalComponentMap k I N) := by</span>
+<span id="L285"><a href="#L285">285</a>   intro q</span>
+<span id="L286"><a href="#L286">286</a>   refine Submodule.Quotient.induction_on _ q ?_</span>
+<span id="L287"><a href="#L287">287</a>   intro P</span>
+<span id="L288"><a href="#L288">288</a>   obtain ⟨z, rfl⟩ :=</span>
+<span id="L289"><a href="#L289">289</a>     principalComponentOnPiece_surjective k (@orderWeight n) P</span>
+<span id="L290"><a href="#L290">290</a>   let z' : presentedWeightPiece k (@orderWeight n) N := ⟨z, z.property⟩</span>
+<span id="L291"><a href="#L291">291</a>   refine ⟨Submodule.Quotient.mk z', ?_⟩</span>
+<span id="L292"><a href="#L292">292</a>   rw [quotientPrincipalComponentMap, Submodule.mapQ_apply]</span>
+<span id="L293"><a href="#L293">293</a> </span>
+<span id="L294"><a href="#L294">294</a> theorem quotientPrincipalComponentMap_injective</span>
+<span id="L295"><a href="#L295">295</a>     (I : RightIdeal (WeylAlg k n)) (N : ℕ) :</span>
+<span id="L296"><a href="#L296">296</a>     Function.Injective (quotientPrincipalComponentMap k I N) := by</span>
+<span id="L297"><a href="#L297">297</a>   intro q₁ q₂</span>
+<span id="L298"><a href="#L298">298</a>   revert q₂</span>
+<span id="L299"><a href="#L299">299</a>   refine Submodule.Quotient.induction_on _ q₁ ?_</span>
+<span id="L300"><a href="#L300">300</a>   intro z q₂</span>
+<span id="L301"><a href="#L301">301</a>   refine Submodule.Quotient.induction_on _ q₂ ?_</span>
+<span id="L302"><a href="#L302">302</a>   intro w h</span>
+<span id="L303"><a href="#L303">303</a>   rw [quotientPrincipalComponentMap, Submodule.mapQ_apply,</span>
+<span id="L304"><a href="#L304">304</a>     Submodule.mapQ_apply] at h</span>
+<span id="L305"><a href="#L305">305</a>   apply (Submodule.Quotient.eq _).2</span>
+<span id="L306"><a href="#L306">306</a>   have hpc :</span>
+<span id="L307"><a href="#L307">307</a>       principalComponentOnPiece k (@orderWeight n) N z -</span>
+<span id="L308"><a href="#L308">308</a>           principalComponentOnPiece k (@orderWeight n) N w ∈</span>
+<span id="L309"><a href="#L309">309</a>         orderSymbolRelation k I N :=</span>
+<span id="L310"><a href="#L310">310</a>     (Submodule.Quotient.eq _).mp h</span>
+<span id="L311"><a href="#L311">311</a>   obtain ⟨r, hr, hpr⟩ := hpc</span>
+<span id="L312"><a href="#L312">312</a>   have hdiffLower :</span>
+<span id="L313"><a href="#L313">313</a>       (((z - w) - r : presentedWeightPiece k (@orderWeight n) N) : WeylAlg k n) ∈</span>
+<span id="L314"><a href="#L314">314</a>         presentedStrictLowerPiece k orderWeight N := by</span>
+<span id="L315"><a href="#L315">315</a>     apply (mem_ker_principalComponentOnPiece_iff k (@orderWeight n)</span>
+<span id="L316"><a href="#L316">316</a>       ((z - w) - r)).mp</span>
+<span id="L317"><a href="#L317">317</a>     have e₁ := LinearMap.map_sub</span>
+<span id="L318"><a href="#L318">318</a>       (principalComponentOnPiece k (@orderWeight n) N) (z - w) r</span>
+<span id="L319"><a href="#L319">319</a>     have e₂ := LinearMap.map_sub</span>
+<span id="L320"><a href="#L320">320</a>       (principalComponentOnPiece k (@orderWeight n) N) z w</span>
+<span id="L321"><a href="#L321">321</a>     rw [LinearMap.mem_ker, e₁, e₂, hpr, sub_self]</span>
+<span id="L322"><a href="#L322">322</a>   have hdiffRelation : (z - w) - r ∈ orderQuotientRelation k I N := by</span>
+<span id="L323"><a href="#L323">323</a>     change ((((z - w) - r : presentedWeightPiece k (@orderWeight n) N) : WeylAlg k n)) ∈</span>
+<span id="L324"><a href="#L324">324</a>       (rightIdealKSubmodule k I) ⊔</span>
+<span id="L325"><a href="#L325">325</a>         presentedStrictLowerPiece k orderWeight N</span>
+<span id="L326"><a href="#L326">326</a>     exact Submodule.mem_sup_right hdiffLower</span>
+<span id="L327"><a href="#L327">327</a>   have hsum := (orderQuotientRelation k I N).add_mem hr hdiffRelation</span>
+<span id="L328"><a href="#L328">328</a>   have hrw : r + ((z - w) - r) = z - w := by abel</span>
+<span id="L329"><a href="#L329">329</a>   rwa [hrw] at hsum</span>
+<span id="L330"><a href="#L330">330</a> </span>
+<span id="L331"><a href="#L331">331</a> /-- Degreewise filtered-quotient bridge: the actual associated graded piece</span>
+<span id="L332"><a href="#L332">332</a> of `A / I` is canonically equivalent to homogeneous symbols modulo the</span>
+<span id="L333"><a href="#L333">333</a> principal components of `I + F_{&lt;N} A`. -/</span>
+<span id="L334"><a href="#L334">334</a> def quotientOrderGradedPieceEquivSymbols</span>
+<span id="L335"><a href="#L335">335</a>     (I : RightIdeal (WeylAlg k n)) (N : ℕ) :</span>
+<span id="L336"><a href="#L336">336</a>     QuotientOrderGradedPiece k I N ≃ₗ[k]</span>
+<span id="L337"><a href="#L337">337</a>       (MvPolynomial.weightedHomogeneousSubmodule k (@orderWeight n) N ⧸</span>
+<span id="L338"><a href="#L338">338</a>         orderSymbolRelation k I N) :=</span>
+<span id="L339"><a href="#L339">339</a>   (quotientOrderGradedPieceEquivRelation k I N).symm ≪≫ₗ</span>
+<span id="L340"><a href="#L340">340</a>     LinearEquiv.ofBijective (quotientPrincipalComponentMap k I N)</span>
+<span id="L341"><a href="#L341">341</a>       ⟨quotientPrincipalComponentMap_injective k I N,</span>
+<span id="L342"><a href="#L342">342</a>         quotientPrincipalComponentMap_surjective k I N⟩</span>
+<span id="L343"><a href="#L343">343</a> </span>
+<span id="L344"><a href="#L344">344</a> /-- Every filtered element of the right ideal contributes its principal</span>
+<span id="L345"><a href="#L345">345</a> component to the exact symbol relation in the actual quotient graded piece. -/</span>
+<span id="L346"><a href="#L346">346</a> theorem principalComponent_mem_orderSymbolRelation</span>
+<span id="L347"><a href="#L347">347</a>     (I : RightIdeal (WeylAlg k n)) (N : ℕ) (z : WeylAlg k n)</span>
+<span id="L348"><a href="#L348">348</a>     (hzN : z ∈ presentedWeightPiece k (@orderWeight n) N) (hzI : z ∈ I) :</span>
+<span id="L349"><a href="#L349">349</a>     principalComponentOnPiece k (@orderWeight n) N ⟨z, hzN⟩ ∈</span>
+<span id="L350"><a href="#L350">350</a>       orderSymbolRelation k I N := by</span>
+<span id="L351"><a href="#L351">351</a>   refine ⟨⟨z, hzN⟩, ?_, rfl⟩</span>
+<span id="L352"><a href="#L352">352</a>   change z ∈ (rightIdealKSubmodule k I) ⊔</span>
+<span id="L353"><a href="#L353">353</a>     presentedStrictLowerPiece k orderWeight N</span>
+<span id="L354"><a href="#L354">354</a>   exact Submodule.mem_sup_left hzI</span>
+<span id="L355"><a href="#L355">355</a> </span>
+<span id="L356"><a href="#L356">356</a> /-- Exact description of the degree-`N` symbol relations: they are precisely</span>
+<span id="L357"><a href="#L357">357</a> the principal components of elements of `I` lying in `F_N A`. -/</span>
+<span id="L358"><a href="#L358">358</a> theorem mem_orderSymbolRelation_iff</span>
+<span id="L359"><a href="#L359">359</a>     (I : RightIdeal (WeylAlg k n)) (N : ℕ)</span>
+<span id="L360"><a href="#L360">360</a>     (P : MvPolynomial.weightedHomogeneousSubmodule k (@orderWeight n) N) :</span>
+<span id="L361"><a href="#L361">361</a>     P ∈ orderSymbolRelation k I N ↔</span>
+<span id="L362"><a href="#L362">362</a>       ∃ (z : WeylAlg k n)</span>
+<span id="L363"><a href="#L363">363</a>         (hzN : z ∈ presentedWeightPiece k (@orderWeight n) N),</span>
+<span id="L364"><a href="#L364">364</a>         z ∈ I ∧ P = principalComponentOnPiece k (@orderWeight n) N ⟨z, hzN⟩ := by</span>
+<span id="L365"><a href="#L365">365</a>   constructor</span>
+<span id="L366"><a href="#L366">366</a>   · rintro ⟨r, hr, hPr⟩</span>
+<span id="L367"><a href="#L367">367</a>     change (r : WeylAlg k n) ∈</span>
+<span id="L368"><a href="#L368">368</a>       (rightIdealKSubmodule k I) ⊔</span>
+<span id="L369"><a href="#L369">369</a>         presentedStrictLowerPiece k orderWeight N at hr</span>
+<span id="L370"><a href="#L370">370</a>     obtain ⟨i, hi, l, hl, hil⟩ := Submodule.mem_sup.mp hr</span>
+<span id="L371"><a href="#L371">371</a>     have hlN : l ∈ presentedWeightPiece k (@orderWeight n) N :=</span>
+<span id="L372"><a href="#L372">372</a>       presentedStrictLowerPiece_le k (@orderWeight n) hl</span>
+<span id="L373"><a href="#L373">373</a>     have hiN : i ∈ presentedWeightPiece k (@orderWeight n) N := by</span>
+<span id="L374"><a href="#L374">374</a>       have hieq : i = (r : WeylAlg k n) - l := by</span>
+<span id="L375"><a href="#L375">375</a>         rw [← hil]</span>
+<span id="L376"><a href="#L376">376</a>         simp</span>
+<span id="L377"><a href="#L377">377</a>       rw [hieq]</span>
+<span id="L378"><a href="#L378">378</a>       exact Submodule.sub_mem _ r.property hlN</span>
+<span id="L379"><a href="#L379">379</a>     refine ⟨i, hiN, hi, ?_⟩</span>
+<span id="L380"><a href="#L380">380</a>     let ii : presentedWeightPiece k (@orderWeight n) N := ⟨i, hiN⟩</span>
+<span id="L381"><a href="#L381">381</a>     let ll : presentedWeightPiece k (@orderWeight n) N := ⟨l, hlN⟩</span>
+<span id="L382"><a href="#L382">382</a>     have hrl : r = ii + ll := by</span>
+<span id="L383"><a href="#L383">383</a>       apply Subtype.ext</span>
+<span id="L384"><a href="#L384">384</a>       exact hil.symm</span>
+<span id="L385"><a href="#L385">385</a>     have hpl :</span>
+<span id="L386"><a href="#L386">386</a>         principalComponentOnPiece k (@orderWeight n) N ll = 0 := by</span>
+<span id="L387"><a href="#L387">387</a>       apply Subtype.ext</span>
+<span id="L388"><a href="#L388">388</a>       exact (presentedPrincipalComponent_eq_zero_iff_mem_strictLower</span>
+<span id="L389"><a href="#L389">389</a>         k (@orderWeight n) ll ll.property).mpr hl</span>
+<span id="L390"><a href="#L390">390</a>     rw [← hPr, hrl, map_add]</span>
+<span id="L391"><a href="#L391">391</a>     calc</span>
+<span id="L392"><a href="#L392">392</a>       principalComponentOnPiece k (@orderWeight n) N ii +</span>
+<span id="L393"><a href="#L393">393</a>           principalComponentOnPiece k (@orderWeight n) N ll =</span>
+<span id="L394"><a href="#L394">394</a>           principalComponentOnPiece k (@orderWeight n) N ii + 0 :=</span>
+<span id="L395"><a href="#L395">395</a>         congrArg (fun Q =&gt;</span>
+<span id="L396"><a href="#L396">396</a>           principalComponentOnPiece k (@orderWeight n) N ii + Q) hpl</span>
+<span id="L397"><a href="#L397">397</a>       _ = principalComponentOnPiece k (@orderWeight n) N ii := add_zero _</span>
+<span id="L398"><a href="#L398">398</a>       _ = principalComponentOnPiece k (@orderWeight n) N ⟨i, hiN⟩ := by</span>
+<span id="L399"><a href="#L399">399</a>         congr 1</span>
+<span id="L400"><a href="#L400">400</a>   · rintro ⟨z, hzN, hzI, rfl⟩</span>
+<span id="L401"><a href="#L401">401</a>     exact principalComponent_mem_orderSymbolRelation k I N z hzN hzI</span>
+<span id="L402"><a href="#L402">402</a> </span>
+<span id="L403"><a href="#L403">403</a> /-- Every exact degree-`N` relation of the actual quotient is one of the</span>
+<span id="L404"><a href="#L404">404</a> generators used by the existing order initial ideal. -/</span>
+<span id="L405"><a href="#L405">405</a> theorem coe_mem_orderInitialGeneratorSet_of_mem_orderSymbolRelation</span>
+<span id="L406"><a href="#L406">406</a>     (I : RightIdeal (WeylAlg k n)) (N : ℕ)</span>
+<span id="L407"><a href="#L407">407</a>     (P : MvPolynomial.weightedHomogeneousSubmodule k (@orderWeight n) N)</span>
+<span id="L408"><a href="#L408">408</a>     (hP : P ∈ orderSymbolRelation k I N) :</span>
+<span id="L409"><a href="#L409">409</a>     (P : SymbolRing k n) ∈ orderInitialGeneratorSet k I := by</span>
+<span id="L410"><a href="#L410">410</a>   obtain ⟨z, hzN, hzI, hPz⟩ :=</span>
+<span id="L411"><a href="#L411">411</a>     (mem_orderSymbolRelation_iff k I N P).mp hP</span>
+<span id="L412"><a href="#L412">412</a>   refine ⟨N, z, hzN, hzI, ?_⟩</span>
+<span id="L413"><a href="#L413">413</a>   rw [hPz]</span>
+<span id="L414"><a href="#L414">414</a>   rfl</span>
+<span id="L415"><a href="#L415">415</a> </span>
+<span id="L416"><a href="#L416">416</a> theorem coe_mem_orderInitialIdeal_of_mem_orderSymbolRelation</span>
+<span id="L417"><a href="#L417">417</a>     (I : RightIdeal (WeylAlg k n)) (N : ℕ)</span>
+<span id="L418"><a href="#L418">418</a>     (P : MvPolynomial.weightedHomogeneousSubmodule k (@orderWeight n) N)</span>
+<span id="L419"><a href="#L419">419</a>     (hP : P ∈ orderSymbolRelation k I N) :</span>
+<span id="L420"><a href="#L420">420</a>     (P : SymbolRing k n) ∈ orderInitialIdeal k I :=</span>
+<span id="L421"><a href="#L421">421</a>   Ideal.subset_span</span>
+<span id="L422"><a href="#L422">422</a>     (coe_mem_orderInitialGeneratorSet_of_mem_orderSymbolRelation k I N P hP)</span>
+<span id="L423"><a href="#L423">423</a> </span>
+<span id="L424"><a href="#L424">424</a> #print axioms rightIdealKSubmodule</span>
+<span id="L425"><a href="#L425">425</a> #print axioms filteredRightQuotientEquivRightQuotient</span>
+<span id="L426"><a href="#L426">426</a> #print axioms ker_orderPieceToQuotientGraded</span>
+<span id="L427"><a href="#L427">427</a> #print axioms quotientOrderGradedPieceEquivRelation</span>
+<span id="L428"><a href="#L428">428</a> #print axioms quotientPrincipalComponentMap_injective</span>
+<span id="L429"><a href="#L429">429</a> #print axioms quotientOrderGradedPieceEquivSymbols</span>
+<span id="L430"><a href="#L430">430</a> #print axioms principalComponent_mem_orderSymbolRelation</span>
+<span id="L431"><a href="#L431">431</a> #print axioms mem_orderSymbolRelation_iff</span>
+<span id="L432"><a href="#L432">432</a> #print axioms coe_mem_orderInitialIdeal_of_mem_orderSymbolRelation</span>
+<span id="L433"><a href="#L433">433</a> </span>
+<span id="L434"><a href="#L434">434</a> end</span>
+<span id="L435"><a href="#L435">435</a> </span>
+<span id="L436"><a href="#L436">436</a> end Stafford38.CharacteristicFilteredQuotient</span>
+<span id="L437"><a href="#L437">437</a> </span></pre>

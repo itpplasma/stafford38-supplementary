@@ -1,0 +1,556 @@
+<!doctype html><meta charset="utf-8"><title>Stafford38/Weyl/FilteredScalarLifting.lean</title><style>body{font:14px monospace}pre span{display:block}pre span:target{background:#fff0ad}a{color:#666}pre{white-space:pre-wrap}</style><h1>Stafford38/Weyl/FilteredScalarLifting.lean</h1><p>This project (Stafford38) · 0403af3f0b1a7f84d2027121932723f67bd279ae</p><pre><span id="L1"><a href="#L1">1</a> module</span>
+<span id="L2"><a href="#L2">2</a> public import AlgebraicAnalysis.Ore.Associativity</span>
+<span id="L3"><a href="#L3">3</a> public import Stafford38.Weyl.PresentedScalarExtension</span>
+<span id="L4"><a href="#L4">4</a> public import Mathlib.RingTheory.Flat.Equalizer</span>
+<span id="L5"><a href="#L5">5</a> public import Mathlib.LinearAlgebra.TensorProduct.RightExactness</span>
+<span id="L6"><a href="#L6">6</a> public import Mathlib.LinearAlgebra.TensorProduct.Basis</span>
+<span id="L7"><a href="#L7">7</a> </span>
+<span id="L8"><a href="#L8">8</a> @[expose] public section</span>
+<span id="L9"><a href="#L9">9</a> </span>
+<span id="L10"><a href="#L10">10</a> open Stafford38Challenge (WeylAlg PhaseVar)</span>
+<span id="L11"><a href="#L11">11</a> </span>
+<span id="L12"><a href="#L12">12</a> /-!</span>
+<span id="L13"><a href="#L13">13</a> # Filtered scalar lifting for the presented Weyl algebra</span>
+<span id="L14"><a href="#L14">14</a> </span>
+<span id="L15"><a href="#L15">15</a> This file isolates the filtered linear-algebra step which is not supplied by</span>
+<span id="L16"><a href="#L16">16</a> unfiltered PBW spanning.  The point is that an element of the intersection of</span>
+<span id="L17"><a href="#L17">17</a> two scalar-extended subspaces has a bounded source representative.  The proof</span>
+<span id="L18"><a href="#L18">18</a> uses the exact kernel statement for tensoring a quotient map; no target</span>
+<span id="L19"><a href="#L19">19</a> initial generators and no strictness assertion are used.</span>
+<span id="L20"><a href="#L20">20</a> </span>
+<span id="L21"><a href="#L21">21</a> The small finite-dimensional example at the end records the cancellation</span>
+<span id="L22"><a href="#L22">22</a> falsifier: an arbitrary high-degree representation need not be termwise</span>
+<span id="L23"><a href="#L23">23</a> bounded, even though a bounded representation exists.</span>
+<span id="L24"><a href="#L24">24</a> -/</span>
+<span id="L25"><a href="#L25">25</a> </span>
+<span id="L26"><a href="#L26">26</a> namespace Stafford38.Weyl.FilteredScalarLifting</span>
+<span id="L27"><a href="#L27">27</a> </span>
+<span id="L28"><a href="#L28">28</a> open scoped TensorProduct</span>
+<span id="L29"><a href="#L29">29</a> </span>
+<span id="L30"><a href="#L30">30</a> open Stafford</span>
+<span id="L31"><a href="#L31">31</a> open AlgebraicAnalysis</span>
+<span id="L32"><a href="#L32">32</a> open Stafford38.Characteristic</span>
+<span id="L33"><a href="#L33">33</a> open Stafford38.EulerSurjectivity</span>
+<span id="L34"><a href="#L34">34</a> open Stafford38.WeylIteratedEquivalence</span>
+<span id="L35"><a href="#L35">35</a> open Stafford38.WeylFiltration</span>
+<span id="L36"><a href="#L36">36</a> open Stafford38.WeylLeadingSymbol</span>
+<span id="L37"><a href="#L37">37</a> open Stafford38.WeylPBW</span>
+<span id="L38"><a href="#L38">38</a> open Stafford38.WeylUniversal</span>
+<span id="L39"><a href="#L39">39</a> open Stafford38.WeylEulerResidue</span>
+<span id="L40"><a href="#L40">40</a> open Stafford38.CharacteristicInitialIdeal</span>
+<span id="L41"><a href="#L41">41</a> open Stafford38.CharacteristicFilteredQuotient</span>
+<span id="L42"><a href="#L42">42</a> open Stafford38.Weyl.PresentedScalarExtension</span>
+<span id="L43"><a href="#L43">43</a> </span>
+<span id="L44"><a href="#L44">44</a> noncomputable section</span>
+<span id="L45"><a href="#L45">45</a> </span>
+<span id="L46"><a href="#L46">46</a> set_option maxHeartbeats 1000000</span>
+<span id="L47"><a href="#L47">47</a> set_option synthInstance.maxHeartbeats 100000</span>
+<span id="L48"><a href="#L48">48</a> </span>
+<span id="L49"><a href="#L49">49</a> universe u v</span>
+<span id="L50"><a href="#L50">50</a> </span>
+<span id="L51"><a href="#L51">51</a> variable {R S M : Type*}</span>
+<span id="L52"><a href="#L52">52</a> </span>
+<span id="L53"><a href="#L53">53</a> section RangeBaseChange</span>
+<span id="L54"><a href="#L54">54</a> </span>
+<span id="L55"><a href="#L55">55</a> variable [CommRing R] [CommRing S] [Algebra R S]</span>
+<span id="L56"><a href="#L56">56</a> variable [AddCommGroup M] [Module R M]</span>
+<span id="L57"><a href="#L57">57</a> </span>
+<span id="L58"><a href="#L58">58</a> /- The image of the tensor extension of a subtype is exactly the submodule</span>
+<span id="L59"><a href="#L59">59</a>    base-change defined by `Submodule.baseChange`. -/</span>
+<span id="L60"><a href="#L60">60</a> theorem range_baseChange_subtype (p : Submodule R M) :</span>
+<span id="L61"><a href="#L61">61</a>     LinearMap.range (p.subtype.baseChange S) = p.baseChange S :=</span>
+<span id="L62"><a href="#L62">62</a>   rfl</span>
+<span id="L63"><a href="#L63">63</a> </span>
+<span id="L64"><a href="#L64">64</a> end RangeBaseChange</span>
+<span id="L65"><a href="#L65">65</a> </span>
+<span id="L66"><a href="#L66">66</a> section FilteredIntersection</span>
+<span id="L67"><a href="#L67">67</a> </span>
+<span id="L68"><a href="#L68">68</a> variable [CommRing R] [CommRing S] [Algebra R S]</span>
+<span id="L69"><a href="#L69">69</a> variable [AddCommGroup M] [Module R M]</span>
+<span id="L70"><a href="#L70">70</a> </span>
+<span id="L71"><a href="#L71">71</a> example [SMulCommClass R S S] :</span>
+<span id="L72"><a href="#L72">72</a>     Module S (S ⊗[R] M) := by infer_instance</span>
+<span id="L73"><a href="#L73">73</a> </span>
+<span id="L74"><a href="#L74">74</a> theorem baseChange_mono [SMulCommClass R S S]</span>
+<span id="L75"><a href="#L75">75</a>     {p q : Submodule R M} (hpq : p ≤ q) :</span>
+<span id="L76"><a href="#L76">76</a>     p.baseChange S ≤ q.baseChange S := by</span>
+<span id="L77"><a href="#L77">77</a>   rw [Submodule.baseChange_eq_span, Submodule.baseChange_eq_span]</span>
+<span id="L78"><a href="#L78">78</a>   apply Submodule.span_le.mpr</span>
+<span id="L79"><a href="#L79">79</a>   intro z hz</span>
+<span id="L80"><a href="#L80">80</a>   rcases hz with ⟨m, hm, rfl⟩</span>
+<span id="L81"><a href="#L81">81</a>   exact Submodule.subset_span ⟨m, hpq hm, rfl⟩</span>
+<span id="L82"><a href="#L82">82</a> </span>
+<span id="L83"><a href="#L83">83</a> /-!</span>
+<span id="L84"><a href="#L84">84</a> Tensoring with a flat coefficient module preserves intersections of</span>
+<span id="L85"><a href="#L85">85</a> submodules.  The proof is deliberately phrased through the quotient map of</span>
+<span id="L86"><a href="#L86">86</a> `q`: the reverse inclusion is a kernel statement, not an appeal to an</span>
+<span id="L87"><a href="#L87">87</a> unfiltered spanning equality.</span>
+<span id="L88"><a href="#L88">88</a> -/</span>
+<span id="L89"><a href="#L89">89</a> theorem baseChange_inf_eq [SMulCommClass R S S]</span>
+<span id="L90"><a href="#L90">90</a>     [Module.Flat R S] (p q : Submodule R M) :</span>
+<span id="L91"><a href="#L91">91</a>     p.baseChange S ⊓ q.baseChange S = (p ⊓ q).baseChange S := by</span>
+<span id="L92"><a href="#L92">92</a>   apply le_antisymm</span>
+<span id="L93"><a href="#L93">93</a>   · intro z hz</span>
+<span id="L94"><a href="#L94">94</a>     let f : p →ₗ[R] M ⧸ q := q.mkQ.comp p.subtype</span>
+<span id="L95"><a href="#L95">95</a>     have hqzero :</span>
+<span id="L96"><a href="#L96">96</a>         TensorProduct.AlgebraTensorModule.lTensor S S q.mkQ z = 0 := by</span>
+<span id="L97"><a href="#L97">97</a>       have hzq := hz.2</span>
+<span id="L98"><a href="#L98">98</a>       rw [Submodule.baseChange_eq_span] at hzq</span>
+<span id="L99"><a href="#L99">99</a>       refine Submodule.span_induction ?_ ?_ ?_ ?_ hzq</span>
+<span id="L100"><a href="#L100">100</a>       · intro a ha</span>
+<span id="L101"><a href="#L101">101</a>         rcases ha with ⟨m, hm, rfl⟩</span>
+<span id="L102"><a href="#L102">102</a>         have hmker : m ∈ LinearMap.ker q.mkQ := by</span>
+<span id="L103"><a href="#L103">103</a>           rw [Submodule.ker_mkQ q]</span>
+<span id="L104"><a href="#L104">104</a>           exact hm</span>
+<span id="L105"><a href="#L105">105</a>         change (1 : S) ⊗ₜ[R] q.mkQ m = 0</span>
+<span id="L106"><a href="#L106">106</a>         rw [LinearMap.mem_ker.mp hmker]</span>
+<span id="L107"><a href="#L107">107</a>         simp</span>
+<span id="L108"><a href="#L108">108</a>       · simp</span>
+<span id="L109"><a href="#L109">109</a>       · intro a b _ _ ha hb</span>
+<span id="L110"><a href="#L110">110</a>         simpa only [map_add, ha, hb, add_zero] using rfl</span>
+<span id="L111"><a href="#L111">111</a>       · intro c a _ ha</span>
+<span id="L112"><a href="#L112">112</a>         simpa only [map_smul, ha, smul_zero] using rfl</span>
+<span id="L113"><a href="#L113">113</a>     have hpRange : z ∈ LinearMap.range (p.subtype.baseChange S) := by</span>
+<span id="L114"><a href="#L114">114</a>       rw [range_baseChange_subtype p]</span>
+<span id="L115"><a href="#L115">115</a>       exact hz.1</span>
+<span id="L116"><a href="#L116">116</a>     obtain ⟨y, hy⟩ := hpRange</span>
+<span id="L117"><a href="#L117">117</a>     change TensorProduct.AlgebraTensorModule.lTensor S S p.subtype y = z at hy</span>
+<span id="L118"><a href="#L118">118</a>     have hyker : y ∈ LinearMap.ker</span>
+<span id="L119"><a href="#L119">119</a>         (TensorProduct.AlgebraTensorModule.lTensor S S f) := by</span>
+<span id="L120"><a href="#L120">120</a>       apply LinearMap.mem_ker.mpr</span>
+<span id="L121"><a href="#L121">121</a>       calc</span>
+<span id="L122"><a href="#L122">122</a>         TensorProduct.AlgebraTensorModule.lTensor S S f y =</span>
+<span id="L123"><a href="#L123">123</a>             TensorProduct.AlgebraTensorModule.lTensor S S q.mkQ</span>
+<span id="L124"><a href="#L124">124</a>               (TensorProduct.AlgebraTensorModule.lTensor S S p.subtype y) := by</span>
+<span id="L125"><a href="#L125">125</a>                 rw [TensorProduct.AlgebraTensorModule.lTensor_comp]</span>
+<span id="L126"><a href="#L126">126</a>                 rfl</span>
+<span id="L127"><a href="#L127">127</a>         _ = TensorProduct.AlgebraTensorModule.lTensor S S q.mkQ z := by</span>
+<span id="L128"><a href="#L128">128</a>               rw [hy]</span>
+<span id="L129"><a href="#L129">129</a>         _ = 0 := hqzero</span>
+<span id="L130"><a href="#L130">130</a>     have hyspan : y ∈</span>
+<span id="L131"><a href="#L131">131</a>         LinearMap.range (TensorProduct.AlgebraTensorModule.lTensor S S</span>
+<span id="L132"><a href="#L132">132</a>           (LinearMap.ker f).subtype) := by</span>
+<span id="L133"><a href="#L133">133</a>       rw [← Module.Flat.ker_lTensor_eq (S := S) (M := S) f]</span>
+<span id="L134"><a href="#L134">134</a>       exact hyker</span>
+<span id="L135"><a href="#L135">135</a>     obtain ⟨v, hv⟩ := hyspan</span>
+<span id="L136"><a href="#L136">136</a>     change (LinearMap.ker f).subtype.baseChange S v = y at hv</span>
+<span id="L137"><a href="#L137">137</a>     let g : LinearMap.ker f →ₗ[R] ↥(p ⊓ q) :=</span>
+<span id="L138"><a href="#L138">138</a>       { toFun := fun u =&gt;</span>
+<span id="L139"><a href="#L139">139</a>           ⟨(u : M), ⟨u.1.property, by</span>
+<span id="L140"><a href="#L140">140</a>             have hu : (u : M) ∈ LinearMap.ker q.mkQ := by</span>
+<span id="L141"><a href="#L141">141</a>               change q.mkQ (u : M) = 0</span>
+<span id="L142"><a href="#L142">142</a>               exact u.property</span>
+<span id="L143"><a href="#L143">143</a>             exact Eq.mp (congrArg (fun r : Submodule R M =&gt; (u : M) ∈ r)</span>
+<span id="L144"><a href="#L144">144</a>               (Submodule.ker_mkQ q)) hu⟩⟩</span>
+<span id="L145"><a href="#L145">145</a>         map_add' := by</span>
+<span id="L146"><a href="#L146">146</a>           intro u v</span>
+<span id="L147"><a href="#L147">147</a>           ext</span>
+<span id="L148"><a href="#L148">148</a>           simp</span>
+<span id="L149"><a href="#L149">149</a>         map_smul' := by</span>
+<span id="L150"><a href="#L150">150</a>           intro a u</span>
+<span id="L151"><a href="#L151">151</a>           ext</span>
+<span id="L152"><a href="#L152">152</a>           simp }</span>
+<span id="L153"><a href="#L153">153</a>     have hcomp :</span>
+<span id="L154"><a href="#L154">154</a>         p.subtype.comp (LinearMap.ker f).subtype =</span>
+<span id="L155"><a href="#L155">155</a>           (p ⊓ q).subtype.comp g := by</span>
+<span id="L156"><a href="#L156">156</a>       ext u</span>
+<span id="L157"><a href="#L157">157</a>       rfl</span>
+<span id="L158"><a href="#L158">158</a>     have hz' : z = (p ⊓ q).subtype.baseChange S</span>
+<span id="L159"><a href="#L159">159</a>         (g.baseChange S v) := by</span>
+<span id="L160"><a href="#L160">160</a>       calc</span>
+<span id="L161"><a href="#L161">161</a>         z = p.subtype.baseChange S y := hy.symm</span>
+<span id="L162"><a href="#L162">162</a>         _ = p.subtype.baseChange S</span>
+<span id="L163"><a href="#L163">163</a>             ((LinearMap.ker f).subtype.baseChange S v) := by rw [hv]</span>
+<span id="L164"><a href="#L164">164</a>         _ = (p.subtype.comp (LinearMap.ker f).subtype).baseChange S v := by</span>
+<span id="L165"><a href="#L165">165</a>               rw [LinearMap.baseChange_comp]</span>
+<span id="L166"><a href="#L166">166</a>               rfl</span>
+<span id="L167"><a href="#L167">167</a>         _ = ((p ⊓ q).subtype.comp g).baseChange S v := by rw [hcomp]</span>
+<span id="L168"><a href="#L168">168</a>         _ = (p ⊓ q).subtype.baseChange S (g.baseChange S v) := by</span>
+<span id="L169"><a href="#L169">169</a>               rw [LinearMap.baseChange_comp]</span>
+<span id="L170"><a href="#L170">170</a>               rfl</span>
+<span id="L171"><a href="#L171">171</a>     rw [hz']</span>
+<span id="L172"><a href="#L172">172</a>     rw [← range_baseChange_subtype (p ⊓ q)]</span>
+<span id="L173"><a href="#L173">173</a>     exact ⟨g.baseChange S v, rfl⟩</span>
+<span id="L174"><a href="#L174">174</a>   · intro z hz</span>
+<span id="L175"><a href="#L175">175</a>     exact ⟨baseChange_mono inf_le_left hz,</span>
+<span id="L176"><a href="#L176">176</a>       baseChange_mono inf_le_right hz⟩</span>
+<span id="L177"><a href="#L177">177</a> </span>
+<span id="L178"><a href="#L178">178</a> end FilteredIntersection</span>
+<span id="L179"><a href="#L179">179</a> </span>
+<span id="L180"><a href="#L180">180</a> section WeylTensorBridge</span>
+<span id="L181"><a href="#L181">181</a> </span>
+<span id="L182"><a href="#L182">182</a> variable {k : Type u} {K : Type v}</span>
+<span id="L183"><a href="#L183">183</a> variable [Field k] [Field K] [Algebra k K]</span>
+<span id="L184"><a href="#L184">184</a> </span>
+<span id="L185"><a href="#L185">185</a> /-!</span>
+<span id="L186"><a href="#L186">186</a> The two PBW bases identify the ordinary tensor base-change with the target</span>
+<span id="L187"><a href="#L187">187</a> presented Weyl algebra.  This is the concrete bridge that turns the abstract</span>
+<span id="L188"><a href="#L188">188</a> intersection theorem above into a bounded PBW decomposition.</span>
+<span id="L189"><a href="#L189">189</a> -/</span>
+<span id="L190"><a href="#L190">190</a> def pbwTensorEquiv (n : Nat) :</span>
+<span id="L191"><a href="#L191">191</a>     (K ⊗[k] WeylAlg k n) ≃ₗ[K] WeylAlg K n :=</span>
+<span id="L192"><a href="#L192">192</a>   (presentedPBWBasis k n).baseChange K |&gt;.equiv</span>
+<span id="L193"><a href="#L193">193</a>     (presentedPBWBasis K n) (Equiv.refl (PhaseVar n →₀ ℕ))</span>
+<span id="L194"><a href="#L194">194</a> </span>
+<span id="L195"><a href="#L195">195</a> theorem pbwTensorEquiv_tmul_one (n : Nat) (z : WeylAlg k n) :</span>
+<span id="L196"><a href="#L196">196</a>     pbwTensorEquiv (k := k) (K := K) n (1 ⊗ₜ[k] z) =</span>
+<span id="L197"><a href="#L197">197</a>       presentedWeylScalarExtension (k := k) (K := K) n z := by</span>
+<span id="L198"><a href="#L198">198</a>   let f : WeylAlg k n →ₗ[k] WeylAlg K n :=</span>
+<span id="L199"><a href="#L199">199</a>     (pbwTensorEquiv (k := k) (K := K) n).toLinearMap.restrictScalars k |&gt;.comp</span>
+<span id="L200"><a href="#L200">200</a>       (TensorProduct.mk k K (WeylAlg k n) 1)</span>
+<span id="L201"><a href="#L201">201</a>   have hf : f =</span>
+<span id="L202"><a href="#L202">202</a>       (presentedWeylScalarExtension (k := k) (K := K) n).toLinearMap := by</span>
+<span id="L203"><a href="#L203">203</a>     apply Module.Basis.ext (presentedPBWBasis k n)</span>
+<span id="L204"><a href="#L204">204</a>     intro m</span>
+<span id="L205"><a href="#L205">205</a>     dsimp [f]</span>
+<span id="L206"><a href="#L206">206</a>     change pbwTensorEquiv (k := k) (K := K) n</span>
+<span id="L207"><a href="#L207">207</a>         (1 ⊗ₜ[k] presentedPBWBasis k n m) =</span>
+<span id="L208"><a href="#L208">208</a>       presentedWeylScalarExtension (k := k) (K := K) n</span>
+<span id="L209"><a href="#L209">209</a>         (presentedPBWBasis k n m)</span>
+<span id="L210"><a href="#L210">210</a>     rw [← Module.Basis.baseChange_apply, pbwTensorEquiv, Module.Basis.equiv_apply,</span>
+<span id="L211"><a href="#L211">211</a>       presentedWeylScalarExtension_basis]</span>
+<span id="L212"><a href="#L212">212</a>     rfl</span>
+<span id="L213"><a href="#L213">213</a>   exact DFunLike.congr_fun hf z</span>
+<span id="L214"><a href="#L214">214</a> </span>
+<span id="L215"><a href="#L215">215</a> theorem pbwTensorEquiv_map_orderPiece (n L : Nat) :</span>
+<span id="L216"><a href="#L216">216</a>     Submodule.map (pbwTensorEquiv (k := k) (K := K) n).toLinearMap</span>
+<span id="L217"><a href="#L217">217</a>         ((orderPiece k n L).baseChange K) =</span>
+<span id="L218"><a href="#L218">218</a>       orderPiece K n L := by</span>
+<span id="L219"><a href="#L219">219</a>   rw [orderPiece, presentedWeightPiece_eq_span,</span>
+<span id="L220"><a href="#L220">220</a>     Submodule.baseChange_span, orderPiece,</span>
+<span id="L221"><a href="#L221">221</a>     presentedWeightPiece_eq_span, Submodule.map_span]</span>
+<span id="L222"><a href="#L222">222</a>   congr 1</span>
+<span id="L223"><a href="#L223">223</a>   ext z</span>
+<span id="L224"><a href="#L224">224</a>   constructor</span>
+<span id="L225"><a href="#L225">225</a>   · rintro ⟨y, ⟨a, ha, rfl⟩, rfl⟩</span>
+<span id="L226"><a href="#L226">226</a>     rcases ha with ⟨m, hm, rfl⟩</span>
+<span id="L227"><a href="#L227">227</a>     refine ⟨m, hm, ?_⟩</span>
+<span id="L228"><a href="#L228">228</a>     calc</span>
+<span id="L229"><a href="#L229">229</a>       (pbwTensorEquiv (k := k) (K := K) n)</span>
+<span id="L230"><a href="#L230">230</a>           ((TensorProduct.mk k K (WeylAlg k n) 1)</span>
+<span id="L231"><a href="#L231">231</a>             (presentedPBWBasis k n m)) =</span>
+<span id="L232"><a href="#L232">232</a>           pbwTensorEquiv (k := k) (K := K) n</span>
+<span id="L233"><a href="#L233">233</a>             (1 ⊗ₜ[k] presentedPBWBasis k n m) := rfl</span>
+<span id="L234"><a href="#L234">234</a>       _ = presentedWeylScalarExtension (k := k) (K := K) n</span>
+<span id="L235"><a href="#L235">235</a>           (presentedPBWBasis k n m) :=</span>
+<span id="L236"><a href="#L236">236</a>         pbwTensorEquiv_tmul_one (k := k) (K := K) n</span>
+<span id="L237"><a href="#L237">237</a>           (presentedPBWBasis k n m)</span>
+<span id="L238"><a href="#L238">238</a>       _ = presentedPBWBasis K n m :=</span>
+<span id="L239"><a href="#L239">239</a>         presentedWeylScalarExtension_basis (k := k) (K := K) n m</span>
+<span id="L240"><a href="#L240">240</a>   · rintro ⟨m, hm, rfl⟩</span>
+<span id="L241"><a href="#L241">241</a>     refine ⟨1 ⊗ₜ[k] presentedPBWBasis k n m,</span>
+<span id="L242"><a href="#L242">242</a>       ⟨presentedPBWBasis k n m, ⟨m, hm, rfl⟩, rfl⟩, ?_⟩</span>
+<span id="L243"><a href="#L243">243</a>     calc</span>
+<span id="L244"><a href="#L244">244</a>       pbwTensorEquiv (k := k) (K := K) n</span>
+<span id="L245"><a href="#L245">245</a>           (1 ⊗ₜ[k] presentedPBWBasis k n m) =</span>
+<span id="L246"><a href="#L246">246</a>           presentedWeylScalarExtension (k := k) (K := K) n</span>
+<span id="L247"><a href="#L247">247</a>             (presentedPBWBasis k n m) :=</span>
+<span id="L248"><a href="#L248">248</a>         pbwTensorEquiv_tmul_one (k := k) (K := K) n</span>
+<span id="L249"><a href="#L249">249</a>           (presentedPBWBasis k n m)</span>
+<span id="L250"><a href="#L250">250</a>       _ = presentedPBWBasis K n m :=</span>
+<span id="L251"><a href="#L251">251</a>         presentedWeylScalarExtension_basis (k := k) (K := K) n m</span>
+<span id="L252"><a href="#L252">252</a> </span>
+<span id="L253"><a href="#L253">253</a> theorem pbwTensorEquiv_map_baseChange (n : Nat)</span>
+<span id="L254"><a href="#L254">254</a>     (J : Submodule k (WeylAlg k n)) :</span>
+<span id="L255"><a href="#L255">255</a>     Submodule.map (pbwTensorEquiv (k := k) (K := K) n).toLinearMap</span>
+<span id="L256"><a href="#L256">256</a>         (J.baseChange K) =</span>
+<span id="L257"><a href="#L257">257</a>       Submodule.span K</span>
+<span id="L258"><a href="#L258">258</a>         (presentedWeylScalarExtension (k := k) (K := K) n ''</span>
+<span id="L259"><a href="#L259">259</a>           (J : Set (WeylAlg k n))) := by</span>
+<span id="L260"><a href="#L260">260</a>   rw [Submodule.baseChange_eq_span, Submodule.map_span]</span>
+<span id="L261"><a href="#L261">261</a>   congr 1</span>
+<span id="L262"><a href="#L262">262</a>   ext z</span>
+<span id="L263"><a href="#L263">263</a>   constructor</span>
+<span id="L264"><a href="#L264">264</a>   · rintro ⟨y, ⟨m, hm, rfl⟩, rfl⟩</span>
+<span id="L265"><a href="#L265">265</a>     refine ⟨m, hm, ?_⟩</span>
+<span id="L266"><a href="#L266">266</a>     exact (pbwTensorEquiv_tmul_one (k := k) (K := K) n m).symm</span>
+<span id="L267"><a href="#L267">267</a>   · rintro ⟨m, hm, rfl⟩</span>
+<span id="L268"><a href="#L268">268</a>     refine ⟨1 ⊗ₜ[k] m, ⟨m, hm, rfl⟩, ?_⟩</span>
+<span id="L269"><a href="#L269">269</a>     exact pbwTensorEquiv_tmul_one (k := k) (K := K) n m</span>
+<span id="L270"><a href="#L270">270</a> </span>
+<span id="L271"><a href="#L271">271</a> theorem pbwTensorEquiv_map_rightIdeal (n : Nat)</span>
+<span id="L272"><a href="#L272">272</a>     (I : RightIdeal (WeylAlg k n)) :</span>
+<span id="L273"><a href="#L273">273</a>     Submodule.map (pbwTensorEquiv (k := k) (K := K) n).toLinearMap</span>
+<span id="L274"><a href="#L274">274</a>         ((rightIdealKSubmodule k I).baseChange K) =</span>
+<span id="L275"><a href="#L275">275</a>       scalarImageRightIdealSpan (k := k) (K := K) n I := by</span>
+<span id="L276"><a href="#L276">276</a>   rw [Submodule.baseChange_eq_span, Submodule.map_span,</span>
+<span id="L277"><a href="#L277">277</a>     scalarImageRightIdealSpan]</span>
+<span id="L278"><a href="#L278">278</a>   congr 1</span>
+<span id="L279"><a href="#L279">279</a>   ext z</span>
+<span id="L280"><a href="#L280">280</a>   constructor</span>
+<span id="L281"><a href="#L281">281</a>   · rintro ⟨y, ⟨m, hm, rfl⟩, rfl⟩</span>
+<span id="L282"><a href="#L282">282</a>     refine ⟨m, hm, ?_⟩</span>
+<span id="L283"><a href="#L283">283</a>     exact (pbwTensorEquiv_tmul_one (k := k) (K := K) n m).symm</span>
+<span id="L284"><a href="#L284">284</a>   · rintro ⟨m, hm, rfl⟩</span>
+<span id="L285"><a href="#L285">285</a>     refine ⟨1 ⊗ₜ[k] m, ⟨m, hm, rfl⟩, ?_⟩</span>
+<span id="L286"><a href="#L286">286</a>     exact pbwTensorEquiv_tmul_one (k := k) (K := K) n m</span>
+<span id="L287"><a href="#L287">287</a> </span>
+<span id="L288"><a href="#L288">288</a> theorem pbwTensorEquiv_map_canonicalRightIdeal</span>
+<span id="L289"><a href="#L289">289</a>     (n N : Nat) (d : WeylAlg k (n + 1)) :</span>
+<span id="L290"><a href="#L290">290</a>     Submodule.map (pbwTensorEquiv (k := k) (K := K) (n + 1)).toLinearMap</span>
+<span id="L291"><a href="#L291">291</a>         ((rightIdealKSubmodule k</span>
+<span id="L292"><a href="#L292">292</a>           (canonicalRightIdeal (presentedCoordinate k n) d N)).baseChange K) =</span>
+<span id="L293"><a href="#L293">293</a>       rightIdealKSubmodule K</span>
+<span id="L294"><a href="#L294">294</a>         (canonicalRightIdeal (presentedCoordinate K n)</span>
+<span id="L295"><a href="#L295">295</a>           (presentedWeylScalarExtension (k := k) (K := K) (n + 1) d) N) := by</span>
+<span id="L296"><a href="#L296">296</a>   rw [pbwTensorEquiv_map_rightIdeal]</span>
+<span id="L297"><a href="#L297">297</a>   apply le_antisymm</span>
+<span id="L298"><a href="#L298">298</a>   · apply Submodule.span_le.mpr</span>
+<span id="L299"><a href="#L299">299</a>     rintro z ⟨a, ha, rfl⟩</span>
+<span id="L300"><a href="#L300">300</a>     exact presentedWeylScalarExtension_mem_canonicalRightIdeal</span>
+<span id="L301"><a href="#L301">301</a>       (k := k) (K := K) n N ha</span>
+<span id="L302"><a href="#L302">302</a>   · intro z hz</span>
+<span id="L303"><a href="#L303">303</a>     exact target_canonicalRightIdeal_le_scalarImageRightIdealSpan</span>
+<span id="L304"><a href="#L304">304</a>       (k := k) (K := K) n N d z hz</span>
+<span id="L305"><a href="#L305">305</a> </span>
+<span id="L306"><a href="#L306">306</a> theorem pbwTensorEquiv_map_canonicalRightIdeal_inf_orderPiece</span>
+<span id="L307"><a href="#L307">307</a>     (n N L : Nat) (d : WeylAlg k (n + 1)) :</span>
+<span id="L308"><a href="#L308">308</a>     Submodule.map (pbwTensorEquiv (k := k) (K := K) (n + 1)).toLinearMap</span>
+<span id="L309"><a href="#L309">309</a>         ((rightIdealKSubmodule k</span>
+<span id="L310"><a href="#L310">310</a>           (canonicalRightIdeal (presentedCoordinate k n) d N) ⊓</span>
+<span id="L311"><a href="#L311">311</a>           orderPiece k (n + 1) L).baseChange K) =</span>
+<span id="L312"><a href="#L312">312</a>       rightIdealKSubmodule K</span>
+<span id="L313"><a href="#L313">313</a>         (canonicalRightIdeal (presentedCoordinate K n)</span>
+<span id="L314"><a href="#L314">314</a>           (presentedWeylScalarExtension (k := k) (K := K) (n + 1) d) N) ⊓</span>
+<span id="L315"><a href="#L315">315</a>         orderPiece K (n + 1) L := by</span>
+<span id="L316"><a href="#L316">316</a>   rw [← baseChange_inf_eq</span>
+<span id="L317"><a href="#L317">317</a>       (R := k) (S := K)</span>
+<span id="L318"><a href="#L318">318</a>       (rightIdealKSubmodule k</span>
+<span id="L319"><a href="#L319">319</a>         (canonicalRightIdeal (presentedCoordinate k n) d N))</span>
+<span id="L320"><a href="#L320">320</a>       (orderPiece k (n + 1) L)]</span>
+<span id="L321"><a href="#L321">321</a>   rw [Submodule.map_inf</span>
+<span id="L322"><a href="#L322">322</a>       (pbwTensorEquiv (k := k) (K := K) (n + 1)).toLinearMap</span>
+<span id="L323"><a href="#L323">323</a>       (pbwTensorEquiv (k := k) (K := K) (n + 1)).injective,</span>
+<span id="L324"><a href="#L324">324</a>     pbwTensorEquiv_map_canonicalRightIdeal,</span>
+<span id="L325"><a href="#L325">325</a>     pbwTensorEquiv_map_orderPiece]</span>
+<span id="L326"><a href="#L326">326</a> </span>
+<span id="L327"><a href="#L327">327</a> theorem target_canonicalRightIdeal_orderPiece_mem_source_span</span>
+<span id="L328"><a href="#L328">328</a>     (n N L : Nat) (d : WeylAlg k (n + 1))</span>
+<span id="L329"><a href="#L329">329</a>     {z : WeylAlg K (n + 1)}</span>
+<span id="L330"><a href="#L330">330</a>     (hzIdeal : z ∈ canonicalRightIdeal (presentedCoordinate K n)</span>
+<span id="L331"><a href="#L331">331</a>       (presentedWeylScalarExtension (k := k) (K := K) (n + 1) d) N)</span>
+<span id="L332"><a href="#L332">332</a>     (hzOrder : z ∈ orderPiece K (n + 1) L) :</span>
+<span id="L333"><a href="#L333">333</a>     z ∈ Submodule.span K</span>
+<span id="L334"><a href="#L334">334</a>       (presentedWeylScalarExtension (k := k) (K := K) (n + 1) ''</span>
+<span id="L335"><a href="#L335">335</a>     ((rightIdealKSubmodule k</span>
+<span id="L336"><a href="#L336">336</a>           (canonicalRightIdeal (presentedCoordinate k n) d N) ⊓</span>
+<span id="L337"><a href="#L337">337</a>           orderPiece k (n + 1) L) :</span>
+<span id="L338"><a href="#L338">338</a>           Set (WeylAlg k (n + 1)))) := by</span>
+<span id="L339"><a href="#L339">339</a>   let J : Submodule k (WeylAlg k (n + 1)) :=</span>
+<span id="L340"><a href="#L340">340</a>     rightIdealKSubmodule k</span>
+<span id="L341"><a href="#L341">341</a>       (canonicalRightIdeal (presentedCoordinate k n) d N) ⊓</span>
+<span id="L342"><a href="#L342">342</a>       orderPiece k (n + 1) L</span>
+<span id="L343"><a href="#L343">343</a>   change z ∈ Submodule.span K</span>
+<span id="L344"><a href="#L344">344</a>     (presentedWeylScalarExtension (k := k) (K := K) (n + 1) ''</span>
+<span id="L345"><a href="#L345">345</a>       (J : Set (WeylAlg k (n + 1))))</span>
+<span id="L346"><a href="#L346">346</a>   rw [← pbwTensorEquiv_map_baseChange (k := k) (K := K) (n + 1) J]</span>
+<span id="L347"><a href="#L347">347</a>   rw [pbwTensorEquiv_map_canonicalRightIdeal_inf_orderPiece]</span>
+<span id="L348"><a href="#L348">348</a>   exact ⟨hzIdeal, hzOrder⟩</span>
+<span id="L349"><a href="#L349">349</a> </span>
+<span id="L350"><a href="#L350">350</a> theorem target_canonicalRightIdeal_orderPiece_exists_fin_decomposition</span>
+<span id="L351"><a href="#L351">351</a>     (n N L : Nat) (d : WeylAlg k (n + 1))</span>
+<span id="L352"><a href="#L352">352</a>     {z : WeylAlg K (n + 1)}</span>
+<span id="L353"><a href="#L353">353</a>     (hzIdeal : z ∈ canonicalRightIdeal (presentedCoordinate K n)</span>
+<span id="L354"><a href="#L354">354</a>       (presentedWeylScalarExtension (k := k) (K := K) (n + 1) d) N)</span>
+<span id="L355"><a href="#L355">355</a>     (hzOrder : z ∈ orderPiece K (n + 1) L) :</span>
+<span id="L356"><a href="#L356">356</a>     ∃ (r : Nat) (c : Fin r → K)</span>
+<span id="L357"><a href="#L357">357</a>       (w : Fin r →</span>
+<span id="L358"><a href="#L358">358</a>         ↥(rightIdealKSubmodule k</span>
+<span id="L359"><a href="#L359">359</a>           (canonicalRightIdeal (presentedCoordinate k n) d N) ⊓</span>
+<span id="L360"><a href="#L360">360</a>           orderPiece k (n + 1) L)),</span>
+<span id="L361"><a href="#L361">361</a>       ∑ i, c i •</span>
+<span id="L362"><a href="#L362">362</a>         presentedWeylScalarExtension (k := k) (K := K) (n + 1)</span>
+<span id="L363"><a href="#L363">363</a>           (w i : WeylAlg k (n + 1)) = z := by</span>
+<span id="L364"><a href="#L364">364</a>   classical</span>
+<span id="L365"><a href="#L365">365</a>   have hzSpan := target_canonicalRightIdeal_orderPiece_mem_source_span</span>
+<span id="L366"><a href="#L366">366</a>     (k := k) (K := K) n N L d hzIdeal hzOrder</span>
+<span id="L367"><a href="#L367">367</a>   rcases (Submodule.mem_span_set').mp hzSpan with ⟨r, c, g, hg⟩</span>
+<span id="L368"><a href="#L368">368</a>   let J : Submodule k (WeylAlg k (n + 1)) :=</span>
+<span id="L369"><a href="#L369">369</a>     rightIdealKSubmodule k</span>
+<span id="L370"><a href="#L370">370</a>       (canonicalRightIdeal (presentedCoordinate k n) d N) ⊓</span>
+<span id="L371"><a href="#L371">371</a>       orderPiece k (n + 1) L</span>
+<span id="L372"><a href="#L372">372</a>   let w : Fin r → J := fun i =&gt;</span>
+<span id="L373"><a href="#L373">373</a>     ⟨Classical.choose (g i).property,</span>
+<span id="L374"><a href="#L374">374</a>       (Classical.choose_spec (g i).property).1⟩</span>
+<span id="L375"><a href="#L375">375</a>   have hw (i : Fin r) :</span>
+<span id="L376"><a href="#L376">376</a>       presentedWeylScalarExtension (k := k) (K := K) (n + 1)</span>
+<span id="L377"><a href="#L377">377</a>           (w i : WeylAlg k (n + 1)) = (g i : WeylAlg K (n + 1)) :=</span>
+<span id="L378"><a href="#L378">378</a>     (Classical.choose_spec (g i).property).2</span>
+<span id="L379"><a href="#L379">379</a>   refine ⟨r, c, w, ?_⟩</span>
+<span id="L380"><a href="#L380">380</a>   calc</span>
+<span id="L381"><a href="#L381">381</a>     ∑ i, c i • presentedWeylScalarExtension (k := k) (K := K) (n + 1)</span>
+<span id="L382"><a href="#L382">382</a>         (w i : WeylAlg k (n + 1)) =</span>
+<span id="L383"><a href="#L383">383</a>         ∑ i, c i • (g i : WeylAlg K (n + 1)) := by</span>
+<span id="L384"><a href="#L384">384</a>           apply Finset.sum_congr rfl</span>
+<span id="L385"><a href="#L385">385</a>           intro i hi</span>
+<span id="L386"><a href="#L386">386</a>           rw [hw i]</span>
+<span id="L387"><a href="#L387">387</a>     _ = z := hg</span>
+<span id="L388"><a href="#L388">388</a> </span>
+<span id="L389"><a href="#L389">389</a> theorem target_orderInitialIdeal_le_map_source_orderInitialIdeal</span>
+<span id="L390"><a href="#L390">390</a>     (n N : Nat) (d : WeylAlg k (n + 1)) :</span>
+<span id="L391"><a href="#L391">391</a>     orderInitialIdeal K</span>
+<span id="L392"><a href="#L392">392</a>         (canonicalRightIdeal (presentedCoordinate K n)</span>
+<span id="L393"><a href="#L393">393</a>           (presentedWeylScalarExtension (k := k) (K := K) (n + 1) d) N) ≤</span>
+<span id="L394"><a href="#L394">394</a>       (orderInitialIdeal k</span>
+<span id="L395"><a href="#L395">395</a>           (canonicalRightIdeal (presentedCoordinate k n) d N)).map</span>
+<span id="L396"><a href="#L396">396</a>         (symbolScalarExtension (k := k) (K := K) (n + 1)).toRingHom := by</span>
+<span id="L397"><a href="#L397">397</a>   apply Ideal.span_le.mpr</span>
+<span id="L398"><a href="#L398">398</a>   intro P hP</span>
+<span id="L399"><a href="#L399">399</a>   rcases hP with ⟨L, z, hzOrder, hzIdeal, rfl⟩</span>
+<span id="L400"><a href="#L400">400</a>   let I : RightIdeal (WeylAlg k (n + 1)) :=</span>
+<span id="L401"><a href="#L401">401</a>     canonicalRightIdeal (presentedCoordinate k n) d N</span>
+<span id="L402"><a href="#L402">402</a>   let IK : RightIdeal (WeylAlg K (n + 1)) :=</span>
+<span id="L403"><a href="#L403">403</a>     canonicalRightIdeal (presentedCoordinate K n)</span>
+<span id="L404"><a href="#L404">404</a>       (presentedWeylScalarExtension (k := k) (K := K) (n + 1) d) N</span>
+<span id="L405"><a href="#L405">405</a>   let J : Submodule k (WeylAlg k (n + 1)) :=</span>
+<span id="L406"><a href="#L406">406</a>     rightIdealKSubmodule k I ⊓ orderPiece k (n + 1) L</span>
+<span id="L407"><a href="#L407">407</a>   have hzMap : z ∈ Submodule.map</span>
+<span id="L408"><a href="#L408">408</a>       (pbwTensorEquiv (k := k) (K := K) (n + 1)).toLinearMap</span>
+<span id="L409"><a href="#L409">409</a>         (J.baseChange K) := by</span>
+<span id="L410"><a href="#L410">410</a>     change z ∈ Submodule.map</span>
+<span id="L411"><a href="#L411">411</a>       (pbwTensorEquiv (k := k) (K := K) (n + 1)).toLinearMap</span>
+<span id="L412"><a href="#L412">412</a>         ((rightIdealKSubmodule k</span>
+<span id="L413"><a href="#L413">413</a>           (canonicalRightIdeal (presentedCoordinate k n) d N) ⊓</span>
+<span id="L414"><a href="#L414">414</a>           orderPiece k (n + 1) L).baseChange K)</span>
+<span id="L415"><a href="#L415">415</a>     rw [pbwTensorEquiv_map_canonicalRightIdeal_inf_orderPiece]</span>
+<span id="L416"><a href="#L416">416</a>     exact ⟨hzIdeal, hzOrder⟩</span>
+<span id="L417"><a href="#L417">417</a>   have hzSpan : z ∈ Submodule.span K</span>
+<span id="L418"><a href="#L418">418</a>       (presentedWeylScalarExtension (k := k) (K := K) (n + 1) ''</span>
+<span id="L419"><a href="#L419">419</a>         (J : Set (WeylAlg k (n + 1)))) := by</span>
+<span id="L420"><a href="#L420">420</a>     rw [← pbwTensorEquiv_map_baseChange (k := k) (K := K) (n + 1) J]</span>
+<span id="L421"><a href="#L421">421</a>     exact hzMap</span>
+<span id="L422"><a href="#L422">422</a>   let M : Ideal (SymbolRing K (n + 1)) :=</span>
+<span id="L423"><a href="#L423">423</a>     (orderInitialIdeal k I).map</span>
+<span id="L424"><a href="#L424">424</a>       (symbolScalarExtension (k := k) (K := K) (n + 1)).toRingHom</span>
+<span id="L425"><a href="#L425">425</a>   refine Submodule.span_induction ?_ ?_ ?_ ?_ hzSpan</span>
+<span id="L426"><a href="#L426">426</a>   · intro a ha</span>
+<span id="L427"><a href="#L427">427</a>     rcases ha with ⟨w, hw, rfl⟩</span>
+<span id="L428"><a href="#L428">428</a>     have hwOrder : w ∈ orderPiece k (n + 1) L := hw.2</span>
+<span id="L429"><a href="#L429">429</a>     have hwIdeal : w ∈ I := hw.1</span>
+<span id="L430"><a href="#L430">430</a>     have hsource : presentedPrincipalComponent k orderWeight L w ∈</span>
+<span id="L431"><a href="#L431">431</a>         orderInitialIdeal k I := by</span>
+<span id="L432"><a href="#L432">432</a>       exact orderPrincipalComponent_mem_initialIdeal k I w hwOrder hwIdeal</span>
+<span id="L433"><a href="#L433">433</a>     have hmap : symbolScalarExtension (k := k) (K := K) (n + 1)</span>
+<span id="L434"><a href="#L434">434</a>           (presentedPrincipalComponent k orderWeight L w) ∈ M := by</span>
+<span id="L435"><a href="#L435">435</a>       exact Ideal.mem_map_of_mem _ hsource</span>
+<span id="L436"><a href="#L436">436</a>     change presentedPrincipalComponent K orderWeight L</span>
+<span id="L437"><a href="#L437">437</a>       (presentedWeylScalarExtension (k := k) (K := K) (n + 1) w) ∈ M</span>
+<span id="L438"><a href="#L438">438</a>     rw [← presentedWeylScalarExtension_principalComponent</span>
+<span id="L439"><a href="#L439">439</a>       (k := k) (K := K) (n + 1) orderWeight L w]</span>
+<span id="L440"><a href="#L440">440</a>     exact hmap</span>
+<span id="L441"><a href="#L441">441</a>   · simpa only [map_zero, SetLike.mem_coe] using M.zero_mem</span>
+<span id="L442"><a href="#L442">442</a>   · intro a b _ _ ha hb</span>
+<span id="L443"><a href="#L443">443</a>     simpa only [map_add, SetLike.mem_coe] using</span>
+<span id="L444"><a href="#L444">444</a>       M.add_mem (SetLike.mem_coe.mp ha) (SetLike.mem_coe.mp hb)</span>
+<span id="L445"><a href="#L445">445</a>   · intro c a _ ha</span>
+<span id="L446"><a href="#L446">446</a>     rw [map_smul, Algebra.smul_def]</span>
+<span id="L447"><a href="#L447">447</a>     exact Ideal.mul_mem_left M _ (SetLike.mem_coe.mp ha)</span>
+<span id="L448"><a href="#L448">448</a> </span>
+<span id="L449"><a href="#L449">449</a> /-- Paper-facing equality: symbols of the canonical right ideal commute</span>
+<span id="L450"><a href="#L450">450</a> with field extension. Both filtered inclusions have already been proved. -/</span>
+<span id="L451"><a href="#L451">451</a> theorem presentedWeylScalarExtension_map_orderInitialIdeal_eq</span>
+<span id="L452"><a href="#L452">452</a>     (n N : Nat) (d : WeylAlg k (n + 1)) :</span>
+<span id="L453"><a href="#L453">453</a>     (orderInitialIdeal k</span>
+<span id="L454"><a href="#L454">454</a>         (canonicalRightIdeal (presentedCoordinate k n) d N)).map</span>
+<span id="L455"><a href="#L455">455</a>         (symbolScalarExtension (k := k) (K := K) (n + 1)).toRingHom =</span>
+<span id="L456"><a href="#L456">456</a>       orderInitialIdeal K</span>
+<span id="L457"><a href="#L457">457</a>         (canonicalRightIdeal (presentedCoordinate K n)</span>
+<span id="L458"><a href="#L458">458</a>           (presentedWeylScalarExtension (k := k) (K := K) (n + 1) d) N) := by</span>
+<span id="L459"><a href="#L459">459</a>   exact le_antisymm</span>
+<span id="L460"><a href="#L460">460</a>     (presentedWeylScalarExtension_map_orderInitialIdeal_le</span>
+<span id="L461"><a href="#L461">461</a>       (k := k) (K := K) n N d)</span>
+<span id="L462"><a href="#L462">462</a>     (target_orderInitialIdeal_le_map_source_orderInitialIdeal</span>
+<span id="L463"><a href="#L463">463</a>       (k := k) (K := K) n N d)</span>
+<span id="L464"><a href="#L464">464</a> </span>
+<span id="L465"><a href="#L465">465</a> /-- Flat filtered lifting discharges the exact algebraic-closure descent</span>
+<span id="L466"><a href="#L466">466</a> contract isolated by `PresentedScalarExtension`. -/</span>
+<span id="L467"><a href="#L467">467</a> theorem filteredInitialLifting : FilteredInitialLifting.{u} := by</span>
+<span id="L468"><a href="#L468">468</a>   intro k _ _ n N d</span>
+<span id="L469"><a href="#L469">469</a>   exact target_orderInitialIdeal_le_map_source_orderInitialIdeal</span>
+<span id="L470"><a href="#L470">470</a>     (k := k) (K := AlgebraicClosure k) n N d</span>
+<span id="L471"><a href="#L471">471</a> </span>
+<span id="L472"><a href="#L472">472</a> /-- The scalar-extension input consumed by the terminal Stafford reduction is</span>
+<span id="L473"><a href="#L473">473</a> therefore unconditional. -/</span>
+<span id="L474"><a href="#L474">474</a> theorem canonicalSupportDescent :</span>
+<span id="L475"><a href="#L475">475</a>     CanonicalSupportVanishingReduction.CanonicalSupportDescent.{u} :=</span>
+<span id="L476"><a href="#L476">476</a>   canonicalSupportDescent_of_filteredInitialLifting filteredInitialLifting</span>
+<span id="L477"><a href="#L477">477</a> </span>
+<span id="L478"><a href="#L478">478</a> section CancellationFalsifier</span>
+<span id="L479"><a href="#L479">479</a> </span>
+<span id="L480"><a href="#L480">480</a> /-!</span>
+<span id="L481"><a href="#L481">481</a> An unfiltered representation cannot be truncated term by term.  Here the</span>
+<span id="L482"><a href="#L482">482</a> low piece is the first coordinate axis, while the source span is all of</span>
+<span id="L483"><a href="#L483">483</a> `ℚ × ℚ`.  The displayed representation of `(1, 0)` has two summands outside</span>
+<span id="L484"><a href="#L484">484</a> the low piece whose second coordinates cancel.  The preceding flat</span>
+<span id="L485"><a href="#L485">485</a> intersection theorem is the surviving filtration-on-span replacement.</span>
+<span id="L486"><a href="#L486">486</a> -/</span>
+<span id="L487"><a href="#L487">487</a> theorem cancellation_falsifier :</span>
+<span id="L488"><a href="#L488">488</a>     let F : Submodule ℚ (ℚ × ℚ) :=</span>
+<span id="L489"><a href="#L489">489</a>       Submodule.span ℚ ({(1, 0)} : Set (ℚ × ℚ))</span>
+<span id="L490"><a href="#L490">490</a>     let I : Submodule ℚ (ℚ × ℚ) :=</span>
+<span id="L491"><a href="#L491">491</a>       Submodule.span ℚ ({(1, 1), (0, 1)} : Set (ℚ × ℚ))</span>
+<span id="L492"><a href="#L492">492</a>     let z : ℚ × ℚ := (1, 0)</span>
+<span id="L493"><a href="#L493">493</a>     z ∈ I ⊓ F ∧</span>
+<span id="L494"><a href="#L494">494</a>       (1, 1) ∉ F ∧</span>
+<span id="L495"><a href="#L495">495</a>       (0, 1) ∉ F ∧</span>
+<span id="L496"><a href="#L496">496</a>       ((1, 1) : ℚ × ℚ) - ((0, 1) : ℚ × ℚ) = z := by</span>
+<span id="L497"><a href="#L497">497</a>   dsimp</span>
+<span id="L498"><a href="#L498">498</a>   let F : Submodule ℚ (ℚ × ℚ) :=</span>
+<span id="L499"><a href="#L499">499</a>     Submodule.span ℚ ({(1, 0)} : Set (ℚ × ℚ))</span>
+<span id="L500"><a href="#L500">500</a>   let I : Submodule ℚ (ℚ × ℚ) :=</span>
+<span id="L501"><a href="#L501">501</a>     Submodule.span ℚ ({(1, 1), (0, 1)} : Set (ℚ × ℚ))</span>
+<span id="L502"><a href="#L502">502</a>   have hzF : ((1, 0) : ℚ × ℚ) ∈ F := by</span>
+<span id="L503"><a href="#L503">503</a>     apply Submodule.subset_span</span>
+<span id="L504"><a href="#L504">504</a>     simp [F]</span>
+<span id="L505"><a href="#L505">505</a>   have huI : ((1, 1) : ℚ × ℚ) ∈ I := by</span>
+<span id="L506"><a href="#L506">506</a>     apply Submodule.subset_span</span>
+<span id="L507"><a href="#L507">507</a>     simp [I]</span>
+<span id="L508"><a href="#L508">508</a>   have hvI : ((0, 1) : ℚ × ℚ) ∈ I := by</span>
+<span id="L509"><a href="#L509">509</a>     apply Submodule.subset_span</span>
+<span id="L510"><a href="#L510">510</a>     simp [I]</span>
+<span id="L511"><a href="#L511">511</a>   have hzI : ((1, 0) : ℚ × ℚ) ∈ I := by</span>
+<span id="L512"><a href="#L512">512</a>     have hdiff := I.sub_mem huI hvI</span>
+<span id="L513"><a href="#L513">513</a>     have heq : ((1, 1) : ℚ × ℚ) - ((0, 1) : ℚ × ℚ) = (1, 0) := by</span>
+<span id="L514"><a href="#L514">514</a>       ext &lt;;&gt; norm_num</span>
+<span id="L515"><a href="#L515">515</a>     rw [← heq]</span>
+<span id="L516"><a href="#L516">516</a>     exact hdiff</span>
+<span id="L517"><a href="#L517">517</a>   have huF : ((1, 1) : ℚ × ℚ) ∉ F := by</span>
+<span id="L518"><a href="#L518">518</a>     intro hu</span>
+<span id="L519"><a href="#L519">519</a>     change ((1, 1) : ℚ × ℚ) ∈</span>
+<span id="L520"><a href="#L520">520</a>       Submodule.span ℚ ({(1, 0)} : Set (ℚ × ℚ)) at hu</span>
+<span id="L521"><a href="#L521">521</a>     rw [Submodule.mem_span_singleton] at hu</span>
+<span id="L522"><a href="#L522">522</a>     rcases hu with ⟨c, hc⟩</span>
+<span id="L523"><a href="#L523">523</a>     have := congrArg Prod.snd hc</span>
+<span id="L524"><a href="#L524">524</a>     simp at this</span>
+<span id="L525"><a href="#L525">525</a>   have hvF : ((0, 1) : ℚ × ℚ) ∉ F := by</span>
+<span id="L526"><a href="#L526">526</a>     intro hv</span>
+<span id="L527"><a href="#L527">527</a>     change ((0, 1) : ℚ × ℚ) ∈</span>
+<span id="L528"><a href="#L528">528</a>       Submodule.span ℚ ({(1, 0)} : Set (ℚ × ℚ)) at hv</span>
+<span id="L529"><a href="#L529">529</a>     rw [Submodule.mem_span_singleton] at hv</span>
+<span id="L530"><a href="#L530">530</a>     rcases hv with ⟨c, hc⟩</span>
+<span id="L531"><a href="#L531">531</a>     have := congrArg Prod.snd hc</span>
+<span id="L532"><a href="#L532">532</a>     simp at this</span>
+<span id="L533"><a href="#L533">533</a>   refine ⟨⟨hzI, hzF⟩, huF, hvF, ?_⟩</span>
+<span id="L534"><a href="#L534">534</a>   ext &lt;;&gt; norm_num</span>
+<span id="L535"><a href="#L535">535</a> </span>
+<span id="L536"><a href="#L536">536</a> end CancellationFalsifier</span>
+<span id="L537"><a href="#L537">537</a> </span>
+<span id="L538"><a href="#L538">538</a> end WeylTensorBridge</span>
+<span id="L539"><a href="#L539">539</a> </span>
+<span id="L540"><a href="#L540">540</a> /-- After scalar descent, the terminal theorem has exactly the three genuine</span>
+<span id="L541"><a href="#L541">541</a> mathematical inputs: an order-zero unit coordinate predecessor, post-extension</span>
+<span id="L542"><a href="#L542">542</a> symbol control, and the asymptotic Laurent conormal producer. -/</span>
+<span id="L543"><a href="#L543">543</a> theorem universalStatement_of_three_inputs</span>
+<span id="L544"><a href="#L544">544</a>     (hunit :</span>
+<span id="L545"><a href="#L545">545</a>       CanonicalSupportVanishingReduction.CanonicalStrictUnitCoordinatePreimage.{u})</span>
+<span id="L546"><a href="#L546">546</a>     (hcontrol :</span>
+<span id="L547"><a href="#L547">547</a>       CanonicalSupportVanishingReduction.CanonicalLaurentSymbolControl.{u})</span>
+<span id="L548"><a href="#L548">548</a>     (hasymptotic :</span>
+<span id="L549"><a href="#L549">549</a>       CanonicalSupportVanishingReduction.CanonicalAsymptoticLaurentProducer.{u}) :</span>
+<span id="L550"><a href="#L550">550</a>     Stafford38Challenge.UniversalStatement.{u} :=</span>
+<span id="L551"><a href="#L551">551</a>   CanonicalSupportVanishingReduction.universalStatement_of_four_inputs</span>
+<span id="L552"><a href="#L552">552</a>     hunit hcontrol hasymptotic canonicalSupportDescent</span>
+<span id="L553"><a href="#L553">553</a> </span>
+<span id="L554"><a href="#L554">554</a> end</span>
+<span id="L555"><a href="#L555">555</a> end Stafford38.Weyl.FilteredScalarLifting</span>
+<span id="L556"><a href="#L556">556</a> </span></pre>

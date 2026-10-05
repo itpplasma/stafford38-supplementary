@@ -1,0 +1,25 @@
+Acceptance excerpt; complete local log sha256: f82cd6e7632addc427b38b4810b081d8ba3ee0cfab8c65fdaefea62f51ebc333
+pins: Lean leanprover/lean4:v4.35.0-rc3 (470d5ce1400764999581fd26d5d72b00d990b0f4), Mathlib c55e6e786f49471c72fbddbec5415808896aec1e, AlgebraicAnalysis bbbbf3fc358ca8100b158cec4cf47f336ab70163; all four Palomar configs passed
+Challenge: audited 3529 loaded modules
+Solution: audited 5381 loaded modules
+comparator.json: accepted config schema and exact theorem/axiom contract passed
+local protected config sha256 aa7112430ff2dc3b3683c3965137a6db03ae70df05cc387312a12a87a722fcfe
+local bwrap bubblewrap 0.12.0
+pins: Lean leanprover/lean4:v4.35.0-rc3 (470d5ce1400764999581fd26d5d72b00d990b0f4), Mathlib c55e6e786f49471c72fbddbec5415808896aec1e, AlgebraicAnalysis bbbbf3fc358ca8100b158cec4cf47f336ab70163; all four Palomar configs passed
+FixedSourceChallenge: audited 3529 loaded modules
+FixedSourceSolution: audited 5382 loaded modules
+comparator-fixed-source.json: accepted config schema and exact theorem/axiom contract passed
+local protected config sha256 0ed3f06e3cba912389df442e514177fd733e1fd89d95379eb573b154951901f1
+local bwrap bubblewrap 0.12.0
+pins: Lean leanprover/lean4:v4.35.0-rc3 (470d5ce1400764999581fd26d5d72b00d990b0f4), Mathlib c55e6e786f49471c72fbddbec5415808896aec1e, AlgebraicAnalysis bbbbf3fc358ca8100b158cec4cf47f336ab70163; all four Palomar configs passed
+Challenge: audited 3529 loaded modules
+AlternativeSolution: audited 5381 loaded modules
+comparator-alternative.json: accepted config schema and exact theorem/axiom contract passed
+local protected config sha256 9537fca31d06a3b598b86c9e8ec659c07278f7f2b31e059d629abe5b118709a5
+local bwrap bubblewrap 0.12.0
+pins: Lean leanprover/lean4:v4.35.0-rc3 (470d5ce1400764999581fd26d5d72b00d990b0f4), Mathlib c55e6e786f49471c72fbddbec5415808896aec1e, AlgebraicAnalysis bbbbf3fc358ca8100b158cec4cf47f336ab70163; all four Palomar configs passed
+FixedSourceChallenge: audited 3529 loaded modules
+AlternativeFixedSourceSolution: audited 5382 loaded modules
+comparator-alternative-fixed-source.json: accepted config schema and exact theorem/axiom contract passed
+local protected config sha256 8acc99bda2d2a07b08bb8886b0d555c99b61fdc8429ac0e18510c7e7754a7f2b
+local bwrap bubblewrap 0.12.0

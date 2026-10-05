@@ -1,0 +1,470 @@
+<!doctype html><meta charset="utf-8"><title>Stafford38/Weyl/SymbolCompatibility.lean</title><style>body{font:14px monospace}pre span{display:block}pre span:target{background:#fff0ad}a{color:#666}pre{white-space:pre-wrap}</style><h1>Stafford38/Weyl/SymbolCompatibility.lean</h1><p>This project (Stafford38) · 0403af3f0b1a7f84d2027121932723f67bd279ae</p><pre><span id="L1"><a href="#L1">1</a> module</span>
+<span id="L2"><a href="#L2">2</a> public import Stafford38.MathlibCompat.MvPolynomialCoeff</span>
+<span id="L3"><a href="#L3">3</a> public import AlgebraicAnalysis.Ore.Associativity</span>
+<span id="L4"><a href="#L4">4</a> public import Stafford38.Weyl.Symplectic</span>
+<span id="L5"><a href="#L5">5</a> public import Stafford38.Weyl.LeadingSymbol</span>
+<span id="L6"><a href="#L6">6</a> public import Stafford38.Characteristic.LinearAction</span>
+<span id="L7"><a href="#L7">7</a> </span>
+<span id="L8"><a href="#L8">8</a> @[expose] public section</span>
+<span id="L9"><a href="#L9">9</a> </span>
+<span id="L10"><a href="#L10">10</a> open Stafford38Challenge (standardForm)</span>
+<span id="L11"><a href="#L11">11</a> </span>
+<span id="L12"><a href="#L12">12</a> open Stafford38Challenge (WeylAlg PhaseVar)</span>
+<span id="L13"><a href="#L13">13</a> </span>
+<span id="L14"><a href="#L14">14</a> /-!</span>
+<span id="L15"><a href="#L15">15</a> # Bernstein-symbol compatibility for linear Weyl changes</span>
+<span id="L16"><a href="#L16">16</a> </span>
+<span id="L17"><a href="#L17">17</a> An algebra map whose generator images have Bernstein degree one preserves the</span>
+<span id="L18"><a href="#L18">18</a> Bernstein filtration. Its action on every principal component is obtained by</span>
+<span id="L19"><a href="#L19">19</a> commutatively substituting the degree-one principal symbols of those images.</span>
+<span id="L20"><a href="#L20">20</a> For a symplectic linear Weyl map, this induced substitution is exactly the</span>
+<span id="L21"><a href="#L21">21</a> phase-space linear action defined in `Characteristic.LinearAction`.</span>
+<span id="L22"><a href="#L22">22</a> -/</span>
+<span id="L23"><a href="#L23">23</a> </span>
+<span id="L24"><a href="#L24">24</a> namespace Stafford38.WeylSymbolCompatibility</span>
+<span id="L25"><a href="#L25">25</a> </span>
+<span id="L26"><a href="#L26">26</a> open Stafford</span>
+<span id="L27"><a href="#L27">27</a> open AlgebraicAnalysis</span>
+<span id="L28"><a href="#L28">28</a> open Stafford38.Characteristic</span>
+<span id="L29"><a href="#L29">29</a> open Stafford38.CharacteristicLinearAction</span>
+<span id="L30"><a href="#L30">30</a> open Stafford38.WeylFiltration</span>
+<span id="L31"><a href="#L31">31</a> open Stafford38.WeylIteratedEquivalence</span>
+<span id="L32"><a href="#L32">32</a> open Stafford38.WeylLeadingSymbol</span>
+<span id="L33"><a href="#L33">33</a> open Stafford38.WeylPBW</span>
+<span id="L34"><a href="#L34">34</a> open Stafford38.WeylSymplectic</span>
+<span id="L35"><a href="#L35">35</a> </span>
+<span id="L36"><a href="#L36">36</a> noncomputable section</span>
+<span id="L37"><a href="#L37">37</a> </span>
+<span id="L38"><a href="#L38">38</a> universe u</span>
+<span id="L39"><a href="#L39">39</a> variable (k : Type u) [Field k]</span>
+<span id="L40"><a href="#L40">40</a> </span>
+<span id="L41"><a href="#L41">41</a> theorem normalForm_linearCombination {n : ℕ}</span>
+<span id="L42"><a href="#L42">42</a>     (M : Matrix (PhaseVar n) (PhaseVar n) k) (i : PhaseVar n) :</span>
+<span id="L43"><a href="#L43">43</a>     presentedNormalFormLinearEquiv k n</span>
+<span id="L44"><a href="#L44">44</a>         (Stafford.linearCombination M</span>
+<span id="L45"><a href="#L45">45</a>           (freeWeylGenerator (standardForm k n)) i) =</span>
+<span id="L46"><a href="#L46">46</a>       symbolLinearCombination k M i := by</span>
+<span id="L47"><a href="#L47">47</a>   calc</span>
+<span id="L48"><a href="#L48">48</a>     _ = presentedNormalFormLinearEquiv k n</span>
+<span id="L49"><a href="#L49">49</a>         (∑ j, (M i j) • freeWeylGenerator (standardForm k n) j) := by</span>
+<span id="L50"><a href="#L50">50</a>       simp [Stafford.linearCombination, Stafford.linearCombination,</span>
+<span id="L51"><a href="#L51">51</a>         Algebra.smul_def]</span>
+<span id="L52"><a href="#L52">52</a>     _ = ∑ j, (M i j) • MvPolynomial.X j := by</span>
+<span id="L53"><a href="#L53">53</a>       rw [map_sum]</span>
+<span id="L54"><a href="#L54">54</a>       apply Finset.sum_congr rfl</span>
+<span id="L55"><a href="#L55">55</a>       intro j hj</span>
+<span id="L56"><a href="#L56">56</a>       rw [map_smul, presentedNormalFormLinearEquiv_generator]</span>
+<span id="L57"><a href="#L57">57</a>     _ = _ := by</span>
+<span id="L58"><a href="#L58">58</a>       simp [symbolLinearCombination, Algebra.smul_def]</span>
+<span id="L59"><a href="#L59">59</a> </span>
+<span id="L60"><a href="#L60">60</a> theorem linearCombination_mem_bernsteinPiece {n : ℕ}</span>
+<span id="L61"><a href="#L61">61</a>     (M : Matrix (PhaseVar n) (PhaseVar n) k) (i : PhaseVar n) :</span>
+<span id="L62"><a href="#L62">62</a>     Stafford.linearCombination M</span>
+<span id="L63"><a href="#L63">63</a>         (freeWeylGenerator (standardForm k n)) i ∈</span>
+<span id="L64"><a href="#L64">64</a>       bernsteinPiece k n 1 := by</span>
+<span id="L65"><a href="#L65">65</a>   rw [Stafford.linearCombination]</span>
+<span id="L66"><a href="#L66">66</a>   apply Submodule.sum_mem</span>
+<span id="L67"><a href="#L67">67</a>   intro j hj</span>
+<span id="L68"><a href="#L68">68</a>   rw [← Algebra.smul_def]</span>
+<span id="L69"><a href="#L69">69</a>   apply Submodule.smul_mem</span>
+<span id="L70"><a href="#L70">70</a>   rw [bernsteinPiece, mem_presentedWeightPiece,</span>
+<span id="L71"><a href="#L71">71</a>     presentedNormalFormLinearEquiv_generator]</span>
+<span id="L72"><a href="#L72">72</a>   intro m hm</span>
+<span id="L73"><a href="#L73">73</a>   simp only [MvPolynomial.coeff_X, ne_eq, ite_eq_right_iff] at hm</span>
+<span id="L74"><a href="#L74">74</a>   by_contra hweight</span>
+<span id="L75"><a href="#L75">75</a>   exact hm (by</span>
+<span id="L76"><a href="#L76">76</a>     intro h</span>
+<span id="L77"><a href="#L77">77</a>     subst m</span>
+<span id="L78"><a href="#L78">78</a>     simp [Finsupp.weight_apply, bernsteinWeight] at hweight)</span>
+<span id="L79"><a href="#L79">79</a> </span>
+<span id="L80"><a href="#L80">80</a> theorem principal_linearCombination {n : ℕ}</span>
+<span id="L81"><a href="#L81">81</a>     (M : Matrix (PhaseVar n) (PhaseVar n) k) (i : PhaseVar n) :</span>
+<span id="L82"><a href="#L82">82</a>     presentedPrincipalComponent k (@bernsteinWeight n) 1</span>
+<span id="L83"><a href="#L83">83</a>         (Stafford.linearCombination M</span>
+<span id="L84"><a href="#L84">84</a>           (freeWeylGenerator (standardForm k n)) i) =</span>
+<span id="L85"><a href="#L85">85</a>       symbolLinearCombination k M i := by</span>
+<span id="L86"><a href="#L86">86</a>   rw [presentedPrincipalComponent, LinearMap.comp_apply,</span>
+<span id="L87"><a href="#L87">87</a>     LinearEquiv.coe_toLinearMap, normalForm_linearCombination]</span>
+<span id="L88"><a href="#L88">88</a>   rw [symbolLinearCombination, map_sum]</span>
+<span id="L89"><a href="#L89">89</a>   apply Finset.sum_congr rfl</span>
+<span id="L90"><a href="#L90">90</a>   intro j hj</span>
+<span id="L91"><a href="#L91">91</a>   rw [MvPolynomial.weightedHomogeneousComponent_C_mul]</span>
+<span id="L92"><a href="#L92">92</a>   congr 1</span>
+<span id="L93"><a href="#L93">93</a>   conv_lhs =&gt; rw [← pow_one (MvPolynomial.X j), MvPolynomial.X_pow_eq_monomial]</span>
+<span id="L94"><a href="#L94">94</a>   conv_rhs =&gt; rw [← pow_one (MvPolynomial.X j), MvPolynomial.X_pow_eq_monomial]</span>
+<span id="L95"><a href="#L95">95</a>   rw [weightedHomogeneousComponent_monomial]</span>
+<span id="L96"><a href="#L96">96</a>   simp [Finsupp.weight_apply, bernsteinWeight]</span>
+<span id="L97"><a href="#L97">97</a> </span>
+<span id="L98"><a href="#L98">98</a> theorem one_mem_bernsteinPiece (r : ℕ) :</span>
+<span id="L99"><a href="#L99">99</a>     (1 : WeylAlg k r) ∈ bernsteinPiece k r 0 := by</span>
+<span id="L100"><a href="#L100">100</a>   rw [bernsteinPiece, mem_presentedWeightPiece,</span>
+<span id="L101"><a href="#L101">101</a>     presentedNormalFormLinearEquiv_one]</span>
+<span id="L102"><a href="#L102">102</a>   intro m hm</span>
+<span id="L103"><a href="#L103">103</a>   simp only [MvPolynomial.coeff_one, ne_eq, ite_eq_right_iff] at hm</span>
+<span id="L104"><a href="#L104">104</a>   by_contra hweight</span>
+<span id="L105"><a href="#L105">105</a>   exact hm (by</span>
+<span id="L106"><a href="#L106">106</a>     intro h</span>
+<span id="L107"><a href="#L107">107</a>     subst m</span>
+<span id="L108"><a href="#L108">108</a>     simp [Finsupp.weight_apply] at hweight)</span>
+<span id="L109"><a href="#L109">109</a> </span>
+<span id="L110"><a href="#L110">110</a> theorem pow_mem_bernsteinPiece {r : ℕ} {x : WeylAlg k r}</span>
+<span id="L111"><a href="#L111">111</a>     (hx : x ∈ bernsteinPiece k r 1) :</span>
+<span id="L112"><a href="#L112">112</a>     ∀ a : ℕ, x ^ a ∈ bernsteinPiece k r a</span>
+<span id="L113"><a href="#L113">113</a>   | 0 =&gt; by simpa using one_mem_bernsteinPiece k r</span>
+<span id="L114"><a href="#L114">114</a>   | a + 1 =&gt; by</span>
+<span id="L115"><a href="#L115">115</a>       rw [pow_succ]</span>
+<span id="L116"><a href="#L116">116</a>       simpa [Nat.add_comm] using</span>
+<span id="L117"><a href="#L117">117</a>         mul_mem_bernsteinPiece k (pow_mem_bernsteinPiece hx a) hx</span>
+<span id="L118"><a href="#L118">118</a> </span>
+<span id="L119"><a href="#L119">119</a> theorem algHom_orderedMonomial_mem_bernstein</span>
+<span id="L120"><a href="#L120">120</a>     {r : ℕ} (f : WeylAlg k 0 →ₐ[k] WeylAlg k r)</span>
+<span id="L121"><a href="#L121">121</a>     (_hgen : ∀ i : PhaseVar 0,</span>
+<span id="L122"><a href="#L122">122</a>       f (freeWeylGenerator (standardForm k 0) i) ∈</span>
+<span id="L123"><a href="#L123">123</a>         bernsteinPiece k r 1)</span>
+<span id="L124"><a href="#L124">124</a>     (a p : Fin 0 → ℕ) :</span>
+<span id="L125"><a href="#L125">125</a>     f (presentedOrderedMonomial k 0 a p) ∈</span>
+<span id="L126"><a href="#L126">126</a>       bernsteinPiece k r</span>
+<span id="L127"><a href="#L127">127</a>         (Finsupp.weight (@bernsteinWeight 0) (phaseExponent a p)) := by</span>
+<span id="L128"><a href="#L128">128</a>   simp only [presentedOrderedMonomial, map_one]</span>
+<span id="L129"><a href="#L129">129</a>   have hw : Finsupp.weight (@bernsteinWeight 0) (phaseExponent a p) = 0 := by</span>
+<span id="L130"><a href="#L130">130</a>     have hphase : phaseExponent a p = 0 := by</span>
+<span id="L131"><a href="#L131">131</a>       ext i</span>
+<span id="L132"><a href="#L132">132</a>       cases i with</span>
+<span id="L133"><a href="#L133">133</a>       | inl i =&gt; exact Fin.elim0 i</span>
+<span id="L134"><a href="#L134">134</a>       | inr i =&gt; exact Fin.elim0 i</span>
+<span id="L135"><a href="#L135">135</a>     rw [hphase]</span>
+<span id="L136"><a href="#L136">136</a>     rfl</span>
+<span id="L137"><a href="#L137">137</a>   rw [hw]</span>
+<span id="L138"><a href="#L138">138</a>   exact one_mem_bernsteinPiece k r</span>
+<span id="L139"><a href="#L139">139</a> </span>
+<span id="L140"><a href="#L140">140</a> theorem algHom_orderedMonomial_mem_bernstein_succ</span>
+<span id="L141"><a href="#L141">141</a>     {n r : ℕ}</span>
+<span id="L142"><a href="#L142">142</a>     (ih : ∀ (f : WeylAlg k n →ₐ[k] WeylAlg k r),</span>
+<span id="L143"><a href="#L143">143</a>       (∀ i : PhaseVar n,</span>
+<span id="L144"><a href="#L144">144</a>         f (freeWeylGenerator (standardForm k n) i) ∈</span>
+<span id="L145"><a href="#L145">145</a>           bernsteinPiece k r 1) →</span>
+<span id="L146"><a href="#L146">146</a>       ∀ (a p : Fin n → ℕ),</span>
+<span id="L147"><a href="#L147">147</a>         f (presentedOrderedMonomial k n a p) ∈</span>
+<span id="L148"><a href="#L148">148</a>           bernsteinPiece k r</span>
+<span id="L149"><a href="#L149">149</a>             (Finsupp.weight (@bernsteinWeight n) (phaseExponent a p)))</span>
+<span id="L150"><a href="#L150">150</a>     (f : WeylAlg k (n + 1) →ₐ[k] WeylAlg k r)</span>
+<span id="L151"><a href="#L151">151</a>     (hgen : ∀ i : PhaseVar (n + 1),</span>
+<span id="L152"><a href="#L152">152</a>       f (freeWeylGenerator (standardForm k (n + 1)) i) ∈</span>
+<span id="L153"><a href="#L153">153</a>         bernsteinPiece k r 1)</span>
+<span id="L154"><a href="#L154">154</a>     (a p : Fin (n + 1) → ℕ) :</span>
+<span id="L155"><a href="#L155">155</a>     f (presentedOrderedMonomial k (n + 1) a p) ∈</span>
+<span id="L156"><a href="#L156">156</a>       bernsteinPiece k r</span>
+<span id="L157"><a href="#L157">157</a>         (Finsupp.weight (@bernsteinWeight (n + 1)) (phaseExponent a p)) := by</span>
+<span id="L158"><a href="#L158">158</a>   let fold : WeylAlg k n →ₐ[k] WeylAlg k r :=</span>
+<span id="L159"><a href="#L159">159</a>     f.comp (previousWeylEmbedding k n)</span>
+<span id="L160"><a href="#L160">160</a>   have hfold : ∀ i : PhaseVar n,</span>
+<span id="L161"><a href="#L161">161</a>       fold (freeWeylGenerator (standardForm k n) i) ∈</span>
+<span id="L162"><a href="#L162">162</a>         bernsteinPiece k r 1 := by</span>
+<span id="L163"><a href="#L163">163</a>     intro i</span>
+<span id="L164"><a href="#L164">164</a>     simpa [fold, oldGenerator] using hgen (Stafford38FixedSourceChallenge.oldIndex i)</span>
+<span id="L165"><a href="#L165">165</a>   have hold := ih fold hfold (fun i =&gt; a i.succ) (fun i =&gt; p i.succ)</span>
+<span id="L166"><a href="#L166">166</a>   have hx := pow_mem_bernsteinPiece k (hgen (.inl 0)) (a 0)</span>
+<span id="L167"><a href="#L167">167</a>   have hp := pow_mem_bernsteinPiece k (hgen (.inr 0)) (p 0)</span>
+<span id="L168"><a href="#L168">168</a>   have hmul := mul_mem_bernsteinPiece k</span>
+<span id="L169"><a href="#L169">169</a>     (mul_mem_bernsteinPiece k hold hx) hp</span>
+<span id="L170"><a href="#L170">170</a>   change f ((previousWeylEmbedding k n)</span>
+<span id="L171"><a href="#L171">171</a>       (presentedOrderedMonomial k n (fun i =&gt; a i.succ) (fun i =&gt; p i.succ))) *</span>
+<span id="L172"><a href="#L172">172</a>       f (presentedCoordinate k n) ^ a 0 *</span>
+<span id="L173"><a href="#L173">173</a>       f (presentedMomentum k n) ^ p 0 ∈ _ at hmul</span>
+<span id="L174"><a href="#L174">174</a>   rw [presentedOrderedMonomial, map_mul, map_mul, map_pow, map_pow]</span>
+<span id="L175"><a href="#L175">175</a>   rw [monomialWeight_phaseExponent_succ_bernstein]</span>
+<span id="L176"><a href="#L176">176</a>   simpa [fold, add_assoc] using hmul</span>
+<span id="L177"><a href="#L177">177</a> </span>
+<span id="L178"><a href="#L178">178</a> theorem algHom_orderedMonomial_mem_bernstein_all {r : ℕ} :</span>
+<span id="L179"><a href="#L179">179</a>     ∀ (n : ℕ) (f : WeylAlg k n →ₐ[k] WeylAlg k r),</span>
+<span id="L180"><a href="#L180">180</a>       (∀ i : PhaseVar n,</span>
+<span id="L181"><a href="#L181">181</a>         f (freeWeylGenerator (standardForm k n) i) ∈</span>
+<span id="L182"><a href="#L182">182</a>           bernsteinPiece k r 1) →</span>
+<span id="L183"><a href="#L183">183</a>       ∀ (a p : Fin n → ℕ),</span>
+<span id="L184"><a href="#L184">184</a>         f (presentedOrderedMonomial k n a p) ∈</span>
+<span id="L185"><a href="#L185">185</a>           bernsteinPiece k r</span>
+<span id="L186"><a href="#L186">186</a>             (Finsupp.weight (@bernsteinWeight n) (phaseExponent a p))</span>
+<span id="L187"><a href="#L187">187</a>   | 0 =&gt; algHom_orderedMonomial_mem_bernstein k</span>
+<span id="L188"><a href="#L188">188</a>   | n + 1 =&gt; algHom_orderedMonomial_mem_bernstein_succ k</span>
+<span id="L189"><a href="#L189">189</a>       (algHom_orderedMonomial_mem_bernstein_all n)</span>
+<span id="L190"><a href="#L190">190</a> </span>
+<span id="L191"><a href="#L191">191</a> theorem algHom_preserves_bernsteinPiece {n r N : ℕ}</span>
+<span id="L192"><a href="#L192">192</a>     (f : WeylAlg k n →ₐ[k] WeylAlg k r)</span>
+<span id="L193"><a href="#L193">193</a>     (hgen : ∀ i : PhaseVar n,</span>
+<span id="L194"><a href="#L194">194</a>       f (freeWeylGenerator (standardForm k n) i) ∈</span>
+<span id="L195"><a href="#L195">195</a>         bernsteinPiece k r 1)</span>
+<span id="L196"><a href="#L196">196</a>     {z : WeylAlg k n} (hz : z ∈ bernsteinPiece k n N) :</span>
+<span id="L197"><a href="#L197">197</a>   f z ∈ bernsteinPiece k r N := by</span>
+<span id="L198"><a href="#L198">198</a>   rw [bernsteinPiece, presentedWeightPiece_eq_span] at hz</span>
+<span id="L199"><a href="#L199">199</a>   induction hz using Submodule.span_induction with</span>
+<span id="L200"><a href="#L200">200</a>   | mem b hb =&gt;</span>
+<span id="L201"><a href="#L201">201</a>       obtain ⟨m, hm, rfl⟩ := hb</span>
+<span id="L202"><a href="#L202">202</a>       rw [presentedPBWBasis_apply]</span>
+<span id="L203"><a href="#L203">203</a>       have h := algHom_orderedMonomial_mem_bernstein_all k n f hgen</span>
+<span id="L204"><a href="#L204">204</a>         (fun i =&gt; m (.inl i)) (fun i =&gt; m (.inr i))</span>
+<span id="L205"><a href="#L205">205</a>       rw [phaseExponent_split] at h</span>
+<span id="L206"><a href="#L206">206</a>       exact presentedWeightPiece_mono k bernsteinWeight hm h</span>
+<span id="L207"><a href="#L207">207</a>   | zero =&gt;</span>
+<span id="L208"><a href="#L208">208</a>       rw [map_zero]</span>
+<span id="L209"><a href="#L209">209</a>       exact (bernsteinPiece k r N).zero_mem</span>
+<span id="L210"><a href="#L210">210</a>   | add x y hx hy ihx ihy =&gt;</span>
+<span id="L211"><a href="#L211">211</a>       rw [map_add]</span>
+<span id="L212"><a href="#L212">212</a>       exact (bernsteinPiece k r N).add_mem ihx ihy</span>
+<span id="L213"><a href="#L213">213</a>   | smul c x hx ih =&gt;</span>
+<span id="L214"><a href="#L214">214</a>       rw [map_smul]</span>
+<span id="L215"><a href="#L215">215</a>       exact (bernsteinPiece k r N).smul_mem c ih</span>
+<span id="L216"><a href="#L216">216</a> </span>
+<span id="L217"><a href="#L217">217</a> theorem standardSymplecticAlgHom_preserves_bernsteinPiece {n N : ℕ}</span>
+<span id="L218"><a href="#L218">218</a>     (M : Matrix (PhaseVar n) (PhaseVar n) k)</span>
+<span id="L219"><a href="#L219">219</a>     (hM : M * standardForm k n * Matrix.transpose M = standardForm k n)</span>
+<span id="L220"><a href="#L220">220</a>     {z : WeylAlg k n} (hz : z ∈ bernsteinPiece k n N) :</span>
+<span id="L221"><a href="#L221">221</a>     standardSymplecticAlgHom k M hM z ∈ bernsteinPiece k n N := by</span>
+<span id="L222"><a href="#L222">222</a>   exact algHom_preserves_bernsteinPiece k</span>
+<span id="L223"><a href="#L223">223</a>     (standardSymplecticAlgHom k M hM)</span>
+<span id="L224"><a href="#L224">224</a>     (fun i =&gt; by</span>
+<span id="L225"><a href="#L225">225</a>       rw [standardSymplecticAlgHom_generator]</span>
+<span id="L226"><a href="#L226">226</a>       exact linearCombination_mem_bernsteinPiece k M i) hz</span>
+<span id="L227"><a href="#L227">227</a> </span>
+<span id="L228"><a href="#L228">228</a> theorem phaseMonomial_succ_decompose {n : ℕ}</span>
+<span id="L229"><a href="#L229">229</a>     (a p : Fin (n + 1) → ℕ) :</span>
+<span id="L230"><a href="#L230">230</a>     MvPolynomial.monomial (phaseExponent a p) (1 : k) =</span>
+<span id="L231"><a href="#L231">231</a>       MvPolynomial.rename Stafford38FixedSourceChallenge.oldIndex</span>
+<span id="L232"><a href="#L232">232</a>           (MvPolynomial.monomial</span>
+<span id="L233"><a href="#L233">233</a>             (phaseExponent (fun i =&gt; a i.succ) (fun i =&gt; p i.succ)) 1) *</span>
+<span id="L234"><a href="#L234">234</a>         MvPolynomial.X (.inl (0 : Fin (n + 1))) ^ a 0 *</span>
+<span id="L235"><a href="#L235">235</a>         MvPolynomial.X (.inr (0 : Fin (n + 1))) ^ p 0 := by</span>
+<span id="L236"><a href="#L236">236</a>   rw [phaseExponent_succ_eq_extend, extendPhaseExponent,</span>
+<span id="L237"><a href="#L237">237</a>     MvPolynomial.rename_monomial,</span>
+<span id="L238"><a href="#L238">238</a>     MvPolynomial.X_pow_eq_monomial,</span>
+<span id="L239"><a href="#L239">239</a>     MvPolynomial.X_pow_eq_monomial,</span>
+<span id="L240"><a href="#L240">240</a>     MvPolynomial.monomial_mul, MvPolynomial.monomial_mul]</span>
+<span id="L241"><a href="#L241">241</a>   simp [add_comm, add_left_comm, add_assoc]</span>
+<span id="L242"><a href="#L242">242</a> </span>
+<span id="L243"><a href="#L243">243</a> theorem principal_one_bernstein (r : ℕ) :</span>
+<span id="L244"><a href="#L244">244</a>     presentedPrincipalComponent k (@bernsteinWeight r) 0</span>
+<span id="L245"><a href="#L245">245</a>         (1 : WeylAlg k r) = 1 := by</span>
+<span id="L246"><a href="#L246">246</a>   rw [presentedPrincipalComponent, LinearMap.comp_apply,</span>
+<span id="L247"><a href="#L247">247</a>     LinearEquiv.coe_toLinearMap, presentedNormalFormLinearEquiv_one]</span>
+<span id="L248"><a href="#L248">248</a>   change MvPolynomial.weightedHomogeneousComponent (@bernsteinWeight r) 0</span>
+<span id="L249"><a href="#L249">249</a>       (MvPolynomial.monomial (0 : PhaseVar r →₀ ℕ) (1 : k)) = 1</span>
+<span id="L250"><a href="#L250">250</a>   rw [weightedHomogeneousComponent_monomial]</span>
+<span id="L251"><a href="#L251">251</a>   simp [Finsupp.weight_apply]</span>
+<span id="L252"><a href="#L252">252</a> </span>
+<span id="L253"><a href="#L253">253</a> theorem pow_principal_bernstein {r : ℕ} {x : WeylAlg k r}</span>
+<span id="L254"><a href="#L254">254</a>     (hx : x ∈ bernsteinPiece k r 1) :</span>
+<span id="L255"><a href="#L255">255</a>     ∀ a : ℕ,</span>
+<span id="L256"><a href="#L256">256</a>       presentedPrincipalComponent k (@bernsteinWeight r) a (x ^ a) =</span>
+<span id="L257"><a href="#L257">257</a>         (presentedPrincipalComponent k (@bernsteinWeight r) 1 x) ^ a</span>
+<span id="L258"><a href="#L258">258</a>   | 0 =&gt; by simpa using principal_one_bernstein k r</span>
+<span id="L259"><a href="#L259">259</a>   | a + 1 =&gt; by</span>
+<span id="L260"><a href="#L260">260</a>       rw [pow_succ, pow_succ, ← pow_principal_bernstein hx a]</span>
+<span id="L261"><a href="#L261">261</a>       simpa [Nat.add_comm] using</span>
+<span id="L262"><a href="#L262">262</a>         presentedPrincipalComponent_mul_bernstein k</span>
+<span id="L263"><a href="#L263">263</a>           (pow_mem_bernsteinPiece k hx a) hx</span>
+<span id="L264"><a href="#L264">264</a> </span>
+<span id="L265"><a href="#L265">265</a> theorem algHom_orderedMonomial_principal_zero</span>
+<span id="L266"><a href="#L266">266</a>     {r : ℕ} (f : WeylAlg k 0 →ₐ[k] WeylAlg k r)</span>
+<span id="L267"><a href="#L267">267</a>     (g : PhaseVar 0 → SymbolRing k r)</span>
+<span id="L268"><a href="#L268">268</a>     (a p : Fin 0 → ℕ) :</span>
+<span id="L269"><a href="#L269">269</a>     presentedPrincipalComponent k (@bernsteinWeight r)</span>
+<span id="L270"><a href="#L270">270</a>         (Finsupp.weight (@bernsteinWeight 0) (phaseExponent a p))</span>
+<span id="L271"><a href="#L271">271</a>         (f (presentedOrderedMonomial k 0 a p)) =</span>
+<span id="L272"><a href="#L272">272</a>       MvPolynomial.aeval g</span>
+<span id="L273"><a href="#L273">273</a>         (MvPolynomial.monomial (phaseExponent a p) (1 : k)) := by</span>
+<span id="L274"><a href="#L274">274</a>   have hphase : phaseExponent a p = 0 := by</span>
+<span id="L275"><a href="#L275">275</a>     ext i</span>
+<span id="L276"><a href="#L276">276</a>     cases i with</span>
+<span id="L277"><a href="#L277">277</a>     | inl i =&gt; exact Fin.elim0 i</span>
+<span id="L278"><a href="#L278">278</a>     | inr i =&gt; exact Fin.elim0 i</span>
+<span id="L279"><a href="#L279">279</a>   rw [hphase]</span>
+<span id="L280"><a href="#L280">280</a>   simp [presentedOrderedMonomial, principal_one_bernstein, Finsupp.weight_apply]</span>
+<span id="L281"><a href="#L281">281</a> </span>
+<span id="L282"><a href="#L282">282</a> theorem algHom_orderedMonomial_principal_succ</span>
+<span id="L283"><a href="#L283">283</a>     {n r : ℕ}</span>
+<span id="L284"><a href="#L284">284</a>     (ih : ∀ (f : WeylAlg k n →ₐ[k] WeylAlg k r)</span>
+<span id="L285"><a href="#L285">285</a>       (_hgen : ∀ i : PhaseVar n,</span>
+<span id="L286"><a href="#L286">286</a>         f (freeWeylGenerator (standardForm k n) i) ∈</span>
+<span id="L287"><a href="#L287">287</a>           bernsteinPiece k r 1)</span>
+<span id="L288"><a href="#L288">288</a>       (g : PhaseVar n → SymbolRing k r),</span>
+<span id="L289"><a href="#L289">289</a>       (∀ i,</span>
+<span id="L290"><a href="#L290">290</a>         presentedPrincipalComponent k (@bernsteinWeight r) 1</span>
+<span id="L291"><a href="#L291">291</a>             (f (freeWeylGenerator (standardForm k n) i)) = g i) →</span>
+<span id="L292"><a href="#L292">292</a>       ∀ (a p : Fin n → ℕ),</span>
+<span id="L293"><a href="#L293">293</a>         presentedPrincipalComponent k (@bernsteinWeight r)</span>
+<span id="L294"><a href="#L294">294</a>             (Finsupp.weight (@bernsteinWeight n) (phaseExponent a p))</span>
+<span id="L295"><a href="#L295">295</a>             (f (presentedOrderedMonomial k n a p)) =</span>
+<span id="L296"><a href="#L296">296</a>           MvPolynomial.aeval g</span>
+<span id="L297"><a href="#L297">297</a>             (MvPolynomial.monomial (phaseExponent a p) (1 : k)))</span>
+<span id="L298"><a href="#L298">298</a>     (f : WeylAlg k (n + 1) →ₐ[k] WeylAlg k r)</span>
+<span id="L299"><a href="#L299">299</a>     (hgen : ∀ i : PhaseVar (n + 1),</span>
+<span id="L300"><a href="#L300">300</a>       f (freeWeylGenerator (standardForm k (n + 1)) i) ∈</span>
+<span id="L301"><a href="#L301">301</a>         bernsteinPiece k r 1)</span>
+<span id="L302"><a href="#L302">302</a>     (g : PhaseVar (n + 1) → SymbolRing k r)</span>
+<span id="L303"><a href="#L303">303</a>     (hprincipal : ∀ i,</span>
+<span id="L304"><a href="#L304">304</a>       presentedPrincipalComponent k (@bernsteinWeight r) 1</span>
+<span id="L305"><a href="#L305">305</a>           (f (freeWeylGenerator (standardForm k (n + 1)) i)) = g i)</span>
+<span id="L306"><a href="#L306">306</a>     (a p : Fin (n + 1) → ℕ) :</span>
+<span id="L307"><a href="#L307">307</a>     presentedPrincipalComponent k (@bernsteinWeight r)</span>
+<span id="L308"><a href="#L308">308</a>         (Finsupp.weight (@bernsteinWeight (n + 1)) (phaseExponent a p))</span>
+<span id="L309"><a href="#L309">309</a>         (f (presentedOrderedMonomial k (n + 1) a p)) =</span>
+<span id="L310"><a href="#L310">310</a>       MvPolynomial.aeval g</span>
+<span id="L311"><a href="#L311">311</a>         (MvPolynomial.monomial (phaseExponent a p) (1 : k)) := by</span>
+<span id="L312"><a href="#L312">312</a>   let fold : WeylAlg k n →ₐ[k] WeylAlg k r :=</span>
+<span id="L313"><a href="#L313">313</a>     f.comp (previousWeylEmbedding k n)</span>
+<span id="L314"><a href="#L314">314</a>   let gold : PhaseVar n → SymbolRing k r := fun i =&gt; g (Stafford38FixedSourceChallenge.oldIndex i)</span>
+<span id="L315"><a href="#L315">315</a>   have hfold : ∀ i : PhaseVar n,</span>
+<span id="L316"><a href="#L316">316</a>       fold (freeWeylGenerator (standardForm k n) i) ∈</span>
+<span id="L317"><a href="#L317">317</a>         bernsteinPiece k r 1 := by</span>
+<span id="L318"><a href="#L318">318</a>     intro i</span>
+<span id="L319"><a href="#L319">319</a>     simpa [fold, oldGenerator] using hgen (Stafford38FixedSourceChallenge.oldIndex i)</span>
+<span id="L320"><a href="#L320">320</a>   have hfoldprincipal : ∀ i,</span>
+<span id="L321"><a href="#L321">321</a>       presentedPrincipalComponent k (@bernsteinWeight r) 1</span>
+<span id="L322"><a href="#L322">322</a>           (fold (freeWeylGenerator (standardForm k n) i)) = gold i := by</span>
+<span id="L323"><a href="#L323">323</a>     intro i</span>
+<span id="L324"><a href="#L324">324</a>     simpa [fold, gold, oldGenerator] using hprincipal (Stafford38FixedSourceChallenge.oldIndex i)</span>
+<span id="L325"><a href="#L325">325</a>   let aold : Fin n → ℕ := fun i =&gt; a i.succ</span>
+<span id="L326"><a href="#L326">326</a>   let pold : Fin n → ℕ := fun i =&gt; p i.succ</span>
+<span id="L327"><a href="#L327">327</a>   let d := Finsupp.weight (@bernsteinWeight n) (phaseExponent aold pold)</span>
+<span id="L328"><a href="#L328">328</a>   have holdmem := algHom_orderedMonomial_mem_bernstein_all k n fold hfold aold pold</span>
+<span id="L329"><a href="#L329">329</a>   have holdprincipal := ih fold hfold gold hfoldprincipal aold pold</span>
+<span id="L330"><a href="#L330">330</a>   have hx := hgen (.inl 0)</span>
+<span id="L331"><a href="#L331">331</a>   have hp := hgen (.inr 0)</span>
+<span id="L332"><a href="#L332">332</a>   have hxa := pow_mem_bernsteinPiece k hx (a 0)</span>
+<span id="L333"><a href="#L333">333</a>   have hpp := pow_mem_bernsteinPiece k hp (p 0)</span>
+<span id="L334"><a href="#L334">334</a>   have hfirst := presentedPrincipalComponent_mul_bernstein k holdmem hxa</span>
+<span id="L335"><a href="#L335">335</a>   rw [pow_principal_bernstein k hx] at hfirst</span>
+<span id="L336"><a href="#L336">336</a>   have hfirstmem := mul_mem_bernsteinPiece k holdmem hxa</span>
+<span id="L337"><a href="#L337">337</a>   have hsecond := presentedPrincipalComponent_mul_bernstein k hfirstmem hpp</span>
+<span id="L338"><a href="#L338">338</a>   rw [pow_principal_bernstein k hp, hfirst, holdprincipal,</span>
+<span id="L339"><a href="#L339">339</a>     hprincipal (.inl 0), hprincipal (.inr 0)] at hsecond</span>
+<span id="L340"><a href="#L340">340</a>   have hf : f (presentedOrderedMonomial k (n + 1) a p) =</span>
+<span id="L341"><a href="#L341">341</a>       fold (presentedOrderedMonomial k n aold pold) *</span>
+<span id="L342"><a href="#L342">342</a>         f (presentedCoordinate k n) ^ a 0 *</span>
+<span id="L343"><a href="#L343">343</a>         f (presentedMomentum k n) ^ p 0 := by</span>
+<span id="L344"><a href="#L344">344</a>     rw [presentedOrderedMonomial, map_mul, map_mul, map_pow, map_pow]</span>
+<span id="L345"><a href="#L345">345</a>     rfl</span>
+<span id="L346"><a href="#L346">346</a>   rw [hf, monomialWeight_phaseExponent_succ_bernstein]</span>
+<span id="L347"><a href="#L347">347</a>   change presentedPrincipalComponent k (@bernsteinWeight r)</span>
+<span id="L348"><a href="#L348">348</a>       (d + a 0 + p 0)</span>
+<span id="L349"><a href="#L349">349</a>       (fold (presentedOrderedMonomial k n aold pold) *</span>
+<span id="L350"><a href="#L350">350</a>         f (presentedCoordinate k n) ^ a 0 *</span>
+<span id="L351"><a href="#L351">351</a>         f (presentedMomentum k n) ^ p 0) = _</span>
+<span id="L352"><a href="#L352">352</a>   rw [phaseMonomial_succ_decompose]</span>
+<span id="L353"><a href="#L353">353</a>   simp only [map_mul, map_pow, MvPolynomial.aeval_X]</span>
+<span id="L354"><a href="#L354">354</a>   rw [MvPolynomial.aeval_rename]</span>
+<span id="L355"><a href="#L355">355</a>   exact hsecond</span>
+<span id="L356"><a href="#L356">356</a> </span>
+<span id="L357"><a href="#L357">357</a> theorem algHom_orderedMonomial_principal_all {r : ℕ} :</span>
+<span id="L358"><a href="#L358">358</a>     ∀ (n : ℕ) (f : WeylAlg k n →ₐ[k] WeylAlg k r)</span>
+<span id="L359"><a href="#L359">359</a>       (_hgen : ∀ i : PhaseVar n,</span>
+<span id="L360"><a href="#L360">360</a>         f (freeWeylGenerator (standardForm k n) i) ∈</span>
+<span id="L361"><a href="#L361">361</a>           bernsteinPiece k r 1)</span>
+<span id="L362"><a href="#L362">362</a>       (g : PhaseVar n → SymbolRing k r),</span>
+<span id="L363"><a href="#L363">363</a>       (∀ i,</span>
+<span id="L364"><a href="#L364">364</a>         presentedPrincipalComponent k (@bernsteinWeight r) 1</span>
+<span id="L365"><a href="#L365">365</a>             (f (freeWeylGenerator (standardForm k n) i)) = g i) →</span>
+<span id="L366"><a href="#L366">366</a>       ∀ (a p : Fin n → ℕ),</span>
+<span id="L367"><a href="#L367">367</a>         presentedPrincipalComponent k (@bernsteinWeight r)</span>
+<span id="L368"><a href="#L368">368</a>             (Finsupp.weight (@bernsteinWeight n) (phaseExponent a p))</span>
+<span id="L369"><a href="#L369">369</a>             (f (presentedOrderedMonomial k n a p)) =</span>
+<span id="L370"><a href="#L370">370</a>           MvPolynomial.aeval g</span>
+<span id="L371"><a href="#L371">371</a>             (MvPolynomial.monomial (phaseExponent a p) (1 : k))</span>
+<span id="L372"><a href="#L372">372</a>   | 0 =&gt; fun f _ g _ =&gt; algHom_orderedMonomial_principal_zero k f g</span>
+<span id="L373"><a href="#L373">373</a>   | n + 1 =&gt; algHom_orderedMonomial_principal_succ k</span>
+<span id="L374"><a href="#L374">374</a>       (algHom_orderedMonomial_principal_all n)</span>
+<span id="L375"><a href="#L375">375</a> </span>
+<span id="L376"><a href="#L376">376</a> theorem algHom_principal_compatibility {n r N : ℕ}</span>
+<span id="L377"><a href="#L377">377</a>     (f : WeylAlg k n →ₐ[k] WeylAlg k r)</span>
+<span id="L378"><a href="#L378">378</a>     (hgen : ∀ i : PhaseVar n,</span>
+<span id="L379"><a href="#L379">379</a>       f (freeWeylGenerator (standardForm k n) i) ∈</span>
+<span id="L380"><a href="#L380">380</a>         bernsteinPiece k r 1)</span>
+<span id="L381"><a href="#L381">381</a>     (g : PhaseVar n → SymbolRing k r)</span>
+<span id="L382"><a href="#L382">382</a>     (hprincipal : ∀ i,</span>
+<span id="L383"><a href="#L383">383</a>       presentedPrincipalComponent k (@bernsteinWeight r) 1</span>
+<span id="L384"><a href="#L384">384</a>           (f (freeWeylGenerator (standardForm k n) i)) = g i)</span>
+<span id="L385"><a href="#L385">385</a>     {z : WeylAlg k n} (hz : z ∈ bernsteinPiece k n N) :</span>
+<span id="L386"><a href="#L386">386</a>     presentedPrincipalComponent k (@bernsteinWeight r) N (f z) =</span>
+<span id="L387"><a href="#L387">387</a>       MvPolynomial.aeval g</span>
+<span id="L388"><a href="#L388">388</a>         (presentedPrincipalComponent k (@bernsteinWeight n) N z) := by</span>
+<span id="L389"><a href="#L389">389</a>   rw [bernsteinPiece, presentedWeightPiece_eq_span] at hz</span>
+<span id="L390"><a href="#L390">390</a>   induction hz using Submodule.span_induction with</span>
+<span id="L391"><a href="#L391">391</a>   | mem b hb =&gt;</span>
+<span id="L392"><a href="#L392">392</a>       obtain ⟨m, hm, rfl⟩ := hb</span>
+<span id="L393"><a href="#L393">393</a>       let d := Finsupp.weight (@bernsteinWeight n) m</span>
+<span id="L394"><a href="#L394">394</a>       have hmapmem : f (presentedPBWBasis k n m) ∈ bernsteinPiece k r d := by</span>
+<span id="L395"><a href="#L395">395</a>         rw [presentedPBWBasis_apply]</span>
+<span id="L396"><a href="#L396">396</a>         have h := algHom_orderedMonomial_mem_bernstein_all k n f hgen</span>
+<span id="L397"><a href="#L397">397</a>           (fun i =&gt; m (.inl i)) (fun i =&gt; m (.inr i))</span>
+<span id="L398"><a href="#L398">398</a>         rw [phaseExponent_split] at h</span>
+<span id="L399"><a href="#L399">399</a>         exact h</span>
+<span id="L400"><a href="#L400">400</a>       by_cases hd : d = N</span>
+<span id="L401"><a href="#L401">401</a>       · subst N</span>
+<span id="L402"><a href="#L402">402</a>         rw [presentedPrincipalComponent_basis, if_pos rfl,</span>
+<span id="L403"><a href="#L403">403</a>           presentedPBWBasis_apply]</span>
+<span id="L404"><a href="#L404">404</a>         have h := algHom_orderedMonomial_principal_all k n f hgen g hprincipal</span>
+<span id="L405"><a href="#L405">405</a>           (fun i =&gt; m (.inl i)) (fun i =&gt; m (.inr i))</span>
+<span id="L406"><a href="#L406">406</a>         rw [phaseExponent_split] at h</span>
+<span id="L407"><a href="#L407">407</a>         exact h</span>
+<span id="L408"><a href="#L408">408</a>       · have hdlt : d &lt; N := lt_of_le_of_ne hm hd</span>
+<span id="L409"><a href="#L409">409</a>         rw [presentedPrincipalComponent_eq_zero_of_mem_of_lt k</span>
+<span id="L410"><a href="#L410">410</a>           (@bernsteinWeight r) (f (presentedPBWBasis k n m)) hmapmem hdlt,</span>
+<span id="L411"><a href="#L411">411</a>           presentedPrincipalComponent_basis, if_neg hd, map_zero]</span>
+<span id="L412"><a href="#L412">412</a>   | zero =&gt; simp</span>
+<span id="L413"><a href="#L413">413</a>   | add x y hx hy ihx ihy =&gt;</span>
+<span id="L414"><a href="#L414">414</a>       simp only [map_add]</span>
+<span id="L415"><a href="#L415">415</a>       rw [ihx, ihy]</span>
+<span id="L416"><a href="#L416">416</a>   | smul c x hx ih =&gt;</span>
+<span id="L417"><a href="#L417">417</a>       simp only [map_smul]</span>
+<span id="L418"><a href="#L418">418</a>       rw [ih]</span>
+<span id="L419"><a href="#L419">419</a> </span>
+<span id="L420"><a href="#L420">420</a> theorem standardSymplecticAlgHom_principal_compatibility {n N : ℕ}</span>
+<span id="L421"><a href="#L421">421</a>     (M : Matrix (PhaseVar n) (PhaseVar n) k)</span>
+<span id="L422"><a href="#L422">422</a>     (hM : M * standardForm k n * Matrix.transpose M = standardForm k n)</span>
+<span id="L423"><a href="#L423">423</a>     {z : WeylAlg k n} (hz : z ∈ bernsteinPiece k n N) :</span>
+<span id="L424"><a href="#L424">424</a>     presentedPrincipalComponent k (@bernsteinWeight n) N</span>
+<span id="L425"><a href="#L425">425</a>         (standardSymplecticAlgHom k M hM z) =</span>
+<span id="L426"><a href="#L426">426</a>       symbolLinearAlgHom k M</span>
+<span id="L427"><a href="#L427">427</a>         (presentedPrincipalComponent k (@bernsteinWeight n) N z) := by</span>
+<span id="L428"><a href="#L428">428</a>   exact algHom_principal_compatibility k</span>
+<span id="L429"><a href="#L429">429</a>     (standardSymplecticAlgHom k M hM)</span>
+<span id="L430"><a href="#L430">430</a>     (fun i =&gt; by</span>
+<span id="L431"><a href="#L431">431</a>       rw [standardSymplecticAlgHom_generator]</span>
+<span id="L432"><a href="#L432">432</a>       exact linearCombination_mem_bernsteinPiece k M i)</span>
+<span id="L433"><a href="#L433">433</a>     (symbolLinearCombination k M)</span>
+<span id="L434"><a href="#L434">434</a>     (fun i =&gt; by</span>
+<span id="L435"><a href="#L435">435</a>       rw [standardSymplecticAlgHom_generator]</span>
+<span id="L436"><a href="#L436">436</a>       exact principal_linearCombination k M i) hz</span>
+<span id="L437"><a href="#L437">437</a> </span>
+<span id="L438"><a href="#L438">438</a> /- Exact statement pins for the two exported compatibility conclusions. -/</span>
+<span id="L439"><a href="#L439">439</a> example {n N : ℕ}</span>
+<span id="L440"><a href="#L440">440</a>     (M : Matrix (PhaseVar n) (PhaseVar n) k)</span>
+<span id="L441"><a href="#L441">441</a>     (hM : M * standardForm k n * Matrix.transpose M = standardForm k n)</span>
+<span id="L442"><a href="#L442">442</a>     {z : WeylAlg k n} (hz : z ∈ bernsteinPiece k n N) :</span>
+<span id="L443"><a href="#L443">443</a>     standardSymplecticAlgHom k M hM z ∈ bernsteinPiece k n N :=</span>
+<span id="L444"><a href="#L444">444</a>   standardSymplecticAlgHom_preserves_bernsteinPiece k M hM hz</span>
+<span id="L445"><a href="#L445">445</a> </span>
+<span id="L446"><a href="#L446">446</a> example {n N : ℕ}</span>
+<span id="L447"><a href="#L447">447</a>     (M : Matrix (PhaseVar n) (PhaseVar n) k)</span>
+<span id="L448"><a href="#L448">448</a>     (hM : M * standardForm k n * Matrix.transpose M = standardForm k n)</span>
+<span id="L449"><a href="#L449">449</a>     {z : WeylAlg k n} (hz : z ∈ bernsteinPiece k n N) :</span>
+<span id="L450"><a href="#L450">450</a>     presentedPrincipalComponent k (@bernsteinWeight n) N</span>
+<span id="L451"><a href="#L451">451</a>         (standardSymplecticAlgHom k M hM z) =</span>
+<span id="L452"><a href="#L452">452</a>       symbolLinearAlgHom k M</span>
+<span id="L453"><a href="#L453">453</a>         (presentedPrincipalComponent k (@bernsteinWeight n) N z) :=</span>
+<span id="L454"><a href="#L454">454</a>   standardSymplecticAlgHom_principal_compatibility k M hM hz</span>
+<span id="L455"><a href="#L455">455</a> </span>
+<span id="L456"><a href="#L456">456</a> #print axioms normalForm_linearCombination</span>
+<span id="L457"><a href="#L457">457</a> #print axioms linearCombination_mem_bernsteinPiece</span>
+<span id="L458"><a href="#L458">458</a> #print axioms principal_linearCombination</span>
+<span id="L459"><a href="#L459">459</a> #print axioms algHom_orderedMonomial_mem_bernstein_all</span>
+<span id="L460"><a href="#L460">460</a> #print axioms algHom_preserves_bernsteinPiece</span>
+<span id="L461"><a href="#L461">461</a> #print axioms standardSymplecticAlgHom_preserves_bernsteinPiece</span>
+<span id="L462"><a href="#L462">462</a> #print axioms phaseMonomial_succ_decompose</span>
+<span id="L463"><a href="#L463">463</a> #print axioms pow_principal_bernstein</span>
+<span id="L464"><a href="#L464">464</a> #print axioms algHom_orderedMonomial_principal_all</span>
+<span id="L465"><a href="#L465">465</a> #print axioms algHom_principal_compatibility</span>
+<span id="L466"><a href="#L466">466</a> #print axioms standardSymplecticAlgHom_principal_compatibility</span>
+<span id="L467"><a href="#L467">467</a> </span>
+<span id="L468"><a href="#L468">468</a> end</span>
+<span id="L469"><a href="#L469">469</a> end Stafford38.WeylSymbolCompatibility</span>
+<span id="L470"><a href="#L470">470</a> </span></pre>

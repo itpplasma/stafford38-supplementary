@@ -3,6 +3,9 @@ Stafford’s Conjecture 3.8: paper and Lean proof comparison.
 Manuscript and curated correspondence: CC BY 4.0, Christopher Albert et al.
 The paper-lean-audit generator: Apache-2.0.
 KaTeX and its fonts: MIT; see LICENSES/KaTeX-MIT.txt for attribution.
-Linked Lean, Mathlib, AlgebraicAnalysis and GlobalStafford sources retain
+Embedded and linked Lean, Mathlib, AlgebraicAnalysis and GlobalStafford sources retain
 their respective licenses and attributions. Exact source revisions are in
 manifest.json. The manuscript license is in LICENSES/manuscript-CC-BY-4.0.txt.
+The formal-source pages and changes are under Apache-2.0; see
+LICENSES/generator-Apache-2.0.txt. Modified sources are identified by the
+local review draft and its canonical-definitions change records.
