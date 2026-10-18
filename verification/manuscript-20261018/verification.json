@@ -1,0 +1,93 @@
+{
+  "status": "passed",
+  "paper": {
+    "repo": "itpplasma/stafford38-paper",
+    "commit": "8834966c58b41b8a7eb7af76f15d15f71d43af23",
+    "file": "human_readable_main.tex",
+    "origin_repo": "itpplasma/stafford38-paper",
+    "origin_commit": "8834966c58b41b8a7eb7af76f15d15f71d43af23",
+    "sha256": "fbec43000e00ddd87eef45c174275d8a37675c8260bcc05115303ef552c47b5a",
+    "label": "Paper (Overleaf update)",
+    "local_source_base": "./sources/paper",
+    "note": "October 18 Overleaf update, preserved verbatim. Excluded comment environments are not current manuscript passages.",
+    "snapshot": {
+      "base": "sources/paper/raw",
+      "files": {
+        "human_readable_main.tex": "fbec43000e00ddd87eef45c174275d8a37675c8260bcc05115303ef552c47b5a",
+        "references.bib": "6f58084d3a27f00c5331684d1e03b7d7b5a9d478da0cddac5b849079e05572b1",
+        "ai_review.tex": "fb502582c8e0f88544098d1aba063ea68e0674545dfe723778dcdbbede891edd"
+      }
+    }
+  },
+  "generator": {
+    "repo": "itpplasma/paper-lean-audit",
+    "commit": "5953b27ba1567bbcf398647b5e748210509c69bc",
+    "version": "manuscript-20261018",
+    "base_commit": "065db3e1fbc9001071422e9c66db36c0ef7da394",
+    "bundle": "verification/manuscript-20261018/generator.bundle"
+  },
+  "manuscript_cards": 58,
+  "active_statements": 36,
+  "manuscript_snapshot_byte_identical": true,
+  "paper_worktree_unchanged": true,
+  "formal_source_pins_unchanged": true,
+  "reader_build": {
+    "status": "passed",
+    "warnings": [
+      "def:conormal",
+      "thm:asymptotic-conormal"
+    ],
+    "scope": "Complete current source/reference and statement-coverage audit; warnings are unresolved references already present in the paper."
+  },
+  "generator_tests": {
+    "passed": 67,
+    "failed": 0,
+    "skipped": 1,
+    "scope": "Non-browser generator regression suite",
+    "skip_reason": "Historical sibling-paper fixture unavailable; current manuscript passes the actual pinned build."
+  },
+  "browser": {
+    "status": "passed",
+    "cards": 58,
+    "paper": "8834966c58b41b8a7eb7af76f15d15f71d43af23",
+    "source_links": 1759,
+    "definition_links": "all targets present",
+    "canonical_weyl_definitions": 1,
+    "ownership_labels": true,
+    "definition_clicks": true,
+    "new_cards": 7,
+    "obsolete_cards_absent": true,
+    "paper_source_links_local": true,
+    "search": true,
+    "guided_navigation": true,
+    "manuscript_annotations": true,
+    "notes_reload": true,
+    "review_export": true,
+    "review_findings": 5,
+    "math_errors": 0,
+    "mobile_overflow": false,
+    "javascript_errors": [],
+    "offline_requests": 0
+  },
+  "paper_pdf": {
+    "sha256": "893a2ccbc3f0665ee55a48419933fe9d46713127fe05f41bde8445fad080319f",
+    "source_commit": "8834966c58b41b8a7eb7af76f15d15f71d43af23",
+    "build": "latexmk -pdf -interaction=nonstopmode -halt-on-error human_readable_main.tex",
+    "isolated_checkout": true,
+    "unresolved_references": [
+      "def:conormal",
+      "thm:asymptotic-conormal"
+    ]
+  },
+  "proof_details_pdf": {
+    "status": "retained",
+    "sha256": "a043efcace06d6fee04f2cbc205a93a53f0999c01cb9e45e4399a435215bd8de",
+    "scope": "Historical readable account of the pinned formal proof; not a regenerated account of the revised printed proof."
+  },
+  "comparison_review": {
+    "johanna": "pending",
+    "max": "pending",
+    "findings": 5
+  },
+  "html_sha256": "382cf8473abdefe54e71f5366e6f1fefb29b6625535583588b83e64e73695438"
+}

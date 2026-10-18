@@ -1,16 +1,26 @@
 {
   "schema": 2,
-  "version": "0.2.3-canonical-review",
+  "version": "0.2.4-manuscript-review",
   "reader": "https://itpplasma.github.io/stafford38-supplementary/",
   "sources": {
     "paper": {
-      "repo": "itpplasma/stafford38-formal",
-      "commit": "9f6ca3241edcf88da42a3a000f25514d105e2f30",
-      "file": "docs/paper-lean-audit/manuscript/human_readable_main.tex",
-      "note": "Final P7/S7 review cites both verified releases. Mathematical text and formal-source links unchanged since corrected companion P6/S6/R131.",
+      "repo": "itpplasma/stafford38-paper",
+      "commit": "8834966c58b41b8a7eb7af76f15d15f71d43af23",
+      "file": "human_readable_main.tex",
       "origin_repo": "itpplasma/stafford38-paper",
-      "origin_commit": "760c68d2d79a8fd2c4b58f35f32dd90969591300",
-      "sha256": "f5699fde5961488d41fd631f67c55a4442b55001e2ba8776ebbf12bd568f5bb6"
+      "origin_commit": "8834966c58b41b8a7eb7af76f15d15f71d43af23",
+      "sha256": "fbec43000e00ddd87eef45c174275d8a37675c8260bcc05115303ef552c47b5a",
+      "label": "Paper (Overleaf update)",
+      "local_source_base": "./sources/paper",
+      "note": "October 18 Overleaf update, preserved verbatim. Excluded comment environments are not current manuscript passages.",
+      "snapshot": {
+        "base": "sources/paper/raw",
+        "files": {
+          "human_readable_main.tex": "fbec43000e00ddd87eef45c174275d8a37675c8260bcc05115303ef552c47b5a",
+          "references.bib": "6f58084d3a27f00c5331684d1e03b7d7b5a9d478da0cddac5b849079e05572b1",
+          "ai_review.tex": "fb502582c8e0f88544098d1aba063ea68e0674545dfe723778dcdbbede891edd"
+        }
+      }
     },
     "formal": {
       "repo": "itpplasma/stafford38-formal",
@@ -43,36 +53,50 @@
   },
   "generator": {
     "repo": "itpplasma/paper-lean-audit",
-    "commit": "162f62b7aab437a9a1a5edf6dfb96178ae42f00d",
-    "version": "canonical-review",
+    "commit": "5953b27ba1567bbcf398647b5e748210509c69bc",
+    "version": "manuscript-20261018",
     "base_commit": "065db3e1fbc9001071422e9c66db36c0ef7da394",
-    "bundle": "verification/canonical-definitions/generator.bundle"
+    "bundle": "verification/manuscript-20261018/generator.bundle"
   },
   "manuscript_pdfs": {
-    "source_receipt": {
-      "repo": "itpplasma/stafford38-formal",
-      "commit": "168b3a75ad20798ae5877fdf33cd121ff3a14b90",
-      "file": "docs/paper-lean-audit/review-pdfs.json",
-      "sha256": "548ca4d908b996fb0456b02a26a3e2b9a1d8bda4ad62210d07303fb14c13ef2a"
+    "paper": {
+      "sha256": "893a2ccbc3f0665ee55a48419933fe9d46713127fe05f41bde8445fad080319f",
+      "source_commit": "8834966c58b41b8a7eb7af76f15d15f71d43af23",
+      "build": "latexmk -pdf -interaction=nonstopmode -halt-on-error human_readable_main.tex",
+      "isolated_checkout": true,
+      "unresolved_references": [
+        "def:conormal",
+        "thm:asymptotic-conormal"
+      ]
     },
-    "build": "latexmk -pdf main.tex; latexmk -pdf human_readable_main.tex; latexmk -pdf lean_proof_details.tex"
+    "proof_details": {
+      "status": "retained",
+      "sha256": "a043efcace06d6fee04f2cbc205a93a53f0999c01cb9e45e4399a435215bd8de",
+      "scope": "Historical readable account of the pinned formal proof; not a regenerated account of the revised printed proof.",
+      "historical_source_receipt": {
+        "repo": "itpplasma/stafford38-formal",
+        "commit": "168b3a75ad20798ae5877fdf33cd121ff3a14b90",
+        "file": "docs/paper-lean-audit/review-pdfs.json",
+        "sha256": "548ca4d908b996fb0456b02a26a3e2b9a1d8bda4ad62210d07303fb14c13ef2a"
+      }
+    }
   },
   "review": {
-    "claims": 57,
+    "claims": 58,
     "statement_relations": {
-      "partial": 8,
-      "lean-stronger": 9,
+      "partial": 14,
+      "lean-stronger": 7,
       "equivalent": 11,
-      "exact": 21,
-      "n/a": 8
+      "exact": 19,
+      "n/a": 7
     },
     "proof_routes": {
-      "n/a": 25,
-      "same": 18,
-      "similar": 13,
+      "n/a": 26,
+      "same": 16,
+      "similar": 15,
       "lean-only": 1
     },
-    "scope": "Current proposed corrected manuscript text at the pinned paper source. The author proof and marked corrections remain available through manuscript annotations; Johanna and Max have not yet accepted the changes.",
+    "scope": "The active October 18 manuscript, including visible AI markup. Comment environments are excluded. Unchanged Lean source pins retain their previous verification scope; updated printed proofs require fresh human correspondence review.",
     "johanna": "pending",
     "max": "pending"
   },
@@ -90,13 +114,16 @@
     "LICENSES/generator-Apache-2.0.txt": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
     "LICENSES/manuscript-CC-BY-4.0.txt": "98b6fde2693d4044dce4a071640e90bd8d250dd789d9033dbd5b77c79f389de4",
     "NOTICE": "203492e6a24996e31d976b06a52a479c08af9904501940296d4a422e95834851",
-    "README.md": "c16a8b1aae9a43ef0396b830d47cf8f7a79e49a2dd6b2deda3a61ef1a3effb29",
-    "human_readable_main.pdf": "7f3b5f3b2c498a1452a19cc2f4877638a48598a07f482daf9a166b44e764a32c",
-    "index.html": "0fbbe7a6af7003b0019fdae7c9425142ee1ca8e1ddcef3a056c0c99c987afeb2",
+    "README.md": "c49f0dcc68fa1713b38171fad6d4517e6857f781028f38fbcec8571071713ba7",
+    "human_readable_main.pdf": "893a2ccbc3f0665ee55a48419933fe9d46713127fe05f41bde8445fad080319f",
+    "index.html": "382cf8473abdefe54e71f5366e6f1fefb29b6625535583588b83e64e73695438",
     "lean_proof_details.pdf": "a043efcace06d6fee04f2cbc205a93a53f0999c01cb9e45e4399a435215bd8de",
-    "paper-lean-map.json": "7559398e972156fd14febfbd3e6149d17deddc1fd1d3465ccbd41fbec0a98aeb",
+    "paper-lean-map.json": "0a11f2eecb82b0cd24f423386fb3b9cb6cf75dcda972d25ece327cc233fe6803",
+    "scripts/check-reader-cdp.mjs": "76eba27b2ce0457d7d634edd20f710038e408e1159845a99f17c6b7b3d92676f",
     "scripts/check-reader.mjs": "9248c6caf236d3ac1b0592bc650494c0fccc1ce91856ee9489424dfd005e6be0",
-    "scripts/rebuild.py": "bee30826d6de9f46bc8d6c2b33129cc03e855e203af1cf3f78e6bd7b53ad4f97",
+    "scripts/rebuild.py": "d7f3466398306a0f8da70c95369a215ae45c0fcc631a46639ac36a91afe87b69",
+    "scripts/record-manuscript-verification.py": "aab9dc0dc9c05025f4aa95ac830be32f92ace795512c9313d8427181faa17488",
+    "scripts/update-manuscript.py": "2c289a528265adedae0e1e0dba2c0f83cc0a8a40d578ca081514388efb6336b3",
     "sources/formal/AlternativeFixedSourceSolution.lean.html": "bf7bac4287e2589395fc8b49ce3305497ea820ed0057e484bd67db0d5821e812",
     "sources/formal/AlternativeSolution.lean.html": "74ed843fe9ab3ceaa45d612cacda0a6697bcdd4d533259591bce1a69298f7f7f",
     "sources/formal/Challenge.lean.html": "34d874fbb213fa11d5a99e30419f0b37ec6434c3bc952a364b4f750d76b77f95",
@@ -244,28 +271,41 @@
     "sources/formal/proofs/weyl_pure_power.lean.html": "c13b6806a367145230c65bf189fa957181e7344478b875e1c68cfa8ea5ad519d",
     "sources/formal/tests/PaperPairConsumer.lean.html": "190e0d22cba1bc200d206ec7ea123d9e119a9fdef57d4c2c252c2c1a67279eae",
     "sources/formal/tests/TorsionCyclicityConsumer.lean.html": "80703a5ae09e7cc3fe171413989f7e02fa04b5106ea216553119d7bb54ff8920",
+    "sources/paper/human_readable_main.tex.html": "185f584091cc9623cf0f0d23e785ca3787c55eac4d618e40c8e849d50e6a0315",
+    "sources/paper/raw/ai_review.tex": "fb502582c8e0f88544098d1aba063ea68e0674545dfe723778dcdbbede891edd",
+    "sources/paper/raw/human_readable_main.tex": "fbec43000e00ddd87eef45c174275d8a37675c8260bcc05115303ef552c47b5a",
+    "sources/paper/raw/references.bib": "6f58084d3a27f00c5331684d1e03b7d7b5a9d478da0cddac5b849079e05572b1",
     "verification/canonical-definitions/README.md": "878570fa551329b607652020b6ff10d990a79f3e7bbc829056e65eebfdd55544",
     "verification/canonical-definitions/formal.bundle": "b4fee468c1512e16874df65b2d2cbf25f86908d78ac82e97b3a95c39ac5c4eb1",
     "verification/canonical-definitions/formal.patch": "b06566b90e1932d3de9af3bdd62fd86d729c9375a845b83e564244481a465a46",
     "verification/canonical-definitions/generator.bundle": "efa444744f44f4c25bede829e5758968e82069427f3db643f6ac4d46ce9d3013",
     "verification/canonical-definitions/generator.patch": "38c941bbf8f4821c2a47acf5d42c6b405e6416f85a1eb6446bd5789d40fe14c7",
-    "version.json": "b88a95316f44ba308f917fdf0d30c44ca9c1d98a6116bc21ccb4ced6693011ce",
-    "verification/canonical-definitions/logs/verify.log": "af86d130e3dd986d9e0c430adf73e63f6af88cb5e6b45cb3327c303ff5106cc8",
-    "verification/canonical-definitions/logs/kernel-comparisons.log": "edc54bbf5eeea368c1dc14885a1fe35316ccc009ec330c4d771a9c3a7177ed89",
-    "verification/canonical-definitions/logs/generator-tests.log": "d886e1f1ef18bdb565980bf2422089245eb032c0e96653258869c85ca1a11ed6",
-    "verification/canonical-definitions/logs/rebuild.log": "b705d5d3d4a83125a63c926debb2670e4907b805011453a1d83087f37019708d",
-    "verification/canonical-definitions/logs/browser.json": "9619f794dca069b2a99b219ae5f13bf181c3d91400206c2995b6ffac98c6ec19",
-    "verification/canonical-definitions/logs/comparator.log": "94020b9e97fd2e40456d0d3032aa71135272caf25e196faab3c44474213f0daa",
-    "verification/canonical-definitions/logs/comparator-fixed-source.log": "d94d008e518e62327ed2554994500bac2ad1ff60ccc73c7c4fd6ade0adcc0482",
-    "verification/canonical-definitions/logs/comparator-alternative.log": "a59fe598aa4aa700652bf3ad2b568fed5088c8587a44ef6deccd4520280608b7",
-    "verification/canonical-definitions/logs/comparator-alternative-fixed-source.log": "15265b0a8efd4f45e4bc1a4341927fc9ddf5a46be0bae7312a058d510c4b7554",
-    "verification/canonical-definitions/logs/terminal-dependency-guard.log": "6db7dbe0b39a17add146fbe0ef5afddab28e5f39163b4cddd30da20169cb2c47",
-    "verification/canonical-definitions/logs/main-solution-dependency-routes.log": "e7f51e6f98432120f9173807bb8f40d0291482876b560ec976eff52b057d85c1",
     "verification/canonical-definitions/logs/alternative-solution-dependency-routes.log": "c6a07f69830a3a971bcc9c6d909a27c9a9636def6138af8c124568591ab7d034",
-    "verification/canonical-definitions/logs/independent-consumers.log": "6340c800511fa2bc0dbae55e936071711621a574399d518c5d4aedebb24eaa3f",
-    "verification/canonical-definitions/logs/paper-declarations.log": "8c0225c596821208620d959edf8654ac00ef184f8f03788b46cda744b0d190ad",
     "verification/canonical-definitions/logs/axioms.log": "0992f70f1f92ebb258a4a9b05846c5780d6a705451fe44cd08c62e47652ff636",
-    "verification/canonical-definitions/verification.json": "a2a0fd52f69e02e952cac1f10c5563e337f202541c1ebe0b27556ca333134676"
+    "verification/canonical-definitions/logs/browser.json": "9619f794dca069b2a99b219ae5f13bf181c3d91400206c2995b6ffac98c6ec19",
+    "verification/canonical-definitions/logs/comparator-alternative-fixed-source.log": "15265b0a8efd4f45e4bc1a4341927fc9ddf5a46be0bae7312a058d510c4b7554",
+    "verification/canonical-definitions/logs/comparator-alternative.log": "a59fe598aa4aa700652bf3ad2b568fed5088c8587a44ef6deccd4520280608b7",
+    "verification/canonical-definitions/logs/comparator-fixed-source.log": "d94d008e518e62327ed2554994500bac2ad1ff60ccc73c7c4fd6ade0adcc0482",
+    "verification/canonical-definitions/logs/comparator.log": "94020b9e97fd2e40456d0d3032aa71135272caf25e196faab3c44474213f0daa",
+    "verification/canonical-definitions/logs/generator-tests.log": "d886e1f1ef18bdb565980bf2422089245eb032c0e96653258869c85ca1a11ed6",
+    "verification/canonical-definitions/logs/independent-consumers.log": "6340c800511fa2bc0dbae55e936071711621a574399d518c5d4aedebb24eaa3f",
+    "verification/canonical-definitions/logs/kernel-comparisons.log": "edc54bbf5eeea368c1dc14885a1fe35316ccc009ec330c4d771a9c3a7177ed89",
+    "verification/canonical-definitions/logs/main-solution-dependency-routes.log": "e7f51e6f98432120f9173807bb8f40d0291482876b560ec976eff52b057d85c1",
+    "verification/canonical-definitions/logs/paper-declarations.log": "8c0225c596821208620d959edf8654ac00ef184f8f03788b46cda744b0d190ad",
+    "verification/canonical-definitions/logs/rebuild.log": "b705d5d3d4a83125a63c926debb2670e4907b805011453a1d83087f37019708d",
+    "verification/canonical-definitions/logs/terminal-dependency-guard.log": "6db7dbe0b39a17add146fbe0ef5afddab28e5f39163b4cddd30da20169cb2c47",
+    "verification/canonical-definitions/logs/verify.log": "af86d130e3dd986d9e0c430adf73e63f6af88cb5e6b45cb3327c303ff5106cc8",
+    "verification/canonical-definitions/verification.json": "a2a0fd52f69e02e952cac1f10c5563e337f202541c1ebe0b27556ca333134676",
+    "verification/manuscript-20261018/README.md": "482ae5945da94f437090874478555e9fbc3e7a93683b2903f7e4e2e1f68d425c",
+    "verification/manuscript-20261018/browser.json": "16819d0cb37885a223bfb5764ff69c1feb448a906f6db9e34a9f798ac3068770",
+    "verification/manuscript-20261018/generator-tests.log": "47a00b3a306d8bb0361d2d2a4018d71cfd7d348a5b018a67a7fe692f40b29669",
+    "verification/manuscript-20261018/generator.bundle": "bfb19334e5951965cde9fff571752c0faaef1da94716b8afa5e251b8623db75a",
+    "verification/manuscript-20261018/generator.patch": "7e5057210977a56d505194540030ce2740b58daf817d3506fe2dd90cbe639681",
+    "verification/manuscript-20261018/migration.json": "ef278e766a294d52599ca10ab42907ce1d3aa503fa951e0c66d6730b455600ec",
+    "verification/manuscript-20261018/paper-build.log": "988f4a7fb3987f33c8538808182909afa57e4a0c8bea2194a466ebc37bd8603e",
+    "verification/manuscript-20261018/reader-build.log": "9f06cde14460911f2ebf739ec9ff9a13926dd14b37caece0ce258b9b76733b92",
+    "verification/manuscript-20261018/verification.json": "588dc8bd60d500989a58e0617ab3c5935edefa45a1e58a016cfccc06c7255aab",
+    "version.json": "dff240bfbd78137815d98f99b8dd1e9e897771739728cb8e9027afc169a79f8e"
   },
   "historical_release": {
     "version": "0.2.2",
@@ -316,7 +356,7 @@
       "status": "byte-verified"
     }
   },
-  "status": "local-review-draft",
+  "status": "manuscript-review-draft",
   "manuscript_sources": {
     "formal": {
       "commit": "f9448d6307fa25aff9d9f94ce0a9c7f9b03e63ff"
@@ -330,23 +370,45 @@
   },
   "checks": {
     "status": "passed",
-    "receipt": "verification/canonical-definitions/verification.json",
+    "receipt": "verification/manuscript-20261018/verification.json",
+    "reader_build": {
+      "status": "passed",
+      "warnings": [
+        "def:conormal",
+        "thm:asymptotic-conormal"
+      ],
+      "scope": "Complete current source/reference and statement-coverage audit; warnings are unresolved references already present in the paper."
+    },
     "generator_tests": {
-      "passed": 77,
+      "passed": 67,
       "failed": 0,
       "skipped": 1,
-      "skip_reason": "Historical sibling-paper fixture unavailable; pinned current manuscript passes the actual build audit."
+      "scope": "Non-browser generator regression suite",
+      "skip_reason": "Historical sibling-paper fixture unavailable; current manuscript passes the actual pinned build."
     },
     "browser": {
       "status": "passed",
+      "cards": 58,
+      "paper": "8834966c58b41b8a7eb7af76f15d15f71d43af23",
+      "source_links": 1759,
       "definition_links": "all targets present",
       "canonical_weyl_definitions": 1,
-      "local_source_links": 1771,
       "ownership_labels": true,
       "definition_clicks": true,
+      "new_cards": 7,
+      "obsolete_cards_absent": true,
+      "paper_source_links_local": true,
+      "search": true,
+      "guided_navigation": true,
+      "manuscript_annotations": true,
+      "notes_reload": true,
+      "review_export": true,
+      "review_findings": 5,
+      "math_errors": 0,
       "mobile_overflow": false,
       "javascript_errors": [],
       "offline_requests": 0
-    }
+    },
+    "scope": "Supplementary source mapping, renderer and reader behavior; not a new proof-correspondence certification."
   }
 }

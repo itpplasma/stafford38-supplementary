@@ -1,0 +1,161 @@
+diff --git a/build.mjs b/build.mjs
+index 22f678f..fb02528 100644
+--- a/build.mjs
++++ b/build.mjs
+@@ -52,6 +52,20 @@ function gitShow(repoKey, file, commit = map.sources[repoKey]?.commit) {
+     errors.push(`${repoKey}: no pinned source repository is configured for ${file}`);
+     return null;
+   }
++  const snapshot = map.sources[repoKey]?.snapshot;
++  if (snapshot && commit === map.sources[repoKey].commit) {
++    try {
++      const sourcePath = path.resolve(dirs[repoKey], file);
++      if (!sourcePath.startsWith(path.resolve(dirs[repoKey]) + path.sep)) throw new Error('unsafe snapshot path');
++      const bytes = fs.readFileSync(sourcePath);
++      if (!snapshot.files[file] || crypto.createHash('sha256').update(bytes).digest('hex') !== snapshot.files[file])
++        throw new Error('snapshot checksum mismatch');
++      return bytes.toString('utf8');
++    } catch (error) {
++      errors.push(`${repoKey}: cannot read verified snapshot ${file}: ${error.message}`);
++      return null;
++    }
++  }
+   try {
+     return execFileSync('git', ['-C', dirs[repoKey], 'show', `${commit}:${file}`], {
+       encoding: 'utf8', maxBuffer: 64 << 20, stdio: ['ignore', 'pipe', 'ignore'],
+@@ -320,6 +334,8 @@ function excerpt(range) {
+ 
+ // ------------------------------------------------------------------ lean ----
+ const fileCache = new Map();
++// Render the complete manuscript as a local source page as well as excerpts.
++fileCache.set('paper:' + paperFile, texRaw);
+ const leanIndex = new Map(); // repository-qualified declaration/file -> {source info, users}
+ function resolveLean(ref, userId) {
+   ref = { ...ref, ...(map.canonical_declarations?.[ref.name] ?? {}) };
+@@ -632,7 +648,7 @@ function card(it) {
+   }).join('');
+   const deps = (it.depends_on ?? []).map((d) => `<a href="#item-${slug(d)}">${escapeHtml(itemById[d]?.short ?? d)}</a>`).join(', ');
+   const usedBy = items.filter((o) => (o.depends_on ?? []).includes(it.id)).map((o) => `<a href="#item-${slug(o.id)}">${escapeHtml(o.short ?? o.id)}</a>`).join(', ');
+-  const texLink = it.tex_lines ? `https://github.com/${map.sources.paper.repo}/blob/${map.sources.paper.commit}/${paperFile}#L${it.tex_lines[0]}-L${it.tex_lines[1]}` : null;
++  const texLink = it.tex_lines ? ghBlob('paper', paperFile, ...it.tex_lines) : null;
+   const maxSev = (it.issues ?? []).reduce((acc, iss) => Math.max(acc, SEV[iss.severity]?.rank ?? 0), 0);
+   const guidedNav = `<nav class="guided-claim-nav" aria-label="Paper-order claim navigation">
+     ${previous ? `<a rel="prev" data-guided-visit="${escapeHtml(previous.id)}" href="#item-${slug(previous.id)}">← Previous claim</a>` : '<span class="guided-disabled" aria-disabled="true">First claim</span>'}
+@@ -657,6 +673,8 @@ function card(it) {
+   </div>
+   <details class="assess"><summary>Comparison notes</summary>
+     <div class="badges">${badge(REL, it.statement_relation, 'statement')} ${badge(ROUTE, it.route_relation, 'route')}</div>
++    ${it.comparison_updated_on && it.correspondence ? `<div class="correspondence">${md(it.correspondence)}</div>` : ''}
++    ${it.issues?.length ? `<ul class="issues">${it.issues.map(iss => issueBlock(iss, it.id)).join('')}</ul>` : ''}
+     ${stepRows ? `<table class="steps"><thead><tr><th>#</th><th>Proof step</th><th>Lean</th></tr></thead><tbody>${stepRows}</tbody></table>` : ''}
+     <div class="deps">${deps ? `Uses: ${deps}` : ''}${deps && usedBy ? ' · ' : ''}${usedBy ? `Used by: ${usedBy}` : ''}</div>
+   </details>
+@@ -796,7 +814,8 @@ const html = `<!doctype html>
+ <header class="doc-head" id="overview">
+   <h1>Stafford’s Conjecture 3.8</h1>
+   <p class="sub">Paper &amp; Lean proof</p>
+-  <div class="reader-links"><a href="./human_readable_main.pdf">Paper PDF ↗</a><a href="./lean_proof_details.pdf">Proof details PDF ↗</a></div>
++  ${map.reader_notice ? `<p class="muted reader-notice">${escapeHtml(map.reader_notice)}</p>` : ''}
++  <div class="reader-links"><a href="./human_readable_main.pdf">Paper PDF ↗</a><a href="./lean_proof_details.pdf">Formal proof details PDF ↗</a></div>
+   ${guidedItems.length ? `<div class="guided-start"><a data-guided-start href="#item-${slug(guidedItems[0].id)}">Begin reading →</a><a id="guided-resume" data-guided-resume hidden>Continue reading →</a></div>` : ''}
+ </header>
+ ${sectionHtml}
+diff --git a/test/build-validation.test.mjs b/test/build-validation.test.mjs
+index afcd896..c019d83 100644
+--- a/test/build-validation.test.mjs
++++ b/test/build-validation.test.mjs
+@@ -5,6 +5,7 @@ import fs from 'node:fs';
+ import os from 'node:os';
+ import path from 'node:path';
+ import { fileURLToPath } from 'node:url';
++import crypto from 'node:crypto';
+ 
+ const testDir = path.dirname(fileURLToPath(import.meta.url));
+ const auditDir = path.resolve(testDir, '..');
+@@ -134,6 +135,34 @@ function fixture(t) {
+     setMathlibDir: (dir) => { mathlibDir = dir; } };
+ }
+ 
++test('bundled manuscript snapshots are checked and have local source links', (t) => {
++  const f = fixture(t);
++  const files = {};
++  for (const name of ['human_readable_main.tex', 'references.bib']) {
++    files[name] = crypto.createHash('sha256').update(fs.readFileSync(path.join(f.paper.repo, name))).digest('hex');
++  }
++  f.map.sources.paper.snapshot = {files};
++  f.map.sources.paper.local_source_base = './sources/paper';
++  const result = f.run();
++  assert.equal(result.status, 0, result.stdout + result.stderr);
++  const html = fs.readFileSync(f.htmlPath, 'utf8');
++  assert.match(html, /href="\.\/sources\/paper\/human_readable_main\.tex\.html#L6"/);
++  assert.match(fs.readFileSync(path.join(path.dirname(f.htmlPath), 'sources/paper/human_readable_main.tex.html'), 'utf8'), /A covered theorem/);
++  fs.appendFileSync(path.join(f.paper.repo, 'human_readable_main.tex'), '\nTampered text.\n');
++  const bad = f.run();
++  assert.notEqual(bad.status, 0);
++  assert.match(bad.stderr, /snapshot checksum mismatch/);
++});
++
++test('excluded manuscript statements and duplicate labels do not enter the audit', (t) => {
++  const f = fixture(t);
++  fs.appendFileSync(path.join(f.paper.repo, 'human_readable_main.tex'),
++    '\n\\begin{comment}\n\\begin{theorem}\\label{not-current}Excluded.\\end{theorem}\n' +
++    '\\label{thm:covered}\\begin{equation}old\\end{equation}\n\\end{comment}\n');
++  const result = f.run();
++  assert.equal(result.status, 0, result.stdout + result.stderr);
++});
++
+ test('preserved manuscript aliases redirect to one current canonical definition', (t) => {
+   const f = fixture(t);
+   const original = f.formal.commit;
+diff --git a/test/comment-environments.test.mjs b/test/comment-environments.test.mjs
+new file mode 100644
+index 0000000..67d3022
+--- /dev/null
++++ b/test/comment-environments.test.mjs
+@@ -0,0 +1,15 @@
++import test from 'node:test';
++import assert from 'node:assert/strict';
++import {stripComments, TexRenderer} from '../texhtml.mjs';
++
++test('excluded proofs cannot override active labels or equation numbering', () => {
++  const source = 'before\n\\begin{comment}\n\\label{same}\\begin{equation}old\\end{equation}\n\\end{comment}\n\\label{same}after';
++  const clean = stripComments(source);
++  assert.equal(clean.split('\n').length, source.split('\n').length);
++  assert.equal(clean.length, source.length);
++  assert.deepEqual([...clean.matchAll(/\\label\{([^}]+)\}/g)].map(m => m[1]), ['same']);
++  assert.ok(!clean.includes('old'));
++  assert.ok(clean.endsWith('\\label{same}after'));
++  const renderer = new TexRenderer({macros: {}, refs: {}, cites: {}, eqAuto: new Map()});
++  assert.ok(!renderer.block(clean).includes('old'));
++});
+diff --git a/texhtml.mjs b/texhtml.mjs
+index 56969de..f1ac862 100644
+--- a/texhtml.mjs
++++ b/texhtml.mjs
+@@ -33,13 +33,17 @@ function detachKaTeXTag(html) {
+ }
+ 
+ export function stripComments(tex) {
+-  return tex.split('\n').map((line) => {
++  const uncommented = tex.split('\n').map((line) => {
+     for (let i = 0; i < line.length; i++) {
+       if (line[i] === '\\') { i++; continue; }
+       if (line[i] === '%') return line.slice(0, i);
+     }
+     return line;
+   }).join('\n');
++  // Excluded proofs must not contribute labels, equations or review claims.
++  // Keep newlines and offsets for links into the unmodified manuscript.
++  return uncommented.replace(/\\begin\{comment\}[\s\S]*?\\end\{comment\}/g,
++    block => block.replace(/[^\n]/g, ' '));
+ }
+ 
+ // Reads a balanced {...} group starting at s[i] === '{'. Returns [content, nextIndex].
+@@ -313,6 +317,7 @@ export class TexRenderer {
+             continue;
+           }
+           case 'end': arg(); i = j; continue;
++          case 'qed': out += '<span class="qed">∎</span>'; i = j; continue;
+           case 'AIadd': { const a = readArg(); out += `<span class="ai-add">${this.text(a.content, a.base)}</span>`; i = j; continue; }
+           case 'AIremove': { const a = readArg(); out += `<del class="ai-remove">${this.text(a.content, a.base)}</del>`; i = j; continue; }
+           case 'AIreplace': { const a = readArg(), b = readArg(); out += `<del class="ai-remove">${this.text(a.content, a.base)}</del><span class="ai-add">${this.text(b.content, b.base)}</span>`; i = j; continue; }

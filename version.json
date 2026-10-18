@@ -1,7 +1,7 @@
 {
-  "version": "0.2.3-canonical-review",
-  "paper": "9f6ca3241edcf88da42a3a000f25514d105e2f30",
+  "version": "0.2.4-manuscript-review",
+  "paper": "8834966c58b41b8a7eb7af76f15d15f71d43af23",
   "formal": "0403af3f0b1a7f84d2027121932723f67bd279ae",
-  "generator": "a43eab8a24e1fe6d",
-  "release_version": "0.2.3-canonical-review"
+  "generator": "648358d0b2bef52a",
+  "release_version": "0.2.4-manuscript-review"
 }

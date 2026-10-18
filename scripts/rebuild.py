@@ -5,6 +5,8 @@ import argparse, json, shutil, subprocess, tempfile
 parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument('--source', action='append', default=[], metavar='NAME=PATH',
                     help='Use an existing Git checkout instead of fetching this source.')
+parser.add_argument('--skip-install', action='store_true',
+                    help='Use already installed generator dependencies (offline builds).')
 args = parser.parse_args()
 overrides = {}
 for entry in args.source:
@@ -25,6 +27,8 @@ with tempfile.TemporaryDirectory(prefix='paper-lean-review-') as scratch:
     for name, source in sources.items():
         if name in overrides:
             destination = overrides[name]
+        elif source.get('snapshot'):
+            destination = root / source['snapshot']['base']
         else:
             destination = Path(scratch) / name
             subprocess.run(['git', 'init', '-q', str(destination)], check=True)
@@ -36,7 +40,8 @@ with tempfile.TemporaryDirectory(prefix='paper-lean-review-') as scratch:
             historical = mapping.get('manuscript_sources', {}).get(name, {}).get('commit')
             if historical and historical != source['commit']:
                 subprocess.run(['git', '-C', str(destination), 'fetch', '--filter=blob:none', '--depth=1', 'origin', historical], check=True)
-        subprocess.run(['git', '-C', str(destination), 'cat-file', '-e', source['commit'] + '^{commit}'], check=True)
+        if not source.get('snapshot'):
+            subprocess.run(['git', '-C', str(destination), 'cat-file', '-e', source['commit'] + '^{commit}'], check=True)
         if name == 'generator':
             if name not in overrides:
                 subprocess.run(['git', '-C', str(destination), 'checkout', '-q', source['commit']], check=True)
@@ -45,7 +50,8 @@ with tempfile.TemporaryDirectory(prefix='paper-lean-review-') as scratch:
             generator = destination
         else:
             arguments.extend(['--source', name + '=' + str(destination)])
-    subprocess.run(['npm', 'ci'], cwd=generator, check=True)
+    if not args.skip_install:
+        subprocess.run(['npm', 'ci'], cwd=generator, check=True)
     subprocess.run(['node', str(generator / 'build.mjs'), '--map', str(root / 'paper-lean-map.json'), '--check', '--out', str(root), *arguments], check=True)
 p = root / 'index.html'
 rendered = root / (mapping.get('output_stem', 'stafford38-paper-lean-audit') + '.html')
