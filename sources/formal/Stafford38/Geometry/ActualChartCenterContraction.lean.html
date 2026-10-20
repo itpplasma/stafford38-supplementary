@@ -1,0 +1,46 @@
+<!doctype html><meta charset="utf-8"><title>Stafford38/Geometry/ActualChartCenterContraction.lean</title><style>body{font:14px monospace}pre span{display:block}pre span:target{background:#fff0ad}a{color:#666}pre{white-space:pre-wrap}a.ref{color:#0645ad;text-decoration:none}a.ref:hover{text-decoration:underline}</style><h1>Stafford38/Geometry/ActualChartCenterContraction.lean</h1><p>This project (Stafford38) · 0403af3f0b1a7f84d2027121932723f67bd279ae</p><pre><span id="L1"><a href="#L1">1</a> module</span>
+<span id="L2"><a href="#L2">2</a> public import Mathlib.RingTheory.Ideal.Over</span>
+<span id="L3"><a href="#L3">3</a> </span>
+<span id="L4"><a href="#L4">4</a> @[expose] public section</span>
+<span id="L5"><a href="#L5">5</a> </span>
+<span id="L6"><a href="#L6">6</a> set_option <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Lean/Elab/AutoBound.lean#L17" title="Lean.Elab.autoImplicit">autoImplicit</a> false</span>
+<span id="L7"><a href="#L7">7</a> </span>
+<span id="L8"><a href="#L8">8</a> /-!</span>
+<span id="L9"><a href="#L9">9</a> # Contraction of the localized residue kernel</span>
+<span id="L10"><a href="#L10">10</a> </span>
+<span id="L11"><a href="#L11">11</a> The normalization-center calculation is made before coefficient</span>
+<span id="L12"><a href="#L12">12</a> localization.  Once the residue map of the localization is known to restrict</span>
+<span id="L13"><a href="#L13">13</a> to the retained residue map on the normalization, this file identifies the</span>
+<span id="L14"><a href="#L14">14</a> contracted kernel without adding any geometric assumptions.</span>
+<span id="L15"><a href="#L15">15</a> -/</span>
+<span id="L16"><a href="#L16">16</a> </span>
+<span id="L17"><a href="#L17">17</a> namespace Stafford38.Geometry.ActualChartCenterContraction</span>
+<span id="L18"><a href="#L18">18</a> </span>
+<span id="L19"><a href="#L19">19</a> universe u v w</span>
+<span id="L20"><a href="#L20">20</a> </span>
+<span id="L21"><a href="#L21">21</a> /-- Contracting the kernel of a map on an algebra is the kernel of its</span>
+<span id="L22"><a href="#L22">22</a> restriction to the original algebra. -/</span>
+<span id="L23"><a href="#L23">23</a> theorem under_ker_eq_ker_comp</span>
+<span id="L24"><a href="#L24">24</a>     {B : Type u} {A : Type v} {K : Type w}</span>
+<span id="L25"><a href="#L25">25</a>     [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Ring/Defs.lean#L228" title="CommSemiring">CommSemiring</a> B] [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Ring/Defs.lean#L228" title="CommSemiring">CommSemiring</a> A] [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Ring/Defs.lean#L228" title="CommSemiring">CommSemiring</a> K] [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Algebra/Defs.lean#L91" title="Algebra">Algebra</a> B A]</span>
+<span id="L26"><a href="#L26">26</a>     (ρ : A →+* K) :</span>
+<span id="L27"><a href="#L27">27</a>     <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Over.lean#L95" title="Ideal.under">Ideal.under</a> B (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Maps.lean#L745" title="RingHom.ker">RingHom.ker</a> ρ) =</span>
+<span id="L28"><a href="#L28">28</a>       <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Maps.lean#L745" title="RingHom.ker">RingHom.ker</a> (ρ.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Ring/Hom/Defs.lean#L582" title="RingHom.comp">comp</a> (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Algebra/Defs.lean#L97" title="Algebra.algebraMap">algebraMap</a> B A)) := by</span>
+<span id="L29"><a href="#L29">29</a>   ext b</span>
+<span id="L30"><a href="#L30">30</a>   simp [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Over.lean#L98" title="Ideal.under_def">Ideal.under_def</a>]</span>
+<span id="L31"><a href="#L31">31</a> </span>
+<span id="L32"><a href="#L32">32</a> /-- If a localized residue map extends the retained residue map, its kernel</span>
+<span id="L33"><a href="#L33">33</a> contracts to the original retained-residue kernel. -/</span>
+<span id="L34"><a href="#L34">34</a> theorem under_ker_eq_ker_of_restriction</span>
+<span id="L35"><a href="#L35">35</a>     {B : Type u} {A : Type v} {K : Type w}</span>
+<span id="L36"><a href="#L36">36</a>     [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Ring/Defs.lean#L228" title="CommSemiring">CommSemiring</a> B] [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Ring/Defs.lean#L228" title="CommSemiring">CommSemiring</a> A] [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Ring/Defs.lean#L228" title="CommSemiring">CommSemiring</a> K] [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Algebra/Defs.lean#L91" title="Algebra">Algebra</a> B A]</span>
+<span id="L37"><a href="#L37">37</a>     (ρA : A →+* K) (ρB : B →+* K)</span>
+<span id="L38"><a href="#L38">38</a>     (hρ : ρA.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Ring/Hom/Defs.lean#L582" title="RingHom.comp">comp</a> (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Algebra/Defs.lean#L97" title="Algebra.algebraMap">algebraMap</a> B A) = ρB) :</span>
+<span id="L39"><a href="#L39">39</a>     <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Over.lean#L95" title="Ideal.under">Ideal.under</a> B (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Maps.lean#L745" title="RingHom.ker">RingHom.ker</a> ρA) = <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Maps.lean#L745" title="RingHom.ker">RingHom.ker</a> ρB := by</span>
+<span id="L40"><a href="#L40">40</a>   rw [<a class="ref" href="./ActualChartCenterContraction.lean.html#L21" title="Stafford38.Geometry.ActualChartCenterContraction.under_ker_eq_ker_comp">under_ker_eq_ker_comp</a>, hρ]</span>
+<span id="L41"><a href="#L41">41</a> </span>
+<span id="L42"><a href="#L42">42</a> #print axioms <a class="ref" href="./ActualChartCenterContraction.lean.html#L21" title="Stafford38.Geometry.ActualChartCenterContraction.under_ker_eq_ker_comp">under_ker_eq_ker_comp</a></span>
+<span id="L43"><a href="#L43">43</a> #print axioms <a class="ref" href="./ActualChartCenterContraction.lean.html#L32" title="Stafford38.Geometry.ActualChartCenterContraction.under_ker_eq_ker_of_restriction">under_ker_eq_ker_of_restriction</a></span>
+<span id="L44"><a href="#L44">44</a> </span>
+<span id="L45"><a href="#L45">45</a> end Stafford38.Geometry.ActualChartCenterContraction</span>
+<span id="L46"><a href="#L46">46</a> </span></pre>

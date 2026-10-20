@@ -1,4 +1,4 @@
-<!doctype html><meta charset="utf-8"><title>Stafford38/Geometry/SameWitness/OriginalPrimeAxis.lean</title><style>body{font:14px monospace}pre span{display:block}pre span:target{background:#fff0ad}a{color:#666}pre{white-space:pre-wrap}</style><h1>Stafford38/Geometry/SameWitness/OriginalPrimeAxis.lean</h1><p>This project (Stafford38) · 0403af3f0b1a7f84d2027121932723f67bd279ae</p><pre><span id="L1"><a href="#L1">1</a> module</span>
+<!doctype html><meta charset="utf-8"><title>Stafford38/Geometry/SameWitness/OriginalPrimeAxis.lean</title><style>body{font:14px monospace}pre span{display:block}pre span:target{background:#fff0ad}a{color:#666}pre{white-space:pre-wrap}a.ref{color:#0645ad;text-decoration:none}a.ref:hover{text-decoration:underline}</style><h1>Stafford38/Geometry/SameWitness/OriginalPrimeAxis.lean</h1><p>This project (Stafford38) · 0403af3f0b1a7f84d2027121932723f67bd279ae</p><pre><span id="L1"><a href="#L1">1</a> module</span>
 <span id="L2"><a href="#L2">2</a> public import Stafford38.Geometry.SameWitness.AffineFibreClosure</span>
 <span id="L3"><a href="#L3">3</a> public import Stafford38.Geometry.OriginalPrimeCoordinateAvoidanceWitness</span>
 <span id="L4"><a href="#L4">4</a> public import Stafford38.Geometry.ActualSameWitnessGroundPointCompletion</span>
@@ -6,8 +6,8 @@
 <span id="L6"><a href="#L6">6</a> </span>
 <span id="L7"><a href="#L7">7</a> @[expose] public section</span>
 <span id="L8"><a href="#L8">8</a> </span>
-<span id="L9"><a href="#L9">9</a> set_option autoImplicit false</span>
-<span id="L10"><a href="#L10">10</a> set_option maxHeartbeats 1600000</span>
+<span id="L9"><a href="#L9">9</a> set_option <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Lean/Elab/AutoBound.lean#L17" title="Lean.Elab.autoImplicit">autoImplicit</a> false</span>
+<span id="L10"><a href="#L10">10</a> set_option <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Lean/CoreM.lean#L30" title="Lean.maxHeartbeats">maxHeartbeats</a> 1600000</span>
 <span id="L11"><a href="#L11">11</a> </span>
 <span id="L12"><a href="#L12">12</a> noncomputable section</span>
 <span id="L13"><a href="#L13">13</a> </span>
@@ -20,20 +20,20 @@
 <span id="L20"><a href="#L20">20</a> /-- The original-prime coordinate axis lies in the smooth conormal fibre closure</span>
 <span id="L21"><a href="#L21">21</a> by splitting into the direct algebraic case and the retained-witness route. -/</span>
 <span id="L22"><a href="#L22">22</a> theorem coordinate_axis_mem_smooth_fibre_closure</span>
-<span id="L23"><a href="#L23">23</a>     {k : Type u} [Field k] [IsAlgClosed k] [CharZero k]</span>
-<span id="L24"><a href="#L24">24</a>     {m : ℕ} (hm : 0 &lt; m)</span>
-<span id="L25"><a href="#L25">25</a>     (I : PrimeSpectrum (MvPolynomial (Fin m) k))</span>
-<span id="L26"><a href="#L26">26</a>     (havoid : ∀ y ∈ MvPolynomial.zeroLocus k I.asIdeal, y ⟨0, hm⟩ ≠ 0) :</span>
-<span id="L27"><a href="#L27">27</a>     (fun i : Fin m =&gt; if i = ⟨0, hm⟩ then (1 : k) else 0) ∈</span>
-<span id="L28"><a href="#L28">28</a>       MvPolynomial.zeroLocus k</span>
-<span id="L29"><a href="#L29">29</a>         (MvPolynomial.vanishingIdeal k (smoothConormalFibreProjection I.asIdeal)) := by</span>
-<span id="L30"><a href="#L30">30</a>   rcases Stafford38.Geometry.OriginalPrimeCoordinateAvoidanceWitness.coordinate_axis_or_visible_frame_of_avoidance</span>
+<span id="L23"><a href="#L23">23</a>     {k : Type u} [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Field/Defs.lean#L170" title="Field">Field</a> k] [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/FieldTheory/IsAlgClosed/Basic.lean#L58" title="IsAlgClosed">IsAlgClosed</a> k] [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/CharZero/Defs.lean#L33" title="CharZero">CharZero</a> k]</span>
+<span id="L24"><a href="#L24">24</a>     {m : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L1351" title="Nat">ℕ</a>} (hm : 0 &lt; m)</span>
+<span id="L25"><a href="#L25">25</a>     (I : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Spectrum/Prime/Defs.lean#L28" title="PrimeSpectrum">PrimeSpectrum</a> (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/Basic.lean#L80" title="MvPolynomial">MvPolynomial</a> (<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L2443" title="Fin">Fin</a> m) k))</span>
+<span id="L26"><a href="#L26">26</a>     (havoid : ∀ y ∈ <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Nullstellensatz.lean#L39" title="MvPolynomial.zeroLocus">MvPolynomial.zeroLocus</a> k I.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Spectrum/Prime/Defs.lean#L35" title="PrimeSpectrum.asIdeal">asIdeal</a>, y ⟨0, hm⟩ ≠ 0) :</span>
+<span id="L27"><a href="#L27">27</a>     (fun i : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L2443" title="Fin">Fin</a> m =&gt; if i = ⟨0, hm⟩ then (1 : k) else 0) ∈</span>
+<span id="L28"><a href="#L28">28</a>       <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Nullstellensatz.lean#L39" title="MvPolynomial.zeroLocus">MvPolynomial.zeroLocus</a> k</span>
+<span id="L29"><a href="#L29">29</a>         (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Nullstellensatz.lean#L61" title="MvPolynomial.vanishingIdeal">MvPolynomial.vanishingIdeal</a> k (<a class="ref" href="../ProjectiveConormalDirections.lean.html#L47" title="Stafford38.Geometry.ProjectiveConormalDirections.smoothConormalFibreProjection">smoothConormalFibreProjection</a> I.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Spectrum/Prime/Defs.lean#L35" title="PrimeSpectrum.asIdeal">asIdeal</a>)) := by</span>
+<span id="L30"><a href="#L30">30</a>   rcases <a class="ref" href="../OriginalPrimeCoordinateAvoidanceWitness.lean.html#L41" title="Stafford38.Geometry.OriginalPrimeCoordinateAvoidanceWitness.coordinate_axis_or_visible_frame_of_avoidance">Stafford38.Geometry.OriginalPrimeCoordinateAvoidanceWitness.coordinate_axis_or_visible_frame_of_avoidance</a></span>
 <span id="L31"><a href="#L31">31</a>       hm I havoid with h | hw</span>
 <span id="L32"><a href="#L32">32</a>   · exact h</span>
 <span id="L33"><a href="#L33">33</a>   · obtain ⟨w⟩ := hw</span>
-<span id="L34"><a href="#L34">34</a>     exact axis_mem_smoothConormalFibreProjection_closure_of_groundPointOutput hm I w</span>
-<span id="L35"><a href="#L35">35</a>       (Stafford38.Geometry.ActualSameWitnessGroundPointCompletion.exists_actual_same_witness_groundpoint_chart hm I w)</span>
-<span id="L36"><a href="#L36">36</a>       (Stafford38.Geometry.exists_nonzero_smooth_away_quotient I.asIdeal)</span>
+<span id="L34"><a href="#L34">34</a>     exact <a class="ref" href="./AffineFibreClosure.lean.html#L135" title="Stafford38.Geometry.SameWitness.axis_mem_smoothConormalFibreProjection_closure_of_groundPointOutput">axis_mem_smoothConormalFibreProjection_closure_of_groundPointOutput</a> hm I w</span>
+<span id="L35"><a href="#L35">35</a>       (<a class="ref" href="../ActualSameWitnessGroundPointCompletion.lean.html#L131" title="Stafford38.Geometry.ActualSameWitnessGroundPointCompletion.exists_actual_same_witness_groundpoint_chart">Stafford38.Geometry.ActualSameWitnessGroundPointCompletion.exists_actual_same_witness_groundpoint_chart</a> hm I w)</span>
+<span id="L36"><a href="#L36">36</a>       (<a class="ref" href="../GenericSmoothOpen.lean.html#L41" title="Stafford38.Geometry.exists_nonzero_smooth_away_quotient">Stafford38.Geometry.exists_nonzero_smooth_away_quotient</a> I.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Spectrum/Prime/Defs.lean#L35" title="PrimeSpectrum.asIdeal">asIdeal</a>)</span>
 <span id="L37"><a href="#L37">37</a> </span>
 <span id="L38"><a href="#L38">38</a> end Stafford38.Geometry.SameWitness</span>
 <span id="L39"><a href="#L39">39</a> end</span>

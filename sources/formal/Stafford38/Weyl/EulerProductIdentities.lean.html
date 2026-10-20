@@ -1,4 +1,4 @@
-<!doctype html><meta charset="utf-8"><title>Stafford38/Weyl/EulerProductIdentities.lean</title><style>body{font:14px monospace}pre span{display:block}pre span:target{background:#fff0ad}a{color:#666}pre{white-space:pre-wrap}</style><h1>Stafford38/Weyl/EulerProductIdentities.lean</h1><p>This project (Stafford38) · 0403af3f0b1a7f84d2027121932723f67bd279ae</p><pre><span id="L1"><a href="#L1">1</a> module</span>
+<!doctype html><meta charset="utf-8"><title>Stafford38/Weyl/EulerProductIdentities.lean</title><style>body{font:14px monospace}pre span{display:block}pre span:target{background:#fff0ad}a{color:#666}pre{white-space:pre-wrap}a.ref{color:#0645ad;text-decoration:none}a.ref:hover{text-decoration:underline}</style><h1>Stafford38/Weyl/EulerProductIdentities.lean</h1><p>This project (Stafford38) · 0403af3f0b1a7f84d2027121932723f67bd279ae</p><pre><span id="L1"><a href="#L1">1</a> module</span>
 <span id="L2"><a href="#L2">2</a> public import proofs.weyl_pure_power</span>
 <span id="L3"><a href="#L3">3</a> public import Stafford38.EvolutionaryCertificate</span>
 <span id="L4"><a href="#L4">4</a> </span>
@@ -15,80 +15,80 @@
 <span id="L15"><a href="#L15">15</a> </span>
 <span id="L16"><a href="#L16">16</a> noncomputable section</span>
 <span id="L17"><a href="#L17">17</a> </span>
-<span id="L18"><a href="#L18">18</a> variable {A : Type*} [Ring A] [Algebra ℚ A]</span>
+<span id="L18"><a href="#L18">18</a> variable {A : Type*} [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Ring/Defs.lean#L145" title="Ring">Ring</a> A] [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Algebra/Defs.lean#L91" title="Algebra">Algebra</a> <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Data/Rat/Basic.lean#L27" title="Rat">ℚ</a> A]</span>
 <span id="L19"><a href="#L19">19</a> </span>
 <span id="L20"><a href="#L20">20</a> /-- Public names specialize the shared coefficient-ring factorial polynomials. -/</span>
-<span id="L21"><a href="#L21">21</a> abbrev fallingEulerPolynomial : ℕ → Polynomial ℚ :=</span>
-<span id="L22"><a href="#L22">22</a>   Stafford38.Evolution.fallingPoly ℚ</span>
+<span id="L21"><a href="#L21">21</a> abbrev fallingEulerPolynomial : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L1351" title="Nat">ℕ</a> → <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Polynomial/Basic.lean#L67" title="Polynomial">Polynomial</a> <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Data/Rat/Basic.lean#L27" title="Rat">ℚ</a> :=</span>
+<span id="L22"><a href="#L22">22</a>   <a class="ref" href="../EvolutionaryCertificate.lean.html#L204" title="Stafford38.Evolution.fallingPoly">Stafford38.Evolution.fallingPoly</a> <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Data/Rat/Basic.lean#L27" title="Rat">ℚ</a></span>
 <span id="L23"><a href="#L23">23</a> </span>
-<span id="L24"><a href="#L24">24</a> abbrev risingEulerPolynomial : ℕ → Polynomial ℚ :=</span>
-<span id="L25"><a href="#L25">25</a>   Stafford38.Evolution.risingPoly ℚ</span>
+<span id="L24"><a href="#L24">24</a> abbrev risingEulerPolynomial : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L1351" title="Nat">ℕ</a> → <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Polynomial/Basic.lean#L67" title="Polynomial">Polynomial</a> <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Data/Rat/Basic.lean#L27" title="Rat">ℚ</a> :=</span>
+<span id="L25"><a href="#L25">25</a>   <a class="ref" href="../EvolutionaryCertificate.lean.html#L199" title="Stafford38.Evolution.risingPoly">Stafford38.Evolution.risingPoly</a> <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Data/Rat/Basic.lean#L27" title="Rat">ℚ</a></span>
 <span id="L26"><a href="#L26">26</a> </span>
 <span id="L27"><a href="#L27">27</a> /-- The falling polynomial is the product of the Euler factors `X-i`. -/</span>
-<span id="L28"><a href="#L28">28</a> theorem fallingEulerPolynomial_eq_prod (n : ℕ) :</span>
-<span id="L29"><a href="#L29">29</a>     fallingEulerPolynomial n = ∏ i ∈ Finset.range n,</span>
-<span id="L30"><a href="#L30">30</a>       (Polynomial.X - Polynomial.C (i : ℚ)) := by</span>
-<span id="L31"><a href="#L31">31</a>   change Stafford38.Evolution.fallingPoly ℚ n = _</span>
+<span id="L28"><a href="#L28">28</a> theorem fallingEulerPolynomial_eq_prod (n : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L1351" title="Nat">ℕ</a>) :</span>
+<span id="L29"><a href="#L29">29</a>     <a class="ref" href="./EulerProductIdentities.lean.html#L20" title="Stafford38.Weyl.EulerProductIdentities.fallingEulerPolynomial">fallingEulerPolynomial</a> n = ∏ i ∈ <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Data/Finset/Range.lean#L52" title="Finset.range">Finset.range</a> n,</span>
+<span id="L30"><a href="#L30">30</a>       (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Polynomial/Basic.lean#L478" title="Polynomial.X">Polynomial.X</a> - <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Polynomial/Basic.lean#L429" title="Polynomial.C">Polynomial.C</a> (i : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Data/Rat/Basic.lean#L27" title="Rat">ℚ</a>)) := by</span>
+<span id="L31"><a href="#L31">31</a>   change <a class="ref" href="../EvolutionaryCertificate.lean.html#L204" title="Stafford38.Evolution.fallingPoly">Stafford38.Evolution.fallingPoly</a> <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Data/Rat/Basic.lean#L27" title="Rat">ℚ</a> n = _</span>
 <span id="L32"><a href="#L32">32</a>   induction n with</span>
-<span id="L33"><a href="#L33">33</a>   | zero =&gt; simp [Stafford38.Evolution.fallingPoly]</span>
-<span id="L34"><a href="#L34">34</a>   | succ n ih =&gt;</span>
-<span id="L35"><a href="#L35">35</a>       rw [Stafford38.Evolution.fallingPoly_succ, ih, Finset.prod_range_succ]</span>
+<span id="L33"><a href="#L33">33</a>   | <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L1360" title="Nat.zero">zero</a> =&gt; simp [<a class="ref" href="../EvolutionaryCertificate.lean.html#L204" title="Stafford38.Evolution.fallingPoly">Stafford38.Evolution.fallingPoly</a>]</span>
+<span id="L34"><a href="#L34">34</a>   | <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L1367" title="Nat.succ">succ</a> n ih =&gt;</span>
+<span id="L35"><a href="#L35">35</a>       rw [<a class="ref" href="../EvolutionaryCertificate.lean.html#L221" title="Stafford38.Evolution.fallingPoly_succ">Stafford38.Evolution.fallingPoly_succ</a>, ih, <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/BigOperators/Group/Finset/Basic.lean#L535" title="Finset.prod_range_succ">Finset.prod_range_succ</a>]</span>
 <span id="L36"><a href="#L36">36</a> </span>
 <span id="L37"><a href="#L37">37</a> /-- The rising polynomial is the product of the Euler factors `X+(i+1)`. -/</span>
-<span id="L38"><a href="#L38">38</a> theorem risingEulerPolynomial_eq_prod (n : ℕ) :</span>
-<span id="L39"><a href="#L39">39</a>     risingEulerPolynomial n = ∏ i ∈ Finset.range n,</span>
-<span id="L40"><a href="#L40">40</a>       (Polynomial.X + Polynomial.C ((i + 1 : ℕ) : ℚ)) := by</span>
-<span id="L41"><a href="#L41">41</a>   change Stafford38.Evolution.risingPoly ℚ n = _</span>
+<span id="L38"><a href="#L38">38</a> theorem risingEulerPolynomial_eq_prod (n : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L1351" title="Nat">ℕ</a>) :</span>
+<span id="L39"><a href="#L39">39</a>     <a class="ref" href="./EulerProductIdentities.lean.html#L24" title="Stafford38.Weyl.EulerProductIdentities.risingEulerPolynomial">risingEulerPolynomial</a> n = ∏ i ∈ <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Data/Finset/Range.lean#L52" title="Finset.range">Finset.range</a> n,</span>
+<span id="L40"><a href="#L40">40</a>       (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Polynomial/Basic.lean#L478" title="Polynomial.X">Polynomial.X</a> + <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Polynomial/Basic.lean#L429" title="Polynomial.C">Polynomial.C</a> ((i + 1 : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L1351" title="Nat">ℕ</a>) : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Data/Rat/Basic.lean#L27" title="Rat">ℚ</a>)) := by</span>
+<span id="L41"><a href="#L41">41</a>   change <a class="ref" href="../EvolutionaryCertificate.lean.html#L199" title="Stafford38.Evolution.risingPoly">Stafford38.Evolution.risingPoly</a> <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Data/Rat/Basic.lean#L27" title="Rat">ℚ</a> n = _</span>
 <span id="L42"><a href="#L42">42</a>   induction n with</span>
-<span id="L43"><a href="#L43">43</a>   | zero =&gt; simp [Stafford38.Evolution.risingPoly]</span>
-<span id="L44"><a href="#L44">44</a>   | succ n ih =&gt;</span>
-<span id="L45"><a href="#L45">45</a>       rw [Stafford38.Evolution.risingPoly_succ, ih, Finset.prod_range_succ]</span>
+<span id="L43"><a href="#L43">43</a>   | <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L1360" title="Nat.zero">zero</a> =&gt; simp [<a class="ref" href="../EvolutionaryCertificate.lean.html#L199" title="Stafford38.Evolution.risingPoly">Stafford38.Evolution.risingPoly</a>]</span>
+<span id="L44"><a href="#L44">44</a>   | <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L1367" title="Nat.succ">succ</a> n ih =&gt;</span>
+<span id="L45"><a href="#L45">45</a>       rw [<a class="ref" href="../EvolutionaryCertificate.lean.html#L216" title="Stafford38.Evolution.risingPoly_succ">Stafford38.Evolution.risingPoly_succ</a>, ih, <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/BigOperators/Group/Finset/Basic.lean#L535" title="Finset.prod_range_succ">Finset.prod_range_succ</a>]</span>
 <span id="L46"><a href="#L46">46</a>       push_cast</span>
 <span id="L47"><a href="#L47">47</a>       rfl</span>
 <span id="L48"><a href="#L48">48</a> </span>
 <span id="L49"><a href="#L49">49</a> /-- Evaluation of the explicit falling Euler product gives `x^n * d^n`. -/</span>
 <span id="L50"><a href="#L50">50</a> theorem eulerPolynomialEval_falling (x d : A)</span>
-<span id="L51"><a href="#L51">51</a>     (h : d * x = x * d + 1) (n : ℕ) :</span>
-<span id="L52"><a href="#L52">52</a>     Stafford.eulerPolynomialEval x d (fallingEulerPolynomial n) = x ^ n * d ^ n := by</span>
-<span id="L53"><a href="#L53">53</a>   change Polynomial.aeval (Stafford38.Evolution.euler x d)</span>
-<span id="L54"><a href="#L54">54</a>     (Stafford38.Evolution.fallingPoly ℚ n) = x ^ n * d ^ n</span>
-<span id="L55"><a href="#L55">55</a>   rw [Stafford38.Evolution.aeval_fallingPoly]</span>
-<span id="L56"><a href="#L56">56</a>   simpa [Stafford38.Evolution.euler] using</span>
-<span id="L57"><a href="#L57">57</a>     (Stafford38.Evolution.pow_mul_pow_eq_falling (x := x) (p := d) h n).symm</span>
+<span id="L51"><a href="#L51">51</a>     (h : d * x = x * d + 1) (n : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L1351" title="Nat">ℕ</a>) :</span>
+<span id="L52"><a href="#L52">52</a>     <a class="ref" href="../../proofs/weyl_pure_power.lean.html#L130" title="Stafford.eulerPolynomialEval">Stafford.eulerPolynomialEval</a> x d (<a class="ref" href="./EulerProductIdentities.lean.html#L20" title="Stafford38.Weyl.EulerProductIdentities.fallingEulerPolynomial">fallingEulerPolynomial</a> n) = x ^ n * d ^ n := by</span>
+<span id="L53"><a href="#L53">53</a>   change <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Polynomial/AlgebraMap.lean#L257" title="Polynomial.aeval">Polynomial.aeval</a> (<a class="ref" href="../EvolutionaryCertificate.lean.html#L76" title="Stafford38.Evolution.euler">Stafford38.Evolution.euler</a> x d)</span>
+<span id="L54"><a href="#L54">54</a>     (<a class="ref" href="../EvolutionaryCertificate.lean.html#L204" title="Stafford38.Evolution.fallingPoly">Stafford38.Evolution.fallingPoly</a> <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Data/Rat/Basic.lean#L27" title="Rat">ℚ</a> n) = x ^ n * d ^ n</span>
+<span id="L55"><a href="#L55">55</a>   rw [<a class="ref" href="../EvolutionaryCertificate.lean.html#L230" title="Stafford38.Evolution.aeval_fallingPoly">Stafford38.Evolution.aeval_fallingPoly</a>]</span>
+<span id="L56"><a href="#L56">56</a>   simpa [<a class="ref" href="../EvolutionaryCertificate.lean.html#L76" title="Stafford38.Evolution.euler">Stafford38.Evolution.euler</a>] using</span>
+<span id="L57"><a href="#L57">57</a>     (<a class="ref" href="../EvolutionaryCertificate.lean.html#L157" title="Stafford38.Evolution.pow_mul_pow_eq_falling">Stafford38.Evolution.pow_mul_pow_eq_falling</a> (x := x) (p := d) h n).<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L364" title="Eq.symm">symm</a></span>
 <span id="L58"><a href="#L58">58</a> </span>
 <span id="L59"><a href="#L59">59</a> /-- Evaluation of the explicit rising Euler product gives `d^n * x^n`. -/</span>
 <span id="L60"><a href="#L60">60</a> theorem eulerPolynomialEval_rising (x d : A)</span>
-<span id="L61"><a href="#L61">61</a>     (h : d * x = x * d + 1) (n : ℕ) :</span>
-<span id="L62"><a href="#L62">62</a>     Stafford.eulerPolynomialEval x d (risingEulerPolynomial n) = d ^ n * x ^ n := by</span>
-<span id="L63"><a href="#L63">63</a>   change Polynomial.aeval (Stafford38.Evolution.euler x d)</span>
-<span id="L64"><a href="#L64">64</a>     (Stafford38.Evolution.risingPoly ℚ n) = d ^ n * x ^ n</span>
-<span id="L65"><a href="#L65">65</a>   rw [Stafford38.Evolution.aeval_risingPoly]</span>
-<span id="L66"><a href="#L66">66</a>   simpa [Stafford38.Evolution.euler] using</span>
-<span id="L67"><a href="#L67">67</a>     (Stafford38.Evolution.pow_mul_pow_eq_rising (x := x) (p := d) h n).symm</span>
+<span id="L61"><a href="#L61">61</a>     (h : d * x = x * d + 1) (n : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L1351" title="Nat">ℕ</a>) :</span>
+<span id="L62"><a href="#L62">62</a>     <a class="ref" href="../../proofs/weyl_pure_power.lean.html#L130" title="Stafford.eulerPolynomialEval">Stafford.eulerPolynomialEval</a> x d (<a class="ref" href="./EulerProductIdentities.lean.html#L24" title="Stafford38.Weyl.EulerProductIdentities.risingEulerPolynomial">risingEulerPolynomial</a> n) = d ^ n * x ^ n := by</span>
+<span id="L63"><a href="#L63">63</a>   change <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Polynomial/AlgebraMap.lean#L257" title="Polynomial.aeval">Polynomial.aeval</a> (<a class="ref" href="../EvolutionaryCertificate.lean.html#L76" title="Stafford38.Evolution.euler">Stafford38.Evolution.euler</a> x d)</span>
+<span id="L64"><a href="#L64">64</a>     (<a class="ref" href="../EvolutionaryCertificate.lean.html#L199" title="Stafford38.Evolution.risingPoly">Stafford38.Evolution.risingPoly</a> <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Data/Rat/Basic.lean#L27" title="Rat">ℚ</a> n) = d ^ n * x ^ n</span>
+<span id="L65"><a href="#L65">65</a>   rw [<a class="ref" href="../EvolutionaryCertificate.lean.html#L224" title="Stafford38.Evolution.aeval_risingPoly">Stafford38.Evolution.aeval_risingPoly</a>]</span>
+<span id="L66"><a href="#L66">66</a>   simpa [<a class="ref" href="../EvolutionaryCertificate.lean.html#L76" title="Stafford38.Evolution.euler">Stafford38.Evolution.euler</a>] using</span>
+<span id="L67"><a href="#L67">67</a>     (<a class="ref" href="../EvolutionaryCertificate.lean.html#L143" title="Stafford38.Evolution.pow_mul_pow_eq_rising">Stafford38.Evolution.pow_mul_pow_eq_rising</a> (x := x) (p := d) h n).<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L364" title="Eq.symm">symm</a></span>
 <span id="L68"><a href="#L68">68</a> </span>
 <span id="L69"><a href="#L69">69</a> /-- Evaluation of the falling product written with a finite-product sign. -/</span>
 <span id="L70"><a href="#L70">70</a> theorem eval_fallingEulerProduct (x d : A)</span>
-<span id="L71"><a href="#L71">71</a>     (h : d * x = x * d + 1) (n : ℕ) :</span>
-<span id="L72"><a href="#L72">72</a>     Stafford.eulerPolynomialEval x d</span>
-<span id="L73"><a href="#L73">73</a>       (∏ i ∈ Finset.range n, (Polynomial.X - Polynomial.C (i : ℚ))) =</span>
+<span id="L71"><a href="#L71">71</a>     (h : d * x = x * d + 1) (n : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L1351" title="Nat">ℕ</a>) :</span>
+<span id="L72"><a href="#L72">72</a>     <a class="ref" href="../../proofs/weyl_pure_power.lean.html#L130" title="Stafford.eulerPolynomialEval">Stafford.eulerPolynomialEval</a> x d</span>
+<span id="L73"><a href="#L73">73</a>       (∏ i ∈ <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Data/Finset/Range.lean#L52" title="Finset.range">Finset.range</a> n, (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Polynomial/Basic.lean#L478" title="Polynomial.X">Polynomial.X</a> - <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Polynomial/Basic.lean#L429" title="Polynomial.C">Polynomial.C</a> (i : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Data/Rat/Basic.lean#L27" title="Rat">ℚ</a>))) =</span>
 <span id="L74"><a href="#L74">74</a>         x ^ n * d ^ n := by</span>
-<span id="L75"><a href="#L75">75</a>   rw [← fallingEulerPolynomial_eq_prod n]</span>
-<span id="L76"><a href="#L76">76</a>   exact eulerPolynomialEval_falling x d h n</span>
+<span id="L75"><a href="#L75">75</a>   rw [← <a class="ref" href="./EulerProductIdentities.lean.html#L27" title="Stafford38.Weyl.EulerProductIdentities.fallingEulerPolynomial_eq_prod">fallingEulerPolynomial_eq_prod</a> n]</span>
+<span id="L76"><a href="#L76">76</a>   exact <a class="ref" href="./EulerProductIdentities.lean.html#L49" title="Stafford38.Weyl.EulerProductIdentities.eulerPolynomialEval_falling">eulerPolynomialEval_falling</a> x d h n</span>
 <span id="L77"><a href="#L77">77</a> </span>
 <span id="L78"><a href="#L78">78</a> /-- Evaluation of the rising product written with a finite-product sign. -/</span>
 <span id="L79"><a href="#L79">79</a> theorem eval_risingEulerProduct (x d : A)</span>
-<span id="L80"><a href="#L80">80</a>     (h : d * x = x * d + 1) (n : ℕ) :</span>
-<span id="L81"><a href="#L81">81</a>     Stafford.eulerPolynomialEval x d</span>
-<span id="L82"><a href="#L82">82</a>       (∏ i ∈ Finset.range n,</span>
-<span id="L83"><a href="#L83">83</a>         (Polynomial.X + Polynomial.C ((i + 1 : ℕ) : ℚ))) =</span>
+<span id="L80"><a href="#L80">80</a>     (h : d * x = x * d + 1) (n : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L1351" title="Nat">ℕ</a>) :</span>
+<span id="L81"><a href="#L81">81</a>     <a class="ref" href="../../proofs/weyl_pure_power.lean.html#L130" title="Stafford.eulerPolynomialEval">Stafford.eulerPolynomialEval</a> x d</span>
+<span id="L82"><a href="#L82">82</a>       (∏ i ∈ <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Data/Finset/Range.lean#L52" title="Finset.range">Finset.range</a> n,</span>
+<span id="L83"><a href="#L83">83</a>         (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Polynomial/Basic.lean#L478" title="Polynomial.X">Polynomial.X</a> + <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Polynomial/Basic.lean#L429" title="Polynomial.C">Polynomial.C</a> ((i + 1 : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L1351" title="Nat">ℕ</a>) : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Data/Rat/Basic.lean#L27" title="Rat">ℚ</a>))) =</span>
 <span id="L84"><a href="#L84">84</a>           d ^ n * x ^ n := by</span>
-<span id="L85"><a href="#L85">85</a>   rw [← risingEulerPolynomial_eq_prod n]</span>
-<span id="L86"><a href="#L86">86</a>   exact eulerPolynomialEval_rising x d h n</span>
+<span id="L85"><a href="#L85">85</a>   rw [← <a class="ref" href="./EulerProductIdentities.lean.html#L37" title="Stafford38.Weyl.EulerProductIdentities.risingEulerPolynomial_eq_prod">risingEulerPolynomial_eq_prod</a> n]</span>
+<span id="L86"><a href="#L86">86</a>   exact <a class="ref" href="./EulerProductIdentities.lean.html#L59" title="Stafford38.Weyl.EulerProductIdentities.eulerPolynomialEval_rising">eulerPolynomialEval_rising</a> x d h n</span>
 <span id="L87"><a href="#L87">87</a> </span>
-<span id="L88"><a href="#L88">88</a> #print axioms eulerPolynomialEval_falling</span>
-<span id="L89"><a href="#L89">89</a> #print axioms eulerPolynomialEval_rising</span>
-<span id="L90"><a href="#L90">90</a> #print axioms eval_fallingEulerProduct</span>
-<span id="L91"><a href="#L91">91</a> #print axioms eval_risingEulerProduct</span>
+<span id="L88"><a href="#L88">88</a> #print axioms <a class="ref" href="./EulerProductIdentities.lean.html#L49" title="Stafford38.Weyl.EulerProductIdentities.eulerPolynomialEval_falling">eulerPolynomialEval_falling</a></span>
+<span id="L89"><a href="#L89">89</a> #print axioms <a class="ref" href="./EulerProductIdentities.lean.html#L59" title="Stafford38.Weyl.EulerProductIdentities.eulerPolynomialEval_rising">eulerPolynomialEval_rising</a></span>
+<span id="L90"><a href="#L90">90</a> #print axioms <a class="ref" href="./EulerProductIdentities.lean.html#L69" title="Stafford38.Weyl.EulerProductIdentities.eval_fallingEulerProduct">eval_fallingEulerProduct</a></span>
+<span id="L91"><a href="#L91">91</a> #print axioms <a class="ref" href="./EulerProductIdentities.lean.html#L78" title="Stafford38.Weyl.EulerProductIdentities.eval_risingEulerProduct">eval_risingEulerProduct</a></span>
 <span id="L92"><a href="#L92">92</a> </span>
 <span id="L93"><a href="#L93">93</a> end</span>
 <span id="L94"><a href="#L94">94</a> </span>

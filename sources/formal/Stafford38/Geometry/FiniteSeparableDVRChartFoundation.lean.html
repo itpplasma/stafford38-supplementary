@@ -1,0 +1,131 @@
+<!doctype html><meta charset="utf-8"><title>Stafford38/Geometry/FiniteSeparableDVRChartFoundation.lean</title><style>body{font:14px monospace}pre span{display:block}pre span:target{background:#fff0ad}a{color:#666}pre{white-space:pre-wrap}a.ref{color:#0645ad;text-decoration:none}a.ref:hover{text-decoration:underline}</style><h1>Stafford38/Geometry/FiniteSeparableDVRChartFoundation.lean</h1><p>This project (Stafford38) · 0403af3f0b1a7f84d2027121932723f67bd279ae</p><pre><span id="L1"><a href="#L1">1</a> module</span>
+<span id="L2"><a href="#L2">2</a> public import Mathlib.RingTheory.Etale.Field</span>
+<span id="L3"><a href="#L3">3</a> public import Mathlib.RingTheory.Smooth.Basic</span>
+<span id="L4"><a href="#L4">4</a> public import Mathlib.RingTheory.Unramified.Basic</span>
+<span id="L5"><a href="#L5">5</a> </span>
+<span id="L6"><a href="#L6">6</a> @[expose] public section</span>
+<span id="L7"><a href="#L7">7</a> </span>
+<span id="L8"><a href="#L8">8</a> /-!</span>
+<span id="L9"><a href="#L9">9</a> # Finite-separable coefficient sections through nilpotent thickenings</span>
+<span id="L10"><a href="#L10">10</a> </span>
+<span id="L11"><a href="#L11">11</a> Let `K/E` be a separable field extension.  Formal etaleness constructs a</span>
+<span id="L12"><a href="#L12">12</a> unique `E`-algebra section of every surjective `E`-algebra map to `K` whose</span>
+<span id="L13"><a href="#L13">13</a> kernel is nilpotent.  These sections are automatically compatible with maps</span>
+<span id="L14"><a href="#L14">14</a> between such thickenings.</span>
+<span id="L15"><a href="#L15">15</a> </span>
+<span id="L16"><a href="#L16">16</a> Applied to the quotients of an equicharacteristic DVR by positive powers of</span>
+<span id="L17"><a href="#L17">17</a> its maximal ideal, this supplies the finite-level coefficient fields needed</span>
+<span id="L18"><a href="#L18">18</a> for a completed power-series chart.  The passage from this compatible family</span>
+<span id="L19"><a href="#L19">19</a> to the inverse limit is outside this module's finite-level scope; the</span>
+<span id="L20"><a href="#L20">20</a> completion comparison is supplied by the downstream completed-DVR chart.</span>
+<span id="L21"><a href="#L21">21</a> -/</span>
+<span id="L22"><a href="#L22">22</a> </span>
+<span id="L23"><a href="#L23">23</a> namespace Stafford38.Geometry.FiniteSeparableDVRChartFoundation</span>
+<span id="L24"><a href="#L24">24</a> </span>
+<span id="L25"><a href="#L25">25</a> noncomputable section</span>
+<span id="L26"><a href="#L26">26</a> </span>
+<span id="L27"><a href="#L27">27</a> universe u</span>
+<span id="L28"><a href="#L28">28</a> </span>
+<span id="L29"><a href="#L29">29</a> variable (E K R : Type u)</span>
+<span id="L30"><a href="#L30">30</a> variable [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Field/Defs.lean#L170" title="Field">Field</a> E] [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Field/Defs.lean#L170" title="Field">Field</a> K] [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Ring/Defs.lean#L412" title="CommRing">CommRing</a> R]</span>
+<span id="L31"><a href="#L31">31</a> variable [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Algebra/Defs.lean#L91" title="Algebra">Algebra</a> E K] [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Algebra/Defs.lean#L91" title="Algebra">Algebra</a> E R]</span>
+<span id="L32"><a href="#L32">32</a> </span>
+<span id="L33"><a href="#L33">33</a> /-- The canonical coefficient-field lift through a nilpotent thickening.</span>
+<span id="L34"><a href="#L34">34</a> </span>
+<span id="L35"><a href="#L35">35</a> The construction uses only the formal smoothness of the separable field</span>
+<span id="L36"><a href="#L36">36</a> extension `K/E`; in particular it does not assume a coefficient field in `R`.</span>
+<span id="L37"><a href="#L37">37</a> -/</span>
+<span id="L38"><a href="#L38">38</a> def finiteSeparableSection</span>
+<span id="L39"><a href="#L39">39</a>     (hsep : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/FieldTheory/Separable.lean#L541" title="Algebra.IsSeparable">Algebra.IsSeparable</a> E K)</span>
+<span id="L40"><a href="#L40">40</a>     (residue : R →ₐ[E] K)</span>
+<span id="L41"><a href="#L41">41</a>     (hsurj : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Data/Function.lean#L59" title="Function.Surjective">Function.Surjective</a> residue)</span>
+<span id="L42"><a href="#L42">42</a>     (hnil : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/GroupWithZero/Basic.lean#L149" title="IsNilpotent">IsNilpotent</a> (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Maps.lean#L745" title="RingHom.ker">RingHom.ker</a> residue.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Algebra/Hom.lean#L30" title="AlgHom.toRingHom">toRingHom</a>)) :</span>
+<span id="L43"><a href="#L43">43</a>     K →ₐ[E] R := by</span>
+<span id="L44"><a href="#L44">44</a>   letI : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/FieldTheory/Separable.lean#L541" title="Algebra.IsSeparable">Algebra.IsSeparable</a> E K := hsep</span>
+<span id="L45"><a href="#L45">45</a>   letI : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Etale/Basic.lean#L44" title="Algebra.FormallyEtale">Algebra.FormallyEtale</a> E K :=</span>
+<span id="L46"><a href="#L46">46</a>     <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Etale/Field.lean#L98" title="Algebra.FormallyEtale.of_isSeparable">Algebra.FormallyEtale.of_isSeparable</a> E K</span>
+<span id="L47"><a href="#L47">47</a>   exact <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Smooth/Basic.lean#L164" title="Algebra.FormallySmooth.liftOfSurjective">Algebra.FormallySmooth.liftOfSurjective</a></span>
+<span id="L48"><a href="#L48">48</a>     (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Algebra/Hom.lean#L240" title="AlgHom.id">AlgHom.id</a> E K) residue hsurj hnil</span>
+<span id="L49"><a href="#L49">49</a> </span>
+<span id="L50"><a href="#L50">50</a> /-- The canonical lift is a section of the residue homomorphism. -/</span>
+<span id="L51"><a href="#L51">51</a> @[simp]</span>
+<span id="L52"><a href="#L52">52</a> theorem residue_comp_finiteSeparableSection</span>
+<span id="L53"><a href="#L53">53</a>     (hsep : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/FieldTheory/Separable.lean#L541" title="Algebra.IsSeparable">Algebra.IsSeparable</a> E K)</span>
+<span id="L54"><a href="#L54">54</a>     (residue : R →ₐ[E] K)</span>
+<span id="L55"><a href="#L55">55</a>     (hsurj : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Data/Function.lean#L59" title="Function.Surjective">Function.Surjective</a> residue)</span>
+<span id="L56"><a href="#L56">56</a>     (hnil : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/GroupWithZero/Basic.lean#L149" title="IsNilpotent">IsNilpotent</a> (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Maps.lean#L745" title="RingHom.ker">RingHom.ker</a> residue.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Algebra/Hom.lean#L30" title="AlgHom.toRingHom">toRingHom</a>)) :</span>
+<span id="L57"><a href="#L57">57</a>     residue.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Algebra/Hom.lean#L257" title="AlgHom.comp">comp</a> (<a class="ref" href="./FiniteSeparableDVRChartFoundation.lean.html#L33" title="Stafford38.Geometry.FiniteSeparableDVRChartFoundation.finiteSeparableSection">finiteSeparableSection</a> E K R hsep residue hsurj hnil) =</span>
+<span id="L58"><a href="#L58">58</a>       <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Algebra/Hom.lean#L240" title="AlgHom.id">AlgHom.id</a> E K := by</span>
+<span id="L59"><a href="#L59">59</a>   letI : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/FieldTheory/Separable.lean#L541" title="Algebra.IsSeparable">Algebra.IsSeparable</a> E K := hsep</span>
+<span id="L60"><a href="#L60">60</a>   letI : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Etale/Basic.lean#L44" title="Algebra.FormallyEtale">Algebra.FormallyEtale</a> E K :=</span>
+<span id="L61"><a href="#L61">61</a>     <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Etale/Field.lean#L98" title="Algebra.FormallyEtale.of_isSeparable">Algebra.FormallyEtale.of_isSeparable</a> E K</span>
+<span id="L62"><a href="#L62">62</a>   exact <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Smooth/Basic.lean#L183" title="Algebra.FormallySmooth.comp_liftOfSurjective">Algebra.FormallySmooth.comp_liftOfSurjective</a></span>
+<span id="L63"><a href="#L63">63</a>     (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Algebra/Hom.lean#L240" title="AlgHom.id">AlgHom.id</a> E K) residue hsurj hnil</span>
+<span id="L64"><a href="#L64">64</a> </span>
+<span id="L65"><a href="#L65">65</a> /-- Every coefficient-field lift through the same nilpotent thickening is the</span>
+<span id="L66"><a href="#L66">66</a> canonical one.  This is the formal-unramified half of separability. -/</span>
+<span id="L67"><a href="#L67">67</a> theorem finiteSeparableSection_unique</span>
+<span id="L68"><a href="#L68">68</a>     (hsep : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/FieldTheory/Separable.lean#L541" title="Algebra.IsSeparable">Algebra.IsSeparable</a> E K)</span>
+<span id="L69"><a href="#L69">69</a>     (residue : R →ₐ[E] K)</span>
+<span id="L70"><a href="#L70">70</a>     (hsurj : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Data/Function.lean#L59" title="Function.Surjective">Function.Surjective</a> residue)</span>
+<span id="L71"><a href="#L71">71</a>     (hnil : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/GroupWithZero/Basic.lean#L149" title="IsNilpotent">IsNilpotent</a> (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Maps.lean#L745" title="RingHom.ker">RingHom.ker</a> residue.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Algebra/Hom.lean#L30" title="AlgHom.toRingHom">toRingHom</a>))</span>
+<span id="L72"><a href="#L72">72</a>     (lift : K →ₐ[E] R)</span>
+<span id="L73"><a href="#L73">73</a>     (hlift : residue.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Algebra/Hom.lean#L257" title="AlgHom.comp">comp</a> lift = <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Algebra/Hom.lean#L240" title="AlgHom.id">AlgHom.id</a> E K) :</span>
+<span id="L74"><a href="#L74">74</a>     lift = <a class="ref" href="./FiniteSeparableDVRChartFoundation.lean.html#L33" title="Stafford38.Geometry.FiniteSeparableDVRChartFoundation.finiteSeparableSection">finiteSeparableSection</a> E K R hsep residue hsurj hnil := by</span>
+<span id="L75"><a href="#L75">75</a>   letI : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/FieldTheory/Separable.lean#L541" title="Algebra.IsSeparable">Algebra.IsSeparable</a> E K := hsep</span>
+<span id="L76"><a href="#L76">76</a>   letI : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Etale/Basic.lean#L44" title="Algebra.FormallyEtale">Algebra.FormallyEtale</a> E K :=</span>
+<span id="L77"><a href="#L77">77</a>     <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Etale/Field.lean#L98" title="Algebra.FormallyEtale.of_isSeparable">Algebra.FormallyEtale.of_isSeparable</a> E K</span>
+<span id="L78"><a href="#L78">78</a>   apply <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Unramified/Basic.lean#L158" title="Algebra.FormallyUnramified.lift_unique&#x27;">Algebra.FormallyUnramified.lift_unique'</a> residue hnil</span>
+<span id="L79"><a href="#L79">79</a>   rw [hlift, <a class="ref" href="./FiniteSeparableDVRChartFoundation.lean.html#L50" title="Stafford38.Geometry.FiniteSeparableDVRChartFoundation.residue_comp_finiteSeparableSection">residue_comp_finiteSeparableSection</a>]</span>
+<span id="L80"><a href="#L80">80</a> </span>
+<span id="L81"><a href="#L81">81</a> /-- A separable residue field has a unique coefficient-field section through</span>
+<span id="L82"><a href="#L82">82</a> every surjective nilpotent `E`-algebra thickening. -/</span>
+<span id="L83"><a href="#L83">83</a> theorem existsUnique_finiteSeparableSection</span>
+<span id="L84"><a href="#L84">84</a>     (hsep : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/FieldTheory/Separable.lean#L541" title="Algebra.IsSeparable">Algebra.IsSeparable</a> E K)</span>
+<span id="L85"><a href="#L85">85</a>     (residue : R →ₐ[E] K)</span>
+<span id="L86"><a href="#L86">86</a>     (hsurj : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Data/Function.lean#L59" title="Function.Surjective">Function.Surjective</a> residue)</span>
+<span id="L87"><a href="#L87">87</a>     (hnil : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/GroupWithZero/Basic.lean#L149" title="IsNilpotent">IsNilpotent</a> (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Maps.lean#L745" title="RingHom.ker">RingHom.ker</a> residue.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Algebra/Hom.lean#L30" title="AlgHom.toRingHom">toRingHom</a>)) :</span>
+<span id="L88"><a href="#L88">88</a>     ∃! lift : K →ₐ[E] R,</span>
+<span id="L89"><a href="#L89">89</a>       residue.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Algebra/Hom.lean#L257" title="AlgHom.comp">comp</a> lift = <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Algebra/Hom.lean#L240" title="AlgHom.id">AlgHom.id</a> E K := by</span>
+<span id="L90"><a href="#L90">90</a>   refine ⟨<a class="ref" href="./FiniteSeparableDVRChartFoundation.lean.html#L33" title="Stafford38.Geometry.FiniteSeparableDVRChartFoundation.finiteSeparableSection">finiteSeparableSection</a> E K R hsep residue hsurj hnil,</span>
+<span id="L91"><a href="#L91">91</a>     <a class="ref" href="./FiniteSeparableDVRChartFoundation.lean.html#L50" title="Stafford38.Geometry.FiniteSeparableDVRChartFoundation.residue_comp_finiteSeparableSection">residue_comp_finiteSeparableSection</a> E K R hsep residue hsurj hnil, ?_⟩</span>
+<span id="L92"><a href="#L92">92</a>   intro lift hlift</span>
+<span id="L93"><a href="#L93">93</a>   exact <a class="ref" href="./FiniteSeparableDVRChartFoundation.lean.html#L65" title="Stafford38.Geometry.FiniteSeparableDVRChartFoundation.finiteSeparableSection_unique">finiteSeparableSection_unique</a> E K R hsep residue hsurj hnil</span>
+<span id="L94"><a href="#L94">94</a>     lift hlift</span>
+<span id="L95"><a href="#L95">95</a> </span>
+<span id="L96"><a href="#L96">96</a> section Compatibility</span>
+<span id="L97"><a href="#L97">97</a> </span>
+<span id="L98"><a href="#L98">98</a> variable (S : Type u) [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Ring/Defs.lean#L412" title="CommRing">CommRing</a> S] [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Algebra/Defs.lean#L91" title="Algebra">Algebra</a> E S]</span>
+<span id="L99"><a href="#L99">99</a> </span>
+<span id="L100"><a href="#L100">100</a> /-- The finite-level coefficient sections are compatible with every</span>
+<span id="L101"><a href="#L101">101</a> `E`-algebra transition map commuting with residue specialization.  Thus no</span>
+<span id="L102"><a href="#L102">102</a> extra choices have to be synchronized along an Artinian quotient tower. -/</span>
+<span id="L103"><a href="#L103">103</a> theorem finiteSeparableSection_naturality</span>
+<span id="L104"><a href="#L104">104</a>     (hsep : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/FieldTheory/Separable.lean#L541" title="Algebra.IsSeparable">Algebra.IsSeparable</a> E K)</span>
+<span id="L105"><a href="#L105">105</a>     (residueR : R →ₐ[E] K)</span>
+<span id="L106"><a href="#L106">106</a>     (hsurjR : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Data/Function.lean#L59" title="Function.Surjective">Function.Surjective</a> residueR)</span>
+<span id="L107"><a href="#L107">107</a>     (hnilR : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/GroupWithZero/Basic.lean#L149" title="IsNilpotent">IsNilpotent</a> (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Maps.lean#L745" title="RingHom.ker">RingHom.ker</a> residueR.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Algebra/Hom.lean#L30" title="AlgHom.toRingHom">toRingHom</a>))</span>
+<span id="L108"><a href="#L108">108</a>     (residueS : S →ₐ[E] K)</span>
+<span id="L109"><a href="#L109">109</a>     (hsurjS : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Data/Function.lean#L59" title="Function.Surjective">Function.Surjective</a> residueS)</span>
+<span id="L110"><a href="#L110">110</a>     (hnilS : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/GroupWithZero/Basic.lean#L149" title="IsNilpotent">IsNilpotent</a> (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Maps.lean#L745" title="RingHom.ker">RingHom.ker</a> residueS.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Algebra/Hom.lean#L30" title="AlgHom.toRingHom">toRingHom</a>))</span>
+<span id="L111"><a href="#L111">111</a>     (transition : S →ₐ[E] R)</span>
+<span id="L112"><a href="#L112">112</a>     (htransition : residueR.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Algebra/Hom.lean#L257" title="AlgHom.comp">comp</a> transition = residueS) :</span>
+<span id="L113"><a href="#L113">113</a>     transition.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Algebra/Hom.lean#L257" title="AlgHom.comp">comp</a></span>
+<span id="L114"><a href="#L114">114</a>         (<a class="ref" href="./FiniteSeparableDVRChartFoundation.lean.html#L33" title="Stafford38.Geometry.FiniteSeparableDVRChartFoundation.finiteSeparableSection">finiteSeparableSection</a> E K S hsep residueS hsurjS hnilS) =</span>
+<span id="L115"><a href="#L115">115</a>       <a class="ref" href="./FiniteSeparableDVRChartFoundation.lean.html#L33" title="Stafford38.Geometry.FiniteSeparableDVRChartFoundation.finiteSeparableSection">finiteSeparableSection</a> E K R hsep residueR hsurjR hnilR := by</span>
+<span id="L116"><a href="#L116">116</a>   apply <a class="ref" href="./FiniteSeparableDVRChartFoundation.lean.html#L65" title="Stafford38.Geometry.FiniteSeparableDVRChartFoundation.finiteSeparableSection_unique">finiteSeparableSection_unique</a> E K R hsep residueR hsurjR hnilR</span>
+<span id="L117"><a href="#L117">117</a>   rw [← <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Algebra/Hom.lean#L284" title="AlgHom.comp_assoc">AlgHom.comp_assoc</a>, htransition,</span>
+<span id="L118"><a href="#L118">118</a>     <a class="ref" href="./FiniteSeparableDVRChartFoundation.lean.html#L50" title="Stafford38.Geometry.FiniteSeparableDVRChartFoundation.residue_comp_finiteSeparableSection">residue_comp_finiteSeparableSection</a>]</span>
+<span id="L119"><a href="#L119">119</a> </span>
+<span id="L120"><a href="#L120">120</a> end Compatibility</span>
+<span id="L121"><a href="#L121">121</a> </span>
+<span id="L122"><a href="#L122">122</a> #print axioms <a class="ref" href="./FiniteSeparableDVRChartFoundation.lean.html#L33" title="Stafford38.Geometry.FiniteSeparableDVRChartFoundation.finiteSeparableSection">finiteSeparableSection</a></span>
+<span id="L123"><a href="#L123">123</a> #print axioms <a class="ref" href="./FiniteSeparableDVRChartFoundation.lean.html#L50" title="Stafford38.Geometry.FiniteSeparableDVRChartFoundation.residue_comp_finiteSeparableSection">residue_comp_finiteSeparableSection</a></span>
+<span id="L124"><a href="#L124">124</a> #print axioms <a class="ref" href="./FiniteSeparableDVRChartFoundation.lean.html#L65" title="Stafford38.Geometry.FiniteSeparableDVRChartFoundation.finiteSeparableSection_unique">finiteSeparableSection_unique</a></span>
+<span id="L125"><a href="#L125">125</a> #print axioms <a class="ref" href="./FiniteSeparableDVRChartFoundation.lean.html#L81" title="Stafford38.Geometry.FiniteSeparableDVRChartFoundation.existsUnique_finiteSeparableSection">existsUnique_finiteSeparableSection</a></span>
+<span id="L126"><a href="#L126">126</a> #print axioms <a class="ref" href="./FiniteSeparableDVRChartFoundation.lean.html#L100" title="Stafford38.Geometry.FiniteSeparableDVRChartFoundation.finiteSeparableSection_naturality">finiteSeparableSection_naturality</a></span>
+<span id="L127"><a href="#L127">127</a> </span>
+<span id="L128"><a href="#L128">128</a> end</span>
+<span id="L129"><a href="#L129">129</a> </span>
+<span id="L130"><a href="#L130">130</a> end Stafford38.Geometry.FiniteSeparableDVRChartFoundation</span>
+<span id="L131"><a href="#L131">131</a> </span></pre>

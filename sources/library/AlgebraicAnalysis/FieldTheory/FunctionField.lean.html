@@ -1,0 +1,69 @@
+<!doctype html><meta charset="utf-8"><title>AlgebraicAnalysis/FieldTheory/FunctionField.lean</title><style>body{font:14px monospace}pre span{display:block}pre span:target{background:#fff0ad}a{color:#666}pre{white-space:pre-wrap}a.ref{color:#0645ad;text-decoration:none}a.ref:hover{text-decoration:underline}</style><h1>AlgebraicAnalysis/FieldTheory/FunctionField.lean</h1><p>AlgebraicAnalysis library · bbbbf3fc358ca8100b158cec4cf47f336ab70163</p><pre><span id="L1"><a href="#L1">1</a> module</span>
+<span id="L2"><a href="#L2">2</a> public import Mathlib.FieldTheory.IntermediateField.Adjoin.Algebra</span>
+<span id="L3"><a href="#L3">3</a> public import Mathlib.RingTheory.FiniteType</span>
+<span id="L4"><a href="#L4">4</a> public import Mathlib.RingTheory.Localization.FractionRing</span>
+<span id="L5"><a href="#L5">5</a> </span>
+<span id="L6"><a href="#L6">6</a> @[expose] public section</span>
+<span id="L7"><a href="#L7">7</a> </span>
+<span id="L8"><a href="#L8">8</a> /-!</span>
+<span id="L9"><a href="#L9">9</a> # Finitely generated fraction fields</span>
+<span id="L10"><a href="#L10">10</a> </span>
+<span id="L11"><a href="#L11">11</a> A fraction field of a finitely generated domain is finitely generated as a</span>
+<span id="L12"><a href="#L12">12</a> field extension.  The conclusion uses `IntermediateField.FG`, rather than</span>
+<span id="L13"><a href="#L13">13</a> finite type as an algebra: a transcendental fraction field is generally not</span>
+<span id="L14"><a href="#L14">14</a> finitely generated as an algebra over its ground field.</span>
+<span id="L15"><a href="#L15">15</a> -/</span>
+<span id="L16"><a href="#L16">16</a> </span>
+<span id="L17"><a href="#L17">17</a> namespace AlgebraicAnalysis.FunctionField</span>
+<span id="L18"><a href="#L18">18</a> </span>
+<span id="L19"><a href="#L19">19</a> noncomputable section</span>
+<span id="L20"><a href="#L20">20</a> </span>
+<span id="L21"><a href="#L21">21</a> universe u v w</span>
+<span id="L22"><a href="#L22">22</a> </span>
+<span id="L23"><a href="#L23">23</a> /-- The fraction field of a finitely generated domain is a finitely generated</span>
+<span id="L24"><a href="#L24">24</a> field extension of the ground field. -/</span>
+<span id="L25"><a href="#L25">25</a> @[nolint <a class="ref" href="https://github.com/leanprover-community/batteries/blob/3b7c8101932390d60e92a3f3d917901d5b5a773b/Batteries/Tactic/Lint/Misc.lean#L30" title="Batteries.Tactic.Lint.unusedArguments">unusedArguments</a>]</span>
+<span id="L26"><a href="#L26">26</a> theorem top_fg_of_finiteType_fractionRing</span>
+<span id="L27"><a href="#L27">27</a>     (k : Type u) (A : Type v) (K : Type w)</span>
+<span id="L28"><a href="#L28">28</a>     [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Field/Defs.lean#L170" title="Field">Field</a> k] [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Ring/Defs.lean#L412" title="CommRing">CommRing</a> A] [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Ring/Defs.lean#L430" title="IsDomain">IsDomain</a> A] [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Algebra/Defs.lean#L91" title="Algebra">Algebra</a> k A]</span>
+<span id="L29"><a href="#L29">29</a>     [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Field/Defs.lean#L170" title="Field">Field</a> K] [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Algebra/Defs.lean#L91" title="Algebra">Algebra</a> A K] [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Localization/FractionRing.lean#L53" title="IsFractionRing">IsFractionRing</a> A K]</span>
+<span id="L30"><a href="#L30">30</a>     [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Algebra/Defs.lean#L91" title="Algebra">Algebra</a> k K] [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Group/Action/Defs.lean#L207" title="IsScalarTower">IsScalarTower</a> k A K]</span>
+<span id="L31"><a href="#L31">31</a>     [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/FiniteType.lean#L37" title="Algebra.FiniteType">Algebra.FiniteType</a> k A] :</span>
+<span id="L32"><a href="#L32">32</a>     (⊤ : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/FieldTheory/IntermediateField/Basic.lean#L50" title="IntermediateField">IntermediateField</a> k K).<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/FieldTheory/IntermediateField/Adjoin/Defs.lean#L646" title="IntermediateField.FG">FG</a> := by</span>
+<span id="L33"><a href="#L33">33</a>   classical</span>
+<span id="L34"><a href="#L34">34</a>   obtain ⟨s, hs⟩ := (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/FiniteType.lean#L40" title="Algebra.FiniteType.out">Algebra.FiniteType.out</a> (R := k) (A := A))</span>
+<span id="L35"><a href="#L35">35</a>   let f : A →ₐ[k] K := <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Algebra/Hom.lean#L397" title="IsScalarTower.toAlgHom">IsScalarTower.toAlgHom</a> k A K</span>
+<span id="L36"><a href="#L36">36</a>   let fi : A ↪ K :=</span>
+<span id="L37"><a href="#L37">37</a>     ⟨f, <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Localization/FractionRing.lean#L138" title="IsFractionRing.injective">IsFractionRing.injective</a> A K⟩</span>
+<span id="L38"><a href="#L38">38</a>   let T : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/FieldTheory/IntermediateField/Basic.lean#L50" title="IntermediateField">IntermediateField</a> k K :=</span>
+<span id="L39"><a href="#L39">39</a>     <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/FieldTheory/IntermediateField/Adjoin/Defs.lean#L32" title="IntermediateField.adjoin">IntermediateField.adjoin</a> k (f '' (s : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Data/Set/Defs.lean#L44" title="Set">Set</a> A))</span>
+<span id="L40"><a href="#L40">40</a>   have hmap : ∀ a : A, f a ∈ T := by</span>
+<span id="L41"><a href="#L41">41</a>     intro a</span>
+<span id="L42"><a href="#L42">42</a>     have ha : a ∈ <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Algebra/Subalgebra/Lattice.lean#L30" title="Algebra.adjoin">Algebra.adjoin</a> k (s : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Data/Set/Defs.lean#L44" title="Set">Set</a> A) := by</span>
+<span id="L43"><a href="#L43">43</a>       rw [hs]</span>
+<span id="L44"><a href="#L44">44</a>       trivial</span>
+<span id="L45"><a href="#L45">45</a>     refine <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Algebra/Subalgebra/Lattice.lean#L579" title="Algebra.adjoin_induction">Algebra.adjoin_induction</a></span>
+<span id="L46"><a href="#L46">46</a>       (p := fun a _ ↦ f a ∈ T) ?_ ?_ ?_ ?_ ha</span>
+<span id="L47"><a href="#L47">47</a>     · intro x hx</span>
+<span id="L48"><a href="#L48">48</a>       exact <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/FieldTheory/IntermediateField/Adjoin/Defs.lean#L330" title="IntermediateField.subset_adjoin">IntermediateField.subset_adjoin</a> k _ ⟨x, hx, <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L334" title="rfl">rfl</a>⟩</span>
+<span id="L49"><a href="#L49">49</a>     · intro x</span>
+<span id="L50"><a href="#L50">50</a>       simpa [f] using T.algebraMap_mem x</span>
+<span id="L51"><a href="#L51">51</a>     · intro x y _ _ hx hy</span>
+<span id="L52"><a href="#L52">52</a>       simpa using T.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/FieldTheory/IntermediateField/Basic.lean#L172" title="IntermediateField.add_mem">add_mem</a> hx hy</span>
+<span id="L53"><a href="#L53">53</a>     · intro x y _ _ hx hy</span>
+<span id="L54"><a href="#L54">54</a>       simpa using T.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/FieldTheory/IntermediateField/Basic.lean#L168" title="IntermediateField.mul_mem">mul_mem</a> hx hy</span>
+<span id="L55"><a href="#L55">55</a>   have htop : T = ⊤ := by</span>
+<span id="L56"><a href="#L56">56</a>     rw [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Order/BoundedOrder/Basic.lean#L177" title="eq_top_iff">eq_top_iff</a>]</span>
+<span id="L57"><a href="#L57">57</a>     intro z _</span>
+<span id="L58"><a href="#L58">58</a>     obtain ⟨a, b, hb, hab⟩ := <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Localization/FractionRing.lean#L263" title="IsFractionRing.div_surjective">IsFractionRing.div_surjective</a> (A := A) z</span>
+<span id="L59"><a href="#L59">59</a>     rw [← hab]</span>
+<span id="L60"><a href="#L60">60</a>     exact T.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/FieldTheory/IntermediateField/Basic.lean#L184" title="IntermediateField.div_mem">div_mem</a> (hmap a) (hmap b)</span>
+<span id="L61"><a href="#L61">61</a>   refine ⟨s.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Data/Finset/Image.lean#L53" title="Finset.map">map</a> fi, ?_⟩</span>
+<span id="L62"><a href="#L62">62</a>   simpa [T, fi, f, <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Data/Finset/Image.lean#L96" title="Finset.coe_map">Finset.coe_map</a>] using htop</span>
+<span id="L63"><a href="#L63">63</a> </span>
+<span id="L64"><a href="#L64">64</a> #print axioms <a class="ref" href="./FunctionField.lean.html#L23" title="AlgebraicAnalysis.FunctionField.top_fg_of_finiteType_fractionRing">top_fg_of_finiteType_fractionRing</a></span>
+<span id="L65"><a href="#L65">65</a> </span>
+<span id="L66"><a href="#L66">66</a> end</span>
+<span id="L67"><a href="#L67">67</a> </span>
+<span id="L68"><a href="#L68">68</a> end AlgebraicAnalysis.FunctionField</span>
+<span id="L69"><a href="#L69">69</a> </span></pre>

@@ -1,0 +1,254 @@
+<!doctype html><meta charset="utf-8"><title>Stafford38/Ore/PairUniversal.lean</title><style>body{font:14px monospace}pre span{display:block}pre span:target{background:#fff0ad}a{color:#666}pre{white-space:pre-wrap}a.ref{color:#0645ad;text-decoration:none}a.ref:hover{text-decoration:underline}</style><h1>Stafford38/Ore/PairUniversal.lean</h1><p>This project (Stafford38) · 0403af3f0b1a7f84d2027121932723f67bd279ae</p><pre><span id="L1"><a href="#L1">1</a> module</span>
+<span id="L2"><a href="#L2">2</a> public import AlgebraicAnalysis.Ore.Associativity</span>
+<span id="L3"><a href="#L3">3</a> public import Stafford38.Ore.PairStage</span>
+<span id="L4"><a href="#L4">4</a> </span>
+<span id="L5"><a href="#L5">5</a> @[expose] public section</span>
+<span id="L6"><a href="#L6">6</a> </span>
+<span id="L7"><a href="#L7">7</a> /-!</span>
+<span id="L8"><a href="#L8">8</a> # Universal property of a coordinate-momentum pair stage</span>
+<span id="L9"><a href="#L9">9</a> </span>
+<span id="L10"><a href="#L10">10</a> The construction is the universal property of `NormalOre` applied twice.</span>
+<span id="L11"><a href="#L11">11</a> First a coefficient map and a commuting coordinate define a map from the</span>
+<span id="L12"><a href="#L12">12</a> central-coordinate stage.  A momentum satisfying the derivation relation</span>
+<span id="L13"><a href="#L13">13</a> against that map then defines a map from `PairStage`.</span>
+<span id="L14"><a href="#L14">14</a> -/</span>
+<span id="L15"><a href="#L15">15</a> </span>
+<span id="L16"><a href="#L16">16</a> namespace Stafford38.OrePairUniversal</span>
+<span id="L17"><a href="#L17">17</a> </span>
+<span id="L18"><a href="#L18">18</a> open AlgebraicAnalysis</span>
+<span id="L19"><a href="#L19">19</a> open AlgebraicAnalysis.OreDivision</span>
+<span id="L20"><a href="#L20">20</a> open AlgebraicAnalysis.OreAssociativity</span>
+<span id="L21"><a href="#L21">21</a> open Stafford38.OreCoordinateStage</span>
+<span id="L22"><a href="#L22">22</a> open Stafford38.OrePairStage</span>
+<span id="L23"><a href="#L23">23</a> </span>
+<span id="L24"><a href="#L24">24</a> noncomputable section</span>
+<span id="L25"><a href="#L25">25</a> </span>
+<span id="L26"><a href="#L26">26</a> variable {B A : Type*} [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Ring/Defs.lean#L145" title="Ring">Ring</a> B] [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Ring/Defs.lean#L145" title="Ring">Ring</a> A]</span>
+<span id="L27"><a href="#L27">27</a> </span>
+<span id="L28"><a href="#L28">28</a> /-- The Ore ambient determined by a coefficient map and a centralizing</span>
+<span id="L29"><a href="#L29">29</a> coordinate image. -/</span>
+<span id="L30"><a href="#L30">30</a> def coordinateAmbient (f : B →+* A) (X : A)</span>
+<span id="L31"><a href="#L31">31</a>     (hX : ∀ b, X * f b = f b * X) :</span>
+<span id="L32"><a href="#L32">32</a>     <a class="ref" href="../../../library/AlgebraicAnalysis/Ore/RightDivision.lean.html#L552" title="AlgebraicAnalysis.OreDivision.OreAmbient">OreAmbient</a> B A (<a class="ref" href="./CoordinateStage.lean.html#L26" title="Stafford38.OreCoordinateStage.zeroDerivation">zeroDerivation</a> : <a class="ref" href="../../../library/AlgebraicAnalysis/Ore/RightDivision.lean.html#L33" title="AlgebraicAnalysis.OreDivisionDerivation">OreDivisionDerivation</a> B) where</span>
+<span id="L33"><a href="#L33">33</a>   <a class="ref" href="../../../library/AlgebraicAnalysis/Ore/RightDivision.lean.html#L556" title="AlgebraicAnalysis.OreDivision.OreAmbient.embed">embed</a> := f</span>
+<span id="L34"><a href="#L34">34</a>   <a class="ref" href="../../../library/AlgebraicAnalysis/Ore/RightDivision.lean.html#L558" title="AlgebraicAnalysis.OreDivision.OreAmbient.x">x</a> := X</span>
+<span id="L35"><a href="#L35">35</a>   <a class="ref" href="../../../library/AlgebraicAnalysis/Ore/RightDivision.lean.html#L560" title="AlgebraicAnalysis.OreDivision.OreAmbient.relation">relation</a> := by</span>
+<span id="L36"><a href="#L36">36</a>     intro b</span>
+<span id="L37"><a href="#L37">37</a>     simpa using hX b</span>
+<span id="L38"><a href="#L38">38</a> </span>
+<span id="L39"><a href="#L39">39</a> /-- The universal map from the central-coordinate stage. -/</span>
+<span id="L40"><a href="#L40">40</a> def coordinateLift (f : B →+* A) (X : A)</span>
+<span id="L41"><a href="#L41">41</a>     (hX : ∀ b, X * f b = f b * X) :</span>
+<span id="L42"><a href="#L42">42</a>     <a class="ref" href="./CoordinateStage.lean.html#L73" title="Stafford38.OreCoordinateStage.CoordinateStage">CoordinateStage</a> (B := B) →+* A :=</span>
+<span id="L43"><a href="#L43">43</a>   <a class="ref" href="../../../library/AlgebraicAnalysis/Ore/Associativity.lean.html#L334" title="AlgebraicAnalysis.OreAssociativity.oreLift">oreLift</a> <a class="ref" href="./CoordinateStage.lean.html#L26" title="Stafford38.OreCoordinateStage.zeroDerivation">zeroDerivation</a> (<a class="ref" href="./PairUniversal.lean.html#L28" title="Stafford38.OrePairUniversal.coordinateAmbient">coordinateAmbient</a> f X hX)</span>
+<span id="L44"><a href="#L44">44</a> </span>
+<span id="L45"><a href="#L45">45</a> @[simp] theorem coordinateLift_coefficient (f : B →+* A) (X : A)</span>
+<span id="L46"><a href="#L46">46</a>     (hX : ∀ b, X * f b = f b * X) (b : B) :</span>
+<span id="L47"><a href="#L47">47</a>     <a class="ref" href="./PairUniversal.lean.html#L39" title="Stafford38.OrePairUniversal.coordinateLift">coordinateLift</a> f X hX (<a class="ref" href="../../../library/AlgebraicAnalysis/Ore/Associativity.lean.html#L277" title="AlgebraicAnalysis.OreAssociativity.normalCoefficient">normalCoefficient</a> <a class="ref" href="./CoordinateStage.lean.html#L26" title="Stafford38.OreCoordinateStage.zeroDerivation">zeroDerivation</a> b) = f b :=</span>
+<span id="L48"><a href="#L48">48</a>   <a class="ref" href="../../../library/AlgebraicAnalysis/Ore/Associativity.lean.html#L385" title="AlgebraicAnalysis.OreAssociativity.oreLift_coefficient">oreLift_coefficient</a> <a class="ref" href="./CoordinateStage.lean.html#L26" title="Stafford38.OreCoordinateStage.zeroDerivation">zeroDerivation</a> (<a class="ref" href="./PairUniversal.lean.html#L28" title="Stafford38.OrePairUniversal.coordinateAmbient">coordinateAmbient</a> f X hX) b</span>
+<span id="L49"><a href="#L49">49</a> </span>
+<span id="L50"><a href="#L50">50</a> @[simp] theorem coordinateLift_variable (f : B →+* A) (X : A)</span>
+<span id="L51"><a href="#L51">51</a>     (hX : ∀ b, X * f b = f b * X) :</span>
+<span id="L52"><a href="#L52">52</a>     <a class="ref" href="./PairUniversal.lean.html#L39" title="Stafford38.OrePairUniversal.coordinateLift">coordinateLift</a> f X hX (<a class="ref" href="../../../library/AlgebraicAnalysis/Ore/Associativity.lean.html#L287" title="AlgebraicAnalysis.OreAssociativity.normalVariable">normalVariable</a> <a class="ref" href="./CoordinateStage.lean.html#L26" title="Stafford38.OreCoordinateStage.zeroDerivation">zeroDerivation</a>) = X :=</span>
+<span id="L53"><a href="#L53">53</a>   <a class="ref" href="../../../library/AlgebraicAnalysis/Ore/Associativity.lean.html#L390" title="AlgebraicAnalysis.OreAssociativity.oreLift_variable">oreLift_variable</a> <a class="ref" href="./CoordinateStage.lean.html#L26" title="Stafford38.OreCoordinateStage.zeroDerivation">zeroDerivation</a> (<a class="ref" href="./PairUniversal.lean.html#L28" title="Stafford38.OrePairUniversal.coordinateAmbient">coordinateAmbient</a> f X hX)</span>
+<span id="L54"><a href="#L54">54</a> </span>
+<span id="L55"><a href="#L55">55</a> /-- A map out of the coordinate stage is determined by the old coefficients</span>
+<span id="L56"><a href="#L56">56</a> and the new coordinate. -/</span>
+<span id="L57"><a href="#L57">57</a> theorem coordinateLift_unique (f : B →+* A) (X : A)</span>
+<span id="L58"><a href="#L58">58</a>     (hX : ∀ b, X * f b = f b * X)</span>
+<span id="L59"><a href="#L59">59</a>     (g : <a class="ref" href="./CoordinateStage.lean.html#L73" title="Stafford38.OreCoordinateStage.CoordinateStage">CoordinateStage</a> (B := B) →+* A)</span>
+<span id="L60"><a href="#L60">60</a>     (hCoefficient : ∀ b, g (<a class="ref" href="../../../library/AlgebraicAnalysis/Ore/Associativity.lean.html#L277" title="AlgebraicAnalysis.OreAssociativity.normalCoefficient">normalCoefficient</a> <a class="ref" href="./CoordinateStage.lean.html#L26" title="Stafford38.OreCoordinateStage.zeroDerivation">zeroDerivation</a> b) = f b)</span>
+<span id="L61"><a href="#L61">61</a>     (hVariable : g (<a class="ref" href="../../../library/AlgebraicAnalysis/Ore/Associativity.lean.html#L287" title="AlgebraicAnalysis.OreAssociativity.normalVariable">normalVariable</a> <a class="ref" href="./CoordinateStage.lean.html#L26" title="Stafford38.OreCoordinateStage.zeroDerivation">zeroDerivation</a>) = X) :</span>
+<span id="L62"><a href="#L62">62</a>     g = <a class="ref" href="./PairUniversal.lean.html#L39" title="Stafford38.OrePairUniversal.coordinateLift">coordinateLift</a> f X hX :=</span>
+<span id="L63"><a href="#L63">63</a>   <a class="ref" href="../../../library/AlgebraicAnalysis/Ore/Associativity.lean.html#L394" title="AlgebraicAnalysis.OreAssociativity.oreLift_unique">oreLift_unique</a> <a class="ref" href="./CoordinateStage.lean.html#L26" title="Stafford38.OreCoordinateStage.zeroDerivation">zeroDerivation</a> (<a class="ref" href="./PairUniversal.lean.html#L28" title="Stafford38.OrePairUniversal.coordinateAmbient">coordinateAmbient</a> f X hX) g</span>
+<span id="L64"><a href="#L64">64</a>     hCoefficient hVariable</span>
+<span id="L65"><a href="#L65">65</a> </span>
+<span id="L66"><a href="#L66">66</a> private theorem momentum_mul_coordinate_pow (X P : A)</span>
+<span id="L67"><a href="#L67">67</a>     (hPX : P * X = X * P + 1) (n : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L1351" title="Nat">ℕ</a>) :</span>
+<span id="L68"><a href="#L68">68</a>     P * X ^ n = X ^ n * P + n • X ^ (n - 1) := by</span>
+<span id="L69"><a href="#L69">69</a>   induction n with</span>
+<span id="L70"><a href="#L70">70</a>   | <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L1360" title="Nat.zero">zero</a> =&gt; simp</span>
+<span id="L71"><a href="#L71">71</a>   | <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L1367" title="Nat.succ">succ</a> n ih =&gt;</span>
+<span id="L72"><a href="#L72">72</a>       rw [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Group/Monoid.lean#L410" title="pow_succ">pow_succ</a>, ← <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Group/Semigroup.lean#L160" title="mul_assoc">mul_assoc</a>, ih, <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Ring/Defs.lean#L98" title="add_mul">add_mul</a>, <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Group/Semigroup.lean#L160" title="mul_assoc">mul_assoc</a>, hPX, <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Ring/Defs.lean#L92" title="mul_add">mul_add</a>]</span>
+<span id="L73"><a href="#L73">73</a>       by_cases hn : n = 0</span>
+<span id="L74"><a href="#L74">74</a>       · subst n</span>
+<span id="L75"><a href="#L75">75</a>         simp</span>
+<span id="L76"><a href="#L76">76</a>       · have hpow : X ^ (n - 1) * X = X ^ n := by</span>
+<span id="L77"><a href="#L77">77</a>           rw [← <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Group/Monoid.lean#L410" title="pow_succ">pow_succ</a>, <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Data/Nat/Basic.lean#L991" title="Nat.sub_add_cancel">Nat.sub_add_cancel</a> (<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Data/Nat/Lemmas.lean#L152" title="Nat.one_le_iff_ne_zero">Nat.one_le_iff_ne_zero</a>.<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Core.lean#L194" title="Iff.mpr">mpr</a> hn)]</span>
+<span id="L78"><a href="#L78">78</a>         rw [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Ring/Defs.lean#L187" title="nsmul_eq_mul">nsmul_eq_mul</a>, <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Group/Semigroup.lean#L160" title="mul_assoc">mul_assoc</a>, hpow, ← <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Ring/Defs.lean#L187" title="nsmul_eq_mul">nsmul_eq_mul</a>]</span>
+<span id="L79"><a href="#L79">79</a>         simp only [<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Data/Nat/Basic.lean#L1002" title="Nat.add_sub_cancel">Nat.add_sub_cancel</a>, <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Group/Monoid.lean#L94" title="mul_one">mul_one</a>, <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Group/Semigroup.lean#L160" title="mul_assoc">mul_assoc</a>, <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Group/Monoid.lean#L410" title="succ_nsmul">succ_nsmul</a>]</span>
+<span id="L80"><a href="#L80">80</a>         abel</span>
+<span id="L81"><a href="#L81">81</a> </span>
+<span id="L82"><a href="#L82">82</a> /-- The coefficient and generator relations imply the full coordinate</span>
+<span id="L83"><a href="#L83">83</a> derivation relation.  No commutativity of either coefficient ring is used. -/</span>
+<span id="L84"><a href="#L84">84</a> theorem coordinateLift_derivation_relation (f : B →+* A) (X P : A)</span>
+<span id="L85"><a href="#L85">85</a>     (hX : ∀ b, X * f b = f b * X)</span>
+<span id="L86"><a href="#L86">86</a>     (hP : ∀ b, P * f b = f b * P)</span>
+<span id="L87"><a href="#L87">87</a>     (hPX : P * X = X * P + 1) (z : <a class="ref" href="./CoordinateStage.lean.html#L73" title="Stafford38.OreCoordinateStage.CoordinateStage">CoordinateStage</a> (B := B)) :</span>
+<span id="L88"><a href="#L88">88</a>     P * <a class="ref" href="./PairUniversal.lean.html#L39" title="Stafford38.OrePairUniversal.coordinateLift">coordinateLift</a> f X hX z =</span>
+<span id="L89"><a href="#L89">89</a>       <a class="ref" href="./PairUniversal.lean.html#L39" title="Stafford38.OrePairUniversal.coordinateLift">coordinateLift</a> f X hX z * P +</span>
+<span id="L90"><a href="#L90">90</a>         <a class="ref" href="./PairUniversal.lean.html#L39" title="Stafford38.OrePairUniversal.coordinateLift">coordinateLift</a> f X hX (<a class="ref" href="./CoordinateStage.lean.html#L87" title="Stafford38.OreCoordinateStage.coordinateDerivation">coordinateDerivation</a> z) := by</span>
+<span id="L91"><a href="#L91">91</a>   rcases <a class="ref" href="../../../library/AlgebraicAnalysis/Ore/Associativity.lean.html#L231" title="AlgebraicAnalysis.OreAssociativity.normalForm_surjective">normalForm_surjective</a> <a class="ref" href="./CoordinateStage.lean.html#L26" title="Stafford38.OreCoordinateStage.zeroDerivation">zeroDerivation</a> z with ⟨p, rfl⟩</span>
+<span id="L92"><a href="#L92">92</a>   induction p using <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Polynomial/Basic.lean#L942" title="Polynomial.induction_on&#x27;">Polynomial.induction_on'</a> with</span>
+<span id="L93"><a href="#L93">93</a>   | add p q hp hq =&gt;</span>
+<span id="L94"><a href="#L94">94</a>       rw [<a class="ref" href="../../../library/AlgebraicAnalysis/Ore/Associativity.lean.html#L246" title="AlgebraicAnalysis.OreAssociativity.normalForm_add">normalForm_add</a>, (<a class="ref" href="./PairUniversal.lean.html#L39" title="Stafford38.OrePairUniversal.coordinateLift">coordinateLift</a> f X hX).<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Ring/Hom/Defs.lean#L500" title="RingHom.map_add">map_add</a>,</span>
+<span id="L95"><a href="#L95">95</a>         <a class="ref" href="./CoordinateStage.lean.html#L87" title="Stafford38.OreCoordinateStage.coordinateDerivation">coordinateDerivation</a>.<a class="ref" href="../../../library/AlgebraicAnalysis/Ore/RightDivision.lean.html#L53" title="AlgebraicAnalysis.OreDivisionDerivation.map_add">map_add</a>, (<a class="ref" href="./PairUniversal.lean.html#L39" title="Stafford38.OrePairUniversal.coordinateLift">coordinateLift</a> f X hX).<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Ring/Hom/Defs.lean#L500" title="RingHom.map_add">map_add</a>,</span>
+<span id="L96"><a href="#L96">96</a>         <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Ring/Defs.lean#L92" title="mul_add">mul_add</a>, <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Ring/Defs.lean#L98" title="add_mul">add_mul</a>, hp, hq]</span>
+<span id="L97"><a href="#L97">97</a>       abel</span>
+<span id="L98"><a href="#L98">98</a>   | <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Polynomial/Basic.lean#L378" title="Polynomial.monomial">monomial</a> n b =&gt;</span>
+<span id="L99"><a href="#L99">99</a>       rw [<a class="ref" href="./CoordinateStage.lean.html#L131" title="Stafford38.OreCoordinateStage.coordinateDerivation_normalForm">coordinateDerivation_normalForm</a>, <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Polynomial/Derivative.lean#L79" title="Polynomial.derivative_monomial">Polynomial.derivative_monomial</a>,</span>
+<span id="L100"><a href="#L100">100</a>         <a class="ref" href="../../../library/AlgebraicAnalysis/Ore/Associativity.lean.html#L291" title="AlgebraicAnalysis.OreAssociativity.normalForm_monomial">normalForm_monomial</a>, <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Group/Hom/Defs.lean#L324" title="map_mul">map_mul</a>, <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Group/Hom/Defs.lean#L475" title="map_pow">map_pow</a>,</span>
+<span id="L101"><a href="#L101">101</a>         <a class="ref" href="./PairUniversal.lean.html#L45" title="Stafford38.OrePairUniversal.coordinateLift_coefficient">coordinateLift_coefficient</a>, <a class="ref" href="./PairUniversal.lean.html#L50" title="Stafford38.OrePairUniversal.coordinateLift_variable">coordinateLift_variable</a>,</span>
+<span id="L102"><a href="#L102">102</a>         <a class="ref" href="../../../library/AlgebraicAnalysis/Ore/Associativity.lean.html#L291" title="AlgebraicAnalysis.OreAssociativity.normalForm_monomial">normalForm_monomial</a>, <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Group/Hom/Defs.lean#L324" title="map_mul">map_mul</a>, <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Group/Hom/Defs.lean#L475" title="map_pow">map_pow</a>,</span>
+<span id="L103"><a href="#L103">103</a>         <a class="ref" href="./PairUniversal.lean.html#L45" title="Stafford38.OrePairUniversal.coordinateLift_coefficient">coordinateLift_coefficient</a>, <a class="ref" href="./PairUniversal.lean.html#L50" title="Stafford38.OrePairUniversal.coordinateLift_variable">coordinateLift_variable</a>]</span>
+<span id="L104"><a href="#L104">104</a>       rw [← <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Group/Semigroup.lean#L160" title="mul_assoc">mul_assoc</a>, hP, <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Group/Semigroup.lean#L160" title="mul_assoc">mul_assoc</a>, <a class="ref" href="./PairUniversal.lean.html#L66" title="_private.Stafford38.Ore.PairUniversal.0.Stafford38.OrePairUniversal.momentum_mul_coordinate_pow">momentum_mul_coordinate_pow</a> X P hPX n]</span>
+<span id="L105"><a href="#L105">105</a>       simp only [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Ring/Defs.lean#L98" title="add_mul">add_mul</a>, <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Ring/Defs.lean#L92" title="mul_add">mul_add</a>, <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Group/Semigroup.lean#L160" title="mul_assoc">mul_assoc</a>]</span>
+<span id="L106"><a href="#L106">106</a>       congr 1</span>
+<span id="L107"><a href="#L107">107</a>       rw [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Group/Hom/Defs.lean#L324" title="map_mul">map_mul</a>, <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Data/Nat/Cast/Basic.lean#L137" title="map_natCast">map_natCast</a>, <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Ring/Defs.lean#L187" title="nsmul_eq_mul">nsmul_eq_mul</a>]</span>
+<span id="L108"><a href="#L108">108</a>       simp only [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Group/Semigroup.lean#L160" title="mul_assoc">mul_assoc</a>]</span>
+<span id="L109"><a href="#L109">109</a> </span>
+<span id="L110"><a href="#L110">110</a> /-- The outer Ore ambient determined by commuting coefficient images and a</span>
+<span id="L111"><a href="#L111">111</a> coordinate-momentum Weyl pair. -/</span>
+<span id="L112"><a href="#L112">112</a> def pairAmbient (f : B →+* A) (X P : A)</span>
+<span id="L113"><a href="#L113">113</a>     (hX : ∀ b, X * f b = f b * X)</span>
+<span id="L114"><a href="#L114">114</a>     (hP : ∀ b, P * f b = f b * P)</span>
+<span id="L115"><a href="#L115">115</a>     (hPX : P * X = X * P + 1) :</span>
+<span id="L116"><a href="#L116">116</a>     <a class="ref" href="../../../library/AlgebraicAnalysis/Ore/RightDivision.lean.html#L552" title="AlgebraicAnalysis.OreDivision.OreAmbient">OreAmbient</a> (<a class="ref" href="./CoordinateStage.lean.html#L73" title="Stafford38.OreCoordinateStage.CoordinateStage">CoordinateStage</a> (B := B)) A <a class="ref" href="./CoordinateStage.lean.html#L87" title="Stafford38.OreCoordinateStage.coordinateDerivation">coordinateDerivation</a> where</span>
+<span id="L117"><a href="#L117">117</a>   <a class="ref" href="../../../library/AlgebraicAnalysis/Ore/RightDivision.lean.html#L556" title="AlgebraicAnalysis.OreDivision.OreAmbient.embed">embed</a> := <a class="ref" href="./PairUniversal.lean.html#L39" title="Stafford38.OrePairUniversal.coordinateLift">coordinateLift</a> f X hX</span>
+<span id="L118"><a href="#L118">118</a>   <a class="ref" href="../../../library/AlgebraicAnalysis/Ore/RightDivision.lean.html#L558" title="AlgebraicAnalysis.OreDivision.OreAmbient.x">x</a> := P</span>
+<span id="L119"><a href="#L119">119</a>   <a class="ref" href="../../../library/AlgebraicAnalysis/Ore/RightDivision.lean.html#L560" title="AlgebraicAnalysis.OreDivision.OreAmbient.relation">relation</a> := <a class="ref" href="./PairUniversal.lean.html#L82" title="Stafford38.OrePairUniversal.coordinateLift_derivation_relation">coordinateLift_derivation_relation</a> f X P hX hP hPX</span>
+<span id="L120"><a href="#L120">120</a> </span>
+<span id="L121"><a href="#L121">121</a> /-- The universal ring map from a coordinate-momentum pair stage. -/</span>
+<span id="L122"><a href="#L122">122</a> def pairLift (f : B →+* A) (X P : A)</span>
+<span id="L123"><a href="#L123">123</a>     (hX : ∀ b, X * f b = f b * X)</span>
+<span id="L124"><a href="#L124">124</a>     (hP : ∀ b, P * f b = f b * P)</span>
+<span id="L125"><a href="#L125">125</a>     (hPX : P * X = X * P + 1) :</span>
+<span id="L126"><a href="#L126">126</a>     <a class="ref" href="./PairStage.lean.html#L28" title="Stafford38.OrePairStage.PairStage">PairStage</a> (B := B) →+* A :=</span>
+<span id="L127"><a href="#L127">127</a>   <a class="ref" href="../../../library/AlgebraicAnalysis/Ore/Associativity.lean.html#L334" title="AlgebraicAnalysis.OreAssociativity.oreLift">oreLift</a> <a class="ref" href="./CoordinateStage.lean.html#L87" title="Stafford38.OreCoordinateStage.coordinateDerivation">coordinateDerivation</a> (<a class="ref" href="./PairUniversal.lean.html#L110" title="Stafford38.OrePairUniversal.pairAmbient">pairAmbient</a> f X P hX hP hPX)</span>
+<span id="L128"><a href="#L128">128</a> </span>
+<span id="L129"><a href="#L129">129</a> @[simp] theorem pairLift_coefficient (f : B →+* A) (X P : A)</span>
+<span id="L130"><a href="#L130">130</a>     (hX : ∀ b, X * f b = f b * X)</span>
+<span id="L131"><a href="#L131">131</a>     (hP : ∀ b, P * f b = f b * P)</span>
+<span id="L132"><a href="#L132">132</a>     (hPX : P * X = X * P + 1)</span>
+<span id="L133"><a href="#L133">133</a>     (b : B) :</span>
+<span id="L134"><a href="#L134">134</a>     <a class="ref" href="./PairUniversal.lean.html#L121" title="Stafford38.OrePairUniversal.pairLift">pairLift</a> f X P hX hP hPX (<a class="ref" href="./PairStage.lean.html#L38" title="Stafford38.OrePairStage.pairCoefficient">pairCoefficient</a> b) = f b := by</span>
+<span id="L135"><a href="#L135">135</a>   change <a class="ref" href="./PairUniversal.lean.html#L121" title="Stafford38.OrePairUniversal.pairLift">pairLift</a> f X P hX hP hPX</span>
+<span id="L136"><a href="#L136">136</a>       (<a class="ref" href="../../../library/AlgebraicAnalysis/Ore/Associativity.lean.html#L277" title="AlgebraicAnalysis.OreAssociativity.normalCoefficient">normalCoefficient</a> <a class="ref" href="./CoordinateStage.lean.html#L87" title="Stafford38.OreCoordinateStage.coordinateDerivation">coordinateDerivation</a></span>
+<span id="L137"><a href="#L137">137</a>         (<a class="ref" href="../../../library/AlgebraicAnalysis/Ore/Associativity.lean.html#L277" title="AlgebraicAnalysis.OreAssociativity.normalCoefficient">normalCoefficient</a> <a class="ref" href="./CoordinateStage.lean.html#L26" title="Stafford38.OreCoordinateStage.zeroDerivation">zeroDerivation</a> b)) = f b</span>
+<span id="L138"><a href="#L138">138</a>   rw [<a class="ref" href="./PairUniversal.lean.html#L121" title="Stafford38.OrePairUniversal.pairLift">pairLift</a>, <a class="ref" href="../../../library/AlgebraicAnalysis/Ore/Associativity.lean.html#L385" title="AlgebraicAnalysis.OreAssociativity.oreLift_coefficient">oreLift_coefficient</a>]</span>
+<span id="L139"><a href="#L139">139</a>   change <a class="ref" href="./PairUniversal.lean.html#L39" title="Stafford38.OrePairUniversal.coordinateLift">coordinateLift</a> f X hX (<a class="ref" href="../../../library/AlgebraicAnalysis/Ore/Associativity.lean.html#L277" title="AlgebraicAnalysis.OreAssociativity.normalCoefficient">normalCoefficient</a> <a class="ref" href="./CoordinateStage.lean.html#L26" title="Stafford38.OreCoordinateStage.zeroDerivation">zeroDerivation</a> b) = f b</span>
+<span id="L140"><a href="#L140">140</a>   exact <a class="ref" href="./PairUniversal.lean.html#L45" title="Stafford38.OrePairUniversal.coordinateLift_coefficient">coordinateLift_coefficient</a> f X hX b</span>
+<span id="L141"><a href="#L141">141</a> </span>
+<span id="L142"><a href="#L142">142</a> @[simp] theorem pairLift_coordinate (f : B →+* A) (X P : A)</span>
+<span id="L143"><a href="#L143">143</a>     (hX : ∀ b, X * f b = f b * X)</span>
+<span id="L144"><a href="#L144">144</a>     (hP : ∀ b, P * f b = f b * P)</span>
+<span id="L145"><a href="#L145">145</a>     (hPX : P * X = X * P + 1) :</span>
+<span id="L146"><a href="#L146">146</a>     <a class="ref" href="./PairUniversal.lean.html#L121" title="Stafford38.OrePairUniversal.pairLift">pairLift</a> f X P hX hP hPX <a class="ref" href="./PairStage.lean.html#L42" title="Stafford38.OrePairStage.pairCoordinate">pairCoordinate</a> = X := by</span>
+<span id="L147"><a href="#L147">147</a>   change <a class="ref" href="./PairUniversal.lean.html#L121" title="Stafford38.OrePairUniversal.pairLift">pairLift</a> f X P hX hP hPX</span>
+<span id="L148"><a href="#L148">148</a>       (<a class="ref" href="../../../library/AlgebraicAnalysis/Ore/Associativity.lean.html#L277" title="AlgebraicAnalysis.OreAssociativity.normalCoefficient">normalCoefficient</a> <a class="ref" href="./CoordinateStage.lean.html#L87" title="Stafford38.OreCoordinateStage.coordinateDerivation">coordinateDerivation</a></span>
+<span id="L149"><a href="#L149">149</a>         (<a class="ref" href="../../../library/AlgebraicAnalysis/Ore/Associativity.lean.html#L287" title="AlgebraicAnalysis.OreAssociativity.normalVariable">normalVariable</a> <a class="ref" href="./CoordinateStage.lean.html#L26" title="Stafford38.OreCoordinateStage.zeroDerivation">zeroDerivation</a>)) = X</span>
+<span id="L150"><a href="#L150">150</a>   rw [<a class="ref" href="./PairUniversal.lean.html#L121" title="Stafford38.OrePairUniversal.pairLift">pairLift</a>, <a class="ref" href="../../../library/AlgebraicAnalysis/Ore/Associativity.lean.html#L385" title="AlgebraicAnalysis.OreAssociativity.oreLift_coefficient">oreLift_coefficient</a>]</span>
+<span id="L151"><a href="#L151">151</a>   change <a class="ref" href="./PairUniversal.lean.html#L39" title="Stafford38.OrePairUniversal.coordinateLift">coordinateLift</a> f X hX (<a class="ref" href="../../../library/AlgebraicAnalysis/Ore/Associativity.lean.html#L287" title="AlgebraicAnalysis.OreAssociativity.normalVariable">normalVariable</a> <a class="ref" href="./CoordinateStage.lean.html#L26" title="Stafford38.OreCoordinateStage.zeroDerivation">zeroDerivation</a>) = X</span>
+<span id="L152"><a href="#L152">152</a>   exact <a class="ref" href="./PairUniversal.lean.html#L50" title="Stafford38.OrePairUniversal.coordinateLift_variable">coordinateLift_variable</a> f X hX</span>
+<span id="L153"><a href="#L153">153</a> </span>
+<span id="L154"><a href="#L154">154</a> @[simp] theorem pairLift_momentum (f : B →+* A) (X P : A)</span>
+<span id="L155"><a href="#L155">155</a>     (hX : ∀ b, X * f b = f b * X)</span>
+<span id="L156"><a href="#L156">156</a>     (hP : ∀ b, P * f b = f b * P)</span>
+<span id="L157"><a href="#L157">157</a>     (hPX : P * X = X * P + 1) :</span>
+<span id="L158"><a href="#L158">158</a>     <a class="ref" href="./PairUniversal.lean.html#L121" title="Stafford38.OrePairUniversal.pairLift">pairLift</a> f X P hX hP hPX <a class="ref" href="./PairStage.lean.html#L46" title="Stafford38.OrePairStage.pairMomentum">pairMomentum</a> = P := by</span>
+<span id="L159"><a href="#L159">159</a>   exact <a class="ref" href="../../../library/AlgebraicAnalysis/Ore/Associativity.lean.html#L390" title="AlgebraicAnalysis.OreAssociativity.oreLift_variable">oreLift_variable</a> <a class="ref" href="./CoordinateStage.lean.html#L87" title="Stafford38.OreCoordinateStage.coordinateDerivation">coordinateDerivation</a> (<a class="ref" href="./PairUniversal.lean.html#L110" title="Stafford38.OrePairUniversal.pairAmbient">pairAmbient</a> f X P hX hP hPX)</span>
+<span id="L160"><a href="#L160">160</a> </span>
+<span id="L161"><a href="#L161">161</a> /-- A ring map out of `PairStage` is determined by the old coefficients and</span>
+<span id="L162"><a href="#L162">162</a> the two newly adjoined generators. -/</span>
+<span id="L163"><a href="#L163">163</a> theorem pairLift_unique (f : B →+* A) (X P : A)</span>
+<span id="L164"><a href="#L164">164</a>     (hX : ∀ b, X * f b = f b * X)</span>
+<span id="L165"><a href="#L165">165</a>     (hP : ∀ b, P * f b = f b * P)</span>
+<span id="L166"><a href="#L166">166</a>     (hPX : P * X = X * P + 1)</span>
+<span id="L167"><a href="#L167">167</a>     (g : <a class="ref" href="./PairStage.lean.html#L28" title="Stafford38.OrePairStage.PairStage">PairStage</a> (B := B) →+* A)</span>
+<span id="L168"><a href="#L168">168</a>     (hCoefficient : ∀ b, g (<a class="ref" href="./PairStage.lean.html#L38" title="Stafford38.OrePairStage.pairCoefficient">pairCoefficient</a> b) = f b)</span>
+<span id="L169"><a href="#L169">169</a>     (hCoordinate : g <a class="ref" href="./PairStage.lean.html#L42" title="Stafford38.OrePairStage.pairCoordinate">pairCoordinate</a> = X)</span>
+<span id="L170"><a href="#L170">170</a>     (hMomentum : g <a class="ref" href="./PairStage.lean.html#L46" title="Stafford38.OrePairStage.pairMomentum">pairMomentum</a> = P) :</span>
+<span id="L171"><a href="#L171">171</a>     g = <a class="ref" href="./PairUniversal.lean.html#L121" title="Stafford38.OrePairUniversal.pairLift">pairLift</a> f X P hX hP hPX := by</span>
+<span id="L172"><a href="#L172">172</a>   let inner : <a class="ref" href="./CoordinateStage.lean.html#L73" title="Stafford38.OreCoordinateStage.CoordinateStage">CoordinateStage</a> (B := B) →+* A :=</span>
+<span id="L173"><a href="#L173">173</a>     g.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Ring/Hom/Defs.lean#L582" title="RingHom.comp">comp</a> (<a class="ref" href="../../../library/AlgebraicAnalysis/Ore/Associativity.lean.html#L277" title="AlgebraicAnalysis.OreAssociativity.normalCoefficient">normalCoefficient</a> <a class="ref" href="./CoordinateStage.lean.html#L87" title="Stafford38.OreCoordinateStage.coordinateDerivation">coordinateDerivation</a>)</span>
+<span id="L174"><a href="#L174">174</a>   have hInner : inner = <a class="ref" href="./PairUniversal.lean.html#L39" title="Stafford38.OrePairUniversal.coordinateLift">coordinateLift</a> f X hX := by</span>
+<span id="L175"><a href="#L175">175</a>     apply <a class="ref" href="./PairUniversal.lean.html#L55" title="Stafford38.OrePairUniversal.coordinateLift_unique">coordinateLift_unique</a> f X hX</span>
+<span id="L176"><a href="#L176">176</a>     · intro b</span>
+<span id="L177"><a href="#L177">177</a>       exact hCoefficient b</span>
+<span id="L178"><a href="#L178">178</a>     · exact hCoordinate</span>
+<span id="L179"><a href="#L179">179</a>   apply <a class="ref" href="../../../library/AlgebraicAnalysis/Ore/Associativity.lean.html#L394" title="AlgebraicAnalysis.OreAssociativity.oreLift_unique">oreLift_unique</a> <a class="ref" href="./CoordinateStage.lean.html#L87" title="Stafford38.OreCoordinateStage.coordinateDerivation">coordinateDerivation</a> (<a class="ref" href="./PairUniversal.lean.html#L110" title="Stafford38.OrePairUniversal.pairAmbient">pairAmbient</a> f X P hX hP hPX)</span>
+<span id="L180"><a href="#L180">180</a>   · intro z</span>
+<span id="L181"><a href="#L181">181</a>     exact <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Data/FunLike/Basic.lean#L201" title="DFunLike.congr_fun">DFunLike.congr_fun</a> hInner z</span>
+<span id="L182"><a href="#L182">182</a>   · exact hMomentum</span>
+<span id="L183"><a href="#L183">183</a> </span>
+<span id="L184"><a href="#L184">184</a> section Scalars</span>
+<span id="L185"><a href="#L185">185</a> </span>
+<span id="L186"><a href="#L186">186</a> variable {k : Type*} [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Ring/Defs.lean#L412" title="CommRing">CommRing</a> k] [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Algebra/Defs.lean#L91" title="Algebra">Algebra</a> k B] [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Algebra/Defs.lean#L91" title="Algebra">Algebra</a> k A]</span>
+<span id="L187"><a href="#L187">187</a> </span>
+<span id="L188"><a href="#L188">188</a> local instance : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Algebra/Defs.lean#L91" title="Algebra">Algebra</a> k (<a class="ref" href="./PairStage.lean.html#L28" title="Stafford38.OrePairStage.PairStage">PairStage</a> (B := B)) :=</span>
+<span id="L189"><a href="#L189">189</a>   <a class="ref" href="./PairStage.lean.html#L115" title="Stafford38.OrePairStage.pairStageAlgebra">pairStageAlgebra</a> (k := k) (B := B)</span>
+<span id="L190"><a href="#L190">190</a> </span>
+<span id="L191"><a href="#L191">191</a> /-- The pair lift as a scalar-preserving algebra map. -/</span>
+<span id="L192"><a href="#L192">192</a> def pairLiftAlgHom (f : B →ₐ[k] A) (X P : A)</span>
+<span id="L193"><a href="#L193">193</a>     (hX : ∀ b, X * f b = f b * X)</span>
+<span id="L194"><a href="#L194">194</a>     (hP : ∀ b, P * f b = f b * P)</span>
+<span id="L195"><a href="#L195">195</a>     (hPX : P * X = X * P + 1) :</span>
+<span id="L196"><a href="#L196">196</a>     <a class="ref" href="./PairStage.lean.html#L28" title="Stafford38.OrePairStage.PairStage">PairStage</a> (B := B) →ₐ[k] A where</span>
+<span id="L197"><a href="#L197">197</a>   <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Algebra/Hom.lean#L30" title="AlgHom.toRingHom">toRingHom</a> := <a class="ref" href="./PairUniversal.lean.html#L121" title="Stafford38.OrePairUniversal.pairLift">pairLift</a> f.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Algebra/Hom.lean#L30" title="AlgHom.toRingHom">toRingHom</a> X P hX hP hPX</span>
+<span id="L198"><a href="#L198">198</a>   <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Algebra/Hom.lean#L32" title="AlgHom.commutes&#x27;">commutes'</a> c := by</span>
+<span id="L199"><a href="#L199">199</a>     rw [<a class="ref" href="./PairStage.lean.html#L121" title="Stafford38.OrePairStage.pairStageAlgebra_algebraMap">pairStageAlgebra_algebraMap</a>]</span>
+<span id="L200"><a href="#L200">200</a>     exact <a class="ref" href="./PairUniversal.lean.html#L129" title="Stafford38.OrePairUniversal.pairLift_coefficient">pairLift_coefficient</a> f.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Algebra/Hom.lean#L30" title="AlgHom.toRingHom">toRingHom</a> X P hX hP hPX (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Algebra/Defs.lean#L97" title="Algebra.algebraMap">algebraMap</a> k B c)</span>
+<span id="L201"><a href="#L201">201</a>       |&gt;.<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L379" title="Eq.trans">trans</a> (f.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Algebra/Hom.lean#L219" title="AlgHom.commutes">commutes</a> c)</span>
+<span id="L202"><a href="#L202">202</a> </span>
+<span id="L203"><a href="#L203">203</a> @[simp] theorem pairLiftAlgHom_coefficient (f : B →ₐ[k] A) (X P : A)</span>
+<span id="L204"><a href="#L204">204</a>     (hX : ∀ b, X * f b = f b * X)</span>
+<span id="L205"><a href="#L205">205</a>     (hP : ∀ b, P * f b = f b * P)</span>
+<span id="L206"><a href="#L206">206</a>     (hPX : P * X = X * P + 1)</span>
+<span id="L207"><a href="#L207">207</a>     (b : B) :</span>
+<span id="L208"><a href="#L208">208</a>     <a class="ref" href="./PairUniversal.lean.html#L191" title="Stafford38.OrePairUniversal.pairLiftAlgHom">pairLiftAlgHom</a> f X P hX hP hPX (<a class="ref" href="./PairStage.lean.html#L38" title="Stafford38.OrePairStage.pairCoefficient">pairCoefficient</a> b) = f b := by</span>
+<span id="L209"><a href="#L209">209</a>   change <a class="ref" href="./PairUniversal.lean.html#L121" title="Stafford38.OrePairUniversal.pairLift">pairLift</a> f.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Algebra/Hom.lean#L30" title="AlgHom.toRingHom">toRingHom</a> X P hX hP hPX (<a class="ref" href="./PairStage.lean.html#L38" title="Stafford38.OrePairStage.pairCoefficient">pairCoefficient</a> b) = f b</span>
+<span id="L210"><a href="#L210">210</a>   exact <a class="ref" href="./PairUniversal.lean.html#L129" title="Stafford38.OrePairUniversal.pairLift_coefficient">pairLift_coefficient</a> f.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Algebra/Hom.lean#L30" title="AlgHom.toRingHom">toRingHom</a> X P hX hP hPX b</span>
+<span id="L211"><a href="#L211">211</a> </span>
+<span id="L212"><a href="#L212">212</a> @[simp] theorem pairLiftAlgHom_coordinate (f : B →ₐ[k] A) (X P : A)</span>
+<span id="L213"><a href="#L213">213</a>     (hX : ∀ b, X * f b = f b * X)</span>
+<span id="L214"><a href="#L214">214</a>     (hP : ∀ b, P * f b = f b * P)</span>
+<span id="L215"><a href="#L215">215</a>     (hPX : P * X = X * P + 1) :</span>
+<span id="L216"><a href="#L216">216</a>     <a class="ref" href="./PairUniversal.lean.html#L191" title="Stafford38.OrePairUniversal.pairLiftAlgHom">pairLiftAlgHom</a> f X P hX hP hPX <a class="ref" href="./PairStage.lean.html#L42" title="Stafford38.OrePairStage.pairCoordinate">pairCoordinate</a> = X := by</span>
+<span id="L217"><a href="#L217">217</a>   change <a class="ref" href="./PairUniversal.lean.html#L121" title="Stafford38.OrePairUniversal.pairLift">pairLift</a> f.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Algebra/Hom.lean#L30" title="AlgHom.toRingHom">toRingHom</a> X P hX hP hPX <a class="ref" href="./PairStage.lean.html#L42" title="Stafford38.OrePairStage.pairCoordinate">pairCoordinate</a> = X</span>
+<span id="L218"><a href="#L218">218</a>   exact <a class="ref" href="./PairUniversal.lean.html#L142" title="Stafford38.OrePairUniversal.pairLift_coordinate">pairLift_coordinate</a> f.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Algebra/Hom.lean#L30" title="AlgHom.toRingHom">toRingHom</a> X P hX hP hPX</span>
+<span id="L219"><a href="#L219">219</a> </span>
+<span id="L220"><a href="#L220">220</a> @[simp] theorem pairLiftAlgHom_momentum (f : B →ₐ[k] A) (X P : A)</span>
+<span id="L221"><a href="#L221">221</a>     (hX : ∀ b, X * f b = f b * X)</span>
+<span id="L222"><a href="#L222">222</a>     (hP : ∀ b, P * f b = f b * P)</span>
+<span id="L223"><a href="#L223">223</a>     (hPX : P * X = X * P + 1) :</span>
+<span id="L224"><a href="#L224">224</a>     <a class="ref" href="./PairUniversal.lean.html#L191" title="Stafford38.OrePairUniversal.pairLiftAlgHom">pairLiftAlgHom</a> f X P hX hP hPX <a class="ref" href="./PairStage.lean.html#L46" title="Stafford38.OrePairStage.pairMomentum">pairMomentum</a> = P := by</span>
+<span id="L225"><a href="#L225">225</a>   change <a class="ref" href="./PairUniversal.lean.html#L121" title="Stafford38.OrePairUniversal.pairLift">pairLift</a> f.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Algebra/Hom.lean#L30" title="AlgHom.toRingHom">toRingHom</a> X P hX hP hPX <a class="ref" href="./PairStage.lean.html#L46" title="Stafford38.OrePairStage.pairMomentum">pairMomentum</a> = P</span>
+<span id="L226"><a href="#L226">226</a>   exact <a class="ref" href="./PairUniversal.lean.html#L154" title="Stafford38.OrePairUniversal.pairLift_momentum">pairLift_momentum</a> f.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Algebra/Hom.lean#L30" title="AlgHom.toRingHom">toRingHom</a> X P hX hP hPX</span>
+<span id="L227"><a href="#L227">227</a> </span>
+<span id="L228"><a href="#L228">228</a> theorem pairLiftAlgHom_unique (f : B →ₐ[k] A) (X P : A)</span>
+<span id="L229"><a href="#L229">229</a>     (hX : ∀ b, X * f b = f b * X)</span>
+<span id="L230"><a href="#L230">230</a>     (hP : ∀ b, P * f b = f b * P)</span>
+<span id="L231"><a href="#L231">231</a>     (hPX : P * X = X * P + 1)</span>
+<span id="L232"><a href="#L232">232</a>     (g : <a class="ref" href="./PairStage.lean.html#L28" title="Stafford38.OrePairStage.PairStage">PairStage</a> (B := B) →ₐ[k] A)</span>
+<span id="L233"><a href="#L233">233</a>     (hCoefficient : ∀ b, g (<a class="ref" href="./PairStage.lean.html#L38" title="Stafford38.OrePairStage.pairCoefficient">pairCoefficient</a> b) = f b)</span>
+<span id="L234"><a href="#L234">234</a>     (hCoordinate : g <a class="ref" href="./PairStage.lean.html#L42" title="Stafford38.OrePairStage.pairCoordinate">pairCoordinate</a> = X)</span>
+<span id="L235"><a href="#L235">235</a>     (hMomentum : g <a class="ref" href="./PairStage.lean.html#L46" title="Stafford38.OrePairStage.pairMomentum">pairMomentum</a> = P) :</span>
+<span id="L236"><a href="#L236">236</a>     g = <a class="ref" href="./PairUniversal.lean.html#L191" title="Stafford38.OrePairUniversal.pairLiftAlgHom">pairLiftAlgHom</a> f X P hX hP hPX := by</span>
+<span id="L237"><a href="#L237">237</a>   apply <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Algebra/Hom.lean#L209" title="AlgHom.ext">AlgHom.ext</a></span>
+<span id="L238"><a href="#L238">238</a>   intro z</span>
+<span id="L239"><a href="#L239">239</a>   exact <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Data/FunLike/Basic.lean#L201" title="DFunLike.congr_fun">DFunLike.congr_fun</a></span>
+<span id="L240"><a href="#L240">240</a>     (<a class="ref" href="./PairUniversal.lean.html#L161" title="Stafford38.OrePairUniversal.pairLift_unique">pairLift_unique</a> f.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Algebra/Hom.lean#L30" title="AlgHom.toRingHom">toRingHom</a> X P hX hP hPX g.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Algebra/Hom.lean#L30" title="AlgHom.toRingHom">toRingHom</a></span>
+<span id="L241"><a href="#L241">241</a>       hCoefficient hCoordinate hMomentum) z</span>
+<span id="L242"><a href="#L242">242</a> </span>
+<span id="L243"><a href="#L243">243</a> end Scalars</span>
+<span id="L244"><a href="#L244">244</a> </span>
+<span id="L245"><a href="#L245">245</a> #print axioms <a class="ref" href="./PairUniversal.lean.html#L55" title="Stafford38.OrePairUniversal.coordinateLift_unique">coordinateLift_unique</a></span>
+<span id="L246"><a href="#L246">246</a> #print axioms <a class="ref" href="./PairUniversal.lean.html#L82" title="Stafford38.OrePairUniversal.coordinateLift_derivation_relation">coordinateLift_derivation_relation</a></span>
+<span id="L247"><a href="#L247">247</a> #print axioms <a class="ref" href="./PairUniversal.lean.html#L121" title="Stafford38.OrePairUniversal.pairLift">pairLift</a></span>
+<span id="L248"><a href="#L248">248</a> #print axioms <a class="ref" href="./PairUniversal.lean.html#L161" title="Stafford38.OrePairUniversal.pairLift_unique">pairLift_unique</a></span>
+<span id="L249"><a href="#L249">249</a> #print axioms <a class="ref" href="./PairUniversal.lean.html#L191" title="Stafford38.OrePairUniversal.pairLiftAlgHom">pairLiftAlgHom</a></span>
+<span id="L250"><a href="#L250">250</a> #print axioms <a class="ref" href="./PairUniversal.lean.html#L228" title="Stafford38.OrePairUniversal.pairLiftAlgHom_unique">pairLiftAlgHom_unique</a></span>
+<span id="L251"><a href="#L251">251</a> </span>
+<span id="L252"><a href="#L252">252</a> end</span>
+<span id="L253"><a href="#L253">253</a> end Stafford38.OrePairUniversal</span>
+<span id="L254"><a href="#L254">254</a> </span></pre>

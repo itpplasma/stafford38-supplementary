@@ -29,6 +29,20 @@ printed proof, with hypotheses entering and the statement exiting. An overall
 DAG runs from Lean's three base axioms to Theorem 1.1. Cited results and
 uncited standard facts appear as axioms with their sources. Regenerate it with
 `python3 scripts/build-proof-dag.py`, which requires Graphviz.
+[lean-dag.html](lean-dag.html) does the same for the Lean proof. Its edges are
+computed from Lean's environment and contracted to the key declarations.
+Mathlib, AlgebraicAnalysis and the Lean proof of Gabber's theorem appear as cited
+inputs.
+
+**Every Lean identifier is linked to its declaration.** This applies in the
+proof comparison and in all bundled source pages. The links come from Lean's
+own reference data (`.ilean`) of the built formal checkout, stored in
+`verification/lean-references/references.json`, not from name matching.
+Project and AlgebraicAnalysis declarations open bundled source pages. Mathlib and
+Lean core declarations open their pinned GitHub source. `rebuild.py` reapplies
+the links. Regenerating the data needs a built checkout of the pinned formal
+commit: `python3 scripts/extract-lean-references.py --formal PATH` and
+`python3 scripts/build-lean-dag.py --formal PATH`.
 
 [Updated paper PDF](human_readable_main.pdf) · [Archived formal proof details PDF](lean_proof_details.pdf) · [Formal proof v1.3.1](https://doi.org/10.5281/zenodo.23127367)
 

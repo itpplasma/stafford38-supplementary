@@ -1,0 +1,62 @@
+<!doctype html><meta charset="utf-8"><title>Stafford38/Characteristic/FilteredQuotientSpecialFibre.lean</title><style>body{font:14px monospace}pre span{display:block}pre span:target{background:#fff0ad}a{color:#666}pre{white-space:pre-wrap}a.ref{color:#0645ad;text-decoration:none}a.ref:hover{text-decoration:underline}</style><h1>Stafford38/Characteristic/FilteredQuotientSpecialFibre.lean</h1><p>This project (Stafford38) · 0403af3f0b1a7f84d2027121932723f67bd279ae</p><pre><span id="L1"><a href="#L1">1</a> module</span>
+<span id="L2"><a href="#L2">2</a> public import Stafford38.Characteristic.FilteredQuotientReesExact</span>
+<span id="L3"><a href="#L3">3</a> </span>
+<span id="L4"><a href="#L4">4</a> @[expose] public section</span>
+<span id="L5"><a href="#L5">5</a> </span>
+<span id="L6"><a href="#L6">6</a> open Stafford38Challenge (<a class="ref" href="../ChallengeDefinitions.lean.html#L73" title="Stafford38Challenge.WeylAlg">WeylAlg</a>)</span>
+<span id="L7"><a href="#L7">7</a> </span>
+<span id="L8"><a href="#L8">8</a> /-!</span>
+<span id="L9"><a href="#L9">9</a> # Additive special fibre of the filtered quotient direct sum</span>
+<span id="L10"><a href="#L10">10</a> </span>
+<span id="L11"><a href="#L11">11</a> The exact successor-shift sequence identifies the quotient by the shift range</span>
+<span id="L12"><a href="#L12">12</a> with the actual associated graded module. This is a `k`-linear equivalence</span>
+<span id="L13"><a href="#L13">13</a> only. The right order-Rees action and its parameter compatibility are separate.</span>
+<span id="L14"><a href="#L14">14</a> -/</span>
+<span id="L15"><a href="#L15">15</a> </span>
+<span id="L16"><a href="#L16">16</a> namespace Stafford38.CharacteristicFilteredQuotientSpecialFibre</span>
+<span id="L17"><a href="#L17">17</a> </span>
+<span id="L18"><a href="#L18">18</a> open Stafford38.CharacteristicFilteredQuotientGraded</span>
+<span id="L19"><a href="#L19">19</a> open Stafford38.CharacteristicFilteredQuotientRees</span>
+<span id="L20"><a href="#L20">20</a> open Stafford38.CharacteristicFilteredQuotientReesExact</span>
+<span id="L21"><a href="#L21">21</a> open Stafford38.EulerSurjectivity</span>
+<span id="L22"><a href="#L22">22</a> open Stafford38.WeylIteratedEquivalence</span>
+<span id="L23"><a href="#L23">23</a> </span>
+<span id="L24"><a href="#L24">24</a> noncomputable section</span>
+<span id="L25"><a href="#L25">25</a> </span>
+<span id="L26"><a href="#L26">26</a> set_option <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Lean/Meta/SynthInstance.lean#L20" title="Lean.Meta.synthInstance.maxHeartbeats">synthInstance.maxHeartbeats</a> 200000</span>
+<span id="L27"><a href="#L27">27</a> set_option <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Lean/CoreM.lean#L30" title="Lean.maxHeartbeats">maxHeartbeats</a> 1000000</span>
+<span id="L28"><a href="#L28">28</a> </span>
+<span id="L29"><a href="#L29">29</a> universe u</span>
+<span id="L30"><a href="#L30">30</a> </span>
+<span id="L31"><a href="#L31">31</a> variable (k : Type u) [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Field/Defs.lean#L170" title="Field">Field</a> k]</span>
+<span id="L32"><a href="#L32">32</a> variable {n : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L1351" title="Nat">ℕ</a>}</span>
+<span id="L33"><a href="#L33">33</a> </span>
+<span id="L34"><a href="#L34">34</a> /-- The additive quotient by the successor-shift range is the actual</span>
+<span id="L35"><a href="#L35">35</a> associated graded quotient. -/</span>
+<span id="L36"><a href="#L36">36</a> def quotientOrderShiftQuotientLinearEquiv</span>
+<span id="L37"><a href="#L37">37</a>     (I : <a class="ref" href="../Quotient/EulerSurjectivity.lean.html#L21" title="Stafford38.EulerSurjectivity.RightIdeal">RightIdeal</a> (<a class="ref" href="../ChallengeDefinitions.lean.html#L73" title="Stafford38Challenge.WeylAlg">WeylAlg</a> k n)) :</span>
+<span id="L38"><a href="#L38">38</a>     (<a class="ref" href="./FilteredQuotientRees.lean.html#L51" title="Stafford38.CharacteristicFilteredQuotientRees.QuotientOrderReesModule">QuotientOrderReesModule</a> k I ⧸</span>
+<span id="L39"><a href="#L39">39</a>         <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Module/Submodule/Range.lean#L55" title="LinearMap.range">LinearMap.range</a> (<a class="ref" href="./FilteredQuotientRees.lean.html#L62" title="Stafford38.CharacteristicFilteredQuotientRees.quotientOrderReesShift">quotientOrderReesShift</a> k I)) ≃ₗ[k]</span>
+<span id="L40"><a href="#L40">40</a>       <a class="ref" href="./FilteredQuotientGraded.lean.html#L41" title="Stafford38.CharacteristicFilteredQuotientGraded.QuotientOrderAssociatedGraded">QuotientOrderAssociatedGraded</a> k I :=</span>
+<span id="L41"><a href="#L41">41</a>   (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/LinearAlgebra/Quotient/Defs.lean#L251" title="Submodule.quotEquivOfEq">Submodule.quotEquivOfEq</a></span>
+<span id="L42"><a href="#L42">42</a>       (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Module/Submodule/Range.lean#L55" title="LinearMap.range">LinearMap.range</a> (<a class="ref" href="./FilteredQuotientRees.lean.html#L62" title="Stafford38.CharacteristicFilteredQuotientRees.quotientOrderReesShift">quotientOrderReesShift</a> k I))</span>
+<span id="L43"><a href="#L43">43</a>       (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Module/Submodule/Ker.lean#L58" title="LinearMap.ker">LinearMap.ker</a> (<a class="ref" href="./FilteredQuotientRees.lean.html#L90" title="Stafford38.CharacteristicFilteredQuotientRees.quotientOrderReesToAssociatedGraded">quotientOrderReesToAssociatedGraded</a> k I))</span>
+<span id="L44"><a href="#L44">44</a>       (<a class="ref" href="./FilteredQuotientReesExact.lean.html#L125" title="Stafford38.CharacteristicFilteredQuotientReesExact.quotientOrderReesToAssociatedGraded_ker_eq_range_shift">quotientOrderReesToAssociatedGraded_ker_eq_range_shift</a> k I).<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L364" title="Eq.symm">symm</a>).<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Module/Equiv/Defs.lean#L304" title="LinearEquiv.trans">trans</a></span>
+<span id="L45"><a href="#L45">45</a>     ((<a class="ref" href="./FilteredQuotientRees.lean.html#L90" title="Stafford38.CharacteristicFilteredQuotientRees.quotientOrderReesToAssociatedGraded">quotientOrderReesToAssociatedGraded</a> k I).<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/LinearAlgebra/Isomorphisms.lean#L46" title="LinearMap.quotKerEquivOfSurjective">quotKerEquivOfSurjective</a></span>
+<span id="L46"><a href="#L46">46</a>       (<a class="ref" href="./FilteredQuotientRees.lean.html#L140" title="Stafford38.CharacteristicFilteredQuotientRees.quotientOrderReesToAssociatedGraded_surjective">quotientOrderReesToAssociatedGraded_surjective</a> k I))</span>
+<span id="L47"><a href="#L47">47</a> </span>
+<span id="L48"><a href="#L48">48</a> @[simp] theorem quotientOrderShiftQuotientLinearEquiv_mk</span>
+<span id="L49"><a href="#L49">49</a>     (I : <a class="ref" href="../Quotient/EulerSurjectivity.lean.html#L21" title="Stafford38.EulerSurjectivity.RightIdeal">RightIdeal</a> (<a class="ref" href="../ChallengeDefinitions.lean.html#L73" title="Stafford38Challenge.WeylAlg">WeylAlg</a> k n))</span>
+<span id="L50"><a href="#L50">50</a>     (x : <a class="ref" href="./FilteredQuotientRees.lean.html#L51" title="Stafford38.CharacteristicFilteredQuotientRees.QuotientOrderReesModule">QuotientOrderReesModule</a> k I) :</span>
+<span id="L51"><a href="#L51">51</a>     <a class="ref" href="./FilteredQuotientSpecialFibre.lean.html#L34" title="Stafford38.CharacteristicFilteredQuotientSpecialFibre.quotientOrderShiftQuotientLinearEquiv">quotientOrderShiftQuotientLinearEquiv</a> k I</span>
+<span id="L52"><a href="#L52">52</a>         (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/LinearAlgebra/Quotient/Defs.lean#L59" title="Submodule.Quotient.mk">Submodule.Quotient.mk</a> x) =</span>
+<span id="L53"><a href="#L53">53</a>       <a class="ref" href="./FilteredQuotientRees.lean.html#L90" title="Stafford38.CharacteristicFilteredQuotientRees.quotientOrderReesToAssociatedGraded">quotientOrderReesToAssociatedGraded</a> k I x := by</span>
+<span id="L54"><a href="#L54">54</a>   rfl</span>
+<span id="L55"><a href="#L55">55</a> </span>
+<span id="L56"><a href="#L56">56</a> #print axioms <a class="ref" href="./FilteredQuotientSpecialFibre.lean.html#L34" title="Stafford38.CharacteristicFilteredQuotientSpecialFibre.quotientOrderShiftQuotientLinearEquiv">quotientOrderShiftQuotientLinearEquiv</a></span>
+<span id="L57"><a href="#L57">57</a> #print axioms <a class="ref" href="./FilteredQuotientSpecialFibre.lean.html#L48" title="Stafford38.CharacteristicFilteredQuotientSpecialFibre.quotientOrderShiftQuotientLinearEquiv_mk">quotientOrderShiftQuotientLinearEquiv_mk</a></span>
+<span id="L58"><a href="#L58">58</a> </span>
+<span id="L59"><a href="#L59">59</a> end</span>
+<span id="L60"><a href="#L60">60</a> </span>
+<span id="L61"><a href="#L61">61</a> end Stafford38.CharacteristicFilteredQuotientSpecialFibre</span>
+<span id="L62"><a href="#L62">62</a> </span></pre>

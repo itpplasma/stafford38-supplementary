@@ -1,0 +1,18 @@
+<!doctype html><meta charset="utf-8"><title>Stafford38/LeftDenominatorTransport.lean</title><style>body{font:14px monospace}pre span{display:block}pre span:target{background:#fff0ad}a{color:#666}pre{white-space:pre-wrap}a.ref{color:#0645ad;text-decoration:none}a.ref:hover{text-decoration:underline}</style><h1>Stafford38/LeftDenominatorTransport.lean</h1><p>This project (Stafford38) · 0403af3f0b1a7f84d2027121932723f67bd279ae</p><pre><span id="L1"><a href="#L1">1</a> module</span>
+<span id="L2"><a href="#L2">2</a> public import Stafford38.LocalizationCorollaries</span>
+<span id="L3"><a href="#L3">3</a> </span>
+<span id="L4"><a href="#L4">4</a> @[expose] public section</span>
+<span id="L5"><a href="#L5">5</a> </span>
+<span id="L6"><a href="#L6">6</a> namespace Stafford38.LocalizationCorollaries</span>
+<span id="L7"><a href="#L7">7</a> </span>
+<span id="L8"><a href="#L8">8</a> theorem s38_of_leftUnitClearing</span>
+<span id="L9"><a href="#L9">9</a>     {R : Type u} {L : Type v} [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Ring/Defs.lean#L145" title="Ring">Ring</a> R] [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Ring/Defs.lean#L145" title="Ring">Ring</a> L]</span>
+<span id="L10"><a href="#L10">10</a>     {f : R →+* L} (hR : <a class="ref" href="./LocalizationCorollaries.lean.html#L15" title="Stafford38.LocalizationCorollaries.S38">S38</a> R)</span>
+<span id="L11"><a href="#L11">11</a>     (hclear : ∀ q : L, q ≠ 0 →</span>
+<span id="L12"><a href="#L12">12</a>       ∃ a : R, ∃ u : L, <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Group/Units/Defs.lean#L358" title="IsUnit">IsUnit</a> u ∧ u * q = f a) : <a class="ref" href="./LocalizationCorollaries.lean.html#L15" title="Stafford38.LocalizationCorollaries.S38">S38</a> L :=</span>
+<span id="L13"><a href="#L13">13</a>   <a class="ref" href="../../library/AlgebraicAnalysis/RingTheory/TwoGeneratorIdentity.lean.html#L55" title="AlgebraicAnalysis.TwoGeneratorIdentity.of_leftUnitClearing">AlgebraicAnalysis.TwoGeneratorIdentity.of_leftUnitClearing</a> hR hclear</span>
+<span id="L14"><a href="#L14">14</a> </span>
+<span id="L15"><a href="#L15">15</a> #print axioms <a class="ref" href="./LeftDenominatorTransport.lean.html#L8" title="Stafford38.LocalizationCorollaries.s38_of_leftUnitClearing">s38_of_leftUnitClearing</a></span>
+<span id="L16"><a href="#L16">16</a> </span>
+<span id="L17"><a href="#L17">17</a> end Stafford38.LocalizationCorollaries</span>
+<span id="L18"><a href="#L18">18</a> </span></pre>

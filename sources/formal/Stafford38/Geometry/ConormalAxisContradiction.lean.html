@@ -1,11 +1,11 @@
-<!doctype html><meta charset="utf-8"><title>Stafford38/Geometry/ConormalAxisContradiction.lean</title><style>body{font:14px monospace}pre span{display:block}pre span:target{background:#fff0ad}a{color:#666}pre{white-space:pre-wrap}</style><h1>Stafford38/Geometry/ConormalAxisContradiction.lean</h1><p>This project (Stafford38) · 0403af3f0b1a7f84d2027121932723f67bd279ae</p><pre><span id="L1"><a href="#L1">1</a> module</span>
+<!doctype html><meta charset="utf-8"><title>Stafford38/Geometry/ConormalAxisContradiction.lean</title><style>body{font:14px monospace}pre span{display:block}pre span:target{background:#fff0ad}a{color:#666}pre{white-space:pre-wrap}a.ref{color:#0645ad;text-decoration:none}a.ref:hover{text-decoration:underline}</style><h1>Stafford38/Geometry/ConormalAxisContradiction.lean</h1><p>This project (Stafford38) · 0403af3f0b1a7f84d2027121932723f67bd279ae</p><pre><span id="L1"><a href="#L1">1</a> module</span>
 <span id="L2"><a href="#L2">2</a> public import Stafford38.MathlibCompat.MvPolynomialCoeff</span>
 <span id="L3"><a href="#L3">3</a> public import Stafford38.Characteristic.HomogeneousChart</span>
 <span id="L4"><a href="#L4">4</a> public import Stafford38.Geometry.AffineConormalClosure</span>
 <span id="L5"><a href="#L5">5</a> </span>
 <span id="L6"><a href="#L6">6</a> @[expose] public section</span>
 <span id="L7"><a href="#L7">7</a> </span>
-<span id="L8"><a href="#L8">8</a> open Stafford38Challenge (WeylAlg PhaseVar)</span>
+<span id="L8"><a href="#L8">8</a> open Stafford38Challenge (<a class="ref" href="../ChallengeDefinitions.lean.html#L73" title="Stafford38Challenge.WeylAlg">WeylAlg</a> <a class="ref" href="../ChallengeDefinitions.lean.html#L64" title="Stafford38Challenge.PhaseVar">PhaseVar</a>)</span>
 <span id="L9"><a href="#L9">9</a> </span>
 <span id="L10"><a href="#L10">10</a> /-!</span>
 <span id="L11"><a href="#L11">11</a> # The pure-momentum axis obstruction</span>
@@ -39,180 +39,180 @@
 <span id="L39"><a href="#L39">39</a> </span>
 <span id="L40"><a href="#L40">40</a> noncomputable section</span>
 <span id="L41"><a href="#L41">41</a> </span>
-<span id="L42"><a href="#L42">42</a> variable {k : Type*} [Field k] {n N : ℕ}</span>
+<span id="L42"><a href="#L42">42</a> variable {k : Type*} [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Field/Defs.lean#L170" title="Field">Field</a> k] {n N : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L1351" title="Nat">ℕ</a>}</span>
 <span id="L43"><a href="#L43">43</a> </span>
 <span id="L44"><a href="#L44">44</a> /-- An order-homogeneous fibre-only symbol is homogeneous for ordinary total</span>
 <span id="L45"><a href="#L45">45</a> degree. -/</span>
 <span id="L46"><a href="#L46">46</a> theorem isHomogeneous_of_orderHomogeneous_of_isFibreOnly</span>
-<span id="L47"><a href="#L47">47</a>     {P : SymbolRing k n}</span>
-<span id="L48"><a href="#L48">48</a>     (horder : P.IsWeightedHomogeneous (@orderWeight n) N)</span>
-<span id="L49"><a href="#L49">49</a>     (hfibre : IsFibreOnly k P) :</span>
-<span id="L50"><a href="#L50">50</a>     P.IsHomogeneous N := by</span>
+<span id="L47"><a href="#L47">47</a>     {P : <a class="ref" href="../Characteristic/Polynomial.lean.html#L20" title="Stafford38.Characteristic.SymbolRing">SymbolRing</a> k n}</span>
+<span id="L48"><a href="#L48">48</a>     (horder : P.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.lean#L126" title="MvPolynomial.IsWeightedHomogeneous">IsWeightedHomogeneous</a> (@<a class="ref" href="../Weyl/Filtration.lean.html#L223" title="Stafford38.WeylFiltration.orderWeight">orderWeight</a> n) N)</span>
+<span id="L49"><a href="#L49">49</a>     (hfibre : <a class="ref" href="../Characteristic/InitialIdeal.lean.html#L258" title="Stafford38.CharacteristicInitialIdeal.IsFibreOnly">IsFibreOnly</a> k P) :</span>
+<span id="L50"><a href="#L50">50</a>     P.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/MvPolynomial/Homogeneous.lean#L46" title="MvPolynomial.IsHomogeneous">IsHomogeneous</a> N := by</span>
 <span id="L51"><a href="#L51">51</a>   intro m hm</span>
 <span id="L52"><a href="#L52">52</a>   have horder' := horder hm</span>
-<span id="L53"><a href="#L53">53</a>   rw [Finsupp.weight_apply] at horder'</span>
+<span id="L53"><a href="#L53">53</a>   rw [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Data/Finsupp/Weight.lean#L85" title="Finsupp.weight_apply">Finsupp.weight_apply</a>] at horder'</span>
 <span id="L54"><a href="#L54">54</a>   rw [← horder']</span>
-<span id="L55"><a href="#L55">55</a>   apply Finsupp.sum_congr</span>
+<span id="L55"><a href="#L55">55</a>   apply <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/BigOperators/Finsupp/Basic.lean#L182" title="Finsupp.sum_congr">Finsupp.sum_congr</a></span>
 <span id="L56"><a href="#L56">56</a>   intro i hi</span>
 <span id="L57"><a href="#L57">57</a>   rcases i with i | i</span>
-<span id="L58"><a href="#L58">58</a>   · simp [orderWeight, fibreWeight, hfibre m hm i]</span>
-<span id="L59"><a href="#L59">59</a>   · simp [orderWeight, fibreWeight]</span>
+<span id="L58"><a href="#L58">58</a>   · simp [<a class="ref" href="../Weyl/Filtration.lean.html#L223" title="Stafford38.WeylFiltration.orderWeight">orderWeight</a>, <a class="ref" href="../Characteristic/Polynomial.lean.html#L24" title="Stafford38.Characteristic.fibreWeight">fibreWeight</a>, hfibre m hm i]</span>
+<span id="L59"><a href="#L59">59</a>   · simp [<a class="ref" href="../Weyl/Filtration.lean.html#L223" title="Stafford38.WeylFiltration.orderWeight">orderWeight</a>, <a class="ref" href="../Characteristic/Polynomial.lean.html#L24" title="Stafford38.Characteristic.fibreWeight">fibreWeight</a>]</span>
 <span id="L60"><a href="#L60">60</a> </span>
 <span id="L61"><a href="#L61">61</a> /-- The canonical order principal symbol is homogeneous of ordinary total</span>
 <span id="L62"><a href="#L62">62</a> degree `N`. -/</span>
 <span id="L63"><a href="#L63">63</a> theorem canonical_orderPrincipalComponent_isHomogeneous</span>
-<span id="L64"><a href="#L64">64</a>     (n N : ℕ) {d : WeylAlg k (n + 1)}</span>
-<span id="L65"><a href="#L65">65</a>     (hd : IsPBWMonicAt k (.inr (0 : Fin (n + 1))) N d) :</span>
-<span id="L66"><a href="#L66">66</a>     (presentedPrincipalComponent k orderWeight N d).IsHomogeneous N := by</span>
-<span id="L67"><a href="#L67">67</a>   apply isHomogeneous_of_orderHomogeneous_of_isFibreOnly</span>
-<span id="L68"><a href="#L68">68</a>   · simpa [presentedPrincipalComponent] using</span>
-<span id="L69"><a href="#L69">69</a>       (MvPolynomial.weightedHomogeneousComponent_isWeightedHomogeneous</span>
-<span id="L70"><a href="#L70">70</a>         (w := @orderWeight (n + 1)) (n := N)</span>
-<span id="L71"><a href="#L71">71</a>         (presentedNormalFormLinearEquiv k (n + 1) d))</span>
-<span id="L72"><a href="#L72">72</a>   · exact canonical_orderPrincipalComponent_isFibreOnly k n N hd</span>
+<span id="L64"><a href="#L64">64</a>     (n N : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L1351" title="Nat">ℕ</a>) {d : <a class="ref" href="../ChallengeDefinitions.lean.html#L73" title="Stafford38Challenge.WeylAlg">WeylAlg</a> k (n + 1)}</span>
+<span id="L65"><a href="#L65">65</a>     (hd : <a class="ref" href="../Weyl/PBWMonicBridge.lean.html#L102" title="Stafford38.WeylPBWMonicBridge.IsPBWMonicAt">IsPBWMonicAt</a> k (<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Core.lean#L215" title="Sum.inr">.inr</a> (0 : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L2443" title="Fin">Fin</a> (n + 1))) N d) :</span>
+<span id="L66"><a href="#L66">66</a>     (<a class="ref" href="../Weyl/LeadingSymbol.lean.html#L33" title="Stafford38.WeylLeadingSymbol.presentedPrincipalComponent">presentedPrincipalComponent</a> k <a class="ref" href="../Weyl/Filtration.lean.html#L223" title="Stafford38.WeylFiltration.orderWeight">orderWeight</a> N d).<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/MvPolynomial/Homogeneous.lean#L46" title="MvPolynomial.IsHomogeneous">IsHomogeneous</a> N := by</span>
+<span id="L67"><a href="#L67">67</a>   apply <a class="ref" href="./ConormalAxisContradiction.lean.html#L44" title="Stafford38.Geometry.ConormalAxisContradiction.isHomogeneous_of_orderHomogeneous_of_isFibreOnly">isHomogeneous_of_orderHomogeneous_of_isFibreOnly</a></span>
+<span id="L68"><a href="#L68">68</a>   · simpa [<a class="ref" href="../Weyl/LeadingSymbol.lean.html#L33" title="Stafford38.WeylLeadingSymbol.presentedPrincipalComponent">presentedPrincipalComponent</a>] using</span>
+<span id="L69"><a href="#L69">69</a>       (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.lean#L401" title="MvPolynomial.weightedHomogeneousComponent_isWeightedHomogeneous">MvPolynomial.weightedHomogeneousComponent_isWeightedHomogeneous</a></span>
+<span id="L70"><a href="#L70">70</a>         (w := @<a class="ref" href="../Weyl/Filtration.lean.html#L223" title="Stafford38.WeylFiltration.orderWeight">orderWeight</a> (n + 1)) (n := N)</span>
+<span id="L71"><a href="#L71">71</a>         (<a class="ref" href="../Weyl/PBW.lean.html#L460" title="Stafford38.WeylPBW.presentedNormalFormLinearEquiv">presentedNormalFormLinearEquiv</a> k (n + 1) d))</span>
+<span id="L72"><a href="#L72">72</a>   · exact <a class="ref" href="../Characteristic/InitialIdeal.lean.html#L320" title="Stafford38.CharacteristicInitialIdeal.canonical_orderPrincipalComponent_isFibreOnly">canonical_orderPrincipalComponent_isFibreOnly</a> k n N hd</span>
 <span id="L73"><a href="#L73">73</a> </span>
 <span id="L74"><a href="#L74">74</a> /-- A homogeneous polynomial with pure-axis coefficient one does not vanish at</span>
 <span id="L75"><a href="#L75">75</a> that axis. -/</span>
 <span id="L76"><a href="#L76">76</a> theorem eval_axis_eq_one_of_pureCoefficient_one</span>
-<span id="L77"><a href="#L77">77</a>     (t : PhaseVar n) {P : SymbolRing k n}</span>
-<span id="L78"><a href="#L78">78</a>     (hP : P.IsHomogeneous N)</span>
-<span id="L79"><a href="#L79">79</a>     (hpure : MvPolynomial.coeff (Finsupp.single t N) P = 1) :</span>
-<span id="L80"><a href="#L80">80</a>     MvPolynomial.eval (axisPoint k t) P = 1 := by</span>
+<span id="L77"><a href="#L77">77</a>     (t : <a class="ref" href="../ChallengeDefinitions.lean.html#L64" title="Stafford38Challenge.PhaseVar">PhaseVar</a> n) {P : <a class="ref" href="../Characteristic/Polynomial.lean.html#L20" title="Stafford38.Characteristic.SymbolRing">SymbolRing</a> k n}</span>
+<span id="L78"><a href="#L78">78</a>     (hP : P.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/MvPolynomial/Homogeneous.lean#L46" title="MvPolynomial.IsHomogeneous">IsHomogeneous</a> N)</span>
+<span id="L79"><a href="#L79">79</a>     (hpure : <a class="ref" href="../MathlibCompat/MvPolynomialCoeff.lean.html#L10" title="MvPolynomial.coeff">MvPolynomial.coeff</a> (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Data/Finsupp/Single.lean#L46" title="Finsupp.single">Finsupp.single</a> t N) P = 1) :</span>
+<span id="L80"><a href="#L80">80</a>     <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/Eval.lean#L255" title="MvPolynomial.eval">MvPolynomial.eval</a> (<a class="ref" href="../Characteristic/HomogeneousChart.lean.html#L74" title="Stafford38.CharacteristicHomogeneousChart.axisPoint">axisPoint</a> k t) P = 1 := by</span>
 <span id="L81"><a href="#L81">81</a>   classical</span>
-<span id="L82"><a href="#L82">82</a>   rw [MvPolynomial.eval_eq]</span>
-<span id="L83"><a href="#L83">83</a>   rw [Finset.sum_eq_single (Finsupp.single t N)]</span>
-<span id="L84"><a href="#L84">84</a>   · change AddMonoidAlgebra.coeff P (Finsupp.single t N) = 1 at hpure</span>
-<span id="L85"><a href="#L85">85</a>     rw [hpure, one_mul]</span>
+<span id="L82"><a href="#L82">82</a>   rw [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/Eval.lean#L259" title="MvPolynomial.eval_eq">MvPolynomial.eval_eq</a>]</span>
+<span id="L83"><a href="#L83">83</a>   rw [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/BigOperators/Group/Finset/Basic.lean#L354" title="Finset.sum_eq_single">Finset.sum_eq_single</a> (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Data/Finsupp/Single.lean#L46" title="Finsupp.single">Finsupp.single</a> t N)]</span>
+<span id="L84"><a href="#L84">84</a>   · change <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MonoidAlgebra/Defs.lean#L69" title="AddMonoidAlgebra.coeff">AddMonoidAlgebra.coeff</a> P (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Data/Finsupp/Single.lean#L46" title="Finsupp.single">Finsupp.single</a> t N) = 1 at hpure</span>
+<span id="L85"><a href="#L85">85</a>     rw [hpure, <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Group/Monoid.lean#L90" title="one_mul">one_mul</a>]</span>
 <span id="L86"><a href="#L86">86</a>     by_cases hN : N = 0</span>
 <span id="L87"><a href="#L87">87</a>     · subst N</span>
 <span id="L88"><a href="#L88">88</a>       simp</span>
-<span id="L89"><a href="#L89">89</a>     · rw [Finsupp.support_single_ne_zero t hN]</span>
-<span id="L90"><a href="#L90">90</a>       simp [axisPoint]</span>
+<span id="L89"><a href="#L89">89</a>     · rw [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Data/Finsupp/Single.lean#L104" title="Finsupp.support_single_ne_zero">Finsupp.support_single_ne_zero</a> t hN]</span>
+<span id="L90"><a href="#L90">90</a>       simp [<a class="ref" href="../Characteristic/HomogeneousChart.lean.html#L74" title="Stafford38.CharacteristicHomogeneousChart.axisPoint">axisPoint</a>]</span>
 <span id="L91"><a href="#L91">91</a>   · intro m hm hne</span>
-<span id="L92"><a href="#L92">92</a>     have hmcoeff : MvPolynomial.coeff m P ≠ 0 :=</span>
-<span id="L93"><a href="#L93">93</a>       MvPolynomial.mem_support_iff.mp hm</span>
-<span id="L94"><a href="#L94">94</a>     have hexists : ∃ i ∈ m.support, i ≠ t := by</span>
+<span id="L92"><a href="#L92">92</a>     have hmcoeff : <a class="ref" href="../MathlibCompat/MvPolynomialCoeff.lean.html#L10" title="MvPolynomial.coeff">MvPolynomial.coeff</a> m P ≠ 0 :=</span>
+<span id="L93"><a href="#L93">93</a>       <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/Basic.lean#L512" title="MvPolynomial.mem_support_iff">MvPolynomial.mem_support_iff</a>.<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Core.lean#L192" title="Iff.mp">mp</a> hm</span>
+<span id="L94"><a href="#L94">94</a>     have hexists : ∃ i ∈ m.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Data/Finsupp/Defs.lean#L90" title="Finsupp.support">support</a>, i ≠ t := by</span>
 <span id="L95"><a href="#L95">95</a>       by_contra hnot</span>
-<span id="L96"><a href="#L96">96</a>       have hsubset : m.support ⊆ {t} := by</span>
+<span id="L96"><a href="#L96">96</a>       have hsubset : m.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Data/Finsupp/Defs.lean#L90" title="Finsupp.support">support</a> ⊆ {t} := by</span>
 <span id="L97"><a href="#L97">97</a>         intro i hi</span>
-<span id="L98"><a href="#L98">98</a>         simp only [Finset.mem_singleton]</span>
+<span id="L98"><a href="#L98">98</a>         simp only [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Data/Finset/Insert.lean#L73" title="Finset.mem_singleton">Finset.mem_singleton</a>]</span>
 <span id="L99"><a href="#L99">99</a>         by_contra hit</span>
 <span id="L100"><a href="#L100">100</a>         exact hnot ⟨i, hi, hit⟩</span>
-<span id="L101"><a href="#L101">101</a>       have hmform : m = Finsupp.single t (m t) :=</span>
-<span id="L102"><a href="#L102">102</a>         Finsupp.support_subset_singleton.mp hsubset</span>
-<span id="L103"><a href="#L103">103</a>       have hdegree : m.degree = N := by</span>
-<span id="L104"><a href="#L104">104</a>         rw [Finsupp.degree_eq_weight_one]</span>
+<span id="L101"><a href="#L101">101</a>       have hmform : m = <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Data/Finsupp/Single.lean#L46" title="Finsupp.single">Finsupp.single</a> t (m t) :=</span>
+<span id="L102"><a href="#L102">102</a>         <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Data/Finsupp/Single.lean#L228" title="Finsupp.support_subset_singleton">Finsupp.support_subset_singleton</a>.<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Core.lean#L192" title="Iff.mp">mp</a> hsubset</span>
+<span id="L103"><a href="#L103">103</a>       have hdegree : m.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Data/Finsupp/Weight.lean#L215" title="Finsupp.degree">degree</a> = N := by</span>
+<span id="L104"><a href="#L104">104</a>         rw [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Data/Finsupp/Weight.lean#L246" title="Finsupp.degree_eq_weight_one">Finsupp.degree_eq_weight_one</a>]</span>
 <span id="L105"><a href="#L105">105</a>         exact hP hmcoeff</span>
-<span id="L106"><a href="#L106">106</a>       rw [hmform, Finsupp.degree_single] at hdegree</span>
+<span id="L106"><a href="#L106">106</a>       rw [hmform, <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Data/Finsupp/Weight.lean#L226" title="Finsupp.degree_single">Finsupp.degree_single</a>] at hdegree</span>
 <span id="L107"><a href="#L107">107</a>       apply hne</span>
 <span id="L108"><a href="#L108">108</a>       rw [hmform, hdegree]</span>
 <span id="L109"><a href="#L109">109</a>     rcases hexists with ⟨i, hi, hit⟩</span>
-<span id="L110"><a href="#L110">110</a>     rw [Finset.prod_eq_zero hi, mul_zero]</span>
-<span id="L111"><a href="#L111">111</a>     rw [axisPoint, if_neg hit, zero_pow]</span>
-<span id="L112"><a href="#L112">112</a>     exact Finsupp.mem_support_iff.mp hi</span>
+<span id="L110"><a href="#L110">110</a>     rw [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/BigOperators/GroupWithZero/Finset.lean#L30" title="Finset.prod_eq_zero">Finset.prod_eq_zero</a> hi, <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/GroupWithZero/Defs.lean#L41" title="MulZeroClass.mul_zero">mul_zero</a>]</span>
+<span id="L111"><a href="#L111">111</a>     rw [<a class="ref" href="../Characteristic/HomogeneousChart.lean.html#L74" title="Stafford38.CharacteristicHomogeneousChart.axisPoint">axisPoint</a>, <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Core.lean#L1193" title="if_neg">if_neg</a> hit, <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/GroupWithZero/Basic.lean#L219" title="zero_pow">zero_pow</a>]</span>
+<span id="L112"><a href="#L112">112</a>     exact <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Data/Finsupp/Defs.lean#L157" title="Finsupp.mem_support_iff">Finsupp.mem_support_iff</a>.<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Core.lean#L192" title="Iff.mp">mp</a> hi</span>
 <span id="L113"><a href="#L113">113</a>   · intro hnot</span>
-<span id="L114"><a href="#L114">114</a>     exact (hnot (MvPolynomial.mem_support_iff.mpr (hpure.trans_ne one_ne_zero))).elim</span>
+<span id="L114"><a href="#L114">114</a>     exact (hnot (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/Basic.lean#L512" title="MvPolynomial.mem_support_iff">MvPolynomial.mem_support_iff</a>.<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Core.lean#L194" title="Iff.mpr">mpr</a> (hpure.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Basic/Logic/Basic.lean#L461" title="Eq.trans_ne">trans_ne</a> <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/NeZero.lean#L33" title="one_ne_zero">one_ne_zero</a>))).<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L310" title="False.elim">elim</a></span>
 <span id="L115"><a href="#L115">115</a> </span>
 <span id="L116"><a href="#L116">116</a> /-- Direct set-level obstruction: if a checked affine locus lies in `V(P)`,</span>
 <span id="L117"><a href="#L117">117</a> axis membership contradicts homogeneity and pure coefficient one. -/</span>
 <span id="L118"><a href="#L118">118</a> theorem false_of_axis_mem_of_subset_principal_zeroLocus</span>
-<span id="L119"><a href="#L119">119</a>     (t : PhaseVar n) {P : SymbolRing k n}</span>
-<span id="L120"><a href="#L120">120</a>     (hP : P.IsHomogeneous N)</span>
-<span id="L121"><a href="#L121">121</a>     (hpure : MvPolynomial.coeff (Finsupp.single t N) P = 1)</span>
-<span id="L122"><a href="#L122">122</a>     {S : Set (PhaseVar n → k)}</span>
-<span id="L123"><a href="#L123">123</a>     (hS : S ⊆ MvPolynomial.zeroLocus k (Ideal.span ({P} : Set (SymbolRing k n))))</span>
-<span id="L124"><a href="#L124">124</a>     (haxis : axisPoint k t ∈ S) : False := by</span>
-<span id="L125"><a href="#L125">125</a>   have hzero := (MvPolynomial.mem_zeroLocus_iff.mp (hS haxis)) P</span>
-<span id="L126"><a href="#L126">126</a>     (Ideal.subset_span (Set.mem_singleton P))</span>
-<span id="L127"><a href="#L127">127</a>   rw [MvPolynomial.aeval_eq_eval,</span>
-<span id="L128"><a href="#L128">128</a>     eval_axis_eq_one_of_pureCoefficient_one t hP hpure] at hzero</span>
-<span id="L129"><a href="#L129">129</a>   exact one_ne_zero hzero</span>
+<span id="L119"><a href="#L119">119</a>     (t : <a class="ref" href="../ChallengeDefinitions.lean.html#L64" title="Stafford38Challenge.PhaseVar">PhaseVar</a> n) {P : <a class="ref" href="../Characteristic/Polynomial.lean.html#L20" title="Stafford38.Characteristic.SymbolRing">SymbolRing</a> k n}</span>
+<span id="L120"><a href="#L120">120</a>     (hP : P.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/MvPolynomial/Homogeneous.lean#L46" title="MvPolynomial.IsHomogeneous">IsHomogeneous</a> N)</span>
+<span id="L121"><a href="#L121">121</a>     (hpure : <a class="ref" href="../MathlibCompat/MvPolynomialCoeff.lean.html#L10" title="MvPolynomial.coeff">MvPolynomial.coeff</a> (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Data/Finsupp/Single.lean#L46" title="Finsupp.single">Finsupp.single</a> t N) P = 1)</span>
+<span id="L122"><a href="#L122">122</a>     {S : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Data/Set/Defs.lean#L44" title="Set">Set</a> (<a class="ref" href="../ChallengeDefinitions.lean.html#L64" title="Stafford38Challenge.PhaseVar">PhaseVar</a> n → k)}</span>
+<span id="L123"><a href="#L123">123</a>     (hS : S ⊆ <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Nullstellensatz.lean#L39" title="MvPolynomial.zeroLocus">MvPolynomial.zeroLocus</a> k (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Span.lean#L45" title="Ideal.span">Ideal.span</a> ({P} : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Data/Set/Defs.lean#L44" title="Set">Set</a> (<a class="ref" href="../Characteristic/Polynomial.lean.html#L20" title="Stafford38.Characteristic.SymbolRing">SymbolRing</a> k n))))</span>
+<span id="L124"><a href="#L124">124</a>     (haxis : <a class="ref" href="../Characteristic/HomogeneousChart.lean.html#L74" title="Stafford38.CharacteristicHomogeneousChart.axisPoint">axisPoint</a> k t ∈ S) : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L274" title="False">False</a> := by</span>
+<span id="L125"><a href="#L125">125</a>   have hzero := (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Nullstellensatz.lean#L43" title="MvPolynomial.mem_zeroLocus_iff">MvPolynomial.mem_zeroLocus_iff</a>.<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Core.lean#L192" title="Iff.mp">mp</a> (hS haxis)) P</span>
+<span id="L126"><a href="#L126">126</a>     (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Span.lean#L68" title="Ideal.subset_span">Ideal.subset_span</a> (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Data/Set/Insert.lean#L180" title="Set.mem_singleton">Set.mem_singleton</a> P))</span>
+<span id="L127"><a href="#L127">127</a>   rw [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/Eval.lean#L586" title="MvPolynomial.aeval_eq_eval">MvPolynomial.aeval_eq_eval</a>,</span>
+<span id="L128"><a href="#L128">128</a>     <a class="ref" href="./ConormalAxisContradiction.lean.html#L74" title="Stafford38.Geometry.ConormalAxisContradiction.eval_axis_eq_one_of_pureCoefficient_one">eval_axis_eq_one_of_pureCoefficient_one</a> t hP hpure] at hzero</span>
+<span id="L129"><a href="#L129">129</a>   exact <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/NeZero.lean#L33" title="one_ne_zero">one_ne_zero</a> hzero</span>
 <span id="L130"><a href="#L130">130</a> </span>
 <span id="L131"><a href="#L131">131</a> /-- The normalized canonical order symbol evaluates to one at the</span>
 <span id="L132"><a href="#L132">132</a> distinguished pure-momentum axis. -/</span>
 <span id="L133"><a href="#L133">133</a> theorem canonical_orderPrincipalComponent_eval_pureMomentumAxis</span>
-<span id="L134"><a href="#L134">134</a>     (n N : ℕ) {d : WeylAlg k (n + 1)}</span>
-<span id="L135"><a href="#L135">135</a>     (hd : IsPBWMonicAt k (.inr (0 : Fin (n + 1))) N d) :</span>
-<span id="L136"><a href="#L136">136</a>     MvPolynomial.eval</span>
-<span id="L137"><a href="#L137">137</a>         (axisPoint k (.inr (0 : Fin (n + 1))))</span>
-<span id="L138"><a href="#L138">138</a>         (presentedPrincipalComponent k orderWeight N d) = 1 := by</span>
-<span id="L139"><a href="#L139">139</a>   exact eval_axis_eq_one_of_pureCoefficient_one</span>
-<span id="L140"><a href="#L140">140</a>     (.inr (0 : Fin (n + 1)))</span>
-<span id="L141"><a href="#L141">141</a>     (canonical_orderPrincipalComponent_isHomogeneous n N hd)</span>
-<span id="L142"><a href="#L142">142</a>     (canonical_orderPrincipalComponent_pureMomentumCoefficient k n N hd)</span>
+<span id="L134"><a href="#L134">134</a>     (n N : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L1351" title="Nat">ℕ</a>) {d : <a class="ref" href="../ChallengeDefinitions.lean.html#L73" title="Stafford38Challenge.WeylAlg">WeylAlg</a> k (n + 1)}</span>
+<span id="L135"><a href="#L135">135</a>     (hd : <a class="ref" href="../Weyl/PBWMonicBridge.lean.html#L102" title="Stafford38.WeylPBWMonicBridge.IsPBWMonicAt">IsPBWMonicAt</a> k (<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Core.lean#L215" title="Sum.inr">.inr</a> (0 : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L2443" title="Fin">Fin</a> (n + 1))) N d) :</span>
+<span id="L136"><a href="#L136">136</a>     <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/Eval.lean#L255" title="MvPolynomial.eval">MvPolynomial.eval</a></span>
+<span id="L137"><a href="#L137">137</a>         (<a class="ref" href="../Characteristic/HomogeneousChart.lean.html#L74" title="Stafford38.CharacteristicHomogeneousChart.axisPoint">axisPoint</a> k (<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Core.lean#L215" title="Sum.inr">.inr</a> (0 : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L2443" title="Fin">Fin</a> (n + 1))))</span>
+<span id="L138"><a href="#L138">138</a>         (<a class="ref" href="../Weyl/LeadingSymbol.lean.html#L33" title="Stafford38.WeylLeadingSymbol.presentedPrincipalComponent">presentedPrincipalComponent</a> k <a class="ref" href="../Weyl/Filtration.lean.html#L223" title="Stafford38.WeylFiltration.orderWeight">orderWeight</a> N d) = 1 := by</span>
+<span id="L139"><a href="#L139">139</a>   exact <a class="ref" href="./ConormalAxisContradiction.lean.html#L74" title="Stafford38.Geometry.ConormalAxisContradiction.eval_axis_eq_one_of_pureCoefficient_one">eval_axis_eq_one_of_pureCoefficient_one</a></span>
+<span id="L140"><a href="#L140">140</a>     (<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Core.lean#L215" title="Sum.inr">.inr</a> (0 : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L2443" title="Fin">Fin</a> (n + 1)))</span>
+<span id="L141"><a href="#L141">141</a>     (<a class="ref" href="./ConormalAxisContradiction.lean.html#L61" title="Stafford38.Geometry.ConormalAxisContradiction.canonical_orderPrincipalComponent_isHomogeneous">canonical_orderPrincipalComponent_isHomogeneous</a> n N hd)</span>
+<span id="L142"><a href="#L142">142</a>     (<a class="ref" href="../Characteristic/InitialIdeal.lean.html#L304" title="Stafford38.CharacteristicInitialIdeal.canonical_orderPrincipalComponent_pureMomentumCoefficient">canonical_orderPrincipalComponent_pureMomentumCoefficient</a> k n N hd)</span>
 <span id="L143"><a href="#L143">143</a> </span>
 <span id="L144"><a href="#L144">144</a> /-- Any checked affine locus contained in the canonical principal-symbol</span>
 <span id="L145"><a href="#L145">145</a> hypersurface excludes the distinguished pure-momentum axis. -/</span>
 <span id="L146"><a href="#L146">146</a> theorem canonical_pureMomentumAxis_not_mem_of_subset_principal_zeroLocus</span>
-<span id="L147"><a href="#L147">147</a>     (n N : ℕ) {d : WeylAlg k (n + 1)}</span>
-<span id="L148"><a href="#L148">148</a>     (hd : IsPBWMonicAt k (.inr (0 : Fin (n + 1))) N d)</span>
-<span id="L149"><a href="#L149">149</a>     {S : Set (PhaseVar (n + 1) → k)}</span>
-<span id="L150"><a href="#L150">150</a>     (hS : S ⊆ MvPolynomial.zeroLocus k</span>
-<span id="L151"><a href="#L151">151</a>       (Ideal.span</span>
-<span id="L152"><a href="#L152">152</a>         ({presentedPrincipalComponent k orderWeight N d} :</span>
-<span id="L153"><a href="#L153">153</a>           Set (SymbolRing k (n + 1))))) :</span>
-<span id="L154"><a href="#L154">154</a>     axisPoint k (.inr (0 : Fin (n + 1))) ∉ S := by</span>
+<span id="L147"><a href="#L147">147</a>     (n N : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L1351" title="Nat">ℕ</a>) {d : <a class="ref" href="../ChallengeDefinitions.lean.html#L73" title="Stafford38Challenge.WeylAlg">WeylAlg</a> k (n + 1)}</span>
+<span id="L148"><a href="#L148">148</a>     (hd : <a class="ref" href="../Weyl/PBWMonicBridge.lean.html#L102" title="Stafford38.WeylPBWMonicBridge.IsPBWMonicAt">IsPBWMonicAt</a> k (<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Core.lean#L215" title="Sum.inr">.inr</a> (0 : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L2443" title="Fin">Fin</a> (n + 1))) N d)</span>
+<span id="L149"><a href="#L149">149</a>     {S : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Data/Set/Defs.lean#L44" title="Set">Set</a> (<a class="ref" href="../ChallengeDefinitions.lean.html#L64" title="Stafford38Challenge.PhaseVar">PhaseVar</a> (n + 1) → k)}</span>
+<span id="L150"><a href="#L150">150</a>     (hS : S ⊆ <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Nullstellensatz.lean#L39" title="MvPolynomial.zeroLocus">MvPolynomial.zeroLocus</a> k</span>
+<span id="L151"><a href="#L151">151</a>       (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Span.lean#L45" title="Ideal.span">Ideal.span</a></span>
+<span id="L152"><a href="#L152">152</a>         ({<a class="ref" href="../Weyl/LeadingSymbol.lean.html#L33" title="Stafford38.WeylLeadingSymbol.presentedPrincipalComponent">presentedPrincipalComponent</a> k <a class="ref" href="../Weyl/Filtration.lean.html#L223" title="Stafford38.WeylFiltration.orderWeight">orderWeight</a> N d} :</span>
+<span id="L153"><a href="#L153">153</a>           <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Data/Set/Defs.lean#L44" title="Set">Set</a> (<a class="ref" href="../Characteristic/Polynomial.lean.html#L20" title="Stafford38.Characteristic.SymbolRing">SymbolRing</a> k (n + 1))))) :</span>
+<span id="L154"><a href="#L154">154</a>     <a class="ref" href="../Characteristic/HomogeneousChart.lean.html#L74" title="Stafford38.CharacteristicHomogeneousChart.axisPoint">axisPoint</a> k (<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Core.lean#L215" title="Sum.inr">.inr</a> (0 : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L2443" title="Fin">Fin</a> (n + 1))) ∉ S := by</span>
 <span id="L155"><a href="#L155">155</a>   intro haxis</span>
-<span id="L156"><a href="#L156">156</a>   exact false_of_axis_mem_of_subset_principal_zeroLocus</span>
-<span id="L157"><a href="#L157">157</a>     (.inr (0 : Fin (n + 1)))</span>
-<span id="L158"><a href="#L158">158</a>     (canonical_orderPrincipalComponent_isHomogeneous n N hd)</span>
-<span id="L159"><a href="#L159">159</a>     (canonical_orderPrincipalComponent_pureMomentumCoefficient k n N hd)</span>
+<span id="L156"><a href="#L156">156</a>   exact <a class="ref" href="./ConormalAxisContradiction.lean.html#L116" title="Stafford38.Geometry.ConormalAxisContradiction.false_of_axis_mem_of_subset_principal_zeroLocus">false_of_axis_mem_of_subset_principal_zeroLocus</a></span>
+<span id="L157"><a href="#L157">157</a>     (<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Core.lean#L215" title="Sum.inr">.inr</a> (0 : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L2443" title="Fin">Fin</a> (n + 1)))</span>
+<span id="L158"><a href="#L158">158</a>     (<a class="ref" href="./ConormalAxisContradiction.lean.html#L61" title="Stafford38.Geometry.ConormalAxisContradiction.canonical_orderPrincipalComponent_isHomogeneous">canonical_orderPrincipalComponent_isHomogeneous</a> n N hd)</span>
+<span id="L159"><a href="#L159">159</a>     (<a class="ref" href="../Characteristic/InitialIdeal.lean.html#L304" title="Stafford38.CharacteristicInitialIdeal.canonical_orderPrincipalComponent_pureMomentumCoefficient">canonical_orderPrincipalComponent_pureMomentumCoefficient</a> k n N hd)</span>
 <span id="L160"><a href="#L160">160</a>     hS haxis</span>
 <span id="L161"><a href="#L161">161</a> </span>
 <span id="L162"><a href="#L162">162</a> /-- The reduced canonical order-support zero locus is contained in the</span>
 <span id="L163"><a href="#L163">163</a> canonical principal-symbol hypersurface. -/</span>
 <span id="L164"><a href="#L164">164</a> theorem canonical_reducedOrderSupport_zeroLocus_subset_principal_zeroLocus</span>
-<span id="L165"><a href="#L165">165</a>     (n N : ℕ) {d : WeylAlg k (n + 1)}</span>
-<span id="L166"><a href="#L166">166</a>     (hd : IsPBWMonicAt k (.inr (0 : Fin (n + 1))) N d) :</span>
-<span id="L167"><a href="#L167">167</a>     MvPolynomial.zeroLocus k</span>
-<span id="L168"><a href="#L168">168</a>         (reducedOrderSupportIdeal k</span>
-<span id="L169"><a href="#L169">169</a>           (canonicalRightIdeal (presentedCoordinate k n) d N)) ⊆</span>
-<span id="L170"><a href="#L170">170</a>       MvPolynomial.zeroLocus k</span>
-<span id="L171"><a href="#L171">171</a>         (Ideal.span</span>
-<span id="L172"><a href="#L172">172</a>           ({presentedPrincipalComponent k orderWeight N d} :</span>
-<span id="L173"><a href="#L173">173</a>             Set (SymbolRing k (n + 1)))) := by</span>
-<span id="L174"><a href="#L174">174</a>   apply MvPolynomial.zeroLocus_anti_mono</span>
-<span id="L175"><a href="#L175">175</a>   apply Ideal.span_le.mpr</span>
+<span id="L165"><a href="#L165">165</a>     (n N : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L1351" title="Nat">ℕ</a>) {d : <a class="ref" href="../ChallengeDefinitions.lean.html#L73" title="Stafford38Challenge.WeylAlg">WeylAlg</a> k (n + 1)}</span>
+<span id="L166"><a href="#L166">166</a>     (hd : <a class="ref" href="../Weyl/PBWMonicBridge.lean.html#L102" title="Stafford38.WeylPBWMonicBridge.IsPBWMonicAt">IsPBWMonicAt</a> k (<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Core.lean#L215" title="Sum.inr">.inr</a> (0 : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L2443" title="Fin">Fin</a> (n + 1))) N d) :</span>
+<span id="L167"><a href="#L167">167</a>     <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Nullstellensatz.lean#L39" title="MvPolynomial.zeroLocus">MvPolynomial.zeroLocus</a> k</span>
+<span id="L168"><a href="#L168">168</a>         (<a class="ref" href="../Characteristic/ReducedSupportIdeal.lean.html#L31" title="Stafford38.Characteristic.ReducedSupportIdeal.reducedOrderSupportIdeal">reducedOrderSupportIdeal</a> k</span>
+<span id="L169"><a href="#L169">169</a>           (<a class="ref" href="../Weyl/EulerResidue.lean.html#L25" title="Stafford38.WeylEulerResidue.canonicalRightIdeal">canonicalRightIdeal</a> (<a class="ref" href="../Weyl/IteratedEquivalence.lean.html#L330" title="Stafford38.WeylIteratedEquivalence.presentedCoordinate">presentedCoordinate</a> k n) d N)) ⊆</span>
+<span id="L170"><a href="#L170">170</a>       <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Nullstellensatz.lean#L39" title="MvPolynomial.zeroLocus">MvPolynomial.zeroLocus</a> k</span>
+<span id="L171"><a href="#L171">171</a>         (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Span.lean#L45" title="Ideal.span">Ideal.span</a></span>
+<span id="L172"><a href="#L172">172</a>           ({<a class="ref" href="../Weyl/LeadingSymbol.lean.html#L33" title="Stafford38.WeylLeadingSymbol.presentedPrincipalComponent">presentedPrincipalComponent</a> k <a class="ref" href="../Weyl/Filtration.lean.html#L223" title="Stafford38.WeylFiltration.orderWeight">orderWeight</a> N d} :</span>
+<span id="L173"><a href="#L173">173</a>             <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Data/Set/Defs.lean#L44" title="Set">Set</a> (<a class="ref" href="../Characteristic/Polynomial.lean.html#L20" title="Stafford38.Characteristic.SymbolRing">SymbolRing</a> k (n + 1)))) := by</span>
+<span id="L174"><a href="#L174">174</a>   apply <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Nullstellensatz.lean#L48" title="MvPolynomial.zeroLocus_anti_mono">MvPolynomial.zeroLocus_anti_mono</a></span>
+<span id="L175"><a href="#L175">175</a>   apply <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Span.lean#L71" title="Ideal.span_le">Ideal.span_le</a>.<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Core.lean#L194" title="Iff.mpr">mpr</a></span>
 <span id="L176"><a href="#L176">176</a>   intro P hP</span>
-<span id="L177"><a href="#L177">177</a>   rw [Set.mem_singleton_iff.mp hP]</span>
-<span id="L178"><a href="#L178">178</a>   exact orderInitialIdeal_le_reducedOrderSupportIdeal k _</span>
-<span id="L179"><a href="#L179">179</a>     (canonical_orderPrincipalComponent_mem_initialIdeal k n N hd)</span>
+<span id="L177"><a href="#L177">177</a>   rw [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Data/Set/Insert.lean#L159" title="Set.mem_singleton_iff">Set.mem_singleton_iff</a>.<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Core.lean#L192" title="Iff.mp">mp</a> hP]</span>
+<span id="L178"><a href="#L178">178</a>   exact <a class="ref" href="../Characteristic/ReducedSupportIdeal.lean.html#L36" title="Stafford38.Characteristic.ReducedSupportIdeal.orderInitialIdeal_le_reducedOrderSupportIdeal">orderInitialIdeal_le_reducedOrderSupportIdeal</a> k _</span>
+<span id="L179"><a href="#L179">179</a>     (<a class="ref" href="../Characteristic/InitialIdeal.lean.html#L283" title="Stafford38.CharacteristicInitialIdeal.canonical_orderPrincipalComponent_mem_initialIdeal">canonical_orderPrincipalComponent_mem_initialIdeal</a> k n N hd)</span>
 <span id="L180"><a href="#L180">180</a> </span>
 <span id="L181"><a href="#L181">181</a> /-- Exact equation-conormal connector.  Under the already isolated</span>
 <span id="L182"><a href="#L182">182</a> base-relative Poisson hypothesis, membership of the distinguished axis in the</span>
 <span id="L183"><a href="#L183">183</a> equation-conormal closure is impossible. -/</span>
 <span id="L184"><a href="#L184">184</a> theorem false_of_canonical_pureMomentumAxis_mem_equationConormalClosure</span>
-<span id="L185"><a href="#L185">185</a>     [CharZero k]</span>
-<span id="L186"><a href="#L186">186</a>     (n N : ℕ) {d : WeylAlg k (n + 1)}</span>
-<span id="L187"><a href="#L187">187</a>     (hd : IsPBWMonicAt k (.inr (0 : Fin (n + 1))) N d)</span>
-<span id="L188"><a href="#L188">188</a>     (hJ : IsBaseRelativePoisson</span>
-<span id="L189"><a href="#L189">189</a>       (reducedOrderSupportIdeal k</span>
-<span id="L190"><a href="#L190">190</a>         (canonicalRightIdeal (presentedCoordinate k n) d N)))</span>
-<span id="L191"><a href="#L191">191</a>     (haxis : axisPoint k (.inr (0 : Fin (n + 1))) ∈</span>
-<span id="L192"><a href="#L192">192</a>       equationConormalClosure</span>
-<span id="L193"><a href="#L193">193</a>         (reducedOrderBaseIdeal k</span>
-<span id="L194"><a href="#L194">194</a>           (canonicalRightIdeal (presentedCoordinate k n) d N))) : False := by</span>
-<span id="L195"><a href="#L195">195</a>   apply false_of_axis_mem_of_subset_principal_zeroLocus</span>
-<span id="L196"><a href="#L196">196</a>     (.inr (0 : Fin (n + 1)))</span>
-<span id="L197"><a href="#L197">197</a>     (canonical_orderPrincipalComponent_isHomogeneous n N hd)</span>
-<span id="L198"><a href="#L198">198</a>     (canonical_orderPrincipalComponent_pureMomentumCoefficient k n N hd)</span>
-<span id="L199"><a href="#L199">199</a>     (S := equationConormalClosure</span>
-<span id="L200"><a href="#L200">200</a>       (reducedOrderBaseIdeal k</span>
-<span id="L201"><a href="#L201">201</a>         (canonicalRightIdeal (presentedCoordinate k n) d N)))</span>
-<span id="L202"><a href="#L202">202</a>   · exact (equationConormalClosure_subset_reducedOrderSupport</span>
-<span id="L203"><a href="#L203">203</a>       (canonicalRightIdeal (presentedCoordinate k n) d N) hJ).trans</span>
-<span id="L204"><a href="#L204">204</a>         (canonical_reducedOrderSupport_zeroLocus_subset_principal_zeroLocus</span>
+<span id="L185"><a href="#L185">185</a>     [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/CharZero/Defs.lean#L33" title="CharZero">CharZero</a> k]</span>
+<span id="L186"><a href="#L186">186</a>     (n N : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L1351" title="Nat">ℕ</a>) {d : <a class="ref" href="../ChallengeDefinitions.lean.html#L73" title="Stafford38Challenge.WeylAlg">WeylAlg</a> k (n + 1)}</span>
+<span id="L187"><a href="#L187">187</a>     (hd : <a class="ref" href="../Weyl/PBWMonicBridge.lean.html#L102" title="Stafford38.WeylPBWMonicBridge.IsPBWMonicAt">IsPBWMonicAt</a> k (<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Core.lean#L215" title="Sum.inr">.inr</a> (0 : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L2443" title="Fin">Fin</a> (n + 1))) N d)</span>
+<span id="L188"><a href="#L188">188</a>     (hJ : <a class="ref" href="../Characteristic/BaseRelativePoisson.lean.html#L25" title="Stafford38.Characteristic.BaseRelativePoisson.IsBaseRelativePoisson">IsBaseRelativePoisson</a></span>
+<span id="L189"><a href="#L189">189</a>       (<a class="ref" href="../Characteristic/ReducedSupportIdeal.lean.html#L31" title="Stafford38.Characteristic.ReducedSupportIdeal.reducedOrderSupportIdeal">reducedOrderSupportIdeal</a> k</span>
+<span id="L190"><a href="#L190">190</a>         (<a class="ref" href="../Weyl/EulerResidue.lean.html#L25" title="Stafford38.WeylEulerResidue.canonicalRightIdeal">canonicalRightIdeal</a> (<a class="ref" href="../Weyl/IteratedEquivalence.lean.html#L330" title="Stafford38.WeylIteratedEquivalence.presentedCoordinate">presentedCoordinate</a> k n) d N)))</span>
+<span id="L191"><a href="#L191">191</a>     (haxis : <a class="ref" href="../Characteristic/HomogeneousChart.lean.html#L74" title="Stafford38.CharacteristicHomogeneousChart.axisPoint">axisPoint</a> k (<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Core.lean#L215" title="Sum.inr">.inr</a> (0 : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L2443" title="Fin">Fin</a> (n + 1))) ∈</span>
+<span id="L192"><a href="#L192">192</a>       <a class="ref" href="./AffineConormalClosure.lean.html#L45" title="Stafford38.Geometry.AffineConormalClosure.equationConormalClosure">equationConormalClosure</a></span>
+<span id="L193"><a href="#L193">193</a>         (<a class="ref" href="../Characteristic/ReducedSupportIdeal.lean.html#L73" title="Stafford38.Characteristic.ReducedSupportIdeal.reducedOrderBaseIdeal">reducedOrderBaseIdeal</a> k</span>
+<span id="L194"><a href="#L194">194</a>           (<a class="ref" href="../Weyl/EulerResidue.lean.html#L25" title="Stafford38.WeylEulerResidue.canonicalRightIdeal">canonicalRightIdeal</a> (<a class="ref" href="../Weyl/IteratedEquivalence.lean.html#L330" title="Stafford38.WeylIteratedEquivalence.presentedCoordinate">presentedCoordinate</a> k n) d N))) : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L274" title="False">False</a> := by</span>
+<span id="L195"><a href="#L195">195</a>   apply <a class="ref" href="./ConormalAxisContradiction.lean.html#L116" title="Stafford38.Geometry.ConormalAxisContradiction.false_of_axis_mem_of_subset_principal_zeroLocus">false_of_axis_mem_of_subset_principal_zeroLocus</a></span>
+<span id="L196"><a href="#L196">196</a>     (<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Core.lean#L215" title="Sum.inr">.inr</a> (0 : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L2443" title="Fin">Fin</a> (n + 1)))</span>
+<span id="L197"><a href="#L197">197</a>     (<a class="ref" href="./ConormalAxisContradiction.lean.html#L61" title="Stafford38.Geometry.ConormalAxisContradiction.canonical_orderPrincipalComponent_isHomogeneous">canonical_orderPrincipalComponent_isHomogeneous</a> n N hd)</span>
+<span id="L198"><a href="#L198">198</a>     (<a class="ref" href="../Characteristic/InitialIdeal.lean.html#L304" title="Stafford38.CharacteristicInitialIdeal.canonical_orderPrincipalComponent_pureMomentumCoefficient">canonical_orderPrincipalComponent_pureMomentumCoefficient</a> k n N hd)</span>
+<span id="L199"><a href="#L199">199</a>     (S := <a class="ref" href="./AffineConormalClosure.lean.html#L45" title="Stafford38.Geometry.AffineConormalClosure.equationConormalClosure">equationConormalClosure</a></span>
+<span id="L200"><a href="#L200">200</a>       (<a class="ref" href="../Characteristic/ReducedSupportIdeal.lean.html#L73" title="Stafford38.Characteristic.ReducedSupportIdeal.reducedOrderBaseIdeal">reducedOrderBaseIdeal</a> k</span>
+<span id="L201"><a href="#L201">201</a>         (<a class="ref" href="../Weyl/EulerResidue.lean.html#L25" title="Stafford38.WeylEulerResidue.canonicalRightIdeal">canonicalRightIdeal</a> (<a class="ref" href="../Weyl/IteratedEquivalence.lean.html#L330" title="Stafford38.WeylIteratedEquivalence.presentedCoordinate">presentedCoordinate</a> k n) d N)))</span>
+<span id="L202"><a href="#L202">202</a>   · exact (<a class="ref" href="./AffineConormalClosure.lean.html#L81" title="Stafford38.Geometry.AffineConormalClosure.equationConormalClosure_subset_reducedOrderSupport">equationConormalClosure_subset_reducedOrderSupport</a></span>
+<span id="L203"><a href="#L203">203</a>       (<a class="ref" href="../Weyl/EulerResidue.lean.html#L25" title="Stafford38.WeylEulerResidue.canonicalRightIdeal">canonicalRightIdeal</a> (<a class="ref" href="../Weyl/IteratedEquivalence.lean.html#L330" title="Stafford38.WeylIteratedEquivalence.presentedCoordinate">presentedCoordinate</a> k n) d N) hJ).<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Order/Basic.lean#L126" title="LE.le.trans">trans</a></span>
+<span id="L204"><a href="#L204">204</a>         (<a class="ref" href="./ConormalAxisContradiction.lean.html#L162" title="Stafford38.Geometry.ConormalAxisContradiction.canonical_reducedOrderSupport_zeroLocus_subset_principal_zeroLocus">canonical_reducedOrderSupport_zeroLocus_subset_principal_zeroLocus</a></span>
 <span id="L205"><a href="#L205">205</a>           n N hd)</span>
 <span id="L206"><a href="#L206">206</a>   · exact haxis</span>
 <span id="L207"><a href="#L207">207</a> </span>
-<span id="L208"><a href="#L208">208</a> #print axioms isHomogeneous_of_orderHomogeneous_of_isFibreOnly</span>
-<span id="L209"><a href="#L209">209</a> #print axioms canonical_orderPrincipalComponent_isHomogeneous</span>
-<span id="L210"><a href="#L210">210</a> #print axioms eval_axis_eq_one_of_pureCoefficient_one</span>
-<span id="L211"><a href="#L211">211</a> #print axioms false_of_axis_mem_of_subset_principal_zeroLocus</span>
-<span id="L212"><a href="#L212">212</a> #print axioms canonical_orderPrincipalComponent_eval_pureMomentumAxis</span>
-<span id="L213"><a href="#L213">213</a> #print axioms canonical_pureMomentumAxis_not_mem_of_subset_principal_zeroLocus</span>
-<span id="L214"><a href="#L214">214</a> #print axioms canonical_reducedOrderSupport_zeroLocus_subset_principal_zeroLocus</span>
-<span id="L215"><a href="#L215">215</a> #print axioms false_of_canonical_pureMomentumAxis_mem_equationConormalClosure</span>
+<span id="L208"><a href="#L208">208</a> #print axioms <a class="ref" href="./ConormalAxisContradiction.lean.html#L44" title="Stafford38.Geometry.ConormalAxisContradiction.isHomogeneous_of_orderHomogeneous_of_isFibreOnly">isHomogeneous_of_orderHomogeneous_of_isFibreOnly</a></span>
+<span id="L209"><a href="#L209">209</a> #print axioms <a class="ref" href="./ConormalAxisContradiction.lean.html#L61" title="Stafford38.Geometry.ConormalAxisContradiction.canonical_orderPrincipalComponent_isHomogeneous">canonical_orderPrincipalComponent_isHomogeneous</a></span>
+<span id="L210"><a href="#L210">210</a> #print axioms <a class="ref" href="./ConormalAxisContradiction.lean.html#L74" title="Stafford38.Geometry.ConormalAxisContradiction.eval_axis_eq_one_of_pureCoefficient_one">eval_axis_eq_one_of_pureCoefficient_one</a></span>
+<span id="L211"><a href="#L211">211</a> #print axioms <a class="ref" href="./ConormalAxisContradiction.lean.html#L116" title="Stafford38.Geometry.ConormalAxisContradiction.false_of_axis_mem_of_subset_principal_zeroLocus">false_of_axis_mem_of_subset_principal_zeroLocus</a></span>
+<span id="L212"><a href="#L212">212</a> #print axioms <a class="ref" href="./ConormalAxisContradiction.lean.html#L131" title="Stafford38.Geometry.ConormalAxisContradiction.canonical_orderPrincipalComponent_eval_pureMomentumAxis">canonical_orderPrincipalComponent_eval_pureMomentumAxis</a></span>
+<span id="L213"><a href="#L213">213</a> #print axioms <a class="ref" href="./ConormalAxisContradiction.lean.html#L144" title="Stafford38.Geometry.ConormalAxisContradiction.canonical_pureMomentumAxis_not_mem_of_subset_principal_zeroLocus">canonical_pureMomentumAxis_not_mem_of_subset_principal_zeroLocus</a></span>
+<span id="L214"><a href="#L214">214</a> #print axioms <a class="ref" href="./ConormalAxisContradiction.lean.html#L162" title="Stafford38.Geometry.ConormalAxisContradiction.canonical_reducedOrderSupport_zeroLocus_subset_principal_zeroLocus">canonical_reducedOrderSupport_zeroLocus_subset_principal_zeroLocus</a></span>
+<span id="L215"><a href="#L215">215</a> #print axioms <a class="ref" href="./ConormalAxisContradiction.lean.html#L181" title="Stafford38.Geometry.ConormalAxisContradiction.false_of_canonical_pureMomentumAxis_mem_equationConormalClosure">false_of_canonical_pureMomentumAxis_mem_equationConormalClosure</a></span>
 <span id="L216"><a href="#L216">216</a> </span>
 <span id="L217"><a href="#L217">217</a> end</span>
 <span id="L218"><a href="#L218">218</a> </span>

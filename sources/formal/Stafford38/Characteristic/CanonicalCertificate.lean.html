@@ -1,9 +1,9 @@
-<!doctype html><meta charset="utf-8"><title>Stafford38/Characteristic/CanonicalCertificate.lean</title><style>body{font:14px monospace}pre span{display:block}pre span:target{background:#fff0ad}a{color:#666}pre{white-space:pre-wrap}</style><h1>Stafford38/Characteristic/CanonicalCertificate.lean</h1><p>This project (Stafford38) · 0403af3f0b1a7f84d2027121932723f67bd279ae</p><pre><span id="L1"><a href="#L1">1</a> module</span>
+<!doctype html><meta charset="utf-8"><title>Stafford38/Characteristic/CanonicalCertificate.lean</title><style>body{font:14px monospace}pre span{display:block}pre span:target{background:#fff0ad}a{color:#666}pre{white-space:pre-wrap}a.ref{color:#0645ad;text-decoration:none}a.ref:hover{text-decoration:underline}</style><h1>Stafford38/Characteristic/CanonicalCertificate.lean</h1><p>This project (Stafford38) · 0403af3f0b1a7f84d2027121932723f67bd279ae</p><pre><span id="L1"><a href="#L1">1</a> module</span>
 <span id="L2"><a href="#L2">2</a> public import Stafford38.Characteristic.EmptySupportVanishing</span>
 <span id="L3"><a href="#L3">3</a> </span>
 <span id="L4"><a href="#L4">4</a> @[expose] public section</span>
 <span id="L5"><a href="#L5">5</a> </span>
-<span id="L6"><a href="#L6">6</a> open Stafford38Challenge (WeylAlg)</span>
+<span id="L6"><a href="#L6">6</a> open Stafford38Challenge (<a class="ref" href="../ChallengeDefinitions.lean.html#L73" title="Stafford38Challenge.WeylAlg">WeylAlg</a>)</span>
 <span id="L7"><a href="#L7">7</a> </span>
 <span id="L8"><a href="#L8">8</a> /-!</span>
 <span id="L9"><a href="#L9">9</a> # Certificate extraction from empty canonical characteristic support</span>
@@ -28,35 +28,35 @@
 <span id="L28"><a href="#L28">28</a> </span>
 <span id="L29"><a href="#L29">29</a> universe u</span>
 <span id="L30"><a href="#L30">30</a> </span>
-<span id="L31"><a href="#L31">31</a> variable (k : Type u) [Field k]</span>
+<span id="L31"><a href="#L31">31</a> variable (k : Type u) [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Field/Defs.lean#L170" title="Field">Field</a> k]</span>
 <span id="L32"><a href="#L32">32</a> </span>
 <span id="L33"><a href="#L33">33</a> /-- Empty order-characteristic support of the canonical right ideal gives the</span>
 <span id="L34"><a href="#L34">34</a> literal fixed-source certificate with source `x^N`. -/</span>
 <span id="L35"><a href="#L35">35</a> theorem exists_fixedSource_certificate_of_orderCharacteristicSupport_eq_empty</span>
-<span id="L36"><a href="#L36">36</a>     (n N : ℕ) (d : WeylAlg k (n + 1))</span>
-<span id="L37"><a href="#L37">37</a>     (hsupport : orderCharacteristicSupport k</span>
-<span id="L38"><a href="#L38">38</a>       (canonicalRightIdeal (presentedCoordinate k n) d N) = ∅) :</span>
-<span id="L39"><a href="#L39">39</a>     ∃ R S : WeylAlg k (n + 1),</span>
-<span id="L40"><a href="#L40">40</a>       (1 : WeylAlg k (n + 1)) =</span>
-<span id="L41"><a href="#L41">41</a>         d * R + (presentedCoordinate k n) ^ N * d * S := by</span>
-<span id="L42"><a href="#L42">42</a>   let I := canonicalRightIdeal (presentedCoordinate k n) d N</span>
-<span id="L43"><a href="#L43">43</a>   have hquotient : Subsingleton (RightQuotient I) :=</span>
-<span id="L44"><a href="#L44">44</a>     rightQuotient_subsingleton_of_orderCharacteristicSupport_eq_empty</span>
+<span id="L36"><a href="#L36">36</a>     (n N : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L1351" title="Nat">ℕ</a>) (d : <a class="ref" href="../ChallengeDefinitions.lean.html#L73" title="Stafford38Challenge.WeylAlg">WeylAlg</a> k (n + 1))</span>
+<span id="L37"><a href="#L37">37</a>     (hsupport : <a class="ref" href="./InitialIdeal.lean.html#L199" title="Stafford38.CharacteristicInitialIdeal.orderCharacteristicSupport">orderCharacteristicSupport</a> k</span>
+<span id="L38"><a href="#L38">38</a>       (<a class="ref" href="../Weyl/EulerResidue.lean.html#L25" title="Stafford38.WeylEulerResidue.canonicalRightIdeal">canonicalRightIdeal</a> (<a class="ref" href="../Weyl/IteratedEquivalence.lean.html#L330" title="Stafford38.WeylIteratedEquivalence.presentedCoordinate">presentedCoordinate</a> k n) d N) = ∅) :</span>
+<span id="L39"><a href="#L39">39</a>     ∃ R S : <a class="ref" href="../ChallengeDefinitions.lean.html#L73" title="Stafford38Challenge.WeylAlg">WeylAlg</a> k (n + 1),</span>
+<span id="L40"><a href="#L40">40</a>       (1 : <a class="ref" href="../ChallengeDefinitions.lean.html#L73" title="Stafford38Challenge.WeylAlg">WeylAlg</a> k (n + 1)) =</span>
+<span id="L41"><a href="#L41">41</a>         d * R + (<a class="ref" href="../Weyl/IteratedEquivalence.lean.html#L330" title="Stafford38.WeylIteratedEquivalence.presentedCoordinate">presentedCoordinate</a> k n) ^ N * d * S := by</span>
+<span id="L42"><a href="#L42">42</a>   let I := <a class="ref" href="../Weyl/EulerResidue.lean.html#L25" title="Stafford38.WeylEulerResidue.canonicalRightIdeal">canonicalRightIdeal</a> (<a class="ref" href="../Weyl/IteratedEquivalence.lean.html#L330" title="Stafford38.WeylIteratedEquivalence.presentedCoordinate">presentedCoordinate</a> k n) d N</span>
+<span id="L43"><a href="#L43">43</a>   have hquotient : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Core.lean#L1260" title="Subsingleton">Subsingleton</a> (<a class="ref" href="../Quotient/EulerSurjectivity.lean.html#L24" title="Stafford38.EulerSurjectivity.RightQuotient">RightQuotient</a> I) :=</span>
+<span id="L44"><a href="#L44">44</a>     <a class="ref" href="./EmptySupportVanishing.lean.html#L55" title="Stafford38.CharacteristicEmptySupportVanishing.rightQuotient_subsingleton_of_orderCharacteristicSupport_eq_empty">rightQuotient_subsingleton_of_orderCharacteristicSupport_eq_empty</a></span>
 <span id="L45"><a href="#L45">45</a>       k I hsupport</span>
 <span id="L46"><a href="#L46">46</a>   have htop : I = ⊤ :=</span>
-<span id="L47"><a href="#L47">47</a>     Submodule.Quotient.subsingleton_iff.mp hquotient</span>
-<span id="L48"><a href="#L48">48</a>   have hone : (1 : WeylAlg k (n + 1)) ∈ I := by</span>
+<span id="L47"><a href="#L47">47</a>     <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/LinearAlgebra/Quotient/Basic.lean#L78" title="Submodule.Quotient.subsingleton_iff">Submodule.Quotient.subsingleton_iff</a>.<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Core.lean#L192" title="Iff.mp">mp</a> hquotient</span>
+<span id="L48"><a href="#L48">48</a>   have hone : (1 : <a class="ref" href="../ChallengeDefinitions.lean.html#L73" title="Stafford38Challenge.WeylAlg">WeylAlg</a> k (n + 1)) ∈ I := by</span>
 <span id="L49"><a href="#L49">49</a>     rw [htop]</span>
 <span id="L50"><a href="#L50">50</a>     trivial</span>
-<span id="L51"><a href="#L51">51</a>   change (1 : WeylAlg k (n + 1)) ∈</span>
-<span id="L52"><a href="#L52">52</a>     Submodule.span (WeylAlg k (n + 1))ᵐᵒᵖ</span>
-<span id="L53"><a href="#L53">53</a>       ({d, (presentedCoordinate k n) ^ N * d} :</span>
-<span id="L54"><a href="#L54">54</a>         Set (WeylAlg k (n + 1))) at hone</span>
-<span id="L55"><a href="#L55">55</a>   rcases Submodule.mem_span_pair.mp hone with ⟨r, s, hrs⟩</span>
-<span id="L56"><a href="#L56">56</a>   refine ⟨r.unop, s.unop, ?_⟩</span>
-<span id="L57"><a href="#L57">57</a>   simpa [op_smul_eq_mul] using hrs.symm</span>
+<span id="L51"><a href="#L51">51</a>   change (1 : <a class="ref" href="../ChallengeDefinitions.lean.html#L73" title="Stafford38Challenge.WeylAlg">WeylAlg</a> k (n + 1)) ∈</span>
+<span id="L52"><a href="#L52">52</a>     <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/LinearAlgebra/Span/Defs.lean#L45" title="Submodule.span">Submodule.span</a> (<a class="ref" href="../ChallengeDefinitions.lean.html#L73" title="Stafford38Challenge.WeylAlg">WeylAlg</a> k (n + 1))ᵐᵒᵖ</span>
+<span id="L53"><a href="#L53">53</a>       ({d, (<a class="ref" href="../Weyl/IteratedEquivalence.lean.html#L330" title="Stafford38.WeylIteratedEquivalence.presentedCoordinate">presentedCoordinate</a> k n) ^ N * d} :</span>
+<span id="L54"><a href="#L54">54</a>         <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Data/Set/Defs.lean#L44" title="Set">Set</a> (<a class="ref" href="../ChallengeDefinitions.lean.html#L73" title="Stafford38Challenge.WeylAlg">WeylAlg</a> k (n + 1))) at hone</span>
+<span id="L55"><a href="#L55">55</a>   rcases <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/LinearAlgebra/Span/Defs.lean#L519" title="Submodule.mem_span_pair">Submodule.mem_span_pair</a>.<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Core.lean#L192" title="Iff.mp">mp</a> hone with ⟨r, s, hrs⟩</span>
+<span id="L56"><a href="#L56">56</a>   refine ⟨r.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Opposites.lean#L81" title="MulOpposite.unop">unop</a>, s.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Opposites.lean#L81" title="MulOpposite.unop">unop</a>, ?_⟩</span>
+<span id="L57"><a href="#L57">57</a>   simpa [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Group/Action/Defs.lean#L77" title="op_smul_eq_mul">op_smul_eq_mul</a>] using hrs.<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L364" title="Eq.symm">symm</a></span>
 <span id="L58"><a href="#L58">58</a> </span>
-<span id="L59"><a href="#L59">59</a> #print axioms exists_fixedSource_certificate_of_orderCharacteristicSupport_eq_empty</span>
+<span id="L59"><a href="#L59">59</a> #print axioms <a class="ref" href="./CanonicalCertificate.lean.html#L33" title="Stafford38.CharacteristicCanonicalCertificate.exists_fixedSource_certificate_of_orderCharacteristicSupport_eq_empty">exists_fixedSource_certificate_of_orderCharacteristicSupport_eq_empty</a></span>
 <span id="L60"><a href="#L60">60</a> </span>
 <span id="L61"><a href="#L61">61</a> end</span>
 <span id="L62"><a href="#L62">62</a> </span>

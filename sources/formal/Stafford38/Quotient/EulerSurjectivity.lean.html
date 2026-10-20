@@ -1,4 +1,4 @@
-<!doctype html><meta charset="utf-8"><title>Stafford38/Quotient/EulerSurjectivity.lean</title><style>body{font:14px monospace}pre span{display:block}pre span:target{background:#fff0ad}a{color:#666}pre{white-space:pre-wrap}</style><h1>Stafford38/Quotient/EulerSurjectivity.lean</h1><p>This project (Stafford38) · 0403af3f0b1a7f84d2027121932723f67bd279ae</p><pre><span id="L1"><a href="#L1">1</a> module</span>
+<!doctype html><meta charset="utf-8"><title>Stafford38/Quotient/EulerSurjectivity.lean</title><style>body{font:14px monospace}pre span{display:block}pre span:target{background:#fff0ad}a{color:#666}pre{white-space:pre-wrap}a.ref{color:#0645ad;text-decoration:none}a.ref:hover{text-decoration:underline}</style><h1>Stafford38/Quotient/EulerSurjectivity.lean</h1><p>This project (Stafford38) · 0403af3f0b1a7f84d2027121932723f67bd279ae</p><pre><span id="L1"><a href="#L1">1</a> module</span>
 <span id="L2"><a href="#L2">2</a> public import Mathlib.LinearAlgebra.Quotient.Defs</span>
 <span id="L3"><a href="#L3">3</a> public import Mathlib.Algebra.Module.Submodule.Basic</span>
 <span id="L4"><a href="#L4">4</a> public import Mathlib.Algebra.Ring.Subring.Basic</span>
@@ -16,65 +16,65 @@
 <span id="L16"><a href="#L16">16</a> </span>
 <span id="L17"><a href="#L17">17</a> namespace Stafford38.EulerSurjectivity</span>
 <span id="L18"><a href="#L18">18</a> </span>
-<span id="L19"><a href="#L19">19</a> variable {A : Type*} [Ring A]</span>
+<span id="L19"><a href="#L19">19</a> variable {A : Type*} [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Ring/Defs.lean#L145" title="Ring">Ring</a> A]</span>
 <span id="L20"><a href="#L20">20</a> </span>
 <span id="L21"><a href="#L21">21</a> /-- A right ideal, represented as a submodule of the regular right module. -/</span>
-<span id="L22"><a href="#L22">22</a> abbrev RightIdeal (A : Type*) [Ring A] := Submodule Aᵐᵒᵖ A</span>
+<span id="L22"><a href="#L22">22</a> abbrev RightIdeal (A : Type*) [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Ring/Defs.lean#L145" title="Ring">Ring</a> A] := <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Module/Submodule/Defs.lean#L38" title="Submodule">Submodule</a> Aᵐᵒᵖ A</span>
 <span id="L23"><a href="#L23">23</a> </span>
 <span id="L24"><a href="#L24">24</a> /-- The additive quotient by a right ideal, with its induced right action. -/</span>
-<span id="L25"><a href="#L25">25</a> abbrev RightQuotient (I : RightIdeal A) := A ⧸ I</span>
+<span id="L25"><a href="#L25">25</a> abbrev RightQuotient (I : <a class="ref" href="./EulerSurjectivity.lean.html#L21" title="Stafford38.EulerSurjectivity.RightIdeal">RightIdeal</a> A) := A ⧸ I</span>
 <span id="L26"><a href="#L26">26</a> </span>
 <span id="L27"><a href="#L27">27</a> /-- The quotient class of a ring element. -/</span>
-<span id="L28"><a href="#L28">28</a> def qmk (I : RightIdeal A) (a : A) : RightQuotient I :=</span>
-<span id="L29"><a href="#L29">29</a>   Submodule.Quotient.mk a</span>
+<span id="L28"><a href="#L28">28</a> def qmk (I : <a class="ref" href="./EulerSurjectivity.lean.html#L21" title="Stafford38.EulerSurjectivity.RightIdeal">RightIdeal</a> A) (a : A) : <a class="ref" href="./EulerSurjectivity.lean.html#L24" title="Stafford38.EulerSurjectivity.RightQuotient">RightQuotient</a> I :=</span>
+<span id="L29"><a href="#L29">29</a>   <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/LinearAlgebra/Quotient/Defs.lean#L59" title="Submodule.Quotient.mk">Submodule.Quotient.mk</a> a</span>
 <span id="L30"><a href="#L30">30</a> </span>
 <span id="L31"><a href="#L31">31</a> /-- Right multiplication on the quotient. -/</span>
-<span id="L32"><a href="#L32">32</a> def rightMul (I : RightIdeal A) (a : A) (q : RightQuotient I) :</span>
-<span id="L33"><a href="#L33">33</a>     RightQuotient I :=</span>
-<span id="L34"><a href="#L34">34</a>   MulOpposite.op a • q</span>
+<span id="L32"><a href="#L32">32</a> def rightMul (I : <a class="ref" href="./EulerSurjectivity.lean.html#L21" title="Stafford38.EulerSurjectivity.RightIdeal">RightIdeal</a> A) (a : A) (q : <a class="ref" href="./EulerSurjectivity.lean.html#L24" title="Stafford38.EulerSurjectivity.RightQuotient">RightQuotient</a> I) :</span>
+<span id="L33"><a href="#L33">33</a>     <a class="ref" href="./EulerSurjectivity.lean.html#L24" title="Stafford38.EulerSurjectivity.RightQuotient">RightQuotient</a> I :=</span>
+<span id="L34"><a href="#L34">34</a>   <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Opposites.lean#L75" title="MulOpposite.op">MulOpposite.op</a> a • q</span>
 <span id="L35"><a href="#L35">35</a> </span>
-<span id="L36"><a href="#L36">36</a> lemma qmk_right_mul (I : RightIdeal A) (a b : A) :</span>
-<span id="L37"><a href="#L37">37</a>     qmk I (a * b) = rightMul I b (qmk I a) := by</span>
-<span id="L38"><a href="#L38">38</a>   exact Submodule.Quotient.mk_smul I (MulOpposite.op b) a</span>
+<span id="L36"><a href="#L36">36</a> lemma qmk_right_mul (I : <a class="ref" href="./EulerSurjectivity.lean.html#L21" title="Stafford38.EulerSurjectivity.RightIdeal">RightIdeal</a> A) (a b : A) :</span>
+<span id="L37"><a href="#L37">37</a>     <a class="ref" href="./EulerSurjectivity.lean.html#L27" title="Stafford38.EulerSurjectivity.qmk">qmk</a> I (a * b) = <a class="ref" href="./EulerSurjectivity.lean.html#L31" title="Stafford38.EulerSurjectivity.rightMul">rightMul</a> I b (<a class="ref" href="./EulerSurjectivity.lean.html#L27" title="Stafford38.EulerSurjectivity.qmk">qmk</a> I a) := by</span>
+<span id="L38"><a href="#L38">38</a>   exact <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/LinearAlgebra/Quotient/Defs.lean#L113" title="Submodule.Quotient.mk_smul">Submodule.Quotient.mk_smul</a> I (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Opposites.lean#L75" title="MulOpposite.op">MulOpposite.op</a> b) a</span>
 <span id="L39"><a href="#L39">39</a> </span>
 <span id="L40"><a href="#L40">40</a> /-- Elements whose quotient classes have representatives in `R`. -/</span>
-<span id="L41"><a href="#L41">41</a> def ReducesTo (I : RightIdeal A) (R : Subring A) (a : A) : Prop :=</span>
-<span id="L42"><a href="#L42">42</a>   ∃ r : R, qmk I a = qmk I (r : A)</span>
+<span id="L41"><a href="#L41">41</a> def ReducesTo (I : <a class="ref" href="./EulerSurjectivity.lean.html#L21" title="Stafford38.EulerSurjectivity.RightIdeal">RightIdeal</a> A) (R : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Ring/Subring/Defs.lean#L161" title="Subring">Subring</a> A) (a : A) : Prop :=</span>
+<span id="L42"><a href="#L42">42</a>   ∃ r : R, <a class="ref" href="./EulerSurjectivity.lean.html#L27" title="Stafford38.EulerSurjectivity.qmk">qmk</a> I a = <a class="ref" href="./EulerSurjectivity.lean.html#L27" title="Stafford38.EulerSurjectivity.qmk">qmk</a> I (r : A)</span>
 <span id="L43"><a href="#L43">43</a> </span>
 <span id="L44"><a href="#L44">44</a> /-- Right multipliers preserving the classes represented by `R`. -/</span>
-<span id="L45"><a href="#L45">45</a> def preservers (I : RightIdeal A) (R : Subring A) : Subring A where</span>
-<span id="L46"><a href="#L46">46</a>   carrier := {a | ∀ r : R, ReducesTo I R ((r : A) * a)}</span>
-<span id="L47"><a href="#L47">47</a>   zero_mem' := by</span>
+<span id="L45"><a href="#L45">45</a> def preservers (I : <a class="ref" href="./EulerSurjectivity.lean.html#L21" title="Stafford38.EulerSurjectivity.RightIdeal">RightIdeal</a> A) (R : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Ring/Subring/Defs.lean#L161" title="Subring">Subring</a> A) : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Ring/Subring/Defs.lean#L161" title="Subring">Subring</a> A where</span>
+<span id="L46"><a href="#L46">46</a>   <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Group/Subsemigroup/Defs.lean#L82" title="Subsemigroup.carrier">carrier</a> := {a | ∀ r : R, <a class="ref" href="./EulerSurjectivity.lean.html#L40" title="Stafford38.EulerSurjectivity.ReducesTo">ReducesTo</a> I R ((r : A) * a)}</span>
+<span id="L47"><a href="#L47">47</a>   <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Ring/Subsemiring/Defs.lean#L131" title="Subsemiring.zero_mem&#x27;">zero_mem'</a> := by</span>
 <span id="L48"><a href="#L48">48</a>     intro r</span>
-<span id="L49"><a href="#L49">49</a>     exact ⟨0, by simp [ReducesTo, qmk]⟩</span>
-<span id="L50"><a href="#L50">50</a>   one_mem' := by</span>
+<span id="L49"><a href="#L49">49</a>     exact ⟨0, by simp [<a class="ref" href="./EulerSurjectivity.lean.html#L40" title="Stafford38.EulerSurjectivity.ReducesTo">ReducesTo</a>, <a class="ref" href="./EulerSurjectivity.lean.html#L27" title="Stafford38.EulerSurjectivity.qmk">qmk</a>]⟩</span>
+<span id="L50"><a href="#L50">50</a>   <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Group/Submonoid/Defs.lean#L91" title="Submonoid.one_mem&#x27;">one_mem'</a> := by</span>
 <span id="L51"><a href="#L51">51</a>     intro r</span>
-<span id="L52"><a href="#L52">52</a>     exact ⟨r, by simp [ReducesTo]⟩</span>
-<span id="L53"><a href="#L53">53</a>   add_mem' := by</span>
+<span id="L52"><a href="#L52">52</a>     exact ⟨r, by simp [<a class="ref" href="./EulerSurjectivity.lean.html#L40" title="Stafford38.EulerSurjectivity.ReducesTo">ReducesTo</a>]⟩</span>
+<span id="L53"><a href="#L53">53</a>   <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Ring/Subsemiring/Defs.lean#L131" title="Subsemiring.add_mem&#x27;">add_mem'</a> := by</span>
 <span id="L54"><a href="#L54">54</a>     intro a b ha hb r</span>
 <span id="L55"><a href="#L55">55</a>     obtain ⟨s, hs⟩ := ha r</span>
 <span id="L56"><a href="#L56">56</a>     obtain ⟨t, ht⟩ := hb r</span>
 <span id="L57"><a href="#L57">57</a>     refine ⟨s + t, ?_⟩</span>
-<span id="L58"><a href="#L58">58</a>     simpa [ReducesTo, mul_add, qmk, Submodule.Quotient.mk_add] using</span>
-<span id="L59"><a href="#L59">59</a>       congrArg₂ (· + ·) hs ht</span>
-<span id="L60"><a href="#L60">60</a>   neg_mem' := by</span>
+<span id="L58"><a href="#L58">58</a>     simpa [<a class="ref" href="./EulerSurjectivity.lean.html#L40" title="Stafford38.EulerSurjectivity.ReducesTo">ReducesTo</a>, <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Ring/Defs.lean#L92" title="mul_add">mul_add</a>, <a class="ref" href="./EulerSurjectivity.lean.html#L27" title="Stafford38.EulerSurjectivity.qmk">qmk</a>, <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/LinearAlgebra/Quotient/Defs.lean#L140" title="Submodule.Quotient.mk_add">Submodule.Quotient.mk_add</a>] using</span>
+<span id="L59"><a href="#L59">59</a>       <a class="ref" href="https://github.com/leanprover-community/batteries/blob/3b7c8101932390d60e92a3f3d917901d5b5a773b/Batteries/Logic.lean#L38" title="congrArg₂">congrArg₂</a> (· + ·) hs ht</span>
+<span id="L60"><a href="#L60">60</a>   <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Ring/Subring/Defs.lean#L165" title="Subring.neg_mem&#x27;">neg_mem'</a> := by</span>
 <span id="L61"><a href="#L61">61</a>     intro a ha r</span>
 <span id="L62"><a href="#L62">62</a>     obtain ⟨s, hs⟩ := ha r</span>
 <span id="L63"><a href="#L63">63</a>     refine ⟨-s, ?_⟩</span>
-<span id="L64"><a href="#L64">64</a>     simpa [ReducesTo, qmk] using congrArg Neg.neg hs</span>
-<span id="L65"><a href="#L65">65</a>   mul_mem' := by</span>
+<span id="L64"><a href="#L64">64</a>     simpa [<a class="ref" href="./EulerSurjectivity.lean.html#L40" title="Stafford38.EulerSurjectivity.ReducesTo">ReducesTo</a>, <a class="ref" href="./EulerSurjectivity.lean.html#L27" title="Stafford38.EulerSurjectivity.qmk">qmk</a>] using <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L405" title="congrArg">congrArg</a> <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L1659" title="Neg.neg">Neg.neg</a> hs</span>
+<span id="L65"><a href="#L65">65</a>   <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Group/Subsemigroup/Defs.lean#L84" title="Subsemigroup.mul_mem&#x27;">mul_mem'</a> := by</span>
 <span id="L66"><a href="#L66">66</a>     intro a b ha hb r</span>
 <span id="L67"><a href="#L67">67</a>     obtain ⟨s, hs⟩ := ha r</span>
 <span id="L68"><a href="#L68">68</a>     obtain ⟨t, ht⟩ := hb s</span>
 <span id="L69"><a href="#L69">69</a>     refine ⟨t, ?_⟩</span>
-<span id="L70"><a href="#L70">70</a>     have hright := congrArg (rightMul I b) hs</span>
-<span id="L71"><a href="#L71">71</a>     rw [← qmk_right_mul, ← qmk_right_mul] at hright</span>
-<span id="L72"><a href="#L72">72</a>     simpa [mul_assoc] using hright.trans ht</span>
+<span id="L70"><a href="#L70">70</a>     have hright := <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L405" title="congrArg">congrArg</a> (<a class="ref" href="./EulerSurjectivity.lean.html#L31" title="Stafford38.EulerSurjectivity.rightMul">rightMul</a> I b) hs</span>
+<span id="L71"><a href="#L71">71</a>     rw [← <a class="ref" href="./EulerSurjectivity.lean.html#L36" title="Stafford38.EulerSurjectivity.qmk_right_mul">qmk_right_mul</a>, ← <a class="ref" href="./EulerSurjectivity.lean.html#L36" title="Stafford38.EulerSurjectivity.qmk_right_mul">qmk_right_mul</a>] at hright</span>
+<span id="L72"><a href="#L72">72</a>     simpa [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Group/Semigroup.lean#L160" title="mul_assoc">mul_assoc</a>] using hright.<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L379" title="Eq.trans">trans</a> ht</span>
 <span id="L73"><a href="#L73">73</a> </span>
-<span id="L74"><a href="#L74">74</a> lemma subring_le_preservers (I : RightIdeal A) (R : Subring A) :</span>
-<span id="L75"><a href="#L75">75</a>     R ≤ preservers I R := by</span>
+<span id="L74"><a href="#L74">74</a> lemma subring_le_preservers (I : <a class="ref" href="./EulerSurjectivity.lean.html#L21" title="Stafford38.EulerSurjectivity.RightIdeal">RightIdeal</a> A) (R : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Ring/Subring/Defs.lean#L161" title="Subring">Subring</a> A) :</span>
+<span id="L75"><a href="#L75">75</a>     R ≤ <a class="ref" href="./EulerSurjectivity.lean.html#L44" title="Stafford38.EulerSurjectivity.preservers">preservers</a> I R := by</span>
 <span id="L76"><a href="#L76">76</a>   intro a ha r</span>
-<span id="L77"><a href="#L77">77</a>   exact ⟨r * ⟨a, ha⟩, rfl⟩</span>
+<span id="L77"><a href="#L77">77</a>   exact ⟨r * ⟨a, ha⟩, <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L334" title="rfl">rfl</a>⟩</span>
 <span id="L78"><a href="#L78">78</a> </span>
 <span id="L79"><a href="#L79">79</a> /--</span>
 <span id="L80"><a href="#L80">80</a> The quotient form of the positive Euler argument.</span>
@@ -84,53 +84,53 @@
 <span id="L84"><a href="#L84">84</a> multiplication by `x` is onto `A/I`.</span>
 <span id="L85"><a href="#L85">85</a> -/</span>
 <span id="L86"><a href="#L86">86</a> theorem rightMul_surjective_of_euler_normal</span>
-<span id="L87"><a href="#L87">87</a>     (I : RightIdeal A) (R : Subring A) (x p : A)</span>
+<span id="L87"><a href="#L87">87</a>     (I : <a class="ref" href="./EulerSurjectivity.lean.html#L21" title="Stafford38.EulerSurjectivity.RightIdeal">RightIdeal</a> A) (R : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Ring/Subring/Defs.lean#L161" title="Subring">Subring</a> A) (x p : A)</span>
 <span id="L88"><a href="#L88">88</a>     (hnormal : ∀ r : R, ∃ s : R, x * (r : A) = (s : A) * x)</span>
 <span id="L89"><a href="#L89">89</a>     (hE : x * p ∈ R)</span>
 <span id="L90"><a href="#L90">90</a>     (hresidue : ∃ U : R, 1 + (U : A) * x ∈ I)</span>
-<span id="L91"><a href="#L91">91</a>     (hgenerate : Subring.closure ((R : Set A) ∪ {p}) = ⊤) :</span>
-<span id="L92"><a href="#L92">92</a>     Function.Surjective (rightMul I x) := by</span>
+<span id="L91"><a href="#L91">91</a>     (hgenerate : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Ring/Subring/Basic.lean#L484" title="Subring.closure">Subring.closure</a> ((R : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Data/Set/Defs.lean#L44" title="Set">Set</a> A) ∪ {p}) = ⊤) :</span>
+<span id="L92"><a href="#L92">92</a>     <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Data/Function.lean#L59" title="Function.Surjective">Function.Surjective</a> (<a class="ref" href="./EulerSurjectivity.lean.html#L31" title="Stafford38.EulerSurjectivity.rightMul">rightMul</a> I x) := by</span>
 <span id="L93"><a href="#L93">93</a>   obtain ⟨U, hU⟩ := hresidue</span>
 <span id="L94"><a href="#L94">94</a> </span>
-<span id="L95"><a href="#L95">95</a>   have hp : p ∈ preservers I R := by</span>
+<span id="L95"><a href="#L95">95</a>   have hp : p ∈ <a class="ref" href="./EulerSurjectivity.lean.html#L44" title="Stafford38.EulerSurjectivity.preservers">preservers</a> I R := by</span>
 <span id="L96"><a href="#L96">96</a>     intro r</span>
 <span id="L97"><a href="#L97">97</a>     obtain ⟨s, hs⟩ := hnormal r</span>
 <span id="L98"><a href="#L98">98</a>     refine ⟨-(U * s * ⟨x * p, hE⟩), ?_⟩</span>
-<span id="L99"><a href="#L99">99</a>     apply (Submodule.Quotient.eq I).2</span>
-<span id="L100"><a href="#L100">100</a>     have hmem := I.smul_mem (MulOpposite.op ((r : A) * p)) hU</span>
+<span id="L99"><a href="#L99">99</a>     apply (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/LinearAlgebra/Quotient/Defs.lean#L81" title="Submodule.Quotient.eq">Submodule.Quotient.eq</a> I).<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Core.lean#L194" title="Iff.mpr">2</a></span>
+<span id="L100"><a href="#L100">100</a>     have hmem := I.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Module/Submodule/Defs.lean#L214" title="Submodule.smul_mem">smul_mem</a> (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Opposites.lean#L75" title="MulOpposite.op">MulOpposite.op</a> ((r : A) * p)) hU</span>
 <span id="L101"><a href="#L101">101</a>     change (1 + (U : A) * x) * ((r : A) * p) ∈ I at hmem</span>
 <span id="L102"><a href="#L102">102</a>     convert hmem using 1</span>
-<span id="L103"><a href="#L103">103</a>     all_goals simp only [Subring.coe_neg, Subring.coe_mul]</span>
+<span id="L103"><a href="#L103">103</a>     all_goals simp only [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Ring/Subring/Defs.lean#L336" title="Subring.coe_neg">Subring.coe_neg</a>, <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Ring/Subring/Defs.lean#L340" title="Subring.coe_mul">Subring.coe_mul</a>]</span>
 <span id="L104"><a href="#L104">104</a>     calc</span>
 <span id="L105"><a href="#L105">105</a>       (r : A) * p - -((U : A) * (s : A) * (x * p)) =</span>
 <span id="L106"><a href="#L106">106</a>           (r : A) * p + (U : A) * ((s : A) * x) * p := by noncomm_ring</span>
 <span id="L107"><a href="#L107">107</a>       _ = (r : A) * p + (U : A) * (x * (r : A)) * p := by rw [hs]</span>
 <span id="L108"><a href="#L108">108</a>       _ = (1 + (U : A) * x) * ((r : A) * p) := by noncomm_ring</span>
 <span id="L109"><a href="#L109">109</a> </span>
-<span id="L110"><a href="#L110">110</a>   have hall : preservers I R = ⊤ := by</span>
-<span id="L111"><a href="#L111">111</a>     apply top_unique</span>
+<span id="L110"><a href="#L110">110</a>   have hall : <a class="ref" href="./EulerSurjectivity.lean.html#L44" title="Stafford38.EulerSurjectivity.preservers">preservers</a> I R = ⊤ := by</span>
+<span id="L111"><a href="#L111">111</a>     apply <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Order/BoundedOrder/Basic.lean#L173" title="top_unique">top_unique</a></span>
 <span id="L112"><a href="#L112">112</a>     rw [← hgenerate]</span>
-<span id="L113"><a href="#L113">113</a>     apply Subring.closure_le.2</span>
+<span id="L113"><a href="#L113">113</a>     apply <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Ring/Subring/Basic.lean#L501" title="Subring.closure_le">Subring.closure_le</a>.<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Core.lean#L194" title="Iff.mpr">2</a></span>
 <span id="L114"><a href="#L114">114</a>     intro a ha</span>
 <span id="L115"><a href="#L115">115</a>     rcases ha with ha | rfl</span>
-<span id="L116"><a href="#L116">116</a>     · exact subring_le_preservers I R ha</span>
+<span id="L116"><a href="#L116">116</a>     · exact <a class="ref" href="./EulerSurjectivity.lean.html#L74" title="Stafford38.EulerSurjectivity.subring_le_preservers">subring_le_preservers</a> I R ha</span>
 <span id="L117"><a href="#L117">117</a>     · simpa using hp</span>
 <span id="L118"><a href="#L118">118</a> </span>
 <span id="L119"><a href="#L119">119</a>   intro q</span>
-<span id="L120"><a href="#L120">120</a>   obtain ⟨a, rfl⟩ := Submodule.Quotient.mk_surjective I q</span>
-<span id="L121"><a href="#L121">121</a>   have ha : a ∈ preservers I R := by</span>
+<span id="L120"><a href="#L120">120</a>   obtain ⟨a, rfl⟩ := <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/LinearAlgebra/Quotient/Defs.lean#L207" title="Submodule.Quotient.mk_surjective">Submodule.Quotient.mk_surjective</a> I q</span>
+<span id="L121"><a href="#L121">121</a>   have ha : a ∈ <a class="ref" href="./EulerSurjectivity.lean.html#L44" title="Stafford38.EulerSurjectivity.preservers">preservers</a> I R := by</span>
 <span id="L122"><a href="#L122">122</a>     rw [hall]</span>
 <span id="L123"><a href="#L123">123</a>     trivial</span>
 <span id="L124"><a href="#L124">124</a>   obtain ⟨r, hr⟩ := ha (1 : R)</span>
-<span id="L125"><a href="#L125">125</a>   have har : qmk I a = qmk I (r : A) := by simpa using hr</span>
+<span id="L125"><a href="#L125">125</a>   have har : <a class="ref" href="./EulerSurjectivity.lean.html#L27" title="Stafford38.EulerSurjectivity.qmk">qmk</a> I a = <a class="ref" href="./EulerSurjectivity.lean.html#L27" title="Stafford38.EulerSurjectivity.qmk">qmk</a> I (r : A) := by simpa using hr</span>
 <span id="L126"><a href="#L126">126</a>   obtain ⟨s, hs⟩ := hnormal r</span>
-<span id="L127"><a href="#L127">127</a>   refine ⟨qmk I (-((U : A) * (s : A))), ?_⟩</span>
-<span id="L128"><a href="#L128">128</a>   change rightMul I x (qmk I (-((U : A) * (s : A)))) = qmk I a</span>
-<span id="L129"><a href="#L129">129</a>   rw [har, ← qmk_right_mul]</span>
-<span id="L130"><a href="#L130">130</a>   apply (Submodule.Quotient.eq I).2</span>
-<span id="L131"><a href="#L131">131</a>   have hmem := I.smul_mem (MulOpposite.op (r : A)) hU</span>
+<span id="L127"><a href="#L127">127</a>   refine ⟨<a class="ref" href="./EulerSurjectivity.lean.html#L27" title="Stafford38.EulerSurjectivity.qmk">qmk</a> I (-((U : A) * (s : A))), ?_⟩</span>
+<span id="L128"><a href="#L128">128</a>   change <a class="ref" href="./EulerSurjectivity.lean.html#L31" title="Stafford38.EulerSurjectivity.rightMul">rightMul</a> I x (<a class="ref" href="./EulerSurjectivity.lean.html#L27" title="Stafford38.EulerSurjectivity.qmk">qmk</a> I (-((U : A) * (s : A)))) = <a class="ref" href="./EulerSurjectivity.lean.html#L27" title="Stafford38.EulerSurjectivity.qmk">qmk</a> I a</span>
+<span id="L129"><a href="#L129">129</a>   rw [har, ← <a class="ref" href="./EulerSurjectivity.lean.html#L36" title="Stafford38.EulerSurjectivity.qmk_right_mul">qmk_right_mul</a>]</span>
+<span id="L130"><a href="#L130">130</a>   apply (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/LinearAlgebra/Quotient/Defs.lean#L81" title="Submodule.Quotient.eq">Submodule.Quotient.eq</a> I).<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Core.lean#L194" title="Iff.mpr">2</a></span>
+<span id="L131"><a href="#L131">131</a>   have hmem := I.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Module/Submodule/Defs.lean#L214" title="Submodule.smul_mem">smul_mem</a> (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Opposites.lean#L75" title="MulOpposite.op">MulOpposite.op</a> (r : A)) hU</span>
 <span id="L132"><a href="#L132">132</a>   change (1 + (U : A) * x) * (r : A) ∈ I at hmem</span>
-<span id="L133"><a href="#L133">133</a>   have hmemneg := I.neg_mem hmem</span>
+<span id="L133"><a href="#L133">133</a>   have hmemneg := I.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Module/Submodule/Defs.lean#L321" title="Submodule.neg_mem">neg_mem</a> hmem</span>
 <span id="L134"><a href="#L134">134</a>   change -((1 + (U : A) * x) * (r : A)) ∈ I at hmemneg</span>
 <span id="L135"><a href="#L135">135</a>   convert hmemneg using 1</span>
 <span id="L136"><a href="#L136">136</a>   calc</span>
@@ -139,7 +139,7 @@
 <span id="L139"><a href="#L139">139</a>     _ = -((r : A) + (U : A) * (x * (r : A))) := by rw [hs]</span>
 <span id="L140"><a href="#L140">140</a>     _ = -((1 + (U : A) * x) * (r : A)) := by noncomm_ring</span>
 <span id="L141"><a href="#L141">141</a> </span>
-<span id="L142"><a href="#L142">142</a> #print axioms rightMul_surjective_of_euler_normal</span>
+<span id="L142"><a href="#L142">142</a> #print axioms <a class="ref" href="./EulerSurjectivity.lean.html#L79" title="Stafford38.EulerSurjectivity.rightMul_surjective_of_euler_normal">rightMul_surjective_of_euler_normal</a></span>
 <span id="L143"><a href="#L143">143</a> </span>
 <span id="L144"><a href="#L144">144</a> end Stafford38.EulerSurjectivity</span>
 <span id="L145"><a href="#L145">145</a> </span></pre>

@@ -1,0 +1,62 @@
+<!doctype html><meta charset="utf-8"><title>Stafford38/Geometry/ProjectiveDVRCenter.lean</title><style>body{font:14px monospace}pre span{display:block}pre span:target{background:#fff0ad}a{color:#666}pre{white-space:pre-wrap}a.ref{color:#0645ad;text-decoration:none}a.ref:hover{text-decoration:underline}</style><h1>Stafford38/Geometry/ProjectiveDVRCenter.lean</h1><p>This project (Stafford38) · 0403af3f0b1a7f84d2027121932723f67bd279ae</p><pre><span id="L1"><a href="#L1">1</a> module</span>
+<span id="L2"><a href="#L2">2</a> public import Mathlib.RingTheory.Valuation.Discrete.IsDiscreteValuationRing</span>
+<span id="L3"><a href="#L3">3</a> public import Mathlib.RingTheory.Valuation.LocalSubring</span>
+<span id="L4"><a href="#L4">4</a> </span>
+<span id="L5"><a href="#L5">5</a> @[expose] public section</span>
+<span id="L6"><a href="#L6">6</a> </span>
+<span id="L7"><a href="#L7">7</a> /-!</span>
+<span id="L8"><a href="#L8">8</a> # Equality of a centered DVR with a dominating valuation ring</span>
+<span id="L9"><a href="#L9">9</a> </span>
+<span id="L10"><a href="#L10">10</a> This is the final local-algebra step in identifying a divisorial valuation</span>
+<span id="L11"><a href="#L11">11</a> with the local ring at its center. It does not construct a proper model, a</span>
+<span id="L12"><a href="#L12">12</a> center, or prove that the center has codimension one.</span>
+<span id="L13"><a href="#L13">13</a> -/</span>
+<span id="L14"><a href="#L14">14</a> </span>
+<span id="L15"><a href="#L15">15</a> namespace Stafford38.Geometry.ProjectiveDVRCenter</span>
+<span id="L16"><a href="#L16">16</a> </span>
+<span id="L17"><a href="#L17">17</a> open IsLocalRing</span>
+<span id="L18"><a href="#L18">18</a> </span>
+<span id="L19"><a href="#L19">19</a> universe u</span>
+<span id="L20"><a href="#L20">20</a> </span>
+<span id="L21"><a href="#L21">21</a> section</span>
+<span id="L22"><a href="#L22">22</a> </span>
+<span id="L23"><a href="#L23">23</a> variable {K : Type u} [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Field/Defs.lean#L170" title="Field">Field</a> K] (R : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Ring/Subring/Defs.lean#L161" title="Subring">Subring</a> K)</span>
+<span id="L24"><a href="#L24">24</a> </span>
+<span id="L25"><a href="#L25">25</a> local instance subringAlgebra : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Algebra/Defs.lean#L91" title="Algebra">Algebra</a> R K := R.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Ring/Subring/Defs.lean#L377" title="Subring.subtype">subtype</a>.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Algebra/Defs.lean#L191" title="RingHom.toAlgebra">toAlgebra</a></span>
+<span id="L26"><a href="#L26">26</a> </span>
+<span id="L27"><a href="#L27">27</a> /-- A DVR subring of a field equals any valuation subring of that field which</span>
+<span id="L28"><a href="#L28">28</a> locally dominates it. The domination hypothesis is precisely the algebraic</span>
+<span id="L29"><a href="#L29">29</a> condition obtained after the center is known to be height one. -/</span>
+<span id="L30"><a href="#L30">30</a> theorem dvr_eq_of_dominated_by_valuationSubring</span>
+<span id="L31"><a href="#L31">31</a>     [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/DiscreteValuationRing/Basic.lean#L56" title="IsDiscreteValuationRing">IsDiscreteValuationRing</a> R] [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Localization/FractionRing.lean#L53" title="IsFractionRing">IsFractionRing</a> R K] (V : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Valuation/ValuationSubring.lean#L35" title="ValuationSubring">ValuationSubring</a> K)</span>
+<span id="L32"><a href="#L32">32</a>     (hdom : (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/LocalRing/LocalSubring.lean#L37" title="LocalSubring.mk">LocalSubring.mk</a> R : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/LocalRing/LocalSubring.lean#L35" title="LocalSubring">LocalSubring</a> K) ≤ V.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Valuation/LocalSubring.lean#L41" title="ValuationSubring.toLocalSubring">toLocalSubring</a>) :</span>
+<span id="L33"><a href="#L33">33</a>     R = V.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Valuation/ValuationSubring.lean#L41" title="ValuationSubring.toSubring">toSubring</a> := by</span>
+<span id="L34"><a href="#L34">34</a>   let vR : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Valuation/ValuationSubring.lean#L35" title="ValuationSubring">ValuationSubring</a> K :=</span>
+<span id="L35"><a href="#L35">35</a>     ((<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Valuation/Discrete/IsDiscreteValuationRing.lean#L40" title="IsDiscreteValuationRing.maximalIdeal">IsDiscreteValuationRing.maximalIdeal</a> R).<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/DedekindDomain/AdicValuation.lean#L319" title="IsDedekindDomain.HeightOneSpectrum.valuation">valuation</a> K).<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Valuation/ValuationSubring.lean#L438" title="Valuation.valuationSubring">valuationSubring</a></span>
+<span id="L36"><a href="#L36">36</a>   have hcarrier : vR.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Valuation/ValuationSubring.lean#L41" title="ValuationSubring.toSubring">toSubring</a> = R := by</span>
+<span id="L37"><a href="#L37">37</a>     change ((<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Valuation/Discrete/IsDiscreteValuationRing.lean#L40" title="IsDiscreteValuationRing.maximalIdeal">IsDiscreteValuationRing.maximalIdeal</a> R).<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/DedekindDomain/AdicValuation.lean#L319" title="IsDedekindDomain.HeightOneSpectrum.valuation">valuation</a> K).<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Valuation/ValuationSubring.lean#L438" title="Valuation.valuationSubring">valuationSubring</a>.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Valuation/ValuationSubring.lean#L41" title="ValuationSubring.toSubring">toSubring</a> = R</span>
+<span id="L38"><a href="#L38">38</a>     rw [← <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Valuation/Discrete/IsDiscreteValuationRing.lean#L134" title="IsDiscreteValuationRing.map_algebraMap_eq_valuationSubring">IsDiscreteValuationRing.map_algebraMap_eq_valuationSubring</a>]</span>
+<span id="L39"><a href="#L39">39</a>     ext x</span>
+<span id="L40"><a href="#L40">40</a>     simp only [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Ring/Subring/Basic.lean#L203" title="Subring.mem_map">Subring.mem_map</a>]</span>
+<span id="L41"><a href="#L41">41</a>     constructor</span>
+<span id="L42"><a href="#L42">42</a>     · rintro ⟨a, ha, hax⟩</span>
+<span id="L43"><a href="#L43">43</a>       change (a : K) = x at hax</span>
+<span id="L44"><a href="#L44">44</a>       exact hax ▸ a.<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L719" title="Subtype.property">property</a></span>
+<span id="L45"><a href="#L45">45</a>     · intro hx</span>
+<span id="L46"><a href="#L46">46</a>       refine ⟨⟨x, hx⟩, <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Data/Set/Operations.lean#L109" title="Set.mem_univ">Set.mem_univ</a> _, ?_⟩</span>
+<span id="L47"><a href="#L47">47</a>       rfl</span>
+<span id="L48"><a href="#L48">48</a>   have hlocal : vR.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Valuation/LocalSubring.lean#L41" title="ValuationSubring.toLocalSubring">toLocalSubring</a> = (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/LocalRing/LocalSubring.lean#L37" title="LocalSubring.mk">LocalSubring.mk</a> R : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/LocalRing/LocalSubring.lean#L35" title="LocalSubring">LocalSubring</a> K) := by</span>
+<span id="L49"><a href="#L49">49</a>     apply <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/LocalRing/LocalSubring.lean#L46" title="LocalSubring.toSubring_injective">LocalSubring.toSubring_injective</a></span>
+<span id="L50"><a href="#L50">50</a>     exact hcarrier</span>
+<span id="L51"><a href="#L51">51</a>   have hmax : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Order/Max.lean#L144" title="IsMax">IsMax</a> (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/LocalRing/LocalSubring.lean#L37" title="LocalSubring.mk">LocalSubring.mk</a> R : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/LocalRing/LocalSubring.lean#L35" title="LocalSubring">LocalSubring</a> K) := by</span>
+<span id="L52"><a href="#L52">52</a>     rw [← hlocal]</span>
+<span id="L53"><a href="#L53">53</a>     exact vR.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Valuation/LocalSubring.lean#L81" title="ValuationSubring.isMax_toLocalSubring">isMax_toLocalSubring</a></span>
+<span id="L54"><a href="#L54">54</a>   have heq := hmax.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Order/Max.lean#L256" title="IsMax.eq_of_le">eq_of_le</a> hdom</span>
+<span id="L55"><a href="#L55">55</a>   exact <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L405" title="congrArg">congrArg</a> <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/LocalRing/LocalSubring.lean#L39" title="LocalSubring.toSubring">LocalSubring.toSubring</a> heq</span>
+<span id="L56"><a href="#L56">56</a> </span>
+<span id="L57"><a href="#L57">57</a> #print axioms <a class="ref" href="./ProjectiveDVRCenter.lean.html#L27" title="Stafford38.Geometry.ProjectiveDVRCenter.dvr_eq_of_dominated_by_valuationSubring">dvr_eq_of_dominated_by_valuationSubring</a></span>
+<span id="L58"><a href="#L58">58</a> </span>
+<span id="L59"><a href="#L59">59</a> end</span>
+<span id="L60"><a href="#L60">60</a> </span>
+<span id="L61"><a href="#L61">61</a> end Stafford38.Geometry.ProjectiveDVRCenter</span>
+<span id="L62"><a href="#L62">62</a> </span></pre>

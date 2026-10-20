@@ -1,10 +1,10 @@
-<!doctype html><meta charset="utf-8"><title>Stafford38/LeftHandedCorollary.lean</title><style>body{font:14px monospace}pre span{display:block}pre span:target{background:#fff0ad}a{color:#666}pre{white-space:pre-wrap}</style><h1>Stafford38/LeftHandedCorollary.lean</h1><p>This project (Stafford38) · 0403af3f0b1a7f84d2027121932723f67bd279ae</p><pre><span id="L1"><a href="#L1">1</a> module</span>
+<!doctype html><meta charset="utf-8"><title>Stafford38/LeftHandedCorollary.lean</title><style>body{font:14px monospace}pre span{display:block}pre span:target{background:#fff0ad}a{color:#666}pre{white-space:pre-wrap}a.ref{color:#0645ad;text-decoration:none}a.ref:hover{text-decoration:underline}</style><h1>Stafford38/LeftHandedCorollary.lean</h1><p>This project (Stafford38) · 0403af3f0b1a7f84d2027121932723f67bd279ae</p><pre><span id="L1"><a href="#L1">1</a> module</span>
 <span id="L2"><a href="#L2">2</a> public import Stafford38.Statement</span>
 <span id="L3"><a href="#L3">3</a> public import Stafford38.Weyl.TranspositionFiltration</span>
 <span id="L4"><a href="#L4">4</a> </span>
 <span id="L5"><a href="#L5">5</a> @[expose] public section</span>
 <span id="L6"><a href="#L6">6</a> </span>
-<span id="L7"><a href="#L7">7</a> open Stafford38Challenge (WeylAlg UniversalStatement)</span>
+<span id="L7"><a href="#L7">7</a> open Stafford38Challenge (<a class="ref" href="./ChallengeDefinitions.lean.html#L73" title="Stafford38Challenge.WeylAlg">WeylAlg</a> <a class="ref" href="./ChallengeDefinitions.lean.html#L77" title="Stafford38Challenge.UniversalStatement">UniversalStatement</a>)</span>
 <span id="L8"><a href="#L8">8</a> </span>
 <span id="L9"><a href="#L9">9</a> /-! The left-handed form is the formal-adjoint/opposite-ring image of the</span>
 <span id="L10"><a href="#L10">10</a>     written-order Stafford identity. -/</span>
@@ -18,23 +18,23 @@
 <span id="L18"><a href="#L18">18</a> universe u</span>
 <span id="L19"><a href="#L19">19</a> </span>
 <span id="L20"><a href="#L20">20</a> def LeftHandedStatement : Prop :=</span>
-<span id="L21"><a href="#L21">21</a>   ∀ (k : Type u) [Field k] [CharZero k] (n : ℕ) (d : WeylAlg k n),</span>
-<span id="L22"><a href="#L22">22</a>     d ≠ 0 → ∃ R S F : WeylAlg k n,</span>
-<span id="L23"><a href="#L23">23</a>       (1 : WeylAlg k n) = R * d + S * d * F</span>
+<span id="L21"><a href="#L21">21</a>   ∀ (k : Type u) [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Field/Defs.lean#L170" title="Field">Field</a> k] [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/CharZero/Defs.lean#L33" title="CharZero">CharZero</a> k] (n : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L1351" title="Nat">ℕ</a>) (d : <a class="ref" href="./ChallengeDefinitions.lean.html#L73" title="Stafford38Challenge.WeylAlg">WeylAlg</a> k n),</span>
+<span id="L22"><a href="#L22">22</a>     d ≠ 0 → ∃ R S F : <a class="ref" href="./ChallengeDefinitions.lean.html#L73" title="Stafford38Challenge.WeylAlg">WeylAlg</a> k n,</span>
+<span id="L23"><a href="#L23">23</a>       (1 : <a class="ref" href="./ChallengeDefinitions.lean.html#L73" title="Stafford38Challenge.WeylAlg">WeylAlg</a> k n) = R * d + S * d * F</span>
 <span id="L24"><a href="#L24">24</a> </span>
 <span id="L25"><a href="#L25">25</a> theorem leftHanded_of_universalStatement</span>
-<span id="L26"><a href="#L26">26</a>     (h : UniversalStatement.{u}) : LeftHandedStatement.{u} := by</span>
+<span id="L26"><a href="#L26">26</a>     (h : <a class="ref" href="./ChallengeDefinitions.lean.html#L77" title="Stafford38Challenge.UniversalStatement">UniversalStatement</a>.{u}) : <a class="ref" href="./LeftHandedCorollary.lean.html#L20" title="Stafford38.LeftHandedCorollary.LeftHandedStatement">LeftHandedStatement</a>.{u} := by</span>
 <span id="L27"><a href="#L27">27</a>   intro k _ _ n d hd</span>
-<span id="L28"><a href="#L28">28</a>   have htd : transpose k n d ≠ 0 := by</span>
+<span id="L28"><a href="#L28">28</a>   have htd : <a class="ref" href="./Weyl/Transposition.lean.html#L195" title="Stafford38.WeylTransposition.transpose">transpose</a> k n d ≠ 0 := by</span>
 <span id="L29"><a href="#L29">29</a>     intro hz</span>
 <span id="L30"><a href="#L30">30</a>     apply hd</span>
-<span id="L31"><a href="#L31">31</a>     simpa only [transpose_transpose, transpose_zero] using congrArg (transpose k n) hz</span>
-<span id="L32"><a href="#L32">32</a>   rcases h k n (transpose k n d) htd with ⟨F, R, S, hone⟩</span>
-<span id="L33"><a href="#L33">33</a>   refine ⟨transpose k n R, transpose k n S, transpose k n F, ?_⟩</span>
-<span id="L34"><a href="#L34">34</a>   have ht := congrArg (transpose k n) hone</span>
-<span id="L35"><a href="#L35">35</a>   have h1 : transpose k n (1 : WeylAlg k n) = 1 := by simp [transpose]</span>
+<span id="L31"><a href="#L31">31</a>     simpa only [<a class="ref" href="./Weyl/Transposition.lean.html#L216" title="Stafford38.WeylTransposition.transpose_transpose">transpose_transpose</a>, <a class="ref" href="./Weyl/TranspositionFiltration.lean.html#L41" title="Stafford38.WeylTranspositionFiltration.transpose_zero">transpose_zero</a>] using <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L405" title="congrArg">congrArg</a> (<a class="ref" href="./Weyl/Transposition.lean.html#L195" title="Stafford38.WeylTransposition.transpose">transpose</a> k n) hz</span>
+<span id="L32"><a href="#L32">32</a>   rcases h k n (<a class="ref" href="./Weyl/Transposition.lean.html#L195" title="Stafford38.WeylTransposition.transpose">transpose</a> k n d) htd with ⟨F, R, S, hone⟩</span>
+<span id="L33"><a href="#L33">33</a>   refine ⟨<a class="ref" href="./Weyl/Transposition.lean.html#L195" title="Stafford38.WeylTransposition.transpose">transpose</a> k n R, <a class="ref" href="./Weyl/Transposition.lean.html#L195" title="Stafford38.WeylTransposition.transpose">transpose</a> k n S, <a class="ref" href="./Weyl/Transposition.lean.html#L195" title="Stafford38.WeylTransposition.transpose">transpose</a> k n F, ?_⟩</span>
+<span id="L34"><a href="#L34">34</a>   have ht := <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L405" title="congrArg">congrArg</a> (<a class="ref" href="./Weyl/Transposition.lean.html#L195" title="Stafford38.WeylTransposition.transpose">transpose</a> k n) hone</span>
+<span id="L35"><a href="#L35">35</a>   have h1 : <a class="ref" href="./Weyl/Transposition.lean.html#L195" title="Stafford38.WeylTransposition.transpose">transpose</a> k n (1 : <a class="ref" href="./ChallengeDefinitions.lean.html#L73" title="Stafford38Challenge.WeylAlg">WeylAlg</a> k n) = 1 := by simp [<a class="ref" href="./Weyl/Transposition.lean.html#L195" title="Stafford38.WeylTransposition.transpose">transpose</a>]</span>
 <span id="L36"><a href="#L36">36</a>   rw [h1] at ht</span>
-<span id="L37"><a href="#L37">37</a>   simpa [transpose_add, transpose_mul, transpose_transpose, mul_assoc] using ht</span>
+<span id="L37"><a href="#L37">37</a>   simpa [<a class="ref" href="./Weyl/TranspositionFiltration.lean.html#L45" title="Stafford38.WeylTranspositionFiltration.transpose_add">transpose_add</a>, <a class="ref" href="./Weyl/Transposition.lean.html#L212" title="Stafford38.WeylTransposition.transpose_mul">transpose_mul</a>, <a class="ref" href="./Weyl/Transposition.lean.html#L216" title="Stafford38.WeylTransposition.transpose_transpose">transpose_transpose</a>, <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Group/Semigroup.lean#L160" title="mul_assoc">mul_assoc</a>] using ht</span>
 <span id="L38"><a href="#L38">38</a> </span>
 <span id="L39"><a href="#L39">39</a> end Stafford38.LeftHandedCorollary</span>
 <span id="L40"><a href="#L40">40</a> </span></pre>

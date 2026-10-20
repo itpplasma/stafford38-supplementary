@@ -1,9 +1,9 @@
-<!doctype html><meta charset="utf-8"><title>Stafford38/Characteristic/PostScalarExtensionPoisson.lean</title><style>body{font:14px monospace}pre span{display:block}pre span:target{background:#fff0ad}a{color:#666}pre{white-space:pre-wrap}</style><h1>Stafford38/Characteristic/PostScalarExtensionPoisson.lean</h1><p>This project (Stafford38) · 0403af3f0b1a7f84d2027121932723f67bd279ae</p><pre><span id="L1"><a href="#L1">1</a> module</span>
+<!doctype html><meta charset="utf-8"><title>Stafford38/Characteristic/PostScalarExtensionPoisson.lean</title><style>body{font:14px monospace}pre span{display:block}pre span:target{background:#fff0ad}a{color:#666}pre{white-space:pre-wrap}a.ref{color:#0645ad;text-decoration:none}a.ref:hover{text-decoration:underline}</style><h1>Stafford38/Characteristic/PostScalarExtensionPoisson.lean</h1><p>This project (Stafford38) · 0403af3f0b1a7f84d2027121932723f67bd279ae</p><pre><span id="L1"><a href="#L1">1</a> module</span>
 <span id="L2"><a href="#L2">2</a> public import Stafford38.Geometry.ScalarExtensionPoints</span>
 <span id="L3"><a href="#L3">3</a> </span>
 <span id="L4"><a href="#L4">4</a> @[expose] public section</span>
 <span id="L5"><a href="#L5">5</a> </span>
-<span id="L6"><a href="#L6">6</a> open Stafford38Challenge (PhaseVar)</span>
+<span id="L6"><a href="#L6">6</a> open Stafford38Challenge (<a class="ref" href="../ChallengeDefinitions.lean.html#L64" title="Stafford38Challenge.PhaseVar">PhaseVar</a>)</span>
 <span id="L7"><a href="#L7">7</a> </span>
 <span id="L8"><a href="#L8">8</a> /-!</span>
 <span id="L9"><a href="#L9">9</a> # Poisson closure after scalar extension</span>
@@ -27,184 +27,184 @@
 <span id="L27"><a href="#L27">27</a> universe u v</span>
 <span id="L28"><a href="#L28">28</a> </span>
 <span id="L29"><a href="#L29">29</a> variable {k : Type u} {K : Type v}</span>
-<span id="L30"><a href="#L30">30</a> variable [Field k] [Field K] [Algebra k K]</span>
-<span id="L31"><a href="#L31">31</a> variable {n : ℕ}</span>
+<span id="L30"><a href="#L30">30</a> variable [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Field/Defs.lean#L170" title="Field">Field</a> k] [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Field/Defs.lean#L170" title="Field">Field</a> K] [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Algebra/Defs.lean#L91" title="Algebra">Algebra</a> k K]</span>
+<span id="L31"><a href="#L31">31</a> variable {n : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L1351" title="Nat">ℕ</a>}</span>
 <span id="L32"><a href="#L32">32</a> </span>
 <span id="L33"><a href="#L33">33</a> /-- The Gabber-shaped bracket condition: both bracket entries lie in the</span>
 <span id="L34"><a href="#L34">34</a> ideal.  This is weaker than the project predicate `IsPoisson`. -/</span>
-<span id="L35"><a href="#L35">35</a> def IsInvolutive (J : Ideal (SymbolRing k n)) : Prop :=</span>
-<span id="L36"><a href="#L36">36</a>   ∀ f ∈ J, ∀ g ∈ J, poissonBracket f g ∈ J</span>
+<span id="L35"><a href="#L35">35</a> def IsInvolutive (J : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Defs.lean#L38" title="Ideal">Ideal</a> (<a class="ref" href="./Polynomial.lean.html#L20" title="Stafford38.Characteristic.SymbolRing">SymbolRing</a> k n)) : Prop :=</span>
+<span id="L36"><a href="#L36">36</a>   ∀ f ∈ J, ∀ g ∈ J, <a class="ref" href="./Polynomial.lean.html#L29" title="Stafford38.Characteristic.poissonBracket">poissonBracket</a> f g ∈ J</span>
 <span id="L37"><a href="#L37">37</a> </span>
 <span id="L38"><a href="#L38">38</a> /-- Coefficient extension commutes with the canonical Poisson bracket. -/</span>
 <span id="L39"><a href="#L39">39</a> theorem poissonBracket_scalarPolynomialMap</span>
-<span id="L40"><a href="#L40">40</a>     (f g : SymbolRing k n) :</span>
-<span id="L41"><a href="#L41">41</a>     poissonBracket</span>
-<span id="L42"><a href="#L42">42</a>         (scalarPolynomialMap (k := k) (K := K) (PhaseVar n) f)</span>
-<span id="L43"><a href="#L43">43</a>         (scalarPolynomialMap (k := k) (K := K) (PhaseVar n) g) =</span>
-<span id="L44"><a href="#L44">44</a>       scalarPolynomialMap (k := k) (K := K) (PhaseVar n)</span>
-<span id="L45"><a href="#L45">45</a>         (poissonBracket f g) := by</span>
-<span id="L46"><a href="#L46">46</a>   simp [poissonBracket, scalarPolynomialMap, MvPolynomial.pderiv_map]</span>
+<span id="L40"><a href="#L40">40</a>     (f g : <a class="ref" href="./Polynomial.lean.html#L20" title="Stafford38.Characteristic.SymbolRing">SymbolRing</a> k n) :</span>
+<span id="L41"><a href="#L41">41</a>     <a class="ref" href="./Polynomial.lean.html#L29" title="Stafford38.Characteristic.poissonBracket">poissonBracket</a></span>
+<span id="L42"><a href="#L42">42</a>         (<a class="ref" href="../Geometry/ScalarExtensionPoints.lean.html#L44" title="Stafford38.Geometry.ScalarExtensionPoints.scalarPolynomialMap">scalarPolynomialMap</a> (k := k) (K := K) (<a class="ref" href="../ChallengeDefinitions.lean.html#L64" title="Stafford38Challenge.PhaseVar">PhaseVar</a> n) f)</span>
+<span id="L43"><a href="#L43">43</a>         (<a class="ref" href="../Geometry/ScalarExtensionPoints.lean.html#L44" title="Stafford38.Geometry.ScalarExtensionPoints.scalarPolynomialMap">scalarPolynomialMap</a> (k := k) (K := K) (<a class="ref" href="../ChallengeDefinitions.lean.html#L64" title="Stafford38Challenge.PhaseVar">PhaseVar</a> n) g) =</span>
+<span id="L44"><a href="#L44">44</a>       <a class="ref" href="../Geometry/ScalarExtensionPoints.lean.html#L44" title="Stafford38.Geometry.ScalarExtensionPoints.scalarPolynomialMap">scalarPolynomialMap</a> (k := k) (K := K) (<a class="ref" href="../ChallengeDefinitions.lean.html#L64" title="Stafford38Challenge.PhaseVar">PhaseVar</a> n)</span>
+<span id="L45"><a href="#L45">45</a>         (<a class="ref" href="./Polynomial.lean.html#L29" title="Stafford38.Characteristic.poissonBracket">poissonBracket</a> f g) := by</span>
+<span id="L46"><a href="#L46">46</a>   simp [<a class="ref" href="./Polynomial.lean.html#L29" title="Stafford38.Characteristic.poissonBracket">poissonBracket</a>, <a class="ref" href="../Geometry/ScalarExtensionPoints.lean.html#L44" title="Stafford38.Geometry.ScalarExtensionPoints.scalarPolynomialMap">scalarPolynomialMap</a>, <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/PDeriv.lean#L136" title="MvPolynomial.pderiv_map">MvPolynomial.pderiv_map</a>]</span>
 <span id="L47"><a href="#L47">47</a> </span>
-<span id="L48"><a href="#L48">48</a> theorem poissonBracket_add_left (f₁ f₂ g : SymbolRing k n) :</span>
-<span id="L49"><a href="#L49">49</a>     poissonBracket (f₁ + f₂) g =</span>
-<span id="L50"><a href="#L50">50</a>       poissonBracket f₁ g + poissonBracket f₂ g := by</span>
-<span id="L51"><a href="#L51">51</a>   simp [poissonBracket, add_mul, Finset.sum_add_distrib]</span>
+<span id="L48"><a href="#L48">48</a> theorem poissonBracket_add_left (f₁ f₂ g : <a class="ref" href="./Polynomial.lean.html#L20" title="Stafford38.Characteristic.SymbolRing">SymbolRing</a> k n) :</span>
+<span id="L49"><a href="#L49">49</a>     <a class="ref" href="./Polynomial.lean.html#L29" title="Stafford38.Characteristic.poissonBracket">poissonBracket</a> (f₁ + f₂) g =</span>
+<span id="L50"><a href="#L50">50</a>       <a class="ref" href="./Polynomial.lean.html#L29" title="Stafford38.Characteristic.poissonBracket">poissonBracket</a> f₁ g + <a class="ref" href="./Polynomial.lean.html#L29" title="Stafford38.Characteristic.poissonBracket">poissonBracket</a> f₂ g := by</span>
+<span id="L51"><a href="#L51">51</a>   simp [<a class="ref" href="./Polynomial.lean.html#L29" title="Stafford38.Characteristic.poissonBracket">poissonBracket</a>, <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Ring/Defs.lean#L98" title="add_mul">add_mul</a>, <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/BigOperators/Group/Finset/Basic.lean#L309" title="Finset.sum_add_distrib">Finset.sum_add_distrib</a>]</span>
 <span id="L52"><a href="#L52">52</a>   ring</span>
 <span id="L53"><a href="#L53">53</a> </span>
-<span id="L54"><a href="#L54">54</a> theorem poissonBracket_add_right (f g₁ g₂ : SymbolRing k n) :</span>
-<span id="L55"><a href="#L55">55</a>     poissonBracket f (g₁ + g₂) =</span>
-<span id="L56"><a href="#L56">56</a>       poissonBracket f g₁ + poissonBracket f g₂ := by</span>
-<span id="L57"><a href="#L57">57</a>   simp [poissonBracket, mul_add, Finset.sum_add_distrib]</span>
+<span id="L54"><a href="#L54">54</a> theorem poissonBracket_add_right (f g₁ g₂ : <a class="ref" href="./Polynomial.lean.html#L20" title="Stafford38.Characteristic.SymbolRing">SymbolRing</a> k n) :</span>
+<span id="L55"><a href="#L55">55</a>     <a class="ref" href="./Polynomial.lean.html#L29" title="Stafford38.Characteristic.poissonBracket">poissonBracket</a> f (g₁ + g₂) =</span>
+<span id="L56"><a href="#L56">56</a>       <a class="ref" href="./Polynomial.lean.html#L29" title="Stafford38.Characteristic.poissonBracket">poissonBracket</a> f g₁ + <a class="ref" href="./Polynomial.lean.html#L29" title="Stafford38.Characteristic.poissonBracket">poissonBracket</a> f g₂ := by</span>
+<span id="L57"><a href="#L57">57</a>   simp [<a class="ref" href="./Polynomial.lean.html#L29" title="Stafford38.Characteristic.poissonBracket">poissonBracket</a>, <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Ring/Defs.lean#L92" title="mul_add">mul_add</a>, <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/BigOperators/Group/Finset/Basic.lean#L309" title="Finset.sum_add_distrib">Finset.sum_add_distrib</a>]</span>
 <span id="L58"><a href="#L58">58</a>   ring</span>
 <span id="L59"><a href="#L59">59</a> </span>
-<span id="L60"><a href="#L60">60</a> theorem poissonBracket_mul_left (a f g : SymbolRing k n) :</span>
-<span id="L61"><a href="#L61">61</a>     poissonBracket (a * f) g =</span>
-<span id="L62"><a href="#L62">62</a>       a * poissonBracket f g + f * poissonBracket a g := by</span>
-<span id="L63"><a href="#L63">63</a>   simp only [poissonBracket, MvPolynomial.pderiv_mul]</span>
-<span id="L64"><a href="#L64">64</a>   rw [Finset.mul_sum, Finset.mul_sum, ← Finset.sum_add_distrib]</span>
-<span id="L65"><a href="#L65">65</a>   apply Finset.sum_congr rfl</span>
+<span id="L60"><a href="#L60">60</a> theorem poissonBracket_mul_left (a f g : <a class="ref" href="./Polynomial.lean.html#L20" title="Stafford38.Characteristic.SymbolRing">SymbolRing</a> k n) :</span>
+<span id="L61"><a href="#L61">61</a>     <a class="ref" href="./Polynomial.lean.html#L29" title="Stafford38.Characteristic.poissonBracket">poissonBracket</a> (a * f) g =</span>
+<span id="L62"><a href="#L62">62</a>       a * <a class="ref" href="./Polynomial.lean.html#L29" title="Stafford38.Characteristic.poissonBracket">poissonBracket</a> f g + f * <a class="ref" href="./Polynomial.lean.html#L29" title="Stafford38.Characteristic.poissonBracket">poissonBracket</a> a g := by</span>
+<span id="L63"><a href="#L63">63</a>   simp only [<a class="ref" href="./Polynomial.lean.html#L29" title="Stafford38.Characteristic.poissonBracket">poissonBracket</a>, <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/PDeriv.lean#L110" title="MvPolynomial.pderiv_mul">MvPolynomial.pderiv_mul</a>]</span>
+<span id="L64"><a href="#L64">64</a>   rw [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/BigOperators/Ring/Finset.lean#L59" title="Finset.mul_sum">Finset.mul_sum</a>, <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/BigOperators/Ring/Finset.lean#L59" title="Finset.mul_sum">Finset.mul_sum</a>, ← <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/BigOperators/Group/Finset/Basic.lean#L309" title="Finset.sum_add_distrib">Finset.sum_add_distrib</a>]</span>
+<span id="L65"><a href="#L65">65</a>   apply <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/BigOperators/Group/Finset/Basic.lean#L103" title="Finset.sum_congr">Finset.sum_congr</a> <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L334" title="rfl">rfl</a></span>
 <span id="L66"><a href="#L66">66</a>   intro i hi</span>
 <span id="L67"><a href="#L67">67</a>   ring</span>
 <span id="L68"><a href="#L68">68</a> </span>
-<span id="L69"><a href="#L69">69</a> theorem poissonBracket_mul_right (f a g : SymbolRing k n) :</span>
-<span id="L70"><a href="#L70">70</a>     poissonBracket f (a * g) =</span>
-<span id="L71"><a href="#L71">71</a>       a * poissonBracket f g + g * poissonBracket f a := by</span>
-<span id="L72"><a href="#L72">72</a>   simp only [poissonBracket, MvPolynomial.pderiv_mul]</span>
-<span id="L73"><a href="#L73">73</a>   rw [Finset.mul_sum, Finset.mul_sum, ← Finset.sum_add_distrib]</span>
-<span id="L74"><a href="#L74">74</a>   apply Finset.sum_congr rfl</span>
+<span id="L69"><a href="#L69">69</a> theorem poissonBracket_mul_right (f a g : <a class="ref" href="./Polynomial.lean.html#L20" title="Stafford38.Characteristic.SymbolRing">SymbolRing</a> k n) :</span>
+<span id="L70"><a href="#L70">70</a>     <a class="ref" href="./Polynomial.lean.html#L29" title="Stafford38.Characteristic.poissonBracket">poissonBracket</a> f (a * g) =</span>
+<span id="L71"><a href="#L71">71</a>       a * <a class="ref" href="./Polynomial.lean.html#L29" title="Stafford38.Characteristic.poissonBracket">poissonBracket</a> f g + g * <a class="ref" href="./Polynomial.lean.html#L29" title="Stafford38.Characteristic.poissonBracket">poissonBracket</a> f a := by</span>
+<span id="L72"><a href="#L72">72</a>   simp only [<a class="ref" href="./Polynomial.lean.html#L29" title="Stafford38.Characteristic.poissonBracket">poissonBracket</a>, <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/PDeriv.lean#L110" title="MvPolynomial.pderiv_mul">MvPolynomial.pderiv_mul</a>]</span>
+<span id="L73"><a href="#L73">73</a>   rw [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/BigOperators/Ring/Finset.lean#L59" title="Finset.mul_sum">Finset.mul_sum</a>, <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/BigOperators/Ring/Finset.lean#L59" title="Finset.mul_sum">Finset.mul_sum</a>, ← <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/BigOperators/Group/Finset/Basic.lean#L309" title="Finset.sum_add_distrib">Finset.sum_add_distrib</a>]</span>
+<span id="L74"><a href="#L74">74</a>   apply <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/BigOperators/Group/Finset/Basic.lean#L103" title="Finset.sum_congr">Finset.sum_congr</a> <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L334" title="rfl">rfl</a></span>
 <span id="L75"><a href="#L75">75</a>   intro i hi</span>
 <span id="L76"><a href="#L76">76</a>   ring</span>
 <span id="L77"><a href="#L77">77</a> </span>
 <span id="L78"><a href="#L78">78</a> /-- Gabber-shaped involutivity is preserved by arbitrary field-valued</span>
 <span id="L79"><a href="#L79">79</a> coefficient extension. -/</span>
 <span id="L80"><a href="#L80">80</a> theorem isInvolutive_map_scalarPolynomialMap</span>
-<span id="L81"><a href="#L81">81</a>     (J : Ideal (SymbolRing k n)) (hJ : IsInvolutive J) :</span>
-<span id="L82"><a href="#L82">82</a>     IsInvolutive</span>
-<span id="L83"><a href="#L83">83</a>       (J.map (scalarPolynomialMap (k := k) (K := K) (PhaseVar n))) := by</span>
-<span id="L84"><a href="#L84">84</a>   let I := J.map (scalarPolynomialMap (k := k) (K := K) (PhaseVar n))</span>
+<span id="L81"><a href="#L81">81</a>     (J : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Defs.lean#L38" title="Ideal">Ideal</a> (<a class="ref" href="./Polynomial.lean.html#L20" title="Stafford38.Characteristic.SymbolRing">SymbolRing</a> k n)) (hJ : <a class="ref" href="./PostScalarExtensionPoisson.lean.html#L33" title="Stafford38.Characteristic.PostScalarExtensionPoisson.IsInvolutive">IsInvolutive</a> J) :</span>
+<span id="L82"><a href="#L82">82</a>     <a class="ref" href="./PostScalarExtensionPoisson.lean.html#L33" title="Stafford38.Characteristic.PostScalarExtensionPoisson.IsInvolutive">IsInvolutive</a></span>
+<span id="L83"><a href="#L83">83</a>       (J.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Maps.lean#L41" title="Ideal.map">map</a> (<a class="ref" href="../Geometry/ScalarExtensionPoints.lean.html#L44" title="Stafford38.Geometry.ScalarExtensionPoints.scalarPolynomialMap">scalarPolynomialMap</a> (k := k) (K := K) (<a class="ref" href="../ChallengeDefinitions.lean.html#L64" title="Stafford38Challenge.PhaseVar">PhaseVar</a> n))) := by</span>
+<span id="L84"><a href="#L84">84</a>   let I := J.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Maps.lean#L41" title="Ideal.map">map</a> (<a class="ref" href="../Geometry/ScalarExtensionPoints.lean.html#L44" title="Stafford38.Geometry.ScalarExtensionPoints.scalarPolynomialMap">scalarPolynomialMap</a> (k := k) (K := K) (<a class="ref" href="../ChallengeDefinitions.lean.html#L64" title="Stafford38Challenge.PhaseVar">PhaseVar</a> n))</span>
 <span id="L85"><a href="#L85">85</a>   intro f hf</span>
-<span id="L86"><a href="#L86">86</a>   change f ∈ J.map</span>
-<span id="L87"><a href="#L87">87</a>     (scalarPolynomialMap (k := k) (K := K) (PhaseVar n)) at hf</span>
-<span id="L88"><a href="#L88">88</a>   rw [Ideal.map] at hf</span>
-<span id="L89"><a href="#L89">89</a>   induction hf using Submodule.span_induction with</span>
+<span id="L86"><a href="#L86">86</a>   change f ∈ J.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Maps.lean#L41" title="Ideal.map">map</a></span>
+<span id="L87"><a href="#L87">87</a>     (<a class="ref" href="../Geometry/ScalarExtensionPoints.lean.html#L44" title="Stafford38.Geometry.ScalarExtensionPoints.scalarPolynomialMap">scalarPolynomialMap</a> (k := k) (K := K) (<a class="ref" href="../ChallengeDefinitions.lean.html#L64" title="Stafford38Challenge.PhaseVar">PhaseVar</a> n)) at hf</span>
+<span id="L88"><a href="#L88">88</a>   rw [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Maps.lean#L41" title="Ideal.map">Ideal.map</a>] at hf</span>
+<span id="L89"><a href="#L89">89</a>   induction hf using <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/LinearAlgebra/Span/Defs.lean#L133" title="Submodule.span_induction">Submodule.span_induction</a> with</span>
 <span id="L90"><a href="#L90">90</a>   | mem f hf =&gt;</span>
 <span id="L91"><a href="#L91">91</a>       rcases hf with ⟨f₀, hf₀, rfl⟩</span>
 <span id="L92"><a href="#L92">92</a>       intro g hg</span>
-<span id="L93"><a href="#L93">93</a>       change g ∈ J.map</span>
-<span id="L94"><a href="#L94">94</a>         (scalarPolynomialMap (k := k) (K := K) (PhaseVar n)) at hg</span>
-<span id="L95"><a href="#L95">95</a>       rw [Ideal.map] at hg</span>
-<span id="L96"><a href="#L96">96</a>       induction hg using Submodule.span_induction with</span>
+<span id="L93"><a href="#L93">93</a>       change g ∈ J.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Maps.lean#L41" title="Ideal.map">map</a></span>
+<span id="L94"><a href="#L94">94</a>         (<a class="ref" href="../Geometry/ScalarExtensionPoints.lean.html#L44" title="Stafford38.Geometry.ScalarExtensionPoints.scalarPolynomialMap">scalarPolynomialMap</a> (k := k) (K := K) (<a class="ref" href="../ChallengeDefinitions.lean.html#L64" title="Stafford38Challenge.PhaseVar">PhaseVar</a> n)) at hg</span>
+<span id="L95"><a href="#L95">95</a>       rw [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Maps.lean#L41" title="Ideal.map">Ideal.map</a>] at hg</span>
+<span id="L96"><a href="#L96">96</a>       induction hg using <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/LinearAlgebra/Span/Defs.lean#L133" title="Submodule.span_induction">Submodule.span_induction</a> with</span>
 <span id="L97"><a href="#L97">97</a>       | mem g hg =&gt;</span>
 <span id="L98"><a href="#L98">98</a>           rcases hg with ⟨g₀, hg₀, rfl⟩</span>
-<span id="L99"><a href="#L99">99</a>           rw [poissonBracket_scalarPolynomialMap]</span>
-<span id="L100"><a href="#L100">100</a>           exact Ideal.mem_map_of_mem _ (hJ f₀ hf₀ g₀ hg₀)</span>
-<span id="L101"><a href="#L101">101</a>       | zero =&gt; simp [poissonBracket]</span>
-<span id="L102"><a href="#L102">102</a>       | add g₁ g₂ _ _ hg₁ hg₂ =&gt;</span>
-<span id="L103"><a href="#L103">103</a>           rw [poissonBracket_add_right]</span>
-<span id="L104"><a href="#L104">104</a>           exact I.add_mem hg₁ hg₂</span>
-<span id="L105"><a href="#L105">105</a>       | smul a g hgm hg =&gt;</span>
-<span id="L106"><a href="#L106">106</a>           rw [smul_eq_mul, poissonBracket_mul_right]</span>
-<span id="L107"><a href="#L107">107</a>           exact I.add_mem (I.mul_mem_left _ hg) (I.mul_mem_right _ hgm)</span>
-<span id="L108"><a href="#L108">108</a>   | zero =&gt;</span>
+<span id="L99"><a href="#L99">99</a>           rw [<a class="ref" href="./PostScalarExtensionPoisson.lean.html#L38" title="Stafford38.Characteristic.PostScalarExtensionPoisson.poissonBracket_scalarPolynomialMap">poissonBracket_scalarPolynomialMap</a>]</span>
+<span id="L100"><a href="#L100">100</a>           exact <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Maps.lean#L70" title="Ideal.mem_map_of_mem">Ideal.mem_map_of_mem</a> _ (hJ f₀ hf₀ g₀ hg₀)</span>
+<span id="L101"><a href="#L101">101</a>       | <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Module/Submodule/Defs.lean#L241" title="Submodule.zero">zero</a> =&gt; simp [<a class="ref" href="./Polynomial.lean.html#L29" title="Stafford38.Characteristic.poissonBracket">poissonBracket</a>]</span>
+<span id="L102"><a href="#L102">102</a>       | <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Module/Submodule/Defs.lean#L238" title="Submodule.add">add</a> g₁ g₂ _ _ hg₁ hg₂ =&gt;</span>
+<span id="L103"><a href="#L103">103</a>           rw [<a class="ref" href="./PostScalarExtensionPoisson.lean.html#L54" title="Stafford38.Characteristic.PostScalarExtensionPoisson.poissonBracket_add_right">poissonBracket_add_right</a>]</span>
+<span id="L104"><a href="#L104">104</a>           exact I.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Defs.lean#L56" title="Ideal.add_mem">add_mem</a> hg₁ hg₂</span>
+<span id="L105"><a href="#L105">105</a>       | <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Module/Submodule/Defs.lean#L247" title="Submodule.smul">smul</a> a g hgm hg =&gt;</span>
+<span id="L106"><a href="#L106">106</a>           rw [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Group/Action/Defs.lean#L74" title="smul_eq_mul">smul_eq_mul</a>, <a class="ref" href="./PostScalarExtensionPoisson.lean.html#L69" title="Stafford38.Characteristic.PostScalarExtensionPoisson.poissonBracket_mul_right">poissonBracket_mul_right</a>]</span>
+<span id="L107"><a href="#L107">107</a>           exact I.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Defs.lean#L56" title="Ideal.add_mem">add_mem</a> (I.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Defs.lean#L61" title="Ideal.mul_mem_left">mul_mem_left</a> _ hg) (I.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Defs.lean#L64" title="Ideal.mul_mem_right">mul_mem_right</a> _ hgm)</span>
+<span id="L108"><a href="#L108">108</a>   | <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Module/Submodule/Defs.lean#L241" title="Submodule.zero">zero</a> =&gt;</span>
 <span id="L109"><a href="#L109">109</a>       intro g hg</span>
-<span id="L110"><a href="#L110">110</a>       simp [poissonBracket]</span>
-<span id="L111"><a href="#L111">111</a>   | add f₁ f₂ _ _ hf₁ hf₂ =&gt;</span>
+<span id="L110"><a href="#L110">110</a>       simp [<a class="ref" href="./Polynomial.lean.html#L29" title="Stafford38.Characteristic.poissonBracket">poissonBracket</a>]</span>
+<span id="L111"><a href="#L111">111</a>   | <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Module/Submodule/Defs.lean#L238" title="Submodule.add">add</a> f₁ f₂ _ _ hf₁ hf₂ =&gt;</span>
 <span id="L112"><a href="#L112">112</a>       intro g hg</span>
-<span id="L113"><a href="#L113">113</a>       rw [poissonBracket_add_left]</span>
-<span id="L114"><a href="#L114">114</a>       exact I.add_mem (hf₁ g hg) (hf₂ g hg)</span>
-<span id="L115"><a href="#L115">115</a>   | smul a f hfm hf =&gt;</span>
+<span id="L113"><a href="#L113">113</a>       rw [<a class="ref" href="./PostScalarExtensionPoisson.lean.html#L48" title="Stafford38.Characteristic.PostScalarExtensionPoisson.poissonBracket_add_left">poissonBracket_add_left</a>]</span>
+<span id="L114"><a href="#L114">114</a>       exact I.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Defs.lean#L56" title="Ideal.add_mem">add_mem</a> (hf₁ g hg) (hf₂ g hg)</span>
+<span id="L115"><a href="#L115">115</a>   | <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Module/Submodule/Defs.lean#L247" title="Submodule.smul">smul</a> a f hfm hf =&gt;</span>
 <span id="L116"><a href="#L116">116</a>       intro g hg</span>
-<span id="L117"><a href="#L117">117</a>       rw [smul_eq_mul, poissonBracket_mul_left]</span>
-<span id="L118"><a href="#L118">118</a>       exact I.add_mem (I.mul_mem_left _ (hf g hg)) (I.mul_mem_right _ hfm)</span>
+<span id="L117"><a href="#L117">117</a>       rw [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Group/Action/Defs.lean#L74" title="smul_eq_mul">smul_eq_mul</a>, <a class="ref" href="./PostScalarExtensionPoisson.lean.html#L60" title="Stafford38.Characteristic.PostScalarExtensionPoisson.poissonBracket_mul_left">poissonBracket_mul_left</a>]</span>
+<span id="L118"><a href="#L118">118</a>       exact I.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Defs.lean#L56" title="Ideal.add_mem">add_mem</a> (I.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Defs.lean#L61" title="Ideal.mul_mem_left">mul_mem_left</a> _ (hf g hg)) (I.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Defs.lean#L64" title="Ideal.mul_mem_right">mul_mem_right</a> _ hfm)</span>
 <span id="L119"><a href="#L119">119</a> </span>
 <span id="L120"><a href="#L120">120</a> /-- Scalar extension of Gabber-shaped involutivity gives exactly the</span>
 <span id="L121"><a href="#L121">121</a> base-relative condition consumed by the conormal proof. -/</span>
 <span id="L122"><a href="#L122">122</a> theorem isBaseRelativePoisson_map_of_isInvolutive</span>
-<span id="L123"><a href="#L123">123</a>     (J : Ideal (SymbolRing k n)) (hJ : IsInvolutive J) :</span>
-<span id="L124"><a href="#L124">124</a>     BaseRelativePoisson.IsBaseRelativePoisson</span>
-<span id="L125"><a href="#L125">125</a>       (J.map (scalarPolynomialMap (k := k) (K := K) (PhaseVar n))) := by</span>
+<span id="L123"><a href="#L123">123</a>     (J : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Defs.lean#L38" title="Ideal">Ideal</a> (<a class="ref" href="./Polynomial.lean.html#L20" title="Stafford38.Characteristic.SymbolRing">SymbolRing</a> k n)) (hJ : <a class="ref" href="./PostScalarExtensionPoisson.lean.html#L33" title="Stafford38.Characteristic.PostScalarExtensionPoisson.IsInvolutive">IsInvolutive</a> J) :</span>
+<span id="L124"><a href="#L124">124</a>     <a class="ref" href="./BaseRelativePoisson.lean.html#L25" title="Stafford38.Characteristic.BaseRelativePoisson.IsBaseRelativePoisson">BaseRelativePoisson.IsBaseRelativePoisson</a></span>
+<span id="L125"><a href="#L125">125</a>       (J.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Maps.lean#L41" title="Ideal.map">map</a> (<a class="ref" href="../Geometry/ScalarExtensionPoints.lean.html#L44" title="Stafford38.Geometry.ScalarExtensionPoints.scalarPolynomialMap">scalarPolynomialMap</a> (k := k) (K := K) (<a class="ref" href="../ChallengeDefinitions.lean.html#L64" title="Stafford38Challenge.PhaseVar">PhaseVar</a> n))) := by</span>
 <span id="L126"><a href="#L126">126</a>   intro f hf g hg</span>
-<span id="L127"><a href="#L127">127</a>   exact isInvolutive_map_scalarPolynomialMap J hJ (baseLift f) hf g hg</span>
+<span id="L127"><a href="#L127">127</a>   exact <a class="ref" href="./PostScalarExtensionPoisson.lean.html#L78" title="Stafford38.Characteristic.PostScalarExtensionPoisson.isInvolutive_map_scalarPolynomialMap">isInvolutive_map_scalarPolynomialMap</a> J hJ (<a class="ref" href="../Geometry/CoisotropicTranslation.lean.html#L30" title="Stafford38.Geometry.CoisotropicTranslation.baseLift">baseLift</a> f) hf g hg</span>
 <span id="L128"><a href="#L128">128</a> </span>
 <span id="L129"><a href="#L129">129</a> /-- A Poisson ideal is stable under each phase-space partial derivative. -/</span>
 <span id="L130"><a href="#L130">130</a> theorem pderiv_mem_of_isPoisson</span>
-<span id="L131"><a href="#L131">131</a>     (J : Ideal (SymbolRing k n)) (hJ : IsPoisson J)</span>
-<span id="L132"><a href="#L132">132</a>     {f : SymbolRing k n} (hf : f ∈ J) (i : PhaseVar n) :</span>
-<span id="L133"><a href="#L133">133</a>     MvPolynomial.pderiv i f ∈ J := by</span>
+<span id="L131"><a href="#L131">131</a>     (J : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Defs.lean#L38" title="Ideal">Ideal</a> (<a class="ref" href="./Polynomial.lean.html#L20" title="Stafford38.Characteristic.SymbolRing">SymbolRing</a> k n)) (hJ : <a class="ref" href="./Polynomial.lean.html#L39" title="Stafford38.Characteristic.IsPoisson">IsPoisson</a> J)</span>
+<span id="L132"><a href="#L132">132</a>     {f : <a class="ref" href="./Polynomial.lean.html#L20" title="Stafford38.Characteristic.SymbolRing">SymbolRing</a> k n} (hf : f ∈ J) (i : <a class="ref" href="../ChallengeDefinitions.lean.html#L64" title="Stafford38Challenge.PhaseVar">PhaseVar</a> n) :</span>
+<span id="L133"><a href="#L133">133</a>     <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/PDeriv.lean#L60" title="MvPolynomial.pderiv">MvPolynomial.pderiv</a> i f ∈ J := by</span>
 <span id="L134"><a href="#L134">134</a>   rcases i with i | i</span>
-<span id="L135"><a href="#L135">135</a>   · have h := hJ f hf (MvPolynomial.X (Sum.inr i))</span>
-<span id="L136"><a href="#L136">136</a>     simpa [poissonBracket, Pi.single_apply] using h</span>
-<span id="L137"><a href="#L137">137</a>   · have h := hJ f hf (MvPolynomial.X (Sum.inl i))</span>
-<span id="L138"><a href="#L138">138</a>     have hn : -MvPolynomial.pderiv (Sum.inr i) f ∈ J := by</span>
-<span id="L139"><a href="#L139">139</a>       simpa [poissonBracket, Pi.single_apply] using h</span>
-<span id="L140"><a href="#L140">140</a>     simpa using J.neg_mem hn</span>
+<span id="L135"><a href="#L135">135</a>   · have h := hJ f hf (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/Basic.lean#L125" title="MvPolynomial.X">MvPolynomial.X</a> (<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Core.lean#L215" title="Sum.inr">Sum.inr</a> i))</span>
+<span id="L136"><a href="#L136">136</a>     simpa [<a class="ref" href="./Polynomial.lean.html#L29" title="Stafford38.Characteristic.poissonBracket">poissonBracket</a>, <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Notation/Pi/Basic.lean#L107" title="Pi.single_apply">Pi.single_apply</a>] using h</span>
+<span id="L137"><a href="#L137">137</a>   · have h := hJ f hf (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/Basic.lean#L125" title="MvPolynomial.X">MvPolynomial.X</a> (<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Core.lean#L213" title="Sum.inl">Sum.inl</a> i))</span>
+<span id="L138"><a href="#L138">138</a>     have hn : -<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/PDeriv.lean#L60" title="MvPolynomial.pderiv">MvPolynomial.pderiv</a> (<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Core.lean#L215" title="Sum.inr">Sum.inr</a> i) f ∈ J := by</span>
+<span id="L139"><a href="#L139">139</a>       simpa [<a class="ref" href="./Polynomial.lean.html#L29" title="Stafford38.Characteristic.poissonBracket">poissonBracket</a>, <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Notation/Pi/Basic.lean#L107" title="Pi.single_apply">Pi.single_apply</a>] using h</span>
+<span id="L140"><a href="#L140">140</a>     simpa using J.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Module/Submodule/Defs.lean#L321" title="Submodule.neg_mem">neg_mem</a> hn</span>
 <span id="L141"><a href="#L141">141</a> </span>
 <span id="L142"><a href="#L142">142</a> /-- Every coordinate derivation preserves the ideal generated after scalar</span>
 <span id="L143"><a href="#L143">143</a> extension from a Poisson ideal. -/</span>
 <span id="L144"><a href="#L144">144</a> theorem pderiv_mem_map_scalarPolynomialMap</span>
-<span id="L145"><a href="#L145">145</a>     (J : Ideal (SymbolRing k n)) (hJ : IsPoisson J)</span>
-<span id="L146"><a href="#L146">146</a>     {f : SymbolRing K n}</span>
-<span id="L147"><a href="#L147">147</a>     (hf : f ∈ J.map</span>
-<span id="L148"><a href="#L148">148</a>       (scalarPolynomialMap (k := k) (K := K) (PhaseVar n)))</span>
-<span id="L149"><a href="#L149">149</a>     (i : PhaseVar n) :</span>
-<span id="L150"><a href="#L150">150</a>     MvPolynomial.pderiv i f ∈ J.map</span>
-<span id="L151"><a href="#L151">151</a>       (scalarPolynomialMap (k := k) (K := K) (PhaseVar n)) := by</span>
-<span id="L152"><a href="#L152">152</a>   rw [Ideal.map] at hf</span>
-<span id="L153"><a href="#L153">153</a>   induction hf using Submodule.span_induction with</span>
+<span id="L145"><a href="#L145">145</a>     (J : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Defs.lean#L38" title="Ideal">Ideal</a> (<a class="ref" href="./Polynomial.lean.html#L20" title="Stafford38.Characteristic.SymbolRing">SymbolRing</a> k n)) (hJ : <a class="ref" href="./Polynomial.lean.html#L39" title="Stafford38.Characteristic.IsPoisson">IsPoisson</a> J)</span>
+<span id="L146"><a href="#L146">146</a>     {f : <a class="ref" href="./Polynomial.lean.html#L20" title="Stafford38.Characteristic.SymbolRing">SymbolRing</a> K n}</span>
+<span id="L147"><a href="#L147">147</a>     (hf : f ∈ J.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Maps.lean#L41" title="Ideal.map">map</a></span>
+<span id="L148"><a href="#L148">148</a>       (<a class="ref" href="../Geometry/ScalarExtensionPoints.lean.html#L44" title="Stafford38.Geometry.ScalarExtensionPoints.scalarPolynomialMap">scalarPolynomialMap</a> (k := k) (K := K) (<a class="ref" href="../ChallengeDefinitions.lean.html#L64" title="Stafford38Challenge.PhaseVar">PhaseVar</a> n)))</span>
+<span id="L149"><a href="#L149">149</a>     (i : <a class="ref" href="../ChallengeDefinitions.lean.html#L64" title="Stafford38Challenge.PhaseVar">PhaseVar</a> n) :</span>
+<span id="L150"><a href="#L150">150</a>     <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/PDeriv.lean#L60" title="MvPolynomial.pderiv">MvPolynomial.pderiv</a> i f ∈ J.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Maps.lean#L41" title="Ideal.map">map</a></span>
+<span id="L151"><a href="#L151">151</a>       (<a class="ref" href="../Geometry/ScalarExtensionPoints.lean.html#L44" title="Stafford38.Geometry.ScalarExtensionPoints.scalarPolynomialMap">scalarPolynomialMap</a> (k := k) (K := K) (<a class="ref" href="../ChallengeDefinitions.lean.html#L64" title="Stafford38Challenge.PhaseVar">PhaseVar</a> n)) := by</span>
+<span id="L152"><a href="#L152">152</a>   rw [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Maps.lean#L41" title="Ideal.map">Ideal.map</a>] at hf</span>
+<span id="L153"><a href="#L153">153</a>   induction hf using <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/LinearAlgebra/Span/Defs.lean#L133" title="Submodule.span_induction">Submodule.span_induction</a> with</span>
 <span id="L154"><a href="#L154">154</a>   | mem f hf =&gt;</span>
 <span id="L155"><a href="#L155">155</a>       rcases hf with ⟨g, hg, rfl⟩</span>
-<span id="L156"><a href="#L156">156</a>       change MvPolynomial.pderiv i</span>
-<span id="L157"><a href="#L157">157</a>           (MvPolynomial.map (algebraMap k K) g) ∈ _</span>
-<span id="L158"><a href="#L158">158</a>       rw [MvPolynomial.pderiv_map]</span>
-<span id="L159"><a href="#L159">159</a>       exact Ideal.mem_map_of_mem _ (pderiv_mem_of_isPoisson J hJ hg i)</span>
-<span id="L160"><a href="#L160">160</a>   | zero =&gt; simp</span>
-<span id="L161"><a href="#L161">161</a>   | add f g _ _ hf hg =&gt;</span>
-<span id="L162"><a href="#L162">162</a>       simpa using (J.map</span>
-<span id="L163"><a href="#L163">163</a>         (scalarPolynomialMap (k := k) (K := K) (PhaseVar n))).add_mem hf hg</span>
-<span id="L164"><a href="#L164">164</a>   | smul a f hfm hf =&gt;</span>
-<span id="L165"><a href="#L165">165</a>       rw [smul_eq_mul, MvPolynomial.pderiv_mul]</span>
-<span id="L166"><a href="#L166">166</a>       exact (J.map</span>
-<span id="L167"><a href="#L167">167</a>         (scalarPolynomialMap (k := k) (K := K) (PhaseVar n))).add_mem</span>
-<span id="L168"><a href="#L168">168</a>           ((J.map</span>
-<span id="L169"><a href="#L169">169</a>             (scalarPolynomialMap (k := k) (K := K) (PhaseVar n))).mul_mem_left _ hfm)</span>
-<span id="L170"><a href="#L170">170</a>           ((J.map</span>
-<span id="L171"><a href="#L171">171</a>             (scalarPolynomialMap (k := k) (K := K) (PhaseVar n))).mul_mem_left _ hf)</span>
+<span id="L156"><a href="#L156">156</a>       change <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/PDeriv.lean#L60" title="MvPolynomial.pderiv">MvPolynomial.pderiv</a> i</span>
+<span id="L157"><a href="#L157">157</a>           (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/Eval.lean#L329" title="MvPolynomial.map">MvPolynomial.map</a> (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Algebra/Defs.lean#L97" title="Algebra.algebraMap">algebraMap</a> k K) g) ∈ _</span>
+<span id="L158"><a href="#L158">158</a>       rw [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/PDeriv.lean#L136" title="MvPolynomial.pderiv_map">MvPolynomial.pderiv_map</a>]</span>
+<span id="L159"><a href="#L159">159</a>       exact <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Maps.lean#L70" title="Ideal.mem_map_of_mem">Ideal.mem_map_of_mem</a> _ (<a class="ref" href="./PostScalarExtensionPoisson.lean.html#L129" title="Stafford38.Characteristic.PostScalarExtensionPoisson.pderiv_mem_of_isPoisson">pderiv_mem_of_isPoisson</a> J hJ hg i)</span>
+<span id="L160"><a href="#L160">160</a>   | <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Module/Submodule/Defs.lean#L241" title="Submodule.zero">zero</a> =&gt; simp</span>
+<span id="L161"><a href="#L161">161</a>   | <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Module/Submodule/Defs.lean#L238" title="Submodule.add">add</a> f g _ _ hf hg =&gt;</span>
+<span id="L162"><a href="#L162">162</a>       simpa using (J.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Maps.lean#L41" title="Ideal.map">map</a></span>
+<span id="L163"><a href="#L163">163</a>         (<a class="ref" href="../Geometry/ScalarExtensionPoints.lean.html#L44" title="Stafford38.Geometry.ScalarExtensionPoints.scalarPolynomialMap">scalarPolynomialMap</a> (k := k) (K := K) (<a class="ref" href="../ChallengeDefinitions.lean.html#L64" title="Stafford38Challenge.PhaseVar">PhaseVar</a> n))).<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Defs.lean#L56" title="Ideal.add_mem">add_mem</a> hf hg</span>
+<span id="L164"><a href="#L164">164</a>   | <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Module/Submodule/Defs.lean#L247" title="Submodule.smul">smul</a> a f hfm hf =&gt;</span>
+<span id="L165"><a href="#L165">165</a>       rw [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Group/Action/Defs.lean#L74" title="smul_eq_mul">smul_eq_mul</a>, <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/PDeriv.lean#L110" title="MvPolynomial.pderiv_mul">MvPolynomial.pderiv_mul</a>]</span>
+<span id="L166"><a href="#L166">166</a>       exact (J.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Maps.lean#L41" title="Ideal.map">map</a></span>
+<span id="L167"><a href="#L167">167</a>         (<a class="ref" href="../Geometry/ScalarExtensionPoints.lean.html#L44" title="Stafford38.Geometry.ScalarExtensionPoints.scalarPolynomialMap">scalarPolynomialMap</a> (k := k) (K := K) (<a class="ref" href="../ChallengeDefinitions.lean.html#L64" title="Stafford38Challenge.PhaseVar">PhaseVar</a> n))).<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Defs.lean#L56" title="Ideal.add_mem">add_mem</a></span>
+<span id="L168"><a href="#L168">168</a>           ((J.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Maps.lean#L41" title="Ideal.map">map</a></span>
+<span id="L169"><a href="#L169">169</a>             (<a class="ref" href="../Geometry/ScalarExtensionPoints.lean.html#L44" title="Stafford38.Geometry.ScalarExtensionPoints.scalarPolynomialMap">scalarPolynomialMap</a> (k := k) (K := K) (<a class="ref" href="../ChallengeDefinitions.lean.html#L64" title="Stafford38Challenge.PhaseVar">PhaseVar</a> n))).<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Defs.lean#L61" title="Ideal.mul_mem_left">mul_mem_left</a> _ hfm)</span>
+<span id="L170"><a href="#L170">170</a>           ((J.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Maps.lean#L41" title="Ideal.map">map</a></span>
+<span id="L171"><a href="#L171">171</a>             (<a class="ref" href="../Geometry/ScalarExtensionPoints.lean.html#L44" title="Stafford38.Geometry.ScalarExtensionPoints.scalarPolynomialMap">scalarPolynomialMap</a> (k := k) (K := K) (<a class="ref" href="../ChallengeDefinitions.lean.html#L64" title="Stafford38Challenge.PhaseVar">PhaseVar</a> n))).<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Defs.lean#L61" title="Ideal.mul_mem_left">mul_mem_left</a> _ hf)</span>
 <span id="L172"><a href="#L172">172</a> </span>
 <span id="L173"><a href="#L173">173</a> /-- Full Poisson closure is preserved by arbitrary field-valued coefficient</span>
 <span id="L174"><a href="#L174">174</a> extension.  The target is the actual extended ideal `map`, not its radical. -/</span>
 <span id="L175"><a href="#L175">175</a> theorem isPoisson_map_scalarPolynomialMap</span>
-<span id="L176"><a href="#L176">176</a>     (J : Ideal (SymbolRing k n)) (hJ : IsPoisson J) :</span>
-<span id="L177"><a href="#L177">177</a>     IsPoisson</span>
-<span id="L178"><a href="#L178">178</a>       (J.map (scalarPolynomialMap (k := k) (K := K) (PhaseVar n))) := by</span>
+<span id="L176"><a href="#L176">176</a>     (J : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Defs.lean#L38" title="Ideal">Ideal</a> (<a class="ref" href="./Polynomial.lean.html#L20" title="Stafford38.Characteristic.SymbolRing">SymbolRing</a> k n)) (hJ : <a class="ref" href="./Polynomial.lean.html#L39" title="Stafford38.Characteristic.IsPoisson">IsPoisson</a> J) :</span>
+<span id="L177"><a href="#L177">177</a>     <a class="ref" href="./Polynomial.lean.html#L39" title="Stafford38.Characteristic.IsPoisson">IsPoisson</a></span>
+<span id="L178"><a href="#L178">178</a>       (J.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Maps.lean#L41" title="Ideal.map">map</a> (<a class="ref" href="../Geometry/ScalarExtensionPoints.lean.html#L44" title="Stafford38.Geometry.ScalarExtensionPoints.scalarPolynomialMap">scalarPolynomialMap</a> (k := k) (K := K) (<a class="ref" href="../ChallengeDefinitions.lean.html#L64" title="Stafford38Challenge.PhaseVar">PhaseVar</a> n))) := by</span>
 <span id="L179"><a href="#L179">179</a>   intro f hf g</span>
-<span id="L180"><a href="#L180">180</a>   apply (J.map</span>
-<span id="L181"><a href="#L181">181</a>     (scalarPolynomialMap (k := k) (K := K) (PhaseVar n))).sum_mem</span>
+<span id="L180"><a href="#L180">180</a>   apply (J.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Maps.lean#L41" title="Ideal.map">map</a></span>
+<span id="L181"><a href="#L181">181</a>     (<a class="ref" href="../Geometry/ScalarExtensionPoints.lean.html#L44" title="Stafford38.Geometry.ScalarExtensionPoints.scalarPolynomialMap">scalarPolynomialMap</a> (k := k) (K := K) (<a class="ref" href="../ChallengeDefinitions.lean.html#L64" title="Stafford38Challenge.PhaseVar">PhaseVar</a> n))).<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/BigOperators.lean#L29" title="Ideal.sum_mem">sum_mem</a></span>
 <span id="L182"><a href="#L182">182</a>   intro i hi</span>
-<span id="L183"><a href="#L183">183</a>   apply (J.map</span>
-<span id="L184"><a href="#L184">184</a>     (scalarPolynomialMap (k := k) (K := K) (PhaseVar n))).sub_mem</span>
-<span id="L185"><a href="#L185">185</a>   · exact (J.map</span>
-<span id="L186"><a href="#L186">186</a>       (scalarPolynomialMap (k := k) (K := K) (PhaseVar n))).mul_mem_right _</span>
-<span id="L187"><a href="#L187">187</a>         (pderiv_mem_map_scalarPolynomialMap J hJ hf (Sum.inl i))</span>
-<span id="L188"><a href="#L188">188</a>   · exact (J.map</span>
-<span id="L189"><a href="#L189">189</a>       (scalarPolynomialMap (k := k) (K := K) (PhaseVar n))).mul_mem_right _</span>
-<span id="L190"><a href="#L190">190</a>         (pderiv_mem_map_scalarPolynomialMap J hJ hf (Sum.inr i))</span>
+<span id="L183"><a href="#L183">183</a>   apply (J.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Maps.lean#L41" title="Ideal.map">map</a></span>
+<span id="L184"><a href="#L184">184</a>     (<a class="ref" href="../Geometry/ScalarExtensionPoints.lean.html#L44" title="Stafford38.Geometry.ScalarExtensionPoints.scalarPolynomialMap">scalarPolynomialMap</a> (k := k) (K := K) (<a class="ref" href="../ChallengeDefinitions.lean.html#L64" title="Stafford38Challenge.PhaseVar">PhaseVar</a> n))).<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Defs.lean#L141" title="Ideal.sub_mem">sub_mem</a></span>
+<span id="L185"><a href="#L185">185</a>   · exact (J.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Maps.lean#L41" title="Ideal.map">map</a></span>
+<span id="L186"><a href="#L186">186</a>       (<a class="ref" href="../Geometry/ScalarExtensionPoints.lean.html#L44" title="Stafford38.Geometry.ScalarExtensionPoints.scalarPolynomialMap">scalarPolynomialMap</a> (k := k) (K := K) (<a class="ref" href="../ChallengeDefinitions.lean.html#L64" title="Stafford38Challenge.PhaseVar">PhaseVar</a> n))).<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Defs.lean#L64" title="Ideal.mul_mem_right">mul_mem_right</a> _</span>
+<span id="L187"><a href="#L187">187</a>         (<a class="ref" href="./PostScalarExtensionPoisson.lean.html#L142" title="Stafford38.Characteristic.PostScalarExtensionPoisson.pderiv_mem_map_scalarPolynomialMap">pderiv_mem_map_scalarPolynomialMap</a> J hJ hf (<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Core.lean#L213" title="Sum.inl">Sum.inl</a> i))</span>
+<span id="L188"><a href="#L188">188</a>   · exact (J.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Maps.lean#L41" title="Ideal.map">map</a></span>
+<span id="L189"><a href="#L189">189</a>       (<a class="ref" href="../Geometry/ScalarExtensionPoints.lean.html#L44" title="Stafford38.Geometry.ScalarExtensionPoints.scalarPolynomialMap">scalarPolynomialMap</a> (k := k) (K := K) (<a class="ref" href="../ChallengeDefinitions.lean.html#L64" title="Stafford38Challenge.PhaseVar">PhaseVar</a> n))).<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Defs.lean#L64" title="Ideal.mul_mem_right">mul_mem_right</a> _</span>
+<span id="L190"><a href="#L190">190</a>         (<a class="ref" href="./PostScalarExtensionPoisson.lean.html#L142" title="Stafford38.Characteristic.PostScalarExtensionPoisson.pderiv_mem_map_scalarPolynomialMap">pderiv_mem_map_scalarPolynomialMap</a> J hJ hf (<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Core.lean#L215" title="Sum.inr">Sum.inr</a> i))</span>
 <span id="L191"><a href="#L191">191</a> </span>
 <span id="L192"><a href="#L192">192</a> /-- The transported full Poisson theorem supplies the exact base-relative</span>
 <span id="L193"><a href="#L193">193</a> fragment used by the conormal argument. -/</span>
 <span id="L194"><a href="#L194">194</a> theorem isBaseRelativePoisson_map_scalarPolynomialMap</span>
-<span id="L195"><a href="#L195">195</a>     (J : Ideal (SymbolRing k n)) (hJ : IsPoisson J) :</span>
-<span id="L196"><a href="#L196">196</a>     BaseRelativePoisson.IsBaseRelativePoisson</span>
-<span id="L197"><a href="#L197">197</a>       (J.map (scalarPolynomialMap (k := k) (K := K) (PhaseVar n))) :=</span>
-<span id="L198"><a href="#L198">198</a>   BaseRelativePoisson.IsPoisson.isBaseRelativePoisson _</span>
-<span id="L199"><a href="#L199">199</a>     (isPoisson_map_scalarPolynomialMap J hJ)</span>
+<span id="L195"><a href="#L195">195</a>     (J : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Defs.lean#L38" title="Ideal">Ideal</a> (<a class="ref" href="./Polynomial.lean.html#L20" title="Stafford38.Characteristic.SymbolRing">SymbolRing</a> k n)) (hJ : <a class="ref" href="./Polynomial.lean.html#L39" title="Stafford38.Characteristic.IsPoisson">IsPoisson</a> J) :</span>
+<span id="L196"><a href="#L196">196</a>     <a class="ref" href="./BaseRelativePoisson.lean.html#L25" title="Stafford38.Characteristic.BaseRelativePoisson.IsBaseRelativePoisson">BaseRelativePoisson.IsBaseRelativePoisson</a></span>
+<span id="L197"><a href="#L197">197</a>       (J.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Maps.lean#L41" title="Ideal.map">map</a> (<a class="ref" href="../Geometry/ScalarExtensionPoints.lean.html#L44" title="Stafford38.Geometry.ScalarExtensionPoints.scalarPolynomialMap">scalarPolynomialMap</a> (k := k) (K := K) (<a class="ref" href="../ChallengeDefinitions.lean.html#L64" title="Stafford38Challenge.PhaseVar">PhaseVar</a> n))) :=</span>
+<span id="L198"><a href="#L198">198</a>   <a class="ref" href="./BaseRelativePoisson.lean.html#L33" title="Stafford38.Characteristic.BaseRelativePoisson.IsPoisson.isBaseRelativePoisson">BaseRelativePoisson.IsPoisson.isBaseRelativePoisson</a> _</span>
+<span id="L199"><a href="#L199">199</a>     (<a class="ref" href="./PostScalarExtensionPoisson.lean.html#L173" title="Stafford38.Characteristic.PostScalarExtensionPoisson.isPoisson_map_scalarPolynomialMap">isPoisson_map_scalarPolynomialMap</a> J hJ)</span>
 <span id="L200"><a href="#L200">200</a> </span>
-<span id="L201"><a href="#L201">201</a> #print axioms pderiv_mem_of_isPoisson</span>
-<span id="L202"><a href="#L202">202</a> #print axioms isInvolutive_map_scalarPolynomialMap</span>
-<span id="L203"><a href="#L203">203</a> #print axioms isBaseRelativePoisson_map_of_isInvolutive</span>
-<span id="L204"><a href="#L204">204</a> #print axioms poissonBracket_scalarPolynomialMap</span>
-<span id="L205"><a href="#L205">205</a> #print axioms pderiv_mem_map_scalarPolynomialMap</span>
-<span id="L206"><a href="#L206">206</a> #print axioms isPoisson_map_scalarPolynomialMap</span>
-<span id="L207"><a href="#L207">207</a> #print axioms isBaseRelativePoisson_map_scalarPolynomialMap</span>
+<span id="L201"><a href="#L201">201</a> #print axioms <a class="ref" href="./PostScalarExtensionPoisson.lean.html#L129" title="Stafford38.Characteristic.PostScalarExtensionPoisson.pderiv_mem_of_isPoisson">pderiv_mem_of_isPoisson</a></span>
+<span id="L202"><a href="#L202">202</a> #print axioms <a class="ref" href="./PostScalarExtensionPoisson.lean.html#L78" title="Stafford38.Characteristic.PostScalarExtensionPoisson.isInvolutive_map_scalarPolynomialMap">isInvolutive_map_scalarPolynomialMap</a></span>
+<span id="L203"><a href="#L203">203</a> #print axioms <a class="ref" href="./PostScalarExtensionPoisson.lean.html#L120" title="Stafford38.Characteristic.PostScalarExtensionPoisson.isBaseRelativePoisson_map_of_isInvolutive">isBaseRelativePoisson_map_of_isInvolutive</a></span>
+<span id="L204"><a href="#L204">204</a> #print axioms <a class="ref" href="./PostScalarExtensionPoisson.lean.html#L38" title="Stafford38.Characteristic.PostScalarExtensionPoisson.poissonBracket_scalarPolynomialMap">poissonBracket_scalarPolynomialMap</a></span>
+<span id="L205"><a href="#L205">205</a> #print axioms <a class="ref" href="./PostScalarExtensionPoisson.lean.html#L142" title="Stafford38.Characteristic.PostScalarExtensionPoisson.pderiv_mem_map_scalarPolynomialMap">pderiv_mem_map_scalarPolynomialMap</a></span>
+<span id="L206"><a href="#L206">206</a> #print axioms <a class="ref" href="./PostScalarExtensionPoisson.lean.html#L173" title="Stafford38.Characteristic.PostScalarExtensionPoisson.isPoisson_map_scalarPolynomialMap">isPoisson_map_scalarPolynomialMap</a></span>
+<span id="L207"><a href="#L207">207</a> #print axioms <a class="ref" href="./PostScalarExtensionPoisson.lean.html#L192" title="Stafford38.Characteristic.PostScalarExtensionPoisson.isBaseRelativePoisson_map_scalarPolynomialMap">isBaseRelativePoisson_map_scalarPolynomialMap</a></span>
 <span id="L208"><a href="#L208">208</a> </span>
 <span id="L209"><a href="#L209">209</a> end</span>
 <span id="L210"><a href="#L210">210</a> </span>

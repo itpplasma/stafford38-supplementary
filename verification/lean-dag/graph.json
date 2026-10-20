@@ -1,0 +1,1695 @@
+{
+ "schema": 1,
+ "formal_commit": "0403af3f0b1a7f84d2027121932723f67bd279ae",
+ "source": "Constants used by types and proofs (scripts/LeanDag.lean); lines from findDeclarationRanges?.",
+ "nodes": {
+  "T": {
+   "keys": [
+    "ASM",
+    "VAN"
+   ],
+   "leaves": [],
+   "helpers": {}
+  },
+  "CYC": {
+   "keys": [
+    "T"
+   ],
+   "leaves": [
+    "ore"
+   ],
+   "helpers": {
+    "Stafford38.PaperCyclicity.paper_torsion_module_is_cyclic": {
+     "keys": [
+      "T"
+     ],
+     "leaves": [
+      "ore"
+     ]
+    }
+   }
+  },
+  "ASM": {
+   "keys": [
+    "CERT",
+    "MON"
+   ],
+   "leaves": [
+    "ore"
+   ],
+   "helpers": {
+    "Stafford38.WeylPBWMonicBridge.coeff_axisPolynomial": {
+     "keys": [],
+     "leaves": []
+    },
+    "Stafford38.WeylPBWMonicBridge.coeff_principal_pure_eq_normalForm": {
+     "keys": [],
+     "leaves": [
+      "ore"
+     ]
+    }
+   }
+  },
+  "MON": {
+   "keys": [
+    "SYMP"
+   ],
+   "leaves": [
+    "ore"
+   ],
+   "helpers": {
+    "Stafford38.WeylMonicNormalization.principal_isHomogeneous": {
+     "keys": [],
+     "leaves": [
+      "ore"
+     ]
+    },
+    "Stafford38.WeylMonicNormalization.scalar_or_positive_top_bernstein_piece": {
+     "keys": [],
+     "leaves": [
+      "ore"
+     ]
+    },
+    "Stafford38.WeylSymbolCompatibility.standardSymplecticAlgHom_preserves_bernsteinPiece": {
+     "keys": [],
+     "leaves": [
+      "ore"
+     ]
+    },
+    "Stafford38.WeylSymbolCompatibility.standardSymplecticAlgHom_principal_compatibility": {
+     "keys": [],
+     "leaves": [
+      "ore"
+     ]
+    }
+   }
+  },
+  "SYMP": {
+   "keys": [],
+   "leaves": [
+    "symp"
+   ],
+   "helpers": {
+    "Stafford38.CharacteristicSymplecticCompletion.exists_symplectic_pureCoefficient_ne_zero": {
+     "keys": [],
+     "leaves": []
+    },
+    "Stafford38.CharacteristicSymplecticCompletion.phasePairing_smul_right": {
+     "keys": [],
+     "leaves": []
+    },
+    "Stafford38.CharacteristicSymplecticCompletion.exists_phasePairing_right_ne_zero": {
+     "keys": [],
+     "leaves": []
+    },
+    "Stafford38.CharacteristicSymplecticCompletion.exists_phasePairing_left_ne_zero": {
+     "keys": [],
+     "leaves": []
+    },
+    "Stafford38.CharacteristicSymplecticCompletion.phasePairing_add_left": {
+     "keys": [],
+     "leaves": []
+    },
+    "Stafford38.CharacteristicPaperSymplecticBasis.exists_symplectic_equiv_sending_nonzero": {
+     "keys": [],
+     "leaves": []
+    },
+    "Stafford38.CharacteristicSymplecticCompletion.phasePairing_basis": {
+     "keys": [],
+     "leaves": []
+    },
+    "Stafford38.CharacteristicSymplecticCompletion.phasePairing_add_right": {
+     "keys": [],
+     "leaves": []
+    },
+    "Stafford38.CharacteristicSymplecticCompletion.phasePairing_self": {
+     "keys": [],
+     "leaves": []
+    },
+    "Stafford38.CharacteristicSymplecticCompletion.phasePairing_smul_left": {
+     "keys": [],
+     "leaves": []
+    }
+   }
+  },
+  "CERT": {
+   "keys": [],
+   "leaves": [
+    "ore",
+    "support"
+   ],
+   "helpers": {
+    "Stafford38.CharacteristicEmptySupportVanishing.rightQuotient_subsingleton_of_orderCharacteristicSupport_eq_empty": {
+     "keys": [],
+     "leaves": [
+      "ore",
+      "support"
+     ]
+    }
+   }
+  },
+  "VAN": {
+   "keys": [
+    "AVOID",
+    "BRIDGE",
+    "DESC",
+    "EXCL"
+   ],
+   "leaves": [
+    "ore"
+   ],
+   "helpers": {
+    "Stafford38.FoundationClosure.canonicalNoncharacteristicSupportAvoidance": {
+     "keys": [
+      "AVOID"
+     ],
+     "leaves": [
+      "ore"
+     ]
+    }
+   }
+  },
+  "DESC": {
+   "keys": [],
+   "leaves": [
+    "flat",
+    "ore",
+    "support"
+   ],
+   "helpers": {
+    "Stafford38.PaperQuotientDescent.canonicalSupport_empty_of_scalarExtension_empty": {
+     "keys": [],
+     "leaves": [
+      "flat",
+      "ore",
+      "support"
+     ]
+    },
+    "Stafford38.Weyl.PresentedScalarExtension.presentedWeylScalarExtension_isPBWMonicAt": {
+     "keys": [],
+     "leaves": [
+      "ore"
+     ]
+    }
+   }
+  },
+  "EXCL": {
+   "keys": [
+    "AXIS",
+    "CHARP",
+    "GABBER"
+   ],
+   "leaves": [
+    "kahler",
+    "length",
+    "nss",
+    "ore",
+    "support"
+   ],
+   "helpers": {
+    "Stafford38.Geometry.LaurentConormalDirection.eval₂_fibreLift": {
+     "keys": [],
+     "leaves": []
+    },
+    "Stafford38.Characteristic.ReducedSupportIdeal.orderCharacteristicSupport_eq_zeroLocus_reduced": {
+     "keys": [],
+     "leaves": [
+      "ore",
+      "support"
+     ]
+    },
+    "Stafford38.CanonicalUnitCoordinatePreimage.canonical_orderCharacteristicSupport_disjoint_coordinate_zeroLocus_of_strictUnit": {
+     "keys": [],
+     "leaves": [
+      "ore",
+      "support"
+     ]
+    },
+    "Stafford38.CharacteristicAssociatedGradedModule.annihilator_orderAssociatedGradedModule": {
+     "keys": [],
+     "leaves": [
+      "ore"
+     ]
+    },
+    "Stafford38.Characteristic.ReducedSupportIdeal.orderInitialIdeal_le_reducedOrderSupportIdeal": {
+     "keys": [],
+     "leaves": [
+      "ore"
+     ]
+    },
+    "Stafford38.Characteristic.ReducedSupportIdeal.reducedOrderSupportIdeal_isRadical": {
+     "keys": [],
+     "leaves": [
+      "ore"
+     ]
+    },
+    "Stafford38.Geometry.ConormalAxisContradiction.canonical_orderPrincipalComponent_eval_pureMomentumAxis": {
+     "keys": [],
+     "leaves": [
+      "ore"
+     ]
+    },
+    "Stafford38.Characteristic.CanonicalLaurentSymbolControl.exists_canonical_fibrePolynomial": {
+     "keys": [],
+     "leaves": [
+      "ore"
+     ]
+    },
+    "Stafford38.Geometry.GeneralCoisotropicSets.exists_zero_base_coordinate_of_isFibreConical_using": {
+     "keys": [],
+     "leaves": [
+      "kahler",
+      "length",
+      "nss",
+      "support"
+     ]
+    }
+   }
+  },
+  "AXIS": {
+   "keys": [
+    "ARC",
+    "PLACE"
+   ],
+   "leaves": [
+    "flat",
+    "kahler",
+    "length",
+    "nss",
+    "support",
+    "val"
+   ],
+   "helpers": {
+    "Stafford38.Geometry.SameWitness.coordinate_axis_mem_smooth_fibre_closure": {
+     "keys": [
+      "ARC",
+      "PLACE"
+     ],
+     "leaves": [
+      "flat",
+      "kahler",
+      "length",
+      "nss",
+      "support",
+      "val"
+     ]
+    }
+   }
+  },
+  "ARC": {
+   "keys": [],
+   "leaves": [
+    "aasupp",
+    "flat",
+    "kahler",
+    "length",
+    "nss",
+    "series",
+    "support",
+    "val"
+   ],
+   "helpers": {
+    "Stafford38.Geometry.SameWitness.nonempty_chartSetup": {
+     "keys": [],
+     "leaves": [
+      "flat",
+      "kahler",
+      "support",
+      "val"
+     ]
+    },
+    "Stafford38.Geometry.SameWitness.CommonOpenEtaleData.hφAction": {
+     "keys": [],
+     "leaves": [
+      "kahler",
+      "series",
+      "support",
+      "val"
+     ]
+    },
+    "Stafford38.Geometry.SameWitness.ChartSetup.hrep": {
+     "keys": [],
+     "leaves": [
+      "support",
+      "val"
+     ]
+    },
+    "Stafford38.Geometry.SameWitness.axis_mem_smoothConormalFibreProjection_closure_of_algHoms": {
+     "keys": [],
+     "leaves": [
+      "aasupp",
+      "flat",
+      "kahler",
+      "length",
+      "nss",
+      "series",
+      "support",
+      "val"
+     ]
+    },
+    "Stafford38.Geometry.SameWitness.nonempty_commonOpenData": {
+     "keys": [],
+     "leaves": [
+      "kahler",
+      "length",
+      "series",
+      "support",
+      "val"
+     ]
+    },
+    "Stafford38.Geometry.SameWitness.CoordinatePresentation.hBfinite": {
+     "keys": [],
+     "leaves": [
+      "kahler",
+      "series",
+      "support",
+      "val"
+     ]
+    },
+    "Stafford38.Geometry.SameWitness.ChartSetup.hchart": {
+     "keys": [],
+     "leaves": [
+      "support",
+      "val"
+     ]
+    },
+    "Stafford38.Geometry.SameWitness.commonOpenColumnsData_of_arc": {
+     "keys": [],
+     "leaves": [
+      "flat",
+      "kahler",
+      "series",
+      "support",
+      "val"
+     ]
+    },
+    "Stafford38.Geometry.SameWitness.CommonOpenEtaleData.hφEtale": {
+     "keys": [],
+     "leaves": [
+      "kahler",
+      "series",
+      "support",
+      "val"
+     ]
+    },
+    "Stafford38.Geometry.SameWitness.ChartSetup.hsmooth": {
+     "keys": [],
+     "leaves": [
+      "support",
+      "val"
+     ]
+    },
+    "Stafford38.Geometry.SameWitness.CommonOpenPositionData.hchartPre": {
+     "keys": [],
+     "leaves": [
+      "kahler",
+      "series",
+      "support",
+      "val"
+     ]
+    },
+    "Stafford38.Geometry.SameWitness.exists_commonOpenArcData": {
+     "keys": [],
+     "leaves": [
+      "kahler",
+      "series",
+      "support",
+      "val"
+     ]
+    },
+    "Stafford38.Geometry.SameWitness.CommonOpenColumnsData.hnumerator": {
+     "keys": [],
+     "leaves": [
+      "kahler",
+      "series",
+      "support",
+      "val"
+     ]
+    },
+    "Stafford38.Geometry.SameWitness.nonempty_commonOpenEtaleData": {
+     "keys": [],
+     "leaves": [
+      "kahler",
+      "series",
+      "support",
+      "val"
+     ]
+    },
+    "Stafford38.Geometry.SameWitness.CommonOpenPointData.hM": {
+     "keys": [],
+     "leaves": [
+      "kahler",
+      "series",
+      "support",
+      "val"
+     ]
+    },
+    "Stafford38.Geometry.SameWitness.CommonOpenPositionData.hpositionL": {
+     "keys": [],
+     "leaves": [
+      "kahler",
+      "series",
+      "support",
+      "val"
+     ]
+    },
+    "Stafford38.Geometry.SameWitness.CommonOpenEtaleData.hψEtale": {
+     "keys": [],
+     "leaves": [
+      "kahler",
+      "series",
+      "support",
+      "val"
+     ]
+    },
+    "Stafford38.Geometry.SameWitness.nonempty_coordinatePresentation": {
+     "keys": [],
+     "leaves": [
+      "kahler",
+      "series",
+      "support",
+      "val"
+     ]
+    },
+    "Stafford38.Geometry.SameWitness.CommonOpenPositionData.hqPre": {
+     "keys": [],
+     "leaves": [
+      "kahler",
+      "series",
+      "support",
+      "val"
+     ]
+    }
+   }
+  },
+  "PLACE": {
+   "keys": [
+    "TRDEG"
+   ],
+   "leaves": [
+    "flat",
+    "kahler",
+    "length",
+    "nss",
+    "series",
+    "support",
+    "val"
+   ],
+   "helpers": {
+    "Stafford38.Geometry.DivisorTangentLattice.VisibleDivisorFrame.one_le_a": {
+     "keys": [],
+     "leaves": []
+    },
+    "Stafford38.Geometry.ProjectiveChartNormalizationCenter.integralClosureCenter_isPrime": {
+     "keys": [],
+     "leaves": [
+      "support",
+      "val"
+     ]
+    },
+    "Stafford38.Geometry.ChartGenericPointFractionRing.chartGenericPointSubalgebra_isFractionRing": {
+     "keys": [],
+     "leaves": [
+      "flat",
+      "kahler",
+      "support"
+     ]
+    },
+    "Stafford38.Geometry.ActualSelectedNormalizationDivisorEtale.ActualOptionEtaleCertificate.prime_isPrime": {
+     "keys": [],
+     "leaves": []
+    },
+    "Stafford38.Geometry.ActualSameWitnessGroundPointCompletion.actualOptionMap_none": {
+     "keys": [],
+     "leaves": []
+    },
+    "Stafford38.Geometry.AsymptoticDivisorExistence.coordinateZeroPrime_isPrime": {
+     "keys": [],
+     "leaves": []
+    },
+    "Stafford38.Geometry.ActualSameWitnessDivisorNumerator.exists_actual_parameter_with_retained_orders": {
+     "keys": [
+      "TRDEG"
+     ],
+     "leaves": [
+      "flat",
+      "kahler",
+      "support",
+      "val"
+     ]
+    },
+    "Stafford38.Geometry.RetainedDVR.RetainedDVRPlace.isDiscrete": {
+     "keys": [],
+     "leaves": []
+    },
+    "Stafford38.Geometry.ChartGenericPointFractionRing.chartGenericPointSubalgebra_finiteType": {
+     "keys": [],
+     "leaves": []
+    },
+    "Stafford38.Geometry.GeneralDivisorialVisibleFrame.GeneralDivisorialVisibleFrameColumn.chart_one": {
+     "keys": [],
+     "leaves": [
+      "support"
+     ]
+    },
+    "selected_center_retained_factors_at_canonical_prime": {
+     "keys": [],
+     "leaves": []
+    },
+    "Stafford38.Geometry.DivisorTangentLattice.VisibleDivisorFrame.one_le_e": {
+     "keys": [],
+     "leaves": []
+    },
+    "Stafford38.Geometry.GeneralDivisorialVisibleFrame.GeneralDivisorialVisibleFrameColumn.q_commonScale": {
+     "keys": [],
+     "leaves": [
+      "support"
+     ]
+    },
+    "Stafford38.Geometry.ActualOptionGroundPointCompletion.exists_groundPoint_chart_from_option_map": {
+     "keys": [],
+     "leaves": [
+      "flat",
+      "kahler",
+      "length",
+      "nss",
+      "series",
+      "support",
+      "val"
+     ]
+    },
+    "Stafford38.Geometry.ActualSelectedResidueBasis.exists_actual_selected_residue_basis": {
+     "keys": [],
+     "leaves": [
+      "flat",
+      "kahler",
+      "support",
+      "val"
+     ]
+    },
+    "Stafford38.Geometry.ActualSameWitnessGroundPointCompletion.actualOptionMap_some": {
+     "keys": [],
+     "leaves": []
+    },
+    "Stafford38.Geometry.ActualSelectedNormalizationDivisorEtale.formallyEtale_at_selected_actual_normalization_center_core": {
+     "keys": [
+      "TRDEG"
+     ],
+     "leaves": [
+      "flat",
+      "kahler",
+      "nss",
+      "support",
+      "val"
+     ]
+    },
+    "Stafford38.Geometry.ProjectiveChartNormalizationFinite.integralClosure_finiteType_over_base": {
+     "keys": [],
+     "leaves": [
+      "kahler",
+      "support",
+      "val"
+     ]
+    },
+    "Stafford38.Geometry.ActualChartValuationImage.chartGenericPointSubalgebra_le_valuationSubring": {
+     "keys": [],
+     "leaves": [
+      "support",
+      "val"
+     ]
+    },
+    "actualCertificate_formallyEtale_for_groundPointAdapter": {
+     "keys": [],
+     "leaves": []
+    },
+    "prime_span_eq_maximalIdeal_transport": {
+     "keys": [],
+     "leaves": [
+      "support"
+     ]
+    }
+   }
+  },
+  "TRDEG": {
+   "keys": [],
+   "leaves": [
+    "flat",
+    "kahler",
+    "series",
+    "support",
+    "val"
+   ],
+   "helpers": {
+    "Stafford38.Geometry.AsymptoticDivisorExistence.coordinateZeroPrime_isPrime": {
+     "keys": [],
+     "leaves": []
+    },
+    "Stafford38.Geometry.RetainedDVR.RetainedDVRPlace.isDiscrete": {
+     "keys": [],
+     "leaves": []
+    },
+    "Stafford38.Geometry.kaehlerFinrankOfTranscendenceBasis": {
+     "keys": [],
+     "leaves": [
+      "kahler",
+      "support"
+     ]
+    },
+    "Stafford38.Geometry.GeneralDivisorialVisibleFrame.GeneralDivisorialVisibleFrameColumn.groundCoeff_eq_retained": {
+     "keys": [],
+     "leaves": [
+      "support"
+     ]
+    },
+    "Stafford38.Geometry.GeneralDivisorialVisibleFrame.GeneralDivisorialVisibleFrameColumn.chart_one": {
+     "keys": [],
+     "leaves": [
+      "support"
+     ]
+    },
+    "Stafford38.Geometry.RelativeDivisorialTower.intermediateAdjoin_isAlgebraic_over_algebraAdjoin": {
+     "keys": [],
+     "leaves": [
+      "kahler"
+     ]
+    },
+    "Stafford38.Geometry.ExactDivisorialVisibleFrameExistence.componentCoordinate_adjoin_eq_top": {
+     "keys": [],
+     "leaves": [
+      "kahler",
+      "support"
+     ]
+    },
+    "Stafford38.Geometry.GeneralDivisorialVisibleFrame.GeneralDivisorialVisibleFrameWitness.halg": {
+     "keys": [],
+     "leaves": [
+      "support",
+      "val"
+     ]
+    },
+    "Stafford38.Geometry.PaperSameWitnessComponentFieldRank.component_field_rank_of_witness": {
+     "keys": [],
+     "leaves": [
+      "kahler",
+      "series",
+      "support",
+      "val"
+     ]
+    },
+    "Stafford38.Geometry.ChartGenericPointFractionRing.exists_finite_chartCoordinate_residue_transcendenceBasis": {
+     "keys": [],
+     "leaves": [
+      "flat",
+      "kahler"
+     ]
+    },
+    "Stafford38.Geometry.GeneralDivisorialVisibleFrame.witness_q0_residue_eq_zero": {
+     "keys": [],
+     "leaves": [
+      "support",
+      "val"
+     ]
+    },
+    "Stafford38.Geometry.GeneralDivisorialVisibleFrame.GeneralDivisorialVisibleFrameWitness.retainedGroundMap": {
+     "keys": [],
+     "leaves": [
+      "support",
+      "val"
+     ]
+    }
+   }
+  },
+  "BRIDGE": {
+   "keys": [],
+   "leaves": [
+    "ore",
+    "support"
+   ],
+   "helpers": {
+    "Stafford38.CharacteristicAssociatedGradedModule.annihilator_orderAssociatedGradedModule": {
+     "keys": [],
+     "leaves": [
+      "ore"
+     ]
+    },
+    "Stafford38.CanonicalUnitPreimageFromInitialTop.strictUnitCoordinatePreimage_of_orderInitialIdeal_sup_coordinate_eq_top": {
+     "keys": [],
+     "leaves": [
+      "ore"
+     ]
+    },
+    "Stafford38.SpecializedNoncharacteristicEquality.transposedSupport_disjoint_axis_iff": {
+     "keys": [],
+     "leaves": [
+      "ore",
+      "support"
+     ]
+    },
+    "Stafford38.CharacteristicTransposedFilteredModuleSupport.instFiniteSymbolRingOrderAssociatedGradedModule": {
+     "keys": [],
+     "leaves": [
+      "ore"
+     ]
+    }
+   }
+  },
+  "AVOID": {
+   "keys": [
+    "UZERO"
+   ],
+   "leaves": [
+    "ore",
+    "support"
+   ],
+   "helpers": {
+    "Stafford38.Characteristic.CanonicalKoszulContradiction.coordinate_quotSMulTop_subsingleton": {
+     "keys": [
+      "UZERO"
+     ],
+     "leaves": [
+      "ore"
+     ]
+    },
+    "Stafford38.CharacteristicTransposedFilteredModuleSupport.transposedOrderAssociatedGradedSupport_eq_preimage": {
+     "keys": [],
+     "leaves": [
+      "ore",
+      "support"
+     ]
+    },
+    "Stafford38.WeylTranspositionFiltration.symbolTransposition_coordinate": {
+     "keys": [],
+     "leaves": []
+    },
+    "Stafford38.Characteristic.AssociatedGradedFinite.orderAssociatedGradedModule_finite": {
+     "keys": [],
+     "leaves": [
+      "ore"
+     ]
+    }
+   }
+  },
+  "UZERO": {
+   "keys": [
+    "FIN",
+    "PAGE",
+    "STRICT"
+   ],
+   "leaves": [
+    "aasupp",
+    "length",
+    "ore",
+    "pages"
+   ],
+   "helpers": {
+    "Stafford38.Characteristic.CanonicalKoszulContradiction.no_minimal_coordinate_cokernel_support": {
+     "keys": [
+      "FIN",
+      "PAGE",
+      "STRICT"
+     ],
+     "leaves": [
+      "aasupp",
+      "length",
+      "ore",
+      "pages"
+     ]
+    }
+   }
+  },
+  "STRICT": {
+   "keys": [
+    "CHARP",
+    "GABBER"
+   ],
+   "leaves": [
+    "ore"
+   ],
+   "helpers": {
+    "Stafford38.Geometry.ConormalAxisContradiction.canonical_orderPrincipalComponent_isHomogeneous": {
+     "keys": [],
+     "leaves": [
+      "ore"
+     ]
+    },
+    "Stafford38.CharacteristicAssociatedGradedModule.annihilator_orderAssociatedGradedModule": {
+     "keys": [],
+     "leaves": [
+      "ore"
+     ]
+    },
+    "Stafford38.CharacteristicInitialIdeal.canonical_orderPrincipalComponent_pureMomentumCoefficient": {
+     "keys": [],
+     "leaves": [
+      "ore"
+     ]
+    }
+   }
+  },
+  "PAGE": {
+   "keys": [
+    "SURJ"
+   ],
+   "leaves": [
+    "aasupp",
+    "length",
+    "ore",
+    "pages"
+   ],
+   "helpers": {
+    "Stafford38.Characteristic.CanonicalTangentialTotalAction.tangentialBoundaryMap_surjective": {
+     "keys": [],
+     "leaves": [
+      "aasupp",
+      "ore",
+      "pages"
+     ]
+    },
+    "Stafford38.Characteristic.CanonicalTangentialTotalAction.tangentialBoundaryMap_ker_mono": {
+     "keys": [],
+     "leaves": [
+      "aasupp",
+      "ore",
+      "pages"
+     ]
+    },
+    "Stafford38.Characteristic.CanonicalTangentialTotalAction.tangentialBoundaryMap_eventually_zero": {
+     "keys": [
+      "SURJ"
+     ],
+     "leaves": [
+      "aasupp",
+      "ore",
+      "pages"
+     ]
+    }
+   }
+  },
+  "FIN": {
+   "keys": [
+    "CHARP",
+    "MONICP"
+   ],
+   "leaves": [
+    "aasupp",
+    "ore"
+   ],
+   "helpers": {
+    "Stafford38.Characteristic.CanonicalTangentialSymbolFiniteness.canonical_orderAssociatedGradedModule_finite_tangential_coordinate": {
+     "keys": [
+      "CHARP",
+      "MONICP"
+     ],
+     "leaves": [
+      "aasupp",
+      "ore"
+     ]
+    },
+    "Stafford38.Characteristic.CanonicalTangentialSymbolFiniteness.tangentialCoordinateMap_apply": {
+     "keys": [],
+     "leaves": []
+    },
+    "Stafford38.Characteristic.CanonicalOldTangentialFiniteness.oldCoordinateMap_apply": {
+     "keys": [],
+     "leaves": []
+    }
+   }
+  },
+  "SURJ": {
+   "keys": [
+    "EULER"
+   ],
+   "leaves": [
+    "ore"
+   ],
+   "helpers": {
+    "Stafford38.WeylQuotientTransport.presented_canonicalRightIdeal_map": {
+     "keys": [],
+     "leaves": [
+      "ore"
+     ]
+    },
+    "Stafford38.WeylQuotientTransport.rightModuleEquiv_invPair": {
+     "keys": [],
+     "leaves": []
+    },
+    "Stafford38.PaperEulerGrading.presentedCanonicalQuotient_rightMul_coordinate_surjective": {
+     "keys": [
+      "EULER"
+     ],
+     "leaves": [
+      "ore"
+     ]
+    },
+    "Stafford38.WeylIteratedEquivalence.presentedToIterated_coordinate": {
+     "keys": [],
+     "leaves": [
+      "ore"
+     ]
+    },
+    "Stafford38.WeylQuotientTransport.rightModuleEquiv_invPair_symm": {
+     "keys": [],
+     "leaves": []
+    },
+    "Stafford38.WeylQuotientTransport.transportedRightQuotientEquiv_rightMul": {
+     "keys": [],
+     "leaves": []
+    }
+   }
+  },
+  "EULER": {
+   "keys": [],
+   "leaves": [
+    "coprime",
+    "ore"
+   ],
+   "helpers": {
+    "Stafford38.WeylEulerRemainder.positiveEulerResidue_eq_eulerSubring_mul_coordinate": {
+     "keys": [],
+     "leaves": [
+      "coprime",
+      "ore"
+     ]
+    },
+    "Stafford38.WeylEulerRemainder.presentedRemainder_hasPositiveCoordinateFactor": {
+     "keys": [],
+     "leaves": [
+      "ore"
+     ]
+    }
+   }
+  },
+  "CHARP": {
+   "keys": [],
+   "leaves": [
+    "ore"
+   ],
+   "helpers": {
+    "Stafford38.WeylEulerResidue.firstGenerator_mem": {
+     "keys": [],
+     "leaves": []
+    },
+    "Stafford38.WeylFiltration.bernsteinPiece_le_orderPiece": {
+     "keys": [],
+     "leaves": [
+      "ore"
+     ]
+    },
+    "Stafford38.CharacteristicInitialIdeal.orderPrincipalComponent_mem_initialIdeal": {
+     "keys": [],
+     "leaves": [
+      "ore"
+     ]
+    }
+   }
+  },
+  "MONICP": {
+   "keys": [],
+   "leaves": [
+    "ore"
+   ],
+   "helpers": {
+    "Stafford38.Geometry.ConormalAxisContradiction.canonical_orderPrincipalComponent_isHomogeneous": {
+     "keys": [],
+     "leaves": [
+      "ore"
+     ]
+    },
+    "Stafford38.CharacteristicInitialIdeal.canonical_orderPrincipalComponent_pureMomentumCoefficient": {
+     "keys": [],
+     "leaves": [
+      "ore"
+     ]
+    },
+    "Stafford38.Characteristic.NormalSymbolPolynomial.optionEquivLeft_monic_of_isHomogeneous": {
+     "keys": [],
+     "leaves": []
+    }
+   }
+  },
+  "GABBER": {
+   "keys": [],
+   "leaves": [
+    "aasupp",
+    "kahler",
+    "length",
+    "ore",
+    "support",
+    "val"
+   ],
+   "helpers": {
+    "Stafford38.Characteristic.RightReesArtinianAdapter.LocalizedPreArtinianCore.fibre_nontrivial": {
+     "keys": [],
+     "leaves": []
+    },
+    "Stafford38.CharacteristicConcreteSquareZeroTraceData.filteredQuotientTwoJetSMulCommClassInstance": {
+     "keys": [],
+     "leaves": [
+      "ore"
+     ]
+    },
+    "Stafford38.Characteristic.SquareZeroTraceData.RightSquareZeroTraceData.exists_lifts_commutator_factor": {
+     "keys": [],
+     "leaves": []
+    },
+    "Stafford38.Characteristic.GabberGlobalAssembly.localized_cofactor_mem": {
+     "keys": [],
+     "leaves": [
+      "kahler",
+      "length",
+      "ore",
+      "support",
+      "val"
+     ]
+    },
+    "Stafford38.Characteristic.RightReesArtinianAdapter.exists_concrete_localizedPreArtinianCore": {
+     "keys": [],
+     "leaves": [
+      "aasupp",
+      "length",
+      "ore",
+      "support"
+     ]
+    },
+    "Stafford38.Characteristic.LocalizedTwoBlockQuotient.localizedTwoBlockSpecialization_mk": {
+     "keys": [],
+     "leaves": []
+    },
+    "Stafford38.Characteristic.SquareZeroLocalizedRing.localizedOppositeSpecialization_numerator": {
+     "keys": [],
+     "leaves": []
+    },
+    "Stafford38.CharacteristicConcreteSquareZeroTraceData.filteredQuotientTwoJetTraceData_bracket": {
+     "keys": [],
+     "leaves": [
+      "ore"
+     ]
+    },
+    "Stafford38.Characteristic.AssociatedGradedFinite.orderAssociatedGradedModule_finite": {
+     "keys": [],
+     "leaves": [
+      "ore"
+     ]
+    },
+    "Stafford38.Characteristic.SquareZeroTraceData.RightSquareZeroTraceData.c_center": {
+     "keys": [],
+     "leaves": []
+    },
+    "Stafford38.Characteristic.RightReesArtinianAdapter.LocalizedPreArtinianCore.annihilatingPower": {
+     "keys": [],
+     "leaves": []
+    }
+   }
+  }
+ },
+ "ranges": {
+  "Stafford38.CanonicalUnitCoordinatePreimage.canonical_orderCharacteristicSupport_disjoint_coordinate_zeroLocus_of_strictUnit": [
+   "Stafford38.Characteristic.CanonicalUnitCoordinatePreimage",
+   155
+  ],
+  "Stafford38.CanonicalUnitPreimageFromInitialTop.strictUnitCoordinatePreimage_of_orderInitialIdeal_sup_coordinate_eq_top": [
+   "Stafford38.Characteristic.CanonicalUnitPreimageFromInitialTop",
+   60
+  ],
+  "Stafford38.Characteristic.AssociatedGradedFinite.orderAssociatedGradedModule_finite": [
+   "Stafford38.Characteristic.AssociatedGradedFinite",
+   50
+  ],
+  "Stafford38.Characteristic.CanonicalKoszulContradiction.canonical_support_avoidance": [
+   "Stafford38.Characteristic.CanonicalKoszulContradiction",
+   125
+  ],
+  "Stafford38.Characteristic.CanonicalKoszulContradiction.coordinate_cokernel_subsingleton": [
+   "Stafford38.Characteristic.CanonicalKoszulContradiction",
+   88
+  ],
+  "Stafford38.Characteristic.CanonicalKoszulContradiction.coordinate_quotSMulTop_subsingleton": [
+   "Stafford38.Characteristic.CanonicalKoszulContradiction",
+   102
+  ],
+  "Stafford38.Characteristic.CanonicalKoszulContradiction.no_minimal_coordinate_cokernel_support": [
+   "Stafford38.Characteristic.CanonicalKoszulContradiction",
+   50
+  ],
+  "Stafford38.Characteristic.CanonicalLaurentSymbolControl.exists_canonical_fibrePolynomial": [
+   "Stafford38.Characteristic.CanonicalLaurentSymbolControl",
+   66
+  ],
+  "Stafford38.Characteristic.CanonicalOldTangentialFiniteness.canonical_finite_old_coordinate_kernel_cokernel": [
+   "Stafford38.Characteristic.CanonicalOldTangentialFiniteness",
+   75
+  ],
+  "Stafford38.Characteristic.CanonicalOldTangentialFiniteness.oldCoordinateMap_apply": [
+   "Stafford38.Characteristic.CanonicalOldTangentialFiniteness",
+   57
+  ],
+  "Stafford38.Characteristic.CanonicalPageEulerInequality.canonicalPage_length_target_le_source": [
+   "Stafford38.Characteristic.CanonicalPageEulerInequality",
+   27
+  ],
+  "Stafford38.Characteristic.CanonicalSupportAvoidanceFromCokernel.canonical_support_avoidance_of_coordinate_cokernel_subsingleton": [
+   "Stafford38.Characteristic.CanonicalSupportAvoidanceFromCokernel",
+   28
+  ],
+  "Stafford38.Characteristic.CanonicalTangentialSymbolFiniteness.canonical_orderAssociatedGradedModule_finite_tangential_coordinate": [
+   "Stafford38.Characteristic.CanonicalTangentialSymbolFiniteness",
+   115
+  ],
+  "Stafford38.Characteristic.CanonicalTangentialSymbolFiniteness.tangentialCoordinateMap_apply": [
+   "Stafford38.Characteristic.CanonicalTangentialSymbolFiniteness",
+   94
+  ],
+  "Stafford38.Characteristic.CanonicalTangentialTotalAction.tangentialBoundaryMap_eventually_zero": [
+   "Stafford38.Characteristic.CanonicalTangentialBoundaryMaps",
+   57
+  ],
+  "Stafford38.Characteristic.CanonicalTangentialTotalAction.tangentialBoundaryMap_ker_mono": [
+   "Stafford38.Characteristic.CanonicalTangentialBoundaryMaps",
+   52
+  ],
+  "Stafford38.Characteristic.CanonicalTangentialTotalAction.tangentialBoundaryMap_surjective": [
+   "Stafford38.Characteristic.CanonicalTangentialBoundaryMaps",
+   48
+  ],
+  "Stafford38.Characteristic.GabberGlobalAssembly.associatedGraded_radical_isInvolutive": [
+   "Stafford38.Characteristic.GabberGlobalAssembly",
+   214
+  ],
+  "Stafford38.Characteristic.GabberGlobalAssembly.localized_cofactor_mem": [
+   "Stafford38.Characteristic.GabberGlobalAssembly",
+   82
+  ],
+  "Stafford38.Characteristic.GabberGlobalAssembly.minimalPrime_isInvolutive": [
+   "Stafford38.Characteristic.GabberGlobalAssembly",
+   146
+  ],
+  "Stafford38.Characteristic.LocalizedTwoBlockQuotient.localizedTwoBlockSpecialization_mk": [
+   "Stafford38.Characteristic.LocalizedTwoBlockQuotient",
+   244
+  ],
+  "Stafford38.Characteristic.NoncharacteristicMinimalPrime.canonical_minimalPrime_mem_of_normalCoordinate_false": [
+   "Stafford38.Characteristic.NoncharacteristicMinimalPrime",
+   120
+  ],
+  "Stafford38.Characteristic.NormalSymbolPolynomial.canonicalNormalPolynomial_monic": [
+   "Stafford38.Characteristic.NormalSymbolPolynomial",
+   106
+  ],
+  "Stafford38.Characteristic.NormalSymbolPolynomial.optionEquivLeft_monic_of_isHomogeneous": [
+   "Stafford38.Characteristic.NormalSymbolPolynomial",
+   55
+  ],
+  "Stafford38.Characteristic.ReducedSupportIdeal.orderCharacteristicSupport_eq_zeroLocus_reduced": [
+   "Stafford38.Characteristic.ReducedSupportIdeal",
+   56
+  ],
+  "Stafford38.Characteristic.ReducedSupportIdeal.orderInitialIdeal_le_reducedOrderSupportIdeal": [
+   "Stafford38.Characteristic.ReducedSupportIdeal",
+   36
+  ],
+  "Stafford38.Characteristic.ReducedSupportIdeal.reducedOrderSupportIdeal_isRadical": [
+   "Stafford38.Characteristic.ReducedSupportIdeal",
+   50
+  ],
+  "Stafford38.Characteristic.RightReesArtinianAdapter.LocalizedPreArtinianCore.annihilatingPower": [
+   "Stafford38.Characteristic.RightReesArtinianAdapter",
+   123
+  ],
+  "Stafford38.Characteristic.RightReesArtinianAdapter.LocalizedPreArtinianCore.fibre_nontrivial": [
+   "Stafford38.Characteristic.RightReesArtinianAdapter",
+   121
+  ],
+  "Stafford38.Characteristic.RightReesArtinianAdapter.exists_concrete_localizedPreArtinianCore": [
+   "Stafford38.Characteristic.RightReesArtinianAdapter",
+   171
+  ],
+  "Stafford38.Characteristic.SquareZeroLocalizedRing.localizedOppositeSpecialization_numerator": [
+   "Stafford38.Characteristic.SquareZeroLocalizedRing",
+   106
+  ],
+  "Stafford38.Characteristic.SquareZeroTraceData.RightSquareZeroTraceData.c_center": [
+   "Stafford38.Characteristic.SquareZeroTraceData",
+   80
+  ],
+  "Stafford38.Characteristic.SquareZeroTraceData.RightSquareZeroTraceData.exists_lifts_commutator_factor": [
+   "Stafford38.Characteristic.SquareZeroTraceData",
+   133
+  ],
+  "Stafford38.CharacteristicAssociatedGradedModule.annihilator_orderAssociatedGradedModule": [
+   "Stafford38.Characteristic.AssociatedGradedModule",
+   373
+  ],
+  "Stafford38.CharacteristicCanonicalCertificate.exists_fixedSource_certificate_of_orderCharacteristicSupport_eq_empty": [
+   "Stafford38.Characteristic.CanonicalCertificate",
+   33
+  ],
+  "Stafford38.CharacteristicConcreteSquareZeroTraceData.filteredQuotientTwoJetSMulCommClassInstance": [
+   "Stafford38.Characteristic.ConcreteSquareZeroTraceData",
+   90
+  ],
+  "Stafford38.CharacteristicConcreteSquareZeroTraceData.filteredQuotientTwoJetTraceData_bracket": [
+   "Stafford38.Characteristic.ConcreteSquareZeroTraceData",
+   123
+  ],
+  "Stafford38.CharacteristicEmptySupportVanishing.rightQuotient_subsingleton_of_orderCharacteristicSupport_eq_empty": [
+   "Stafford38.Characteristic.EmptySupportVanishing",
+   55
+  ],
+  "Stafford38.CharacteristicInitialIdeal.canonical_orderPrincipalComponent_mem_initialIdeal": [
+   "Stafford38.Characteristic.InitialIdeal",
+   283
+  ],
+  "Stafford38.CharacteristicInitialIdeal.canonical_orderPrincipalComponent_pureMomentumCoefficient": [
+   "Stafford38.Characteristic.InitialIdeal",
+   304
+  ],
+  "Stafford38.CharacteristicInitialIdeal.orderPrincipalComponent_mem_initialIdeal": [
+   "Stafford38.Characteristic.InitialIdeal",
+   264
+  ],
+  "Stafford38.CharacteristicPaperSymplecticBasis.exists_symplectic_equiv_sending_nonzero": [
+   "Stafford38.Characteristic.PaperSymplecticBasis",
+   437
+  ],
+  "Stafford38.CharacteristicSymplecticCompletion.exists_phasePairing_left_ne_zero": [
+   "Stafford38.Characteristic.SymplecticCompletion",
+   201
+  ],
+  "Stafford38.CharacteristicSymplecticCompletion.exists_phasePairing_right_ne_zero": [
+   "Stafford38.Characteristic.SymplecticCompletion",
+   183
+  ],
+  "Stafford38.CharacteristicSymplecticCompletion.exists_symplectic_chart_matrices": [
+   "Stafford38.Characteristic.SymplecticCompletion",
+   350
+  ],
+  "Stafford38.CharacteristicSymplecticCompletion.exists_symplectic_mulVec_eq": [
+   "Stafford38.Characteristic.SymplecticCompletion",
+   242
+  ],
+  "Stafford38.CharacteristicSymplecticCompletion.exists_symplectic_pureCoefficient_ne_zero": [
+   "Stafford38.Characteristic.SymplecticCompletion",
+   328
+  ],
+  "Stafford38.CharacteristicSymplecticCompletion.phasePairing_add_left": [
+   "Stafford38.Characteristic.SymplecticCompletion",
+   78
+  ],
+  "Stafford38.CharacteristicSymplecticCompletion.phasePairing_add_right": [
+   "Stafford38.Characteristic.SymplecticCompletion",
+   85
+  ],
+  "Stafford38.CharacteristicSymplecticCompletion.phasePairing_basis": [
+   "Stafford38.Characteristic.SymplecticCompletion",
+   150
+  ],
+  "Stafford38.CharacteristicSymplecticCompletion.phasePairing_self": [
+   "Stafford38.Characteristic.SymplecticCompletion",
+   111
+  ],
+  "Stafford38.CharacteristicSymplecticCompletion.phasePairing_smul_left": [
+   "Stafford38.Characteristic.SymplecticCompletion",
+   92
+  ],
+  "Stafford38.CharacteristicSymplecticCompletion.phasePairing_smul_right": [
+   "Stafford38.Characteristic.SymplecticCompletion",
+   99
+  ],
+  "Stafford38.CharacteristicTransposedFilteredModuleSupport.instFiniteSymbolRingOrderAssociatedGradedModule": [
+   "Stafford38.Characteristic.TransposedFilteredModuleSupport",
+   258
+  ],
+  "Stafford38.CharacteristicTransposedFilteredModuleSupport.transposedOrderAssociatedGradedSupport_eq_preimage": [
+   "Stafford38.Characteristic.TransposedFilteredModuleSupport",
+   303
+  ],
+  "Stafford38.FoundationClosure.canonicalNoncharacteristicSupportAvoidance": [
+   "Stafford38.FoundationClosure",
+   29
+  ],
+  "Stafford38.FoundationClosure.canonicalSupportVanishingViaGeneralCoisotropic": [
+   "Stafford38.FoundationClosure",
+   43
+  ],
+  "Stafford38.Geometry.ActualChartValuationImage.chartGenericPointSubalgebra_le_valuationSubring": [
+   "Stafford38.Geometry.ActualChartValuationImage",
+   27
+  ],
+  "Stafford38.Geometry.ActualOptionGroundPointCompletion.exists_groundPoint_chart_from_option_map": [
+   "Stafford38.Geometry.ActualOptionGroundPointCompletion",
+   105
+  ],
+  "Stafford38.Geometry.ActualSameWitnessDivisorNumerator.exists_actual_parameter_with_retained_orders": [
+   "Stafford38.Geometry.ActualSameWitnessDivisorNumerator",
+   103
+  ],
+  "Stafford38.Geometry.ActualSameWitnessGroundPointCompletion.actualOptionMap_none": [
+   "Stafford38.Geometry.ActualSameWitnessGroundPointCompletion",
+   49
+  ],
+  "Stafford38.Geometry.ActualSameWitnessGroundPointCompletion.actualOptionMap_some": [
+   "Stafford38.Geometry.ActualSameWitnessGroundPointCompletion",
+   57
+  ],
+  "Stafford38.Geometry.ActualSameWitnessGroundPointCompletion.exists_actual_same_witness_groundpoint_chart": [
+   "Stafford38.Geometry.ActualSameWitnessGroundPointCompletion",
+   131
+  ],
+  "Stafford38.Geometry.ActualSelectedNormalizationDivisorEtale.ActualOptionEtaleCertificate.prime_isPrime": [
+   "Stafford38.Geometry.ActualSelectedNormalizationDivisorEtale",
+   47
+  ],
+  "Stafford38.Geometry.ActualSelectedNormalizationDivisorEtale.formallyEtale_at_selected_actual_normalization_center_core": [
+   "Stafford38.Geometry.ActualSelectedNormalizationDivisorEtale",
+   166
+  ],
+  "Stafford38.Geometry.ActualSelectedResidueBasis.exists_actual_selected_residue_basis": [
+   "Stafford38.Geometry.ActualSelectedResidueBasis",
+   61
+  ],
+  "Stafford38.Geometry.AsymptoticDivisorExistence.coordinateZeroPrime_isPrime": [
+   "Stafford38.Geometry.AsymptoticDivisorExistence",
+   57
+  ],
+  "Stafford38.Geometry.ChartGenericPointFractionRing.chartGenericPointSubalgebra_finiteType": [
+   "Stafford38.Geometry.ChartGenericPointFractionRing",
+   317
+  ],
+  "Stafford38.Geometry.ChartGenericPointFractionRing.chartGenericPointSubalgebra_isFractionRing": [
+   "Stafford38.Geometry.ChartGenericPointFractionRing",
+   325
+  ],
+  "Stafford38.Geometry.ChartGenericPointFractionRing.exists_finite_chartCoordinate_residue_transcendenceBasis": [
+   "Stafford38.Geometry.ChartGenericPointFractionRing",
+   224
+  ],
+  "Stafford38.Geometry.ConormalAxisContradiction.canonical_orderPrincipalComponent_eval_pureMomentumAxis": [
+   "Stafford38.Geometry.ConormalAxisContradiction",
+   131
+  ],
+  "Stafford38.Geometry.ConormalAxisContradiction.canonical_orderPrincipalComponent_isHomogeneous": [
+   "Stafford38.Geometry.ConormalAxisContradiction",
+   61
+  ],
+  "Stafford38.Geometry.DivisorTangentLattice.VisibleDivisorFrame.one_le_a": [
+   "Stafford38.Geometry.DivisorTangentLattice",
+   89
+  ],
+  "Stafford38.Geometry.DivisorTangentLattice.VisibleDivisorFrame.one_le_e": [
+   "Stafford38.Geometry.DivisorTangentLattice",
+   90
+  ],
+  "Stafford38.Geometry.ExactDivisorialVisibleFrameExistence.componentCoordinate_adjoin_eq_top": [
+   "Stafford38.Geometry.ExactDivisorialVisibleFrameExistence",
+   45
+  ],
+  "Stafford38.Geometry.GeneralAsymptoticConormal.coordinate_axis_mem_smooth_fibre_closure": [
+   "Stafford38.Geometry.GeneralAsymptoticConormal",
+   32
+  ],
+  "Stafford38.Geometry.GeneralCoisotropicCanonicalAdapter.algebraicallyClosedCanonicalSupportVanishing_of_generalCoisotropic": [
+   "Stafford38.Geometry.GeneralCoisotropicCanonicalAdapter",
+   224
+  ],
+  "Stafford38.Geometry.GeneralCoisotropicCanonicalAdapter.algebraicallyClosedCanonicalSupportVanishing_using": [
+   "Stafford38.Geometry.GeneralCoisotropicCanonicalAdapter",
+   113
+  ],
+  "Stafford38.Geometry.GeneralCoisotropicSets.exists_zero_base_coordinate_of_isFibreConical_using": [
+   "Stafford38.Geometry.GeneralCoisotropicSets",
+   116
+  ],
+  "Stafford38.Geometry.GeneralDivisorialVisibleFrame.GeneralDivisorialVisibleFrameColumn.chart_one": [
+   "Stafford38.Geometry.GeneralDivisorialVisibleFrameColumn",
+   75
+  ],
+  "Stafford38.Geometry.GeneralDivisorialVisibleFrame.GeneralDivisorialVisibleFrameColumn.groundCoeff_eq_retained": [
+   "Stafford38.Geometry.GeneralDivisorialVisibleFrameColumn",
+   100
+  ],
+  "Stafford38.Geometry.GeneralDivisorialVisibleFrame.GeneralDivisorialVisibleFrameColumn.q_commonScale": [
+   "Stafford38.Geometry.GeneralDivisorialVisibleFrameColumn",
+   83
+  ],
+  "Stafford38.Geometry.GeneralDivisorialVisibleFrame.GeneralDivisorialVisibleFrameWitness.halg": [
+   "Stafford38.Geometry.GeneralDivisorialVisibleFrameWitness",
+   82
+  ],
+  "Stafford38.Geometry.GeneralDivisorialVisibleFrame.GeneralDivisorialVisibleFrameWitness.retainedGroundMap": [
+   "Stafford38.Geometry.GeneralDivisorialVisibleFrameWitness",
+   80
+  ],
+  "Stafford38.Geometry.GeneralDivisorialVisibleFrame.witness_q0_residue_eq_zero": [
+   "Stafford38.Geometry.GeneralDivisorialVisibleFrameResidueSupport",
+   57
+  ],
+  "Stafford38.Geometry.LaurentConormalDirection.eval₂_fibreLift": [
+   "Stafford38.Geometry.LaurentConormalDirection",
+   138
+  ],
+  "Stafford38.Geometry.PaperSameWitnessComponentFieldRank.component_field_rank_of_witness": [
+   "Stafford38.Geometry.PaperSameWitnessComponentFieldRank",
+   41
+  ],
+  "Stafford38.Geometry.ProjectiveChartNormalizationCenter.integralClosureCenter_isPrime": [
+   "Stafford38.Geometry.ProjectiveChartNormalizationCenter",
+   51
+  ],
+  "Stafford38.Geometry.ProjectiveChartNormalizationFinite.integralClosure_finiteType_over_base": [
+   "Stafford38.Geometry.ProjectiveChartNormalizationFinite",
+   42
+  ],
+  "Stafford38.Geometry.RelativeDivisorialTower.intermediateAdjoin_isAlgebraic_over_algebraAdjoin": [
+   "Stafford38.Geometry.RelativeDivisorialTower",
+   57
+  ],
+  "Stafford38.Geometry.RetainedDVR.RetainedDVRPlace.isDiscrete": [
+   "Stafford38.Geometry.RetainedDVRPlace",
+   46
+  ],
+  "Stafford38.Geometry.SameWitness.ChartSetup.hchart": [
+   "Stafford38.Geometry.SameWitness.ChartSetup",
+   43
+  ],
+  "Stafford38.Geometry.SameWitness.ChartSetup.hrep": [
+   "Stafford38.Geometry.SameWitness.ChartSetup",
+   39
+  ],
+  "Stafford38.Geometry.SameWitness.ChartSetup.hsmooth": [
+   "Stafford38.Geometry.SameWitness.ChartSetup",
+   41
+  ],
+  "Stafford38.Geometry.SameWitness.CommonOpenColumnsData.hnumerator": [
+   "Stafford38.Geometry.SameWitness.CommonOpenColumns",
+   47
+  ],
+  "Stafford38.Geometry.SameWitness.CommonOpenEtaleData.hφAction": [
+   "Stafford38.Geometry.SameWitness.CommonOpenEtale",
+   79
+  ],
+  "Stafford38.Geometry.SameWitness.CommonOpenEtaleData.hφEtale": [
+   "Stafford38.Geometry.SameWitness.CommonOpenEtale",
+   89
+  ],
+  "Stafford38.Geometry.SameWitness.CommonOpenEtaleData.hψEtale": [
+   "Stafford38.Geometry.SameWitness.CommonOpenEtale",
+   92
+  ],
+  "Stafford38.Geometry.SameWitness.CommonOpenPointData.hM": [
+   "Stafford38.Geometry.SameWitness.CommonOpen",
+   169
+  ],
+  "Stafford38.Geometry.SameWitness.CommonOpenPositionData.hchartPre": [
+   "Stafford38.Geometry.SameWitness.CommonOpenPositions",
+   161
+  ],
+  "Stafford38.Geometry.SameWitness.CommonOpenPositionData.hpositionL": [
+   "Stafford38.Geometry.SameWitness.CommonOpenPositions",
+   167
+  ],
+  "Stafford38.Geometry.SameWitness.CommonOpenPositionData.hqPre": [
+   "Stafford38.Geometry.SameWitness.CommonOpenPositions",
+   156
+  ],
+  "Stafford38.Geometry.SameWitness.CoordinatePresentation.hBfinite": [
+   "Stafford38.Geometry.SameWitness.CoordinatePresentation",
+   42
+  ],
+  "Stafford38.Geometry.SameWitness.axis_mem_smoothConormalFibreProjection_closure_of_algHoms": [
+   "Stafford38.Geometry.SameWitness.EndpointOfAlgHoms",
+   26
+  ],
+  "Stafford38.Geometry.SameWitness.axis_mem_smoothConormalFibreProjection_closure_of_groundPointOutput": [
+   "Stafford38.Geometry.SameWitness.AffineFibreClosure",
+   135
+  ],
+  "Stafford38.Geometry.SameWitness.commonOpenColumnsData_of_arc": [
+   "Stafford38.Geometry.SameWitness.CommonOpenColumns",
+   131
+  ],
+  "Stafford38.Geometry.SameWitness.coordinate_axis_mem_smooth_fibre_closure": [
+   "Stafford38.Geometry.SameWitness.OriginalPrimeAxis",
+   20
+  ],
+  "Stafford38.Geometry.SameWitness.exists_commonOpenArcData": [
+   "Stafford38.Geometry.SameWitness.CommonOpenArc",
+   258
+  ],
+  "Stafford38.Geometry.SameWitness.nonempty_chartSetup": [
+   "Stafford38.Geometry.SameWitness.ChartSetup",
+   66
+  ],
+  "Stafford38.Geometry.SameWitness.nonempty_commonOpenData": [
+   "Stafford38.Geometry.SameWitness.CommonOpen",
+   689
+  ],
+  "Stafford38.Geometry.SameWitness.nonempty_commonOpenEtaleData": [
+   "Stafford38.Geometry.SameWitness.CommonOpenEtale",
+   149
+  ],
+  "Stafford38.Geometry.SameWitness.nonempty_coordinatePresentation": [
+   "Stafford38.Geometry.SameWitness.CoordinatePresentation",
+   128
+  ],
+  "Stafford38.Geometry.SameWitnessTranscendenceDegreeBound.component_trdeg_le_residue_trdeg_add_one_of_witness": [
+   "Stafford38.Geometry.SameWitnessTranscendenceDegreeBound",
+   37
+  ],
+  "Stafford38.Geometry.kaehlerFinrankOfTranscendenceBasis": [
+   "Stafford38.Geometry.KaehlerTranscendenceBasis",
+   136
+  ],
+  "Stafford38.PaperCyclicity.paper_torsion_module_is_cyclic": [
+   "Stafford38.PaperCyclicity",
+   83
+  ],
+  "Stafford38.PaperEulerGrading.presentedCanonicalQuotient_rightMul_coordinate_surjective": [
+   "Stafford38.Weyl.PaperEulerGrading",
+   227
+  ],
+  "Stafford38.PaperQuotientDescent.canonicalSupportDescent_via_quotient": [
+   "Stafford38.Weyl.PaperQuotientDescent",
+   151
+  ],
+  "Stafford38.PaperQuotientDescent.canonicalSupport_empty_of_scalarExtension_empty": [
+   "Stafford38.Weyl.PaperQuotientDescent",
+   135
+  ],
+  "Stafford38.SpecializedNoncharacteristicEquality.strictUnitCoordinatePreimage_of_transposedSupport_disjoint_axis": [
+   "Stafford38.Characteristic.SpecializedNoncharacteristicEquality",
+   265
+  ],
+  "Stafford38.SpecializedNoncharacteristicEquality.transposedSupport_disjoint_axis_iff": [
+   "Stafford38.Characteristic.SpecializedNoncharacteristicEquality",
+   151
+  ],
+  "Stafford38.TorsionCyclicity.weyl_isCyclic_of_isRightTorsion": [
+   "Stafford38.TorsionCyclicity",
+   63
+  ],
+  "Stafford38.UniversalAssembly.universalStatement_of_canonicalSupportVanishing": [
+   "Stafford38.UniversalAssembly",
+   69
+  ],
+  "Stafford38.Weyl.PresentedScalarExtension.presentedWeylScalarExtension_isPBWMonicAt": [
+   "Stafford38.Weyl.PresentedScalarExtension",
+   332
+  ],
+  "Stafford38.WeylEulerRemainder.positiveEulerResidue_eq_eulerSubring_mul_coordinate": [
+   "Stafford38.Weyl.EulerRemainder",
+   257
+  ],
+  "Stafford38.WeylEulerRemainder.presentedPositiveEulerResidue": [
+   "Stafford38.Weyl.EulerRemainder",
+   405
+  ],
+  "Stafford38.WeylEulerRemainder.presentedRemainder_hasPositiveCoordinateFactor": [
+   "Stafford38.Weyl.EulerRemainder",
+   371
+  ],
+  "Stafford38.WeylEulerResidue.firstGenerator_mem": [
+   "Stafford38.Weyl.EulerResidue",
+   29
+  ],
+  "Stafford38.WeylFiltration.bernsteinPiece_le_orderPiece": [
+   "Stafford38.Weyl.Filtration",
+   580
+  ],
+  "Stafford38.WeylIteratedEquivalence.presentedToIterated_coordinate": [
+   "Stafford38.Weyl.IteratedEquivalence",
+   492
+  ],
+  "Stafford38.WeylMonicNormalization.exists_normalized_symplectic_image": [
+   "Stafford38.Weyl.MonicNormalization",
+   162
+  ],
+  "Stafford38.WeylMonicNormalization.principal_isHomogeneous": [
+   "Stafford38.Weyl.MonicNormalization",
+   60
+  ],
+  "Stafford38.WeylMonicNormalization.scalar_or_normalized_symplectic_image": [
+   "Stafford38.Weyl.MonicNormalization",
+   185
+  ],
+  "Stafford38.WeylMonicNormalization.scalar_or_positive_top_bernstein_piece": [
+   "Stafford38.Weyl.MonicNormalization",
+   126
+  ],
+  "Stafford38.WeylPBWMonicBridge.coeff_axisPolynomial": [
+   "Stafford38.Weyl.PBWMonicBridge",
+   38
+  ],
+  "Stafford38.WeylPBWMonicBridge.coeff_principal_pure_eq_normalForm": [
+   "Stafford38.Weyl.PBWMonicBridge",
+   88
+  ],
+  "Stafford38.WeylQuotientTransport.presentedCanonicalRightQuotient_rightMul_coordinate_surjective": [
+   "Stafford38.Weyl.QuotientTransport",
+   242
+  ],
+  "Stafford38.WeylQuotientTransport.presented_canonicalRightIdeal_map": [
+   "Stafford38.Weyl.QuotientTransport",
+   156
+  ],
+  "Stafford38.WeylQuotientTransport.rightModuleEquiv_invPair": [
+   "Stafford38.Weyl.QuotientTransport",
+   39
+  ],
+  "Stafford38.WeylQuotientTransport.rightModuleEquiv_invPair_symm": [
+   "Stafford38.Weyl.QuotientTransport",
+   46
+  ],
+  "Stafford38.WeylQuotientTransport.transportedRightQuotientEquiv_rightMul": [
+   "Stafford38.Weyl.QuotientTransport",
+   227
+  ],
+  "Stafford38.WeylSymbolCompatibility.standardSymplecticAlgHom_preserves_bernsteinPiece": [
+   "Stafford38.Weyl.SymbolCompatibility",
+   217
+  ],
+  "Stafford38.WeylSymbolCompatibility.standardSymplecticAlgHom_principal_compatibility": [
+   "Stafford38.Weyl.SymbolCompatibility",
+   420
+  ],
+  "Stafford38.WeylTranspositionFiltration.symbolTransposition_coordinate": [
+   "Stafford38.Weyl.TranspositionFiltration",
+   346
+  ],
+  "Stafford38.universalStatement": [
+   "Stafford38.FoundationClosure",
+   69
+  ],
+  "actualCertificate_formallyEtale_for_groundPointAdapter": [
+   "Stafford38.Geometry.GroundPointETCompatibility",
+   13
+  ],
+  "prime_span_eq_maximalIdeal_transport": [
+   "Stafford38.Geometry.UnitPowerCenterTransport",
+   82
+  ],
+  "selected_center_retained_factors_at_canonical_prime": [
+   "Stafford38.Geometry.UnitPowerCenterTransport",
+   58
+  ]
+ }
+}

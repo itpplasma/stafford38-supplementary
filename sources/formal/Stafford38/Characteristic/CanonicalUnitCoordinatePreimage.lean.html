@@ -1,9 +1,9 @@
-<!doctype html><meta charset="utf-8"><title>Stafford38/Characteristic/CanonicalUnitCoordinatePreimage.lean</title><style>body{font:14px monospace}pre span{display:block}pre span:target{background:#fff0ad}a{color:#666}pre{white-space:pre-wrap}</style><h1>Stafford38/Characteristic/CanonicalUnitCoordinatePreimage.lean</h1><p>This project (Stafford38) · 0403af3f0b1a7f84d2027121932723f67bd279ae</p><pre><span id="L1"><a href="#L1">1</a> module</span>
+<!doctype html><meta charset="utf-8"><title>Stafford38/Characteristic/CanonicalUnitCoordinatePreimage.lean</title><style>body{font:14px monospace}pre span{display:block}pre span:target{background:#fff0ad}a{color:#666}pre{white-space:pre-wrap}a.ref{color:#0645ad;text-decoration:none}a.ref:hover{text-decoration:underline}</style><h1>Stafford38/Characteristic/CanonicalUnitCoordinatePreimage.lean</h1><p>This project (Stafford38) · 0403af3f0b1a7f84d2027121932723f67bd279ae</p><pre><span id="L1"><a href="#L1">1</a> module</span>
 <span id="L2"><a href="#L2">2</a> public import Stafford38.Characteristic.CanonicalMonicSaturation</span>
 <span id="L3"><a href="#L3">3</a> </span>
 <span id="L4"><a href="#L4">4</a> @[expose] public section</span>
 <span id="L5"><a href="#L5">5</a> </span>
-<span id="L6"><a href="#L6">6</a> open Stafford38Challenge (WeylAlg)</span>
+<span id="L6"><a href="#L6">6</a> open Stafford38Challenge (<a class="ref" href="../ChallengeDefinitions.lean.html#L73" title="Stafford38Challenge.WeylAlg">WeylAlg</a>)</span>
 <span id="L7"><a href="#L7">7</a> </span>
 <span id="L8"><a href="#L8">8</a> /-!</span>
 <span id="L9"><a href="#L9">9</a> # A unit-only strict coordinate criterion for canonical axis avoidance</span>
@@ -43,143 +43,143 @@
 <span id="L43"><a href="#L43">43</a> </span>
 <span id="L44"><a href="#L44">44</a> universe u</span>
 <span id="L45"><a href="#L45">45</a> </span>
-<span id="L46"><a href="#L46">46</a> variable (k : Type u) [Field k] [Algebra ℚ k]</span>
+<span id="L46"><a href="#L46">46</a> variable (k : Type u) [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Field/Defs.lean#L170" title="Field">Field</a> k] [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Algebra/Defs.lean#L91" title="Algebra">Algebra</a> <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Data/Rat/Basic.lean#L27" title="Rat">ℚ</a> k]</span>
 <span id="L47"><a href="#L47">47</a> </span>
-<span id="L48"><a href="#L48">48</a> abbrev CanonicalIdeal (n N : ℕ)</span>
-<span id="L49"><a href="#L49">49</a>     (d : WeylAlg k (n + 1)) :=</span>
-<span id="L50"><a href="#L50">50</a>   canonicalRightIdeal (presentedCoordinate k n) d N</span>
+<span id="L48"><a href="#L48">48</a> abbrev CanonicalIdeal (n N : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L1351" title="Nat">ℕ</a>)</span>
+<span id="L49"><a href="#L49">49</a>     (d : <a class="ref" href="../ChallengeDefinitions.lean.html#L73" title="Stafford38Challenge.WeylAlg">WeylAlg</a> k (n + 1)) :=</span>
+<span id="L50"><a href="#L50">50</a>   <a class="ref" href="../Weyl/EulerResidue.lean.html#L25" title="Stafford38.WeylEulerResidue.canonicalRightIdeal">canonicalRightIdeal</a> (<a class="ref" href="../Weyl/IteratedEquivalence.lean.html#L330" title="Stafford38.WeylIteratedEquivalence.presentedCoordinate">presentedCoordinate</a> k n) d N</span>
 <span id="L51"><a href="#L51">51</a> </span>
 <span id="L52"><a href="#L52">52</a> /-- The weakest concrete filtered input used by the terminal axis argument:</span>
 <span id="L53"><a href="#L53">53</a> the quotient class of `1` has one coordinate predecessor of order zero. -/</span>
-<span id="L54"><a href="#L54">54</a> def StrictUnitCoordinatePreimage (n N : ℕ)</span>
-<span id="L55"><a href="#L55">55</a>     (d : WeylAlg k (n + 1)) : Prop :=</span>
-<span id="L56"><a href="#L56">56</a>   ∃ y : WeylAlg k (n + 1),</span>
-<span id="L57"><a href="#L57">57</a>     y ∈ orderPiece k (n + 1) 0 ∧</span>
-<span id="L58"><a href="#L58">58</a>       qmk (CanonicalIdeal k n N d) (y * presentedCoordinate k n) =</span>
-<span id="L59"><a href="#L59">59</a>         qmk (CanonicalIdeal k n N d) 1</span>
+<span id="L54"><a href="#L54">54</a> def StrictUnitCoordinatePreimage (n N : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L1351" title="Nat">ℕ</a>)</span>
+<span id="L55"><a href="#L55">55</a>     (d : <a class="ref" href="../ChallengeDefinitions.lean.html#L73" title="Stafford38Challenge.WeylAlg">WeylAlg</a> k (n + 1)) : Prop :=</span>
+<span id="L56"><a href="#L56">56</a>   ∃ y : <a class="ref" href="../ChallengeDefinitions.lean.html#L73" title="Stafford38Challenge.WeylAlg">WeylAlg</a> k (n + 1),</span>
+<span id="L57"><a href="#L57">57</a>     y ∈ <a class="ref" href="../Weyl/Filtration.lean.html#L285" title="Stafford38.WeylFiltration.orderPiece">orderPiece</a> k (n + 1) 0 ∧</span>
+<span id="L58"><a href="#L58">58</a>       <a class="ref" href="../Quotient/EulerSurjectivity.lean.html#L27" title="Stafford38.EulerSurjectivity.qmk">qmk</a> (<a class="ref" href="./CanonicalUnitCoordinatePreimage.lean.html#L48" title="Stafford38.CanonicalUnitCoordinatePreimage.CanonicalIdeal">CanonicalIdeal</a> k n N d) (y * <a class="ref" href="../Weyl/IteratedEquivalence.lean.html#L330" title="Stafford38.WeylIteratedEquivalence.presentedCoordinate">presentedCoordinate</a> k n) =</span>
+<span id="L59"><a href="#L59">59</a>         <a class="ref" href="../Quotient/EulerSurjectivity.lean.html#L27" title="Stafford38.EulerSurjectivity.qmk">qmk</a> (<a class="ref" href="./CanonicalUnitCoordinatePreimage.lean.html#L48" title="Stafford38.CanonicalUnitCoordinatePreimage.CanonicalIdeal">CanonicalIdeal</a> k n N d) 1</span>
 <span id="L60"><a href="#L60">60</a> </span>
 <span id="L61"><a href="#L61">61</a> /-- The previous all-degree cancellation hypothesis implies the unit-only</span>
 <span id="L62"><a href="#L62">62</a> criterion, by strictifying an unrestricted preimage only at degree zero. -/</span>
 <span id="L63"><a href="#L63">63</a> theorem strictUnitCoordinatePreimage_of_coordinateCancellation</span>
-<span id="L64"><a href="#L64">64</a>     (n N : ℕ) {d : WeylAlg k (n + 1)}</span>
-<span id="L65"><a href="#L65">65</a>     (hd : IsPBWMonicAt k (.inr (0 : Fin (n + 1))) N d)</span>
-<span id="L66"><a href="#L66">66</a>     (hcancel : CoordinateCancellation k n N d) :</span>
-<span id="L67"><a href="#L67">67</a>     StrictUnitCoordinatePreimage k n N d := by</span>
-<span id="L68"><a href="#L68">68</a>   obtain ⟨y, hy, hyx⟩ := exists_strict_coordinate_preimage</span>
-<span id="L69"><a href="#L69">69</a>     k n N 0 hd hcancel 1 (orderPieceOne (n := n + 1) k).property</span>
+<span id="L64"><a href="#L64">64</a>     (n N : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L1351" title="Nat">ℕ</a>) {d : <a class="ref" href="../ChallengeDefinitions.lean.html#L73" title="Stafford38Challenge.WeylAlg">WeylAlg</a> k (n + 1)}</span>
+<span id="L65"><a href="#L65">65</a>     (hd : <a class="ref" href="../Weyl/PBWMonicBridge.lean.html#L102" title="Stafford38.WeylPBWMonicBridge.IsPBWMonicAt">IsPBWMonicAt</a> k (<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Core.lean#L215" title="Sum.inr">.inr</a> (0 : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L2443" title="Fin">Fin</a> (n + 1))) N d)</span>
+<span id="L66"><a href="#L66">66</a>     (hcancel : <a class="ref" href="./CanonicalAxisAvoidanceConsumer.lean.html#L58" title="Stafford38.CanonicalAxisAvoidanceConsumer.CoordinateCancellation">CoordinateCancellation</a> k n N d) :</span>
+<span id="L67"><a href="#L67">67</a>     <a class="ref" href="./CanonicalUnitCoordinatePreimage.lean.html#L52" title="Stafford38.CanonicalUnitCoordinatePreimage.StrictUnitCoordinatePreimage">StrictUnitCoordinatePreimage</a> k n N d := by</span>
+<span id="L68"><a href="#L68">68</a>   obtain ⟨y, hy, hyx⟩ := <a class="ref" href="./CanonicalAxisAvoidanceConsumer.lean.html#L70" title="Stafford38.CanonicalAxisAvoidanceConsumer.exists_strict_coordinate_preimage">exists_strict_coordinate_preimage</a></span>
+<span id="L69"><a href="#L69">69</a>     k n N 0 hd hcancel 1 (<a class="ref" href="./AssociatedGradedModule.lean.html#L265" title="Stafford38.CharacteristicAssociatedGradedModule.orderPieceOne">orderPieceOne</a> (n := n + 1) k).<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L719" title="Subtype.property">property</a></span>
 <span id="L70"><a href="#L70">70</a>   exact ⟨y, hy, hyx⟩</span>
 <span id="L71"><a href="#L71">71</a> </span>
-<span id="L72"><a href="#L72">72</a> omit [Algebra ℚ k] in</span>
+<span id="L72"><a href="#L72">72</a> omit [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Algebra/Defs.lean#L91" title="Algebra">Algebra</a> <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Data/Rat/Basic.lean#L27" title="Rat">ℚ</a> k] in</span>
 <span id="L73"><a href="#L73">73</a> /-- Uniform strict-lower coordinate division is also stronger than necessary:</span>
 <span id="L74"><a href="#L74">74</a> only its instance at cutoff `1` and target `1` is used here. -/</span>
 <span id="L75"><a href="#L75">75</a> theorem strictUnitCoordinatePreimage_of_strictLowerCoordinatePreimages</span>
-<span id="L76"><a href="#L76">76</a>     (n N : ℕ) {d : WeylAlg k (n + 1)}</span>
-<span id="L77"><a href="#L77">77</a>     (hstrict : StrictLowerCoordinatePreimages k n N d) :</span>
-<span id="L78"><a href="#L78">78</a>     StrictUnitCoordinatePreimage k n N d := by</span>
-<span id="L79"><a href="#L79">79</a>   have hone : (1 : WeylAlg k (n + 1)) ∈</span>
-<span id="L80"><a href="#L80">80</a>       presentedStrictLowerPiece k orderWeight 1 := by</span>
-<span id="L81"><a href="#L81">81</a>     change (1 : WeylAlg k (n + 1)) ∈ orderPiece k (n + 1) 0</span>
-<span id="L82"><a href="#L82">82</a>     exact (orderPieceOne (n := n + 1) k).property</span>
+<span id="L76"><a href="#L76">76</a>     (n N : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L1351" title="Nat">ℕ</a>) {d : <a class="ref" href="../ChallengeDefinitions.lean.html#L73" title="Stafford38Challenge.WeylAlg">WeylAlg</a> k (n + 1)}</span>
+<span id="L77"><a href="#L77">77</a>     (hstrict : <a class="ref" href="./CanonicalMonicSaturation.lean.html#L58" title="Stafford38.CanonicalMonicSaturation.StrictLowerCoordinatePreimages">StrictLowerCoordinatePreimages</a> k n N d) :</span>
+<span id="L78"><a href="#L78">78</a>     <a class="ref" href="./CanonicalUnitCoordinatePreimage.lean.html#L52" title="Stafford38.CanonicalUnitCoordinatePreimage.StrictUnitCoordinatePreimage">StrictUnitCoordinatePreimage</a> k n N d := by</span>
+<span id="L79"><a href="#L79">79</a>   have hone : (1 : <a class="ref" href="../ChallengeDefinitions.lean.html#L73" title="Stafford38Challenge.WeylAlg">WeylAlg</a> k (n + 1)) ∈</span>
+<span id="L80"><a href="#L80">80</a>       <a class="ref" href="../Weyl/AssociatedGraded.lean.html#L34" title="Stafford38.WeylAssociatedGraded.presentedStrictLowerPiece">presentedStrictLowerPiece</a> k <a class="ref" href="../Weyl/Filtration.lean.html#L223" title="Stafford38.WeylFiltration.orderWeight">orderWeight</a> 1 := by</span>
+<span id="L81"><a href="#L81">81</a>     change (1 : <a class="ref" href="../ChallengeDefinitions.lean.html#L73" title="Stafford38Challenge.WeylAlg">WeylAlg</a> k (n + 1)) ∈ <a class="ref" href="../Weyl/Filtration.lean.html#L285" title="Stafford38.WeylFiltration.orderPiece">orderPiece</a> k (n + 1) 0</span>
+<span id="L82"><a href="#L82">82</a>     exact (<a class="ref" href="./AssociatedGradedModule.lean.html#L265" title="Stafford38.CharacteristicAssociatedGradedModule.orderPieceOne">orderPieceOne</a> (n := n + 1) k).<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L719" title="Subtype.property">property</a></span>
 <span id="L83"><a href="#L83">83</a>   obtain ⟨y, hy, hyx⟩ := hstrict 1 1 hone</span>
-<span id="L84"><a href="#L84">84</a>   have hy0 : y ∈ orderPiece k (n + 1) 0 := by</span>
-<span id="L85"><a href="#L85">85</a>     change y ∈ orderPiece k (n + 1) 0 at hy</span>
+<span id="L84"><a href="#L84">84</a>   have hy0 : y ∈ <a class="ref" href="../Weyl/Filtration.lean.html#L285" title="Stafford38.WeylFiltration.orderPiece">orderPiece</a> k (n + 1) 0 := by</span>
+<span id="L85"><a href="#L85">85</a>     change y ∈ <a class="ref" href="../Weyl/Filtration.lean.html#L285" title="Stafford38.WeylFiltration.orderPiece">orderPiece</a> k (n + 1) 0 at hy</span>
 <span id="L86"><a href="#L86">86</a>     exact hy</span>
 <span id="L87"><a href="#L87">87</a>   exact ⟨y, hy0, hyx⟩</span>
 <span id="L88"><a href="#L88">88</a> </span>
 <span id="L89"><a href="#L89">89</a> /-- A single strict unit preimage gives the exact degree-zero initial relation</span>
 <span id="L90"><a href="#L90">90</a> needed for scheme-level coordinate-axis avoidance. -/</span>
 <span id="L91"><a href="#L91">91</a> theorem canonical_orderInitialIdeal_sup_coordinate_eq_top_of_strictUnit</span>
-<span id="L92"><a href="#L92">92</a>     (n N : ℕ) {d : WeylAlg k (n + 1)}</span>
-<span id="L93"><a href="#L93">93</a>     (hunit : StrictUnitCoordinatePreimage k n N d) :</span>
-<span id="L94"><a href="#L94">94</a>     orderInitialIdeal k (CanonicalIdeal k n N d) ⊔</span>
-<span id="L95"><a href="#L95">95</a>         Ideal.span {MvPolynomial.X (.inl (0 : Fin (n + 1)))} = ⊤ := by</span>
-<span id="L96"><a href="#L96">96</a>   let I := CanonicalIdeal k n N d</span>
-<span id="L97"><a href="#L97">97</a>   let x := presentedCoordinate k n</span>
+<span id="L92"><a href="#L92">92</a>     (n N : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L1351" title="Nat">ℕ</a>) {d : <a class="ref" href="../ChallengeDefinitions.lean.html#L73" title="Stafford38Challenge.WeylAlg">WeylAlg</a> k (n + 1)}</span>
+<span id="L93"><a href="#L93">93</a>     (hunit : <a class="ref" href="./CanonicalUnitCoordinatePreimage.lean.html#L52" title="Stafford38.CanonicalUnitCoordinatePreimage.StrictUnitCoordinatePreimage">StrictUnitCoordinatePreimage</a> k n N d) :</span>
+<span id="L94"><a href="#L94">94</a>     <a class="ref" href="./InitialIdeal.lean.html#L191" title="Stafford38.CharacteristicInitialIdeal.orderInitialIdeal">orderInitialIdeal</a> k (<a class="ref" href="./CanonicalUnitCoordinatePreimage.lean.html#L48" title="Stafford38.CanonicalUnitCoordinatePreimage.CanonicalIdeal">CanonicalIdeal</a> k n N d) ⊔</span>
+<span id="L95"><a href="#L95">95</a>         <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Span.lean#L45" title="Ideal.span">Ideal.span</a> {<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/Basic.lean#L125" title="MvPolynomial.X">MvPolynomial.X</a> (<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Core.lean#L213" title="Sum.inl">.inl</a> (0 : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L2443" title="Fin">Fin</a> (n + 1)))} = ⊤ := by</span>
+<span id="L96"><a href="#L96">96</a>   let I := <a class="ref" href="./CanonicalUnitCoordinatePreimage.lean.html#L48" title="Stafford38.CanonicalUnitCoordinatePreimage.CanonicalIdeal">CanonicalIdeal</a> k n N d</span>
+<span id="L97"><a href="#L97">97</a>   let x := <a class="ref" href="../Weyl/IteratedEquivalence.lean.html#L330" title="Stafford38.WeylIteratedEquivalence.presentedCoordinate">presentedCoordinate</a> k n</span>
 <span id="L98"><a href="#L98">98</a>   obtain ⟨y, hy, hyx⟩ := hunit</span>
-<span id="L99"><a href="#L99">99</a>   have hx : x ∈ orderPiece k (n + 1) 0 :=</span>
-<span id="L100"><a href="#L100">100</a>     presentedCoordinate_mem_orderPiece_zero k n</span>
-<span id="L101"><a href="#L101">101</a>   have hyxOrder : y * x ∈ orderPiece k (n + 1) 0 :=</span>
-<span id="L102"><a href="#L102">102</a>     mul_mem_orderPiece k hy hx</span>
-<span id="L103"><a href="#L103">103</a>   have honeOrder : (1 : WeylAlg k (n + 1)) ∈</span>
-<span id="L104"><a href="#L104">104</a>       orderPiece k (n + 1) 0 :=</span>
-<span id="L105"><a href="#L105">105</a>     (orderPieceOne (n := n + 1) k).property</span>
-<span id="L106"><a href="#L106">106</a>   have hdiffOrder : y * x - 1 ∈ orderPiece k (n + 1) 0 :=</span>
-<span id="L107"><a href="#L107">107</a>     (orderPiece k (n + 1) 0).sub_mem hyxOrder honeOrder</span>
+<span id="L99"><a href="#L99">99</a>   have hx : x ∈ <a class="ref" href="../Weyl/Filtration.lean.html#L285" title="Stafford38.WeylFiltration.orderPiece">orderPiece</a> k (n + 1) 0 :=</span>
+<span id="L100"><a href="#L100">100</a>     <a class="ref" href="./CanonicalAxisAvoidanceConsumer.lean.html#L43" title="Stafford38.CanonicalAxisAvoidanceConsumer.presentedCoordinate_mem_orderPiece_zero">presentedCoordinate_mem_orderPiece_zero</a> k n</span>
+<span id="L101"><a href="#L101">101</a>   have hyxOrder : y * x ∈ <a class="ref" href="../Weyl/Filtration.lean.html#L285" title="Stafford38.WeylFiltration.orderPiece">orderPiece</a> k (n + 1) 0 :=</span>
+<span id="L102"><a href="#L102">102</a>     <a class="ref" href="../Weyl/Filtration.lean.html#L532" title="Stafford38.WeylFiltration.mul_mem_orderPiece">mul_mem_orderPiece</a> k hy hx</span>
+<span id="L103"><a href="#L103">103</a>   have honeOrder : (1 : <a class="ref" href="../ChallengeDefinitions.lean.html#L73" title="Stafford38Challenge.WeylAlg">WeylAlg</a> k (n + 1)) ∈</span>
+<span id="L104"><a href="#L104">104</a>       <a class="ref" href="../Weyl/Filtration.lean.html#L285" title="Stafford38.WeylFiltration.orderPiece">orderPiece</a> k (n + 1) 0 :=</span>
+<span id="L105"><a href="#L105">105</a>     (<a class="ref" href="./AssociatedGradedModule.lean.html#L265" title="Stafford38.CharacteristicAssociatedGradedModule.orderPieceOne">orderPieceOne</a> (n := n + 1) k).<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L719" title="Subtype.property">property</a></span>
+<span id="L106"><a href="#L106">106</a>   have hdiffOrder : y * x - 1 ∈ <a class="ref" href="../Weyl/Filtration.lean.html#L285" title="Stafford38.WeylFiltration.orderPiece">orderPiece</a> k (n + 1) 0 :=</span>
+<span id="L107"><a href="#L107">107</a>     (<a class="ref" href="../Weyl/Filtration.lean.html#L285" title="Stafford38.WeylFiltration.orderPiece">orderPiece</a> k (n + 1) 0).<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Module/Submodule/Defs.lean#L342" title="Submodule.sub_mem">sub_mem</a> hyxOrder honeOrder</span>
 <span id="L108"><a href="#L108">108</a>   have hdiffIdeal : y * x - 1 ∈ I :=</span>
-<span id="L109"><a href="#L109">109</a>     (Submodule.Quotient.eq I).mp hyx</span>
-<span id="L110"><a href="#L110">110</a>   have hrelation := principalComponent_mem_orderSymbolRelation</span>
+<span id="L109"><a href="#L109">109</a>     (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/LinearAlgebra/Quotient/Defs.lean#L81" title="Submodule.Quotient.eq">Submodule.Quotient.eq</a> I).<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Core.lean#L192" title="Iff.mp">mp</a> hyx</span>
+<span id="L110"><a href="#L110">110</a>   have hrelation := <a class="ref" href="./FilteredQuotient.lean.html#L344" title="Stafford38.CharacteristicFilteredQuotient.principalComponent_mem_orderSymbolRelation">principalComponent_mem_orderSymbolRelation</a></span>
 <span id="L111"><a href="#L111">111</a>     k I 0 (y * x - 1) hdiffOrder hdiffIdeal</span>
 <span id="L112"><a href="#L112">112</a>   have hinitial :</span>
-<span id="L113"><a href="#L113">113</a>       ((principalComponentOnPiece k (@orderWeight (n + 1)) 0</span>
+<span id="L113"><a href="#L113">113</a>       ((<a class="ref" href="../Weyl/AssociatedGraded.lean.html#L96" title="Stafford38.WeylAssociatedGraded.principalComponentOnPiece">principalComponentOnPiece</a> k (@<a class="ref" href="../Weyl/Filtration.lean.html#L223" title="Stafford38.WeylFiltration.orderWeight">orderWeight</a> (n + 1)) 0</span>
 <span id="L114"><a href="#L114">114</a>           ⟨y * x - 1, hdiffOrder⟩ :</span>
-<span id="L115"><a href="#L115">115</a>         MvPolynomial.weightedHomogeneousSubmodule k</span>
-<span id="L116"><a href="#L116">116</a>           (@orderWeight (n + 1)) 0) : SymbolRing k (n + 1)) ∈</span>
-<span id="L117"><a href="#L117">117</a>         orderInitialIdeal k I :=</span>
-<span id="L118"><a href="#L118">118</a>     coe_mem_orderInitialIdeal_of_mem_orderSymbolRelation k I 0 _ hrelation</span>
-<span id="L119"><a href="#L119">119</a>   let Y : MvPolynomial.weightedHomogeneousSubmodule k</span>
-<span id="L120"><a href="#L120">120</a>       (@orderWeight (n + 1)) 0 :=</span>
-<span id="L121"><a href="#L121">121</a>     principalComponentOnPiece k (@orderWeight (n + 1)) 0 ⟨y, hy⟩</span>
-<span id="L122"><a href="#L122">122</a>   have hYX : (Y : SymbolRing k (n + 1)) *</span>
-<span id="L123"><a href="#L123">123</a>         MvPolynomial.X (.inl (0 : Fin (n + 1))) - 1 ∈</span>
-<span id="L124"><a href="#L124">124</a>       orderInitialIdeal k I := by</span>
+<span id="L115"><a href="#L115">115</a>         <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.lean#L133" title="MvPolynomial.weightedHomogeneousSubmodule">MvPolynomial.weightedHomogeneousSubmodule</a> k</span>
+<span id="L116"><a href="#L116">116</a>           (@<a class="ref" href="../Weyl/Filtration.lean.html#L223" title="Stafford38.WeylFiltration.orderWeight">orderWeight</a> (n + 1)) 0) : <a class="ref" href="./Polynomial.lean.html#L20" title="Stafford38.Characteristic.SymbolRing">SymbolRing</a> k (n + 1)) ∈</span>
+<span id="L117"><a href="#L117">117</a>         <a class="ref" href="./InitialIdeal.lean.html#L191" title="Stafford38.CharacteristicInitialIdeal.orderInitialIdeal">orderInitialIdeal</a> k I :=</span>
+<span id="L118"><a href="#L118">118</a>     <a class="ref" href="./FilteredQuotient.lean.html#L416" title="Stafford38.CharacteristicFilteredQuotient.coe_mem_orderInitialIdeal_of_mem_orderSymbolRelation">coe_mem_orderInitialIdeal_of_mem_orderSymbolRelation</a> k I 0 _ hrelation</span>
+<span id="L119"><a href="#L119">119</a>   let Y : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.lean#L133" title="MvPolynomial.weightedHomogeneousSubmodule">MvPolynomial.weightedHomogeneousSubmodule</a> k</span>
+<span id="L120"><a href="#L120">120</a>       (@<a class="ref" href="../Weyl/Filtration.lean.html#L223" title="Stafford38.WeylFiltration.orderWeight">orderWeight</a> (n + 1)) 0 :=</span>
+<span id="L121"><a href="#L121">121</a>     <a class="ref" href="../Weyl/AssociatedGraded.lean.html#L96" title="Stafford38.WeylAssociatedGraded.principalComponentOnPiece">principalComponentOnPiece</a> k (@<a class="ref" href="../Weyl/Filtration.lean.html#L223" title="Stafford38.WeylFiltration.orderWeight">orderWeight</a> (n + 1)) 0 ⟨y, hy⟩</span>
+<span id="L122"><a href="#L122">122</a>   have hYX : (Y : <a class="ref" href="./Polynomial.lean.html#L20" title="Stafford38.Characteristic.SymbolRing">SymbolRing</a> k (n + 1)) *</span>
+<span id="L123"><a href="#L123">123</a>         <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/Basic.lean#L125" title="MvPolynomial.X">MvPolynomial.X</a> (<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Core.lean#L213" title="Sum.inl">.inl</a> (0 : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L2443" title="Fin">Fin</a> (n + 1))) - 1 ∈</span>
+<span id="L124"><a href="#L124">124</a>       <a class="ref" href="./InitialIdeal.lean.html#L191" title="Stafford38.CharacteristicInitialIdeal.orderInitialIdeal">orderInitialIdeal</a> k I := by</span>
 <span id="L125"><a href="#L125">125</a>     convert hinitial using 1</span>
-<span id="L126"><a href="#L126">126</a>     change (Y : SymbolRing k (n + 1)) *</span>
-<span id="L127"><a href="#L127">127</a>         MvPolynomial.X (.inl (0 : Fin (n + 1))) - 1 =</span>
-<span id="L128"><a href="#L128">128</a>       presentedPrincipalComponent k orderWeight 0 (y * x - 1)</span>
-<span id="L129"><a href="#L129">129</a>     rw [map_sub, presentedPrincipalComponent_mul_order k hy hx]</span>
-<span id="L130"><a href="#L130">130</a>     have honePC : presentedPrincipalComponent k orderWeight 0</span>
-<span id="L131"><a href="#L131">131</a>         (1 : WeylAlg k (n + 1)) = 1 := by</span>
-<span id="L132"><a href="#L132">132</a>       change presentedPrincipalComponent k orderWeight 0</span>
-<span id="L133"><a href="#L133">133</a>           ((orderPieceOne (n := n + 1) k : orderPiece k (n + 1) 0) :</span>
-<span id="L134"><a href="#L134">134</a>             WeylAlg k (n + 1)) = 1</span>
-<span id="L135"><a href="#L135">135</a>       exact presentedPrincipalComponent_orderPieceOne (n := n + 1) k</span>
+<span id="L126"><a href="#L126">126</a>     change (Y : <a class="ref" href="./Polynomial.lean.html#L20" title="Stafford38.Characteristic.SymbolRing">SymbolRing</a> k (n + 1)) *</span>
+<span id="L127"><a href="#L127">127</a>         <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/Basic.lean#L125" title="MvPolynomial.X">MvPolynomial.X</a> (<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Core.lean#L213" title="Sum.inl">.inl</a> (0 : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L2443" title="Fin">Fin</a> (n + 1))) - 1 =</span>
+<span id="L128"><a href="#L128">128</a>       <a class="ref" href="../Weyl/LeadingSymbol.lean.html#L33" title="Stafford38.WeylLeadingSymbol.presentedPrincipalComponent">presentedPrincipalComponent</a> k <a class="ref" href="../Weyl/Filtration.lean.html#L223" title="Stafford38.WeylFiltration.orderWeight">orderWeight</a> 0 (y * x - 1)</span>
+<span id="L129"><a href="#L129">129</a>     rw [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Group/Hom/Defs.lean#L467" title="map_sub">map_sub</a>, <a class="ref" href="../Weyl/LeadingSymbol.lean.html#L575" title="Stafford38.WeylLeadingSymbol.presentedPrincipalComponent_mul_order">presentedPrincipalComponent_mul_order</a> k hy hx]</span>
+<span id="L130"><a href="#L130">130</a>     have honePC : <a class="ref" href="../Weyl/LeadingSymbol.lean.html#L33" title="Stafford38.WeylLeadingSymbol.presentedPrincipalComponent">presentedPrincipalComponent</a> k <a class="ref" href="../Weyl/Filtration.lean.html#L223" title="Stafford38.WeylFiltration.orderWeight">orderWeight</a> 0</span>
+<span id="L131"><a href="#L131">131</a>         (1 : <a class="ref" href="../ChallengeDefinitions.lean.html#L73" title="Stafford38Challenge.WeylAlg">WeylAlg</a> k (n + 1)) = 1 := by</span>
+<span id="L132"><a href="#L132">132</a>       change <a class="ref" href="../Weyl/LeadingSymbol.lean.html#L33" title="Stafford38.WeylLeadingSymbol.presentedPrincipalComponent">presentedPrincipalComponent</a> k <a class="ref" href="../Weyl/Filtration.lean.html#L223" title="Stafford38.WeylFiltration.orderWeight">orderWeight</a> 0</span>
+<span id="L133"><a href="#L133">133</a>           ((<a class="ref" href="./AssociatedGradedModule.lean.html#L265" title="Stafford38.CharacteristicAssociatedGradedModule.orderPieceOne">orderPieceOne</a> (n := n + 1) k : <a class="ref" href="../Weyl/Filtration.lean.html#L285" title="Stafford38.WeylFiltration.orderPiece">orderPiece</a> k (n + 1) 0) :</span>
+<span id="L134"><a href="#L134">134</a>             <a class="ref" href="../ChallengeDefinitions.lean.html#L73" title="Stafford38Challenge.WeylAlg">WeylAlg</a> k (n + 1)) = 1</span>
+<span id="L135"><a href="#L135">135</a>       exact <a class="ref" href="./AssociatedGradedModule.lean.html#L277" title="Stafford38.CharacteristicAssociatedGradedModule.presentedPrincipalComponent_orderPieceOne">presentedPrincipalComponent_orderPieceOne</a> (n := n + 1) k</span>
 <span id="L136"><a href="#L136">136</a>     rw [honePC]</span>
-<span id="L137"><a href="#L137">137</a>     rw [show MvPolynomial.X (.inl (0 : Fin (n + 1))) =</span>
-<span id="L138"><a href="#L138">138</a>         presentedPrincipalComponent k orderWeight 0 x by</span>
-<span id="L139"><a href="#L139">139</a>       exact (coe_coordinate_order_symbol k n).symm]</span>
-<span id="L140"><a href="#L140">140</a>     change presentedPrincipalComponent k orderWeight 0 y *</span>
-<span id="L141"><a href="#L141">141</a>         presentedPrincipalComponent k orderWeight 0 x - 1 = _</span>
+<span id="L137"><a href="#L137">137</a>     rw [show <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/Basic.lean#L125" title="MvPolynomial.X">MvPolynomial.X</a> (<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Core.lean#L213" title="Sum.inl">.inl</a> (0 : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L2443" title="Fin">Fin</a> (n + 1))) =</span>
+<span id="L138"><a href="#L138">138</a>         <a class="ref" href="../Weyl/LeadingSymbol.lean.html#L33" title="Stafford38.WeylLeadingSymbol.presentedPrincipalComponent">presentedPrincipalComponent</a> k <a class="ref" href="../Weyl/Filtration.lean.html#L223" title="Stafford38.WeylFiltration.orderWeight">orderWeight</a> 0 x by</span>
+<span id="L139"><a href="#L139">139</a>       exact (<a class="ref" href="./CanonicalAxisAvoidanceConsumer.lean.html#L178" title="Stafford38.CanonicalAxisAvoidanceConsumer.coe_coordinate_order_symbol">coe_coordinate_order_symbol</a> k n).<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L364" title="Eq.symm">symm</a>]</span>
+<span id="L140"><a href="#L140">140</a>     change <a class="ref" href="../Weyl/LeadingSymbol.lean.html#L33" title="Stafford38.WeylLeadingSymbol.presentedPrincipalComponent">presentedPrincipalComponent</a> k <a class="ref" href="../Weyl/Filtration.lean.html#L223" title="Stafford38.WeylFiltration.orderWeight">orderWeight</a> 0 y *</span>
+<span id="L141"><a href="#L141">141</a>         <a class="ref" href="../Weyl/LeadingSymbol.lean.html#L33" title="Stafford38.WeylLeadingSymbol.presentedPrincipalComponent">presentedPrincipalComponent</a> k <a class="ref" href="../Weyl/Filtration.lean.html#L223" title="Stafford38.WeylFiltration.orderWeight">orderWeight</a> 0 x - 1 = _</span>
 <span id="L142"><a href="#L142">142</a>     rfl</span>
-<span id="L143"><a href="#L143">143</a>   apply (Ideal.eq_top_iff_one _).2</span>
-<span id="L144"><a href="#L144">144</a>   rw [show (1 : SymbolRing k (n + 1)) =</span>
-<span id="L145"><a href="#L145">145</a>       -((Y : SymbolRing k (n + 1)) *</span>
-<span id="L146"><a href="#L146">146</a>           MvPolynomial.X (.inl (0 : Fin (n + 1))) - 1) +</span>
-<span id="L147"><a href="#L147">147</a>         (Y : SymbolRing k (n + 1)) *</span>
-<span id="L148"><a href="#L148">148</a>           MvPolynomial.X (.inl (0 : Fin (n + 1))) by ring]</span>
-<span id="L149"><a href="#L149">149</a>   exact Submodule.add_mem _</span>
-<span id="L150"><a href="#L150">150</a>     (Submodule.mem_sup_left ((orderInitialIdeal k I).neg_mem hYX))</span>
-<span id="L151"><a href="#L151">151</a>     (Submodule.mem_sup_right (by</span>
-<span id="L152"><a href="#L152">152</a>       rw [Ideal.mem_span_singleton]</span>
-<span id="L153"><a href="#L153">153</a>       exact ⟨(Y : SymbolRing k (n + 1)), by rw [mul_comm]⟩))</span>
+<span id="L143"><a href="#L143">143</a>   apply (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Lattice.lean#L57" title="Ideal.eq_top_iff_one">Ideal.eq_top_iff_one</a> _).<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Core.lean#L194" title="Iff.mpr">2</a></span>
+<span id="L144"><a href="#L144">144</a>   rw [show (1 : <a class="ref" href="./Polynomial.lean.html#L20" title="Stafford38.Characteristic.SymbolRing">SymbolRing</a> k (n + 1)) =</span>
+<span id="L145"><a href="#L145">145</a>       -((Y : <a class="ref" href="./Polynomial.lean.html#L20" title="Stafford38.Characteristic.SymbolRing">SymbolRing</a> k (n + 1)) *</span>
+<span id="L146"><a href="#L146">146</a>           <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/Basic.lean#L125" title="MvPolynomial.X">MvPolynomial.X</a> (<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Core.lean#L213" title="Sum.inl">.inl</a> (0 : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L2443" title="Fin">Fin</a> (n + 1))) - 1) +</span>
+<span id="L147"><a href="#L147">147</a>         (Y : <a class="ref" href="./Polynomial.lean.html#L20" title="Stafford38.Characteristic.SymbolRing">SymbolRing</a> k (n + 1)) *</span>
+<span id="L148"><a href="#L148">148</a>           <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/Basic.lean#L125" title="MvPolynomial.X">MvPolynomial.X</a> (<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Core.lean#L213" title="Sum.inl">.inl</a> (0 : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L2443" title="Fin">Fin</a> (n + 1))) by ring]</span>
+<span id="L149"><a href="#L149">149</a>   exact <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Module/Submodule/Defs.lean#L211" title="Submodule.add_mem">Submodule.add_mem</a> _</span>
+<span id="L150"><a href="#L150">150</a>     (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Module/Submodule/Lattice.lean#L252" title="Submodule.mem_sup_left">Submodule.mem_sup_left</a> ((<a class="ref" href="./InitialIdeal.lean.html#L191" title="Stafford38.CharacteristicInitialIdeal.orderInitialIdeal">orderInitialIdeal</a> k I).<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Module/Submodule/Defs.lean#L321" title="Submodule.neg_mem">neg_mem</a> hYX))</span>
+<span id="L151"><a href="#L151">151</a>     (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Module/Submodule/Lattice.lean#L257" title="Submodule.mem_sup_right">Submodule.mem_sup_right</a> (by</span>
+<span id="L152"><a href="#L152">152</a>       rw [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Span.lean#L181" title="Ideal.mem_span_singleton">Ideal.mem_span_singleton</a>]</span>
+<span id="L153"><a href="#L153">153</a>       exact ⟨(Y : <a class="ref" href="./Polynomial.lean.html#L20" title="Stafford38.Characteristic.SymbolRing">SymbolRing</a> k (n + 1)), by rw [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Group/Semigroup.lean#L227" title="mul_comm">mul_comm</a>]⟩))</span>
 <span id="L154"><a href="#L154">154</a> </span>
 <span id="L155"><a href="#L155">155</a> /-- The terminal set-theoretic conclusion follows from the unit-only strict</span>
 <span id="L156"><a href="#L156">156</a> preimage; neither all-degree cancellation nor graded injectivity is consumed. -/</span>
 <span id="L157"><a href="#L157">157</a> theorem canonical_orderCharacteristicSupport_disjoint_coordinate_zeroLocus_of_strictUnit</span>
-<span id="L158"><a href="#L158">158</a>     (n N : ℕ) {d : WeylAlg k (n + 1)}</span>
-<span id="L159"><a href="#L159">159</a>     (hunit : StrictUnitCoordinatePreimage k n N d) :</span>
-<span id="L160"><a href="#L160">160</a>     Disjoint</span>
-<span id="L161"><a href="#L161">161</a>       (orderCharacteristicSupport k (CanonicalIdeal k n N d))</span>
-<span id="L162"><a href="#L162">162</a>       (PrimeSpectrum.zeroLocus</span>
-<span id="L163"><a href="#L163">163</a>         ({MvPolynomial.X (.inl (0 : Fin (n + 1)))} :</span>
-<span id="L164"><a href="#L164">164</a>           Set (SymbolRing k (n + 1)))) := by</span>
-<span id="L165"><a href="#L165">165</a>   rw [Set.disjoint_left]</span>
+<span id="L158"><a href="#L158">158</a>     (n N : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L1351" title="Nat">ℕ</a>) {d : <a class="ref" href="../ChallengeDefinitions.lean.html#L73" title="Stafford38Challenge.WeylAlg">WeylAlg</a> k (n + 1)}</span>
+<span id="L159"><a href="#L159">159</a>     (hunit : <a class="ref" href="./CanonicalUnitCoordinatePreimage.lean.html#L52" title="Stafford38.CanonicalUnitCoordinatePreimage.StrictUnitCoordinatePreimage">StrictUnitCoordinatePreimage</a> k n N d) :</span>
+<span id="L160"><a href="#L160">160</a>     <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Order/Disjoint.lean#L37" title="Disjoint">Disjoint</a></span>
+<span id="L161"><a href="#L161">161</a>       (<a class="ref" href="./InitialIdeal.lean.html#L199" title="Stafford38.CharacteristicInitialIdeal.orderCharacteristicSupport">orderCharacteristicSupport</a> k (<a class="ref" href="./CanonicalUnitCoordinatePreimage.lean.html#L48" title="Stafford38.CanonicalUnitCoordinatePreimage.CanonicalIdeal">CanonicalIdeal</a> k n N d))</span>
+<span id="L162"><a href="#L162">162</a>       (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Spectrum/Prime/Basic.lean#L129" title="PrimeSpectrum.zeroLocus">PrimeSpectrum.zeroLocus</a></span>
+<span id="L163"><a href="#L163">163</a>         ({<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/Basic.lean#L125" title="MvPolynomial.X">MvPolynomial.X</a> (<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Core.lean#L213" title="Sum.inl">.inl</a> (0 : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L2443" title="Fin">Fin</a> (n + 1)))} :</span>
+<span id="L164"><a href="#L164">164</a>           <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Data/Set/Defs.lean#L44" title="Set">Set</a> (<a class="ref" href="./Polynomial.lean.html#L20" title="Stafford38.Characteristic.SymbolRing">SymbolRing</a> k (n + 1)))) := by</span>
+<span id="L165"><a href="#L165">165</a>   rw [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Data/Set/Disjoint.lean#L38" title="Set.disjoint_left">Set.disjoint_left</a>]</span>
 <span id="L166"><a href="#L166">166</a>   intro p hp hpx</span>
-<span id="L167"><a href="#L167">167</a>   rw [orderCharacteristicSupport_eq_zeroLocus,</span>
-<span id="L168"><a href="#L168">168</a>     PrimeSpectrum.mem_zeroLocus] at hp</span>
-<span id="L169"><a href="#L169">169</a>   rw [PrimeSpectrum.mem_zeroLocus] at hpx</span>
+<span id="L167"><a href="#L167">167</a>   rw [<a class="ref" href="./InitialIdeal.lean.html#L203" title="Stafford38.CharacteristicInitialIdeal.orderCharacteristicSupport_eq_zeroLocus">orderCharacteristicSupport_eq_zeroLocus</a>,</span>
+<span id="L168"><a href="#L168">168</a>     <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Spectrum/Prime/Basic.lean#L140" title="PrimeSpectrum.mem_zeroLocus">PrimeSpectrum.mem_zeroLocus</a>] at hp</span>
+<span id="L169"><a href="#L169">169</a>   rw [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Spectrum/Prime/Basic.lean#L140" title="PrimeSpectrum.mem_zeroLocus">PrimeSpectrum.mem_zeroLocus</a>] at hpx</span>
 <span id="L170"><a href="#L170">170</a>   have htop :=</span>
-<span id="L171"><a href="#L171">171</a>     canonical_orderInitialIdeal_sup_coordinate_eq_top_of_strictUnit</span>
+<span id="L171"><a href="#L171">171</a>     <a class="ref" href="./CanonicalUnitCoordinatePreimage.lean.html#L89" title="Stafford38.CanonicalUnitCoordinatePreimage.canonical_orderInitialIdeal_sup_coordinate_eq_top_of_strictUnit">canonical_orderInitialIdeal_sup_coordinate_eq_top_of_strictUnit</a></span>
 <span id="L172"><a href="#L172">172</a>       k n N hunit</span>
-<span id="L173"><a href="#L173">173</a>   have hle : orderInitialIdeal k (CanonicalIdeal k n N d) ⊔</span>
-<span id="L174"><a href="#L174">174</a>       Ideal.span {MvPolynomial.X (.inl (0 : Fin (n + 1)))} ≤ p.asIdeal :=</span>
-<span id="L175"><a href="#L175">175</a>     sup_le hp (Ideal.span_le.mpr hpx)</span>
+<span id="L173"><a href="#L173">173</a>   have hle : <a class="ref" href="./InitialIdeal.lean.html#L191" title="Stafford38.CharacteristicInitialIdeal.orderInitialIdeal">orderInitialIdeal</a> k (<a class="ref" href="./CanonicalUnitCoordinatePreimage.lean.html#L48" title="Stafford38.CanonicalUnitCoordinatePreimage.CanonicalIdeal">CanonicalIdeal</a> k n N d) ⊔</span>
+<span id="L174"><a href="#L174">174</a>       <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Span.lean#L45" title="Ideal.span">Ideal.span</a> {<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/Basic.lean#L125" title="MvPolynomial.X">MvPolynomial.X</a> (<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Core.lean#L213" title="Sum.inl">.inl</a> (0 : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L2443" title="Fin">Fin</a> (n + 1)))} ≤ p.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Spectrum/Prime/Defs.lean#L35" title="PrimeSpectrum.asIdeal">asIdeal</a> :=</span>
+<span id="L175"><a href="#L175">175</a>     <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Order/Lattice.lean#L149" title="sup_le">sup_le</a> hp (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Span.lean#L71" title="Ideal.span_le">Ideal.span_le</a>.<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Core.lean#L194" title="Iff.mpr">mpr</a> hpx)</span>
 <span id="L176"><a href="#L176">176</a>   rw [htop] at hle</span>
-<span id="L177"><a href="#L177">177</a>   exact p.2.ne_top (top_unique hle)</span>
+<span id="L177"><a href="#L177">177</a>   exact p.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Spectrum/Prime/Defs.lean#L36" title="PrimeSpectrum.isPrime">2</a>.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Prime.lean#L50" title="Ideal.IsPrime.ne_top">ne_top</a> (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Order/BoundedOrder/Basic.lean#L173" title="top_unique">top_unique</a> hle)</span>
 <span id="L178"><a href="#L178">178</a> </span>
-<span id="L179"><a href="#L179">179</a> #print axioms strictUnitCoordinatePreimage_of_coordinateCancellation</span>
-<span id="L180"><a href="#L180">180</a> #print axioms strictUnitCoordinatePreimage_of_strictLowerCoordinatePreimages</span>
-<span id="L181"><a href="#L181">181</a> #print axioms canonical_orderInitialIdeal_sup_coordinate_eq_top_of_strictUnit</span>
-<span id="L182"><a href="#L182">182</a> #print axioms canonical_orderCharacteristicSupport_disjoint_coordinate_zeroLocus_of_strictUnit</span>
+<span id="L179"><a href="#L179">179</a> #print axioms <a class="ref" href="./CanonicalUnitCoordinatePreimage.lean.html#L61" title="Stafford38.CanonicalUnitCoordinatePreimage.strictUnitCoordinatePreimage_of_coordinateCancellation">strictUnitCoordinatePreimage_of_coordinateCancellation</a></span>
+<span id="L180"><a href="#L180">180</a> #print axioms <a class="ref" href="./CanonicalUnitCoordinatePreimage.lean.html#L73" title="Stafford38.CanonicalUnitCoordinatePreimage.strictUnitCoordinatePreimage_of_strictLowerCoordinatePreimages">strictUnitCoordinatePreimage_of_strictLowerCoordinatePreimages</a></span>
+<span id="L181"><a href="#L181">181</a> #print axioms <a class="ref" href="./CanonicalUnitCoordinatePreimage.lean.html#L89" title="Stafford38.CanonicalUnitCoordinatePreimage.canonical_orderInitialIdeal_sup_coordinate_eq_top_of_strictUnit">canonical_orderInitialIdeal_sup_coordinate_eq_top_of_strictUnit</a></span>
+<span id="L182"><a href="#L182">182</a> #print axioms <a class="ref" href="./CanonicalUnitCoordinatePreimage.lean.html#L155" title="Stafford38.CanonicalUnitCoordinatePreimage.canonical_orderCharacteristicSupport_disjoint_coordinate_zeroLocus_of_strictUnit">canonical_orderCharacteristicSupport_disjoint_coordinate_zeroLocus_of_strictUnit</a></span>
 <span id="L183"><a href="#L183">183</a> </span>
 <span id="L184"><a href="#L184">184</a> end</span>
 <span id="L185"><a href="#L185">185</a> </span>

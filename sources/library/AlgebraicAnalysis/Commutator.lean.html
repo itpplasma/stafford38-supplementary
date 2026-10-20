@@ -1,0 +1,53 @@
+<!doctype html><meta charset="utf-8"><title>AlgebraicAnalysis/Commutator.lean</title><style>body{font:14px monospace}pre span{display:block}pre span:target{background:#fff0ad}a{color:#666}pre{white-space:pre-wrap}a.ref{color:#0645ad;text-decoration:none}a.ref:hover{text-decoration:underline}</style><h1>AlgebraicAnalysis/Commutator.lean</h1><p>AlgebraicAnalysis library · bbbbf3fc358ca8100b158cec4cf47f336ab70163</p><pre><span id="L1"><a href="#L1">1</a> module</span>
+<span id="L2"><a href="#L2">2</a> public import Mathlib.Tactic.NoncommRing</span>
+<span id="L3"><a href="#L3">3</a> public import Mathlib.Algebra.Module.NatInt</span>
+<span id="L4"><a href="#L4">4</a> </span>
+<span id="L5"><a href="#L5">5</a> @[expose] public section</span>
+<span id="L6"><a href="#L6">6</a> </span>
+<span id="L7"><a href="#L7">7</a> /-!</span>
+<span id="L8"><a href="#L8">8</a> # Ring commutators</span>
+<span id="L9"><a href="#L9">9</a> </span>
+<span id="L10"><a href="#L10">10</a> This module contains the multiplication identities used by both the Weyl</span>
+<span id="L11"><a href="#L11">11</a> symplectic layer and the differential-Ore escape layer.  The convention is</span>
+<span id="L12"><a href="#L12">12</a> `[u,v] = u*v - v*u`; no Weyl relation, Ore presentation, or application</span>
+<span id="L13"><a href="#L13">13</a> specific structure is assumed.</span>
+<span id="L14"><a href="#L14">14</a> -/</span>
+<span id="L15"><a href="#L15">15</a> </span>
+<span id="L16"><a href="#L16">16</a> namespace AlgebraicAnalysis</span>
+<span id="L17"><a href="#L17">17</a> </span>
+<span id="L18"><a href="#L18">18</a> section</span>
+<span id="L19"><a href="#L19">19</a> </span>
+<span id="L20"><a href="#L20">20</a> variable {A : Type*} [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Ring/Defs.lean#L145" title="Ring">Ring</a> A]</span>
+<span id="L21"><a href="#L21">21</a> </span>
+<span id="L22"><a href="#L22">22</a> /-- The ring commutator, with the written multiplication order retained. -/</span>
+<span id="L23"><a href="#L23">23</a> def ringCommutator (u v : A) : A := u * v - v * u</span>
+<span id="L24"><a href="#L24">24</a> </span>
+<span id="L25"><a href="#L25">25</a> @[simp] theorem ringCommutator_apply (u v : A) :</span>
+<span id="L26"><a href="#L26">26</a>     <a class="ref" href="./Commutator.lean.html#L22" title="AlgebraicAnalysis.ringCommutator">ringCommutator</a> u v = u * v - v * u := <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L334" title="rfl">rfl</a></span>
+<span id="L27"><a href="#L27">27</a> </span>
+<span id="L28"><a href="#L28">28</a> /-- Leibniz expansion in the first argument. -/</span>
+<span id="L29"><a href="#L29">29</a> theorem ringCommutator_mul (u v x : A) :</span>
+<span id="L30"><a href="#L30">30</a>     <a class="ref" href="./Commutator.lean.html#L22" title="AlgebraicAnalysis.ringCommutator">ringCommutator</a> (u * v) x =</span>
+<span id="L31"><a href="#L31">31</a>       u * <a class="ref" href="./Commutator.lean.html#L22" title="AlgebraicAnalysis.ringCommutator">ringCommutator</a> v x + <a class="ref" href="./Commutator.lean.html#L22" title="AlgebraicAnalysis.ringCommutator">ringCommutator</a> u x * v := by</span>
+<span id="L32"><a href="#L32">32</a>   simp only [<a class="ref" href="./Commutator.lean.html#L22" title="AlgebraicAnalysis.ringCommutator">ringCommutator</a>]</span>
+<span id="L33"><a href="#L33">33</a>   noncomm_ring</span>
+<span id="L34"><a href="#L34">34</a> </span>
+<span id="L35"><a href="#L35">35</a> /-- Iterated commutation with a Weyl-type relation. -/</span>
+<span id="L36"><a href="#L36">36</a> theorem ringCommutator_pow (z x : A) (h : <a class="ref" href="./Commutator.lean.html#L22" title="AlgebraicAnalysis.ringCommutator">ringCommutator</a> z x = 1) :</span>
+<span id="L37"><a href="#L37">37</a>     ∀ n : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L1351" title="Nat">ℕ</a>, <a class="ref" href="./Commutator.lean.html#L22" title="AlgebraicAnalysis.ringCommutator">ringCommutator</a> (z ^ n) x = n • z ^ (n - 1)</span>
+<span id="L38"><a href="#L38">38</a>   | 0 =&gt; by simp [<a class="ref" href="./Commutator.lean.html#L22" title="AlgebraicAnalysis.ringCommutator">ringCommutator</a>]</span>
+<span id="L39"><a href="#L39">39</a>   | n + 1 =&gt; by</span>
+<span id="L40"><a href="#L40">40</a>       rw [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Group/Monoid.lean#L410" title="pow_succ">pow_succ</a>, <a class="ref" href="./Commutator.lean.html#L28" title="AlgebraicAnalysis.ringCommutator_mul">ringCommutator_mul</a>, h, <a class="ref" href="./Commutator.lean.html#L35" title="AlgebraicAnalysis.ringCommutator_pow">ringCommutator_pow</a> z x h n]</span>
+<span id="L41"><a href="#L41">41</a>       by_cases hn : n = 0</span>
+<span id="L42"><a href="#L42">42</a>       · subst n</span>
+<span id="L43"><a href="#L43">43</a>         simp</span>
+<span id="L44"><a href="#L44">44</a>       · rw [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Group/Action/Defs.lean#L353" title="smul_mul_assoc">smul_mul_assoc</a>, <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Data/Nat/Lemmas.lean#L307" title="Nat.succ_sub_one">Nat.succ_sub_one</a>, <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Group/Monoid.lean#L94" title="mul_one">mul_one</a>, <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Group/Monoid.lean#L446" title="add_nsmul">add_nsmul</a>]</span>
+<span id="L45"><a href="#L45">45</a>         have hpow : z ^ (n - 1) * z = z ^ n := by</span>
+<span id="L46"><a href="#L46">46</a>           rw [← <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Group/Monoid.lean#L410" title="pow_succ">pow_succ</a>, <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Data/Nat/Basic.lean#L991" title="Nat.sub_add_cancel">Nat.sub_add_cancel</a> (<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Data/Nat/Basic.lean#L332" title="Nat.pos_of_ne_zero">Nat.pos_of_ne_zero</a> hn)]</span>
+<span id="L47"><a href="#L47">47</a>         rw [hpow, <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Group/Monoid.lean#L414" title="one_nsmul">one_nsmul</a>]</span>
+<span id="L48"><a href="#L48">48</a>         exact <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Group/Semigroup.lean#L227" title="add_comm">add_comm</a> _ _</span>
+<span id="L49"><a href="#L49">49</a> </span>
+<span id="L50"><a href="#L50">50</a> end</span>
+<span id="L51"><a href="#L51">51</a> </span>
+<span id="L52"><a href="#L52">52</a> end AlgebraicAnalysis</span>
+<span id="L53"><a href="#L53">53</a> </span></pre>

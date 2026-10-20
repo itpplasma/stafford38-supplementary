@@ -1,4 +1,4 @@
-<!doctype html><meta charset="utf-8"><title>Stafford38/PaperInputs.lean</title><style>body{font:14px monospace}pre span{display:block}pre span:target{background:#fff0ad}a{color:#666}pre{white-space:pre-wrap}</style><h1>Stafford38/PaperInputs.lean</h1><p>This project (Stafford38) · 0403af3f0b1a7f84d2027121932723f67bd279ae</p><pre><span id="L1"><a href="#L1">1</a> module</span>
+<!doctype html><meta charset="utf-8"><title>Stafford38/PaperInputs.lean</title><style>body{font:14px monospace}pre span{display:block}pre span:target{background:#fff0ad}a{color:#666}pre{white-space:pre-wrap}a.ref{color:#0645ad;text-decoration:none}a.ref:hover{text-decoration:underline}</style><h1>Stafford38/PaperInputs.lean</h1><p>This project (Stafford38) · 0403af3f0b1a7f84d2027121932723f67bd279ae</p><pre><span id="L1"><a href="#L1">1</a> module</span>
 <span id="L2"><a href="#L2">2</a> public import Stafford38.Characteristic.SpecializedNoncharacteristicEquality</span>
 <span id="L3"><a href="#L3">3</a> public import Stafford38.Geometry.CanonicalNonconstantFiniteGradientProduction</span>
 <span id="L4"><a href="#L4">4</a> public import Stafford38.Geometry.CanonicalVisibleDivisorFrameProduction</span>
@@ -7,7 +7,7 @@
 <span id="L7"><a href="#L7">7</a> </span>
 <span id="L8"><a href="#L8">8</a> @[expose] public section</span>
 <span id="L9"><a href="#L9">9</a> </span>
-<span id="L10"><a href="#L10">10</a> open Stafford38Challenge (WeylAlg)</span>
+<span id="L10"><a href="#L10">10</a> open Stafford38Challenge (<a class="ref" href="./ChallengeDefinitions.lean.html#L73" title="Stafford38Challenge.WeylAlg">WeylAlg</a>)</span>
 <span id="L11"><a href="#L11">11</a> </span>
 <span id="L12"><a href="#L12">12</a> /-!</span>
 <span id="L13"><a href="#L13">13</a> # Typed assembly interfaces for the paper proof</span>
@@ -44,53 +44,53 @@
 <span id="L44"><a href="#L44">44</a> application.  This is support avoidance, not the stronger filtered predecessor</span>
 <span id="L45"><a href="#L45">45</a> to which it is converted by a separate trust-zero algebraic theorem. -/</span>
 <span id="L46"><a href="#L46">46</a> def CanonicalNoncharacteristicSupportAvoidance : Prop :=</span>
-<span id="L47"><a href="#L47">47</a>   ∀ (k : Type u) [Field k] [CharZero k] [IsAlgClosed k] (n N : ℕ)</span>
-<span id="L48"><a href="#L48">48</a>     (d : WeylAlg k (n + 1)),</span>
-<span id="L49"><a href="#L49">49</a>     0 &lt; N → IsPBWMonicAt k (.inr (0 : Fin (n + 1))) N d →</span>
-<span id="L50"><a href="#L50">50</a>       Disjoint</span>
-<span id="L51"><a href="#L51">51</a>         (transposedOrderAssociatedGradedSupport k</span>
-<span id="L52"><a href="#L52">52</a>           (canonicalRightIdeal (presentedCoordinate k n) d N))</span>
-<span id="L53"><a href="#L53">53</a>         (PrimeSpectrum.zeroLocus</span>
-<span id="L54"><a href="#L54">54</a>           ({MvPolynomial.X (.inl (0 : Fin (n + 1)))} :</span>
-<span id="L55"><a href="#L55">55</a>             Set (SymbolRing k (n + 1))))</span>
+<span id="L47"><a href="#L47">47</a>   ∀ (k : Type u) [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Field/Defs.lean#L170" title="Field">Field</a> k] [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/CharZero/Defs.lean#L33" title="CharZero">CharZero</a> k] [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/FieldTheory/IsAlgClosed/Basic.lean#L58" title="IsAlgClosed">IsAlgClosed</a> k] (n N : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L1351" title="Nat">ℕ</a>)</span>
+<span id="L48"><a href="#L48">48</a>     (d : <a class="ref" href="./ChallengeDefinitions.lean.html#L73" title="Stafford38Challenge.WeylAlg">WeylAlg</a> k (n + 1)),</span>
+<span id="L49"><a href="#L49">49</a>     0 &lt; N → <a class="ref" href="./Weyl/PBWMonicBridge.lean.html#L102" title="Stafford38.WeylPBWMonicBridge.IsPBWMonicAt">IsPBWMonicAt</a> k (<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Core.lean#L215" title="Sum.inr">.inr</a> (0 : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L2443" title="Fin">Fin</a> (n + 1))) N d →</span>
+<span id="L50"><a href="#L50">50</a>       <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Order/Disjoint.lean#L37" title="Disjoint">Disjoint</a></span>
+<span id="L51"><a href="#L51">51</a>         (<a class="ref" href="./Characteristic/TransposedFilteredModuleSupport.lean.html#L296" title="Stafford38.CharacteristicTransposedFilteredModuleSupport.transposedOrderAssociatedGradedSupport">transposedOrderAssociatedGradedSupport</a> k</span>
+<span id="L52"><a href="#L52">52</a>           (<a class="ref" href="./Weyl/EulerResidue.lean.html#L25" title="Stafford38.WeylEulerResidue.canonicalRightIdeal">canonicalRightIdeal</a> (<a class="ref" href="./Weyl/IteratedEquivalence.lean.html#L330" title="Stafford38.WeylIteratedEquivalence.presentedCoordinate">presentedCoordinate</a> k n) d N))</span>
+<span id="L53"><a href="#L53">53</a>         (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Spectrum/Prime/Basic.lean#L129" title="PrimeSpectrum.zeroLocus">PrimeSpectrum.zeroLocus</a></span>
+<span id="L54"><a href="#L54">54</a>           ({<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/Basic.lean#L125" title="MvPolynomial.X">MvPolynomial.X</a> (<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Core.lean#L213" title="Sum.inl">.inl</a> (0 : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L2443" title="Fin">Fin</a> (n + 1)))} :</span>
+<span id="L55"><a href="#L55">55</a>             <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Data/Set/Defs.lean#L44" title="Set">Set</a> (<a class="ref" href="./Characteristic/Polynomial.lean.html#L20" title="Stafford38.Characteristic.SymbolRing">SymbolRing</a> k (n + 1))))</span>
 <span id="L56"><a href="#L56">56</a> </span>
 <span id="L57"><a href="#L57">57</a> /-- Assembly interfaces whose fields are proved in `Stafford38.FoundationClosure`. -/</span>
 <span id="L58"><a href="#L58">58</a> structure Inputs : Prop where</span>
 <span id="L59"><a href="#L59">59</a>   noncharacteristicApplication :</span>
-<span id="L60"><a href="#L60">60</a>     CanonicalNoncharacteristicSupportAvoidance.{u}</span>
+<span id="L60"><a href="#L60">60</a>     <a class="ref" href="./PaperInputs.lean.html#L43" title="Stafford38.PaperInputs.CanonicalNoncharacteristicSupportAvoidance">CanonicalNoncharacteristicSupportAvoidance</a>.{u}</span>
 <span id="L61"><a href="#L61">61</a>   residueExtensionSymbolControl :</span>
-<span id="L62"><a href="#L62">62</a>     CanonicalResidueExtensionSymbolControl.{u}</span>
+<span id="L62"><a href="#L62">62</a>     <a class="ref" href="./Geometry/CanonicalResidueExtensionAssembly.lean.html#L64" title="Stafford38.Geometry.CanonicalResidueExtensionAssembly.CanonicalResidueExtensionSymbolControl">CanonicalResidueExtensionSymbolControl</a>.{u}</span>
 <span id="L63"><a href="#L63">63</a>   higherDimensionalVisibleDivisorFrameProduction :</span>
-<span id="L64"><a href="#L64">64</a>     HigherDimensionalCanonicalVisibleDivisorFrameProduction.{u}</span>
+<span id="L64"><a href="#L64">64</a>     <a class="ref" href="./Geometry/CanonicalVisibleDivisorFrameProduction.lean.html#L245" title="Stafford38.Geometry.CanonicalVisibleDivisorFrameProduction.HigherDimensionalCanonicalVisibleDivisorFrameProduction">HigherDimensionalCanonicalVisibleDivisorFrameProduction</a>.{u}</span>
 <span id="L65"><a href="#L65">65</a> </span>
 <span id="L66"><a href="#L66">66</a> /-- Canonical support vanishes under the three explicit paper inputs.</span>
 <span id="L67"><a href="#L67">67</a> This theorem is conditional and introduces no project axiom. -/</span>
-<span id="L68"><a href="#L68">68</a> theorem canonicalSupportVanishing_of_inputs (h : Inputs.{u}) :</span>
-<span id="L69"><a href="#L69">69</a>     Stafford38.UniversalAssembly.CanonicalSupportVanishing.{u} := by</span>
-<span id="L70"><a href="#L70">70</a>   let hunit : CanonicalStrictUnitCoordinatePreimage.{u} := by</span>
+<span id="L68"><a href="#L68">68</a> theorem canonicalSupportVanishing_of_inputs (h : <a class="ref" href="./PaperInputs.lean.html#L57" title="Stafford38.PaperInputs.Inputs">Inputs</a>.{u}) :</span>
+<span id="L69"><a href="#L69">69</a>     <a class="ref" href="./UniversalAssembly.lean.html#L35" title="Stafford38.UniversalAssembly.CanonicalSupportVanishing">Stafford38.UniversalAssembly.CanonicalSupportVanishing</a>.{u} := by</span>
+<span id="L70"><a href="#L70">70</a>   let hunit : <a class="ref" href="./CanonicalSupportVanishingReduction.lean.html#L62" title="Stafford38.CanonicalSupportVanishingReduction.CanonicalStrictUnitCoordinatePreimage">CanonicalStrictUnitCoordinatePreimage</a>.{u} := by</span>
 <span id="L71"><a href="#L71">71</a>     intro k _ _ _ n N d hN hd</span>
-<span id="L72"><a href="#L72">72</a>     exact strictUnitCoordinatePreimage_of_transposedSupport_disjoint_axis</span>
-<span id="L73"><a href="#L73">73</a>       k n N d (h.noncharacteristicApplication k n N d hN hd)</span>
-<span id="L74"><a href="#L74">74</a>   exact canonicalSupportDescent</span>
-<span id="L75"><a href="#L75">75</a>       (algebraicallyClosedCanonicalSupportVanishing_of_residueExtension_rankSplit</span>
-<span id="L76"><a href="#L76">76</a>         hunit h.residueExtensionSymbolControl</span>
-<span id="L77"><a href="#L77">77</a>           (higherDimensionalCanonicalResidueExtensionConormalAxisProduction_of_nonconstantFiniteGradient</span>
-<span id="L78"><a href="#L78">78</a>             (higherDimensionalCanonicalResidueExtensionNonconstantFiniteGradientProduction_of_visibleDivisorFrame</span>
-<span id="L79"><a href="#L79">79</a>               h.higherDimensionalVisibleDivisorFrameProduction)))</span>
+<span id="L72"><a href="#L72">72</a>     exact <a class="ref" href="./Characteristic/SpecializedNoncharacteristicEquality.lean.html#L265" title="Stafford38.SpecializedNoncharacteristicEquality.strictUnitCoordinatePreimage_of_transposedSupport_disjoint_axis">strictUnitCoordinatePreimage_of_transposedSupport_disjoint_axis</a></span>
+<span id="L73"><a href="#L73">73</a>       k n N d (h.<a class="ref" href="./PaperInputs.lean.html#L59" title="Stafford38.PaperInputs.Inputs.noncharacteristicApplication">noncharacteristicApplication</a> k n N d hN hd)</span>
+<span id="L74"><a href="#L74">74</a>   exact <a class="ref" href="./Weyl/FilteredScalarLifting.lean.html#L472" title="Stafford38.Weyl.FilteredScalarLifting.canonicalSupportDescent">canonicalSupportDescent</a></span>
+<span id="L75"><a href="#L75">75</a>       (<a class="ref" href="./Geometry/CanonicalResidueExtensionAssembly.lean.html#L197" title="Stafford38.Geometry.CanonicalResidueExtensionAssembly.algebraicallyClosedCanonicalSupportVanishing_of_residueExtension_rankSplit">algebraicallyClosedCanonicalSupportVanishing_of_residueExtension_rankSplit</a></span>
+<span id="L76"><a href="#L76">76</a>         hunit h.<a class="ref" href="./PaperInputs.lean.html#L61" title="Stafford38.PaperInputs.Inputs.residueExtensionSymbolControl">residueExtensionSymbolControl</a></span>
+<span id="L77"><a href="#L77">77</a>           (<a class="ref" href="./Geometry/CanonicalNonconstantFiniteGradientProduction.lean.html#L67" title="Stafford38.Geometry.CanonicalNonconstantFiniteGradientProduction.higherDimensionalCanonicalResidueExtensionConormalAxisProduction_of_nonconstantFiniteGradient">higherDimensionalCanonicalResidueExtensionConormalAxisProduction_of_nonconstantFiniteGradient</a></span>
+<span id="L78"><a href="#L78">78</a>             (<a class="ref" href="./Geometry/CanonicalVisibleDivisorFrameProduction.lean.html#L264" title="Stafford38.Geometry.CanonicalVisibleDivisorFrameProduction.higherDimensionalCanonicalResidueExtensionNonconstantFiniteGradientProduction_of_visibleDivisorFrame">higherDimensionalCanonicalResidueExtensionNonconstantFiniteGradientProduction_of_visibleDivisorFrame</a></span>
+<span id="L79"><a href="#L79">79</a>               h.<a class="ref" href="./PaperInputs.lean.html#L63" title="Stafford38.PaperInputs.Inputs.higherDimensionalVisibleDivisorFrameProduction">higherDimensionalVisibleDivisorFrameProduction</a>)))</span>
 <span id="L80"><a href="#L80">80</a> </span>
 <span id="L81"><a href="#L81">81</a> /-- The universal identity under the explicit paper inputs. -/</span>
-<span id="L82"><a href="#L82">82</a> theorem universalStatement_of_inputs (h : Inputs.{u}) :</span>
-<span id="L83"><a href="#L83">83</a>     Stafford38Challenge.UniversalStatement.{u} :=</span>
-<span id="L84"><a href="#L84">84</a>   Stafford38.UniversalAssembly.universalStatement_of_canonicalSupportVanishing</span>
-<span id="L85"><a href="#L85">85</a>     (canonicalSupportVanishing_of_inputs h)</span>
+<span id="L82"><a href="#L82">82</a> theorem universalStatement_of_inputs (h : <a class="ref" href="./PaperInputs.lean.html#L57" title="Stafford38.PaperInputs.Inputs">Inputs</a>.{u}) :</span>
+<span id="L83"><a href="#L83">83</a>     <a class="ref" href="./ChallengeDefinitions.lean.html#L77" title="Stafford38Challenge.UniversalStatement">Stafford38Challenge.UniversalStatement</a>.{u} :=</span>
+<span id="L84"><a href="#L84">84</a>   <a class="ref" href="./UniversalAssembly.lean.html#L69" title="Stafford38.UniversalAssembly.universalStatement_of_canonicalSupportVanishing">Stafford38.UniversalAssembly.universalStatement_of_canonicalSupportVanishing</a></span>
+<span id="L85"><a href="#L85">85</a>     (<a class="ref" href="./PaperInputs.lean.html#L66" title="Stafford38.PaperInputs.canonicalSupportVanishing_of_inputs">canonicalSupportVanishing_of_inputs</a> h)</span>
 <span id="L86"><a href="#L86">86</a> </span>
 <span id="L87"><a href="#L87">87</a> /-- The stronger paper statement, with the exact Bernstein exponent. -/</span>
-<span id="L88"><a href="#L88">88</a> theorem universalFixedSourceStatement_of_inputs (h : Inputs.{u}) :</span>
-<span id="L89"><a href="#L89">89</a>     Stafford38FixedSourceChallenge.UniversalFixedSourceStatement.{u} :=</span>
-<span id="L90"><a href="#L90">90</a>   Stafford38.FixedSource.universalFixedSourceStatement_of_canonicalSupportVanishing</span>
-<span id="L91"><a href="#L91">91</a>     (canonicalSupportVanishing_of_inputs h)</span>
+<span id="L88"><a href="#L88">88</a> theorem universalFixedSourceStatement_of_inputs (h : <a class="ref" href="./PaperInputs.lean.html#L57" title="Stafford38.PaperInputs.Inputs">Inputs</a>.{u}) :</span>
+<span id="L89"><a href="#L89">89</a>     <a class="ref" href="./ChallengeDefinitions.lean.html#L161" title="Stafford38FixedSourceChallenge.UniversalFixedSourceStatement">Stafford38FixedSourceChallenge.UniversalFixedSourceStatement</a>.{u} :=</span>
+<span id="L90"><a href="#L90">90</a>   <a class="ref" href="./FixedSourceAssembly.lean.html#L30" title="Stafford38.FixedSource.universalFixedSourceStatement_of_canonicalSupportVanishing">Stafford38.FixedSource.universalFixedSourceStatement_of_canonicalSupportVanishing</a></span>
+<span id="L91"><a href="#L91">91</a>     (<a class="ref" href="./PaperInputs.lean.html#L66" title="Stafford38.PaperInputs.canonicalSupportVanishing_of_inputs">canonicalSupportVanishing_of_inputs</a> h)</span>
 <span id="L92"><a href="#L92">92</a> </span>
-<span id="L93"><a href="#L93">93</a> #print axioms universalStatement_of_inputs</span>
+<span id="L93"><a href="#L93">93</a> #print axioms <a class="ref" href="./PaperInputs.lean.html#L81" title="Stafford38.PaperInputs.universalStatement_of_inputs">universalStatement_of_inputs</a></span>
 <span id="L94"><a href="#L94">94</a> </span>
 <span id="L95"><a href="#L95">95</a> end Stafford38.PaperInputs</span>
 <span id="L96"><a href="#L96">96</a> </span></pre>

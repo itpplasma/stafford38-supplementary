@@ -1,4 +1,4 @@
-<!doctype html><meta charset="utf-8"><title>Stafford38/Geometry/GeneralTangentLimitCriterionTest.lean</title><style>body{font:14px monospace}pre span{display:block}pre span:target{background:#fff0ad}a{color:#666}pre{white-space:pre-wrap}</style><h1>Stafford38/Geometry/GeneralTangentLimitCriterionTest.lean</h1><p>This project (Stafford38) · 0403af3f0b1a7f84d2027121932723f67bd279ae</p><pre><span id="L1"><a href="#L1">1</a> module</span>
+<!doctype html><meta charset="utf-8"><title>Stafford38/Geometry/GeneralTangentLimitCriterionTest.lean</title><style>body{font:14px monospace}pre span{display:block}pre span:target{background:#fff0ad}a{color:#666}pre{white-space:pre-wrap}a.ref{color:#0645ad;text-decoration:none}a.ref:hover{text-decoration:underline}</style><h1>Stafford38/Geometry/GeneralTangentLimitCriterionTest.lean</h1><p>This project (Stafford38) · 0403af3f0b1a7f84d2027121932723f67bd279ae</p><pre><span id="L1"><a href="#L1">1</a> module</span>
 <span id="L2"><a href="#L2">2</a> public import Stafford38.Geometry.GeneralTangentLimitCriterion</span>
 <span id="L3"><a href="#L3">3</a> </span>
 <span id="L4"><a href="#L4">4</a> @[expose] public section</span>
@@ -20,23 +20,23 @@
 <span id="L20"><a href="#L20">20</a> </span>
 <span id="L21"><a href="#L21">21</a> noncomputable section</span>
 <span id="L22"><a href="#L22">22</a> </span>
-<span id="L23"><a href="#L23">23</a> variable {k : Type*} [Field k] [IsAlgClosed k]</span>
+<span id="L23"><a href="#L23">23</a> variable {k : Type*} [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Field/Defs.lean#L170" title="Field">Field</a> k] [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/FieldTheory/IsAlgClosed/Basic.lean#L58" title="IsAlgClosed">IsAlgClosed</a> k]</span>
 <span id="L24"><a href="#L24">24</a> </span>
 <span id="L25"><a href="#L25">25</a> theorem paper_shape_consumer</span>
-<span id="L26"><a href="#L26">26</a>     {n dimY : ℕ}</span>
-<span id="L27"><a href="#L27">27</a>     (I : Ideal (MvPolynomial (Fin n) k))</span>
-<span id="L28"><a href="#L28">28</a>     (q : Fin (n + 1) → PowerSeries k)</span>
-<span id="L29"><a href="#L29">29</a>     (L : Submodule (PowerSeries k)</span>
-<span id="L30"><a href="#L30">30</a>       (Fin (n + 1) → PowerSeries k))</span>
-<span id="L31"><a href="#L31">31</a>     (D : DirectSummandInput (dimY := dimY) I q L) :</span>
-<span id="L32"><a href="#L32">32</a>     Projectivization.mk k</span>
-<span id="L33"><a href="#L33">33</a>         (fun i : Fin n =&gt; if i = D.axis then (1 : k) else 0)</span>
-<span id="L34"><a href="#L34">34</a>         (by intro h; have hh := congrFun h D.axis; simpa using hh) ∈</span>
-<span id="L35"><a href="#L35">35</a>       projectiveHomogeneousClosure</span>
-<span id="L36"><a href="#L36">36</a>         (projectivizedDirectionSet (smoothConormalDirectionSet I)) := by</span>
-<span id="L37"><a href="#L37">37</a>   exact tangent_limit_criterion_of_directSummand I q L D</span>
+<span id="L26"><a href="#L26">26</a>     {n dimY : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L1351" title="Nat">ℕ</a>}</span>
+<span id="L27"><a href="#L27">27</a>     (I : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Defs.lean#L38" title="Ideal">Ideal</a> (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/Basic.lean#L80" title="MvPolynomial">MvPolynomial</a> (<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L2443" title="Fin">Fin</a> n) k))</span>
+<span id="L28"><a href="#L28">28</a>     (q : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L2443" title="Fin">Fin</a> (n + 1) → <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/PowerSeries/Basic.lean#L58" title="PowerSeries">PowerSeries</a> k)</span>
+<span id="L29"><a href="#L29">29</a>     (L : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Module/Submodule/Defs.lean#L38" title="Submodule">Submodule</a> (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/PowerSeries/Basic.lean#L58" title="PowerSeries">PowerSeries</a> k)</span>
+<span id="L30"><a href="#L30">30</a>       (<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L2443" title="Fin">Fin</a> (n + 1) → <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/PowerSeries/Basic.lean#L58" title="PowerSeries">PowerSeries</a> k))</span>
+<span id="L31"><a href="#L31">31</a>     (D : <a class="ref" href="./GeneralTangentLimitCriterion.lean.html#L307" title="Stafford38.Geometry.GeneralTangentLimitCriterion.DirectSummandInput">DirectSummandInput</a> (dimY := dimY) I q L) :</span>
+<span id="L32"><a href="#L32">32</a>     <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/LinearAlgebra/Projectivization/Basic.lean#L59" title="Projectivization.mk">Projectivization.mk</a> k</span>
+<span id="L33"><a href="#L33">33</a>         (fun i : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L2443" title="Fin">Fin</a> n =&gt; if i = D.<a class="ref" href="./GeneralTangentLimitCriterion.lean.html#L317" title="Stafford38.Geometry.GeneralTangentLimitCriterion.DirectSummandInput.axis">axis</a> then (1 : k) else 0)</span>
+<span id="L34"><a href="#L34">34</a>         (by intro h; have hh := <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L428" title="congrFun">congrFun</a> h D.<a class="ref" href="./GeneralTangentLimitCriterion.lean.html#L317" title="Stafford38.Geometry.GeneralTangentLimitCriterion.DirectSummandInput.axis">axis</a>; simpa using hh) ∈</span>
+<span id="L35"><a href="#L35">35</a>       <a class="ref" href="./ProjectiveConormalDirections.lean.html#L32" title="Stafford38.Geometry.ProjectiveConormalDirections.projectiveHomogeneousClosure">projectiveHomogeneousClosure</a></span>
+<span id="L36"><a href="#L36">36</a>         (<a class="ref" href="./ProjectiveConormalDirections.lean.html#L53" title="Stafford38.Geometry.ProjectiveConormalDirections.projectivizedDirectionSet">projectivizedDirectionSet</a> (<a class="ref" href="./ProjectiveConormalDirections.lean.html#L40" title="Stafford38.Geometry.ProjectiveConormalDirections.smoothConormalDirectionSet">smoothConormalDirectionSet</a> I)) := by</span>
+<span id="L37"><a href="#L37">37</a>   exact <a class="ref" href="./GeneralTangentLimitCriterion.lean.html#L629" title="Stafford38.Geometry.GeneralTangentLimitCriterion.tangent_limit_criterion_of_directSummand">tangent_limit_criterion_of_directSummand</a> I q L D</span>
 <span id="L38"><a href="#L38">38</a> </span>
-<span id="L39"><a href="#L39">39</a> #print axioms paper_shape_consumer</span>
+<span id="L39"><a href="#L39">39</a> #print axioms <a class="ref" href="./GeneralTangentLimitCriterionTest.lean.html#L25" title="Stafford38.Geometry.GeneralTangentLimitCriterionTest.paper_shape_consumer">paper_shape_consumer</a></span>
 <span id="L40"><a href="#L40">40</a> </span>
 <span id="L41"><a href="#L41">41</a> end</span>
 <span id="L42"><a href="#L42">42</a> end Stafford38.Geometry.GeneralTangentLimitCriterionTest</span>

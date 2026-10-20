@@ -1,0 +1,156 @@
+<!doctype html><meta charset="utf-8"><title>Stafford38/Characteristic/FilteredQuotientReesExact.lean</title><style>body{font:14px monospace}pre span{display:block}pre span:target{background:#fff0ad}a{color:#666}pre{white-space:pre-wrap}a.ref{color:#0645ad;text-decoration:none}a.ref:hover{text-decoration:underline}</style><h1>Stafford38/Characteristic/FilteredQuotientReesExact.lean</h1><p>This project (Stafford38) · 0403af3f0b1a7f84d2027121932723f67bd279ae</p><pre><span id="L1"><a href="#L1">1</a> module</span>
+<span id="L2"><a href="#L2">2</a> public import Stafford38.Characteristic.FilteredQuotientRees</span>
+<span id="L3"><a href="#L3">3</a> </span>
+<span id="L4"><a href="#L4">4</a> @[expose] public section</span>
+<span id="L5"><a href="#L5">5</a> </span>
+<span id="L6"><a href="#L6">6</a> open Stafford38Challenge (<a class="ref" href="../ChallengeDefinitions.lean.html#L73" title="Stafford38Challenge.WeylAlg">WeylAlg</a>)</span>
+<span id="L7"><a href="#L7">7</a> </span>
+<span id="L8"><a href="#L8">8</a> /-!</span>
+<span id="L9"><a href="#L9">9</a> # Exact specialization of the filtered quotient Rees direct sum</span>
+<span id="L10"><a href="#L10">10</a> </span>
+<span id="L11"><a href="#L11">11</a> This file completes the additive exactness statement for the concrete direct</span>
+<span id="L12"><a href="#L12">12</a> sum constructed in `FilteredQuotientRees`.  The filtration inclusions make the</span>
+<span id="L13"><a href="#L13">13</a> degree shift injective, and the kernel of the componentwise associated-graded</span>
+<span id="L14"><a href="#L14">14</a> quotient is exactly its range.</span>
+<span id="L15"><a href="#L15">15</a> </span>
+<span id="L16"><a href="#L16">16</a> Only `k`-linear maps are used here.  In particular, this file introduces no</span>
+<span id="L17"><a href="#L17">17</a> Rees-ring action and asserts no special-fibre ring or module equivalence.</span>
+<span id="L18"><a href="#L18">18</a> -/</span>
+<span id="L19"><a href="#L19">19</a> </span>
+<span id="L20"><a href="#L20">20</a> namespace Stafford38.CharacteristicFilteredQuotientReesExact</span>
+<span id="L21"><a href="#L21">21</a> </span>
+<span id="L22"><a href="#L22">22</a> open Stafford38.CharacteristicFilteredQuotient</span>
+<span id="L23"><a href="#L23">23</a> open Stafford38.CharacteristicFilteredQuotientGraded</span>
+<span id="L24"><a href="#L24">24</a> open Stafford38.CharacteristicFilteredQuotientRees</span>
+<span id="L25"><a href="#L25">25</a> open Stafford38.EulerSurjectivity</span>
+<span id="L26"><a href="#L26">26</a> open Stafford38.WeylAssociatedGraded</span>
+<span id="L27"><a href="#L27">27</a> open Stafford38.WeylIteratedEquivalence</span>
+<span id="L28"><a href="#L28">28</a> </span>
+<span id="L29"><a href="#L29">29</a> noncomputable section</span>
+<span id="L30"><a href="#L30">30</a> </span>
+<span id="L31"><a href="#L31">31</a> set_option <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Lean/Meta/SynthInstance.lean#L20" title="Lean.Meta.synthInstance.maxHeartbeats">synthInstance.maxHeartbeats</a> 200000</span>
+<span id="L32"><a href="#L32">32</a> set_option <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Lean/CoreM.lean#L30" title="Lean.maxHeartbeats">maxHeartbeats</a> 1000000</span>
+<span id="L33"><a href="#L33">33</a> </span>
+<span id="L34"><a href="#L34">34</a> universe u</span>
+<span id="L35"><a href="#L35">35</a> </span>
+<span id="L36"><a href="#L36">36</a> variable (k : Type u) [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Field/Defs.lean#L170" title="Field">Field</a> k]</span>
+<span id="L37"><a href="#L37">37</a> variable {n : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L1351" title="Nat">ℕ</a>}</span>
+<span id="L38"><a href="#L38">38</a> </span>
+<span id="L39"><a href="#L39">39</a> private theorem quotientOrderReesShift_apply_succ</span>
+<span id="L40"><a href="#L40">40</a>     (I : <a class="ref" href="../Quotient/EulerSurjectivity.lean.html#L21" title="Stafford38.EulerSurjectivity.RightIdeal">RightIdeal</a> (<a class="ref" href="../ChallengeDefinitions.lean.html#L73" title="Stafford38Challenge.WeylAlg">WeylAlg</a> k n))</span>
+<span id="L41"><a href="#L41">41</a>     (x : <a class="ref" href="./FilteredQuotientRees.lean.html#L51" title="Stafford38.CharacteristicFilteredQuotientRees.QuotientOrderReesModule">QuotientOrderReesModule</a> k I) (N : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L1351" title="Nat">ℕ</a>) :</span>
+<span id="L42"><a href="#L42">42</a>     (<a class="ref" href="./FilteredQuotientRees.lean.html#L62" title="Stafford38.CharacteristicFilteredQuotientRees.quotientOrderReesShift">quotientOrderReesShift</a> k I x) (N + 1) =</span>
+<span id="L43"><a href="#L43">43</a>       <a class="ref" href="./FilteredQuotientRees.lean.html#L56" title="Stafford38.CharacteristicFilteredQuotientRees.quotientOrderPieceSucc">quotientOrderPieceSucc</a> k I N (x N) := by</span>
+<span id="L44"><a href="#L44">44</a>   induction x using <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/DirectSum/Basic.lean#L181" title="DirectSum.induction_on">DirectSum.induction_on</a> with</span>
+<span id="L45"><a href="#L45">45</a>   | zero =&gt; simp</span>
+<span id="L46"><a href="#L46">46</a>   | of M q =&gt;</span>
+<span id="L47"><a href="#L47">47</a>       rw [<a class="ref" href="./FilteredQuotientRees.lean.html#L70" title="Stafford38.CharacteristicFilteredQuotientRees.quotientOrderReesShift_of">quotientOrderReesShift_of</a>]</span>
+<span id="L48"><a href="#L48">48</a>       simp only [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/DirectSum/Basic.lean#L142" title="DirectSum.of_apply">DirectSum.of_apply</a>]</span>
+<span id="L49"><a href="#L49">49</a>       by_cases h : M = N</span>
+<span id="L50"><a href="#L50">50</a>       · subst M</span>
+<span id="L51"><a href="#L51">51</a>         simp</span>
+<span id="L52"><a href="#L52">52</a>       · have hs : M + 1 ≠ N + 1 := by omega</span>
+<span id="L53"><a href="#L53">53</a>         simp [h, hs]</span>
+<span id="L54"><a href="#L54">54</a>   | add x y hx hy =&gt;</span>
+<span id="L55"><a href="#L55">55</a>       simpa using <a class="ref" href="https://github.com/leanprover-community/batteries/blob/3b7c8101932390d60e92a3f3d917901d5b5a773b/Batteries/Logic.lean#L38" title="congrArg₂">congrArg₂</a> (· + ·) hx hy</span>
+<span id="L56"><a href="#L56">56</a> </span>
+<span id="L57"><a href="#L57">57</a> private theorem quotientOrderReesToAssociatedGraded_apply</span>
+<span id="L58"><a href="#L58">58</a>     (I : <a class="ref" href="../Quotient/EulerSurjectivity.lean.html#L21" title="Stafford38.EulerSurjectivity.RightIdeal">RightIdeal</a> (<a class="ref" href="../ChallengeDefinitions.lean.html#L73" title="Stafford38Challenge.WeylAlg">WeylAlg</a> k n))</span>
+<span id="L59"><a href="#L59">59</a>     (x : <a class="ref" href="./FilteredQuotientRees.lean.html#L51" title="Stafford38.CharacteristicFilteredQuotientRees.QuotientOrderReesModule">QuotientOrderReesModule</a> k I) (N : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L1351" title="Nat">ℕ</a>) :</span>
+<span id="L60"><a href="#L60">60</a>     (<a class="ref" href="./FilteredQuotientRees.lean.html#L90" title="Stafford38.CharacteristicFilteredQuotientRees.quotientOrderReesToAssociatedGraded">quotientOrderReesToAssociatedGraded</a> k I x) N =</span>
+<span id="L61"><a href="#L61">61</a>       <a class="ref" href="./FilteredQuotientRees.lean.html#L83" title="Stafford38.CharacteristicFilteredQuotientRees.quotientOrderPieceToGraded">quotientOrderPieceToGraded</a> k I N (x N) := by</span>
+<span id="L62"><a href="#L62">62</a>   induction x using <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/DirectSum/Basic.lean#L181" title="DirectSum.induction_on">DirectSum.induction_on</a> with</span>
+<span id="L63"><a href="#L63">63</a>   | zero =&gt; simp</span>
+<span id="L64"><a href="#L64">64</a>   | of M q =&gt;</span>
+<span id="L65"><a href="#L65">65</a>       rw [<a class="ref" href="./FilteredQuotientRees.lean.html#L99" title="Stafford38.CharacteristicFilteredQuotientRees.quotientOrderReesToAssociatedGraded_of">quotientOrderReesToAssociatedGraded_of</a>]</span>
+<span id="L66"><a href="#L66">66</a>       simp only [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/DirectSum/Basic.lean#L142" title="DirectSum.of_apply">DirectSum.of_apply</a>]</span>
+<span id="L67"><a href="#L67">67</a>       by_cases h : M = N</span>
+<span id="L68"><a href="#L68">68</a>       · subst M</span>
+<span id="L69"><a href="#L69">69</a>         simp</span>
+<span id="L70"><a href="#L70">70</a>       · simp [h]</span>
+<span id="L71"><a href="#L71">71</a>   | add x y hx hy =&gt;</span>
+<span id="L72"><a href="#L72">72</a>       simpa using <a class="ref" href="https://github.com/leanprover-community/batteries/blob/3b7c8101932390d60e92a3f3d917901d5b5a773b/Batteries/Logic.lean#L38" title="congrArg₂">congrArg₂</a> (· + ·) hx hy</span>
+<span id="L73"><a href="#L73">73</a> </span>
+<span id="L74"><a href="#L74">74</a> /-- The degree-raising filtration shift on the concrete quotient Rees direct</span>
+<span id="L75"><a href="#L75">75</a> sum is injective. -/</span>
+<span id="L76"><a href="#L76">76</a> theorem quotientOrderReesShift_injective</span>
+<span id="L77"><a href="#L77">77</a>     (I : <a class="ref" href="../Quotient/EulerSurjectivity.lean.html#L21" title="Stafford38.EulerSurjectivity.RightIdeal">RightIdeal</a> (<a class="ref" href="../ChallengeDefinitions.lean.html#L73" title="Stafford38Challenge.WeylAlg">WeylAlg</a> k n)) :</span>
+<span id="L78"><a href="#L78">78</a>     <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Data/Function.lean#L51" title="Function.Injective">Function.Injective</a> (<a class="ref" href="./FilteredQuotientRees.lean.html#L62" title="Stafford38.CharacteristicFilteredQuotientRees.quotientOrderReesShift">quotientOrderReesShift</a> k I) := by</span>
+<span id="L79"><a href="#L79">79</a>   intro x y hxy</span>
+<span id="L80"><a href="#L80">80</a>   apply <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Data/DFinsupp/Defs.lean#L88" title="DFinsupp.ext">DFinsupp.ext</a></span>
+<span id="L81"><a href="#L81">81</a>   intro N</span>
+<span id="L82"><a href="#L82">82</a>   have hcomponent := <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L405" title="congrArg">congrArg</a> (fun z =&gt; z (N + 1)) hxy</span>
+<span id="L83"><a href="#L83">83</a>   change (<a class="ref" href="./FilteredQuotientRees.lean.html#L62" title="Stafford38.CharacteristicFilteredQuotientRees.quotientOrderReesShift">quotientOrderReesShift</a> k I x) (N + 1) =</span>
+<span id="L84"><a href="#L84">84</a>     (<a class="ref" href="./FilteredQuotientRees.lean.html#L62" title="Stafford38.CharacteristicFilteredQuotientRees.quotientOrderReesShift">quotientOrderReesShift</a> k I y) (N + 1) at hcomponent</span>
+<span id="L85"><a href="#L85">85</a>   rw [<a class="ref" href="./FilteredQuotientReesExact.lean.html#L39" title="_private.Stafford38.Characteristic.FilteredQuotientReesExact.0.Stafford38.CharacteristicFilteredQuotientReesExact.quotientOrderReesShift_apply_succ">quotientOrderReesShift_apply_succ</a>,</span>
+<span id="L86"><a href="#L86">86</a>     <a class="ref" href="./FilteredQuotientReesExact.lean.html#L39" title="_private.Stafford38.Characteristic.FilteredQuotientReesExact.0.Stafford38.CharacteristicFilteredQuotientReesExact.quotientOrderReesShift_apply_succ">quotientOrderReesShift_apply_succ</a>] at hcomponent</span>
+<span id="L87"><a href="#L87">87</a>   have hval :</span>
+<span id="L88"><a href="#L88">88</a>       ((<a class="ref" href="./FilteredQuotientRees.lean.html#L56" title="Stafford38.CharacteristicFilteredQuotientRees.quotientOrderPieceSucc">quotientOrderPieceSucc</a> k I N (x N) :</span>
+<span id="L89"><a href="#L89">89</a>         <a class="ref" href="./FilteredQuotient.lean.html#L106" title="Stafford38.CharacteristicFilteredQuotient.quotientOrderPiece">quotientOrderPiece</a> k I (N + 1)) : <a class="ref" href="./FilteredQuotient.lean.html#L85" title="Stafford38.CharacteristicFilteredQuotient.FilteredRightQuotient">FilteredRightQuotient</a> k I) =</span>
+<span id="L90"><a href="#L90">90</a>       ((<a class="ref" href="./FilteredQuotientRees.lean.html#L56" title="Stafford38.CharacteristicFilteredQuotientRees.quotientOrderPieceSucc">quotientOrderPieceSucc</a> k I N (y N) :</span>
+<span id="L91"><a href="#L91">91</a>         <a class="ref" href="./FilteredQuotient.lean.html#L106" title="Stafford38.CharacteristicFilteredQuotient.quotientOrderPiece">quotientOrderPiece</a> k I (N + 1)) : <a class="ref" href="./FilteredQuotient.lean.html#L85" title="Stafford38.CharacteristicFilteredQuotient.FilteredRightQuotient">FilteredRightQuotient</a> k I) :=</span>
+<span id="L92"><a href="#L92">92</a>     <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L405" title="congrArg">congrArg</a></span>
+<span id="L93"><a href="#L93">93</a>       (fun z : <a class="ref" href="./FilteredQuotient.lean.html#L106" title="Stafford38.CharacteristicFilteredQuotient.quotientOrderPiece">quotientOrderPiece</a> k I (N + 1) =&gt;</span>
+<span id="L94"><a href="#L94">94</a>         (z : <a class="ref" href="./FilteredQuotient.lean.html#L85" title="Stafford38.CharacteristicFilteredQuotient.FilteredRightQuotient">FilteredRightQuotient</a> k I)) hcomponent</span>
+<span id="L95"><a href="#L95">95</a>   apply <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Core.lean#L1384" title="Subtype.ext">Subtype.ext</a></span>
+<span id="L96"><a href="#L96">96</a>   exact hval</span>
+<span id="L97"><a href="#L97">97</a> </span>
+<span id="L98"><a href="#L98">98</a> private theorem homogeneous_mem_range_of_specialization_eq_zero</span>
+<span id="L99"><a href="#L99">99</a>     (I : <a class="ref" href="../Quotient/EulerSurjectivity.lean.html#L21" title="Stafford38.EulerSurjectivity.RightIdeal">RightIdeal</a> (<a class="ref" href="../ChallengeDefinitions.lean.html#L73" title="Stafford38Challenge.WeylAlg">WeylAlg</a> k n)) (N : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L1351" title="Nat">ℕ</a>)</span>
+<span id="L100"><a href="#L100">100</a>     (q : <a class="ref" href="./FilteredQuotient.lean.html#L106" title="Stafford38.CharacteristicFilteredQuotient.quotientOrderPiece">quotientOrderPiece</a> k I N)</span>
+<span id="L101"><a href="#L101">101</a>     (hq : <a class="ref" href="./FilteredQuotientRees.lean.html#L83" title="Stafford38.CharacteristicFilteredQuotientRees.quotientOrderPieceToGraded">quotientOrderPieceToGraded</a> k I N q = 0) :</span>
+<span id="L102"><a href="#L102">102</a>     <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/DirectSum/Basic.lean#L129" title="DirectSum.of">DirectSum.of</a> (fun M =&gt; <a class="ref" href="./FilteredQuotient.lean.html#L106" title="Stafford38.CharacteristicFilteredQuotient.quotientOrderPiece">quotientOrderPiece</a> k I M) N q ∈</span>
+<span id="L103"><a href="#L103">103</a>       <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Module/Submodule/Range.lean#L55" title="LinearMap.range">LinearMap.range</a> (<a class="ref" href="./FilteredQuotientRees.lean.html#L62" title="Stafford38.CharacteristicFilteredQuotientRees.quotientOrderReesShift">quotientOrderReesShift</a> k I) := by</span>
+<span id="L104"><a href="#L104">104</a>   cases N with</span>
+<span id="L105"><a href="#L105">105</a>   | <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L1360" title="Nat.zero">zero</a> =&gt;</span>
+<span id="L106"><a href="#L106">106</a>       have hmem := (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/LinearAlgebra/Quotient/Defs.lean#L97" title="Submodule.Quotient.mk_eq_zero">Submodule.Quotient.mk_eq_zero</a> _).<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Core.lean#L192" title="Iff.mp">mp</a> hq</span>
+<span id="L107"><a href="#L107">107</a>       have hqzero : q = 0 := by</span>
+<span id="L108"><a href="#L108">108</a>         apply <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Core.lean#L1384" title="Subtype.ext">Subtype.ext</a></span>
+<span id="L109"><a href="#L109">109</a>         change (q : <a class="ref" href="./FilteredQuotient.lean.html#L85" title="Stafford38.CharacteristicFilteredQuotient.FilteredRightQuotient">FilteredRightQuotient</a> k I) = 0</span>
+<span id="L110"><a href="#L110">110</a>         simpa [<a class="ref" href="./FilteredQuotient.lean.html#L112" title="Stafford38.CharacteristicFilteredQuotient.quotientOrderStrictLowerPiece">quotientOrderStrictLowerPiece</a>,</span>
+<span id="L111"><a href="#L111">111</a>           <a class="ref" href="../Weyl/AssociatedGraded.lean.html#L34" title="Stafford38.WeylAssociatedGraded.presentedStrictLowerPiece">Stafford38.WeylAssociatedGraded.presentedStrictLowerPiece</a>] using hmem</span>
+<span id="L112"><a href="#L112">112</a>       subst q</span>
+<span id="L113"><a href="#L113">113</a>       rw [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Group/Hom/Defs.lean#L233" title="map_zero">map_zero</a>]</span>
+<span id="L114"><a href="#L114">114</a>       exact (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Module/Submodule/Range.lean#L55" title="LinearMap.range">LinearMap.range</a> (<a class="ref" href="./FilteredQuotientRees.lean.html#L62" title="Stafford38.CharacteristicFilteredQuotientRees.quotientOrderReesShift">quotientOrderReesShift</a> k I)).<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Module/Submodule/Defs.lean#L208" title="Submodule.zero_mem">zero_mem</a></span>
+<span id="L115"><a href="#L115">115</a>   | <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L1367" title="Nat.succ">succ</a> N =&gt;</span>
+<span id="L116"><a href="#L116">116</a>       have hmem := (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/LinearAlgebra/Quotient/Defs.lean#L97" title="Submodule.Quotient.mk_eq_zero">Submodule.Quotient.mk_eq_zero</a> _).<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Core.lean#L192" title="Iff.mp">mp</a> hq</span>
+<span id="L117"><a href="#L117">117</a>       have hprev : (q : <a class="ref" href="./FilteredQuotient.lean.html#L85" title="Stafford38.CharacteristicFilteredQuotient.FilteredRightQuotient">FilteredRightQuotient</a> k I) ∈</span>
+<span id="L118"><a href="#L118">118</a>           <a class="ref" href="./FilteredQuotient.lean.html#L106" title="Stafford38.CharacteristicFilteredQuotient.quotientOrderPiece">quotientOrderPiece</a> k I N := by</span>
+<span id="L119"><a href="#L119">119</a>         simpa [<a class="ref" href="./FilteredQuotientRees.lean.html#L45" title="Stafford38.CharacteristicFilteredQuotientRees.quotientOrderStrictLowerPiece_succ_eq">quotientOrderStrictLowerPiece_succ_eq</a>] using hmem</span>
+<span id="L120"><a href="#L120">120</a>       let qprev : <a class="ref" href="./FilteredQuotient.lean.html#L106" title="Stafford38.CharacteristicFilteredQuotient.quotientOrderPiece">quotientOrderPiece</a> k I N := ⟨q, hprev⟩</span>
+<span id="L121"><a href="#L121">121</a>       refine ⟨<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/DirectSum/Basic.lean#L129" title="DirectSum.of">DirectSum.of</a> (fun M =&gt; <a class="ref" href="./FilteredQuotient.lean.html#L106" title="Stafford38.CharacteristicFilteredQuotient.quotientOrderPiece">quotientOrderPiece</a> k I M) N qprev, ?_⟩</span>
+<span id="L122"><a href="#L122">122</a>       rw [<a class="ref" href="./FilteredQuotientRees.lean.html#L70" title="Stafford38.CharacteristicFilteredQuotientRees.quotientOrderReesShift_of">quotientOrderReesShift_of</a>]</span>
+<span id="L123"><a href="#L123">123</a>       congr 1</span>
+<span id="L124"><a href="#L124">124</a> </span>
+<span id="L125"><a href="#L125">125</a> /-- Exactness of specialization for the concrete filtered quotient direct sum:</span>
+<span id="L126"><a href="#L126">126</a> the elements killed by passage to the associated graded object are precisely</span>
+<span id="L127"><a href="#L127">127</a> the images of the degree-raising filtration shift. -/</span>
+<span id="L128"><a href="#L128">128</a> theorem quotientOrderReesToAssociatedGraded_ker_eq_range_shift</span>
+<span id="L129"><a href="#L129">129</a>     (I : <a class="ref" href="../Quotient/EulerSurjectivity.lean.html#L21" title="Stafford38.EulerSurjectivity.RightIdeal">RightIdeal</a> (<a class="ref" href="../ChallengeDefinitions.lean.html#L73" title="Stafford38Challenge.WeylAlg">WeylAlg</a> k n)) :</span>
+<span id="L130"><a href="#L130">130</a>     <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Module/Submodule/Ker.lean#L58" title="LinearMap.ker">LinearMap.ker</a> (<a class="ref" href="./FilteredQuotientRees.lean.html#L90" title="Stafford38.CharacteristicFilteredQuotientRees.quotientOrderReesToAssociatedGraded">quotientOrderReesToAssociatedGraded</a> k I) =</span>
+<span id="L131"><a href="#L131">131</a>       <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Module/Submodule/Range.lean#L55" title="LinearMap.range">LinearMap.range</a> (<a class="ref" href="./FilteredQuotientRees.lean.html#L62" title="Stafford38.CharacteristicFilteredQuotientRees.quotientOrderReesShift">quotientOrderReesShift</a> k I) := by</span>
+<span id="L132"><a href="#L132">132</a>   classical</span>
+<span id="L133"><a href="#L133">133</a>   apply <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Order/Defs/PartialOrder.lean#L187" title="le_antisymm">le_antisymm</a></span>
+<span id="L134"><a href="#L134">134</a>   · intro x hx</span>
+<span id="L135"><a href="#L135">135</a>     have hmap : <a class="ref" href="./FilteredQuotientRees.lean.html#L90" title="Stafford38.CharacteristicFilteredQuotientRees.quotientOrderReesToAssociatedGraded">quotientOrderReesToAssociatedGraded</a> k I x = 0 :=</span>
+<span id="L136"><a href="#L136">136</a>       <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Module/Submodule/Ker.lean#L63" title="LinearMap.mem_ker">LinearMap.mem_ker</a>.<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Core.lean#L192" title="Iff.mp">mp</a> hx</span>
+<span id="L137"><a href="#L137">137</a>     rw [← <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/DirectSum/Basic.lean#L166" title="DirectSum.sum_support_of">DirectSum.sum_support_of</a> x]</span>
+<span id="L138"><a href="#L138">138</a>     apply <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Module/Submodule/Basic.lean#L73" title="Submodule.sum_mem">Submodule.sum_mem</a></span>
+<span id="L139"><a href="#L139">139</a>     intro N hN</span>
+<span id="L140"><a href="#L140">140</a>     apply <a class="ref" href="./FilteredQuotientReesExact.lean.html#L98" title="_private.Stafford38.Characteristic.FilteredQuotientReesExact.0.Stafford38.CharacteristicFilteredQuotientReesExact.homogeneous_mem_range_of_specialization_eq_zero">homogeneous_mem_range_of_specialization_eq_zero</a> k I N</span>
+<span id="L141"><a href="#L141">141</a>     have hcomponent := <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L405" title="congrArg">congrArg</a> (fun z =&gt; z N) hmap</span>
+<span id="L142"><a href="#L142">142</a>     simpa [<a class="ref" href="./FilteredQuotientReesExact.lean.html#L57" title="_private.Stafford38.Characteristic.FilteredQuotientReesExact.0.Stafford38.CharacteristicFilteredQuotientReesExact.quotientOrderReesToAssociatedGraded_apply">quotientOrderReesToAssociatedGraded_apply</a>] using hcomponent</span>
+<span id="L143"><a href="#L143">143</a>   · intro x hx</span>
+<span id="L144"><a href="#L144">144</a>     obtain ⟨y, rfl⟩ := hx</span>
+<span id="L145"><a href="#L145">145</a>     apply <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Module/Submodule/Ker.lean#L63" title="LinearMap.mem_ker">LinearMap.mem_ker</a>.<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Core.lean#L194" title="Iff.mpr">mpr</a></span>
+<span id="L146"><a href="#L146">146</a>     have hcomp := <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Module/LinearMap/Defs.lean#L306" title="LinearMap.congr_fun">LinearMap.congr_fun</a></span>
+<span id="L147"><a href="#L147">147</a>       (<a class="ref" href="./FilteredQuotientRees.lean.html#L124" title="Stafford38.CharacteristicFilteredQuotientRees.quotientOrderReesToAssociatedGraded_comp_shift">quotientOrderReesToAssociatedGraded_comp_shift</a> k I) y</span>
+<span id="L148"><a href="#L148">148</a>     simpa using hcomp</span>
+<span id="L149"><a href="#L149">149</a> </span>
+<span id="L150"><a href="#L150">150</a> #print axioms <a class="ref" href="./FilteredQuotientReesExact.lean.html#L74" title="Stafford38.CharacteristicFilteredQuotientReesExact.quotientOrderReesShift_injective">quotientOrderReesShift_injective</a></span>
+<span id="L151"><a href="#L151">151</a> #print axioms <a class="ref" href="./FilteredQuotientReesExact.lean.html#L125" title="Stafford38.CharacteristicFilteredQuotientReesExact.quotientOrderReesToAssociatedGraded_ker_eq_range_shift">quotientOrderReesToAssociatedGraded_ker_eq_range_shift</a></span>
+<span id="L152"><a href="#L152">152</a> </span>
+<span id="L153"><a href="#L153">153</a> end</span>
+<span id="L154"><a href="#L154">154</a> </span>
+<span id="L155"><a href="#L155">155</a> end Stafford38.CharacteristicFilteredQuotientReesExact</span>
+<span id="L156"><a href="#L156">156</a> </span></pre>

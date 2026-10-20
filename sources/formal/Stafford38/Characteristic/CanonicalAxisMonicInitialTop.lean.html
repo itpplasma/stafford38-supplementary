@@ -1,0 +1,213 @@
+<!doctype html><meta charset="utf-8"><title>Stafford38/Characteristic/CanonicalAxisMonicInitialTop.lean</title><style>body{font:14px monospace}pre span{display:block}pre span:target{background:#fff0ad}a{color:#666}pre{white-space:pre-wrap}a.ref{color:#0645ad;text-decoration:none}a.ref:hover{text-decoration:underline}</style><h1>Stafford38/Characteristic/CanonicalAxisMonicInitialTop.lean</h1><p>This project (Stafford38) · 0403af3f0b1a7f84d2027121932723f67bd279ae</p><pre><span id="L1"><a href="#L1">1</a> module</span>
+<span id="L2"><a href="#L2">2</a> public import Stafford38.Characteristic.AssociatedGradedFinite</span>
+<span id="L3"><a href="#L3">3</a> public import Stafford38.Characteristic.CanonicalUnitPreimageFromInitialTop</span>
+<span id="L4"><a href="#L4">4</a> public import Stafford38.Characteristic.FilteredQuotientReesAction</span>
+<span id="L5"><a href="#L5">5</a> public import Stafford38.Characteristic.HyperplaneRestriction</span>
+<span id="L6"><a href="#L6">6</a> public import Stafford38.Weyl.QuotientTransport</span>
+<span id="L7"><a href="#L7">7</a> </span>
+<span id="L8"><a href="#L8">8</a> @[expose] public section</span>
+<span id="L9"><a href="#L9">9</a> </span>
+<span id="L10"><a href="#L10">10</a> open Stafford38Challenge (<a class="ref" href="../ChallengeDefinitions.lean.html#L73" title="Stafford38Challenge.WeylAlg">WeylAlg</a>)</span>
+<span id="L11"><a href="#L11">11</a> </span>
+<span id="L12"><a href="#L12">12</a> /-!</span>
+<span id="L13"><a href="#L13">13</a> # Rees--Koszul criteria for canonical axis cancellation</span>
+<span id="L14"><a href="#L14">14</a> </span>
+<span id="L15"><a href="#L15">15</a> This file relates ordinary coordinate surjectivity to restriction on the</span>
+<span id="L16"><a href="#L16">16</a> actual order-associated-graded module and to a one-element Rees--Koszul</span>
+<span id="L17"><a href="#L17">17</a> complex. It does not identify ordinary quotient surjectivity with graded</span>
+<span id="L18"><a href="#L18">18</a> surjectivity. The current canonical-support proof uses the separate</span>
+<span id="L19"><a href="#L19">19</a> canonical-page argument in `CanonicalKoszulContradiction`.</span>
+<span id="L20"><a href="#L20">20</a> -/</span>
+<span id="L21"><a href="#L21">21</a> </span>
+<span id="L22"><a href="#L22">22</a> namespace Stafford38.CanonicalAxisMonicInitialTop</span>
+<span id="L23"><a href="#L23">23</a> </span>
+<span id="L24"><a href="#L24">24</a> open Stafford38.CanonicalUnitCoordinatePreimage</span>
+<span id="L25"><a href="#L25">25</a> open Stafford38.CanonicalUnitPreimageFromInitialTop</span>
+<span id="L26"><a href="#L26">26</a> open Stafford38.Characteristic</span>
+<span id="L27"><a href="#L27">27</a> open Stafford38.Characteristic.AssociatedGradedFinite</span>
+<span id="L28"><a href="#L28">28</a> open Stafford38.CharacteristicAssociatedGradedModule</span>
+<span id="L29"><a href="#L29">29</a> open Stafford38.CharacteristicFilteredQuotient</span>
+<span id="L30"><a href="#L30">30</a> open Stafford38.CharacteristicFilteredQuotientReesAction</span>
+<span id="L31"><a href="#L31">31</a> open Stafford38.CharacteristicInitialIdeal</span>
+<span id="L32"><a href="#L32">32</a> open Stafford38.EulerSurjectivity</span>
+<span id="L33"><a href="#L33">33</a> open AlgebraicAnalysis.HyperplaneRestriction</span>
+<span id="L34"><a href="#L34">34</a> open Stafford38.WeylEulerResidue</span>
+<span id="L35"><a href="#L35">35</a> open Stafford38.WeylIteratedEquivalence</span>
+<span id="L36"><a href="#L36">36</a> open Stafford38.WeylPBWMonicBridge</span>
+<span id="L37"><a href="#L37">37</a> open Stafford38.WeylQuotientTransport</span>
+<span id="L38"><a href="#L38">38</a> </span>
+<span id="L39"><a href="#L39">39</a> noncomputable section</span>
+<span id="L40"><a href="#L40">40</a> </span>
+<span id="L41"><a href="#L41">41</a> universe u</span>
+<span id="L42"><a href="#L42">42</a> </span>
+<span id="L43"><a href="#L43">43</a> variable (k : Type u) [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Field/Defs.lean#L170" title="Field">Field</a> k] [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Algebra/Defs.lean#L91" title="Algebra">Algebra</a> <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Data/Rat/Basic.lean#L27" title="Rat">ℚ</a> k]</span>
+<span id="L44"><a href="#L44">44</a> </span>
+<span id="L45"><a href="#L45">45</a> abbrev CanonicalIdeal (n N : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L1351" title="Nat">ℕ</a>)</span>
+<span id="L46"><a href="#L46">46</a>     (d : <a class="ref" href="../ChallengeDefinitions.lean.html#L73" title="Stafford38Challenge.WeylAlg">WeylAlg</a> k (n + 1)) :=</span>
+<span id="L47"><a href="#L47">47</a>   <a class="ref" href="../Weyl/EulerResidue.lean.html#L25" title="Stafford38.WeylEulerResidue.canonicalRightIdeal">canonicalRightIdeal</a> (<a class="ref" href="../Weyl/IteratedEquivalence.lean.html#L330" title="Stafford38.WeylIteratedEquivalence.presentedCoordinate">presentedCoordinate</a> k n) d N</span>
+<span id="L48"><a href="#L48">48</a> </span>
+<span id="L49"><a href="#L49">49</a> /-- The distinguished base-coordinate symbol. -/</span>
+<span id="L50"><a href="#L50">50</a> abbrev AxisCoordinate (n : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L1351" title="Nat">ℕ</a>) : <a class="ref" href="./Polynomial.lean.html#L20" title="Stafford38.Characteristic.SymbolRing">SymbolRing</a> k (n + 1) :=</span>
+<span id="L51"><a href="#L51">51</a>   <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/Basic.lean#L125" title="MvPolynomial.X">MvPolynomial.X</a> (<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Core.lean#L213" title="Sum.inl">.inl</a> (0 : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L2443" title="Fin">Fin</a> (n + 1)))</span>
+<span id="L52"><a href="#L52">52</a> </span>
+<span id="L53"><a href="#L53">53</a> /-- Zeroth Koszul homology of the distinguished coordinate on the actual</span>
+<span id="L54"><a href="#L54">54</a> order-associated graded canonical quotient.  Through the exact Rees special</span>
+<span id="L55"><a href="#L55">55</a> fibre constructed elsewhere, this is the specialized Rees restriction. -/</span>
+<span id="L56"><a href="#L56">56</a> abbrev CanonicalGradedCoordinateKoszulH0 (n N : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L1351" title="Nat">ℕ</a>)</span>
+<span id="L57"><a href="#L57">57</a>     (d : <a class="ref" href="../ChallengeDefinitions.lean.html#L73" title="Stafford38Challenge.WeylAlg">WeylAlg</a> k (n + 1)) :=</span>
+<span id="L58"><a href="#L58">58</a>   <a class="ref" href="../../../library/AlgebraicAnalysis/Module/HyperplaneRestriction.lean.html#L22" title="AlgebraicAnalysis.HyperplaneRestriction.Restriction">Restriction</a></span>
+<span id="L59"><a href="#L59">59</a>     (R := <a class="ref" href="./Polynomial.lean.html#L20" title="Stafford38.Characteristic.SymbolRing">SymbolRing</a> k (n + 1))</span>
+<span id="L60"><a href="#L60">60</a>     (M := <a class="ref" href="./AssociatedGradedModule.lean.html#L52" title="Stafford38.CharacteristicAssociatedGradedModule.OrderAssociatedGradedModule">OrderAssociatedGradedModule</a> k (<a class="ref" href="./CanonicalAxisMonicInitialTop.lean.html#L45" title="Stafford38.CanonicalAxisMonicInitialTop.CanonicalIdeal">CanonicalIdeal</a> k n N d))</span>
+<span id="L61"><a href="#L61">61</a>     (<a class="ref" href="./CanonicalAxisMonicInitialTop.lean.html#L49" title="Stafford38.CanonicalAxisMonicInitialTop.AxisCoordinate">AxisCoordinate</a> k n)</span>
+<span id="L62"><a href="#L62">62</a> </span>
+<span id="L63"><a href="#L63">63</a> /-- Ordinary zeroth Koszul homology of the coordinate on the canonical</span>
+<span id="L64"><a href="#L64">64</a> filtered quotient, before Rees specialization. -/</span>
+<span id="L65"><a href="#L65">65</a> abbrev CanonicalOrdinaryCoordinateKoszulH0 (n N : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L1351" title="Nat">ℕ</a>)</span>
+<span id="L66"><a href="#L66">66</a>     (d : <a class="ref" href="../ChallengeDefinitions.lean.html#L73" title="Stafford38Challenge.WeylAlg">WeylAlg</a> k (n + 1)) :=</span>
+<span id="L67"><a href="#L67">67</a>   <a class="ref" href="./FilteredQuotient.lean.html#L85" title="Stafford38.CharacteristicFilteredQuotient.FilteredRightQuotient">FilteredRightQuotient</a> k (<a class="ref" href="./CanonicalAxisMonicInitialTop.lean.html#L45" title="Stafford38.CanonicalAxisMonicInitialTop.CanonicalIdeal">CanonicalIdeal</a> k n N d) ⧸</span>
+<span id="L68"><a href="#L68">68</a>     <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Module/Submodule/Range.lean#L55" title="LinearMap.range">LinearMap.range</a></span>
+<span id="L69"><a href="#L69">69</a>       (<a class="ref" href="./FilteredQuotientReesAction.lean.html#L41" title="Stafford38.CharacteristicFilteredQuotientReesAction.filteredRightMul">filteredRightMul</a> k (<a class="ref" href="./CanonicalAxisMonicInitialTop.lean.html#L45" title="Stafford38.CanonicalAxisMonicInitialTop.CanonicalIdeal">CanonicalIdeal</a> k n N d)</span>
+<span id="L70"><a href="#L70">70</a>         (<a class="ref" href="../Weyl/IteratedEquivalence.lean.html#L330" title="Stafford38.WeylIteratedEquivalence.presentedCoordinate">presentedCoordinate</a> k n))</span>
+<span id="L71"><a href="#L71">71</a> </span>
+<span id="L72"><a href="#L72">72</a> /-- The initial-ideal target is exactly surjectivity of coordinate</span>
+<span id="L73"><a href="#L73">73</a> multiplication on the actual order-associated graded module.  Cyclicity is</span>
+<span id="L74"><a href="#L74">74</a> used in both directions, and the annihilator is the literal order initial</span>
+<span id="L75"><a href="#L75">75</a> ideal. -/</span>
+<span id="L76"><a href="#L76">76</a> theorem canonical_orderInitialIdeal_sup_coordinate_eq_top_iff_graded_surjective</span>
+<span id="L77"><a href="#L77">77</a>     (n N : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L1351" title="Nat">ℕ</a>) (d : <a class="ref" href="../ChallengeDefinitions.lean.html#L73" title="Stafford38Challenge.WeylAlg">WeylAlg</a> k (n + 1)) :</span>
+<span id="L78"><a href="#L78">78</a>     <a class="ref" href="./InitialIdeal.lean.html#L191" title="Stafford38.CharacteristicInitialIdeal.orderInitialIdeal">orderInitialIdeal</a> k (<a class="ref" href="./CanonicalAxisMonicInitialTop.lean.html#L45" title="Stafford38.CanonicalAxisMonicInitialTop.CanonicalIdeal">CanonicalIdeal</a> k n N d) ⊔</span>
+<span id="L79"><a href="#L79">79</a>           <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Span.lean#L45" title="Ideal.span">Ideal.span</a> {<a class="ref" href="./CanonicalAxisMonicInitialTop.lean.html#L49" title="Stafford38.CanonicalAxisMonicInitialTop.AxisCoordinate">AxisCoordinate</a> k n} = ⊤ ↔</span>
+<span id="L80"><a href="#L80">80</a>       <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Data/Function.lean#L59" title="Function.Surjective">Function.Surjective</a></span>
+<span id="L81"><a href="#L81">81</a>         (fun q : <a class="ref" href="./AssociatedGradedModule.lean.html#L52" title="Stafford38.CharacteristicAssociatedGradedModule.OrderAssociatedGradedModule">OrderAssociatedGradedModule</a> k (<a class="ref" href="./CanonicalAxisMonicInitialTop.lean.html#L45" title="Stafford38.CanonicalAxisMonicInitialTop.CanonicalIdeal">CanonicalIdeal</a> k n N d) ↦</span>
+<span id="L82"><a href="#L82">82</a>           <a class="ref" href="./CanonicalAxisMonicInitialTop.lean.html#L49" title="Stafford38.CanonicalAxisMonicInitialTop.AxisCoordinate">AxisCoordinate</a> k n • q) := by</span>
+<span id="L83"><a href="#L83">83</a>   classical</span>
+<span id="L84"><a href="#L84">84</a>   let I := <a class="ref" href="./CanonicalAxisMonicInitialTop.lean.html#L45" title="Stafford38.CanonicalAxisMonicInitialTop.CanonicalIdeal">CanonicalIdeal</a> k n N d</span>
+<span id="L85"><a href="#L85">85</a>   let X := <a class="ref" href="./CanonicalAxisMonicInitialTop.lean.html#L49" title="Stafford38.CanonicalAxisMonicInitialTop.AxisCoordinate">AxisCoordinate</a> k n</span>
+<span id="L86"><a href="#L86">86</a>   let g := <a class="ref" href="./AssociatedGradedModule.lean.html#L297" title="Stafford38.CharacteristicAssociatedGradedModule.orderAssociatedGradedGenerator">orderAssociatedGradedGenerator</a> k I</span>
+<span id="L87"><a href="#L87">87</a>   constructor</span>
+<span id="L88"><a href="#L88">88</a>   · intro htop q</span>
+<span id="L89"><a href="#L89">89</a>     obtain ⟨P, rfl⟩ := <a class="ref" href="./AssociatedGradedModule.lean.html#L337" title="Stafford38.CharacteristicAssociatedGradedModule.exists_smul_orderAssociatedGradedGenerator">exists_smul_orderAssociatedGradedGenerator</a> k I q</span>
+<span id="L90"><a href="#L90">90</a>     have hone : (1 : <a class="ref" href="./Polynomial.lean.html#L20" title="Stafford38.Characteristic.SymbolRing">SymbolRing</a> k (n + 1)) ∈</span>
+<span id="L91"><a href="#L91">91</a>         <a class="ref" href="./InitialIdeal.lean.html#L191" title="Stafford38.CharacteristicInitialIdeal.orderInitialIdeal">orderInitialIdeal</a> k I ⊔ <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Span.lean#L45" title="Ideal.span">Ideal.span</a> {X} := by</span>
+<span id="L92"><a href="#L92">92</a>       rw [htop]</span>
+<span id="L93"><a href="#L93">93</a>       exact <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Module/Submodule/Lattice.lean#L143" title="Submodule.mem_top">Submodule.mem_top</a></span>
+<span id="L94"><a href="#L94">94</a>     obtain ⟨j, hj, s, hs, hjs⟩ := <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/LinearAlgebra/Span/Defs.lean#L381" title="Submodule.mem_sup">Submodule.mem_sup</a>.<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Core.lean#L192" title="Iff.mp">mp</a> hone</span>
+<span id="L95"><a href="#L95">95</a>     obtain ⟨a, ha⟩ := <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Span.lean#L181" title="Ideal.mem_span_singleton">Ideal.mem_span_singleton</a>.<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Core.lean#L192" title="Iff.mp">mp</a> hs</span>
+<span id="L96"><a href="#L96">96</a>     have hjg : j • g = 0 :=</span>
+<span id="L97"><a href="#L97">97</a>       (<a class="ref" href="./AssociatedGradedModule.lean.html#L351" title="Stafford38.CharacteristicAssociatedGradedModule.smul_orderAssociatedGradedGenerator_eq_zero_iff">smul_orderAssociatedGradedGenerator_eq_zero_iff</a> k I j).<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Core.lean#L194" title="Iff.mpr">2</a> hj</span>
+<span id="L98"><a href="#L98">98</a>     have hsg : s • g = g := by</span>
+<span id="L99"><a href="#L99">99</a>       calc</span>
+<span id="L100"><a href="#L100">100</a>         s • g = (j + s) • g := by rw [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Module/Defs.lean#L73" title="add_smul">add_smul</a>, hjg, <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Group/Monoid.lean#L90" title="zero_add">zero_add</a>]</span>
+<span id="L101"><a href="#L101">101</a>         _ = 1 • g := <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L405" title="congrArg">congrArg</a> (fun r : <a class="ref" href="./Polynomial.lean.html#L20" title="Stafford38.Characteristic.SymbolRing">SymbolRing</a> k (n + 1) =&gt; r • g) hjs</span>
+<span id="L102"><a href="#L102">102</a>         _ = g := <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Group/Action/Defs.lean#L418" title="one_smul">one_smul</a> _ _</span>
+<span id="L103"><a href="#L103">103</a>     refine ⟨(P * a) • g, ?_⟩</span>
+<span id="L104"><a href="#L104">104</a>     calc</span>
+<span id="L105"><a href="#L105">105</a>       X • ((P * a) • g) = (X * (P * a)) • g := by rw [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Group/Action/Defs.lean#L413" title="smul_smul">smul_smul</a>]</span>
+<span id="L106"><a href="#L106">106</a>       _ = (P * s) • g := by rw [ha]; ring</span>
+<span id="L107"><a href="#L107">107</a>       _ = P • (s • g) := by rw [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Group/Action/Defs.lean#L413" title="smul_smul">smul_smul</a>]</span>
+<span id="L108"><a href="#L108">108</a>       _ = P • g := by rw [hsg]</span>
+<span id="L109"><a href="#L109">109</a>   · intro hsurj</span>
+<span id="L110"><a href="#L110">110</a>     obtain ⟨q, hq⟩ := hsurj</span>
+<span id="L111"><a href="#L111">111</a>       (<a class="ref" href="./AssociatedGradedModule.lean.html#L297" title="Stafford38.CharacteristicAssociatedGradedModule.orderAssociatedGradedGenerator">orderAssociatedGradedGenerator</a> k I)</span>
+<span id="L112"><a href="#L112">112</a>     obtain ⟨P, hP⟩ := <a class="ref" href="./AssociatedGradedModule.lean.html#L337" title="Stafford38.CharacteristicAssociatedGradedModule.exists_smul_orderAssociatedGradedGenerator">exists_smul_orderAssociatedGradedGenerator</a> k I q</span>
+<span id="L113"><a href="#L113">113</a>     have hq' : X • (P • <a class="ref" href="./AssociatedGradedModule.lean.html#L297" title="Stafford38.CharacteristicAssociatedGradedModule.orderAssociatedGradedGenerator">orderAssociatedGradedGenerator</a> k I) =</span>
+<span id="L114"><a href="#L114">114</a>         <a class="ref" href="./AssociatedGradedModule.lean.html#L297" title="Stafford38.CharacteristicAssociatedGradedModule.orderAssociatedGradedGenerator">orderAssociatedGradedGenerator</a> k I := by</span>
+<span id="L115"><a href="#L115">115</a>       rw [hP]</span>
+<span id="L116"><a href="#L116">116</a>       simpa [X, I] using hq</span>
+<span id="L117"><a href="#L117">117</a>     have hkill : (X * P - 1) • <a class="ref" href="./AssociatedGradedModule.lean.html#L297" title="Stafford38.CharacteristicAssociatedGradedModule.orderAssociatedGradedGenerator">orderAssociatedGradedGenerator</a> k I = 0 := by</span>
+<span id="L118"><a href="#L118">118</a>       rw [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Module/Defs.lean#L150" title="sub_smul">sub_smul</a>, <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Group/Action/Defs.lean#L107" title="SemigroupAction.mul_smul">mul_smul</a>, hq', <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Group/Action/Defs.lean#L418" title="one_smul">one_smul</a>, <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Group/Defs.lean#L65" title="sub_self">sub_self</a>]</span>
+<span id="L119"><a href="#L119">119</a>     have hrel : X * P - 1 ∈ <a class="ref" href="./InitialIdeal.lean.html#L191" title="Stafford38.CharacteristicInitialIdeal.orderInitialIdeal">orderInitialIdeal</a> k I :=</span>
+<span id="L120"><a href="#L120">120</a>       (<a class="ref" href="./AssociatedGradedModule.lean.html#L351" title="Stafford38.CharacteristicAssociatedGradedModule.smul_orderAssociatedGradedGenerator_eq_zero_iff">smul_orderAssociatedGradedGenerator_eq_zero_iff</a> k I (X * P - 1)).<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Core.lean#L192" title="Iff.mp">1</a></span>
+<span id="L121"><a href="#L121">121</a>         hkill</span>
+<span id="L122"><a href="#L122">122</a>     apply (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Lattice.lean#L57" title="Ideal.eq_top_iff_one">Ideal.eq_top_iff_one</a> _).<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Core.lean#L194" title="Iff.mpr">2</a></span>
+<span id="L123"><a href="#L123">123</a>     rw [show (1 : <a class="ref" href="./Polynomial.lean.html#L20" title="Stafford38.Characteristic.SymbolRing">SymbolRing</a> k (n + 1)) = -(X * P - 1) + X * P by ring]</span>
+<span id="L124"><a href="#L124">124</a>     apply <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Module/Submodule/Defs.lean#L211" title="Submodule.add_mem">Submodule.add_mem</a></span>
+<span id="L125"><a href="#L125">125</a>     · exact <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Module/Submodule/Lattice.lean#L252" title="Submodule.mem_sup_left">Submodule.mem_sup_left</a> ((<a class="ref" href="./InitialIdeal.lean.html#L191" title="Stafford38.CharacteristicInitialIdeal.orderInitialIdeal">orderInitialIdeal</a> k I).<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Module/Submodule/Defs.lean#L321" title="Submodule.neg_mem">neg_mem</a> hrel)</span>
+<span id="L126"><a href="#L126">126</a>     · apply <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Module/Submodule/Lattice.lean#L257" title="Submodule.mem_sup_right">Submodule.mem_sup_right</a></span>
+<span id="L127"><a href="#L127">127</a>       exact (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Span.lean#L45" title="Ideal.span">Ideal.span</a> {X}).<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Defs.lean#L64" title="Ideal.mul_mem_right">mul_mem_right</a> P</span>
+<span id="L128"><a href="#L128">128</a>         (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Span.lean#L68" title="Ideal.subset_span">Ideal.subset_span</a> (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Data/Set/Insert.lean#L180" title="Set.mem_singleton">Set.mem_singleton</a> X))</span>
+<span id="L129"><a href="#L129">129</a> </span>
+<span id="L130"><a href="#L130">130</a> /-- Exact Koszul formulation of the requested theorem: the initial ideal and</span>
+<span id="L131"><a href="#L131">131</a> the coordinate generate one iff the specialized one-coordinate Koszul</span>
+<span id="L132"><a href="#L132">132</a> `H₀` is zero. -/</span>
+<span id="L133"><a href="#L133">133</a> theorem canonical_orderInitialIdeal_sup_coordinate_eq_top_iff_koszulH0_subsingleton</span>
+<span id="L134"><a href="#L134">134</a>     (n N : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L1351" title="Nat">ℕ</a>) (d : <a class="ref" href="../ChallengeDefinitions.lean.html#L73" title="Stafford38Challenge.WeylAlg">WeylAlg</a> k (n + 1)) :</span>
+<span id="L135"><a href="#L135">135</a>     <a class="ref" href="./InitialIdeal.lean.html#L191" title="Stafford38.CharacteristicInitialIdeal.orderInitialIdeal">orderInitialIdeal</a> k (<a class="ref" href="./CanonicalAxisMonicInitialTop.lean.html#L45" title="Stafford38.CanonicalAxisMonicInitialTop.CanonicalIdeal">CanonicalIdeal</a> k n N d) ⊔</span>
+<span id="L136"><a href="#L136">136</a>           <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Span.lean#L45" title="Ideal.span">Ideal.span</a> {<a class="ref" href="./CanonicalAxisMonicInitialTop.lean.html#L49" title="Stafford38.CanonicalAxisMonicInitialTop.AxisCoordinate">AxisCoordinate</a> k n} = ⊤ ↔</span>
+<span id="L137"><a href="#L137">137</a>       <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Core.lean#L1260" title="Subsingleton">Subsingleton</a> (<a class="ref" href="./CanonicalAxisMonicInitialTop.lean.html#L53" title="Stafford38.CanonicalAxisMonicInitialTop.CanonicalGradedCoordinateKoszulH0">CanonicalGradedCoordinateKoszulH0</a> k n N d) := by</span>
+<span id="L138"><a href="#L138">138</a>   rw [<a class="ref" href="./CanonicalAxisMonicInitialTop.lean.html#L72" title="Stafford38.CanonicalAxisMonicInitialTop.canonical_orderInitialIdeal_sup_coordinate_eq_top_iff_graded_surjective">canonical_orderInitialIdeal_sup_coordinate_eq_top_iff_graded_surjective</a>]</span>
+<span id="L139"><a href="#L139">139</a>   exact (<a class="ref" href="../../../library/AlgebraicAnalysis/Module/HyperplaneRestriction.lean.html#L26" title="AlgebraicAnalysis.HyperplaneRestriction.restriction_subsingleton_iff_smul_surjective">restriction_subsingleton_iff_smul_surjective</a></span>
+<span id="L140"><a href="#L140">140</a>     (R := <a class="ref" href="./Polynomial.lean.html#L20" title="Stafford38.Characteristic.SymbolRing">SymbolRing</a> k (n + 1))</span>
+<span id="L141"><a href="#L141">141</a>     (M := <a class="ref" href="./AssociatedGradedModule.lean.html#L52" title="Stafford38.CharacteristicAssociatedGradedModule.OrderAssociatedGradedModule">OrderAssociatedGradedModule</a> k (<a class="ref" href="./CanonicalAxisMonicInitialTop.lean.html#L45" title="Stafford38.CanonicalAxisMonicInitialTop.CanonicalIdeal">CanonicalIdeal</a> k n N d))</span>
+<span id="L142"><a href="#L142">142</a>     (x := <a class="ref" href="./CanonicalAxisMonicInitialTop.lean.html#L49" title="Stafford38.CanonicalAxisMonicInitialTop.AxisCoordinate">AxisCoordinate</a> k n)).<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Core.lean#L1059" title="Iff.symm">symm</a></span>
+<span id="L143"><a href="#L143">143</a> </span>
+<span id="L144"><a href="#L144">144</a> /-- Monicity already kills ordinary coordinate restriction on the literal</span>
+<span id="L145"><a href="#L145">145</a> canonical right quotient.  This is the source side of the still-missing</span>
+<span id="L146"><a href="#L146">146</a> strict Rees--Koszul base-change theorem. -/</span>
+<span id="L147"><a href="#L147">147</a> theorem canonical_ordinary_coordinate_surjective_of_axisMonic</span>
+<span id="L148"><a href="#L148">148</a>     (n N : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L1351" title="Nat">ℕ</a>) {d : <a class="ref" href="../ChallengeDefinitions.lean.html#L73" title="Stafford38Challenge.WeylAlg">WeylAlg</a> k (n + 1)}</span>
+<span id="L149"><a href="#L149">149</a>     (hd : <a class="ref" href="../Weyl/PBWMonicBridge.lean.html#L102" title="Stafford38.WeylPBWMonicBridge.IsPBWMonicAt">IsPBWMonicAt</a> k (<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Core.lean#L215" title="Sum.inr">.inr</a> (0 : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L2443" title="Fin">Fin</a> (n + 1))) N d) :</span>
+<span id="L150"><a href="#L150">150</a>     <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Data/Function.lean#L59" title="Function.Surjective">Function.Surjective</a></span>
+<span id="L151"><a href="#L151">151</a>       (<a class="ref" href="../Quotient/EulerSurjectivity.lean.html#L31" title="Stafford38.EulerSurjectivity.rightMul">rightMul</a> (<a class="ref" href="./CanonicalAxisMonicInitialTop.lean.html#L45" title="Stafford38.CanonicalAxisMonicInitialTop.CanonicalIdeal">CanonicalIdeal</a> k n N d) (<a class="ref" href="../Weyl/IteratedEquivalence.lean.html#L330" title="Stafford38.WeylIteratedEquivalence.presentedCoordinate">presentedCoordinate</a> k n)) :=</span>
+<span id="L152"><a href="#L152">152</a>   <a class="ref" href="../Weyl/QuotientTransport.lean.html#L242" title="Stafford38.WeylQuotientTransport.presentedCanonicalRightQuotient_rightMul_coordinate_surjective">presentedCanonicalRightQuotient_rightMul_coordinate_surjective</a> n N hd</span>
+<span id="L153"><a href="#L153">153</a> </span>
+<span id="L154"><a href="#L154">154</a> /-- The filtered additive model and the literal regular-right-module quotient</span>
+<span id="L155"><a href="#L155">155</a> intertwine their written right coordinate actions. -/</span>
+<span id="L156"><a href="#L156">156</a> theorem filteredRightQuotientEquivRightQuotient_coordinate</span>
+<span id="L157"><a href="#L157">157</a>     (n N : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L1351" title="Nat">ℕ</a>) (d : <a class="ref" href="../ChallengeDefinitions.lean.html#L73" title="Stafford38Challenge.WeylAlg">WeylAlg</a> k (n + 1))</span>
+<span id="L158"><a href="#L158">158</a>     (q : <a class="ref" href="./FilteredQuotient.lean.html#L85" title="Stafford38.CharacteristicFilteredQuotient.FilteredRightQuotient">FilteredRightQuotient</a> k (<a class="ref" href="./CanonicalAxisMonicInitialTop.lean.html#L45" title="Stafford38.CanonicalAxisMonicInitialTop.CanonicalIdeal">CanonicalIdeal</a> k n N d)) :</span>
+<span id="L159"><a href="#L159">159</a>     <a class="ref" href="./FilteredQuotient.lean.html#L75" title="Stafford38.CharacteristicFilteredQuotient.filteredRightQuotientEquivRightQuotient">filteredRightQuotientEquivRightQuotient</a> k (<a class="ref" href="./CanonicalAxisMonicInitialTop.lean.html#L45" title="Stafford38.CanonicalAxisMonicInitialTop.CanonicalIdeal">CanonicalIdeal</a> k n N d)</span>
+<span id="L160"><a href="#L160">160</a>         (<a class="ref" href="./FilteredQuotientReesAction.lean.html#L41" title="Stafford38.CharacteristicFilteredQuotientReesAction.filteredRightMul">filteredRightMul</a> k (<a class="ref" href="./CanonicalAxisMonicInitialTop.lean.html#L45" title="Stafford38.CanonicalAxisMonicInitialTop.CanonicalIdeal">CanonicalIdeal</a> k n N d)</span>
+<span id="L161"><a href="#L161">161</a>           (<a class="ref" href="../Weyl/IteratedEquivalence.lean.html#L330" title="Stafford38.WeylIteratedEquivalence.presentedCoordinate">presentedCoordinate</a> k n) q) =</span>
+<span id="L162"><a href="#L162">162</a>       <a class="ref" href="../Quotient/EulerSurjectivity.lean.html#L31" title="Stafford38.EulerSurjectivity.rightMul">rightMul</a> (<a class="ref" href="./CanonicalAxisMonicInitialTop.lean.html#L45" title="Stafford38.CanonicalAxisMonicInitialTop.CanonicalIdeal">CanonicalIdeal</a> k n N d) (<a class="ref" href="../Weyl/IteratedEquivalence.lean.html#L330" title="Stafford38.WeylIteratedEquivalence.presentedCoordinate">presentedCoordinate</a> k n)</span>
+<span id="L163"><a href="#L163">163</a>         (<a class="ref" href="./FilteredQuotient.lean.html#L75" title="Stafford38.CharacteristicFilteredQuotient.filteredRightQuotientEquivRightQuotient">filteredRightQuotientEquivRightQuotient</a> k</span>
+<span id="L164"><a href="#L164">164</a>           (<a class="ref" href="./CanonicalAxisMonicInitialTop.lean.html#L45" title="Stafford38.CanonicalAxisMonicInitialTop.CanonicalIdeal">CanonicalIdeal</a> k n N d) q) := by</span>
+<span id="L165"><a href="#L165">165</a>   refine <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/LinearAlgebra/Quotient/Defs.lean#L203" title="Submodule.Quotient.induction_on">Submodule.Quotient.induction_on</a> _ q ?_</span>
+<span id="L166"><a href="#L166">166</a>   intro z</span>
+<span id="L167"><a href="#L167">167</a>   rfl</span>
+<span id="L168"><a href="#L168">168</a> </span>
+<span id="L169"><a href="#L169">169</a> /-- PBW monicity makes the ordinary one-coordinate Koszul `H₀` literally</span>
+<span id="L170"><a href="#L170">170</a> zero.  The requested initial-top theorem is the assertion that this remains</span>
+<span id="L171"><a href="#L171">171</a> true after passing to the order-Rees special fibre. -/</span>
+<span id="L172"><a href="#L172">172</a> theorem canonical_ordinary_coordinateKoszulH0_subsingleton_of_axisMonic</span>
+<span id="L173"><a href="#L173">173</a>     (n N : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L1351" title="Nat">ℕ</a>) {d : <a class="ref" href="../ChallengeDefinitions.lean.html#L73" title="Stafford38Challenge.WeylAlg">WeylAlg</a> k (n + 1)}</span>
+<span id="L174"><a href="#L174">174</a>     (hd : <a class="ref" href="../Weyl/PBWMonicBridge.lean.html#L102" title="Stafford38.WeylPBWMonicBridge.IsPBWMonicAt">IsPBWMonicAt</a> k (<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Core.lean#L215" title="Sum.inr">.inr</a> (0 : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L2443" title="Fin">Fin</a> (n + 1))) N d) :</span>
+<span id="L175"><a href="#L175">175</a>     <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Core.lean#L1260" title="Subsingleton">Subsingleton</a> (<a class="ref" href="./CanonicalAxisMonicInitialTop.lean.html#L63" title="Stafford38.CanonicalAxisMonicInitialTop.CanonicalOrdinaryCoordinateKoszulH0">CanonicalOrdinaryCoordinateKoszulH0</a> k n N d) := by</span>
+<span id="L176"><a href="#L176">176</a>   rw [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/LinearAlgebra/Quotient/Basic.lean#L78" title="Submodule.Quotient.subsingleton_iff">Submodule.Quotient.subsingleton_iff</a>]</span>
+<span id="L177"><a href="#L177">177</a>   apply <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Order/BoundedOrder/Basic.lean#L173" title="top_unique">top_unique</a></span>
+<span id="L178"><a href="#L178">178</a>   intro q hq</span>
+<span id="L179"><a href="#L179">179</a>   let e := <a class="ref" href="./FilteredQuotient.lean.html#L75" title="Stafford38.CharacteristicFilteredQuotient.filteredRightQuotientEquivRightQuotient">filteredRightQuotientEquivRightQuotient</a> k</span>
+<span id="L180"><a href="#L180">180</a>     (<a class="ref" href="./CanonicalAxisMonicInitialTop.lean.html#L45" title="Stafford38.CanonicalAxisMonicInitialTop.CanonicalIdeal">CanonicalIdeal</a> k n N d)</span>
+<span id="L181"><a href="#L181">181</a>   obtain ⟨r, hr⟩ :=</span>
+<span id="L182"><a href="#L182">182</a>     <a class="ref" href="./CanonicalAxisMonicInitialTop.lean.html#L144" title="Stafford38.CanonicalAxisMonicInitialTop.canonical_ordinary_coordinate_surjective_of_axisMonic">canonical_ordinary_coordinate_surjective_of_axisMonic</a> k n N hd (e q)</span>
+<span id="L183"><a href="#L183">183</a>   refine ⟨e.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Module/Equiv/Defs.lean#L249" title="LinearEquiv.symm">symm</a> r, ?_⟩</span>
+<span id="L184"><a href="#L184">184</a>   apply e.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Module/Equiv/Defs.lean#L553" title="LinearEquiv.injective">injective</a></span>
+<span id="L185"><a href="#L185">185</a>   rw [<a class="ref" href="./CanonicalAxisMonicInitialTop.lean.html#L154" title="Stafford38.CanonicalAxisMonicInitialTop.filteredRightQuotientEquivRightQuotient_coordinate">filteredRightQuotientEquivRightQuotient_coordinate</a>]</span>
+<span id="L186"><a href="#L186">186</a>   simpa [e] using hr</span>
+<span id="L187"><a href="#L187">187</a> </span>
+<span id="L188"><a href="#L188">188</a> /-- The initial-top statement and the existing strict unit predecessor are</span>
+<span id="L189"><a href="#L189">189</a> equivalent for the literal canonical quotient. -/</span>
+<span id="L190"><a href="#L190">190</a> theorem canonical_orderInitialIdeal_sup_coordinate_eq_top_iff_strictUnit</span>
+<span id="L191"><a href="#L191">191</a>     (n N : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L1351" title="Nat">ℕ</a>) (d : <a class="ref" href="../ChallengeDefinitions.lean.html#L73" title="Stafford38Challenge.WeylAlg">WeylAlg</a> k (n + 1)) :</span>
+<span id="L192"><a href="#L192">192</a>     <a class="ref" href="./InitialIdeal.lean.html#L191" title="Stafford38.CharacteristicInitialIdeal.orderInitialIdeal">orderInitialIdeal</a> k (<a class="ref" href="./CanonicalAxisMonicInitialTop.lean.html#L45" title="Stafford38.CanonicalAxisMonicInitialTop.CanonicalIdeal">CanonicalIdeal</a> k n N d) ⊔</span>
+<span id="L193"><a href="#L193">193</a>           <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Span.lean#L45" title="Ideal.span">Ideal.span</a> {<a class="ref" href="./CanonicalAxisMonicInitialTop.lean.html#L49" title="Stafford38.CanonicalAxisMonicInitialTop.AxisCoordinate">AxisCoordinate</a> k n} = ⊤ ↔</span>
+<span id="L194"><a href="#L194">194</a>       <a class="ref" href="./CanonicalUnitCoordinatePreimage.lean.html#L52" title="Stafford38.CanonicalUnitCoordinatePreimage.StrictUnitCoordinatePreimage">StrictUnitCoordinatePreimage</a> k n N d := by</span>
+<span id="L195"><a href="#L195">195</a>   constructor</span>
+<span id="L196"><a href="#L196">196</a>   · exact fun h ↦</span>
+<span id="L197"><a href="#L197">197</a>       <a class="ref" href="./CanonicalUnitPreimageFromInitialTop.lean.html#L60" title="Stafford38.CanonicalUnitPreimageFromInitialTop.strictUnitCoordinatePreimage_of_orderInitialIdeal_sup_coordinate_eq_top">strictUnitCoordinatePreimage_of_orderInitialIdeal_sup_coordinate_eq_top</a></span>
+<span id="L198"><a href="#L198">198</a>         k n N h</span>
+<span id="L199"><a href="#L199">199</a>   · exact fun h ↦</span>
+<span id="L200"><a href="#L200">200</a>       <a class="ref" href="./CanonicalUnitCoordinatePreimage.lean.html#L89" title="Stafford38.CanonicalUnitCoordinatePreimage.canonical_orderInitialIdeal_sup_coordinate_eq_top_of_strictUnit">canonical_orderInitialIdeal_sup_coordinate_eq_top_of_strictUnit</a></span>
+<span id="L201"><a href="#L201">201</a>         k n N h</span>
+<span id="L202"><a href="#L202">202</a> </span>
+<span id="L203"><a href="#L203">203</a> #print axioms <a class="ref" href="./CanonicalAxisMonicInitialTop.lean.html#L72" title="Stafford38.CanonicalAxisMonicInitialTop.canonical_orderInitialIdeal_sup_coordinate_eq_top_iff_graded_surjective">canonical_orderInitialIdeal_sup_coordinate_eq_top_iff_graded_surjective</a></span>
+<span id="L204"><a href="#L204">204</a> #print axioms <a class="ref" href="./CanonicalAxisMonicInitialTop.lean.html#L130" title="Stafford38.CanonicalAxisMonicInitialTop.canonical_orderInitialIdeal_sup_coordinate_eq_top_iff_koszulH0_subsingleton">canonical_orderInitialIdeal_sup_coordinate_eq_top_iff_koszulH0_subsingleton</a></span>
+<span id="L205"><a href="#L205">205</a> #print axioms <a class="ref" href="./CanonicalAxisMonicInitialTop.lean.html#L144" title="Stafford38.CanonicalAxisMonicInitialTop.canonical_ordinary_coordinate_surjective_of_axisMonic">canonical_ordinary_coordinate_surjective_of_axisMonic</a></span>
+<span id="L206"><a href="#L206">206</a> #print axioms <a class="ref" href="./CanonicalAxisMonicInitialTop.lean.html#L154" title="Stafford38.CanonicalAxisMonicInitialTop.filteredRightQuotientEquivRightQuotient_coordinate">filteredRightQuotientEquivRightQuotient_coordinate</a></span>
+<span id="L207"><a href="#L207">207</a> #print axioms <a class="ref" href="./CanonicalAxisMonicInitialTop.lean.html#L169" title="Stafford38.CanonicalAxisMonicInitialTop.canonical_ordinary_coordinateKoszulH0_subsingleton_of_axisMonic">canonical_ordinary_coordinateKoszulH0_subsingleton_of_axisMonic</a></span>
+<span id="L208"><a href="#L208">208</a> #print axioms <a class="ref" href="./CanonicalAxisMonicInitialTop.lean.html#L188" title="Stafford38.CanonicalAxisMonicInitialTop.canonical_orderInitialIdeal_sup_coordinate_eq_top_iff_strictUnit">canonical_orderInitialIdeal_sup_coordinate_eq_top_iff_strictUnit</a></span>
+<span id="L209"><a href="#L209">209</a> </span>
+<span id="L210"><a href="#L210">210</a> end</span>
+<span id="L211"><a href="#L211">211</a> </span>
+<span id="L212"><a href="#L212">212</a> end Stafford38.CanonicalAxisMonicInitialTop</span>
+<span id="L213"><a href="#L213">213</a> </span></pre>

@@ -1,11 +1,11 @@
-<!doctype html><meta charset="utf-8"><title>Stafford38/Geometry/FiniteGradientResidueExtension.lean</title><style>body{font:14px monospace}pre span{display:block}pre span:target{background:#fff0ad}a{color:#666}pre{white-space:pre-wrap}</style><h1>Stafford38/Geometry/FiniteGradientResidueExtension.lean</h1><p>This project (Stafford38) · 0403af3f0b1a7f84d2027121932723f67bd279ae</p><pre><span id="L1"><a href="#L1">1</a> module</span>
+<!doctype html><meta charset="utf-8"><title>Stafford38/Geometry/FiniteGradientResidueExtension.lean</title><style>body{font:14px monospace}pre span{display:block}pre span:target{background:#fff0ad}a{color:#666}pre{white-space:pre-wrap}a.ref{color:#0645ad;text-decoration:none}a.ref:hover{text-decoration:underline}</style><h1>Stafford38/Geometry/FiniteGradientResidueExtension.lean</h1><p>This project (Stafford38) · 0403af3f0b1a7f84d2027121932723f67bd279ae</p><pre><span id="L1"><a href="#L1">1</a> module</span>
 <span id="L2"><a href="#L2">2</a> public import Stafford38.Geometry.FiniteGradientBoundaryProducer</span>
 <span id="L3"><a href="#L3">3</a> public import Stafford38.Geometry.FiniteGradientBoundaryCertificateOver</span>
 <span id="L4"><a href="#L4">4</a> public import Stafford38.Geometry.LaurentConormalResidueExtension</span>
 <span id="L5"><a href="#L5">5</a> </span>
 <span id="L6"><a href="#L6">6</a> @[expose] public section</span>
 <span id="L7"><a href="#L7">7</a> </span>
-<span id="L8"><a href="#L8">8</a> open Stafford38.Geometry.ScalarExtensionPoints (scalarPolynomialMap)</span>
+<span id="L8"><a href="#L8">8</a> open Stafford38.Geometry.ScalarExtensionPoints (<a class="ref" href="./ScalarExtensionPoints.lean.html#L44" title="Stafford38.Geometry.ScalarExtensionPoints.scalarPolynomialMap">scalarPolynomialMap</a>)</span>
 <span id="L9"><a href="#L9">9</a> </span>
 <span id="L10"><a href="#L10">10</a> /-!</span>
 <span id="L11"><a href="#L11">11</a> # Finite-gradient certificates over a boundary residue field</span>
@@ -38,87 +38,87 @@
 <span id="L38"><a href="#L38">38</a> </span>
 <span id="L39"><a href="#L39">39</a> universe u</span>
 <span id="L40"><a href="#L40">40</a> </span>
-<span id="L41"><a href="#L41">41</a> variable {k K : Type u} [Field k] [Field K] [Algebra k K]</span>
+<span id="L41"><a href="#L41">41</a> variable {k K : Type u} [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Field/Defs.lean#L170" title="Field">Field</a> k] [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Field/Defs.lean#L170" title="Field">Field</a> K] [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Algebra/Defs.lean#L91" title="Algebra">Algebra</a> k K]</span>
 <span id="L42"><a href="#L42">42</a> </span>
 <span id="L43"><a href="#L43">43</a> /-- A residue-field finite-gradient certificate gives exactly the</span>
 <span id="L44"><a href="#L44">44</a> `K((t))`-valued equation-conormal point needed by residue specialization. -/</span>
 <span id="L45"><a href="#L45">45</a> theorem exists_groundConormalAxis_of_finiteGradientBoundaryCertificateOver</span>
-<span id="L46"><a href="#L46">46</a>     {m : ℕ} (hm : 0 &lt; m)</span>
-<span id="L47"><a href="#L47">47</a>     (I : Ideal (MvPolynomial (Fin m) k))</span>
-<span id="L48"><a href="#L48">48</a>     (W : FiniteGradientBoundaryCertificateOver</span>
+<span id="L46"><a href="#L46">46</a>     {m : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L1351" title="Nat">ℕ</a>} (hm : 0 &lt; m)</span>
+<span id="L47"><a href="#L47">47</a>     (I : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Defs.lean#L38" title="Ideal">Ideal</a> (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/Basic.lean#L80" title="MvPolynomial">MvPolynomial</a> (<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L2443" title="Fin">Fin</a> m) k))</span>
+<span id="L48"><a href="#L48">48</a>     (W : <a class="ref" href="./FiniteGradientBoundaryCertificateOver.lean.html#L35" title="Stafford38.Geometry.FiniteGradientResidueExtension.FiniteGradientBoundaryCertificateOver">FiniteGradientBoundaryCertificateOver</a></span>
 <span id="L49"><a href="#L49">49</a>       (k := k) (K := K) m hm I) :</span>
-<span id="L50"><a href="#L50">50</a>     ∃ (y : Fin m → LaurentSeries K)</span>
-<span id="L51"><a href="#L51">51</a>       (xi : Fin m → PowerSeries K),</span>
-<span id="L52"><a href="#L52">52</a>       Sum.elim y</span>
-<span id="L53"><a href="#L53">53</a>           (fun i ↦ algebraMap (PowerSeries K) (LaurentSeries K) (xi i)) ∈</span>
-<span id="L54"><a href="#L54">54</a>         groundEquationConormalLocus (k := k) (K := K) I ∧</span>
-<span id="L55"><a href="#L55">55</a>       residueColumn xi =</span>
-<span id="L56"><a href="#L56">56</a>         (fun i : Fin m ↦ if i = ⟨0, hm⟩ then 1 else 0) := by</span>
-<span id="L57"><a href="#L57">57</a>   let Iext := I.map (scalarPolynomialMap (k := k) (K := LaurentSeries K) (Fin m))</span>
-<span id="L58"><a href="#L58">58</a>   let y := dehomogenizedPoint (laurentColumn W.q)</span>
-<span id="L59"><a href="#L59">59</a>   let xi : Fin m → PowerSeries K := fun i ↦ W.ell i.succ</span>
+<span id="L50"><a href="#L50">50</a>     ∃ (y : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L2443" title="Fin">Fin</a> m → <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/LaurentSeries.lean#L98" title="LaurentSeries">LaurentSeries</a> K)</span>
+<span id="L51"><a href="#L51">51</a>       (xi : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L2443" title="Fin">Fin</a> m → <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/PowerSeries/Basic.lean#L58" title="PowerSeries">PowerSeries</a> K),</span>
+<span id="L52"><a href="#L52">52</a>       <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Data/Sum/Basic.lean#L99" title="Sum.elim">Sum.elim</a> y</span>
+<span id="L53"><a href="#L53">53</a>           (fun i ↦ <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Algebra/Defs.lean#L97" title="Algebra.algebraMap">algebraMap</a> (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/PowerSeries/Basic.lean#L58" title="PowerSeries">PowerSeries</a> K) (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/LaurentSeries.lean#L98" title="LaurentSeries">LaurentSeries</a> K) (xi i)) ∈</span>
+<span id="L54"><a href="#L54">54</a>         <a class="ref" href="./LaurentConormalResidueExtension.lean.html#L146" title="Stafford38.Geometry.LaurentConormalResidueExtension.groundEquationConormalLocus">groundEquationConormalLocus</a> (k := k) (K := K) I ∧</span>
+<span id="L55"><a href="#L55">55</a>       <a class="ref" href="./RetractionSpecialization.lean.html#L143" title="Stafford38.GeometryRetractionSpecialization.residueColumn">residueColumn</a> xi =</span>
+<span id="L56"><a href="#L56">56</a>         (fun i : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L2443" title="Fin">Fin</a> m ↦ if i = ⟨0, hm⟩ then 1 else 0) := by</span>
+<span id="L57"><a href="#L57">57</a>   let Iext := I.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Maps.lean#L41" title="Ideal.map">map</a> (<a class="ref" href="./ScalarExtensionPoints.lean.html#L44" title="Stafford38.Geometry.ScalarExtensionPoints.scalarPolynomialMap">scalarPolynomialMap</a> (k := k) (K := <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/LaurentSeries.lean#L98" title="LaurentSeries">LaurentSeries</a> K) (<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L2443" title="Fin">Fin</a> m))</span>
+<span id="L58"><a href="#L58">58</a>   let y := <a class="ref" href="./ProjectiveConormalDehomogenization.lean.html#L33" title="Stafford38.Geometry.ProjectiveConormalDehomogenization.dehomogenizedPoint">dehomogenizedPoint</a> (<a class="ref" href="./FormalDivisorLaurentConormal.lean.html#L38" title="Stafford38.Geometry.FormalDivisorLaurentConormal.laurentColumn">laurentColumn</a> W.<a class="ref" href="./FiniteGradientBoundaryCertificateOver.lean.html#L41" title="Stafford38.Geometry.FiniteGradientResidueExtension.FiniteGradientBoundaryCertificateOver.q">q</a>)</span>
+<span id="L59"><a href="#L59">59</a>   let xi : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L2443" title="Fin">Fin</a> m → <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/PowerSeries/Basic.lean#L58" title="PowerSeries">PowerSeries</a> K := fun i ↦ W.<a class="ref" href="./FiniteGradientBoundaryCertificateOver.lean.html#L42" title="Stafford38.Geometry.FiniteGradientResidueExtension.FiniteGradientBoundaryCertificateOver.ell">ell</a> i.<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Data/Fin/Basic.lean#L34" title="Fin.succ">succ</a></span>
 <span id="L60"><a href="#L60">60</a>   have hconormal :</span>
-<span id="L61"><a href="#L61">61</a>       coordinateCovector (fun i ↦ laurentColumn W.ell i.succ) ∈</span>
-<span id="L62"><a href="#L62">62</a>         affineConormalSpace y Iext := by</span>
-<span id="L63"><a href="#L63">63</a>     exact coordinateCovector_mem_affineConormalSpace_of_finite_gradient</span>
-<span id="L64"><a href="#L64">64</a>       Iext y (fun i ↦ laurentColumn W.ell i.succ)</span>
-<span id="L65"><a href="#L65">65</a>         W.equations W.coefficients W.gradient_identity</span>
-<span id="L66"><a href="#L66">66</a>   refine ⟨y, xi, ?_, W.residue_axis⟩</span>
+<span id="L61"><a href="#L61">61</a>       <a class="ref" href="./AffineConormalSpan.lean.html#L119" title="Stafford38.Geometry.AffineConormalSpan.coordinateCovector">coordinateCovector</a> (fun i ↦ <a class="ref" href="./FormalDivisorLaurentConormal.lean.html#L38" title="Stafford38.Geometry.FormalDivisorLaurentConormal.laurentColumn">laurentColumn</a> W.<a class="ref" href="./FiniteGradientBoundaryCertificateOver.lean.html#L42" title="Stafford38.Geometry.FiniteGradientResidueExtension.FiniteGradientBoundaryCertificateOver.ell">ell</a> i.<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Data/Fin/Basic.lean#L34" title="Fin.succ">succ</a>) ∈</span>
+<span id="L62"><a href="#L62">62</a>         <a class="ref" href="./AffineConormalSpan.lean.html#L92" title="Stafford38.Geometry.AffineConormalSpan.affineConormalSpace">affineConormalSpace</a> y Iext := by</span>
+<span id="L63"><a href="#L63">63</a>     exact <a class="ref" href="./FiniteGradientBoundaryProducer.lean.html#L54" title="Stafford38.Geometry.FiniteGradientBoundaryProducer.coordinateCovector_mem_affineConormalSpace_of_finite_gradient">coordinateCovector_mem_affineConormalSpace_of_finite_gradient</a></span>
+<span id="L64"><a href="#L64">64</a>       Iext y (fun i ↦ <a class="ref" href="./FormalDivisorLaurentConormal.lean.html#L38" title="Stafford38.Geometry.FormalDivisorLaurentConormal.laurentColumn">laurentColumn</a> W.<a class="ref" href="./FiniteGradientBoundaryCertificateOver.lean.html#L42" title="Stafford38.Geometry.FiniteGradientResidueExtension.FiniteGradientBoundaryCertificateOver.ell">ell</a> i.<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Data/Fin/Basic.lean#L34" title="Fin.succ">succ</a>)</span>
+<span id="L65"><a href="#L65">65</a>         W.<a class="ref" href="./FiniteGradientBoundaryCertificateOver.lean.html#L49" title="Stafford38.Geometry.FiniteGradientResidueExtension.FiniteGradientBoundaryCertificateOver.equations">equations</a> W.<a class="ref" href="./FiniteGradientBoundaryCertificateOver.lean.html#L51" title="Stafford38.Geometry.FiniteGradientResidueExtension.FiniteGradientBoundaryCertificateOver.coefficients">coefficients</a> W.<a class="ref" href="./FiniteGradientBoundaryCertificateOver.lean.html#L52" title="Stafford38.Geometry.FiniteGradientResidueExtension.FiniteGradientBoundaryCertificateOver.gradient_identity">gradient_identity</a></span>
+<span id="L66"><a href="#L66">66</a>   refine ⟨y, xi, ?_, W.<a class="ref" href="./FiniteGradientBoundaryCertificateOver.lean.html#L57" title="Stafford38.Geometry.FiniteGradientResidueExtension.FiniteGradientBoundaryCertificateOver.residue_axis">residue_axis</a>⟩</span>
 <span id="L67"><a href="#L67">67</a>   refine ⟨?_, ?_⟩</span>
-<span id="L68"><a href="#L68">68</a>   · simpa [Iext, y, groundEquationConormalLocus] using W.base_vanish</span>
-<span id="L69"><a href="#L69">69</a>   · simpa [xi, laurentColumn, y, Iext] using hconormal</span>
+<span id="L68"><a href="#L68">68</a>   · simpa [Iext, y, <a class="ref" href="./LaurentConormalResidueExtension.lean.html#L146" title="Stafford38.Geometry.LaurentConormalResidueExtension.groundEquationConormalLocus">groundEquationConormalLocus</a>] using W.<a class="ref" href="./FiniteGradientBoundaryCertificateOver.lean.html#L46" title="Stafford38.Geometry.FiniteGradientResidueExtension.FiniteGradientBoundaryCertificateOver.base_vanish">base_vanish</a></span>
+<span id="L69"><a href="#L69">69</a>   · simpa [xi, <a class="ref" href="./FormalDivisorLaurentConormal.lean.html#L38" title="Stafford38.Geometry.FormalDivisorLaurentConormal.laurentColumn">laurentColumn</a>, y, Iext] using hconormal</span>
 <span id="L70"><a href="#L70">70</a> </span>
 <span id="L71"><a href="#L71">71</a> /-- Evaluation on the coordinate axis commutes with extension from `k` to</span>
 <span id="L72"><a href="#L72">72</a> `K`.  This is the only scalar-extension fact needed for the terminal value</span>
 <span id="L73"><a href="#L73">73</a> `P(axis)=1`. -/</span>
 <span id="L74"><a href="#L74">74</a> theorem eval₂_extensionAxis_eq_algebraMap_eval_axis</span>
-<span id="L75"><a href="#L75">75</a>     {m : ℕ} (hm : 0 &lt; m) (P : MvPolynomial (Fin m) k) :</span>
-<span id="L76"><a href="#L76">76</a>     MvPolynomial.eval₂ (algebraMap k K)</span>
-<span id="L77"><a href="#L77">77</a>         (fun i : Fin m ↦ if i = ⟨0, hm⟩ then 1 else 0) P =</span>
-<span id="L78"><a href="#L78">78</a>       algebraMap k K</span>
-<span id="L79"><a href="#L79">79</a>         (MvPolynomial.eval</span>
-<span id="L80"><a href="#L80">80</a>           (fun i : Fin m ↦ if i = ⟨0, hm⟩ then 1 else 0) P) := by</span>
+<span id="L75"><a href="#L75">75</a>     {m : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L1351" title="Nat">ℕ</a>} (hm : 0 &lt; m) (P : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/Basic.lean#L80" title="MvPolynomial">MvPolynomial</a> (<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L2443" title="Fin">Fin</a> m) k) :</span>
+<span id="L76"><a href="#L76">76</a>     <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/Eval.lean#L67" title="MvPolynomial.eval₂">MvPolynomial.eval₂</a> (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Algebra/Defs.lean#L97" title="Algebra.algebraMap">algebraMap</a> k K)</span>
+<span id="L77"><a href="#L77">77</a>         (fun i : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L2443" title="Fin">Fin</a> m ↦ if i = ⟨0, hm⟩ then 1 else 0) P =</span>
+<span id="L78"><a href="#L78">78</a>       <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Algebra/Defs.lean#L97" title="Algebra.algebraMap">algebraMap</a> k K</span>
+<span id="L79"><a href="#L79">79</a>         (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/Eval.lean#L255" title="MvPolynomial.eval">MvPolynomial.eval</a></span>
+<span id="L80"><a href="#L80">80</a>           (fun i : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L2443" title="Fin">Fin</a> m ↦ if i = ⟨0, hm⟩ then 1 else 0) P) := by</span>
 <span id="L81"><a href="#L81">81</a>   have hpoint :</span>
-<span id="L82"><a href="#L82">82</a>       (fun i : Fin m ↦ if i = ⟨0, hm⟩ then (1 : K) else 0) =</span>
-<span id="L83"><a href="#L83">83</a>         fun i ↦ algebraMap k K</span>
+<span id="L82"><a href="#L82">82</a>       (fun i : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L2443" title="Fin">Fin</a> m ↦ if i = ⟨0, hm⟩ then (1 : K) else 0) =</span>
+<span id="L83"><a href="#L83">83</a>         fun i ↦ <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Algebra/Defs.lean#L97" title="Algebra.algebraMap">algebraMap</a> k K</span>
 <span id="L84"><a href="#L84">84</a>           (if i = ⟨0, hm⟩ then (1 : k) else 0) := by</span>
 <span id="L85"><a href="#L85">85</a>     funext i</span>
 <span id="L86"><a href="#L86">86</a>     split &lt;;&gt; simp_all</span>
 <span id="L87"><a href="#L87">87</a>   rw [hpoint]</span>
-<span id="L88"><a href="#L88">88</a>   exact (MvPolynomial.map_eval₂Hom</span>
-<span id="L89"><a href="#L89">89</a>     (RingHom.id k)</span>
-<span id="L90"><a href="#L90">90</a>     (fun i : Fin m ↦ if i = ⟨0, hm⟩ then (1 : k) else 0)</span>
-<span id="L91"><a href="#L91">91</a>     (algebraMap k K) P).symm</span>
+<span id="L88"><a href="#L88">88</a>   exact (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/Eval.lean#L193" title="MvPolynomial.map_eval₂Hom">MvPolynomial.map_eval₂Hom</a></span>
+<span id="L89"><a href="#L89">89</a>     (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Ring/Hom/Defs.lean#L547" title="RingHom.id">RingHom.id</a> k)</span>
+<span id="L90"><a href="#L90">90</a>     (fun i : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L2443" title="Fin">Fin</a> m ↦ if i = ⟨0, hm⟩ then (1 : k) else 0)</span>
+<span id="L91"><a href="#L91">91</a>     (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Algebra/Defs.lean#L97" title="Algebra.algebraMap">algebraMap</a> k K) P).<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L364" title="Eq.symm">symm</a></span>
 <span id="L92"><a href="#L92">92</a> </span>
 <span id="L93"><a href="#L93">93</a> /-- Direct terminal contradiction from a residue-field finite-gradient</span>
 <span id="L94"><a href="#L94">94</a> certificate.  The symbol and its axis value stay over `k`; the completed arc</span>
 <span id="L95"><a href="#L95">95</a> and all gradient coefficients may live over an arbitrary extension `K/k`. -/</span>
 <span id="L96"><a href="#L96">96</a> theorem false_of_finiteGradientBoundaryCertificateOver</span>
-<span id="L97"><a href="#L97">97</a>     {m : ℕ} (hm : 0 &lt; m)</span>
-<span id="L98"><a href="#L98">98</a>     (I : Ideal (MvPolynomial (Fin m) k))</span>
-<span id="L99"><a href="#L99">99</a>     (P : MvPolynomial (Fin m) k)</span>
-<span id="L100"><a href="#L100">100</a>     (W : FiniteGradientBoundaryCertificateOver</span>
+<span id="L97"><a href="#L97">97</a>     {m : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L1351" title="Nat">ℕ</a>} (hm : 0 &lt; m)</span>
+<span id="L98"><a href="#L98">98</a>     (I : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Defs.lean#L38" title="Ideal">Ideal</a> (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/Basic.lean#L80" title="MvPolynomial">MvPolynomial</a> (<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L2443" title="Fin">Fin</a> m) k))</span>
+<span id="L99"><a href="#L99">99</a>     (P : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/Basic.lean#L80" title="MvPolynomial">MvPolynomial</a> (<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L2443" title="Fin">Fin</a> m) k)</span>
+<span id="L100"><a href="#L100">100</a>     (W : <a class="ref" href="./FiniteGradientBoundaryCertificateOver.lean.html#L35" title="Stafford38.Geometry.FiniteGradientResidueExtension.FiniteGradientBoundaryCertificateOver">FiniteGradientBoundaryCertificateOver</a></span>
 <span id="L101"><a href="#L101">101</a>       (k := k) (K := K) m hm I)</span>
 <span id="L102"><a href="#L102">102</a>     (hvanishes :</span>
-<span id="L103"><a href="#L103">103</a>       ∀ q ∈ groundEquationConormalLocus (k := k) (K := K) I,</span>
-<span id="L104"><a href="#L104">104</a>         MvPolynomial.eval₂ (groundLaurentMap (k := k) (K := K)) q</span>
-<span id="L105"><a href="#L105">105</a>           (fibreLift P) = 0)</span>
-<span id="L106"><a href="#L106">106</a>     (haxis : MvPolynomial.eval</span>
-<span id="L107"><a href="#L107">107</a>       (fun i : Fin m ↦ if i = ⟨0, hm⟩ then 1 else 0) P = 1) : False := by</span>
+<span id="L103"><a href="#L103">103</a>       ∀ q ∈ <a class="ref" href="./LaurentConormalResidueExtension.lean.html#L146" title="Stafford38.Geometry.LaurentConormalResidueExtension.groundEquationConormalLocus">groundEquationConormalLocus</a> (k := k) (K := K) I,</span>
+<span id="L104"><a href="#L104">104</a>         <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/Eval.lean#L67" title="MvPolynomial.eval₂">MvPolynomial.eval₂</a> (<a class="ref" href="./LaurentConormalResidueExtension.lean.html#L61" title="Stafford38.Geometry.LaurentConormalResidueExtension.groundLaurentMap">groundLaurentMap</a> (k := k) (K := K)) q</span>
+<span id="L105"><a href="#L105">105</a>           (<a class="ref" href="./LaurentConormalDirection.lean.html#L133" title="Stafford38.Geometry.LaurentConormalDirection.fibreLift">fibreLift</a> P) = 0)</span>
+<span id="L106"><a href="#L106">106</a>     (haxis : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/Eval.lean#L255" title="MvPolynomial.eval">MvPolynomial.eval</a></span>
+<span id="L107"><a href="#L107">107</a>       (fun i : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L2443" title="Fin">Fin</a> m ↦ if i = ⟨0, hm⟩ then 1 else 0) P = 1) : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L274" title="False">False</a> := by</span>
 <span id="L108"><a href="#L108">108</a>   obtain ⟨y, xi, hgeneric, hresidue⟩ :=</span>
-<span id="L109"><a href="#L109">109</a>     exists_groundConormalAxis_of_finiteGradientBoundaryCertificateOver</span>
+<span id="L109"><a href="#L109">109</a>     <a class="ref" href="./FiniteGradientResidueExtension.lean.html#L43" title="Stafford38.Geometry.FiniteGradientResidueExtension.exists_groundConormalAxis_of_finiteGradientBoundaryCertificateOver">exists_groundConormalAxis_of_finiteGradientBoundaryCertificateOver</a></span>
 <span id="L110"><a href="#L110">110</a>       (k := k) (K := K) hm I W</span>
-<span id="L111"><a href="#L111">111</a>   apply false_of_ground_fibreOnly_symbol_one_on_residue_and_vanishing</span>
+<span id="L111"><a href="#L111">111</a>   apply <a class="ref" href="./LaurentConormalResidueExtension.lean.html#L174" title="Stafford38.Geometry.LaurentConormalResidueExtension.false_of_ground_fibreOnly_symbol_one_on_residue_and_vanishing">false_of_ground_fibreOnly_symbol_one_on_residue_and_vanishing</a></span>
 <span id="L112"><a href="#L112">112</a>     (k := k) (K := K) I P</span>
-<span id="L113"><a href="#L113">113</a>       (fun i : Fin m ↦ if i = ⟨0, hm⟩ then 1 else 0)</span>
+<span id="L113"><a href="#L113">113</a>       (fun i : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L2443" title="Fin">Fin</a> m ↦ if i = ⟨0, hm⟩ then 1 else 0)</span>
 <span id="L114"><a href="#L114">114</a>       y xi hgeneric hresidue hvanishes</span>
-<span id="L115"><a href="#L115">115</a>   rw [eval₂_extensionAxis_eq_algebraMap_eval_axis (K := K) hm P, haxis]</span>
-<span id="L116"><a href="#L116">116</a>   exact map_one (algebraMap k K)</span>
+<span id="L115"><a href="#L115">115</a>   rw [<a class="ref" href="./FiniteGradientResidueExtension.lean.html#L71" title="Stafford38.Geometry.FiniteGradientResidueExtension.eval₂_extensionAxis_eq_algebraMap_eval_axis">eval₂_extensionAxis_eq_algebraMap_eval_axis</a> (K := K) hm P, haxis]</span>
+<span id="L116"><a href="#L116">116</a>   exact <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Group/Hom/Defs.lean#L232" title="map_one">map_one</a> (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Algebra/Defs.lean#L97" title="Algebra.algebraMap">algebraMap</a> k K)</span>
 <span id="L117"><a href="#L117">117</a> </span>
-<span id="L118"><a href="#L118">118</a> #print axioms FiniteGradientBoundaryCertificateOver</span>
-<span id="L119"><a href="#L119">119</a> #print axioms exists_groundConormalAxis_of_finiteGradientBoundaryCertificateOver</span>
-<span id="L120"><a href="#L120">120</a> #print axioms eval₂_extensionAxis_eq_algebraMap_eval_axis</span>
-<span id="L121"><a href="#L121">121</a> #print axioms false_of_finiteGradientBoundaryCertificateOver</span>
+<span id="L118"><a href="#L118">118</a> #print axioms <a class="ref" href="./FiniteGradientBoundaryCertificateOver.lean.html#L35" title="Stafford38.Geometry.FiniteGradientResidueExtension.FiniteGradientBoundaryCertificateOver">FiniteGradientBoundaryCertificateOver</a></span>
+<span id="L119"><a href="#L119">119</a> #print axioms <a class="ref" href="./FiniteGradientResidueExtension.lean.html#L43" title="Stafford38.Geometry.FiniteGradientResidueExtension.exists_groundConormalAxis_of_finiteGradientBoundaryCertificateOver">exists_groundConormalAxis_of_finiteGradientBoundaryCertificateOver</a></span>
+<span id="L120"><a href="#L120">120</a> #print axioms <a class="ref" href="./FiniteGradientResidueExtension.lean.html#L71" title="Stafford38.Geometry.FiniteGradientResidueExtension.eval₂_extensionAxis_eq_algebraMap_eval_axis">eval₂_extensionAxis_eq_algebraMap_eval_axis</a></span>
+<span id="L121"><a href="#L121">121</a> #print axioms <a class="ref" href="./FiniteGradientResidueExtension.lean.html#L93" title="Stafford38.Geometry.FiniteGradientResidueExtension.false_of_finiteGradientBoundaryCertificateOver">false_of_finiteGradientBoundaryCertificateOver</a></span>
 <span id="L122"><a href="#L122">122</a> </span>
 <span id="L123"><a href="#L123">123</a> end</span>
 <span id="L124"><a href="#L124">124</a> </span>

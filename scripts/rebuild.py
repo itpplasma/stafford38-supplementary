@@ -59,6 +59,8 @@ if rendered != p:
     shutil.copyfile(rendered, p)
     rendered.unlink()
 p.write_text(p.read_text().replace('https://itpplasma.github.io/stafford38-formal/lean_proof_details.pdf', './lean_proof_details.pdf'))
+# Lean's recorded references link every identifier to its declaration.
+subprocess.run(['python3', str(root / 'scripts/link-lean-references.py')], check=True)
 version_path = root / 'version.json'
 version = json.loads(version_path.read_text())
 version['release_version'] = manifest['version']

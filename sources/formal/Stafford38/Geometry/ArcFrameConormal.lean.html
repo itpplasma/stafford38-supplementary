@@ -1,0 +1,141 @@
+<!doctype html><meta charset="utf-8"><title>Stafford38/Geometry/ArcFrameConormal.lean</title><style>body{font:14px monospace}pre span{display:block}pre span:target{background:#fff0ad}a{color:#666}pre{white-space:pre-wrap}a.ref{color:#0645ad;text-decoration:none}a.ref:hover{text-decoration:underline}</style><h1>Stafford38/Geometry/ArcFrameConormal.lean</h1><p>This project (Stafford38) · 0403af3f0b1a7f84d2027121932723f67bd279ae</p><pre><span id="L1"><a href="#L1">1</a> module</span>
+<span id="L2"><a href="#L2">2</a> public import Stafford38.Geometry.AffineConormalSpan</span>
+<span id="L3"><a href="#L3">3</a> public import Stafford38.Geometry.PowerSeriesArcTangency</span>
+<span id="L4"><a href="#L4">4</a> </span>
+<span id="L5"><a href="#L5">5</a> @[expose] public section</span>
+<span id="L6"><a href="#L6">6</a> </span>
+<span id="L7"><a href="#L7">7</a> /-!</span>
+<span id="L8"><a href="#L8">8</a> # From an annihilating arc frame to an affine conormal covector</span>
+<span id="L9"><a href="#L9">9</a> </span>
+<span id="L10"><a href="#L10">10</a> The power-series arc file proves that the uniformizer and coefficient-field</span>
+<span id="L11"><a href="#L11">11</a> residue directions are tangent to the scalar-extended equation ideal.  The</span>
+<span id="L12"><a href="#L12">12</a> continuous-frame file separately proves that a finite independent family with</span>
+<span id="L13"><a href="#L13">13</a> the correct tangent-dimension bound spans the tangent space.  This file joins</span>
+<span id="L14"><a href="#L14">14</a> those two facts and records the exact local tangent-to-conormal bridge.</span>
+<span id="L15"><a href="#L15">15</a> </span>
+<span id="L16"><a href="#L16">16</a> The result is deliberately affine and local.  It does not construct a</span>
+<span id="L17"><a href="#L17">17</a> divisorial chart, identify an arc with a projective component, or descend a</span>
+<span id="L18"><a href="#L18">18</a> `K[[t]]` chart to `k[[t]]`.  Those are still global production obligations for</span>
+<span id="L19"><a href="#L19">19</a> `CanonicalAsymptoticLaurentProducer`.</span>
+<span id="L20"><a href="#L20">20</a> -/</span>
+<span id="L21"><a href="#L21">21</a> </span>
+<span id="L22"><a href="#L22">22</a> namespace Stafford38.Geometry.ArcFrameConormal</span>
+<span id="L23"><a href="#L23">23</a> </span>
+<span id="L24"><a href="#L24">24</a> open Stafford38.Geometry.AffineConormalSpan</span>
+<span id="L25"><a href="#L25">25</a> open Stafford38.Geometry.ContinuousPowerSeriesTangentFrame</span>
+<span id="L26"><a href="#L26">26</a> open Stafford38.Geometry.PowerSeriesArcTangency</span>
+<span id="L27"><a href="#L27">27</a> </span>
+<span id="L28"><a href="#L28">28</a> noncomputable section</span>
+<span id="L29"><a href="#L29">29</a> </span>
+<span id="L30"><a href="#L30">30</a> universe u v</span>
+<span id="L31"><a href="#L31">31</a> </span>
+<span id="L32"><a href="#L32">32</a> variable {k K : Type u} [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Field/Defs.lean#L170" title="Field">Field</a> k] [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Field/Defs.lean#L170" title="Field">Field</a> K] [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Algebra/Defs.lean#L91" title="Algebra">Algebra</a> k K]</span>
+<span id="L33"><a href="#L33">33</a> </span>
+<span id="L34"><a href="#L34">34</a> /-! ## The frame-span bridge -/</span>
+<span id="L35"><a href="#L35">35</a> </span>
+<span id="L36"><a href="#L36">36</a> /--</span>
+<span id="L37"><a href="#L37">37</a> An actual annihilating power-series arc makes the complete residue frame</span>
+<span id="L38"><a href="#L38">38</a> tangent.  If that finite frame is independent and its cardinality bounds the</span>
+<span id="L39"><a href="#L39">39</a> tangent dimension, the equation-defined tangent space is contained in its</span>
+<span id="L40"><a href="#L40">40</a> span.</span>
+<span id="L41"><a href="#L41">41</a> </span>
+<span id="L42"><a href="#L42">42</a> The coefficient directions are arbitrary `k`-derivations of the residue</span>
+<span id="L43"><a href="#L43">43</a> field; no coefficient-field section of a geometric DVR is inferred here.</span>
+<span id="L44"><a href="#L44">44</a> -/</span>
+<span id="L45"><a href="#L45">45</a> theorem tangent_le_span_residueFrame_of_annihilatingArc</span>
+<span id="L46"><a href="#L46">46</a>     {m : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L1351" title="Nat">ℕ</a>} {κ : Type v} [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Data/Fintype/Defs.lean#L53" title="Fintype">Fintype</a> κ]</span>
+<span id="L47"><a href="#L47">47</a>     (I : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Defs.lean#L38" title="Ideal">Ideal</a> (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/Basic.lean#L80" title="MvPolynomial">MvPolynomial</a> (<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L2443" title="Fin">Fin</a> m) k))</span>
+<span id="L48"><a href="#L48">48</a>     (q : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L2443" title="Fin">Fin</a> m → <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/PowerSeries/Basic.lean#L58" title="PowerSeries">PowerSeries</a> K)</span>
+<span id="L49"><a href="#L49">49</a>     (D : κ → <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Derivation/Basic.lean#L40" title="Derivation">Derivation</a> k K K)</span>
+<span id="L50"><a href="#L50">50</a>     (hq : ∀ f ∈ I,</span>
+<span id="L51"><a href="#L51">51</a>       <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/Eval.lean#L67" title="MvPolynomial.eval₂">MvPolynomial.eval₂</a> (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Algebra/Defs.lean#L97" title="Algebra.algebraMap">algebraMap</a> k (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/PowerSeries/Basic.lean#L58" title="PowerSeries">PowerSeries</a> K)) q f = 0)</span>
+<span id="L52"><a href="#L52">52</a>     (hindependent : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/LinearAlgebra/LinearIndependent/Defs.lean#L97" title="LinearIndependent">LinearIndependent</a> K (<a class="ref" href="./ContinuousPowerSeriesTangentFrame.lean.html#L187" title="Stafford38.Geometry.ContinuousPowerSeriesTangentFrame.residueFrameVector">residueFrameVector</a> q D))</span>
+<span id="L53"><a href="#L53">53</a>     (hfinrank : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/LinearAlgebra/Dimension/Finrank.lean#L49" title="Module.finrank">Module.finrank</a> K</span>
+<span id="L54"><a href="#L54">54</a>         (<a class="ref" href="./AffineConormalSpan.lean.html#L85" title="Stafford38.Geometry.AffineConormalSpan.zariskiTangentSpace">zariskiTangentSpace</a></span>
+<span id="L55"><a href="#L55">55</a>           (fun i ↦ <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/PowerSeries/Basic.lean#L142" title="PowerSeries.constantCoeff">PowerSeries.constantCoeff</a> (q i))</span>
+<span id="L56"><a href="#L56">56</a>           (I.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Maps.lean#L41" title="Ideal.map">map</a> (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/Eval.lean#L329" title="MvPolynomial.map">MvPolynomial.map</a> (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Algebra/Defs.lean#L97" title="Algebra.algebraMap">algebraMap</a> k K)))) ≤</span>
+<span id="L57"><a href="#L57">57</a>       <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Data/Fintype/Card.lean#L39" title="Fintype.card">Fintype.card</a> (<a class="ref" href="./ContinuousPowerSeriesTangentFrame.lean.html#L166" title="Stafford38.Geometry.ContinuousPowerSeriesTangentFrame.FrameIndex">FrameIndex</a> κ)) :</span>
+<span id="L58"><a href="#L58">58</a>     <a class="ref" href="./AffineConormalSpan.lean.html#L85" title="Stafford38.Geometry.AffineConormalSpan.zariskiTangentSpace">zariskiTangentSpace</a></span>
+<span id="L59"><a href="#L59">59</a>         (fun i ↦ <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/PowerSeries/Basic.lean#L142" title="PowerSeries.constantCoeff">PowerSeries.constantCoeff</a> (q i))</span>
+<span id="L60"><a href="#L60">60</a>         (I.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Maps.lean#L41" title="Ideal.map">map</a> (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/Eval.lean#L329" title="MvPolynomial.map">MvPolynomial.map</a> (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Algebra/Defs.lean#L97" title="Algebra.algebraMap">algebraMap</a> k K))) ≤</span>
+<span id="L61"><a href="#L61">61</a>       <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/LinearAlgebra/Span/Defs.lean#L45" title="Submodule.span">Submodule.span</a> K (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Data/Set/Operations.lean#L169" title="Set.range">Set.range</a> (<a class="ref" href="./ContinuousPowerSeriesTangentFrame.lean.html#L187" title="Stafford38.Geometry.ContinuousPowerSeriesTangentFrame.residueFrameVector">residueFrameVector</a> q D)) := by</span>
+<span id="L62"><a href="#L62">62</a>   apply <a class="ref" href="./ContinuousPowerSeriesTangentFrame.lean.html#L236" title="Stafford38.Geometry.ContinuousPowerSeriesTangentFrame.tangent_le_span_residueFrame">tangent_le_span_residueFrame</a></span>
+<span id="L63"><a href="#L63">63</a>     (k := k) (K := K)</span>
+<span id="L64"><a href="#L64">64</a>     (I.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Maps.lean#L41" title="Ideal.map">map</a> (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/Eval.lean#L329" title="MvPolynomial.map">MvPolynomial.map</a> (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Algebra/Defs.lean#L97" title="Algebra.algebraMap">algebraMap</a> k K))) q D ?_</span>
+<span id="L65"><a href="#L65">65</a>     hindependent hfinrank</span>
+<span id="L66"><a href="#L66">66</a>   intro j</span>
+<span id="L67"><a href="#L67">67</a>   cases j with</span>
+<span id="L68"><a href="#L68">68</a>   | <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L3057" title="Option.none">none</a> =&gt;</span>
+<span id="L69"><a href="#L69">69</a>       have hD :=</span>
+<span id="L70"><a href="#L70">70</a>         <a class="ref" href="./PowerSeriesArcTangency.lean.html#L179" title="Stafford38.Geometry.PowerSeriesArcTangency.residueDerivationVector_mem_zariskiTangentSpace_of_eval₂_eq_zero">residueDerivationVector_mem_zariskiTangentSpace_of_eval₂_eq_zero</a></span>
+<span id="L71"><a href="#L71">71</a>           (k := k) (K := K) I q</span>
+<span id="L72"><a href="#L72">72</a>             (<a class="ref" href="./ContinuousPowerSeriesTangentFrame.lean.html#L129" title="Stafford38.Geometry.ContinuousPowerSeriesTangentFrame.uniformizerDerivation">uniformizerDerivation</a> (k := k) (K := K)) hq</span>
+<span id="L73"><a href="#L73">73</a>       change (fun i ↦ <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/PowerSeries/Basic.lean#L142" title="PowerSeries.constantCoeff">PowerSeries.constantCoeff</a></span>
+<span id="L74"><a href="#L74">74</a>           (<a class="ref" href="./ContinuousPowerSeriesTangentFrame.lean.html#L129" title="Stafford38.Geometry.ContinuousPowerSeriesTangentFrame.uniformizerDerivation">uniformizerDerivation</a> (k := k) (K := K) (q i))) ∈ _</span>
+<span id="L75"><a href="#L75">75</a>       exact hD</span>
+<span id="L76"><a href="#L76">76</a>   | <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L3059" title="Option.some">some</a> j =&gt;</span>
+<span id="L77"><a href="#L77">77</a>       have hD :=</span>
+<span id="L78"><a href="#L78">78</a>         <a class="ref" href="./PowerSeriesArcTangency.lean.html#L179" title="Stafford38.Geometry.PowerSeriesArcTangency.residueDerivationVector_mem_zariskiTangentSpace_of_eval₂_eq_zero">residueDerivationVector_mem_zariskiTangentSpace_of_eval₂_eq_zero</a></span>
+<span id="L79"><a href="#L79">79</a>           (k := k) (K := K) I q</span>
+<span id="L80"><a href="#L80">80</a>             (<a class="ref" href="./ContinuousPowerSeriesTangentFrame.lean.html#L75" title="Stafford38.Geometry.ContinuousPowerSeriesTangentFrame.coefficientwiseDerivation">coefficientwiseDerivation</a> (D j)) hq</span>
+<span id="L81"><a href="#L81">81</a>       change (fun i ↦ <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/PowerSeries/Basic.lean#L142" title="PowerSeries.constantCoeff">PowerSeries.constantCoeff</a></span>
+<span id="L82"><a href="#L82">82</a>           (<a class="ref" href="./ContinuousPowerSeriesTangentFrame.lean.html#L75" title="Stafford38.Geometry.ContinuousPowerSeriesTangentFrame.coefficientwiseDerivation">coefficientwiseDerivation</a> (D j) (q i))) ∈ _</span>
+<span id="L83"><a href="#L83">83</a>       exact hD</span>
+<span id="L84"><a href="#L84">84</a> </span>
+<span id="L85"><a href="#L85">85</a> /-! ## The tangent-to-conormal bridge -/</span>
+<span id="L86"><a href="#L86">86</a> </span>
+<span id="L87"><a href="#L87">87</a> /--</span>
+<span id="L88"><a href="#L88">88</a> If a covector annihilates every residue-frame direction of an annihilating</span>
+<span id="L89"><a href="#L89">89</a> arc, then the frame-span bridge places that covector in the affine conormal</span>
+<span id="L90"><a href="#L90">90</a> space of the scalar-extended equation ideal.</span>
+<span id="L91"><a href="#L91">91</a> </span>
+<span id="L92"><a href="#L92">92</a> The hypothesis is an explicit finite sum, so the theorem does not hide a</span>
+<span id="L93"><a href="#L93">93</a> projective tangent comparison or a smoothness assertion.</span>
+<span id="L94"><a href="#L94">94</a> -/</span>
+<span id="L95"><a href="#L95">95</a> theorem coordinateCovector_mem_affineConormalSpace_of_annihilatingArcFrame</span>
+<span id="L96"><a href="#L96">96</a>     {m : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L1351" title="Nat">ℕ</a>} {κ : Type v} [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Data/Fintype/Defs.lean#L53" title="Fintype">Fintype</a> κ]</span>
+<span id="L97"><a href="#L97">97</a>     (I : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Defs.lean#L38" title="Ideal">Ideal</a> (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/Basic.lean#L80" title="MvPolynomial">MvPolynomial</a> (<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L2443" title="Fin">Fin</a> m) k))</span>
+<span id="L98"><a href="#L98">98</a>     (q : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L2443" title="Fin">Fin</a> m → <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/PowerSeries/Basic.lean#L58" title="PowerSeries">PowerSeries</a> K)</span>
+<span id="L99"><a href="#L99">99</a>     (D : κ → <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Derivation/Basic.lean#L40" title="Derivation">Derivation</a> k K K)</span>
+<span id="L100"><a href="#L100">100</a>     (xi : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L2443" title="Fin">Fin</a> m → K)</span>
+<span id="L101"><a href="#L101">101</a>     (hq : ∀ f ∈ I,</span>
+<span id="L102"><a href="#L102">102</a>       <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/Eval.lean#L67" title="MvPolynomial.eval₂">MvPolynomial.eval₂</a> (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Algebra/Defs.lean#L97" title="Algebra.algebraMap">algebraMap</a> k (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/PowerSeries/Basic.lean#L58" title="PowerSeries">PowerSeries</a> K)) q f = 0)</span>
+<span id="L103"><a href="#L103">103</a>     (hframe : ∀ j,</span>
+<span id="L104"><a href="#L104">104</a>       ∑ i, xi i * <a class="ref" href="./ContinuousPowerSeriesTangentFrame.lean.html#L187" title="Stafford38.Geometry.ContinuousPowerSeriesTangentFrame.residueFrameVector">residueFrameVector</a> q D j i = 0)</span>
+<span id="L105"><a href="#L105">105</a>     (hindependent : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/LinearAlgebra/LinearIndependent/Defs.lean#L97" title="LinearIndependent">LinearIndependent</a> K (<a class="ref" href="./ContinuousPowerSeriesTangentFrame.lean.html#L187" title="Stafford38.Geometry.ContinuousPowerSeriesTangentFrame.residueFrameVector">residueFrameVector</a> q D))</span>
+<span id="L106"><a href="#L106">106</a>     (hfinrank : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/LinearAlgebra/Dimension/Finrank.lean#L49" title="Module.finrank">Module.finrank</a> K</span>
+<span id="L107"><a href="#L107">107</a>         (<a class="ref" href="./AffineConormalSpan.lean.html#L85" title="Stafford38.Geometry.AffineConormalSpan.zariskiTangentSpace">zariskiTangentSpace</a></span>
+<span id="L108"><a href="#L108">108</a>           (fun i ↦ <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/PowerSeries/Basic.lean#L142" title="PowerSeries.constantCoeff">PowerSeries.constantCoeff</a> (q i))</span>
+<span id="L109"><a href="#L109">109</a>           (I.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Maps.lean#L41" title="Ideal.map">map</a> (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/Eval.lean#L329" title="MvPolynomial.map">MvPolynomial.map</a> (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Algebra/Defs.lean#L97" title="Algebra.algebraMap">algebraMap</a> k K)))) ≤</span>
+<span id="L110"><a href="#L110">110</a>       <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Data/Fintype/Card.lean#L39" title="Fintype.card">Fintype.card</a> (<a class="ref" href="./ContinuousPowerSeriesTangentFrame.lean.html#L166" title="Stafford38.Geometry.ContinuousPowerSeriesTangentFrame.FrameIndex">FrameIndex</a> κ)) :</span>
+<span id="L111"><a href="#L111">111</a>     <a class="ref" href="./AffineConormalSpan.lean.html#L119" title="Stafford38.Geometry.AffineConormalSpan.coordinateCovector">coordinateCovector</a> xi ∈</span>
+<span id="L112"><a href="#L112">112</a>       <a class="ref" href="./AffineConormalSpan.lean.html#L92" title="Stafford38.Geometry.AffineConormalSpan.affineConormalSpace">affineConormalSpace</a></span>
+<span id="L113"><a href="#L113">113</a>         (fun i ↦ <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/PowerSeries/Basic.lean#L142" title="PowerSeries.constantCoeff">PowerSeries.constantCoeff</a> (q i))</span>
+<span id="L114"><a href="#L114">114</a>         (I.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Maps.lean#L41" title="Ideal.map">map</a> (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/Eval.lean#L329" title="MvPolynomial.map">MvPolynomial.map</a> (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Algebra/Defs.lean#L97" title="Algebra.algebraMap">algebraMap</a> k K))) := by</span>
+<span id="L115"><a href="#L115">115</a>   have htangent := <a class="ref" href="./ArcFrameConormal.lean.html#L36" title="Stafford38.Geometry.ArcFrameConormal.tangent_le_span_residueFrame_of_annihilatingArc">tangent_le_span_residueFrame_of_annihilatingArc</a></span>
+<span id="L116"><a href="#L116">116</a>     (k := k) (K := K) I q D hq hindependent hfinrank</span>
+<span id="L117"><a href="#L117">117</a>   rw [<a class="ref" href="./AffineConormalSpan.lean.html#L92" title="Stafford38.Geometry.AffineConormalSpan.affineConormalSpace">affineConormalSpace</a>, <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/LinearAlgebra/Dual/Defs.lean#L341" title="Submodule.mem_dualAnnihilator">Submodule.mem_dualAnnihilator</a>]</span>
+<span id="L118"><a href="#L118">118</a>   intro v hv</span>
+<span id="L119"><a href="#L119">119</a>   have hspan : ∀ w,</span>
+<span id="L120"><a href="#L120">120</a>       w ∈ <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/LinearAlgebra/Span/Defs.lean#L45" title="Submodule.span">Submodule.span</a> K (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Data/Set/Operations.lean#L169" title="Set.range">Set.range</a> (<a class="ref" href="./ContinuousPowerSeriesTangentFrame.lean.html#L187" title="Stafford38.Geometry.ContinuousPowerSeriesTangentFrame.residueFrameVector">residueFrameVector</a> q D)) →</span>
+<span id="L121"><a href="#L121">121</a>         <a class="ref" href="./AffineConormalSpan.lean.html#L119" title="Stafford38.Geometry.AffineConormalSpan.coordinateCovector">coordinateCovector</a> xi w = 0 := by</span>
+<span id="L122"><a href="#L122">122</a>     intro w hw</span>
+<span id="L123"><a href="#L123">123</a>     induction hw using <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/LinearAlgebra/Span/Defs.lean#L133" title="Submodule.span_induction">Submodule.span_induction</a> with</span>
+<span id="L124"><a href="#L124">124</a>     | mem w hw =&gt;</span>
+<span id="L125"><a href="#L125">125</a>         rcases hw with ⟨j, rfl⟩</span>
+<span id="L126"><a href="#L126">126</a>         simpa [<a class="ref" href="./AffineConormalSpan.lean.html#L126" title="Stafford38.Geometry.AffineConormalSpan.coordinateCovector_apply">coordinateCovector_apply</a>] using hframe j</span>
+<span id="L127"><a href="#L127">127</a>     | <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Module/Submodule/Defs.lean#L241" title="Submodule.zero">zero</a> =&gt;</span>
+<span id="L128"><a href="#L128">128</a>         simp</span>
+<span id="L129"><a href="#L129">129</a>     | <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Module/Submodule/Defs.lean#L238" title="Submodule.add">add</a> w z hw hz ihw ihz =&gt;</span>
+<span id="L130"><a href="#L130">130</a>         rw [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Group/Hom/Defs.lean#L325" title="map_add">map_add</a>, ihw, ihz, <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Group/Monoid.lean#L94" title="add_zero">add_zero</a>]</span>
+<span id="L131"><a href="#L131">131</a>     | <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Module/Submodule/Defs.lean#L247" title="Submodule.smul">smul</a> a w hw ih =&gt;</span>
+<span id="L132"><a href="#L132">132</a>         rw [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/GroupTheory/GroupAction/Hom.lean#L148" title="map_smul">map_smul</a>, ih, <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/GroupWithZero/Action/Defs.lean#L58" title="smul_zero">smul_zero</a>]</span>
+<span id="L133"><a href="#L133">133</a>   exact hspan v (htangent hv)</span>
+<span id="L134"><a href="#L134">134</a> </span>
+<span id="L135"><a href="#L135">135</a> #print axioms <a class="ref" href="./ArcFrameConormal.lean.html#L36" title="Stafford38.Geometry.ArcFrameConormal.tangent_le_span_residueFrame_of_annihilatingArc">tangent_le_span_residueFrame_of_annihilatingArc</a></span>
+<span id="L136"><a href="#L136">136</a> #print axioms <a class="ref" href="./ArcFrameConormal.lean.html#L87" title="Stafford38.Geometry.ArcFrameConormal.coordinateCovector_mem_affineConormalSpace_of_annihilatingArcFrame">coordinateCovector_mem_affineConormalSpace_of_annihilatingArcFrame</a></span>
+<span id="L137"><a href="#L137">137</a> </span>
+<span id="L138"><a href="#L138">138</a> end</span>
+<span id="L139"><a href="#L139">139</a> </span>
+<span id="L140"><a href="#L140">140</a> end Stafford38.Geometry.ArcFrameConormal</span>
+<span id="L141"><a href="#L141">141</a> </span></pre>

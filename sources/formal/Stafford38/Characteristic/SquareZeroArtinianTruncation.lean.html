@@ -1,0 +1,94 @@
+<!doctype html><meta charset="utf-8"><title>Stafford38/Characteristic/SquareZeroArtinianTruncation.lean</title><style>body{font:14px monospace}pre span{display:block}pre span:target{background:#fff0ad}a{color:#666}pre{white-space:pre-wrap}a.ref{color:#0645ad;text-decoration:none}a.ref:hover{text-decoration:underline}</style><h1>Stafford38/Characteristic/SquareZeroArtinianTruncation.lean</h1><p>This project (Stafford38) · 0403af3f0b1a7f84d2027121932723f67bd279ae</p><pre><span id="L1"><a href="#L1">1</a> module</span>
+<span id="L2"><a href="#L2">2</a> public import Stafford38.Characteristic.SquareZeroAnnihilatorBracket</span>
+<span id="L3"><a href="#L3">3</a> </span>
+<span id="L4"><a href="#L4">4</a> @[expose] public section</span>
+<span id="L5"><a href="#L5">5</a> </span>
+<span id="L6"><a href="#L6">6</a> /-!</span>
+<span id="L7"><a href="#L7">7</a> # Artinian truncation in a square-zero deformation</span>
+<span id="L8"><a href="#L8">8</a> </span>
+<span id="L9"><a href="#L9">9</a> This file isolates the algebraic replacement for the invalid pullback-</span>
+<span id="L10"><a href="#L10">10</a> filtration division step.  If a power of an ideal annihilates the special</span>
+<span id="L11"><a href="#L11">11</a> fibre, then every deformation-ring element specializing into that power sends</span>
+<span id="L12"><a href="#L12">12</a> the deformation module into the parameter layer.  Two such blocks act by</span>
+<span id="L13"><a href="#L13">13</a> zero, because the parameter is central and square-zero.</span>
+<span id="L14"><a href="#L14">14</a> </span>
+<span id="L15"><a href="#L15">15</a> The result is deliberately stated without a noncommutative ideal on the</span>
+<span id="L16"><a href="#L16">16</a> deformation ring.  Membership is tested after specialization in the</span>
+<span id="L17"><a href="#L17">17</a> commutative fibre, which is exactly the datum available in the Rees two-jet.</span>
+<span id="L18"><a href="#L18">18</a> -/</span>
+<span id="L19"><a href="#L19">19</a> </span>
+<span id="L20"><a href="#L20">20</a> namespace Stafford38.Characteristic.SquareZeroArtinianTruncation</span>
+<span id="L21"><a href="#L21">21</a> </span>
+<span id="L22"><a href="#L22">22</a> open Stafford38.Characteristic.SquareZeroTraceData</span>
+<span id="L23"><a href="#L23">23</a> open Stafford38.Characteristic.SquareZeroAnnihilatorBracket</span>
+<span id="L24"><a href="#L24">24</a> </span>
+<span id="L25"><a href="#L25">25</a> noncomputable section</span>
+<span id="L26"><a href="#L26">26</a> </span>
+<span id="L27"><a href="#L27">27</a> universe u_k u_R u_B u_N u_G</span>
+<span id="L28"><a href="#L28">28</a> </span>
+<span id="L29"><a href="#L29">29</a> variable {k : Type u_k} {R : Type u_R} {B : Type u_B}</span>
+<span id="L30"><a href="#L30">30</a> variable {N : Type u_N} {G : Type u_G}</span>
+<span id="L31"><a href="#L31">31</a> variable [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Field/Defs.lean#L170" title="Field">Field</a> k] [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Ring/Defs.lean#L412" title="CommRing">CommRing</a> R] [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Algebra/Defs.lean#L91" title="Algebra">Algebra</a> k R]</span>
+<span id="L32"><a href="#L32">32</a> variable [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Ring/Defs.lean#L145" title="Ring">Ring</a> B] [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Algebra/Defs.lean#L91" title="Algebra">Algebra</a> k B]</span>
+<span id="L33"><a href="#L33">33</a> variable [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Group/Defs.lean#L110" title="AddCommGroup">AddCommGroup</a> N] [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Module/Defs.lean#L48" title="Module">Module</a> k N] [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Module/Defs.lean#L48" title="Module">Module</a> Bᵐᵒᵖ N]</span>
+<span id="L34"><a href="#L34">34</a> variable [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Group/Action/Defs.lean#L147" title="SMulCommClass">SMulCommClass</a> k Bᵐᵒᵖ N]</span>
+<span id="L35"><a href="#L35">35</a> variable [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Group/Defs.lean#L110" title="AddCommGroup">AddCommGroup</a> G] [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Module/Defs.lean#L48" title="Module">Module</a> k G] [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Module/Defs.lean#L48" title="Module">Module</a> R G]</span>
+<span id="L36"><a href="#L36">36</a> </span>
+<span id="L37"><a href="#L37">37</a> variable (D : <a class="ref" href="./SquareZeroTraceData.lean.html#L64" title="Stafford38.Characteristic.SquareZeroTraceData.RightSquareZeroTraceData">RightSquareZeroTraceData</a> k R B N G)</span>
+<span id="L38"><a href="#L38">38</a> variable (m : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Defs.lean#L38" title="Ideal">Ideal</a> R) (n : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L1351" title="Nat">ℕ</a>)</span>
+<span id="L39"><a href="#L39">39</a> </span>
+<span id="L40"><a href="#L40">40</a> /-- If `m^n` annihilates the special fibre, a deformation element whose</span>
+<span id="L41"><a href="#L41">41</a> specialization lies in `m^n` sends every vector into the parameter layer. -/</span>
+<span id="L42"><a href="#L42">42</a> theorem rightAction_mem_parameterLayer_of_pi_mem_pow</span>
+<span id="L43"><a href="#L43">43</a>     (hpow : m ^ n ≤ <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Maps.lean#L859" title="Module.annihilator">Module.annihilator</a> R G)</span>
+<span id="L44"><a href="#L44">44</a>     {a : B} (ha : D.<a class="ref" href="./SquareZeroTraceData.lean.html#L83" title="Stafford38.Characteristic.SquareZeroTraceData.RightSquareZeroTraceData.pi">pi</a> a ∈ m ^ n) (z : N) :</span>
+<span id="L45"><a href="#L45">45</a>     <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Opposites.lean#L75" title="MulOpposite.op">MulOpposite.op</a> a • z ∈ <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Module/Submodule/Range.lean#L55" title="LinearMap.range">LinearMap.range</a> D.<a class="ref" href="./SquareZeroTraceData.lean.html#L87" title="Stafford38.Characteristic.SquareZeroTraceData.RightSquareZeroTraceData.cAct">cAct</a> := by</span>
+<span id="L46"><a href="#L46">46</a>   exact <a class="ref" href="./SquareZeroAnnihilatorBracket.lean.html#L38" title="Stafford38.Characteristic.SquareZeroAnnihilatorBracket.rightAction_mem_range_cAct_of_pi_mem_annihilator">rightAction_mem_range_cAct_of_pi_mem_annihilator</a> D (hpow ha) z</span>
+<span id="L47"><a href="#L47">47</a> </span>
+<span id="L48"><a href="#L48">48</a> /-- Two blocks specializing into an annihilating ideal power act successively</span>
+<span id="L49"><a href="#L49">49</a> by zero. This is a two-step parameter-layer statement; it does not say that</span>
+<span id="L50"><a href="#L50">50</a> every element specializing into `m ^ (2 * n)` acts by zero. -/</span>
+<span id="L51"><a href="#L51">51</a> theorem iterated_rightAction_eq_zero_of_pi_mem_pow</span>
+<span id="L52"><a href="#L52">52</a>     (hpow : m ^ n ≤ <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Maps.lean#L859" title="Module.annihilator">Module.annihilator</a> R G)</span>
+<span id="L53"><a href="#L53">53</a>     {a b : B} (ha : D.<a class="ref" href="./SquareZeroTraceData.lean.html#L83" title="Stafford38.Characteristic.SquareZeroTraceData.RightSquareZeroTraceData.pi">pi</a> a ∈ m ^ n) (hb : D.<a class="ref" href="./SquareZeroTraceData.lean.html#L83" title="Stafford38.Characteristic.SquareZeroTraceData.RightSquareZeroTraceData.pi">pi</a> b ∈ m ^ n) (z : N) :</span>
+<span id="L54"><a href="#L54">54</a>     <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Opposites.lean#L75" title="MulOpposite.op">MulOpposite.op</a> b • (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Opposites.lean#L75" title="MulOpposite.op">MulOpposite.op</a> a • z) = 0 := by</span>
+<span id="L55"><a href="#L55">55</a>   exact <a class="ref" href="./SquareZeroAnnihilatorBracket.lean.html#L55" title="Stafford38.Characteristic.SquareZeroAnnihilatorBracket.iterated_rightAction_eq_zero_of_pi_mem_annihilator">iterated_rightAction_eq_zero_of_pi_mem_annihilator</a> D</span>
+<span id="L56"><a href="#L56">56</a>     (hpow ha) (hpow hb) z</span>
+<span id="L57"><a href="#L57">57</a> </span>
+<span id="L58"><a href="#L58">58</a> /-- Equivalently, the product of two deformation blocks lying over `m^n`</span>
+<span id="L59"><a href="#L59">59</a> acts trivially on the deformation module. -/</span>
+<span id="L60"><a href="#L60">60</a> theorem product_rightAction_eq_zero_of_pi_mem_pow</span>
+<span id="L61"><a href="#L61">61</a>     (hpow : m ^ n ≤ <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Maps.lean#L859" title="Module.annihilator">Module.annihilator</a> R G)</span>
+<span id="L62"><a href="#L62">62</a>     {a b : B} (ha : D.<a class="ref" href="./SquareZeroTraceData.lean.html#L83" title="Stafford38.Characteristic.SquareZeroTraceData.RightSquareZeroTraceData.pi">pi</a> a ∈ m ^ n) (hb : D.<a class="ref" href="./SquareZeroTraceData.lean.html#L83" title="Stafford38.Characteristic.SquareZeroTraceData.RightSquareZeroTraceData.pi">pi</a> b ∈ m ^ n) (z : N) :</span>
+<span id="L63"><a href="#L63">63</a>     <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Opposites.lean#L75" title="MulOpposite.op">MulOpposite.op</a> (a * b) • z = 0 := by</span>
+<span id="L64"><a href="#L64">64</a>   simpa only [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Opposites.lean#L221" title="MulOpposite.op_mul">MulOpposite.op_mul</a>, <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Group/Action/Defs.lean#L107" title="SemigroupAction.mul_smul">mul_smul</a>] using</span>
+<span id="L65"><a href="#L65">65</a>     <a class="ref" href="./SquareZeroArtinianTruncation.lean.html#L48" title="Stafford38.Characteristic.SquareZeroArtinianTruncation.iterated_rightAction_eq_zero_of_pi_mem_pow">iterated_rightAction_eq_zero_of_pi_mem_pow</a> D m n hpow ha hb z</span>
+<span id="L66"><a href="#L66">66</a> </span>
+<span id="L67"><a href="#L67">67</a> /-- Every finite sum of two-block products acts trivially. This is the</span>
+<span id="L68"><a href="#L68">68</a> elementwise ideal-product form needed by an Artinian quotient construction;</span>
+<span id="L69"><a href="#L69">69</a> no noncommutative ideal API on `B` is required. -/</span>
+<span id="L70"><a href="#L70">70</a> theorem sum_products_rightAction_eq_zero_of_pi_mem_pow</span>
+<span id="L71"><a href="#L71">71</a>     {ι : Type*} (s : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Data/Finset/Defs.lean#L72" title="Finset">Finset</a> ι)</span>
+<span id="L72"><a href="#L72">72</a>     (hpow : m ^ n ≤ <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Maps.lean#L859" title="Module.annihilator">Module.annihilator</a> R G)</span>
+<span id="L73"><a href="#L73">73</a>     (a b : ι → B)</span>
+<span id="L74"><a href="#L74">74</a>     (ha : ∀ i ∈ s, D.<a class="ref" href="./SquareZeroTraceData.lean.html#L83" title="Stafford38.Characteristic.SquareZeroTraceData.RightSquareZeroTraceData.pi">pi</a> (a i) ∈ m ^ n)</span>
+<span id="L75"><a href="#L75">75</a>     (hb : ∀ i ∈ s, D.<a class="ref" href="./SquareZeroTraceData.lean.html#L83" title="Stafford38.Characteristic.SquareZeroTraceData.RightSquareZeroTraceData.pi">pi</a> (b i) ∈ m ^ n) (z : N) :</span>
+<span id="L76"><a href="#L76">76</a>     <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Opposites.lean#L75" title="MulOpposite.op">MulOpposite.op</a> (∑ i ∈ s, a i * b i) • z = 0 := by</span>
+<span id="L77"><a href="#L77">77</a>   rw [show <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Opposites.lean#L75" title="MulOpposite.op">MulOpposite.op</a> (∑ i ∈ s, a i * b i) =</span>
+<span id="L78"><a href="#L78">78</a>       ∑ i ∈ s, <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Opposites.lean#L75" title="MulOpposite.op">MulOpposite.op</a> (a i * b i) by</span>
+<span id="L79"><a href="#L79">79</a>     exact <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/BigOperators/Group/Finset/Defs.lean#L365" title="map_sum">map_sum</a> (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Group/Equiv/Opposite.lean#L39" title="MulOpposite.opAddEquiv">MulOpposite.opAddEquiv</a> : B ≃+ Bᵐᵒᵖ) _ s]</span>
+<span id="L80"><a href="#L80">80</a>   rw [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Module/BigOperators.lean#L38" title="Finset.sum_smul">Finset.sum_smul</a>]</span>
+<span id="L81"><a href="#L81">81</a>   apply <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/BigOperators/Group/Finset/Basic.lean#L107" title="Finset.sum_eq_zero">Finset.sum_eq_zero</a></span>
+<span id="L82"><a href="#L82">82</a>   intro i hi</span>
+<span id="L83"><a href="#L83">83</a>   exact <a class="ref" href="./SquareZeroArtinianTruncation.lean.html#L58" title="Stafford38.Characteristic.SquareZeroArtinianTruncation.product_rightAction_eq_zero_of_pi_mem_pow">product_rightAction_eq_zero_of_pi_mem_pow</a> D m n hpow</span>
+<span id="L84"><a href="#L84">84</a>     (ha i hi) (hb i hi) z</span>
+<span id="L85"><a href="#L85">85</a> </span>
+<span id="L86"><a href="#L86">86</a> #print axioms <a class="ref" href="./SquareZeroArtinianTruncation.lean.html#L40" title="Stafford38.Characteristic.SquareZeroArtinianTruncation.rightAction_mem_parameterLayer_of_pi_mem_pow">rightAction_mem_parameterLayer_of_pi_mem_pow</a></span>
+<span id="L87"><a href="#L87">87</a> #print axioms <a class="ref" href="./SquareZeroArtinianTruncation.lean.html#L48" title="Stafford38.Characteristic.SquareZeroArtinianTruncation.iterated_rightAction_eq_zero_of_pi_mem_pow">iterated_rightAction_eq_zero_of_pi_mem_pow</a></span>
+<span id="L88"><a href="#L88">88</a> #print axioms <a class="ref" href="./SquareZeroArtinianTruncation.lean.html#L58" title="Stafford38.Characteristic.SquareZeroArtinianTruncation.product_rightAction_eq_zero_of_pi_mem_pow">product_rightAction_eq_zero_of_pi_mem_pow</a></span>
+<span id="L89"><a href="#L89">89</a> #print axioms <a class="ref" href="./SquareZeroArtinianTruncation.lean.html#L67" title="Stafford38.Characteristic.SquareZeroArtinianTruncation.sum_products_rightAction_eq_zero_of_pi_mem_pow">sum_products_rightAction_eq_zero_of_pi_mem_pow</a></span>
+<span id="L90"><a href="#L90">90</a> </span>
+<span id="L91"><a href="#L91">91</a> end</span>
+<span id="L92"><a href="#L92">92</a> </span>
+<span id="L93"><a href="#L93">93</a> end Stafford38.Characteristic.SquareZeroArtinianTruncation</span>
+<span id="L94"><a href="#L94">94</a> </span></pre>

@@ -1,10 +1,10 @@
-<!doctype html><meta charset="utf-8"><title>Stafford38/Characteristic/CanonicalTangentialBoundaryMaps.lean</title><style>body{font:14px monospace}pre span{display:block}pre span:target{background:#fff0ad}a{color:#666}pre{white-space:pre-wrap}</style><h1>Stafford38/Characteristic/CanonicalTangentialBoundaryMaps.lean</h1><p>This project (Stafford38) · 0403af3f0b1a7f84d2027121932723f67bd279ae</p><pre><span id="L1"><a href="#L1">1</a> module</span>
+<!doctype html><meta charset="utf-8"><title>Stafford38/Characteristic/CanonicalTangentialBoundaryMaps.lean</title><style>body{font:14px monospace}pre span{display:block}pre span:target{background:#fff0ad}a{color:#666}pre{white-space:pre-wrap}a.ref{color:#0645ad;text-decoration:none}a.ref:hover{text-decoration:underline}</style><h1>Stafford38/Characteristic/CanonicalTangentialBoundaryMaps.lean</h1><p>This project (Stafford38) · 0403af3f0b1a7f84d2027121932723f67bd279ae</p><pre><span id="L1"><a href="#L1">1</a> module</span>
 <span id="L2"><a href="#L2">2</a> public import Stafford38.Characteristic.CanonicalTangentialTotalAction</span>
 <span id="L3"><a href="#L3">3</a> public import Stafford38.Characteristic.FilteredTwoTermBoundaryNaturality</span>
 <span id="L4"><a href="#L4">4</a> </span>
 <span id="L5"><a href="#L5">5</a> @[expose] public section</span>
 <span id="L6"><a href="#L6">6</a> </span>
-<span id="L7"><a href="#L7">7</a> open Stafford38Challenge (WeylAlg)</span>
+<span id="L7"><a href="#L7">7</a> open Stafford38Challenge (<a class="ref" href="../ChallengeDefinitions.lean.html#L73" title="Stafford38Challenge.WeylAlg">WeylAlg</a>)</span>
 <span id="L8"><a href="#L8">8</a> </span>
 <span id="L9"><a href="#L9">9</a> /-!</span>
 <span id="L10"><a href="#L10">10</a> # Tangential-linear boundary maps for the canonical quotient</span>
@@ -22,47 +22,47 @@
 <span id="L22"><a href="#L22">22</a> </span>
 <span id="L23"><a href="#L23">23</a> noncomputable section</span>
 <span id="L24"><a href="#L24">24</a> </span>
-<span id="L25"><a href="#L25">25</a> variable (k : Type*) [Field k] [Algebra ℚ k]</span>
-<span id="L26"><a href="#L26">26</a> variable (n N : ℕ) (d : WeylAlg k (n + 1))</span>
-<span id="L27"><a href="#L27">27</a> variable (hd : IsPBWMonicAt k (.inr (0 : Fin (n + 1))) N d)</span>
+<span id="L25"><a href="#L25">25</a> variable (k : Type*) [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Field/Defs.lean#L170" title="Field">Field</a> k] [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Algebra/Defs.lean#L91" title="Algebra">Algebra</a> <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Data/Rat/Basic.lean#L27" title="Rat">ℚ</a> k]</span>
+<span id="L26"><a href="#L26">26</a> variable (n N : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L1351" title="Nat">ℕ</a>) (d : <a class="ref" href="../ChallengeDefinitions.lean.html#L73" title="Stafford38Challenge.WeylAlg">WeylAlg</a> k (n + 1))</span>
+<span id="L27"><a href="#L27">27</a> variable (hd : <a class="ref" href="../Weyl/PBWMonicBridge.lean.html#L102" title="Stafford38.WeylPBWMonicBridge.IsPBWMonicAt">IsPBWMonicAt</a> k (<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Core.lean#L215" title="Sum.inr">.inr</a> (0 : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L2443" title="Fin">Fin</a> (n + 1))) N d)</span>
 <span id="L28"><a href="#L28">28</a> </span>
-<span id="L29"><a href="#L29">29</a> attribute [local instance] sourceModule targetModule</span>
+<span id="L29"><a href="#L29">29</a> attribute [local instance] <a class="ref" href="./CanonicalTangentialTotalAction.lean.html#L90" title="Stafford38.Characteristic.CanonicalTangentialTotalAction.sourceModule">sourceModule</a> <a class="ref" href="./CanonicalTangentialTotalAction.lean.html#L95" title="Stafford38.Characteristic.CanonicalTangentialTotalAction.targetModule">targetModule</a></span>
 <span id="L30"><a href="#L30">30</a> </span>
-<span id="L31"><a href="#L31">31</a> theorem totalBoundaryMap_intertwines_polynomials (r : ℕ)</span>
-<span id="L32"><a href="#L32">32</a>     (P : MvPolynomial (Fin n ⊕ Fin n) k) :</span>
-<span id="L33"><a href="#L33">33</a>     (complex k n N d hd).totalBoundaryMap r ∘ₗ targetAction k n N d hd 1 P =</span>
-<span id="L34"><a href="#L34">34</a>       targetAction k n N d hd (r + 1) P ∘ₗ</span>
-<span id="L35"><a href="#L35">35</a>         (complex k n N d hd).totalBoundaryMap r :=</span>
-<span id="L36"><a href="#L36">36</a>   commutingPolynomialAction_intertwines _ _ _ _ _</span>
-<span id="L37"><a href="#L37">37</a>     (fun i =&gt; (generator k n N d hd i).totalBoundaryMap_naturality r) P</span>
+<span id="L31"><a href="#L31">31</a> theorem totalBoundaryMap_intertwines_polynomials (r : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L1351" title="Nat">ℕ</a>)</span>
+<span id="L32"><a href="#L32">32</a>     (P : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/Basic.lean#L80" title="MvPolynomial">MvPolynomial</a> (<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L2443" title="Fin">Fin</a> n ⊕ <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L2443" title="Fin">Fin</a> n) k) :</span>
+<span id="L33"><a href="#L33">33</a>     (<a class="ref" href="./CanonicalTangentialTotalAction.lean.html#L32" title="Stafford38.Characteristic.CanonicalTangentialTotalAction.complex">complex</a> k n N d hd).<a class="ref" href="../../../library/AlgebraicAnalysis/Module/FilteredTwoTermBoundaryExhaustion.lean.html#L72" title="AlgebraicAnalysis.FilteredTwoTermPages.FilteredTwoTerm.totalBoundaryMap">totalBoundaryMap</a> r ∘ₗ <a class="ref" href="./CanonicalTangentialTotalAction.lean.html#L77" title="Stafford38.Characteristic.CanonicalTangentialTotalAction.targetAction">targetAction</a> k n N d hd 1 P =</span>
+<span id="L34"><a href="#L34">34</a>       <a class="ref" href="./CanonicalTangentialTotalAction.lean.html#L77" title="Stafford38.Characteristic.CanonicalTangentialTotalAction.targetAction">targetAction</a> k n N d hd (r + 1) P ∘ₗ</span>
+<span id="L35"><a href="#L35">35</a>         (<a class="ref" href="./CanonicalTangentialTotalAction.lean.html#L32" title="Stafford38.Characteristic.CanonicalTangentialTotalAction.complex">complex</a> k n N d hd).<a class="ref" href="../../../library/AlgebraicAnalysis/Module/FilteredTwoTermBoundaryExhaustion.lean.html#L72" title="AlgebraicAnalysis.FilteredTwoTermPages.FilteredTwoTerm.totalBoundaryMap">totalBoundaryMap</a> r :=</span>
+<span id="L36"><a href="#L36">36</a>   <a class="ref" href="../../../library/AlgebraicAnalysis/Module/CommutingPolynomialAction.lean.html#L62" title="AlgebraicAnalysis.CommutingPolynomialAction.commutingPolynomialAction_intertwines">commutingPolynomialAction_intertwines</a> _ _ _ _ _</span>
+<span id="L37"><a href="#L37">37</a>     (fun i =&gt; (<a class="ref" href="./CanonicalTangentialTotalAction.lean.html#L34" title="Stafford38.Characteristic.CanonicalTangentialTotalAction.generator">generator</a> k n N d hd i).<a class="ref" href="../../../library/AlgebraicAnalysis/Module/FilteredTwoTermBoundaryNaturality.lean.html#L39" title="AlgebraicAnalysis.FilteredTwoTermPages.FilteredTwoTerm.PageOperator.totalBoundaryMap_naturality">totalBoundaryMap_naturality</a> r) P</span>
 <span id="L38"><a href="#L38">38</a> </span>
-<span id="L39"><a href="#L39">39</a> def tangentialBoundaryMap (r : ℕ) :</span>
-<span id="L40"><a href="#L40">40</a>     (complex k n N d hd).TargetTotal 1 →ₗ[MvPolynomial (Fin n ⊕ Fin n) k]</span>
-<span id="L41"><a href="#L41">41</a>       (complex k n N d hd).TargetTotal (r + 1) where</span>
-<span id="L42"><a href="#L42">42</a>   toFun := (complex k n N d hd).totalBoundaryMap r</span>
-<span id="L43"><a href="#L43">43</a>   map_add' := map_add _</span>
-<span id="L44"><a href="#L44">44</a>   map_smul' P z :=</span>
-<span id="L45"><a href="#L45">45</a>     congrArg (fun f =&gt; f z)</span>
-<span id="L46"><a href="#L46">46</a>       (totalBoundaryMap_intertwines_polynomials k n N d hd r P)</span>
+<span id="L39"><a href="#L39">39</a> def tangentialBoundaryMap (r : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L1351" title="Nat">ℕ</a>) :</span>
+<span id="L40"><a href="#L40">40</a>     (<a class="ref" href="./CanonicalTangentialTotalAction.lean.html#L32" title="Stafford38.Characteristic.CanonicalTangentialTotalAction.complex">complex</a> k n N d hd).<a class="ref" href="../../../library/AlgebraicAnalysis/Module/FilteredTwoTermTotalPages.lean.html#L31" title="AlgebraicAnalysis.FilteredTwoTermPages.FilteredTwoTerm.TargetTotal">TargetTotal</a> 1 →ₗ[<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/Basic.lean#L80" title="MvPolynomial">MvPolynomial</a> (<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L2443" title="Fin">Fin</a> n ⊕ <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L2443" title="Fin">Fin</a> n) k]</span>
+<span id="L41"><a href="#L41">41</a>       (<a class="ref" href="./CanonicalTangentialTotalAction.lean.html#L32" title="Stafford38.Characteristic.CanonicalTangentialTotalAction.complex">complex</a> k n N d hd).<a class="ref" href="../../../library/AlgebraicAnalysis/Module/FilteredTwoTermTotalPages.lean.html#L31" title="AlgebraicAnalysis.FilteredTwoTermPages.FilteredTwoTerm.TargetTotal">TargetTotal</a> (r + 1) where</span>
+<span id="L42"><a href="#L42">42</a>   <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Group/Hom/Defs.lean#L116" title="AddHom.toFun">toFun</a> := (<a class="ref" href="./CanonicalTangentialTotalAction.lean.html#L32" title="Stafford38.Characteristic.CanonicalTangentialTotalAction.complex">complex</a> k n N d hd).<a class="ref" href="../../../library/AlgebraicAnalysis/Module/FilteredTwoTermBoundaryExhaustion.lean.html#L72" title="AlgebraicAnalysis.FilteredTwoTermPages.FilteredTwoTerm.totalBoundaryMap">totalBoundaryMap</a> r</span>
+<span id="L43"><a href="#L43">43</a>   <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Group/Hom/Defs.lean#L118" title="AddHom.map_add&#x27;">map_add'</a> := <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Group/Hom/Defs.lean#L325" title="map_add">map_add</a> _</span>
+<span id="L44"><a href="#L44">44</a>   <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Module/LinearMap/Defs.lean#L87" title="LinearMap.map_smul&#x27;">map_smul'</a> P z :=</span>
+<span id="L45"><a href="#L45">45</a>     <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L405" title="congrArg">congrArg</a> (fun f =&gt; f z)</span>
+<span id="L46"><a href="#L46">46</a>       (<a class="ref" href="./CanonicalTangentialBoundaryMaps.lean.html#L31" title="Stafford38.Characteristic.CanonicalTangentialTotalAction.totalBoundaryMap_intertwines_polynomials">totalBoundaryMap_intertwines_polynomials</a> k n N d hd r P)</span>
 <span id="L47"><a href="#L47">47</a> </span>
-<span id="L48"><a href="#L48">48</a> theorem tangentialBoundaryMap_surjective (r : ℕ) :</span>
-<span id="L49"><a href="#L49">49</a>     Function.Surjective (tangentialBoundaryMap k n N d hd r) :=</span>
-<span id="L50"><a href="#L50">50</a>   (complex k n N d hd).totalBoundaryMap_surjective r</span>
+<span id="L48"><a href="#L48">48</a> theorem tangentialBoundaryMap_surjective (r : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L1351" title="Nat">ℕ</a>) :</span>
+<span id="L49"><a href="#L49">49</a>     <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Data/Function.lean#L59" title="Function.Surjective">Function.Surjective</a> (<a class="ref" href="./CanonicalTangentialBoundaryMaps.lean.html#L39" title="Stafford38.Characteristic.CanonicalTangentialTotalAction.tangentialBoundaryMap">tangentialBoundaryMap</a> k n N d hd r) :=</span>
+<span id="L50"><a href="#L50">50</a>   (<a class="ref" href="./CanonicalTangentialTotalAction.lean.html#L32" title="Stafford38.Characteristic.CanonicalTangentialTotalAction.complex">complex</a> k n N d hd).<a class="ref" href="../../../library/AlgebraicAnalysis/Module/FilteredTwoTermBoundaryExhaustion.lean.html#L86" title="AlgebraicAnalysis.FilteredTwoTermPages.FilteredTwoTerm.totalBoundaryMap_surjective">totalBoundaryMap_surjective</a> r</span>
 <span id="L51"><a href="#L51">51</a> </span>
 <span id="L52"><a href="#L52">52</a> theorem tangentialBoundaryMap_ker_mono :</span>
-<span id="L53"><a href="#L53">53</a>     Monotone (fun r =&gt; (tangentialBoundaryMap k n N d hd r).ker) := by</span>
+<span id="L53"><a href="#L53">53</a>     <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Order/Monotone/Defs.lean#L61" title="Monotone">Monotone</a> (fun r =&gt; (<a class="ref" href="./CanonicalTangentialBoundaryMaps.lean.html#L39" title="Stafford38.Characteristic.CanonicalTangentialTotalAction.tangentialBoundaryMap">tangentialBoundaryMap</a> k n N d hd r).<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Module/Submodule/Ker.lean#L58" title="LinearMap.ker">ker</a>) := by</span>
 <span id="L54"><a href="#L54">54</a>   intro r s hrs z hz</span>
-<span id="L55"><a href="#L55">55</a>   exact (complex k n N d hd).totalBoundaryMap_ker_mono r s hrs hz</span>
+<span id="L55"><a href="#L55">55</a>   exact (<a class="ref" href="./CanonicalTangentialTotalAction.lean.html#L32" title="Stafford38.Characteristic.CanonicalTangentialTotalAction.complex">complex</a> k n N d hd).<a class="ref" href="../../../library/AlgebraicAnalysis/Module/FilteredTwoTermBoundaryExhaustion.lean.html#L91" title="AlgebraicAnalysis.FilteredTwoTermPages.FilteredTwoTerm.totalBoundaryMap_ker_mono">totalBoundaryMap_ker_mono</a> r s hrs hz</span>
 <span id="L56"><a href="#L56">56</a> </span>
 <span id="L57"><a href="#L57">57</a> theorem tangentialBoundaryMap_eventually_zero</span>
-<span id="L58"><a href="#L58">58</a>     (z : (complex k n N d hd).TargetTotal 1) :</span>
-<span id="L59"><a href="#L59">59</a>     ∃ r, tangentialBoundaryMap k n N d hd r z = 0 :=</span>
-<span id="L60"><a href="#L60">60</a>   (complex k n N d hd).totalBoundaryMap_eventually_zero</span>
-<span id="L61"><a href="#L61">61</a>     (CanonicalFilteredTwoTerm.canonicalOrderFiltration_exhaustive k _)</span>
-<span id="L62"><a href="#L62">62</a>     (CanonicalFilteredTwoTerm.canonicalFilteredTwoTerm_f_surjective k n N hd) z</span>
+<span id="L58"><a href="#L58">58</a>     (z : (<a class="ref" href="./CanonicalTangentialTotalAction.lean.html#L32" title="Stafford38.Characteristic.CanonicalTangentialTotalAction.complex">complex</a> k n N d hd).<a class="ref" href="../../../library/AlgebraicAnalysis/Module/FilteredTwoTermTotalPages.lean.html#L31" title="AlgebraicAnalysis.FilteredTwoTermPages.FilteredTwoTerm.TargetTotal">TargetTotal</a> 1) :</span>
+<span id="L59"><a href="#L59">59</a>     ∃ r, <a class="ref" href="./CanonicalTangentialBoundaryMaps.lean.html#L39" title="Stafford38.Characteristic.CanonicalTangentialTotalAction.tangentialBoundaryMap">tangentialBoundaryMap</a> k n N d hd r z = 0 :=</span>
+<span id="L60"><a href="#L60">60</a>   (<a class="ref" href="./CanonicalTangentialTotalAction.lean.html#L32" title="Stafford38.Characteristic.CanonicalTangentialTotalAction.complex">complex</a> k n N d hd).<a class="ref" href="../../../library/AlgebraicAnalysis/Module/FilteredTwoTermBoundaryExhaustion.lean.html#L121" title="AlgebraicAnalysis.FilteredTwoTermPages.FilteredTwoTerm.totalBoundaryMap_eventually_zero">totalBoundaryMap_eventually_zero</a></span>
+<span id="L61"><a href="#L61">61</a>     (<a class="ref" href="./CanonicalFilteredTwoTerm.lean.html#L84" title="Stafford38.Characteristic.CanonicalFilteredTwoTerm.canonicalOrderFiltration_exhaustive">CanonicalFilteredTwoTerm.canonicalOrderFiltration_exhaustive</a> k _)</span>
+<span id="L62"><a href="#L62">62</a>     (<a class="ref" href="./CanonicalFilteredTwoTerm.lean.html#L132" title="Stafford38.Characteristic.CanonicalFilteredTwoTerm.canonicalFilteredTwoTerm_f_surjective">CanonicalFilteredTwoTerm.canonicalFilteredTwoTerm_f_surjective</a> k n N hd) z</span>
 <span id="L63"><a href="#L63">63</a> </span>
-<span id="L64"><a href="#L64">64</a> #print axioms tangentialBoundaryMap</span>
-<span id="L65"><a href="#L65">65</a> #print axioms tangentialBoundaryMap_eventually_zero</span>
+<span id="L64"><a href="#L64">64</a> #print axioms <a class="ref" href="./CanonicalTangentialBoundaryMaps.lean.html#L39" title="Stafford38.Characteristic.CanonicalTangentialTotalAction.tangentialBoundaryMap">tangentialBoundaryMap</a></span>
+<span id="L65"><a href="#L65">65</a> #print axioms <a class="ref" href="./CanonicalTangentialBoundaryMaps.lean.html#L57" title="Stafford38.Characteristic.CanonicalTangentialTotalAction.tangentialBoundaryMap_eventually_zero">tangentialBoundaryMap_eventually_zero</a></span>
 <span id="L66"><a href="#L66">66</a> </span>
 <span id="L67"><a href="#L67">67</a> end</span>
 <span id="L68"><a href="#L68">68</a> end Stafford38.Characteristic.CanonicalTangentialTotalAction</span>

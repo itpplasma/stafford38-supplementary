@@ -602,7 +602,7 @@ def page():
 <style>{STYLE}</style>
 </head><body>
 <main>
-<p class="mute"><a href="index.html">← Proof comparison</a></p>
+<p class="mute"><a href="index.html">← Proof comparison</a> · <a href="lean-dag.html">Lean proof graph</a></p>
 <h1>Proof graph</h1>
 <p>Dependency graphs of the printed proofs in the October 18 manuscript
 (<code>human_readable_main.tex</code>, paper commit {manifest()['sources']['paper']['commit'][:7]}). Comment
@@ -613,7 +613,8 @@ Click a node to jump to its proof graph or source.</p>
 <h2 id="overall">From the axioms to Theorem 1.1</h2>
 <p>Roots are the three Lean base axioms and the external inputs. The three axioms sit under the
 logic of every step of the paper. The Lean development proves Theorem 1.1 from these
-three axioms alone; its route differs in places from the printed proof graphed here.</p>
+three axioms alone; its route differs in places from the printed proof graphed here
+(see the <a href="lean-dag.html">Lean proof graph</a>).</p>
 <div class="fig bleed">{svg(overall_dot(), shrink=False)}</div>
 <h2 id="proofs">One graph per proof</h2>
 <p>Hypotheses enter at the top; the proved statement exits at the bottom. Theorem 3.7 (Gabber) and

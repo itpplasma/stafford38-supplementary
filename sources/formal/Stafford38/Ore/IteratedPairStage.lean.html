@@ -1,0 +1,99 @@
+<!doctype html><meta charset="utf-8"><title>Stafford38/Ore/IteratedPairStage.lean</title><style>body{font:14px monospace}pre span{display:block}pre span:target{background:#fff0ad}a{color:#666}pre{white-space:pre-wrap}a.ref{color:#0645ad;text-decoration:none}a.ref:hover{text-decoration:underline}</style><h1>Stafford38/Ore/IteratedPairStage.lean</h1><p>This project (Stafford38) · 0403af3f0b1a7f84d2027121932723f67bd279ae</p><pre><span id="L1"><a href="#L1">1</a> module</span>
+<span id="L2"><a href="#L2">2</a> public import Stafford38.Ore.PairStage</span>
+<span id="L3"><a href="#L3">3</a> </span>
+<span id="L4"><a href="#L4">4</a> @[expose] public section</span>
+<span id="L5"><a href="#L5">5</a> </span>
+<span id="L6"><a href="#L6">6</a> /-!</span>
+<span id="L7"><a href="#L7">7</a> # Iterated coordinate-momentum pair stages</span>
+<span id="L8"><a href="#L8">8</a> </span>
+<span id="L9"><a href="#L9">9</a> This file recursively repeats the checked `PairStage` construction over an</span>
+<span id="L10"><a href="#L10">10</a> arbitrary coefficient ring.  It records only the resulting tower and the</span>
+<span id="L11"><a href="#L11">11</a> canonical data introduced at each successor; it does not identify the tower</span>
+<span id="L12"><a href="#L12">12</a> with a presented Weyl algebra.</span>
+<span id="L13"><a href="#L13">13</a> -/</span>
+<span id="L14"><a href="#L14">14</a> </span>
+<span id="L15"><a href="#L15">15</a> namespace Stafford38.OreIteratedPairStage</span>
+<span id="L16"><a href="#L16">16</a> </span>
+<span id="L17"><a href="#L17">17</a> open Stafford38.OrePairStage</span>
+<span id="L18"><a href="#L18">18</a> </span>
+<span id="L19"><a href="#L19">19</a> noncomputable section</span>
+<span id="L20"><a href="#L20">20</a> </span>
+<span id="L21"><a href="#L21">21</a> universe u</span>
+<span id="L22"><a href="#L22">22</a> </span>
+<span id="L23"><a href="#L23">23</a> /-- A type together with the ring structure used at the next Ore stage. -/</span>
+<span id="L24"><a href="#L24">24</a> structure RingStage where</span>
+<span id="L25"><a href="#L25">25</a>   carrier : Type u</span>
+<span id="L26"><a href="#L26">26</a>   ring : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Ring/Defs.lean#L145" title="Ring">Ring</a> <a class="ref" href="./IteratedPairStage.lean.html#L25" title="Stafford38.OreIteratedPairStage.RingStage.carrier">carrier</a></span>
+<span id="L27"><a href="#L27">27</a> </span>
+<span id="L28"><a href="#L28">28</a> variable (B : Type u) [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Ring/Defs.lean#L145" title="Ring">Ring</a> B]</span>
+<span id="L29"><a href="#L29">29</a> </span>
+<span id="L30"><a href="#L30">30</a> /-- The recursively constructed ring data after adjoining `n` Weyl pairs. -/</span>
+<span id="L31"><a href="#L31">31</a> def iteratedPairData : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L1351" title="Nat">Nat</a> → <a class="ref" href="./IteratedPairStage.lean.html#L23" title="Stafford38.OreIteratedPairStage.RingStage">RingStage</a></span>
+<span id="L32"><a href="#L32">32</a>   | 0 =&gt; ⟨B, <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L160" title="inferInstance">inferInstance</a>⟩</span>
+<span id="L33"><a href="#L33">33</a>   | n + 1 =&gt;</span>
+<span id="L34"><a href="#L34">34</a>       let previous := <a class="ref" href="./IteratedPairStage.lean.html#L30" title="Stafford38.OreIteratedPairStage.iteratedPairData">iteratedPairData</a> n</span>
+<span id="L35"><a href="#L35">35</a>       letI : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Ring/Defs.lean#L145" title="Ring">Ring</a> previous.<a class="ref" href="./IteratedPairStage.lean.html#L25" title="Stafford38.OreIteratedPairStage.RingStage.carrier">carrier</a> := previous.<a class="ref" href="./IteratedPairStage.lean.html#L26" title="Stafford38.OreIteratedPairStage.RingStage.ring">ring</a></span>
+<span id="L36"><a href="#L36">36</a>       ⟨<a class="ref" href="./PairStage.lean.html#L28" title="Stafford38.OrePairStage.PairStage">PairStage</a> (B := previous.<a class="ref" href="./IteratedPairStage.lean.html#L25" title="Stafford38.OreIteratedPairStage.RingStage.carrier">carrier</a>), <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L160" title="inferInstance">inferInstance</a>⟩</span>
+<span id="L37"><a href="#L37">37</a> </span>
+<span id="L38"><a href="#L38">38</a> /-- The ring obtained from `B` after recursively adjoining `n` checked</span>
+<span id="L39"><a href="#L39">39</a> coordinate-momentum pairs. -/</span>
+<span id="L40"><a href="#L40">40</a> def IteratedPairStage (n : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L1351" title="Nat">Nat</a>) : Type u :=</span>
+<span id="L41"><a href="#L41">41</a>   (<a class="ref" href="./IteratedPairStage.lean.html#L30" title="Stafford38.OreIteratedPairStage.iteratedPairData">iteratedPairData</a> B n).<a class="ref" href="./IteratedPairStage.lean.html#L25" title="Stafford38.OreIteratedPairStage.RingStage.carrier">carrier</a></span>
+<span id="L42"><a href="#L42">42</a> </span>
+<span id="L43"><a href="#L43">43</a> instance iteratedPairStageRing (n : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L1351" title="Nat">Nat</a>) : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Ring/Defs.lean#L145" title="Ring">Ring</a> (<a class="ref" href="./IteratedPairStage.lean.html#L38" title="Stafford38.OreIteratedPairStage.IteratedPairStage">IteratedPairStage</a> (B := B) n) :=</span>
+<span id="L44"><a href="#L44">44</a>   (<a class="ref" href="./IteratedPairStage.lean.html#L30" title="Stafford38.OreIteratedPairStage.iteratedPairData">iteratedPairData</a> B n).<a class="ref" href="./IteratedPairStage.lean.html#L26" title="Stafford38.OreIteratedPairStage.RingStage.ring">ring</a></span>
+<span id="L45"><a href="#L45">45</a> </span>
+<span id="L46"><a href="#L46">46</a> /-- The zeroth stage is the original coefficient type. -/</span>
+<span id="L47"><a href="#L47">47</a> theorem iteratedPairStage_zero : <a class="ref" href="./IteratedPairStage.lean.html#L38" title="Stafford38.OreIteratedPairStage.IteratedPairStage">IteratedPairStage</a> (B := B) 0 = B := <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L334" title="rfl">rfl</a></span>
+<span id="L48"><a href="#L48">48</a> </span>
+<span id="L49"><a href="#L49">49</a> /-- Every successor is definitionally the checked `PairStage` construction</span>
+<span id="L50"><a href="#L50">50</a> over its predecessor. -/</span>
+<span id="L51"><a href="#L51">51</a> theorem iteratedPairStage_succ (n : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L1351" title="Nat">Nat</a>) :</span>
+<span id="L52"><a href="#L52">52</a>     <a class="ref" href="./IteratedPairStage.lean.html#L38" title="Stafford38.OreIteratedPairStage.IteratedPairStage">IteratedPairStage</a> (B := B) (n + 1) =</span>
+<span id="L53"><a href="#L53">53</a>       <a class="ref" href="./PairStage.lean.html#L28" title="Stafford38.OrePairStage.PairStage">PairStage</a> (B := <a class="ref" href="./IteratedPairStage.lean.html#L38" title="Stafford38.OreIteratedPairStage.IteratedPairStage">IteratedPairStage</a> (B := B) n) := <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L334" title="rfl">rfl</a></span>
+<span id="L54"><a href="#L54">54</a> </span>
+<span id="L55"><a href="#L55">55</a> /-- The canonical embedding from stage `n` into stage `n + 1`. -/</span>
+<span id="L56"><a href="#L56">56</a> def stageEmbedding (n : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L1351" title="Nat">Nat</a>) :</span>
+<span id="L57"><a href="#L57">57</a>     <a class="ref" href="./IteratedPairStage.lean.html#L38" title="Stafford38.OreIteratedPairStage.IteratedPairStage">IteratedPairStage</a> (B := B) n →+* <a class="ref" href="./IteratedPairStage.lean.html#L38" title="Stafford38.OreIteratedPairStage.IteratedPairStage">IteratedPairStage</a> (B := B) (n + 1) :=</span>
+<span id="L58"><a href="#L58">58</a>   <a class="ref" href="./PairStage.lean.html#L38" title="Stafford38.OrePairStage.pairCoefficient">pairCoefficient</a> (B := <a class="ref" href="./IteratedPairStage.lean.html#L38" title="Stafford38.OreIteratedPairStage.IteratedPairStage">IteratedPairStage</a> (B := B) n)</span>
+<span id="L59"><a href="#L59">59</a> </span>
+<span id="L60"><a href="#L60">60</a> /-- The coordinate introduced at the successor of stage `n`. -/</span>
+<span id="L61"><a href="#L61">61</a> def stageCoordinate (n : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L1351" title="Nat">Nat</a>) : <a class="ref" href="./IteratedPairStage.lean.html#L38" title="Stafford38.OreIteratedPairStage.IteratedPairStage">IteratedPairStage</a> (B := B) (n + 1) :=</span>
+<span id="L62"><a href="#L62">62</a>   <a class="ref" href="./PairStage.lean.html#L42" title="Stafford38.OrePairStage.pairCoordinate">pairCoordinate</a> (B := <a class="ref" href="./IteratedPairStage.lean.html#L38" title="Stafford38.OreIteratedPairStage.IteratedPairStage">IteratedPairStage</a> (B := B) n)</span>
+<span id="L63"><a href="#L63">63</a> </span>
+<span id="L64"><a href="#L64">64</a> /-- The momentum introduced at the successor of stage `n`. -/</span>
+<span id="L65"><a href="#L65">65</a> def stageMomentum (n : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L1351" title="Nat">Nat</a>) : <a class="ref" href="./IteratedPairStage.lean.html#L38" title="Stafford38.OreIteratedPairStage.IteratedPairStage">IteratedPairStage</a> (B := B) (n + 1) :=</span>
+<span id="L66"><a href="#L66">66</a>   <a class="ref" href="./PairStage.lean.html#L46" title="Stafford38.OrePairStage.pairMomentum">pairMomentum</a> (B := <a class="ref" href="./IteratedPairStage.lean.html#L38" title="Stafford38.OreIteratedPairStage.IteratedPairStage">IteratedPairStage</a> (B := B) n)</span>
+<span id="L67"><a href="#L67">67</a> </span>
+<span id="L68"><a href="#L68">68</a> /-- The coordinate introduced at stage `n + 1` commutes with the embedded</span>
+<span id="L69"><a href="#L69">69</a> predecessor ring. -/</span>
+<span id="L70"><a href="#L70">70</a> theorem stageCoordinate_mul_embedding (n : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L1351" title="Nat">Nat</a>)</span>
+<span id="L71"><a href="#L71">71</a>     (b : <a class="ref" href="./IteratedPairStage.lean.html#L38" title="Stafford38.OreIteratedPairStage.IteratedPairStage">IteratedPairStage</a> (B := B) n) :</span>
+<span id="L72"><a href="#L72">72</a>     <a class="ref" href="./IteratedPairStage.lean.html#L60" title="Stafford38.OreIteratedPairStage.stageCoordinate">stageCoordinate</a> B n * <a class="ref" href="./IteratedPairStage.lean.html#L55" title="Stafford38.OreIteratedPairStage.stageEmbedding">stageEmbedding</a> B n b =</span>
+<span id="L73"><a href="#L73">73</a>       <a class="ref" href="./IteratedPairStage.lean.html#L55" title="Stafford38.OreIteratedPairStage.stageEmbedding">stageEmbedding</a> B n b * <a class="ref" href="./IteratedPairStage.lean.html#L60" title="Stafford38.OreIteratedPairStage.stageCoordinate">stageCoordinate</a> B n :=</span>
+<span id="L74"><a href="#L74">74</a>   <a class="ref" href="./PairStage.lean.html#L57" title="Stafford38.OrePairStage.pairCoordinate_mul_coefficient">pairCoordinate_mul_coefficient</a> b</span>
+<span id="L75"><a href="#L75">75</a> </span>
+<span id="L76"><a href="#L76">76</a> /-- The momentum introduced at stage `n + 1` commutes with the embedded</span>
+<span id="L77"><a href="#L77">77</a> predecessor ring. -/</span>
+<span id="L78"><a href="#L78">78</a> theorem stageMomentum_mul_embedding (n : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L1351" title="Nat">Nat</a>)</span>
+<span id="L79"><a href="#L79">79</a>     (b : <a class="ref" href="./IteratedPairStage.lean.html#L38" title="Stafford38.OreIteratedPairStage.IteratedPairStage">IteratedPairStage</a> (B := B) n) :</span>
+<span id="L80"><a href="#L80">80</a>     <a class="ref" href="./IteratedPairStage.lean.html#L64" title="Stafford38.OreIteratedPairStage.stageMomentum">stageMomentum</a> B n * <a class="ref" href="./IteratedPairStage.lean.html#L55" title="Stafford38.OreIteratedPairStage.stageEmbedding">stageEmbedding</a> B n b =</span>
+<span id="L81"><a href="#L81">81</a>       <a class="ref" href="./IteratedPairStage.lean.html#L55" title="Stafford38.OreIteratedPairStage.stageEmbedding">stageEmbedding</a> B n b * <a class="ref" href="./IteratedPairStage.lean.html#L64" title="Stafford38.OreIteratedPairStage.stageMomentum">stageMomentum</a> B n :=</span>
+<span id="L82"><a href="#L82">82</a>   <a class="ref" href="./PairStage.lean.html#L72" title="Stafford38.OrePairStage.pairMomentum_mul_coefficient">pairMomentum_mul_coefficient</a> b</span>
+<span id="L83"><a href="#L83">83</a> </span>
+<span id="L84"><a href="#L84">84</a> /-- The generators introduced at stage `n + 1` satisfy the checked Weyl</span>
+<span id="L85"><a href="#L85">85</a> relation. -/</span>
+<span id="L86"><a href="#L86">86</a> theorem stageMomentum_mul_coordinate (n : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L1351" title="Nat">Nat</a>) :</span>
+<span id="L87"><a href="#L87">87</a>     <a class="ref" href="./IteratedPairStage.lean.html#L64" title="Stafford38.OreIteratedPairStage.stageMomentum">stageMomentum</a> B n * <a class="ref" href="./IteratedPairStage.lean.html#L60" title="Stafford38.OreIteratedPairStage.stageCoordinate">stageCoordinate</a> B n =</span>
+<span id="L88"><a href="#L88">88</a>       <a class="ref" href="./IteratedPairStage.lean.html#L60" title="Stafford38.OreIteratedPairStage.stageCoordinate">stageCoordinate</a> B n * <a class="ref" href="./IteratedPairStage.lean.html#L64" title="Stafford38.OreIteratedPairStage.stageMomentum">stageMomentum</a> B n + 1 :=</span>
+<span id="L89"><a href="#L89">89</a>   <a class="ref" href="./PairStage.lean.html#L82" title="Stafford38.OrePairStage.pairMomentum_mul_coordinate">pairMomentum_mul_coordinate</a></span>
+<span id="L90"><a href="#L90">90</a> </span>
+<span id="L91"><a href="#L91">91</a> #print axioms <a class="ref" href="./IteratedPairStage.lean.html#L49" title="Stafford38.OreIteratedPairStage.iteratedPairStage_succ">iteratedPairStage_succ</a></span>
+<span id="L92"><a href="#L92">92</a> #print axioms <a class="ref" href="./IteratedPairStage.lean.html#L68" title="Stafford38.OreIteratedPairStage.stageCoordinate_mul_embedding">stageCoordinate_mul_embedding</a></span>
+<span id="L93"><a href="#L93">93</a> #print axioms <a class="ref" href="./IteratedPairStage.lean.html#L76" title="Stafford38.OreIteratedPairStage.stageMomentum_mul_embedding">stageMomentum_mul_embedding</a></span>
+<span id="L94"><a href="#L94">94</a> #print axioms <a class="ref" href="./IteratedPairStage.lean.html#L84" title="Stafford38.OreIteratedPairStage.stageMomentum_mul_coordinate">stageMomentum_mul_coordinate</a></span>
+<span id="L95"><a href="#L95">95</a> </span>
+<span id="L96"><a href="#L96">96</a> end</span>
+<span id="L97"><a href="#L97">97</a> </span>
+<span id="L98"><a href="#L98">98</a> end Stafford38.OreIteratedPairStage</span>
+<span id="L99"><a href="#L99">99</a> </span></pre>

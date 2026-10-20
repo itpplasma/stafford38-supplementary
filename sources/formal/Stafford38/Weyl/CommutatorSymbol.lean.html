@@ -1,0 +1,189 @@
+<!doctype html><meta charset="utf-8"><title>Stafford38/Weyl/CommutatorSymbol.lean</title><style>body{font:14px monospace}pre span{display:block}pre span:target{background:#fff0ad}a{color:#666}pre{white-space:pre-wrap}a.ref{color:#0645ad;text-decoration:none}a.ref:hover{text-decoration:underline}</style><h1>Stafford38/Weyl/CommutatorSymbol.lean</h1><p>This project (Stafford38) · 0403af3f0b1a7f84d2027121932723f67bd279ae</p><pre><span id="L1"><a href="#L1">1</a> module</span>
+<span id="L2"><a href="#L2">2</a> public import Stafford38.Weyl.GradedAlgebra</span>
+<span id="L3"><a href="#L3">3</a> public import Stafford38.Characteristic.Polynomial</span>
+<span id="L4"><a href="#L4">4</a> </span>
+<span id="L5"><a href="#L5">5</a> @[expose] public section</span>
+<span id="L6"><a href="#L6">6</a> </span>
+<span id="L7"><a href="#L7">7</a> open Stafford38Challenge (<a class="ref" href="../ChallengeDefinitions.lean.html#L73" title="Stafford38Challenge.WeylAlg">WeylAlg</a>)</span>
+<span id="L8"><a href="#L8">8</a> </span>
+<span id="L9"><a href="#L9">9</a> /-!</span>
+<span id="L10"><a href="#L10">10</a> # Coordinate commutators and order symbols</span>
+<span id="L11"><a href="#L11">11</a> </span>
+<span id="L12"><a href="#L12">12</a> This file proves the newest-coordinate generator case of the filtered</span>
+<span id="L13"><a href="#L13">13</a> ringCommutator--Poisson correspondence.  It uses the exact PBW block normal form;</span>
+<span id="L14"><a href="#L14">14</a> no characteristic-ideal, radical, or Gabber statement is assumed.</span>
+<span id="L15"><a href="#L15">15</a> -/</span>
+<span id="L16"><a href="#L16">16</a> </span>
+<span id="L17"><a href="#L17">17</a> namespace Stafford38.WeylCommutatorSymbol</span>
+<span id="L18"><a href="#L18">18</a> </span>
+<span id="L19"><a href="#L19">19</a> open Stafford38.Characteristic</span>
+<span id="L20"><a href="#L20">20</a> open Stafford38.WeylIteratedEquivalence</span>
+<span id="L21"><a href="#L21">21</a> open Stafford38.WeylPBW</span>
+<span id="L22"><a href="#L22">22</a> open Stafford38.WeylFiltration</span>
+<span id="L23"><a href="#L23">23</a> open Stafford38.WeylLeadingSymbol</span>
+<span id="L24"><a href="#L24">24</a> </span>
+<span id="L25"><a href="#L25">25</a> noncomputable section</span>
+<span id="L26"><a href="#L26">26</a> </span>
+<span id="L27"><a href="#L27">27</a> universe u</span>
+<span id="L28"><a href="#L28">28</a> </span>
+<span id="L29"><a href="#L29">29</a> variable (k : Type u) [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Field/Defs.lean#L170" title="Field">Field</a> k]</span>
+<span id="L30"><a href="#L30">30</a> </span>
+<span id="L31"><a href="#L31">31</a> /-- Commutation with the newest coordinate differentiates the momentum power</span>
+<span id="L32"><a href="#L32">32</a> in an exact ordered PBW block, with the sign dictated by `[x,p] = -1`. -/</span>
+<span id="L33"><a href="#L33">33</a> theorem presentedCoordinate_commutator_coefficientOrdered</span>
+<span id="L34"><a href="#L34">34</a>     (n a p : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L1351" title="Nat">ℕ</a>) (z : <a class="ref" href="../ChallengeDefinitions.lean.html#L73" title="Stafford38Challenge.WeylAlg">WeylAlg</a> k n) :</span>
+<span id="L35"><a href="#L35">35</a>     <a class="ref" href="../../../library/AlgebraicAnalysis/Commutator.lean.html#L22" title="AlgebraicAnalysis.ringCommutator">AlgebraicAnalysis.ringCommutator</a> (<a class="ref" href="./IteratedEquivalence.lean.html#L330" title="Stafford38.WeylIteratedEquivalence.presentedCoordinate">presentedCoordinate</a> k n)</span>
+<span id="L36"><a href="#L36">36</a>         (<a class="ref" href="./PBW.lean.html#L483" title="Stafford38.WeylPBW.presentedCoefficientOrdered">presentedCoefficientOrdered</a> k n a p z) =</span>
+<span id="L37"><a href="#L37">37</a>       -((p : k) • <a class="ref" href="./PBW.lean.html#L483" title="Stafford38.WeylPBW.presentedCoefficientOrdered">presentedCoefficientOrdered</a> k n a (p - 1) z) := by</span>
+<span id="L38"><a href="#L38">38</a>   let X := <a class="ref" href="./IteratedEquivalence.lean.html#L330" title="Stafford38.WeylIteratedEquivalence.presentedCoordinate">presentedCoordinate</a> k n</span>
+<span id="L39"><a href="#L39">39</a>   let P := <a class="ref" href="./IteratedEquivalence.lean.html#L334" title="Stafford38.WeylIteratedEquivalence.presentedMomentum">presentedMomentum</a> k n</span>
+<span id="L40"><a href="#L40">40</a>   let Z := <a class="ref" href="./IteratedEquivalence.lean.html#L317" title="Stafford38.WeylIteratedEquivalence.previousWeylEmbedding">previousWeylEmbedding</a> k n z</span>
+<span id="L41"><a href="#L41">41</a>   have hXZ : X * Z = Z * X :=</span>
+<span id="L42"><a href="#L42">42</a>     <a class="ref" href="./IteratedEquivalence.lean.html#L400" title="Stafford38.WeylIteratedEquivalence.presentedCoordinate_commutes_previous">presentedCoordinate_commutes_previous</a> k n z</span>
+<span id="L43"><a href="#L43">43</a>   have hPX : P * X = X * P + 1 := <a class="ref" href="./IteratedEquivalence.lean.html#L418" title="Stafford38.WeylIteratedEquivalence.presentedMomentum_mul_coordinate">presentedMomentum_mul_coordinate</a> k n</span>
+<span id="L44"><a href="#L44">44</a>   have hpowSucc : ∀ r : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L1351" title="Nat">ℕ</a>,</span>
+<span id="L45"><a href="#L45">45</a>       X * P ^ (r + 1) - P ^ (r + 1) * X = -((r + 1) • P ^ r) := by</span>
+<span id="L46"><a href="#L46">46</a>     intro r</span>
+<span id="L47"><a href="#L47">47</a>     let Xop : (<a class="ref" href="../ChallengeDefinitions.lean.html#L73" title="Stafford38Challenge.WeylAlg">WeylAlg</a> k (n + 1))ᵐᵒᵖ := <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Opposites.lean#L75" title="MulOpposite.op">MulOpposite.op</a> X</span>
+<span id="L48"><a href="#L48">48</a>     let Pop : (<a class="ref" href="../ChallengeDefinitions.lean.html#L73" title="Stafford38Challenge.WeylAlg">WeylAlg</a> k (n + 1))ᵐᵒᵖ := <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Opposites.lean#L75" title="MulOpposite.op">MulOpposite.op</a> P</span>
+<span id="L49"><a href="#L49">49</a>     have hop : Xop * Pop - Pop * Xop = 1 := by</span>
+<span id="L50"><a href="#L50">50</a>       have hopEq := <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L405" title="congrArg">congrArg</a> <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Opposites.lean#L75" title="MulOpposite.op">MulOpposite.op</a> hPX</span>
+<span id="L51"><a href="#L51">51</a>       change <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Opposites.lean#L75" title="MulOpposite.op">MulOpposite.op</a> X * <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Opposites.lean#L75" title="MulOpposite.op">MulOpposite.op</a> P -</span>
+<span id="L52"><a href="#L52">52</a>         <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Opposites.lean#L75" title="MulOpposite.op">MulOpposite.op</a> P * <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Opposites.lean#L75" title="MulOpposite.op">MulOpposite.op</a> X = 1</span>
+<span id="L53"><a href="#L53">53</a>       rw [show <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Opposites.lean#L75" title="MulOpposite.op">MulOpposite.op</a> X * <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Opposites.lean#L75" title="MulOpposite.op">MulOpposite.op</a> P =</span>
+<span id="L54"><a href="#L54">54</a>           <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Opposites.lean#L75" title="MulOpposite.op">MulOpposite.op</a> P * <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Opposites.lean#L75" title="MulOpposite.op">MulOpposite.op</a> X + 1 by simpa using hopEq]</span>
+<span id="L55"><a href="#L55">55</a>       abel</span>
+<span id="L56"><a href="#L56">56</a>     have ht := <a class="ref" href="../../../library/AlgebraicAnalysis/Ore/RightDivision.lean.html#L716" title="AlgebraicAnalysis.OreDivision.OreAmbient.commutator_pow_succ">AlgebraicAnalysis.OreDivision.OreAmbient.commutator_pow_succ</a></span>
+<span id="L57"><a href="#L57">57</a>       Xop Pop hop r</span>
+<span id="L58"><a href="#L58">58</a>     have hu := <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L405" title="congrArg">congrArg</a> <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Opposites.lean#L81" title="MulOpposite.unop">MulOpposite.unop</a> ht</span>
+<span id="L59"><a href="#L59">59</a>     change P ^ (r + 1) * X - X * P ^ (r + 1) = (r + 1) • P ^ r at hu</span>
+<span id="L60"><a href="#L60">60</a>     rw [← hu]</span>
+<span id="L61"><a href="#L61">61</a>     abel</span>
+<span id="L62"><a href="#L62">62</a>   have hpow : ∀ q : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L1351" title="Nat">ℕ</a>,</span>
+<span id="L63"><a href="#L63">63</a>       X * P ^ q - P ^ q * X = -((q : k) • P ^ (q - 1)) := by</span>
+<span id="L64"><a href="#L64">64</a>     intro q</span>
+<span id="L65"><a href="#L65">65</a>     cases q with</span>
+<span id="L66"><a href="#L66">66</a>     | <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L1360" title="Nat.zero">zero</a> =&gt; simp</span>
+<span id="L67"><a href="#L67">67</a>     | <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L1367" title="Nat.succ">succ</a> r =&gt;</span>
+<span id="L68"><a href="#L68">68</a>         rw [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Module/NatInt.lean#L112" title="Nat.cast_smul_eq_nsmul">Nat.cast_smul_eq_nsmul</a> k]</span>
+<span id="L69"><a href="#L69">69</a>         exact hpowSucc r</span>
+<span id="L70"><a href="#L70">70</a>   rw [<a class="ref" href="./PBW.lean.html#L483" title="Stafford38.WeylPBW.presentedCoefficientOrdered">presentedCoefficientOrdered</a>]</span>
+<span id="L71"><a href="#L71">71</a>   change X * (Z * X ^ a * P ^ p) - (Z * X ^ a * P ^ p) * X = _</span>
+<span id="L72"><a href="#L72">72</a>   let Q := Z * X ^ a</span>
+<span id="L73"><a href="#L73">73</a>   have hXpow : X * X ^ a = X ^ a * X := (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Group/Commute/Defs.lean#L57" title="Commute.refl">Commute.refl</a> X).<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Group/Commute/Defs.lean#L142" title="Commute.pow_right">pow_right</a> a</span>
+<span id="L74"><a href="#L74">74</a>   have hQ : <a class="ref" href="../../../library/AlgebraicAnalysis/Commutator.lean.html#L22" title="AlgebraicAnalysis.ringCommutator">AlgebraicAnalysis.ringCommutator</a> X Q = 0 := by</span>
+<span id="L75"><a href="#L75">75</a>     change X * (Z * X ^ a) - (Z * X ^ a) * X = 0</span>
+<span id="L76"><a href="#L76">76</a>     rw [show X * (Z * X ^ a) = (Z * X ^ a) * X by</span>
+<span id="L77"><a href="#L77">77</a>       calc</span>
+<span id="L78"><a href="#L78">78</a>         X * (Z * X ^ a) = (X * Z) * X ^ a := by rw [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Group/Semigroup.lean#L160" title="mul_assoc">mul_assoc</a>]</span>
+<span id="L79"><a href="#L79">79</a>         _ = (Z * X) * X ^ a := by rw [hXZ]</span>
+<span id="L80"><a href="#L80">80</a>         _ = Z * (X * X ^ a) := by rw [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Group/Semigroup.lean#L160" title="mul_assoc">mul_assoc</a>]</span>
+<span id="L81"><a href="#L81">81</a>         _ = Z * (X ^ a * X) := by rw [hXpow]</span>
+<span id="L82"><a href="#L82">82</a>         _ = (Z * X ^ a) * X := by rw [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Group/Semigroup.lean#L160" title="mul_assoc">mul_assoc</a>]]</span>
+<span id="L83"><a href="#L83">83</a>     exact <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Group/Defs.lean#L65" title="sub_self">sub_self</a> _</span>
+<span id="L84"><a href="#L84">84</a>   change <a class="ref" href="../../../library/AlgebraicAnalysis/Commutator.lean.html#L22" title="AlgebraicAnalysis.ringCommutator">AlgebraicAnalysis.ringCommutator</a> X (Q * P ^ p) = _</span>
+<span id="L85"><a href="#L85">85</a>   calc</span>
+<span id="L86"><a href="#L86">86</a>     <a class="ref" href="../../../library/AlgebraicAnalysis/Commutator.lean.html#L22" title="AlgebraicAnalysis.ringCommutator">AlgebraicAnalysis.ringCommutator</a> X (Q * P ^ p) =</span>
+<span id="L87"><a href="#L87">87</a>         <a class="ref" href="../../../library/AlgebraicAnalysis/Commutator.lean.html#L22" title="AlgebraicAnalysis.ringCommutator">AlgebraicAnalysis.ringCommutator</a> X Q * P ^ p +</span>
+<span id="L88"><a href="#L88">88</a>           Q * <a class="ref" href="../../../library/AlgebraicAnalysis/Commutator.lean.html#L22" title="AlgebraicAnalysis.ringCommutator">AlgebraicAnalysis.ringCommutator</a> X (P ^ p) := by</span>
+<span id="L89"><a href="#L89">89</a>             simp only [<a class="ref" href="../../../library/AlgebraicAnalysis/Commutator.lean.html#L22" title="AlgebraicAnalysis.ringCommutator">AlgebraicAnalysis.ringCommutator</a>,</span>
+<span id="L90"><a href="#L90">90</a>               <a class="ref" href="../../../library/AlgebraicAnalysis/Commutator.lean.html#L22" title="AlgebraicAnalysis.ringCommutator">AlgebraicAnalysis.ringCommutator</a>, <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Ring/Defs.lean#L354" title="sub_mul">sub_mul</a>, <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Ring/Defs.lean#L349" title="mul_sub">mul_sub</a>, <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Group/Semigroup.lean#L160" title="mul_assoc">mul_assoc</a>]</span>
+<span id="L91"><a href="#L91">91</a>             abel</span>
+<span id="L92"><a href="#L92">92</a>     _ = Q * (X * P ^ p - P ^ p * X) := by</span>
+<span id="L93"><a href="#L93">93</a>       have hQ' : X * Q - Q * X = 0 := by exact hQ</span>
+<span id="L94"><a href="#L94">94</a>       change (X * Q - Q * X) * P ^ p +</span>
+<span id="L95"><a href="#L95">95</a>           Q * (X * P ^ p - P ^ p * X) = _</span>
+<span id="L96"><a href="#L96">96</a>       rw [hQ', <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/GroupWithZero/Defs.lean#L39" title="MulZeroClass.zero_mul">zero_mul</a>, <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Group/Monoid.lean#L90" title="zero_add">zero_add</a>]</span>
+<span id="L97"><a href="#L97">97</a>     _ = Q * -((p : k) • P ^ (p - 1)) := by rw [hpow]</span>
+<span id="L98"><a href="#L98">98</a>     _ = -((p : k) • (Q * P ^ (p - 1))) := by</span>
+<span id="L99"><a href="#L99">99</a>       calc</span>
+<span id="L100"><a href="#L100">100</a>         Q * -((p : k) • P ^ (p - 1)) =</span>
+<span id="L101"><a href="#L101">101</a>             -(Q * ((p : k) • P ^ (p - 1))) := by</span>
+<span id="L102"><a href="#L102">102</a>               simpa only using (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Ring/Defs.lean#L289" title="mul_neg">mul_neg</a> Q ((p : k) • P ^ (p - 1)))</span>
+<span id="L103"><a href="#L103">103</a>         _ = -((p : k) • (Q * P ^ (p - 1))) :=</span>
+<span id="L104"><a href="#L104">104</a>           <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L405" title="congrArg">congrArg</a> <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L1659" title="Neg.neg">Neg.neg</a></span>
+<span id="L105"><a href="#L105">105</a>             (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Algebra/Defs.lean#L318" title="Algebra.mul_smul_comm">Algebra.mul_smul_comm</a> (p : k) Q (P ^ (p - 1)))</span>
+<span id="L106"><a href="#L106">106</a> </span>
+<span id="L107"><a href="#L107">107</a> @[simp] theorem poissonBracket_newestCoordinate</span>
+<span id="L108"><a href="#L108">108</a>     (n : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L1351" title="Nat">ℕ</a>) (f : <a class="ref" href="../Characteristic/Polynomial.lean.html#L20" title="Stafford38.Characteristic.SymbolRing">SymbolRing</a> k (n + 1)) :</span>
+<span id="L109"><a href="#L109">109</a>     <a class="ref" href="../Characteristic/Polynomial.lean.html#L29" title="Stafford38.Characteristic.poissonBracket">poissonBracket</a> (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/Basic.lean#L125" title="MvPolynomial.X">MvPolynomial.X</a> (<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Core.lean#L213" title="Sum.inl">.inl</a> (0 : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L2443" title="Fin">Fin</a> (n + 1)))) f =</span>
+<span id="L110"><a href="#L110">110</a>       <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/PDeriv.lean#L60" title="MvPolynomial.pderiv">MvPolynomial.pderiv</a> (<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Core.lean#L215" title="Sum.inr">.inr</a> (0 : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L2443" title="Fin">Fin</a> (n + 1))) f := by</span>
+<span id="L111"><a href="#L111">111</a>   simp only [<a class="ref" href="../Characteristic/Polynomial.lean.html#L29" title="Stafford38.Characteristic.poissonBracket">poissonBracket</a>, <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/PDeriv.lean#L91" title="MvPolynomial.pderiv_X">MvPolynomial.pderiv_X</a>, <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/GroupWithZero/Defs.lean#L41" title="MulZeroClass.mul_zero">mul_zero</a>, <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Group/Basic.lean#L352" title="sub_zero">sub_zero</a>]</span>
+<span id="L112"><a href="#L112">112</a>   rw [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/BigOperators/Group/Finset/Basic.lean#L354" title="Finset.sum_eq_single">Finset.sum_eq_single</a> (0 : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L2443" title="Fin">Fin</a> (n + 1))]</span>
+<span id="L113"><a href="#L113">113</a>   · simp</span>
+<span id="L114"><a href="#L114">114</a>   · intro i _ hi</span>
+<span id="L115"><a href="#L115">115</a>     simp [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Notation/Pi/Basic.lean#L107" title="Pi.single_apply">Pi.single_apply</a>, hi]</span>
+<span id="L116"><a href="#L116">116</a>   · simp</span>
+<span id="L117"><a href="#L117">117</a> </span>
+<span id="L118"><a href="#L118">118</a> theorem pderiv_rename_oldIndex_newestMomentum</span>
+<span id="L119"><a href="#L119">119</a>     (n : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L1351" title="Nat">ℕ</a>) (f : <a class="ref" href="../Characteristic/Polynomial.lean.html#L20" title="Stafford38.Characteristic.SymbolRing">SymbolRing</a> k n) :</span>
+<span id="L120"><a href="#L120">120</a>     <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/PDeriv.lean#L60" title="MvPolynomial.pderiv">MvPolynomial.pderiv</a> (<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Core.lean#L215" title="Sum.inr">.inr</a> (0 : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L2443" title="Fin">Fin</a> (n + 1)))</span>
+<span id="L121"><a href="#L121">121</a>         (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/Rename.lean#L53" title="MvPolynomial.rename">MvPolynomial.rename</a> <a class="ref" href="../ChallengeDefinitions.lean.html#L100" title="Stafford38FixedSourceChallenge.oldIndex">Stafford38FixedSourceChallenge.oldIndex</a> f) = 0 := by</span>
+<span id="L122"><a href="#L122">122</a>   classical</span>
+<span id="L123"><a href="#L123">123</a>   induction f using <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/Basic.lean#L335" title="MvPolynomial.induction_on&#x27;">MvPolynomial.induction_on'</a> with</span>
+<span id="L124"><a href="#L124">124</a>   | monomial m c =&gt;</span>
+<span id="L125"><a href="#L125">125</a>       rw [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/Rename.lean#L94" title="MvPolynomial.rename_monomial">MvPolynomial.rename_monomial</a>, <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/PDeriv.lean#L68" title="MvPolynomial.pderiv_monomial">MvPolynomial.pderiv_monomial</a>]</span>
+<span id="L126"><a href="#L126">126</a>       have hz : (m.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Data/Finsupp/Basic.lean#L266" title="Finsupp.mapDomain">mapDomain</a> <a class="ref" href="../ChallengeDefinitions.lean.html#L100" title="Stafford38FixedSourceChallenge.oldIndex">Stafford38FixedSourceChallenge.oldIndex</a>) (<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Core.lean#L215" title="Sum.inr">.inr</a> (0 : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L2443" title="Fin">Fin</a> (n + 1))) = 0 := by</span>
+<span id="L127"><a href="#L127">127</a>         apply <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Data/Finsupp/Basic.lean#L290" title="Finsupp.mapDomain_notin_range">Finsupp.mapDomain_notin_range</a></span>
+<span id="L128"><a href="#L128">128</a>         rintro ⟨i, hi⟩</span>
+<span id="L129"><a href="#L129">129</a>         cases i &lt;;&gt; simp [<a class="ref" href="../ChallengeDefinitions.lean.html#L100" title="Stafford38FixedSourceChallenge.oldIndex">Stafford38FixedSourceChallenge.oldIndex</a>, <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Data/Fin/Lemmas.lean#L419" title="Fin.succ_ne_zero">Fin.succ_ne_zero</a>] at hi</span>
+<span id="L130"><a href="#L130">130</a>       simp [hz]</span>
+<span id="L131"><a href="#L131">131</a>   | add f g hf hg =&gt; simp [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Group/Hom/Defs.lean#L325" title="map_add">map_add</a>, hf, hg]</span>
+<span id="L132"><a href="#L132">132</a> </span>
+<span id="L133"><a href="#L133">133</a> theorem extendPhaseExponent_sub_newestMomentum</span>
+<span id="L134"><a href="#L134">134</a>     (n a p : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L1351" title="Nat">ℕ</a>) :</span>
+<span id="L135"><a href="#L135">135</a>     <a class="ref" href="./Filtration.lean.html#L33" title="Stafford38.WeylFiltration.extendPhaseExponent">extendPhaseExponent</a> n a p 0 -</span>
+<span id="L136"><a href="#L136">136</a>         <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Data/Finsupp/Single.lean#L46" title="Finsupp.single">Finsupp.single</a> (<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Core.lean#L215" title="Sum.inr">.inr</a> (0 : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L2443" title="Fin">Fin</a> (n + 1))) 1 =</span>
+<span id="L137"><a href="#L137">137</a>       <a class="ref" href="./Filtration.lean.html#L33" title="Stafford38.WeylFiltration.extendPhaseExponent">extendPhaseExponent</a> n a (p - 1) 0 := by</span>
+<span id="L138"><a href="#L138">138</a>   classical</span>
+<span id="L139"><a href="#L139">139</a>   ext i</span>
+<span id="L140"><a href="#L140">140</a>   rcases i with i | i</span>
+<span id="L141"><a href="#L141">141</a>   · by_cases hi : i = 0</span>
+<span id="L142"><a href="#L142">142</a>     · subst i</span>
+<span id="L143"><a href="#L143">143</a>       simp [<a class="ref" href="./Filtration.lean.html#L33" title="Stafford38.WeylFiltration.extendPhaseExponent">extendPhaseExponent</a>, <a class="ref" href="../ChallengeDefinitions.lean.html#L100" title="Stafford38FixedSourceChallenge.oldIndex">Stafford38FixedSourceChallenge.oldIndex</a>]</span>
+<span id="L144"><a href="#L144">144</a>     · simp [<a class="ref" href="./Filtration.lean.html#L33" title="Stafford38.WeylFiltration.extendPhaseExponent">extendPhaseExponent</a>, <a class="ref" href="../ChallengeDefinitions.lean.html#L100" title="Stafford38FixedSourceChallenge.oldIndex">Stafford38FixedSourceChallenge.oldIndex</a>, hi]</span>
+<span id="L145"><a href="#L145">145</a>   · by_cases hi : i = 0</span>
+<span id="L146"><a href="#L146">146</a>     · subst i</span>
+<span id="L147"><a href="#L147">147</a>       simp [<a class="ref" href="./Filtration.lean.html#L33" title="Stafford38.WeylFiltration.extendPhaseExponent">extendPhaseExponent</a>, <a class="ref" href="../ChallengeDefinitions.lean.html#L100" title="Stafford38FixedSourceChallenge.oldIndex">Stafford38FixedSourceChallenge.oldIndex</a>]</span>
+<span id="L148"><a href="#L148">148</a>     · simp [<a class="ref" href="./Filtration.lean.html#L33" title="Stafford38.WeylFiltration.extendPhaseExponent">extendPhaseExponent</a>, <a class="ref" href="../ChallengeDefinitions.lean.html#L100" title="Stafford38FixedSourceChallenge.oldIndex">Stafford38FixedSourceChallenge.oldIndex</a>, hi]</span>
+<span id="L149"><a href="#L149">149</a> </span>
+<span id="L150"><a href="#L150">150</a> /-- Generator/ordered-block case of the order-symbol ringCommutator formula.</span>
+<span id="L151"><a href="#L151">151</a> The exact degree is `N+p-1`; positivity of `p` prevents truncated subtraction.</span>
+<span id="L152"><a href="#L152">152</a> The sign records the repository convention `[x,p] = -1`. -/</span>
+<span id="L153"><a href="#L153">153</a> theorem principalComponent_coordinate_commutator_eq_neg_poisson</span>
+<span id="L154"><a href="#L154">154</a>     (n N a p : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L1351" title="Nat">ℕ</a>) (z : <a class="ref" href="../ChallengeDefinitions.lean.html#L73" title="Stafford38Challenge.WeylAlg">WeylAlg</a> k n) (hp : 0 &lt; p) :</span>
+<span id="L155"><a href="#L155">155</a>     <a class="ref" href="./LeadingSymbol.lean.html#L33" title="Stafford38.WeylLeadingSymbol.presentedPrincipalComponent">presentedPrincipalComponent</a> k (@<a class="ref" href="./Filtration.lean.html#L223" title="Stafford38.WeylFiltration.orderWeight">orderWeight</a> (n + 1)) (N + p - 1)</span>
+<span id="L156"><a href="#L156">156</a>         (<a class="ref" href="../../../library/AlgebraicAnalysis/Commutator.lean.html#L22" title="AlgebraicAnalysis.ringCommutator">AlgebraicAnalysis.ringCommutator</a> (<a class="ref" href="./IteratedEquivalence.lean.html#L330" title="Stafford38.WeylIteratedEquivalence.presentedCoordinate">presentedCoordinate</a> k n)</span>
+<span id="L157"><a href="#L157">157</a>           (<a class="ref" href="./PBW.lean.html#L483" title="Stafford38.WeylPBW.presentedCoefficientOrdered">presentedCoefficientOrdered</a> k n a p z)) =</span>
+<span id="L158"><a href="#L158">158</a>       -<a class="ref" href="../Characteristic/Polynomial.lean.html#L29" title="Stafford38.Characteristic.poissonBracket">poissonBracket</a> (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/Basic.lean#L125" title="MvPolynomial.X">MvPolynomial.X</a> (<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Core.lean#L213" title="Sum.inl">.inl</a> (0 : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L2443" title="Fin">Fin</a> (n + 1))))</span>
+<span id="L159"><a href="#L159">159</a>         (<a class="ref" href="./LeadingSymbol.lean.html#L33" title="Stafford38.WeylLeadingSymbol.presentedPrincipalComponent">presentedPrincipalComponent</a> k (@<a class="ref" href="./Filtration.lean.html#L223" title="Stafford38.WeylFiltration.orderWeight">orderWeight</a> (n + 1)) (N + p)</span>
+<span id="L160"><a href="#L160">160</a>           (<a class="ref" href="./PBW.lean.html#L483" title="Stafford38.WeylPBW.presentedCoefficientOrdered">presentedCoefficientOrdered</a> k n a p z)) := by</span>
+<span id="L161"><a href="#L161">161</a>   rw [<a class="ref" href="./CommutatorSymbol.lean.html#L31" title="Stafford38.WeylCommutatorSymbol.presentedCoordinate_commutator_coefficientOrdered">presentedCoordinate_commutator_coefficientOrdered</a>]</span>
+<span id="L162"><a href="#L162">162</a>   simp only [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Group/Hom/Defs.lean#L446" title="map_neg">map_neg</a>, <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/GroupTheory/GroupAction/Hom.lean#L148" title="map_smul">map_smul</a>]</span>
+<span id="L163"><a href="#L163">163</a>   rw [show N + p - 1 = N + (p - 1) by omega,</span>
+<span id="L164"><a href="#L164">164</a>     <a class="ref" href="./LeadingSymbol.lean.html#L231" title="Stafford38.WeylLeadingSymbol.presentedPrincipalComponent_coefficientOrdered_order">presentedPrincipalComponent_coefficientOrdered_order</a>,</span>
+<span id="L165"><a href="#L165">165</a>     <a class="ref" href="./LeadingSymbol.lean.html#L231" title="Stafford38.WeylLeadingSymbol.presentedPrincipalComponent_coefficientOrdered_order">presentedPrincipalComponent_coefficientOrdered_order</a>,</span>
+<span id="L166"><a href="#L166">166</a>     <a class="ref" href="./CommutatorSymbol.lean.html#L107" title="Stafford38.WeylCommutatorSymbol.poissonBracket_newestCoordinate">poissonBracket_newestCoordinate</a>,</span>
+<span id="L167"><a href="#L167">167</a>     <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/PDeriv.lean#L110" title="MvPolynomial.pderiv_mul">MvPolynomial.pderiv_mul</a>,</span>
+<span id="L168"><a href="#L168">168</a>     <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/PDeriv.lean#L68" title="MvPolynomial.pderiv_monomial">MvPolynomial.pderiv_monomial</a>,</span>
+<span id="L169"><a href="#L169">169</a>     <a class="ref" href="./CommutatorSymbol.lean.html#L118" title="Stafford38.WeylCommutatorSymbol.pderiv_rename_oldIndex_newestMomentum">pderiv_rename_oldIndex_newestMomentum</a>,</span>
+<span id="L170"><a href="#L170">170</a>     <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/GroupWithZero/Defs.lean#L41" title="MulZeroClass.mul_zero">mul_zero</a>, <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Group/Monoid.lean#L94" title="add_zero">add_zero</a>,</span>
+<span id="L171"><a href="#L171">171</a>     <a class="ref" href="./CommutatorSymbol.lean.html#L133" title="Stafford38.WeylCommutatorSymbol.extendPhaseExponent_sub_newestMomentum">extendPhaseExponent_sub_newestMomentum</a> n a p]</span>
+<span id="L172"><a href="#L172">172</a>   have hexp : (<a class="ref" href="./Filtration.lean.html#L33" title="Stafford38.WeylFiltration.extendPhaseExponent">extendPhaseExponent</a> n a p 0)</span>
+<span id="L173"><a href="#L173">173</a>       (<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Core.lean#L215" title="Sum.inr">.inr</a> (0 : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L2443" title="Fin">Fin</a> (n + 1))) = p := by</span>
+<span id="L174"><a href="#L174">174</a>     simp [<a class="ref" href="./Filtration.lean.html#L33" title="Stafford38.WeylFiltration.extendPhaseExponent">extendPhaseExponent</a>, <a class="ref" href="../ChallengeDefinitions.lean.html#L100" title="Stafford38FixedSourceChallenge.oldIndex">Stafford38FixedSourceChallenge.oldIndex</a>]</span>
+<span id="L175"><a href="#L175">175</a>   rw [hexp]</span>
+<span id="L176"><a href="#L176">176</a>   congr 1</span>
+<span id="L177"><a href="#L177">177</a>   rw [← <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Algebra/Defs.lean#L324" title="Algebra.smul_mul_assoc">Algebra.smul_mul_assoc</a>, <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/Basic.lean#L217" title="MvPolynomial.smul_monomial">MvPolynomial.smul_monomial</a>]</span>
+<span id="L178"><a href="#L178">178</a>   simp</span>
+<span id="L179"><a href="#L179">179</a> </span>
+<span id="L180"><a href="#L180">180</a> #print axioms <a class="ref" href="./CommutatorSymbol.lean.html#L31" title="Stafford38.WeylCommutatorSymbol.presentedCoordinate_commutator_coefficientOrdered">presentedCoordinate_commutator_coefficientOrdered</a></span>
+<span id="L181"><a href="#L181">181</a> #print axioms <a class="ref" href="./CommutatorSymbol.lean.html#L107" title="Stafford38.WeylCommutatorSymbol.poissonBracket_newestCoordinate">poissonBracket_newestCoordinate</a></span>
+<span id="L182"><a href="#L182">182</a> #print axioms <a class="ref" href="./CommutatorSymbol.lean.html#L118" title="Stafford38.WeylCommutatorSymbol.pderiv_rename_oldIndex_newestMomentum">pderiv_rename_oldIndex_newestMomentum</a></span>
+<span id="L183"><a href="#L183">183</a> #print axioms <a class="ref" href="./CommutatorSymbol.lean.html#L133" title="Stafford38.WeylCommutatorSymbol.extendPhaseExponent_sub_newestMomentum">extendPhaseExponent_sub_newestMomentum</a></span>
+<span id="L184"><a href="#L184">184</a> #print axioms <a class="ref" href="./CommutatorSymbol.lean.html#L150" title="Stafford38.WeylCommutatorSymbol.principalComponent_coordinate_commutator_eq_neg_poisson">principalComponent_coordinate_commutator_eq_neg_poisson</a></span>
+<span id="L185"><a href="#L185">185</a> </span>
+<span id="L186"><a href="#L186">186</a> end</span>
+<span id="L187"><a href="#L187">187</a> </span>
+<span id="L188"><a href="#L188">188</a> end Stafford38.WeylCommutatorSymbol</span>
+<span id="L189"><a href="#L189">189</a> </span></pre>

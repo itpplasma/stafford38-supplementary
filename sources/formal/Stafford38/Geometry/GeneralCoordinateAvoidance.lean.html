@@ -1,0 +1,53 @@
+<!doctype html><meta charset="utf-8"><title>Stafford38/Geometry/GeneralCoordinateAvoidance.lean</title><style>body{font:14px monospace}pre span{display:block}pre span:target{background:#fff0ad}a{color:#666}pre{white-space:pre-wrap}a.ref{color:#0645ad;text-decoration:none}a.ref:hover{text-decoration:underline}</style><h1>Stafford38/Geometry/GeneralCoordinateAvoidance.lean</h1><p>This project (Stafford38) · 0403af3f0b1a7f84d2027121932723f67bd279ae</p><pre><span id="L1"><a href="#L1">1</a> module</span>
+<span id="L2"><a href="#L2">2</a> public import Mathlib.RingTheory.Nullstellensatz</span>
+<span id="L3"><a href="#L3">3</a> </span>
+<span id="L4"><a href="#L4">4</a> @[expose] public section</span>
+<span id="L5"><a href="#L5">5</a> </span>
+<span id="L6"><a href="#L6">6</a> /-!</span>
+<span id="L7"><a href="#L7">7</a> # Polynomial inverses from coordinate avoidance</span>
+<span id="L8"><a href="#L8">8</a> </span>
+<span id="L9"><a href="#L9">9</a> A coordinate that never vanishes on an affine zero locus is invertible modulo</span>
+<span id="L10"><a href="#L10">10</a> its defining ideal. The ideal need not be prime or radical.</span>
+<span id="L11"><a href="#L11">11</a> -/</span>
+<span id="L12"><a href="#L12">12</a> </span>
+<span id="L13"><a href="#L13">13</a> namespace Stafford38.Geometry.GeneralCoordinateAvoidance</span>
+<span id="L14"><a href="#L14">14</a> </span>
+<span id="L15"><a href="#L15">15</a> noncomputable section</span>
+<span id="L16"><a href="#L16">16</a> </span>
+<span id="L17"><a href="#L17">17</a> theorem exists_coordinate_inverse_of_avoidance</span>
+<span id="L18"><a href="#L18">18</a>     {k : Type*} [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Field/Defs.lean#L170" title="Field">Field</a> k] [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/FieldTheory/IsAlgClosed/Basic.lean#L58" title="IsAlgClosed">IsAlgClosed</a> k] {m : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L1351" title="Nat">ℕ</a>}</span>
+<span id="L19"><a href="#L19">19</a>     (I : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Defs.lean#L38" title="Ideal">Ideal</a> (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/Basic.lean#L80" title="MvPolynomial">MvPolynomial</a> (<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L2443" title="Fin">Fin</a> m) k)) (i : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L2443" title="Fin">Fin</a> m)</span>
+<span id="L20"><a href="#L20">20</a>     (havoid : ∀ y ∈ <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Nullstellensatz.lean#L39" title="MvPolynomial.zeroLocus">MvPolynomial.zeroLocus</a> k I, y i ≠ 0) :</span>
+<span id="L21"><a href="#L21">21</a>     ∃ g : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/Basic.lean#L80" title="MvPolynomial">MvPolynomial</a> (<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L2443" title="Fin">Fin</a> m) k, <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/Basic.lean#L125" title="MvPolynomial.X">MvPolynomial.X</a> i * g - 1 ∈ I := by</span>
+<span id="L22"><a href="#L22">22</a>   classical</span>
+<span id="L23"><a href="#L23">23</a>   let J := I ⊔ <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Span.lean#L45" title="Ideal.span">Ideal.span</a> ({<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/Basic.lean#L125" title="MvPolynomial.X">MvPolynomial.X</a> i} : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Data/Set/Defs.lean#L44" title="Set">Set</a> (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/Basic.lean#L80" title="MvPolynomial">MvPolynomial</a> (<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L2443" title="Fin">Fin</a> m) k))</span>
+<span id="L24"><a href="#L24">24</a>   have htop : J = ⊤ := by</span>
+<span id="L25"><a href="#L25">25</a>     by_contra hne</span>
+<span id="L26"><a href="#L26">26</a>     obtain ⟨M, hM, hJM⟩ := <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Maximal.lean#L78" title="Ideal.exists_le_maximal">Ideal.exists_le_maximal</a> J hne</span>
+<span id="L27"><a href="#L27">27</a>     obtain ⟨y, hMy⟩ :=</span>
+<span id="L28"><a href="#L28">28</a>       <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Nullstellensatz.lean#L165" title="MvPolynomial.isMaximal_iff_eq_vanishingIdeal_singleton">MvPolynomial.isMaximal_iff_eq_vanishingIdeal_singleton</a>.<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Core.lean#L192" title="Iff.mp">mp</a> hM</span>
+<span id="L29"><a href="#L29">29</a>     have hy : y ∈ <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Nullstellensatz.lean#L39" title="MvPolynomial.zeroLocus">MvPolynomial.zeroLocus</a> k I := by</span>
+<span id="L30"><a href="#L30">30</a>       intro p hp</span>
+<span id="L31"><a href="#L31">31</a>       have hpM := hJM (show p ∈ J from <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Lattice.lean#L67" title="Ideal.mem_sup_left">Ideal.mem_sup_left</a> hp)</span>
+<span id="L32"><a href="#L32">32</a>       rw [hMy, <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Nullstellensatz.lean#L101" title="MvPolynomial.mem_vanishingIdeal_singleton_iff">MvPolynomial.mem_vanishingIdeal_singleton_iff</a>] at hpM</span>
+<span id="L33"><a href="#L33">33</a>       exact hpM</span>
+<span id="L34"><a href="#L34">34</a>     have hxM : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/Basic.lean#L125" title="MvPolynomial.X">MvPolynomial.X</a> i ∈ M :=</span>
+<span id="L35"><a href="#L35">35</a>       hJM (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Lattice.lean#L70" title="Ideal.mem_sup_right">Ideal.mem_sup_right</a> (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Span.lean#L97" title="Ideal.mem_span_singleton_self">Ideal.mem_span_singleton_self</a> _))</span>
+<span id="L36"><a href="#L36">36</a>     rw [hMy, <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Nullstellensatz.lean#L101" title="MvPolynomial.mem_vanishingIdeal_singleton_iff">MvPolynomial.mem_vanishingIdeal_singleton_iff</a>] at hxM</span>
+<span id="L37"><a href="#L37">37</a>     exact havoid y hy (by simpa using hxM)</span>
+<span id="L38"><a href="#L38">38</a>   have hone : (1 : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/Basic.lean#L80" title="MvPolynomial">MvPolynomial</a> (<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L2443" title="Fin">Fin</a> m) k) ∈ J := by simp [htop]</span>
+<span id="L39"><a href="#L39">39</a>   obtain ⟨b, hb, z, hz, hbz⟩ := <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/LinearAlgebra/Span/Defs.lean#L381" title="Submodule.mem_sup">Submodule.mem_sup</a>.<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Core.lean#L192" title="Iff.mp">mp</a> hone</span>
+<span id="L40"><a href="#L40">40</a>   obtain ⟨g, hg⟩ := <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Span.lean#L181" title="Ideal.mem_span_singleton">Ideal.mem_span_singleton</a>.<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Core.lean#L192" title="Iff.mp">mp</a> hz</span>
+<span id="L41"><a href="#L41">41</a>   refine ⟨g, ?_⟩</span>
+<span id="L42"><a href="#L42">42</a>   have heq : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/Basic.lean#L125" title="MvPolynomial.X">MvPolynomial.X</a> i * g - 1 = -b := by</span>
+<span id="L43"><a href="#L43">43</a>     rw [← hg]</span>
+<span id="L44"><a href="#L44">44</a>     rw [← hbz]</span>
+<span id="L45"><a href="#L45">45</a>     ring</span>
+<span id="L46"><a href="#L46">46</a>   rw [heq]</span>
+<span id="L47"><a href="#L47">47</a>   exact I.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Module/Submodule/Defs.lean#L321" title="Submodule.neg_mem">neg_mem</a> hb</span>
+<span id="L48"><a href="#L48">48</a> </span>
+<span id="L49"><a href="#L49">49</a> #print axioms <a class="ref" href="./GeneralCoordinateAvoidance.lean.html#L17" title="Stafford38.Geometry.GeneralCoordinateAvoidance.exists_coordinate_inverse_of_avoidance">exists_coordinate_inverse_of_avoidance</a></span>
+<span id="L50"><a href="#L50">50</a> </span>
+<span id="L51"><a href="#L51">51</a> end</span>
+<span id="L52"><a href="#L52">52</a> end Stafford38.Geometry.GeneralCoordinateAvoidance</span>
+<span id="L53"><a href="#L53">53</a> </span></pre>

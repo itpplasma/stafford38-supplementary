@@ -1,4 +1,4 @@
-<!doctype html><meta charset="utf-8"><title>Stafford38/Characteristic/RightReesArtinianAdapter.lean</title><style>body{font:14px monospace}pre span{display:block}pre span:target{background:#fff0ad}a{color:#666}pre{white-space:pre-wrap}</style><h1>Stafford38/Characteristic/RightReesArtinianAdapter.lean</h1><p>This project (Stafford38) · 0403af3f0b1a7f84d2027121932723f67bd279ae</p><pre><span id="L1"><a href="#L1">1</a> module</span>
+<!doctype html><meta charset="utf-8"><title>Stafford38/Characteristic/RightReesArtinianAdapter.lean</title><style>body{font:14px monospace}pre span{display:block}pre span:target{background:#fff0ad}a{color:#666}pre{white-space:pre-wrap}a.ref{color:#0645ad;text-decoration:none}a.ref:hover{text-decoration:underline}</style><h1>Stafford38/Characteristic/RightReesArtinianAdapter.lean</h1><p>This project (Stafford38) · 0403af3f0b1a7f84d2027121932723f67bd279ae</p><pre><span id="L1"><a href="#L1">1</a> module</span>
 <span id="L2"><a href="#L2">2</a> public import Mathlib.Algebra.CharP.Algebra</span>
 <span id="L3"><a href="#L3">3</a> public import Stafford38.Characteristic.AssociatedGradedFinite</span>
 <span id="L4"><a href="#L4">4</a> public import Stafford38.Characteristic.ConcreteSquareZeroTraceData</span>
@@ -7,7 +7,7 @@
 <span id="L7"><a href="#L7">7</a> </span>
 <span id="L8"><a href="#L8">8</a> @[expose] public section</span>
 <span id="L9"><a href="#L9">9</a> </span>
-<span id="L10"><a href="#L10">10</a> open Stafford38Challenge (WeylAlg)</span>
+<span id="L10"><a href="#L10">10</a> open Stafford38Challenge (<a class="ref" href="../ChallengeDefinitions.lean.html#L73" title="Stafford38Challenge.WeylAlg">WeylAlg</a>)</span>
 <span id="L11"><a href="#L11">11</a> </span>
 <span id="L12"><a href="#L12">12</a> /-!</span>
 <span id="L13"><a href="#L13">13</a> # Right-Rees Artinian-local adapter</span>
@@ -35,26 +35,26 @@
 <span id="L35"><a href="#L35">35</a> </span>
 <span id="L36"><a href="#L36">36</a> noncomputable section</span>
 <span id="L37"><a href="#L37">37</a> </span>
-<span id="L38"><a href="#L38">38</a> set_option maxHeartbeats 3000000</span>
-<span id="L39"><a href="#L39">39</a> set_option synthInstance.maxHeartbeats 1000000</span>
+<span id="L38"><a href="#L38">38</a> set_option <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Lean/CoreM.lean#L30" title="Lean.maxHeartbeats">maxHeartbeats</a> 3000000</span>
+<span id="L39"><a href="#L39">39</a> set_option <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Lean/Meta/SynthInstance.lean#L20" title="Lean.Meta.synthInstance.maxHeartbeats">synthInstance.maxHeartbeats</a> 1000000</span>
 <span id="L40"><a href="#L40">40</a> </span>
 <span id="L41"><a href="#L41">41</a> universe u_k u_R u_B u_N u_G</span>
 <span id="L42"><a href="#L42">42</a> </span>
 <span id="L43"><a href="#L43">43</a> variable {k : Type u_k} {R : Type u_R} {B : Type u_B}</span>
 <span id="L44"><a href="#L44">44</a> variable {N : Type u_N} {G : Type u_G}</span>
-<span id="L45"><a href="#L45">45</a> variable [Field k] [CharZero k]</span>
-<span id="L46"><a href="#L46">46</a> variable [CommRing R] [Algebra k R]</span>
-<span id="L47"><a href="#L47">47</a> variable [Ring B] [Algebra k B]</span>
-<span id="L48"><a href="#L48">48</a> variable [AddCommGroup N] [Module k N] [Module Bᵐᵒᵖ N]</span>
-<span id="L49"><a href="#L49">49</a> variable [SMulCommClass k Bᵐᵒᵖ N]</span>
-<span id="L50"><a href="#L50">50</a> variable [AddCommGroup G] [Module k G] [Module R G]</span>
+<span id="L45"><a href="#L45">45</a> variable [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Field/Defs.lean#L170" title="Field">Field</a> k] [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/CharZero/Defs.lean#L33" title="CharZero">CharZero</a> k]</span>
+<span id="L46"><a href="#L46">46</a> variable [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Ring/Defs.lean#L412" title="CommRing">CommRing</a> R] [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Algebra/Defs.lean#L91" title="Algebra">Algebra</a> k R]</span>
+<span id="L47"><a href="#L47">47</a> variable [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Ring/Defs.lean#L145" title="Ring">Ring</a> B] [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Algebra/Defs.lean#L91" title="Algebra">Algebra</a> k B]</span>
+<span id="L48"><a href="#L48">48</a> variable [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Group/Defs.lean#L110" title="AddCommGroup">AddCommGroup</a> N] [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Module/Defs.lean#L48" title="Module">Module</a> k N] [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Module/Defs.lean#L48" title="Module">Module</a> Bᵐᵒᵖ N]</span>
+<span id="L49"><a href="#L49">49</a> variable [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Group/Action/Defs.lean#L147" title="SMulCommClass">SMulCommClass</a> k Bᵐᵒᵖ N]</span>
+<span id="L50"><a href="#L50">50</a> variable [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Group/Defs.lean#L110" title="AddCommGroup">AddCommGroup</a> G] [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Module/Defs.lean#L48" title="Module">Module</a> k G] [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Module/Defs.lean#L48" title="Module">Module</a> R G]</span>
 <span id="L51"><a href="#L51">51</a> </span>
-<span id="L52"><a href="#L52">52</a> variable (D : RightSquareZeroTraceData k R B N G)</span>
-<span id="L53"><a href="#L53">53</a> variable (S : Submonoid R)</span>
-<span id="L54"><a href="#L54">54</a> variable [OreLocalization.OreSet (OppositeDenominators D S)]</span>
-<span id="L55"><a href="#L55">55</a> variable [IsLocalRing (Localization S)]</span>
-<span id="L56"><a href="#L56">56</a> variable [CharZero (Localization S)]</span>
-<span id="L57"><a href="#L57">57</a> variable [IsNoetherianRing (Localization S)]</span>
+<span id="L52"><a href="#L52">52</a> variable (D : <a class="ref" href="./SquareZeroTraceData.lean.html#L64" title="Stafford38.Characteristic.SquareZeroTraceData.RightSquareZeroTraceData">RightSquareZeroTraceData</a> k R B N G)</span>
+<span id="L53"><a href="#L53">53</a> variable (S : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Group/Submonoid/Defs.lean#L88" title="Submonoid">Submonoid</a> R)</span>
+<span id="L54"><a href="#L54">54</a> variable [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/GroupTheory/OreLocalization/OreSet.lean#L48" title="OreLocalization.OreSet">OreLocalization.OreSet</a> (<a class="ref" href="./SquareZeroLocalizedExactness.lean.html#L48" title="Stafford38.Characteristic.SquareZeroLocalizedExactness.OppositeDenominators">OppositeDenominators</a> D S)]</span>
+<span id="L55"><a href="#L55">55</a> variable [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/LocalRing/Defs.lean#L27" title="IsLocalRing">IsLocalRing</a> (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/GroupTheory/MonoidLocalization/Basic.lean#L207" title="Localization">Localization</a> S)]</span>
+<span id="L56"><a href="#L56">56</a> variable [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/CharZero/Defs.lean#L33" title="CharZero">CharZero</a> (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/GroupTheory/MonoidLocalization/Basic.lean#L207" title="Localization">Localization</a> S)]</span>
+<span id="L57"><a href="#L57">57</a> variable [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Noetherian/Defs.lean#L189" title="IsNoetherianRing">IsNoetherianRing</a> (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/GroupTheory/MonoidLocalization/Basic.lean#L207" title="Localization">Localization</a> S)]</span>
 <span id="L58"><a href="#L58">58</a> </span>
 <span id="L59"><a href="#L59">59</a> /-- A precise missing localized-action consequence.</span>
 <span id="L60"><a href="#L60">60</a> </span>
@@ -64,17 +64,17 @@
 <span id="L64"><a href="#L64">64</a> needed to make the finite sums defining the high-power product ideal act by</span>
 <span id="L65"><a href="#L65">65</a> zero, without silently postulating a noncommutative ideal quotient.</span>
 <span id="L66"><a href="#L66">66</a> -/</span>
-<span id="L67"><a href="#L67">67</a> def LocalizedHighPowerTwoBlockVanishing (q : ℕ) : Prop :=</span>
-<span id="L68"><a href="#L68">68</a>   ∀ {iota : Type*} (s : Finset iota)</span>
+<span id="L67"><a href="#L67">67</a> def LocalizedHighPowerTwoBlockVanishing (q : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L1351" title="Nat">ℕ</a>) : Prop :=</span>
+<span id="L68"><a href="#L68">68</a>   ∀ {iota : Type*} (s : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Data/Finset/Defs.lean#L72" title="Finset">Finset</a> iota)</span>
 <span id="L69"><a href="#L69">69</a>     (a b : iota →</span>
-<span id="L70"><a href="#L70">70</a>       OreLocalization (OppositeDenominators D S) (Bᵐᵒᵖ))</span>
+<span id="L70"><a href="#L70">70</a>       <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/GroupTheory/OreLocalization/Basic.lean#L89" title="OreLocalization">OreLocalization</a> (<a class="ref" href="./SquareZeroLocalizedExactness.lean.html#L48" title="Stafford38.Characteristic.SquareZeroLocalizedExactness.OppositeDenominators">OppositeDenominators</a> D S) (Bᵐᵒᵖ))</span>
 <span id="L71"><a href="#L71">71</a>     (_ha : ∀ i ∈ s,</span>
-<span id="L72"><a href="#L72">72</a>       localizedOppositeSpecialization D S (a i) ∈</span>
-<span id="L73"><a href="#L73">73</a>         IsLocalRing.maximalIdeal (Localization S) ^ q)</span>
+<span id="L72"><a href="#L72">72</a>       <a class="ref" href="./SquareZeroLocalizedRing.lean.html#L87" title="Stafford38.Characteristic.SquareZeroLocalizedRing.localizedOppositeSpecialization">localizedOppositeSpecialization</a> D S (a i) ∈</span>
+<span id="L73"><a href="#L73">73</a>         <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/LocalRing/MaximalIdeal/Defs.lean#L29" title="IsLocalRing.maximalIdeal">IsLocalRing.maximalIdeal</a> (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/GroupTheory/MonoidLocalization/Basic.lean#L207" title="Localization">Localization</a> S) ^ q)</span>
 <span id="L74"><a href="#L74">74</a>     (_hb : ∀ i ∈ s,</span>
-<span id="L75"><a href="#L75">75</a>       localizedOppositeSpecialization D S (b i) ∈</span>
-<span id="L76"><a href="#L76">76</a>         IsLocalRing.maximalIdeal (Localization S) ^ q)</span>
-<span id="L77"><a href="#L77">77</a>     (z : LocalizedDeformationModule D S),</span>
+<span id="L75"><a href="#L75">75</a>       <a class="ref" href="./SquareZeroLocalizedRing.lean.html#L87" title="Stafford38.Characteristic.SquareZeroLocalizedRing.localizedOppositeSpecialization">localizedOppositeSpecialization</a> D S (b i) ∈</span>
+<span id="L76"><a href="#L76">76</a>         <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/LocalRing/MaximalIdeal/Defs.lean#L29" title="IsLocalRing.maximalIdeal">IsLocalRing.maximalIdeal</a> (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/GroupTheory/MonoidLocalization/Basic.lean#L207" title="Localization">Localization</a> S) ^ q)</span>
+<span id="L77"><a href="#L77">77</a>     (z : <a class="ref" href="./SquareZeroLocalizedExactness.lean.html#L52" title="Stafford38.Characteristic.SquareZeroLocalizedExactness.LocalizedDeformationModule">LocalizedDeformationModule</a> D S),</span>
 <span id="L78"><a href="#L78">78</a>       (∑ i ∈ s, a i * b i) • z = 0</span>
 <span id="L79"><a href="#L79">79</a> </span>
 <span id="L80"><a href="#L80">80</a> /-- All pre-Artinian inputs already produced by the localized square-zero</span>
@@ -86,87 +86,87 @@
 <span id="L86"><a href="#L86">86</a> specialization with the principal parameter ideal.</span>
 <span id="L87"><a href="#L87">87</a> -/</span>
 <span id="L88"><a href="#L88">88</a> structure LocalizedPreArtinianCore : Prop where</span>
-<span id="L89"><a href="#L89">89</a>   base_charZero : CharZero k</span>
-<span id="L90"><a href="#L90">90</a>   localizedFibre_charZero : CharZero (Localization S)</span>
-<span id="L91"><a href="#L91">91</a>   localizedFibre_noetherian : IsNoetherianRing (Localization S)</span>
+<span id="L89"><a href="#L89">89</a>   base_charZero : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/CharZero/Defs.lean#L33" title="CharZero">CharZero</a> k</span>
+<span id="L90"><a href="#L90">90</a>   localizedFibre_charZero : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/CharZero/Defs.lean#L33" title="CharZero">CharZero</a> (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/GroupTheory/MonoidLocalization/Basic.lean#L207" title="Localization">Localization</a> S)</span>
+<span id="L91"><a href="#L91">91</a>   localizedFibre_noetherian : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Noetherian/Defs.lean#L189" title="IsNoetherianRing">IsNoetherianRing</a> (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/GroupTheory/MonoidLocalization/Basic.lean#L207" title="Localization">Localization</a> S)</span>
 <span id="L92"><a href="#L92">92</a>   ringSpecialization_surjective :</span>
-<span id="L93"><a href="#L93">93</a>     Function.Surjective (localizedOppositeSpecialization D S)</span>
+<span id="L93"><a href="#L93">93</a>     <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Data/Function.lean#L59" title="Function.Surjective">Function.Surjective</a> (<a class="ref" href="./SquareZeroLocalizedRing.lean.html#L87" title="Stafford38.Characteristic.SquareZeroLocalizedRing.localizedOppositeSpecialization">localizedOppositeSpecialization</a> D S)</span>
 <span id="L94"><a href="#L94">94</a>   ringSpecialization_numerator :</span>
 <span id="L95"><a href="#L95">95</a>     ∀ b : Bᵐᵒᵖ,</span>
-<span id="L96"><a href="#L96">96</a>       localizedOppositeSpecialization D S</span>
-<span id="L97"><a href="#L97">97</a>           (OreLocalization.numeratorHom b) =</span>
-<span id="L98"><a href="#L98">98</a>         algebraMap R (Localization S) (D.pi b.unop)</span>
+<span id="L96"><a href="#L96">96</a>       <a class="ref" href="./SquareZeroLocalizedRing.lean.html#L87" title="Stafford38.Characteristic.SquareZeroLocalizedRing.localizedOppositeSpecialization">localizedOppositeSpecialization</a> D S</span>
+<span id="L97"><a href="#L97">97</a>           (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/GroupTheory/OreLocalization/Basic.lean#L464" title="OreLocalization.numeratorHom">OreLocalization.numeratorHom</a> b) =</span>
+<span id="L98"><a href="#L98">98</a>         <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Algebra/Defs.lean#L97" title="Algebra.algebraMap">algebraMap</a> R (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/GroupTheory/MonoidLocalization/Basic.lean#L207" title="Localization">Localization</a> S) (D.<a class="ref" href="./SquareZeroTraceData.lean.html#L83" title="Stafford38.Characteristic.SquareZeroTraceData.RightSquareZeroTraceData.pi">pi</a> b.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Opposites.lean#L81" title="MulOpposite.unop">unop</a>)</span>
 <span id="L99"><a href="#L99">99</a>   ringSpecialization_parameter :</span>
-<span id="L100"><a href="#L100">100</a>     localizedOppositeSpecialization D S</span>
-<span id="L101"><a href="#L101">101</a>         (OreLocalization.numeratorHom (MulOpposite.op D.c)) = 0</span>
+<span id="L100"><a href="#L100">100</a>     <a class="ref" href="./SquareZeroLocalizedRing.lean.html#L87" title="Stafford38.Characteristic.SquareZeroLocalizedRing.localizedOppositeSpecialization">localizedOppositeSpecialization</a> D S</span>
+<span id="L101"><a href="#L101">101</a>         (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/GroupTheory/OreLocalization/Basic.lean#L464" title="OreLocalization.numeratorHom">OreLocalization.numeratorHom</a> (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Opposites.lean#L75" title="MulOpposite.op">MulOpposite.op</a> D.<a class="ref" href="./SquareZeroTraceData.lean.html#L79" title="Stafford38.Characteristic.SquareZeroTraceData.RightSquareZeroTraceData.c">c</a>)) = 0</span>
 <span id="L102"><a href="#L102">102</a>   parameter_sq :</span>
-<span id="L103"><a href="#L103">103</a>     ∀ z : LocalizedDeformationModule D S,</span>
-<span id="L104"><a href="#L104">104</a>       localizedCAct D S (localizedCAct D S z) = 0</span>
+<span id="L103"><a href="#L103">103</a>     ∀ z : <a class="ref" href="./SquareZeroLocalizedExactness.lean.html#L52" title="Stafford38.Characteristic.SquareZeroLocalizedExactness.LocalizedDeformationModule">LocalizedDeformationModule</a> D S,</span>
+<span id="L104"><a href="#L104">104</a>       <a class="ref" href="./SquareZeroLocalizedExactness.lean.html#L70" title="Stafford38.Characteristic.SquareZeroLocalizedExactness.localizedCAct">localizedCAct</a> D S (<a class="ref" href="./SquareZeroLocalizedExactness.lean.html#L70" title="Stafford38.Characteristic.SquareZeroLocalizedExactness.localizedCAct">localizedCAct</a> D S z) = 0</span>
 <span id="L105"><a href="#L105">105</a>   parameter_fraction :</span>
-<span id="L106"><a href="#L106">106</a>     ∀ (z : N) (s : OppositeDenominators D S),</span>
-<span id="L107"><a href="#L107">107</a>       localizedCAct D S (z /ₒ s) =</span>
-<span id="L108"><a href="#L108">108</a>         (MulOpposite.op D.c • z) /ₒ s</span>
+<span id="L106"><a href="#L106">106</a>     ∀ (z : N) (s : <a class="ref" href="./SquareZeroLocalizedExactness.lean.html#L48" title="Stafford38.Characteristic.SquareZeroLocalizedExactness.OppositeDenominators">OppositeDenominators</a> D S),</span>
+<span id="L107"><a href="#L107">107</a>       <a class="ref" href="./SquareZeroLocalizedExactness.lean.html#L70" title="Stafford38.Characteristic.SquareZeroLocalizedExactness.localizedCAct">localizedCAct</a> D S (z /ₒ s) =</span>
+<span id="L108"><a href="#L108">108</a>         (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Opposites.lean#L75" title="MulOpposite.op">MulOpposite.op</a> D.<a class="ref" href="./SquareZeroTraceData.lean.html#L79" title="Stafford38.Characteristic.SquareZeroTraceData.RightSquareZeroTraceData.c">c</a> • z) /ₒ s</span>
 <span id="L109"><a href="#L109">109</a>   parameter_exact :</span>
-<span id="L110"><a href="#L110">110</a>     AddMonoidHom.ker (localizedCAct D S) =</span>
-<span id="L111"><a href="#L111">111</a>       AddMonoidHom.range (localizedCAct D S)</span>
+<span id="L110"><a href="#L110">110</a>     <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Group/Subgroup/Ker.lean#L235" title="AddMonoidHom.ker">AddMonoidHom.ker</a> (<a class="ref" href="./SquareZeroLocalizedExactness.lean.html#L70" title="Stafford38.Characteristic.SquareZeroLocalizedExactness.localizedCAct">localizedCAct</a> D S) =</span>
+<span id="L111"><a href="#L111">111</a>       <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Group/Subgroup/Ker.lean#L65" title="AddMonoidHom.range">AddMonoidHom.range</a> (<a class="ref" href="./SquareZeroLocalizedExactness.lean.html#L70" title="Stafford38.Characteristic.SquareZeroLocalizedExactness.localizedCAct">localizedCAct</a> D S)</span>
 <span id="L112"><a href="#L112">112</a>   moduleSpecialization_surjective :</span>
-<span id="L113"><a href="#L113">113</a>     Function.Surjective (localizedSpecialization D S)</span>
+<span id="L113"><a href="#L113">113</a>     <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Data/Function.lean#L59" title="Function.Surjective">Function.Surjective</a> (<a class="ref" href="./SquareZeroLocalizedExactness.lean.html#L190" title="Stafford38.Characteristic.SquareZeroLocalizedExactness.localizedSpecialization">localizedSpecialization</a> D S)</span>
 <span id="L114"><a href="#L114">114</a>   moduleSpecialization_fraction :</span>
-<span id="L115"><a href="#L115">115</a>     ∀ (z : N) (s : OppositeDenominators D S),</span>
-<span id="L116"><a href="#L116">116</a>       localizedSpecialization D S (z /ₒ s) =</span>
-<span id="L117"><a href="#L117">117</a>         LocalizedModule.mk (D.rho z) (denominatorMap D S s)</span>
+<span id="L115"><a href="#L115">115</a>     ∀ (z : N) (s : <a class="ref" href="./SquareZeroLocalizedExactness.lean.html#L48" title="Stafford38.Characteristic.SquareZeroLocalizedExactness.OppositeDenominators">OppositeDenominators</a> D S),</span>
+<span id="L116"><a href="#L116">116</a>       <a class="ref" href="./SquareZeroLocalizedExactness.lean.html#L190" title="Stafford38.Characteristic.SquareZeroLocalizedExactness.localizedSpecialization">localizedSpecialization</a> D S (z /ₒ s) =</span>
+<span id="L117"><a href="#L117">117</a>         <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Module/LocalizedModule/Basic.lean#L100" title="LocalizedModule.mk">LocalizedModule.mk</a> (D.<a class="ref" href="./SquareZeroTraceData.lean.html#L91" title="Stafford38.Characteristic.SquareZeroTraceData.RightSquareZeroTraceData.rho">rho</a> z) (<a class="ref" href="./SquareZeroLocalizedExactness.lean.html#L58" title="Stafford38.Characteristic.SquareZeroLocalizedExactness.denominatorMap">denominatorMap</a> D S s)</span>
 <span id="L118"><a href="#L118">118</a>   moduleSpecialization_exact :</span>
-<span id="L119"><a href="#L119">119</a>     AddMonoidHom.ker (localizedSpecialization D S) =</span>
-<span id="L120"><a href="#L120">120</a>       AddMonoidHom.range (localizedCAct D S)</span>
-<span id="L121"><a href="#L121">121</a>   fibre_nontrivial : Nontrivial (LocalizedModule S G)</span>
-<span id="L122"><a href="#L122">122</a>   fibre_finiteLength : IsFiniteLength (Localization S) (LocalizedModule S G)</span>
+<span id="L119"><a href="#L119">119</a>     <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Group/Subgroup/Ker.lean#L235" title="AddMonoidHom.ker">AddMonoidHom.ker</a> (<a class="ref" href="./SquareZeroLocalizedExactness.lean.html#L190" title="Stafford38.Characteristic.SquareZeroLocalizedExactness.localizedSpecialization">localizedSpecialization</a> D S) =</span>
+<span id="L120"><a href="#L120">120</a>       <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Group/Subgroup/Ker.lean#L65" title="AddMonoidHom.range">AddMonoidHom.range</a> (<a class="ref" href="./SquareZeroLocalizedExactness.lean.html#L70" title="Stafford38.Characteristic.SquareZeroLocalizedExactness.localizedCAct">localizedCAct</a> D S)</span>
+<span id="L121"><a href="#L121">121</a>   fibre_nontrivial : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Basic/Nontrivial/Defs.lean#L26" title="Nontrivial">Nontrivial</a> (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Module/LocalizedModule/Basic.lean#L86" title="LocalizedModule">LocalizedModule</a> S G)</span>
+<span id="L122"><a href="#L122">122</a>   fibre_finiteLength : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/FiniteLength.lean#L28" title="IsFiniteLength">IsFiniteLength</a> (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/GroupTheory/MonoidLocalization/Basic.lean#L207" title="Localization">Localization</a> S) (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Module/LocalizedModule/Basic.lean#L86" title="LocalizedModule">LocalizedModule</a> S G)</span>
 <span id="L123"><a href="#L123">123</a>   annihilatingPower :</span>
-<span id="L124"><a href="#L124">124</a>     ∃ q : ℕ,</span>
-<span id="L125"><a href="#L125">125</a>       IsLocalRing.maximalIdeal (Localization S) ^ q ≤</span>
-<span id="L126"><a href="#L126">126</a>         Module.annihilator (Localization S) (LocalizedModule S G)</span>
+<span id="L124"><a href="#L124">124</a>     ∃ q : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L1351" title="Nat">ℕ</a>,</span>
+<span id="L125"><a href="#L125">125</a>       <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/LocalRing/MaximalIdeal/Defs.lean#L29" title="IsLocalRing.maximalIdeal">IsLocalRing.maximalIdeal</a> (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/GroupTheory/MonoidLocalization/Basic.lean#L207" title="Localization">Localization</a> S) ^ q ≤</span>
+<span id="L126"><a href="#L126">126</a>         <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Maps.lean#L859" title="Module.annihilator">Module.annihilator</a> (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/GroupTheory/MonoidLocalization/Basic.lean#L207" title="Localization">Localization</a> S) (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Module/LocalizedModule/Basic.lean#L86" title="LocalizedModule">LocalizedModule</a> S G)</span>
 <span id="L127"><a href="#L127">127</a> </span>
 <span id="L128"><a href="#L128">128</a> /-- Generic assembly of the localized pre-Artinian core from the existing ring,</span>
 <span id="L129"><a href="#L129">129</a> module, and finite-length APIs.  This theorem does not prove</span>
 <span id="L130"><a href="#L130">130</a> `LocalizedHighPowerTwoBlockVanishing`.</span>
 <span id="L131"><a href="#L131">131</a> -/</span>
 <span id="L132"><a href="#L132">132</a> theorem localizedPreArtinianCore_of_exact_finiteLength</span>
-<span id="L133"><a href="#L133">133</a>     (hnontrivial : Nontrivial (LocalizedModule S G))</span>
-<span id="L134"><a href="#L134">134</a>     (hlength : IsFiniteLength (Localization S) (LocalizedModule S G)) :</span>
-<span id="L135"><a href="#L135">135</a>     LocalizedPreArtinianCore D S := by</span>
-<span id="L136"><a href="#L136">136</a>   letI : Nontrivial (LocalizedModule S G) := hnontrivial</span>
+<span id="L133"><a href="#L133">133</a>     (hnontrivial : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Basic/Nontrivial/Defs.lean#L26" title="Nontrivial">Nontrivial</a> (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Module/LocalizedModule/Basic.lean#L86" title="LocalizedModule">LocalizedModule</a> S G))</span>
+<span id="L134"><a href="#L134">134</a>     (hlength : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/FiniteLength.lean#L28" title="IsFiniteLength">IsFiniteLength</a> (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/GroupTheory/MonoidLocalization/Basic.lean#L207" title="Localization">Localization</a> S) (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Module/LocalizedModule/Basic.lean#L86" title="LocalizedModule">LocalizedModule</a> S G)) :</span>
+<span id="L135"><a href="#L135">135</a>     <a class="ref" href="./RightReesArtinianAdapter.lean.html#L80" title="Stafford38.Characteristic.RightReesArtinianAdapter.LocalizedPreArtinianCore">LocalizedPreArtinianCore</a> D S := by</span>
+<span id="L136"><a href="#L136">136</a>   letI : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Basic/Nontrivial/Defs.lean#L26" title="Nontrivial">Nontrivial</a> (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Module/LocalizedModule/Basic.lean#L86" title="LocalizedModule">LocalizedModule</a> S G) := hnontrivial</span>
 <span id="L137"><a href="#L137">137</a>   obtain ⟨q, hq⟩ :=</span>
-<span id="L138"><a href="#L138">138</a>     exists_maximalIdeal_pow_le_annihilator_of_finiteLength hlength</span>
+<span id="L138"><a href="#L138">138</a>     <a class="ref" href="./SquareZeroHighPowerReduction.lean.html#L43" title="Stafford38.Characteristic.SquareZeroHighPowerReduction.exists_maximalIdeal_pow_le_annihilator_of_finiteLength">exists_maximalIdeal_pow_le_annihilator_of_finiteLength</a> hlength</span>
 <span id="L139"><a href="#L139">139</a>   exact</span>
-<span id="L140"><a href="#L140">140</a>     { base_charZero := inferInstance</span>
-<span id="L141"><a href="#L141">141</a>       localizedFibre_charZero := inferInstance</span>
-<span id="L142"><a href="#L142">142</a>       localizedFibre_noetherian := inferInstance</span>
-<span id="L143"><a href="#L143">143</a>       ringSpecialization_surjective :=</span>
-<span id="L144"><a href="#L144">144</a>         localizedOppositeSpecialization_surjective D S</span>
-<span id="L145"><a href="#L145">145</a>       ringSpecialization_numerator :=</span>
-<span id="L146"><a href="#L146">146</a>         localizedOppositeSpecialization_numerator D S</span>
-<span id="L147"><a href="#L147">147</a>       ringSpecialization_parameter :=</span>
-<span id="L148"><a href="#L148">148</a>         localizedOppositeSpecialization_parameter D S</span>
-<span id="L149"><a href="#L149">149</a>       parameter_sq := localizedCAct_sq_eq_zero D S</span>
-<span id="L150"><a href="#L150">150</a>       parameter_fraction := localizedCAct_oreDiv D S</span>
-<span id="L151"><a href="#L151">151</a>       parameter_exact := localizedCAct_ker_eq_range D S</span>
-<span id="L152"><a href="#L152">152</a>       moduleSpecialization_surjective :=</span>
-<span id="L153"><a href="#L153">153</a>         localizedSpecialization_surjective D S</span>
-<span id="L154"><a href="#L154">154</a>       moduleSpecialization_fraction := by</span>
+<span id="L140"><a href="#L140">140</a>     { <a class="ref" href="./RightReesArtinianAdapter.lean.html#L89" title="Stafford38.Characteristic.RightReesArtinianAdapter.LocalizedPreArtinianCore.base_charZero">base_charZero</a> := <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L160" title="inferInstance">inferInstance</a></span>
+<span id="L141"><a href="#L141">141</a>       <a class="ref" href="./RightReesArtinianAdapter.lean.html#L90" title="Stafford38.Characteristic.RightReesArtinianAdapter.LocalizedPreArtinianCore.localizedFibre_charZero">localizedFibre_charZero</a> := <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L160" title="inferInstance">inferInstance</a></span>
+<span id="L142"><a href="#L142">142</a>       <a class="ref" href="./RightReesArtinianAdapter.lean.html#L91" title="Stafford38.Characteristic.RightReesArtinianAdapter.LocalizedPreArtinianCore.localizedFibre_noetherian">localizedFibre_noetherian</a> := <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L160" title="inferInstance">inferInstance</a></span>
+<span id="L143"><a href="#L143">143</a>       <a class="ref" href="./RightReesArtinianAdapter.lean.html#L92" title="Stafford38.Characteristic.RightReesArtinianAdapter.LocalizedPreArtinianCore.ringSpecialization_surjective">ringSpecialization_surjective</a> :=</span>
+<span id="L144"><a href="#L144">144</a>         <a class="ref" href="./SquareZeroLocalizedRing.lean.html#L117" title="Stafford38.Characteristic.SquareZeroLocalizedRing.localizedOppositeSpecialization_surjective">localizedOppositeSpecialization_surjective</a> D S</span>
+<span id="L145"><a href="#L145">145</a>       <a class="ref" href="./RightReesArtinianAdapter.lean.html#L94" title="Stafford38.Characteristic.RightReesArtinianAdapter.LocalizedPreArtinianCore.ringSpecialization_numerator">ringSpecialization_numerator</a> :=</span>
+<span id="L146"><a href="#L146">146</a>         <a class="ref" href="./SquareZeroLocalizedRing.lean.html#L106" title="Stafford38.Characteristic.SquareZeroLocalizedRing.localizedOppositeSpecialization_numerator">localizedOppositeSpecialization_numerator</a> D S</span>
+<span id="L147"><a href="#L147">147</a>       <a class="ref" href="./RightReesArtinianAdapter.lean.html#L99" title="Stafford38.Characteristic.RightReesArtinianAdapter.LocalizedPreArtinianCore.ringSpecialization_parameter">ringSpecialization_parameter</a> :=</span>
+<span id="L148"><a href="#L148">148</a>         <a class="ref" href="./SquareZeroLocalizedRing.lean.html#L112" title="Stafford38.Characteristic.SquareZeroLocalizedRing.localizedOppositeSpecialization_parameter">localizedOppositeSpecialization_parameter</a> D S</span>
+<span id="L149"><a href="#L149">149</a>       <a class="ref" href="./RightReesArtinianAdapter.lean.html#L102" title="Stafford38.Characteristic.RightReesArtinianAdapter.LocalizedPreArtinianCore.parameter_sq">parameter_sq</a> := <a class="ref" href="./SquareZeroLocalizedExactness.lean.html#L99" title="Stafford38.Characteristic.SquareZeroLocalizedExactness.localizedCAct_sq_eq_zero">localizedCAct_sq_eq_zero</a> D S</span>
+<span id="L150"><a href="#L150">150</a>       <a class="ref" href="./RightReesArtinianAdapter.lean.html#L105" title="Stafford38.Characteristic.RightReesArtinianAdapter.LocalizedPreArtinianCore.parameter_fraction">parameter_fraction</a> := <a class="ref" href="./SquareZeroLocalizedExactness.lean.html#L84" title="Stafford38.Characteristic.SquareZeroLocalizedExactness.localizedCAct_oreDiv">localizedCAct_oreDiv</a> D S</span>
+<span id="L151"><a href="#L151">151</a>       <a class="ref" href="./RightReesArtinianAdapter.lean.html#L109" title="Stafford38.Characteristic.RightReesArtinianAdapter.LocalizedPreArtinianCore.parameter_exact">parameter_exact</a> := <a class="ref" href="./SquareZeroLocalizedExactness.lean.html#L110" title="Stafford38.Characteristic.SquareZeroLocalizedExactness.localizedCAct_ker_eq_range">localizedCAct_ker_eq_range</a> D S</span>
+<span id="L152"><a href="#L152">152</a>       <a class="ref" href="./RightReesArtinianAdapter.lean.html#L112" title="Stafford38.Characteristic.RightReesArtinianAdapter.LocalizedPreArtinianCore.moduleSpecialization_surjective">moduleSpecialization_surjective</a> :=</span>
+<span id="L153"><a href="#L153">153</a>         <a class="ref" href="./SquareZeroLocalizedExactness.lean.html#L261" title="Stafford38.Characteristic.SquareZeroLocalizedExactness.localizedSpecialization_surjective">localizedSpecialization_surjective</a> D S</span>
+<span id="L154"><a href="#L154">154</a>       <a class="ref" href="./RightReesArtinianAdapter.lean.html#L114" title="Stafford38.Characteristic.RightReesArtinianAdapter.LocalizedPreArtinianCore.moduleSpecialization_fraction">moduleSpecialization_fraction</a> := by</span>
 <span id="L155"><a href="#L155">155</a>         intro z s</span>
-<span id="L156"><a href="#L156">156</a>         rw [localizedSpecialization_apply,</span>
-<span id="L157"><a href="#L157">157</a>           localizedSpecializationFun_oreDiv]</span>
-<span id="L158"><a href="#L158">158</a>       moduleSpecialization_exact :=</span>
-<span id="L159"><a href="#L159">159</a>         localizedSpecialization_ker_eq_range D S</span>
-<span id="L160"><a href="#L160">160</a>       fibre_nontrivial := hnontrivial</span>
-<span id="L161"><a href="#L161">161</a>       fibre_finiteLength := hlength</span>
-<span id="L162"><a href="#L162">162</a>       annihilatingPower := ⟨q, hq⟩ }</span>
+<span id="L156"><a href="#L156">156</a>         rw [<a class="ref" href="./SquareZeroLocalizedExactness.lean.html#L256" title="Stafford38.Characteristic.SquareZeroLocalizedExactness.localizedSpecialization_apply">localizedSpecialization_apply</a>,</span>
+<span id="L157"><a href="#L157">157</a>           <a class="ref" href="./SquareZeroLocalizedExactness.lean.html#L184" title="Stafford38.Characteristic.SquareZeroLocalizedExactness.localizedSpecializationFun_oreDiv">localizedSpecializationFun_oreDiv</a>]</span>
+<span id="L158"><a href="#L158">158</a>       <a class="ref" href="./RightReesArtinianAdapter.lean.html#L118" title="Stafford38.Characteristic.RightReesArtinianAdapter.LocalizedPreArtinianCore.moduleSpecialization_exact">moduleSpecialization_exact</a> :=</span>
+<span id="L159"><a href="#L159">159</a>         <a class="ref" href="./SquareZeroLocalizedExactness.lean.html#L294" title="Stafford38.Characteristic.SquareZeroLocalizedExactness.localizedSpecialization_ker_eq_range">localizedSpecialization_ker_eq_range</a> D S</span>
+<span id="L160"><a href="#L160">160</a>       <a class="ref" href="./RightReesArtinianAdapter.lean.html#L121" title="Stafford38.Characteristic.RightReesArtinianAdapter.LocalizedPreArtinianCore.fibre_nontrivial">fibre_nontrivial</a> := hnontrivial</span>
+<span id="L161"><a href="#L161">161</a>       <a class="ref" href="./RightReesArtinianAdapter.lean.html#L122" title="Stafford38.Characteristic.RightReesArtinianAdapter.LocalizedPreArtinianCore.fibre_finiteLength">fibre_finiteLength</a> := hlength</span>
+<span id="L162"><a href="#L162">162</a>       <a class="ref" href="./RightReesArtinianAdapter.lean.html#L123" title="Stafford38.Characteristic.RightReesArtinianAdapter.LocalizedPreArtinianCore.annihilatingPower">annihilatingPower</a> := ⟨q, hq⟩ }</span>
 <span id="L163"><a href="#L163">163</a> </span>
 <span id="L164"><a href="#L164">164</a> section Concrete</span>
 <span id="L165"><a href="#L165">165</a> </span>
 <span id="L166"><a href="#L166">166</a> universe u</span>
 <span id="L167"><a href="#L167">167</a> </span>
-<span id="L168"><a href="#L168">168</a> variable (K : Type u) [Field K] [CharZero K]</span>
-<span id="L169"><a href="#L169">169</a> variable {n : ℕ}</span>
+<span id="L168"><a href="#L168">168</a> variable (K : Type u) [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Field/Defs.lean#L170" title="Field">Field</a> K] [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/CharZero/Defs.lean#L33" title="CharZero">CharZero</a> K]</span>
+<span id="L169"><a href="#L169">169</a> variable {n : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L1351" title="Nat">ℕ</a>}</span>
 <span id="L170"><a href="#L170">170</a> </span>
 <span id="L171"><a href="#L171">171</a> /-- At every minimal prime over the characteristic-module annihilator, the</span>
 <span id="L172"><a href="#L172">172</a> concrete right order-Rees two-jet supplies the full localized pre-Artinian core.</span>
@@ -177,37 +177,37 @@
 <span id="L177"><a href="#L177">177</a> `LocalizedHighPowerTwoBlockVanishing`, or Artinian quotient descent.</span>
 <span id="L178"><a href="#L178">178</a> -/</span>
 <span id="L179"><a href="#L179">179</a> theorem exists_concrete_localizedPreArtinianCore</span>
-<span id="L180"><a href="#L180">180</a>     (I : RightIdeal (WeylAlg K n))</span>
-<span id="L181"><a href="#L181">181</a>     (P : Ideal (SymbolRing K n)) [P.IsPrime]</span>
+<span id="L180"><a href="#L180">180</a>     (I : <a class="ref" href="../Quotient/EulerSurjectivity.lean.html#L21" title="Stafford38.EulerSurjectivity.RightIdeal">RightIdeal</a> (<a class="ref" href="../ChallengeDefinitions.lean.html#L73" title="Stafford38Challenge.WeylAlg">WeylAlg</a> K n))</span>
+<span id="L181"><a href="#L181">181</a>     (P : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Defs.lean#L38" title="Ideal">Ideal</a> (<a class="ref" href="./Polynomial.lean.html#L20" title="Stafford38.Characteristic.SymbolRing">SymbolRing</a> K n)) [P.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Prime.lean#L39" title="Ideal.IsPrime">IsPrime</a>]</span>
 <span id="L182"><a href="#L182">182</a>     (hP : P ∈</span>
-<span id="L183"><a href="#L183">183</a>       (Module.annihilator (SymbolRing K n)</span>
-<span id="L184"><a href="#L184">184</a>         (Stafford38.CharacteristicAssociatedGradedModule.OrderAssociatedGradedModule</span>
-<span id="L185"><a href="#L185">185</a>           K I)).minimalPrimes) :</span>
-<span id="L186"><a href="#L186">186</a>     ∃ h : OreLocalization.OreSet</span>
-<span id="L187"><a href="#L187">187</a>         (OppositeDenominators (filteredQuotientTwoJetTraceData K I)</span>
-<span id="L188"><a href="#L188">188</a>           P.primeCompl),</span>
+<span id="L183"><a href="#L183">183</a>       (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Maps.lean#L859" title="Module.annihilator">Module.annihilator</a> (<a class="ref" href="./Polynomial.lean.html#L20" title="Stafford38.Characteristic.SymbolRing">SymbolRing</a> K n)</span>
+<span id="L184"><a href="#L184">184</a>         (<a class="ref" href="./AssociatedGradedModule.lean.html#L52" title="Stafford38.CharacteristicAssociatedGradedModule.OrderAssociatedGradedModule">Stafford38.CharacteristicAssociatedGradedModule.OrderAssociatedGradedModule</a></span>
+<span id="L185"><a href="#L185">185</a>           K I)).<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/MinimalPrime/Basic.lean#L56" title="Ideal.minimalPrimes">minimalPrimes</a>) :</span>
+<span id="L186"><a href="#L186">186</a>     ∃ h : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/GroupTheory/OreLocalization/OreSet.lean#L48" title="OreLocalization.OreSet">OreLocalization.OreSet</a></span>
+<span id="L187"><a href="#L187">187</a>         (<a class="ref" href="./SquareZeroLocalizedExactness.lean.html#L48" title="Stafford38.Characteristic.SquareZeroLocalizedExactness.OppositeDenominators">OppositeDenominators</a> (<a class="ref" href="./ConcreteSquareZeroTraceData.lean.html#L96" title="Stafford38.CharacteristicConcreteSquareZeroTraceData.filteredQuotientTwoJetTraceData">filteredQuotientTwoJetTraceData</a> K I)</span>
+<span id="L188"><a href="#L188">188</a>           P.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Prime.lean#L113" title="Ideal.primeCompl">primeCompl</a>),</span>
 <span id="L189"><a href="#L189">189</a>       letI := h</span>
-<span id="L190"><a href="#L190">190</a>       LocalizedPreArtinianCore</span>
-<span id="L191"><a href="#L191">191</a>         (filteredQuotientTwoJetTraceData K I) P.primeCompl := by</span>
+<span id="L190"><a href="#L190">190</a>       <a class="ref" href="./RightReesArtinianAdapter.lean.html#L80" title="Stafford38.Characteristic.RightReesArtinianAdapter.LocalizedPreArtinianCore">LocalizedPreArtinianCore</a></span>
+<span id="L191"><a href="#L191">191</a>         (<a class="ref" href="./ConcreteSquareZeroTraceData.lean.html#L96" title="Stafford38.CharacteristicConcreteSquareZeroTraceData.filteredQuotientTwoJetTraceData">filteredQuotientTwoJetTraceData</a> K I) P.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Prime.lean#L113" title="Ideal.primeCompl">primeCompl</a> := by</span>
 <span id="L192"><a href="#L192">192</a>   obtain ⟨h, _hexact, hnontrivial, hlength⟩ :=</span>
-<span id="L193"><a href="#L193">193</a>     Stafford38.Characteristic.AssociatedGradedFinite.exists_minimalPrimeLocalizedExactnessAndFiniteLength</span>
+<span id="L193"><a href="#L193">193</a>     <a class="ref" href="./AssociatedGradedFinite.lean.html#L57" title="Stafford38.Characteristic.AssociatedGradedFinite.exists_minimalPrimeLocalizedExactnessAndFiniteLength">Stafford38.Characteristic.AssociatedGradedFinite.exists_minimalPrimeLocalizedExactnessAndFiniteLength</a></span>
 <span id="L194"><a href="#L194">194</a>       K I P hP</span>
 <span id="L195"><a href="#L195">195</a>   refine ⟨h, ?_⟩</span>
 <span id="L196"><a href="#L196">196</a>   letI := h</span>
-<span id="L197"><a href="#L197">197</a>   letI : CharZero (Localization P.primeCompl) :=</span>
-<span id="L198"><a href="#L198">198</a>     charZero_of_injective_algebraMap</span>
-<span id="L199"><a href="#L199">199</a>       (FaithfulSMul.algebraMap_injective K</span>
-<span id="L200"><a href="#L200">200</a>         (Localization P.primeCompl))</span>
-<span id="L201"><a href="#L201">201</a>   letI : IsNoetherianRing (Localization P.primeCompl) :=</span>
-<span id="L202"><a href="#L202">202</a>     IsLocalization.isNoetherianRing P.primeCompl</span>
-<span id="L203"><a href="#L203">203</a>       (Localization P.primeCompl) inferInstance</span>
-<span id="L204"><a href="#L204">204</a>   exact localizedPreArtinianCore_of_exact_finiteLength</span>
-<span id="L205"><a href="#L205">205</a>     (filteredQuotientTwoJetTraceData K I) P.primeCompl</span>
+<span id="L197"><a href="#L197">197</a>   letI : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/CharZero/Defs.lean#L33" title="CharZero">CharZero</a> (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/GroupTheory/MonoidLocalization/Basic.lean#L207" title="Localization">Localization</a> P.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Prime.lean#L113" title="Ideal.primeCompl">primeCompl</a>) :=</span>
+<span id="L198"><a href="#L198">198</a>     <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/CharP/Algebra.lean#L76" title="charZero_of_injective_algebraMap">charZero_of_injective_algebraMap</a></span>
+<span id="L199"><a href="#L199">199</a>       (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Algebra/Basic.lean#L336" title="FaithfulSMul.algebraMap_injective">FaithfulSMul.algebraMap_injective</a> K</span>
+<span id="L200"><a href="#L200">200</a>         (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/GroupTheory/MonoidLocalization/Basic.lean#L207" title="Localization">Localization</a> P.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Prime.lean#L113" title="Ideal.primeCompl">primeCompl</a>))</span>
+<span id="L201"><a href="#L201">201</a>   letI : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Noetherian/Defs.lean#L189" title="IsNoetherianRing">IsNoetherianRing</a> (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/GroupTheory/MonoidLocalization/Basic.lean#L207" title="Localization">Localization</a> P.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Prime.lean#L113" title="Ideal.primeCompl">primeCompl</a>) :=</span>
+<span id="L202"><a href="#L202">202</a>     <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Localization/Submodule.lean#L82" title="IsLocalization.isNoetherianRing">IsLocalization.isNoetherianRing</a> P.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Prime.lean#L113" title="Ideal.primeCompl">primeCompl</a></span>
+<span id="L203"><a href="#L203">203</a>       (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/GroupTheory/MonoidLocalization/Basic.lean#L207" title="Localization">Localization</a> P.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Prime.lean#L113" title="Ideal.primeCompl">primeCompl</a>) <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L160" title="inferInstance">inferInstance</a></span>
+<span id="L204"><a href="#L204">204</a>   exact <a class="ref" href="./RightReesArtinianAdapter.lean.html#L128" title="Stafford38.Characteristic.RightReesArtinianAdapter.localizedPreArtinianCore_of_exact_finiteLength">localizedPreArtinianCore_of_exact_finiteLength</a></span>
+<span id="L205"><a href="#L205">205</a>     (<a class="ref" href="./ConcreteSquareZeroTraceData.lean.html#L96" title="Stafford38.CharacteristicConcreteSquareZeroTraceData.filteredQuotientTwoJetTraceData">filteredQuotientTwoJetTraceData</a> K I) P.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Prime.lean#L113" title="Ideal.primeCompl">primeCompl</a></span>
 <span id="L206"><a href="#L206">206</a>       hnontrivial hlength</span>
 <span id="L207"><a href="#L207">207</a> </span>
-<span id="L208"><a href="#L208">208</a> #print axioms LocalizedHighPowerTwoBlockVanishing</span>
-<span id="L209"><a href="#L209">209</a> #print axioms localizedPreArtinianCore_of_exact_finiteLength</span>
-<span id="L210"><a href="#L210">210</a> #print axioms exists_concrete_localizedPreArtinianCore</span>
+<span id="L208"><a href="#L208">208</a> #print axioms <a class="ref" href="./RightReesArtinianAdapter.lean.html#L59" title="Stafford38.Characteristic.RightReesArtinianAdapter.LocalizedHighPowerTwoBlockVanishing">LocalizedHighPowerTwoBlockVanishing</a></span>
+<span id="L209"><a href="#L209">209</a> #print axioms <a class="ref" href="./RightReesArtinianAdapter.lean.html#L128" title="Stafford38.Characteristic.RightReesArtinianAdapter.localizedPreArtinianCore_of_exact_finiteLength">localizedPreArtinianCore_of_exact_finiteLength</a></span>
+<span id="L210"><a href="#L210">210</a> #print axioms <a class="ref" href="./RightReesArtinianAdapter.lean.html#L171" title="Stafford38.Characteristic.RightReesArtinianAdapter.exists_concrete_localizedPreArtinianCore">exists_concrete_localizedPreArtinianCore</a></span>
 <span id="L211"><a href="#L211">211</a> </span>
 <span id="L212"><a href="#L212">212</a> end Concrete</span>
 <span id="L213"><a href="#L213">213</a> </span>

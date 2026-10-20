@@ -1,11 +1,11 @@
-<!doctype html><meta charset="utf-8"><title>Stafford38/Geometry/GeneralCoisotropicSetsTest.lean</title><style>body{font:14px monospace}pre span{display:block}pre span:target{background:#fff0ad}a{color:#666}pre{white-space:pre-wrap}</style><h1>Stafford38/Geometry/GeneralCoisotropicSetsTest.lean</h1><p>This project (Stafford38) · 0403af3f0b1a7f84d2027121932723f67bd279ae</p><pre><span id="L1"><a href="#L1">1</a> module</span>
+<!doctype html><meta charset="utf-8"><title>Stafford38/Geometry/GeneralCoisotropicSetsTest.lean</title><style>body{font:14px monospace}pre span{display:block}pre span:target{background:#fff0ad}a{color:#666}pre{white-space:pre-wrap}a.ref{color:#0645ad;text-decoration:none}a.ref:hover{text-decoration:underline}</style><h1>Stafford38/Geometry/GeneralCoisotropicSetsTest.lean</h1><p>This project (Stafford38) · 0403af3f0b1a7f84d2027121932723f67bd279ae</p><pre><span id="L1"><a href="#L1">1</a> module</span>
 <span id="L2"><a href="#L2">2</a> public import Stafford38.Geometry.GeneralCoisotropicSets</span>
 <span id="L3"><a href="#L3">3</a> public import Stafford38.Characteristic.PostScalarExtensionPoisson</span>
 <span id="L4"><a href="#L4">4</a> public import Mathlib.Analysis.Complex.Polynomial.Basic</span>
 <span id="L5"><a href="#L5">5</a> </span>
 <span id="L6"><a href="#L6">6</a> @[expose] public section</span>
 <span id="L7"><a href="#L7">7</a> </span>
-<span id="L8"><a href="#L8">8</a> open Stafford38Challenge (PhaseVar)</span>
+<span id="L8"><a href="#L8">8</a> open Stafford38Challenge (<a class="ref" href="../ChallengeDefinitions.lean.html#L64" title="Stafford38Challenge.PhaseVar">PhaseVar</a>)</span>
 <span id="L9"><a href="#L9">9</a> </span>
 <span id="L10"><a href="#L10">10</a> /-!</span>
 <span id="L11"><a href="#L11">11</a> # Independent consumer for the set-level coisotropic exclusion</span>
@@ -36,66 +36,66 @@
 <span id="L36"><a href="#L36">36</a> containment directly, without requiring a consumer to reconstruct the</span>
 <span id="L37"><a href="#L37">37</a> vanishing-ideal dictionary. -/</span>
 <span id="L38"><a href="#L38">38</a> theorem exported_general_coisotropic_component_conormal_consumer</span>
-<span id="L39"><a href="#L39">39</a>     {k : Type u} [Field k] [IsAlgClosed k] [CharZero k]</span>
-<span id="L40"><a href="#L40">40</a>     {m : ℕ}</span>
-<span id="L41"><a href="#L41">41</a>     (W : Set (PhaseVar m → k))</span>
-<span id="L42"><a href="#L42">42</a>     (hclosed : ∃ L : Ideal (SymbolRing k m),</span>
-<span id="L43"><a href="#L43">43</a>       W = MvPolynomial.zeroLocus k L)</span>
-<span id="L44"><a href="#L44">44</a>     (hW : IsFibreConical W)</span>
-<span id="L45"><a href="#L45">45</a>     (hpoisson : ∀ f ∈ MvPolynomial.vanishingIdeal k W,</span>
-<span id="L46"><a href="#L46">46</a>       ∀ g ∈ MvPolynomial.vanishingIdeal k W,</span>
-<span id="L47"><a href="#L47">47</a>         poissonBracket f g ∈ MvPolynomial.vanishingIdeal k W)</span>
-<span id="L48"><a href="#L48">48</a>     (P : Ideal (MvPolynomial (Fin m) k))</span>
-<span id="L49"><a href="#L49">49</a>     (hP : P ∈ ((MvPolynomial.vanishingIdeal k W).comap</span>
-<span id="L50"><a href="#L50">50</a>       (Stafford38.Geometry.CoisotropicTranslation.baseLift :</span>
-<span id="L51"><a href="#L51">51</a>         MvPolynomial (Fin m) k →ₐ[k] SymbolRing k m).toRingHom).minimalPrimes) :</span>
-<span id="L52"><a href="#L52">52</a>     MvPolynomial.zeroLocus k</span>
-<span id="L53"><a href="#L53">53</a>         (MvPolynomial.vanishingIdeal k</span>
-<span id="L54"><a href="#L54">54</a>           (restrictedEquationConormalLocus P {y | SmoothAffinePoint P y})) ⊆ W := by</span>
-<span id="L55"><a href="#L55">55</a>   exact smoothConormalClosure_minimalPrime_subset_of_isFibreConical</span>
+<span id="L39"><a href="#L39">39</a>     {k : Type u} [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Field/Defs.lean#L170" title="Field">Field</a> k] [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/FieldTheory/IsAlgClosed/Basic.lean#L58" title="IsAlgClosed">IsAlgClosed</a> k] [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/CharZero/Defs.lean#L33" title="CharZero">CharZero</a> k]</span>
+<span id="L40"><a href="#L40">40</a>     {m : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L1351" title="Nat">ℕ</a>}</span>
+<span id="L41"><a href="#L41">41</a>     (W : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Data/Set/Defs.lean#L44" title="Set">Set</a> (<a class="ref" href="../ChallengeDefinitions.lean.html#L64" title="Stafford38Challenge.PhaseVar">PhaseVar</a> m → k))</span>
+<span id="L42"><a href="#L42">42</a>     (hclosed : ∃ L : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Defs.lean#L38" title="Ideal">Ideal</a> (<a class="ref" href="../Characteristic/Polynomial.lean.html#L20" title="Stafford38.Characteristic.SymbolRing">SymbolRing</a> k m),</span>
+<span id="L43"><a href="#L43">43</a>       W = <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Nullstellensatz.lean#L39" title="MvPolynomial.zeroLocus">MvPolynomial.zeroLocus</a> k L)</span>
+<span id="L44"><a href="#L44">44</a>     (hW : <a class="ref" href="./FibreConicalVanishingIdeal.lean.html#L23" title="Stafford38.Geometry.FibreConicalVanishingIdeal.IsFibreConical">IsFibreConical</a> W)</span>
+<span id="L45"><a href="#L45">45</a>     (hpoisson : ∀ f ∈ <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Nullstellensatz.lean#L61" title="MvPolynomial.vanishingIdeal">MvPolynomial.vanishingIdeal</a> k W,</span>
+<span id="L46"><a href="#L46">46</a>       ∀ g ∈ <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Nullstellensatz.lean#L61" title="MvPolynomial.vanishingIdeal">MvPolynomial.vanishingIdeal</a> k W,</span>
+<span id="L47"><a href="#L47">47</a>         <a class="ref" href="../Characteristic/Polynomial.lean.html#L29" title="Stafford38.Characteristic.poissonBracket">poissonBracket</a> f g ∈ <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Nullstellensatz.lean#L61" title="MvPolynomial.vanishingIdeal">MvPolynomial.vanishingIdeal</a> k W)</span>
+<span id="L48"><a href="#L48">48</a>     (P : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Defs.lean#L38" title="Ideal">Ideal</a> (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/Basic.lean#L80" title="MvPolynomial">MvPolynomial</a> (<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L2443" title="Fin">Fin</a> m) k))</span>
+<span id="L49"><a href="#L49">49</a>     (hP : P ∈ ((<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Nullstellensatz.lean#L61" title="MvPolynomial.vanishingIdeal">MvPolynomial.vanishingIdeal</a> k W).<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Maps.lean#L46" title="Ideal.comap">comap</a></span>
+<span id="L50"><a href="#L50">50</a>       (<a class="ref" href="./CoisotropicTranslation.lean.html#L30" title="Stafford38.Geometry.CoisotropicTranslation.baseLift">Stafford38.Geometry.CoisotropicTranslation.baseLift</a> :</span>
+<span id="L51"><a href="#L51">51</a>         <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/Basic.lean#L80" title="MvPolynomial">MvPolynomial</a> (<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L2443" title="Fin">Fin</a> m) k →ₐ[k] <a class="ref" href="../Characteristic/Polynomial.lean.html#L20" title="Stafford38.Characteristic.SymbolRing">SymbolRing</a> k m).<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Algebra/Hom.lean#L30" title="AlgHom.toRingHom">toRingHom</a>).<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/MinimalPrime/Basic.lean#L56" title="Ideal.minimalPrimes">minimalPrimes</a>) :</span>
+<span id="L52"><a href="#L52">52</a>     <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Nullstellensatz.lean#L39" title="MvPolynomial.zeroLocus">MvPolynomial.zeroLocus</a> k</span>
+<span id="L53"><a href="#L53">53</a>         (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Nullstellensatz.lean#L61" title="MvPolynomial.vanishingIdeal">MvPolynomial.vanishingIdeal</a> k</span>
+<span id="L54"><a href="#L54">54</a>           (<a class="ref" href="./ConormalPrincipalOpenDensity.lean.html#L53" title="Stafford38.Geometry.ConormalPrincipalOpenDensity.restrictedEquationConormalLocus">restrictedEquationConormalLocus</a> P {y | <a class="ref" href="./SmoothAffineConormal.lean.html#L25" title="Stafford38.Geometry.SmoothAffineConormal.SmoothAffinePoint">SmoothAffinePoint</a> P y})) ⊆ W := by</span>
+<span id="L55"><a href="#L55">55</a>   exact <a class="ref" href="./GeneralCoisotropicSets.lean.html#L86" title="Stafford38.Geometry.GeneralCoisotropicSets.smoothConormalClosure_minimalPrime_subset_of_isFibreConical">smoothConormalClosure_minimalPrime_subset_of_isFibreConical</a></span>
 <span id="L56"><a href="#L56">56</a>     W hclosed hW hpoisson P hP</span>
 <span id="L57"><a href="#L57">57</a> </span>
 <span id="L58"><a href="#L58">58</a> /-- The exported arbitrary-set theorem is consumable at exactly its stated</span>
 <span id="L59"><a href="#L59">59</a> hypotheses, independently of the implementation module. -/</span>
 <span id="L60"><a href="#L60">60</a> theorem exported_general_coisotropic_set_consumer</span>
-<span id="L61"><a href="#L61">61</a>     {k : Type u} [Field k] [IsAlgClosed k] [CharZero k]</span>
-<span id="L62"><a href="#L62">62</a>     {m : ℕ} (hm : 0 &lt; m)</span>
-<span id="L63"><a href="#L63">63</a>     (W : Set (PhaseVar m → k))</span>
-<span id="L64"><a href="#L64">64</a>     (hnonempty : W.Nonempty)</span>
-<span id="L65"><a href="#L65">65</a>     (hclosed : ∃ L : Ideal (SymbolRing k m),</span>
-<span id="L66"><a href="#L66">66</a>       W = MvPolynomial.zeroLocus k L)</span>
-<span id="L67"><a href="#L67">67</a>     (hW : IsFibreConical W)</span>
-<span id="L68"><a href="#L68">68</a>     (hpoisson : ∀ f ∈ MvPolynomial.vanishingIdeal k W,</span>
-<span id="L69"><a href="#L69">69</a>       ∀ g ∈ MvPolynomial.vanishingIdeal k W,</span>
-<span id="L70"><a href="#L70">70</a>         poissonBracket f g ∈ MvPolynomial.vanishingIdeal k W)</span>
-<span id="L71"><a href="#L71">71</a>     (P : MvPolynomial (Fin m) k)</span>
-<span id="L72"><a href="#L72">72</a>     (hP : fibreLift P ∈ MvPolynomial.vanishingIdeal k W)</span>
-<span id="L73"><a href="#L73">73</a>     (haxis : MvPolynomial.eval</span>
-<span id="L74"><a href="#L74">74</a>       (fun i : Fin m =&gt; if i = ⟨0, hm⟩ then (1 : k) else 0) P ≠ 0) :</span>
-<span id="L75"><a href="#L75">75</a>     ∃ q ∈ W, q (.inl ⟨0, hm⟩) = 0 := by</span>
-<span id="L76"><a href="#L76">76</a>   exact exists_zero_base_coordinate_of_isFibreConical</span>
+<span id="L61"><a href="#L61">61</a>     {k : Type u} [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Field/Defs.lean#L170" title="Field">Field</a> k] [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/FieldTheory/IsAlgClosed/Basic.lean#L58" title="IsAlgClosed">IsAlgClosed</a> k] [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/CharZero/Defs.lean#L33" title="CharZero">CharZero</a> k]</span>
+<span id="L62"><a href="#L62">62</a>     {m : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L1351" title="Nat">ℕ</a>} (hm : 0 &lt; m)</span>
+<span id="L63"><a href="#L63">63</a>     (W : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Data/Set/Defs.lean#L44" title="Set">Set</a> (<a class="ref" href="../ChallengeDefinitions.lean.html#L64" title="Stafford38Challenge.PhaseVar">PhaseVar</a> m → k))</span>
+<span id="L64"><a href="#L64">64</a>     (hnonempty : W.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Data/Set/Defs.lean#L277" title="Set.Nonempty">Nonempty</a>)</span>
+<span id="L65"><a href="#L65">65</a>     (hclosed : ∃ L : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Defs.lean#L38" title="Ideal">Ideal</a> (<a class="ref" href="../Characteristic/Polynomial.lean.html#L20" title="Stafford38.Characteristic.SymbolRing">SymbolRing</a> k m),</span>
+<span id="L66"><a href="#L66">66</a>       W = <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Nullstellensatz.lean#L39" title="MvPolynomial.zeroLocus">MvPolynomial.zeroLocus</a> k L)</span>
+<span id="L67"><a href="#L67">67</a>     (hW : <a class="ref" href="./FibreConicalVanishingIdeal.lean.html#L23" title="Stafford38.Geometry.FibreConicalVanishingIdeal.IsFibreConical">IsFibreConical</a> W)</span>
+<span id="L68"><a href="#L68">68</a>     (hpoisson : ∀ f ∈ <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Nullstellensatz.lean#L61" title="MvPolynomial.vanishingIdeal">MvPolynomial.vanishingIdeal</a> k W,</span>
+<span id="L69"><a href="#L69">69</a>       ∀ g ∈ <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Nullstellensatz.lean#L61" title="MvPolynomial.vanishingIdeal">MvPolynomial.vanishingIdeal</a> k W,</span>
+<span id="L70"><a href="#L70">70</a>         <a class="ref" href="../Characteristic/Polynomial.lean.html#L29" title="Stafford38.Characteristic.poissonBracket">poissonBracket</a> f g ∈ <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Nullstellensatz.lean#L61" title="MvPolynomial.vanishingIdeal">MvPolynomial.vanishingIdeal</a> k W)</span>
+<span id="L71"><a href="#L71">71</a>     (P : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/Basic.lean#L80" title="MvPolynomial">MvPolynomial</a> (<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L2443" title="Fin">Fin</a> m) k)</span>
+<span id="L72"><a href="#L72">72</a>     (hP : <a class="ref" href="./LaurentConormalDirection.lean.html#L133" title="Stafford38.Geometry.LaurentConormalDirection.fibreLift">fibreLift</a> P ∈ <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Nullstellensatz.lean#L61" title="MvPolynomial.vanishingIdeal">MvPolynomial.vanishingIdeal</a> k W)</span>
+<span id="L73"><a href="#L73">73</a>     (haxis : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/Eval.lean#L255" title="MvPolynomial.eval">MvPolynomial.eval</a></span>
+<span id="L74"><a href="#L74">74</a>       (fun i : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L2443" title="Fin">Fin</a> m =&gt; if i = ⟨0, hm⟩ then (1 : k) else 0) P ≠ 0) :</span>
+<span id="L75"><a href="#L75">75</a>     ∃ q ∈ W, q (<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Core.lean#L213" title="Sum.inl">.inl</a> ⟨0, hm⟩) = 0 := by</span>
+<span id="L76"><a href="#L76">76</a>   exact <a class="ref" href="./GeneralCoisotropicSets.lean.html#L162" title="Stafford38.Geometry.GeneralCoisotropicSets.exists_zero_base_coordinate_of_isFibreConical">exists_zero_base_coordinate_of_isFibreConical</a></span>
 <span id="L77"><a href="#L77">77</a>     hm W hnonempty hclosed hW hpoisson P hP haxis</span>
 <span id="L78"><a href="#L78">78</a> </span>
 <span id="L79"><a href="#L79">79</a> /-- The exclusion form used by the paper follows immediately and retains the</span>
 <span id="L80"><a href="#L80">80</a> same arbitrary-set quantifiers. -/</span>
 <span id="L81"><a href="#L81">81</a> theorem false_of_exported_general_coisotropic_set_avoiding_hyperplane</span>
-<span id="L82"><a href="#L82">82</a>     {k : Type u} [Field k] [IsAlgClosed k] [CharZero k]</span>
-<span id="L83"><a href="#L83">83</a>     {m : ℕ} (hm : 0 &lt; m)</span>
-<span id="L84"><a href="#L84">84</a>     (W : Set (PhaseVar m → k))</span>
-<span id="L85"><a href="#L85">85</a>     (hnonempty : W.Nonempty)</span>
-<span id="L86"><a href="#L86">86</a>     (hclosed : ∃ L : Ideal (SymbolRing k m),</span>
-<span id="L87"><a href="#L87">87</a>       W = MvPolynomial.zeroLocus k L)</span>
-<span id="L88"><a href="#L88">88</a>     (hW : IsFibreConical W)</span>
-<span id="L89"><a href="#L89">89</a>     (hpoisson : ∀ f ∈ MvPolynomial.vanishingIdeal k W,</span>
-<span id="L90"><a href="#L90">90</a>       ∀ g ∈ MvPolynomial.vanishingIdeal k W,</span>
-<span id="L91"><a href="#L91">91</a>         poissonBracket f g ∈ MvPolynomial.vanishingIdeal k W)</span>
-<span id="L92"><a href="#L92">92</a>     (P : MvPolynomial (Fin m) k)</span>
-<span id="L93"><a href="#L93">93</a>     (hP : fibreLift P ∈ MvPolynomial.vanishingIdeal k W)</span>
-<span id="L94"><a href="#L94">94</a>     (haxis : MvPolynomial.eval</span>
-<span id="L95"><a href="#L95">95</a>       (fun i : Fin m =&gt; if i = ⟨0, hm⟩ then (1 : k) else 0) P ≠ 0)</span>
-<span id="L96"><a href="#L96">96</a>     (havoid : ∀ q ∈ W, q (.inl ⟨0, hm⟩) ≠ 0) :</span>
-<span id="L97"><a href="#L97">97</a>     False := by</span>
-<span id="L98"><a href="#L98">98</a>   obtain ⟨q, hq, hqcoord⟩ := exported_general_coisotropic_set_consumer</span>
+<span id="L82"><a href="#L82">82</a>     {k : Type u} [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Field/Defs.lean#L170" title="Field">Field</a> k] [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/FieldTheory/IsAlgClosed/Basic.lean#L58" title="IsAlgClosed">IsAlgClosed</a> k] [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/CharZero/Defs.lean#L33" title="CharZero">CharZero</a> k]</span>
+<span id="L83"><a href="#L83">83</a>     {m : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L1351" title="Nat">ℕ</a>} (hm : 0 &lt; m)</span>
+<span id="L84"><a href="#L84">84</a>     (W : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Data/Set/Defs.lean#L44" title="Set">Set</a> (<a class="ref" href="../ChallengeDefinitions.lean.html#L64" title="Stafford38Challenge.PhaseVar">PhaseVar</a> m → k))</span>
+<span id="L85"><a href="#L85">85</a>     (hnonempty : W.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Data/Set/Defs.lean#L277" title="Set.Nonempty">Nonempty</a>)</span>
+<span id="L86"><a href="#L86">86</a>     (hclosed : ∃ L : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Defs.lean#L38" title="Ideal">Ideal</a> (<a class="ref" href="../Characteristic/Polynomial.lean.html#L20" title="Stafford38.Characteristic.SymbolRing">SymbolRing</a> k m),</span>
+<span id="L87"><a href="#L87">87</a>       W = <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Nullstellensatz.lean#L39" title="MvPolynomial.zeroLocus">MvPolynomial.zeroLocus</a> k L)</span>
+<span id="L88"><a href="#L88">88</a>     (hW : <a class="ref" href="./FibreConicalVanishingIdeal.lean.html#L23" title="Stafford38.Geometry.FibreConicalVanishingIdeal.IsFibreConical">IsFibreConical</a> W)</span>
+<span id="L89"><a href="#L89">89</a>     (hpoisson : ∀ f ∈ <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Nullstellensatz.lean#L61" title="MvPolynomial.vanishingIdeal">MvPolynomial.vanishingIdeal</a> k W,</span>
+<span id="L90"><a href="#L90">90</a>       ∀ g ∈ <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Nullstellensatz.lean#L61" title="MvPolynomial.vanishingIdeal">MvPolynomial.vanishingIdeal</a> k W,</span>
+<span id="L91"><a href="#L91">91</a>         <a class="ref" href="../Characteristic/Polynomial.lean.html#L29" title="Stafford38.Characteristic.poissonBracket">poissonBracket</a> f g ∈ <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Nullstellensatz.lean#L61" title="MvPolynomial.vanishingIdeal">MvPolynomial.vanishingIdeal</a> k W)</span>
+<span id="L92"><a href="#L92">92</a>     (P : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/Basic.lean#L80" title="MvPolynomial">MvPolynomial</a> (<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L2443" title="Fin">Fin</a> m) k)</span>
+<span id="L93"><a href="#L93">93</a>     (hP : <a class="ref" href="./LaurentConormalDirection.lean.html#L133" title="Stafford38.Geometry.LaurentConormalDirection.fibreLift">fibreLift</a> P ∈ <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Nullstellensatz.lean#L61" title="MvPolynomial.vanishingIdeal">MvPolynomial.vanishingIdeal</a> k W)</span>
+<span id="L94"><a href="#L94">94</a>     (haxis : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/Eval.lean#L255" title="MvPolynomial.eval">MvPolynomial.eval</a></span>
+<span id="L95"><a href="#L95">95</a>       (fun i : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L2443" title="Fin">Fin</a> m =&gt; if i = ⟨0, hm⟩ then (1 : k) else 0) P ≠ 0)</span>
+<span id="L96"><a href="#L96">96</a>     (havoid : ∀ q ∈ W, q (<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Core.lean#L213" title="Sum.inl">.inl</a> ⟨0, hm⟩) ≠ 0) :</span>
+<span id="L97"><a href="#L97">97</a>     <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L274" title="False">False</a> := by</span>
+<span id="L98"><a href="#L98">98</a>   obtain ⟨q, hq, hqcoord⟩ := <a class="ref" href="./GeneralCoisotropicSetsTest.lean.html#L58" title="Stafford38.Geometry.GeneralCoisotropicSetsTest.exported_general_coisotropic_set_consumer">exported_general_coisotropic_set_consumer</a></span>
 <span id="L99"><a href="#L99">99</a>     hm W hnonempty hclosed hW hpoisson P hP haxis</span>
 <span id="L100"><a href="#L100">100</a>   exact havoid q hq hqcoord</span>
 <span id="L101"><a href="#L101">101</a> </span>
@@ -104,30 +104,30 @@
 <span id="L104"><a href="#L104">104</a> therefore checked through the definitions used by the paper rather than by</span>
 <span id="L105"><a href="#L105">105</a> repeating its interface propositions as hypotheses. -/</span>
 <span id="L106"><a href="#L106">106</a> theorem exact_complex_manuscript_coisotropic_consumer</span>
-<span id="L107"><a href="#L107">107</a>     {n : ℕ} (hn : 0 &lt; n)</span>
-<span id="L108"><a href="#L108">108</a>     (W : Set (PhaseVar n → ℂ))</span>
-<span id="L109"><a href="#L109">109</a>     (hnonempty : W.Nonempty)</span>
-<span id="L110"><a href="#L110">110</a>     (hclosed : ∃ L : Ideal (SymbolRing ℂ n),</span>
-<span id="L111"><a href="#L111">111</a>       W = MvPolynomial.zeroLocus ℂ L)</span>
-<span id="L112"><a href="#L112">112</a>     (hscale : ∀ q ∈ W, ∀ a : ℂ, a ≠ 0 →</span>
-<span id="L113"><a href="#L113">113</a>       Sum.elim (fun i =&gt; q (.inl i)) (fun i =&gt; a * q (.inr i)) ∈ W)</span>
-<span id="L114"><a href="#L114">114</a>     (hbracket : ∀ f ∈ MvPolynomial.vanishingIdeal ℂ W,</span>
-<span id="L115"><a href="#L115">115</a>       ∀ g ∈ MvPolynomial.vanishingIdeal ℂ W,</span>
-<span id="L116"><a href="#L116">116</a>       poissonBracket f g ∈ MvPolynomial.vanishingIdeal ℂ W)</span>
-<span id="L117"><a href="#L117">117</a>     (P : MvPolynomial (Fin n) ℂ)</span>
+<span id="L107"><a href="#L107">107</a>     {n : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L1351" title="Nat">ℕ</a>} (hn : 0 &lt; n)</span>
+<span id="L108"><a href="#L108">108</a>     (W : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Data/Set/Defs.lean#L44" title="Set">Set</a> (<a class="ref" href="../ChallengeDefinitions.lean.html#L64" title="Stafford38Challenge.PhaseVar">PhaseVar</a> n → <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Basic/Complex/Basic.lean#L33" title="Complex">ℂ</a>))</span>
+<span id="L109"><a href="#L109">109</a>     (hnonempty : W.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Data/Set/Defs.lean#L277" title="Set.Nonempty">Nonempty</a>)</span>
+<span id="L110"><a href="#L110">110</a>     (hclosed : ∃ L : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Defs.lean#L38" title="Ideal">Ideal</a> (<a class="ref" href="../Characteristic/Polynomial.lean.html#L20" title="Stafford38.Characteristic.SymbolRing">SymbolRing</a> <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Basic/Complex/Basic.lean#L33" title="Complex">ℂ</a> n),</span>
+<span id="L111"><a href="#L111">111</a>       W = <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Nullstellensatz.lean#L39" title="MvPolynomial.zeroLocus">MvPolynomial.zeroLocus</a> <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Basic/Complex/Basic.lean#L33" title="Complex">ℂ</a> L)</span>
+<span id="L112"><a href="#L112">112</a>     (hscale : ∀ q ∈ W, ∀ a : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Basic/Complex/Basic.lean#L33" title="Complex">ℂ</a>, a ≠ 0 →</span>
+<span id="L113"><a href="#L113">113</a>       <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Data/Sum/Basic.lean#L99" title="Sum.elim">Sum.elim</a> (fun i =&gt; q (<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Core.lean#L213" title="Sum.inl">.inl</a> i)) (fun i =&gt; a * q (<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Core.lean#L215" title="Sum.inr">.inr</a> i)) ∈ W)</span>
+<span id="L114"><a href="#L114">114</a>     (hbracket : ∀ f ∈ <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Nullstellensatz.lean#L61" title="MvPolynomial.vanishingIdeal">MvPolynomial.vanishingIdeal</a> <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Basic/Complex/Basic.lean#L33" title="Complex">ℂ</a> W,</span>
+<span id="L115"><a href="#L115">115</a>       ∀ g ∈ <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Nullstellensatz.lean#L61" title="MvPolynomial.vanishingIdeal">MvPolynomial.vanishingIdeal</a> <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Basic/Complex/Basic.lean#L33" title="Complex">ℂ</a> W,</span>
+<span id="L116"><a href="#L116">116</a>       <a class="ref" href="../Characteristic/Polynomial.lean.html#L29" title="Stafford38.Characteristic.poissonBracket">poissonBracket</a> f g ∈ <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Nullstellensatz.lean#L61" title="MvPolynomial.vanishingIdeal">MvPolynomial.vanishingIdeal</a> <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Basic/Complex/Basic.lean#L33" title="Complex">ℂ</a> W)</span>
+<span id="L117"><a href="#L117">117</a>     (P : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/Basic.lean#L80" title="MvPolynomial">MvPolynomial</a> (<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L2443" title="Fin">Fin</a> n) <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Basic/Complex/Basic.lean#L33" title="Complex">ℂ</a>)</span>
 <span id="L118"><a href="#L118">118</a>     (hPpoint : ∀ q ∈ W,</span>
-<span id="L119"><a href="#L119">119</a>       MvPolynomial.eval (fun i =&gt; q (.inr i)) P = 0)</span>
-<span id="L120"><a href="#L120">120</a>     (haxis : MvPolynomial.eval</span>
-<span id="L121"><a href="#L121">121</a>       (fun i : Fin n =&gt; if i = ⟨0, hn⟩ then (1 : ℂ) else 0) P ≠ 0)</span>
-<span id="L122"><a href="#L122">122</a>     (havoid : ∀ q ∈ W, q (.inl ⟨0, hn⟩) ≠ 0) :</span>
-<span id="L123"><a href="#L123">123</a>     False := by</span>
-<span id="L124"><a href="#L124">124</a>   have hW : IsFibreConical W := hscale</span>
-<span id="L125"><a href="#L125">125</a>   have hP : fibreLift P ∈ MvPolynomial.vanishingIdeal ℂ W := by</span>
-<span id="L126"><a href="#L126">126</a>     rw [MvPolynomial.mem_vanishingIdeal_iff]</span>
+<span id="L119"><a href="#L119">119</a>       <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/Eval.lean#L255" title="MvPolynomial.eval">MvPolynomial.eval</a> (fun i =&gt; q (<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Core.lean#L215" title="Sum.inr">.inr</a> i)) P = 0)</span>
+<span id="L120"><a href="#L120">120</a>     (haxis : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/Eval.lean#L255" title="MvPolynomial.eval">MvPolynomial.eval</a></span>
+<span id="L121"><a href="#L121">121</a>       (fun i : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L2443" title="Fin">Fin</a> n =&gt; if i = ⟨0, hn⟩ then (1 : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Basic/Complex/Basic.lean#L33" title="Complex">ℂ</a>) else 0) P ≠ 0)</span>
+<span id="L122"><a href="#L122">122</a>     (havoid : ∀ q ∈ W, q (<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Core.lean#L213" title="Sum.inl">.inl</a> ⟨0, hn⟩) ≠ 0) :</span>
+<span id="L123"><a href="#L123">123</a>     <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L274" title="False">False</a> := by</span>
+<span id="L124"><a href="#L124">124</a>   have hW : <a class="ref" href="./FibreConicalVanishingIdeal.lean.html#L23" title="Stafford38.Geometry.FibreConicalVanishingIdeal.IsFibreConical">IsFibreConical</a> W := hscale</span>
+<span id="L125"><a href="#L125">125</a>   have hP : <a class="ref" href="./LaurentConormalDirection.lean.html#L133" title="Stafford38.Geometry.LaurentConormalDirection.fibreLift">fibreLift</a> P ∈ <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Nullstellensatz.lean#L61" title="MvPolynomial.vanishingIdeal">MvPolynomial.vanishingIdeal</a> <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Basic/Complex/Basic.lean#L33" title="Complex">ℂ</a> W := by</span>
+<span id="L126"><a href="#L126">126</a>     rw [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Nullstellensatz.lean#L69" title="MvPolynomial.mem_vanishingIdeal_iff">MvPolynomial.mem_vanishingIdeal_iff</a>]</span>
 <span id="L127"><a href="#L127">127</a>     intro q hq</span>
 <span id="L128"><a href="#L128">128</a>     have hqP := hPpoint q hq</span>
-<span id="L129"><a href="#L129">129</a>     simpa [fibreLift, MvPolynomial.eval_rename, Function.comp_def] using hqP</span>
-<span id="L130"><a href="#L130">130</a>   exact false_of_exported_general_coisotropic_set_avoiding_hyperplane</span>
+<span id="L129"><a href="#L129">129</a>     simpa [<a class="ref" href="./LaurentConormalDirection.lean.html#L133" title="Stafford38.Geometry.LaurentConormalDirection.fibreLift">fibreLift</a>, <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/Rename.lean#L244" title="MvPolynomial.eval_rename">MvPolynomial.eval_rename</a>, <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Core.lean#L72" title="Function.comp_def">Function.comp_def</a>] using hqP</span>
+<span id="L130"><a href="#L130">130</a>   exact <a class="ref" href="./GeneralCoisotropicSetsTest.lean.html#L79" title="Stafford38.Geometry.GeneralCoisotropicSetsTest.false_of_exported_general_coisotropic_set_avoiding_hyperplane">false_of_exported_general_coisotropic_set_avoiding_hyperplane</a></span>
 <span id="L131"><a href="#L131">131</a>     hn W hnonempty hclosed hW hbracket P hP haxis havoid</span>
 <span id="L132"><a href="#L132">132</a> </span>
 <span id="L133"><a href="#L133">133</a> /-! ## A negative control for the coisotropic hypothesis</span>
@@ -136,56 +136,56 @@
 <span id="L136"><a href="#L136">136</a> self-involutive, but it is not stable under bracketing with arbitrary ambient</span>
 <span id="L137"><a href="#L137">137</a> polynomials because `{ξ, x} = -1`. -/</span>
 <span id="L138"><a href="#L138">138</a> </span>
-<span id="L139"><a href="#L139">139</a> def zeroSectionIdealOne (k : Type*) [Field k] : Ideal (SymbolRing k 1) :=</span>
-<span id="L140"><a href="#L140">140</a>   Ideal.span {MvPolynomial.X (Sum.inr (0 : Fin 1) : PhaseVar 1)}</span>
+<span id="L139"><a href="#L139">139</a> def zeroSectionIdealOne (k : Type*) [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Field/Defs.lean#L170" title="Field">Field</a> k] : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Defs.lean#L38" title="Ideal">Ideal</a> (<a class="ref" href="../Characteristic/Polynomial.lean.html#L20" title="Stafford38.Characteristic.SymbolRing">SymbolRing</a> k 1) :=</span>
+<span id="L140"><a href="#L140">140</a>   <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Span.lean#L45" title="Ideal.span">Ideal.span</a> {<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/Basic.lean#L125" title="MvPolynomial.X">MvPolynomial.X</a> (<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Core.lean#L215" title="Sum.inr">Sum.inr</a> (0 : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L2443" title="Fin">Fin</a> 1) : <a class="ref" href="../ChallengeDefinitions.lean.html#L64" title="Stafford38Challenge.PhaseVar">PhaseVar</a> 1)}</span>
 <span id="L141"><a href="#L141">141</a> </span>
 <span id="L142"><a href="#L142">142</a> theorem zeroSectionIdealOne_isInvolutive</span>
-<span id="L143"><a href="#L143">143</a>     {k : Type*} [Field k] :</span>
-<span id="L144"><a href="#L144">144</a>     ∀ f ∈ zeroSectionIdealOne k, ∀ g ∈ zeroSectionIdealOne k,</span>
-<span id="L145"><a href="#L145">145</a>       poissonBracket f g ∈ zeroSectionIdealOne k := by</span>
+<span id="L143"><a href="#L143">143</a>     {k : Type*} [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Field/Defs.lean#L170" title="Field">Field</a> k] :</span>
+<span id="L144"><a href="#L144">144</a>     ∀ f ∈ <a class="ref" href="./GeneralCoisotropicSetsTest.lean.html#L139" title="Stafford38.Geometry.GeneralCoisotropicSetsTest.zeroSectionIdealOne">zeroSectionIdealOne</a> k, ∀ g ∈ <a class="ref" href="./GeneralCoisotropicSetsTest.lean.html#L139" title="Stafford38.Geometry.GeneralCoisotropicSetsTest.zeroSectionIdealOne">zeroSectionIdealOne</a> k,</span>
+<span id="L145"><a href="#L145">145</a>       <a class="ref" href="../Characteristic/Polynomial.lean.html#L29" title="Stafford38.Characteristic.poissonBracket">poissonBracket</a> f g ∈ <a class="ref" href="./GeneralCoisotropicSetsTest.lean.html#L139" title="Stafford38.Geometry.GeneralCoisotropicSetsTest.zeroSectionIdealOne">zeroSectionIdealOne</a> k := by</span>
 <span id="L146"><a href="#L146">146</a>   intro f hf g hg</span>
-<span id="L147"><a href="#L147">147</a>   change f ∈ Ideal.span</span>
-<span id="L148"><a href="#L148">148</a>     {MvPolynomial.X (Sum.inr (0 : Fin 1) : PhaseVar 1)} at hf</span>
-<span id="L149"><a href="#L149">149</a>   change g ∈ Ideal.span</span>
-<span id="L150"><a href="#L150">150</a>     {MvPolynomial.X (Sum.inr (0 : Fin 1) : PhaseVar 1)} at hg</span>
-<span id="L151"><a href="#L151">151</a>   rw [Ideal.mem_span_singleton] at hf hg</span>
+<span id="L147"><a href="#L147">147</a>   change f ∈ <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Span.lean#L45" title="Ideal.span">Ideal.span</a></span>
+<span id="L148"><a href="#L148">148</a>     {<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/Basic.lean#L125" title="MvPolynomial.X">MvPolynomial.X</a> (<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Core.lean#L215" title="Sum.inr">Sum.inr</a> (0 : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L2443" title="Fin">Fin</a> 1) : <a class="ref" href="../ChallengeDefinitions.lean.html#L64" title="Stafford38Challenge.PhaseVar">PhaseVar</a> 1)} at hf</span>
+<span id="L149"><a href="#L149">149</a>   change g ∈ <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Span.lean#L45" title="Ideal.span">Ideal.span</a></span>
+<span id="L150"><a href="#L150">150</a>     {<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/Basic.lean#L125" title="MvPolynomial.X">MvPolynomial.X</a> (<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Core.lean#L215" title="Sum.inr">Sum.inr</a> (0 : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L2443" title="Fin">Fin</a> 1) : <a class="ref" href="../ChallengeDefinitions.lean.html#L64" title="Stafford38Challenge.PhaseVar">PhaseVar</a> 1)} at hg</span>
+<span id="L151"><a href="#L151">151</a>   rw [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Span.lean#L181" title="Ideal.mem_span_singleton">Ideal.mem_span_singleton</a>] at hf hg</span>
 <span id="L152"><a href="#L152">152</a>   obtain ⟨a, ha⟩ := hf</span>
 <span id="L153"><a href="#L153">153</a>   obtain ⟨b, hb⟩ := hg</span>
 <span id="L154"><a href="#L154">154</a>   rw [ha, hb]</span>
-<span id="L155"><a href="#L155">155</a>   let I := zeroSectionIdealOne k</span>
-<span id="L156"><a href="#L156">156</a>   have hxi : MvPolynomial.X (Sum.inr (0 : Fin 1) : PhaseVar 1) ∈ I :=</span>
-<span id="L157"><a href="#L157">157</a>     Ideal.mem_span_singleton_self _</span>
-<span id="L158"><a href="#L158">158</a>   rw [PostScalarExtensionPoisson.poissonBracket_mul_left]</span>
-<span id="L159"><a href="#L159">159</a>   apply I.add_mem</span>
-<span id="L160"><a href="#L160">160</a>   · exact I.mul_mem_right _ hxi</span>
-<span id="L161"><a href="#L161">161</a>   · apply I.mul_mem_left</span>
-<span id="L162"><a href="#L162">162</a>     rw [PostScalarExtensionPoisson.poissonBracket_mul_right,</span>
-<span id="L163"><a href="#L163">163</a>       poissonBracket_self, mul_zero, add_zero]</span>
-<span id="L164"><a href="#L164">164</a>     exact I.mul_mem_right _ hxi</span>
+<span id="L155"><a href="#L155">155</a>   let I := <a class="ref" href="./GeneralCoisotropicSetsTest.lean.html#L139" title="Stafford38.Geometry.GeneralCoisotropicSetsTest.zeroSectionIdealOne">zeroSectionIdealOne</a> k</span>
+<span id="L156"><a href="#L156">156</a>   have hxi : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/Basic.lean#L125" title="MvPolynomial.X">MvPolynomial.X</a> (<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Core.lean#L215" title="Sum.inr">Sum.inr</a> (0 : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L2443" title="Fin">Fin</a> 1) : <a class="ref" href="../ChallengeDefinitions.lean.html#L64" title="Stafford38Challenge.PhaseVar">PhaseVar</a> 1) ∈ I :=</span>
+<span id="L157"><a href="#L157">157</a>     <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Span.lean#L97" title="Ideal.mem_span_singleton_self">Ideal.mem_span_singleton_self</a> _</span>
+<span id="L158"><a href="#L158">158</a>   rw [<a class="ref" href="../Characteristic/PostScalarExtensionPoisson.lean.html#L60" title="Stafford38.Characteristic.PostScalarExtensionPoisson.poissonBracket_mul_left">PostScalarExtensionPoisson.poissonBracket_mul_left</a>]</span>
+<span id="L159"><a href="#L159">159</a>   apply I.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Defs.lean#L56" title="Ideal.add_mem">add_mem</a></span>
+<span id="L160"><a href="#L160">160</a>   · exact I.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Defs.lean#L64" title="Ideal.mul_mem_right">mul_mem_right</a> _ hxi</span>
+<span id="L161"><a href="#L161">161</a>   · apply I.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Defs.lean#L61" title="Ideal.mul_mem_left">mul_mem_left</a></span>
+<span id="L162"><a href="#L162">162</a>     rw [<a class="ref" href="../Characteristic/PostScalarExtensionPoisson.lean.html#L69" title="Stafford38.Characteristic.PostScalarExtensionPoisson.poissonBracket_mul_right">PostScalarExtensionPoisson.poissonBracket_mul_right</a>,</span>
+<span id="L163"><a href="#L163">163</a>       <a class="ref" href="../Characteristic/Polynomial.lean.html#L45" title="Stafford38.Characteristic.poissonBracket_self">poissonBracket_self</a>, <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/GroupWithZero/Defs.lean#L41" title="MulZeroClass.mul_zero">mul_zero</a>, <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Group/Monoid.lean#L94" title="add_zero">add_zero</a>]</span>
+<span id="L164"><a href="#L164">164</a>     exact I.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Defs.lean#L64" title="Ideal.mul_mem_right">mul_mem_right</a> _ hxi</span>
 <span id="L165"><a href="#L165">165</a> </span>
 <span id="L166"><a href="#L166">166</a> theorem zeroSectionIdealOne_not_isPoisson</span>
-<span id="L167"><a href="#L167">167</a>     {k : Type*} [Field k] : ¬ IsPoisson (zeroSectionIdealOne k) := by</span>
+<span id="L167"><a href="#L167">167</a>     {k : Type*} [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Field/Defs.lean#L170" title="Field">Field</a> k] : ¬ <a class="ref" href="../Characteristic/Polynomial.lean.html#L39" title="Stafford38.Characteristic.IsPoisson">IsPoisson</a> (<a class="ref" href="./GeneralCoisotropicSetsTest.lean.html#L139" title="Stafford38.Geometry.GeneralCoisotropicSetsTest.zeroSectionIdealOne">zeroSectionIdealOne</a> k) := by</span>
 <span id="L168"><a href="#L168">168</a>   intro hpoisson</span>
-<span id="L169"><a href="#L169">169</a>   have hxi : MvPolynomial.X (Sum.inr (0 : Fin 1) : PhaseVar 1) ∈</span>
-<span id="L170"><a href="#L170">170</a>       zeroSectionIdealOne k :=</span>
-<span id="L171"><a href="#L171">171</a>     Ideal.mem_span_singleton_self _</span>
+<span id="L169"><a href="#L169">169</a>   have hxi : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/Basic.lean#L125" title="MvPolynomial.X">MvPolynomial.X</a> (<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Core.lean#L215" title="Sum.inr">Sum.inr</a> (0 : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L2443" title="Fin">Fin</a> 1) : <a class="ref" href="../ChallengeDefinitions.lean.html#L64" title="Stafford38Challenge.PhaseVar">PhaseVar</a> 1) ∈</span>
+<span id="L170"><a href="#L170">170</a>       <a class="ref" href="./GeneralCoisotropicSetsTest.lean.html#L139" title="Stafford38.Geometry.GeneralCoisotropicSetsTest.zeroSectionIdealOne">zeroSectionIdealOne</a> k :=</span>
+<span id="L171"><a href="#L171">171</a>     <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Span.lean#L97" title="Ideal.mem_span_singleton_self">Ideal.mem_span_singleton_self</a> _</span>
 <span id="L172"><a href="#L172">172</a>   have hbad := hpoisson</span>
-<span id="L173"><a href="#L173">173</a>     (MvPolynomial.X (Sum.inr (0 : Fin 1) : PhaseVar 1)) hxi</span>
-<span id="L174"><a href="#L174">174</a>     (MvPolynomial.X (Sum.inl (0 : Fin 1) : PhaseVar 1))</span>
-<span id="L175"><a href="#L175">175</a>   have hnegone : (-1 : SymbolRing k 1) ∈ zeroSectionIdealOne k := by</span>
-<span id="L176"><a href="#L176">176</a>     simpa [poissonBracket, Pi.single_apply] using hbad</span>
-<span id="L177"><a href="#L177">177</a>   rw [zeroSectionIdealOne, Ideal.mem_span_singleton] at hnegone</span>
+<span id="L173"><a href="#L173">173</a>     (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/Basic.lean#L125" title="MvPolynomial.X">MvPolynomial.X</a> (<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Core.lean#L215" title="Sum.inr">Sum.inr</a> (0 : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L2443" title="Fin">Fin</a> 1) : <a class="ref" href="../ChallengeDefinitions.lean.html#L64" title="Stafford38Challenge.PhaseVar">PhaseVar</a> 1)) hxi</span>
+<span id="L174"><a href="#L174">174</a>     (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/Basic.lean#L125" title="MvPolynomial.X">MvPolynomial.X</a> (<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Core.lean#L213" title="Sum.inl">Sum.inl</a> (0 : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L2443" title="Fin">Fin</a> 1) : <a class="ref" href="../ChallengeDefinitions.lean.html#L64" title="Stafford38Challenge.PhaseVar">PhaseVar</a> 1))</span>
+<span id="L175"><a href="#L175">175</a>   have hnegone : (-1 : <a class="ref" href="../Characteristic/Polynomial.lean.html#L20" title="Stafford38.Characteristic.SymbolRing">SymbolRing</a> k 1) ∈ <a class="ref" href="./GeneralCoisotropicSetsTest.lean.html#L139" title="Stafford38.Geometry.GeneralCoisotropicSetsTest.zeroSectionIdealOne">zeroSectionIdealOne</a> k := by</span>
+<span id="L176"><a href="#L176">176</a>     simpa [<a class="ref" href="../Characteristic/Polynomial.lean.html#L29" title="Stafford38.Characteristic.poissonBracket">poissonBracket</a>, <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Notation/Pi/Basic.lean#L107" title="Pi.single_apply">Pi.single_apply</a>] using hbad</span>
+<span id="L177"><a href="#L177">177</a>   rw [<a class="ref" href="./GeneralCoisotropicSetsTest.lean.html#L139" title="Stafford38.Geometry.GeneralCoisotropicSetsTest.zeroSectionIdealOne">zeroSectionIdealOne</a>, <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Span.lean#L181" title="Ideal.mem_span_singleton">Ideal.mem_span_singleton</a>] at hnegone</span>
 <span id="L178"><a href="#L178">178</a>   rcases hnegone with ⟨a, ha⟩</span>
-<span id="L179"><a href="#L179">179</a>   have ha0 := congrArg</span>
-<span id="L180"><a href="#L180">180</a>     (MvPolynomial.eval (fun _ : PhaseVar 1 =&gt; (0 : k))) ha</span>
+<span id="L179"><a href="#L179">179</a>   have ha0 := <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L405" title="congrArg">congrArg</a></span>
+<span id="L180"><a href="#L180">180</a>     (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/Eval.lean#L255" title="MvPolynomial.eval">MvPolynomial.eval</a> (fun _ : <a class="ref" href="../ChallengeDefinitions.lean.html#L64" title="Stafford38Challenge.PhaseVar">PhaseVar</a> 1 =&gt; (0 : k))) ha</span>
 <span id="L181"><a href="#L181">181</a>   simpa using ha0</span>
 <span id="L182"><a href="#L182">182</a> </span>
-<span id="L183"><a href="#L183">183</a> #print axioms exported_general_coisotropic_component_conormal_consumer</span>
-<span id="L184"><a href="#L184">184</a> #print axioms exported_general_coisotropic_set_consumer</span>
-<span id="L185"><a href="#L185">185</a> #print axioms false_of_exported_general_coisotropic_set_avoiding_hyperplane</span>
-<span id="L186"><a href="#L186">186</a> #print axioms exact_complex_manuscript_coisotropic_consumer</span>
-<span id="L187"><a href="#L187">187</a> #print axioms zeroSectionIdealOne_isInvolutive</span>
-<span id="L188"><a href="#L188">188</a> #print axioms zeroSectionIdealOne_not_isPoisson</span>
+<span id="L183"><a href="#L183">183</a> #print axioms <a class="ref" href="./GeneralCoisotropicSetsTest.lean.html#L35" title="Stafford38.Geometry.GeneralCoisotropicSetsTest.exported_general_coisotropic_component_conormal_consumer">exported_general_coisotropic_component_conormal_consumer</a></span>
+<span id="L184"><a href="#L184">184</a> #print axioms <a class="ref" href="./GeneralCoisotropicSetsTest.lean.html#L58" title="Stafford38.Geometry.GeneralCoisotropicSetsTest.exported_general_coisotropic_set_consumer">exported_general_coisotropic_set_consumer</a></span>
+<span id="L185"><a href="#L185">185</a> #print axioms <a class="ref" href="./GeneralCoisotropicSetsTest.lean.html#L79" title="Stafford38.Geometry.GeneralCoisotropicSetsTest.false_of_exported_general_coisotropic_set_avoiding_hyperplane">false_of_exported_general_coisotropic_set_avoiding_hyperplane</a></span>
+<span id="L186"><a href="#L186">186</a> #print axioms <a class="ref" href="./GeneralCoisotropicSetsTest.lean.html#L102" title="Stafford38.Geometry.GeneralCoisotropicSetsTest.exact_complex_manuscript_coisotropic_consumer">exact_complex_manuscript_coisotropic_consumer</a></span>
+<span id="L187"><a href="#L187">187</a> #print axioms <a class="ref" href="./GeneralCoisotropicSetsTest.lean.html#L142" title="Stafford38.Geometry.GeneralCoisotropicSetsTest.zeroSectionIdealOne_isInvolutive">zeroSectionIdealOne_isInvolutive</a></span>
+<span id="L188"><a href="#L188">188</a> #print axioms <a class="ref" href="./GeneralCoisotropicSetsTest.lean.html#L166" title="Stafford38.Geometry.GeneralCoisotropicSetsTest.zeroSectionIdealOne_not_isPoisson">zeroSectionIdealOne_not_isPoisson</a></span>
 <span id="L189"><a href="#L189">189</a> </span>
 <span id="L190"><a href="#L190">190</a> end</span>
 <span id="L191"><a href="#L191">191</a> end Stafford38.Geometry.GeneralCoisotropicSetsTest</span>

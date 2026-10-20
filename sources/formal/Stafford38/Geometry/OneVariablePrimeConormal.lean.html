@@ -1,0 +1,156 @@
+<!doctype html><meta charset="utf-8"><title>Stafford38/Geometry/OneVariablePrimeConormal.lean</title><style>body{font:14px monospace}pre span{display:block}pre span:target{background:#fff0ad}a{color:#666}pre{white-space:pre-wrap}a.ref{color:#0645ad;text-decoration:none}a.ref:hover{text-decoration:underline}</style><h1>Stafford38/Geometry/OneVariablePrimeConormal.lean</h1><p>This project (Stafford38) · 0403af3f0b1a7f84d2027121932723f67bd279ae</p><pre><span id="L1"><a href="#L1">1</a> module</span>
+<span id="L2"><a href="#L2">2</a> public import Stafford38.Geometry.ConstantCoordinateConormal</span>
+<span id="L3"><a href="#L3">3</a> public import Mathlib.RingTheory.PrincipalIdealDomain</span>
+<span id="L4"><a href="#L4">4</a> </span>
+<span id="L5"><a href="#L5">5</a> @[expose] public section</span>
+<span id="L6"><a href="#L6">6</a> </span>
+<span id="L7"><a href="#L7">7</a> /-!</span>
+<span id="L8"><a href="#L8">8</a> # One-variable prime components and the conormal axis</span>
+<span id="L9"><a href="#L9">9</a> </span>
+<span id="L10"><a href="#L10">10</a> The completed boundary chart is unavailable in one affine variable, but no</span>
+<span id="L11"><a href="#L11">11</a> boundary argument is needed there.  A prime component of the affine line</span>
+<span id="L12"><a href="#L12">12</a> whose zero set avoids the origin is nonzero.  Transporting it to the ordinary</span>
+<span id="L13"><a href="#L13">13</a> polynomial ring makes it a nonzero prime in a PID, hence a maximal ideal.</span>
+<span id="L14"><a href="#L14">14</a> Over an algebraically closed field it is therefore the ideal of one point</span>
+<span id="L15"><a href="#L15">15</a> `c != 0`, and in particular contains `X - c`.</span>
+<span id="L16"><a href="#L16">16</a> </span>
+<span id="L17"><a href="#L17">17</a> The final theorem feeds this component equation into the existing</span>
+<span id="L18"><a href="#L18">18</a> constant-coordinate consumer and produces the exact Laurent conormal axis.</span>
+<span id="L19"><a href="#L19">19</a> No projective chart, completion, Gabber input, or filtered cancellation is</span>
+<span id="L20"><a href="#L20">20</a> used here.</span>
+<span id="L21"><a href="#L21">21</a> -/</span>
+<span id="L22"><a href="#L22">22</a> </span>
+<span id="L23"><a href="#L23">23</a> namespace Stafford38.Geometry.OneVariablePrimeConormal</span>
+<span id="L24"><a href="#L24">24</a> </span>
+<span id="L25"><a href="#L25">25</a> open Stafford38.Geometry.AffineConormalClosure</span>
+<span id="L26"><a href="#L26">26</a> open Stafford38.Geometry.ConstantCoordinateConormal</span>
+<span id="L27"><a href="#L27">27</a> open Stafford38.Geometry.ScalarExtensionPoints</span>
+<span id="L28"><a href="#L28">28</a> open Stafford38.GeometryRetractionSpecialization</span>
+<span id="L29"><a href="#L29">29</a> </span>
+<span id="L30"><a href="#L30">30</a> noncomputable section</span>
+<span id="L31"><a href="#L31">31</a> </span>
+<span id="L32"><a href="#L32">32</a> universe u</span>
+<span id="L33"><a href="#L33">33</a> </span>
+<span id="L34"><a href="#L34">34</a> /-- The standard identification of a one-variable multivariate polynomial</span>
+<span id="L35"><a href="#L35">35</a> ring with the ordinary polynomial ring. -/</span>
+<span id="L36"><a href="#L36">36</a> private abbrev finOnePolynomialEquiv (k : Type u) [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Field/Defs.lean#L170" title="Field">Field</a> k] :</span>
+<span id="L37"><a href="#L37">37</a>     <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/Basic.lean#L80" title="MvPolynomial">MvPolynomial</a> (<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L2443" title="Fin">Fin</a> 1) k ≃ₐ[k] <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Polynomial/Basic.lean#L67" title="Polynomial">Polynomial</a> k :=</span>
+<span id="L38"><a href="#L38">38</a>   <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/Equiv.lean#L64" title="MvPolynomial.uniqueAlgEquiv">MvPolynomial.uniqueAlgEquiv</a> k (<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L2443" title="Fin">Fin</a> 1)</span>
+<span id="L39"><a href="#L39">39</a> </span>
+<span id="L40"><a href="#L40">40</a> /-- A prime component of the affine line whose entire zero set avoids the</span>
+<span id="L41"><a href="#L41">41</a> origin is maximal.  Algebraic closedness is not needed for this PID step. -/</span>
+<span id="L42"><a href="#L42">42</a> theorem primeComponent_isMaximal_of_axis_avoidance</span>
+<span id="L43"><a href="#L43">43</a>     {k : Type u} [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Field/Defs.lean#L170" title="Field">Field</a> k]</span>
+<span id="L44"><a href="#L44">44</a>     (P : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Defs.lean#L38" title="Ideal">Ideal</a> (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/Basic.lean#L80" title="MvPolynomial">MvPolynomial</a> (<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L2443" title="Fin">Fin</a> 1) k)) [P.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Prime.lean#L39" title="Ideal.IsPrime">IsPrime</a>]</span>
+<span id="L45"><a href="#L45">45</a>     (havoid : ∀ y : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L2443" title="Fin">Fin</a> 1 → k,</span>
+<span id="L46"><a href="#L46">46</a>       (∀ f ∈ P, <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/Eval.lean#L255" title="MvPolynomial.eval">MvPolynomial.eval</a> y f = 0) → y 0 ≠ 0) :</span>
+<span id="L47"><a href="#L47">47</a>     P.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Maximal.lean#L45" title="Ideal.IsMaximal">IsMaximal</a> := by</span>
+<span id="L48"><a href="#L48">48</a>   have hPne : P ≠ ⊥ := by</span>
+<span id="L49"><a href="#L49">49</a>     intro hP</span>
+<span id="L50"><a href="#L50">50</a>     have hzero : ∀ f ∈ P,</span>
+<span id="L51"><a href="#L51">51</a>         <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/Eval.lean#L255" title="MvPolynomial.eval">MvPolynomial.eval</a> (fun _ : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L2443" title="Fin">Fin</a> 1 ↦ (0 : k)) f = 0 := by</span>
+<span id="L52"><a href="#L52">52</a>       intro f hf</span>
+<span id="L53"><a href="#L53">53</a>       have hf0 : f = 0 := by</span>
+<span id="L54"><a href="#L54">54</a>         rw [hP] at hf</span>
+<span id="L55"><a href="#L55">55</a>         simpa using hf</span>
+<span id="L56"><a href="#L56">56</a>       rw [hf0]</span>
+<span id="L57"><a href="#L57">57</a>       simp</span>
+<span id="L58"><a href="#L58">58</a>     exact (havoid (fun _ ↦ 0) hzero) <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L334" title="rfl">rfl</a></span>
+<span id="L59"><a href="#L59">59</a>   let e := <a class="ref" href="./OneVariablePrimeConormal.lean.html#L34" title="_private.Stafford38.Geometry.OneVariablePrimeConormal.0.Stafford38.Geometry.OneVariablePrimeConormal.finOnePolynomialEquiv">finOnePolynomialEquiv</a> k</span>
+<span id="L60"><a href="#L60">60</a>   let Q : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Defs.lean#L38" title="Ideal">Ideal</a> (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Polynomial/Basic.lean#L67" title="Polynomial">Polynomial</a> k) := <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Maps.lean#L41" title="Ideal.map">Ideal.map</a> e P</span>
+<span id="L61"><a href="#L61">61</a>   letI : Q.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Prime.lean#L39" title="Ideal.IsPrime">IsPrime</a> := by</span>
+<span id="L62"><a href="#L62">62</a>     dsimp [Q]</span>
+<span id="L63"><a href="#L63">63</a>     infer_instance</span>
+<span id="L64"><a href="#L64">64</a>   have hQne : Q ≠ ⊥ := by</span>
+<span id="L65"><a href="#L65">65</a>     intro hQ</span>
+<span id="L66"><a href="#L66">66</a>     apply hPne</span>
+<span id="L67"><a href="#L67">67</a>     apply (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Maps.lean#L1062" title="Ideal.map_eq_bot_iff_of_injective">Ideal.map_eq_bot_iff_of_injective</a> e.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Algebra/Equiv.lean#L230" title="AlgEquiv.injective">injective</a>).<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Core.lean#L192" title="Iff.mp">mp</a></span>
+<span id="L68"><a href="#L68">68</a>     exact hQ</span>
+<span id="L69"><a href="#L69">69</a>   have hQmax : Q.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Maximal.lean#L45" title="Ideal.IsMaximal">IsMaximal</a> := <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/PrincipalIdealDomain.lean#L257" title="IsPrime.to_maximal_ideal">IsPrime.to_maximal_ideal</a> hQne</span>
+<span id="L70"><a href="#L70">70</a>   exact (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Maps.lean#L555" title="Ideal.isMaximal_map_iff_of_bijective">Ideal.isMaximal_map_iff_of_bijective</a> e e.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Algebra/Equiv.lean#L227" title="AlgEquiv.bijective">bijective</a>).<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Core.lean#L192" title="Iff.mp">mp</a> hQmax</span>
+<span id="L71"><a href="#L71">71</a> </span>
+<span id="L72"><a href="#L72">72</a> /-- Componentwise one-variable production: axis avoidance forces the prime</span>
+<span id="L73"><a href="#L73">73</a> component to be the ideal of a nonzero point and supplies its linear</span>
+<span id="L74"><a href="#L74">74</a> coordinate equation. -/</span>
+<span id="L75"><a href="#L75">75</a> theorem exists_coordinate_sub_constant_mem_of_prime_axis_avoidance</span>
+<span id="L76"><a href="#L76">76</a>     {k : Type u} [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Field/Defs.lean#L170" title="Field">Field</a> k] [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/FieldTheory/IsAlgClosed/Basic.lean#L58" title="IsAlgClosed">IsAlgClosed</a> k]</span>
+<span id="L77"><a href="#L77">77</a>     (P : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Defs.lean#L38" title="Ideal">Ideal</a> (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/Basic.lean#L80" title="MvPolynomial">MvPolynomial</a> (<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L2443" title="Fin">Fin</a> 1) k)) [P.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Prime.lean#L39" title="Ideal.IsPrime">IsPrime</a>]</span>
+<span id="L78"><a href="#L78">78</a>     (havoid : ∀ y : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L2443" title="Fin">Fin</a> 1 → k,</span>
+<span id="L79"><a href="#L79">79</a>       (∀ f ∈ P, <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/Eval.lean#L255" title="MvPolynomial.eval">MvPolynomial.eval</a> y f = 0) → y 0 ≠ 0) :</span>
+<span id="L80"><a href="#L80">80</a>     ∃ (c : k) (y : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L2443" title="Fin">Fin</a> 1 → k),</span>
+<span id="L81"><a href="#L81">81</a>       c ≠ 0 ∧ y 0 = c ∧</span>
+<span id="L82"><a href="#L82">82</a>       P = <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Nullstellensatz.lean#L61" title="MvPolynomial.vanishingIdeal">MvPolynomial.vanishingIdeal</a> k {y} ∧</span>
+<span id="L83"><a href="#L83">83</a>       <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/Basic.lean#L125" title="MvPolynomial.X">MvPolynomial.X</a> (0 : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L2443" title="Fin">Fin</a> 1) - <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/Basic.lean#L104" title="MvPolynomial.C">MvPolynomial.C</a> c ∈ P := by</span>
+<span id="L84"><a href="#L84">84</a>   have hmax := <a class="ref" href="./OneVariablePrimeConormal.lean.html#L40" title="Stafford38.Geometry.OneVariablePrimeConormal.primeComponent_isMaximal_of_axis_avoidance">primeComponent_isMaximal_of_axis_avoidance</a> P havoid</span>
+<span id="L85"><a href="#L85">85</a>   obtain ⟨y, hPy⟩ :=</span>
+<span id="L86"><a href="#L86">86</a>     <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Nullstellensatz.lean#L165" title="MvPolynomial.isMaximal_iff_eq_vanishingIdeal_singleton">MvPolynomial.isMaximal_iff_eq_vanishingIdeal_singleton</a>.<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Core.lean#L192" title="Iff.mp">mp</a> hmax</span>
+<span id="L87"><a href="#L87">87</a>   let c : k := y 0</span>
+<span id="L88"><a href="#L88">88</a>   have hy : ∀ f ∈ P, <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/Eval.lean#L255" title="MvPolynomial.eval">MvPolynomial.eval</a> y f = 0 := by</span>
+<span id="L89"><a href="#L89">89</a>     intro f hf</span>
+<span id="L90"><a href="#L90">90</a>     rw [hPy] at hf</span>
+<span id="L91"><a href="#L91">91</a>     exact (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Nullstellensatz.lean#L101" title="MvPolynomial.mem_vanishingIdeal_singleton_iff">MvPolynomial.mem_vanishingIdeal_singleton_iff</a> y f).<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Core.lean#L192" title="Iff.mp">mp</a> hf</span>
+<span id="L92"><a href="#L92">92</a>   have hc : c ≠ 0 := havoid y hy</span>
+<span id="L93"><a href="#L93">93</a>   have hcoordinate :</span>
+<span id="L94"><a href="#L94">94</a>       <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/Basic.lean#L125" title="MvPolynomial.X">MvPolynomial.X</a> (0 : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L2443" title="Fin">Fin</a> 1) - <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/Basic.lean#L104" title="MvPolynomial.C">MvPolynomial.C</a> c ∈ P := by</span>
+<span id="L95"><a href="#L95">95</a>     rw [hPy, <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Nullstellensatz.lean#L101" title="MvPolynomial.mem_vanishingIdeal_singleton_iff">MvPolynomial.mem_vanishingIdeal_singleton_iff</a>]</span>
+<span id="L96"><a href="#L96">96</a>     simp [c]</span>
+<span id="L97"><a href="#L97">97</a>   exact ⟨c, y, hc, <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L334" title="rfl">rfl</a>, hPy, hcoordinate⟩</span>
+<span id="L98"><a href="#L98">98</a> </span>
+<span id="L99"><a href="#L99">99</a> /-- Ambient-to-component form.  If `P` is a prime component above `I`, then</span>
+<span id="L100"><a href="#L100">100</a> avoidance of the coordinate origin by `V(I)` also holds on `V(P)`, so the</span>
+<span id="L101"><a href="#L101">101</a> linear equation is produced in the component ideal `P`. -/</span>
+<span id="L102"><a href="#L102">102</a> theorem exists_coordinate_sub_constant_mem_of_primeComponent</span>
+<span id="L103"><a href="#L103">103</a>     {k : Type u} [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Field/Defs.lean#L170" title="Field">Field</a> k] [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/FieldTheory/IsAlgClosed/Basic.lean#L58" title="IsAlgClosed">IsAlgClosed</a> k]</span>
+<span id="L104"><a href="#L104">104</a>     (I P : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Defs.lean#L38" title="Ideal">Ideal</a> (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/Basic.lean#L80" title="MvPolynomial">MvPolynomial</a> (<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L2443" title="Fin">Fin</a> 1) k)) [P.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Prime.lean#L39" title="Ideal.IsPrime">IsPrime</a>]</span>
+<span id="L105"><a href="#L105">105</a>     (hIP : I ≤ P)</span>
+<span id="L106"><a href="#L106">106</a>     (havoid : ∀ y : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L2443" title="Fin">Fin</a> 1 → k,</span>
+<span id="L107"><a href="#L107">107</a>       (∀ f ∈ I, <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/Eval.lean#L255" title="MvPolynomial.eval">MvPolynomial.eval</a> y f = 0) → y 0 ≠ 0) :</span>
+<span id="L108"><a href="#L108">108</a>     ∃ (c : k) (y : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L2443" title="Fin">Fin</a> 1 → k),</span>
+<span id="L109"><a href="#L109">109</a>       c ≠ 0 ∧ y 0 = c ∧</span>
+<span id="L110"><a href="#L110">110</a>       P = <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Nullstellensatz.lean#L61" title="MvPolynomial.vanishingIdeal">MvPolynomial.vanishingIdeal</a> k {y} ∧</span>
+<span id="L111"><a href="#L111">111</a>       <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/Basic.lean#L125" title="MvPolynomial.X">MvPolynomial.X</a> (0 : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L2443" title="Fin">Fin</a> 1) - <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/Basic.lean#L104" title="MvPolynomial.C">MvPolynomial.C</a> c ∈ P := by</span>
+<span id="L112"><a href="#L112">112</a>   apply <a class="ref" href="./OneVariablePrimeConormal.lean.html#L72" title="Stafford38.Geometry.OneVariablePrimeConormal.exists_coordinate_sub_constant_mem_of_prime_axis_avoidance">exists_coordinate_sub_constant_mem_of_prime_axis_avoidance</a> P</span>
+<span id="L113"><a href="#L113">113</a>   intro y hyP</span>
+<span id="L114"><a href="#L114">114</a>   apply havoid y</span>
+<span id="L115"><a href="#L115">115</a>   intro f hf</span>
+<span id="L116"><a href="#L116">116</a>   exact hyP f (hIP hf)</span>
+<span id="L117"><a href="#L117">117</a> </span>
+<span id="L118"><a href="#L118">118</a> /-- Direct rank-one replacement for the impossible boundary-chart branch.</span>
+<span id="L119"><a href="#L119">119</a> The fibre residue is the unique pure coordinate axis. -/</span>
+<span id="L120"><a href="#L120">120</a> theorem exists_laurentConormalAxis_of_prime_axis_avoidance</span>
+<span id="L121"><a href="#L121">121</a>     {k : Type u} [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Field/Defs.lean#L170" title="Field">Field</a> k] [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/FieldTheory/IsAlgClosed/Basic.lean#L58" title="IsAlgClosed">IsAlgClosed</a> k]</span>
+<span id="L122"><a href="#L122">122</a>     (P : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Defs.lean#L38" title="Ideal">Ideal</a> (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/Basic.lean#L80" title="MvPolynomial">MvPolynomial</a> (<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L2443" title="Fin">Fin</a> 1) k)) [P.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Prime.lean#L39" title="Ideal.IsPrime">IsPrime</a>]</span>
+<span id="L123"><a href="#L123">123</a>     (havoid : ∀ y : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L2443" title="Fin">Fin</a> 1 → k,</span>
+<span id="L124"><a href="#L124">124</a>       (∀ f ∈ P, <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/Eval.lean#L255" title="MvPolynomial.eval">MvPolynomial.eval</a> y f = 0) → y 0 ≠ 0) :</span>
+<span id="L125"><a href="#L125">125</a>     ∃ (yL : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L2443" title="Fin">Fin</a> 1 → <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/LaurentSeries.lean#L98" title="LaurentSeries">LaurentSeries</a> k)</span>
+<span id="L126"><a href="#L126">126</a>       (xi : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L2443" title="Fin">Fin</a> 1 → <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/PowerSeries/Basic.lean#L58" title="PowerSeries">PowerSeries</a> k),</span>
+<span id="L127"><a href="#L127">127</a>       <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Data/Sum/Basic.lean#L99" title="Sum.elim">Sum.elim</a> yL</span>
+<span id="L128"><a href="#L128">128</a>           (fun j ↦ <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Algebra/Defs.lean#L97" title="Algebra.algebraMap">algebraMap</a> (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/PowerSeries/Basic.lean#L58" title="PowerSeries">PowerSeries</a> k) (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/LaurentSeries.lean#L98" title="LaurentSeries">LaurentSeries</a> k) (xi j)) ∈</span>
+<span id="L129"><a href="#L129">129</a>         <a class="ref" href="./AffineConormalClosure.lean.html#L36" title="Stafford38.Geometry.AffineConormalClosure.equationConormalLocus">equationConormalLocus</a></span>
+<span id="L130"><a href="#L130">130</a>           (P.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Maps.lean#L41" title="Ideal.map">map</a> (<a class="ref" href="./ScalarExtensionPoints.lean.html#L44" title="Stafford38.Geometry.ScalarExtensionPoints.scalarPolynomialMap">scalarPolynomialMap</a></span>
+<span id="L131"><a href="#L131">131</a>             (k := k) (K := <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/LaurentSeries.lean#L98" title="LaurentSeries">LaurentSeries</a> k) (<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L2443" title="Fin">Fin</a> 1))) ∧</span>
+<span id="L132"><a href="#L132">132</a>       <a class="ref" href="./RetractionSpecialization.lean.html#L143" title="Stafford38.GeometryRetractionSpecialization.residueColumn">residueColumn</a> xi = (fun _ : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L2443" title="Fin">Fin</a> 1 ↦ 1) := by</span>
+<span id="L133"><a href="#L133">133</a>   obtain ⟨c, y, _hc, _hyc, hPy, hcoordinate⟩ :=</span>
+<span id="L134"><a href="#L134">134</a>     <a class="ref" href="./OneVariablePrimeConormal.lean.html#L72" title="Stafford38.Geometry.OneVariablePrimeConormal.exists_coordinate_sub_constant_mem_of_prime_axis_avoidance">exists_coordinate_sub_constant_mem_of_prime_axis_avoidance</a> P havoid</span>
+<span id="L135"><a href="#L135">135</a>   have hy : ∀ f ∈ P, <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/Eval.lean#L255" title="MvPolynomial.eval">MvPolynomial.eval</a> y f = 0 := by</span>
+<span id="L136"><a href="#L136">136</a>     intro f hf</span>
+<span id="L137"><a href="#L137">137</a>     rw [hPy] at hf</span>
+<span id="L138"><a href="#L138">138</a>     exact (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Nullstellensatz.lean#L101" title="MvPolynomial.mem_vanishingIdeal_singleton_iff">MvPolynomial.mem_vanishingIdeal_singleton_iff</a> y f).<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Core.lean#L192" title="Iff.mp">mp</a> hf</span>
+<span id="L139"><a href="#L139">139</a>   obtain ⟨yL, xi, hphase, hresidue⟩ :=</span>
+<span id="L140"><a href="#L140">140</a>     <a class="ref" href="./ConstantCoordinateConormal.lean.html#L71" title="Stafford38.Geometry.ConstantCoordinateConormal.exists_laurentConormalAxis_of_coordinate_sub_constant_mem">exists_laurentConormalAxis_of_coordinate_sub_constant_mem</a></span>
+<span id="L141"><a href="#L141">141</a>       P y hy (0 : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L2443" title="Fin">Fin</a> 1) c hcoordinate</span>
+<span id="L142"><a href="#L142">142</a>   refine ⟨yL, xi, hphase, ?_⟩</span>
+<span id="L143"><a href="#L143">143</a>   rw [hresidue]</span>
+<span id="L144"><a href="#L144">144</a>   funext j</span>
+<span id="L145"><a href="#L145">145</a>   fin_cases j</span>
+<span id="L146"><a href="#L146">146</a>   simp</span>
+<span id="L147"><a href="#L147">147</a> </span>
+<span id="L148"><a href="#L148">148</a> #print axioms <a class="ref" href="./OneVariablePrimeConormal.lean.html#L40" title="Stafford38.Geometry.OneVariablePrimeConormal.primeComponent_isMaximal_of_axis_avoidance">primeComponent_isMaximal_of_axis_avoidance</a></span>
+<span id="L149"><a href="#L149">149</a> #print axioms <a class="ref" href="./OneVariablePrimeConormal.lean.html#L72" title="Stafford38.Geometry.OneVariablePrimeConormal.exists_coordinate_sub_constant_mem_of_prime_axis_avoidance">exists_coordinate_sub_constant_mem_of_prime_axis_avoidance</a></span>
+<span id="L150"><a href="#L150">150</a> #print axioms <a class="ref" href="./OneVariablePrimeConormal.lean.html#L99" title="Stafford38.Geometry.OneVariablePrimeConormal.exists_coordinate_sub_constant_mem_of_primeComponent">exists_coordinate_sub_constant_mem_of_primeComponent</a></span>
+<span id="L151"><a href="#L151">151</a> #print axioms <a class="ref" href="./OneVariablePrimeConormal.lean.html#L118" title="Stafford38.Geometry.OneVariablePrimeConormal.exists_laurentConormalAxis_of_prime_axis_avoidance">exists_laurentConormalAxis_of_prime_axis_avoidance</a></span>
+<span id="L152"><a href="#L152">152</a> </span>
+<span id="L153"><a href="#L153">153</a> end</span>
+<span id="L154"><a href="#L154">154</a> </span>
+<span id="L155"><a href="#L155">155</a> end Stafford38.Geometry.OneVariablePrimeConormal</span>
+<span id="L156"><a href="#L156">156</a> </span></pre>

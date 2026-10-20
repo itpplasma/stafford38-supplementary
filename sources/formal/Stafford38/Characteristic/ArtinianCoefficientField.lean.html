@@ -1,4 +1,4 @@
-<!doctype html><meta charset="utf-8"><title>Stafford38/Characteristic/ArtinianCoefficientField.lean</title><style>body{font:14px monospace}pre span{display:block}pre span:target{background:#fff0ad}a{color:#666}pre{white-space:pre-wrap}</style><h1>Stafford38/Characteristic/ArtinianCoefficientField.lean</h1><p>This project (Stafford38) · 0403af3f0b1a7f84d2027121932723f67bd279ae</p><pre><span id="L1"><a href="#L1">1</a> module</span>
+<!doctype html><meta charset="utf-8"><title>Stafford38/Characteristic/ArtinianCoefficientField.lean</title><style>body{font:14px monospace}pre span{display:block}pre span:target{background:#fff0ad}a{color:#666}pre{white-space:pre-wrap}a.ref{color:#0645ad;text-decoration:none}a.ref:hover{text-decoration:underline}</style><h1>Stafford38/Characteristic/ArtinianCoefficientField.lean</h1><p>This project (Stafford38) · 0403af3f0b1a7f84d2027121932723f67bd279ae</p><pre><span id="L1"><a href="#L1">1</a> module</span>
 <span id="L2"><a href="#L2">2</a> public import Mathlib.RingTheory.AlgebraicIndependent.Adjoin</span>
 <span id="L3"><a href="#L3">3</a> public import Mathlib.RingTheory.AlgebraicIndependent.TranscendenceBasis</span>
 <span id="L4"><a href="#L4">4</a> public import Mathlib.RingTheory.Artinian.Ring</span>
@@ -39,65 +39,65 @@
 <span id="L39"><a href="#L39">39</a> Mathlib's `Algebra.IsSeparable` describes algebraic separability, so the</span>
 <span id="L40"><a href="#L40">40</a> transcendental part is first isolated with a transcendence basis. -/</span>
 <span id="L41"><a href="#L41">41</a> theorem formallySmooth_fieldExtension_of_charZero</span>
-<span id="L42"><a href="#L42">42</a>     (F E : Type u) [Field F] [Field E] [Algebra F E] [CharZero F] :</span>
-<span id="L43"><a href="#L43">43</a>     Algebra.FormallySmooth F E := by</span>
+<span id="L42"><a href="#L42">42</a>     (F E : Type u) [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Field/Defs.lean#L170" title="Field">Field</a> F] [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Field/Defs.lean#L170" title="Field">Field</a> E] [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Algebra/Defs.lean#L91" title="Algebra">Algebra</a> F E] [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/CharZero/Defs.lean#L33" title="CharZero">CharZero</a> F] :</span>
+<span id="L43"><a href="#L43">43</a>     <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Smooth/Basic.lean#L64" title="Algebra.FormallySmooth">Algebra.FormallySmooth</a> F E := by</span>
 <span id="L44"><a href="#L44">44</a>   obtain ⟨ι, x, hx⟩ :=</span>
-<span id="L45"><a href="#L45">45</a>     exists_isTranscendenceBasis' F E</span>
-<span id="L46"><a href="#L46">46</a>   let K := IntermediateField.adjoin F (Set.range x)</span>
-<span id="L47"><a href="#L47">47</a>   let P := MvPolynomial ι F</span>
-<span id="L48"><a href="#L48">48</a>   let L := FractionRing P</span>
-<span id="L49"><a href="#L49">49</a>   haveI : Algebra.FormallySmooth F P := inferInstance</span>
-<span id="L50"><a href="#L50">50</a>   haveI : Algebra.FormallySmooth P L :=</span>
-<span id="L51"><a href="#L51">51</a>     Algebra.FormallySmooth.of_isLocalization (nonZeroDivisors P)</span>
-<span id="L52"><a href="#L52">52</a>   haveI : Algebra.FormallySmooth F L :=</span>
-<span id="L53"><a href="#L53">53</a>     Algebra.FormallySmooth.comp F P L</span>
-<span id="L54"><a href="#L54">54</a>   haveI : Algebra.FormallySmooth F K :=</span>
-<span id="L55"><a href="#L55">55</a>     Algebra.FormallySmooth.of_equiv hx.1.aevalEquivField</span>
-<span id="L56"><a href="#L56">56</a>   haveI : Algebra.IsAlgebraic K E := hx.isAlgebraic_field</span>
-<span id="L57"><a href="#L57">57</a>   haveI : CharZero K :=</span>
-<span id="L58"><a href="#L58">58</a>     charZero_of_injective_algebraMap (algebraMap F K).injective</span>
-<span id="L59"><a href="#L59">59</a>   haveI : PerfectField K := PerfectField.ofCharZero</span>
-<span id="L60"><a href="#L60">60</a>   haveI : Algebra.IsSeparable K E := inferInstance</span>
-<span id="L61"><a href="#L61">61</a>   haveI : Algebra.FormallyEtale K E :=</span>
-<span id="L62"><a href="#L62">62</a>     Algebra.FormallyEtale.of_isSeparable K E</span>
-<span id="L63"><a href="#L63">63</a>   exact Algebra.FormallySmooth.comp F K E</span>
+<span id="L45"><a href="#L45">45</a>     <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/AlgebraicIndependent/TranscendenceBasis.lean#L63" title="exists_isTranscendenceBasis&#x27;">exists_isTranscendenceBasis'</a> F E</span>
+<span id="L46"><a href="#L46">46</a>   let K := <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/FieldTheory/IntermediateField/Adjoin/Defs.lean#L32" title="IntermediateField.adjoin">IntermediateField.adjoin</a> F (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Data/Set/Operations.lean#L169" title="Set.range">Set.range</a> x)</span>
+<span id="L47"><a href="#L47">47</a>   let P := <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/Basic.lean#L80" title="MvPolynomial">MvPolynomial</a> ι F</span>
+<span id="L48"><a href="#L48">48</a>   let L := <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Localization/FractionRing.lean#L724" title="FractionRing">FractionRing</a> P</span>
+<span id="L49"><a href="#L49">49</a>   haveI : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Smooth/Basic.lean#L64" title="Algebra.FormallySmooth">Algebra.FormallySmooth</a> F P := <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L160" title="inferInstance">inferInstance</a></span>
+<span id="L50"><a href="#L50">50</a>   haveI : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Smooth/Basic.lean#L64" title="Algebra.FormallySmooth">Algebra.FormallySmooth</a> P L :=</span>
+<span id="L51"><a href="#L51">51</a>     <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Smooth/Basic.lean#L482" title="Algebra.FormallySmooth.of_isLocalization">Algebra.FormallySmooth.of_isLocalization</a> (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/GroupWithZero/NonZeroDivisors.lean#L99" title="nonZeroDivisors">nonZeroDivisors</a> P)</span>
+<span id="L52"><a href="#L52">52</a>   haveI : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Smooth/Basic.lean#L64" title="Algebra.FormallySmooth">Algebra.FormallySmooth</a> F L :=</span>
+<span id="L53"><a href="#L53">53</a>     <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Smooth/Basic.lean#L408" title="Algebra.FormallySmooth.comp">Algebra.FormallySmooth.comp</a> F P L</span>
+<span id="L54"><a href="#L54">54</a>   haveI : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Smooth/Basic.lean#L64" title="Algebra.FormallySmooth">Algebra.FormallySmooth</a> F K :=</span>
+<span id="L55"><a href="#L55">55</a>     <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Smooth/Basic.lean#L383" title="Algebra.FormallySmooth.of_equiv">Algebra.FormallySmooth.of_equiv</a> hx.<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L656" title="And.left">1</a>.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/AlgebraicIndependent/Adjoin.lean#L39" title="AlgebraicIndependent.aevalEquivField">aevalEquivField</a></span>
+<span id="L56"><a href="#L56">56</a>   haveI : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Algebraic/Defs.lean#L66" title="Algebra.IsAlgebraic">Algebra.IsAlgebraic</a> K E := hx.<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/AlgebraicIndependent/TranscendenceBasis.lean#L237" title="IsTranscendenceBasis.isAlgebraic_field">isAlgebraic_field</a></span>
+<span id="L57"><a href="#L57">57</a>   haveI : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/CharZero/Defs.lean#L33" title="CharZero">CharZero</a> K :=</span>
+<span id="L58"><a href="#L58">58</a>     <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/CharP/Algebra.lean#L76" title="charZero_of_injective_algebraMap">charZero_of_injective_algebraMap</a> (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Algebra/Defs.lean#L97" title="Algebra.algebraMap">algebraMap</a> F K).<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/SimpleRing/Basic.lean#L67" title="RingHom.injective">injective</a></span>
+<span id="L59"><a href="#L59">59</a>   haveI : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/FieldTheory/Perfect.lean#L286" title="PerfectField">PerfectField</a> K := <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/FieldTheory/Perfect.lean#L306" title="PerfectField.ofCharZero">PerfectField.ofCharZero</a></span>
+<span id="L60"><a href="#L60">60</a>   haveI : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/FieldTheory/Separable.lean#L541" title="Algebra.IsSeparable">Algebra.IsSeparable</a> K E := <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L160" title="inferInstance">inferInstance</a></span>
+<span id="L61"><a href="#L61">61</a>   haveI : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Etale/Basic.lean#L44" title="Algebra.FormallyEtale">Algebra.FormallyEtale</a> K E :=</span>
+<span id="L62"><a href="#L62">62</a>     <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Etale/Field.lean#L98" title="Algebra.FormallyEtale.of_isSeparable">Algebra.FormallyEtale.of_isSeparable</a> K E</span>
+<span id="L63"><a href="#L63">63</a>   exact <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Smooth/Basic.lean#L408" title="Algebra.FormallySmooth.comp">Algebra.FormallySmooth.comp</a> F K E</span>
 <span id="L64"><a href="#L64">64</a> </span>
 <span id="L65"><a href="#L65">65</a> section ArtinianLocal</span>
 <span id="L66"><a href="#L66">66</a> </span>
-<span id="L67"><a href="#L67">67</a> variable (F R : Type u) [Field F] [CharZero F]</span>
-<span id="L68"><a href="#L68">68</a> variable [CommRing R] [Algebra F R] [IsLocalRing R] [IsArtinianRing R]</span>
+<span id="L67"><a href="#L67">67</a> variable (F R : Type u) [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Field/Defs.lean#L170" title="Field">Field</a> F] [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/CharZero/Defs.lean#L33" title="CharZero">CharZero</a> F]</span>
+<span id="L68"><a href="#L68">68</a> variable [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Ring/Defs.lean#L412" title="CommRing">CommRing</a> R] [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Algebra/Defs.lean#L91" title="Algebra">Algebra</a> F R] [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/LocalRing/Defs.lean#L27" title="IsLocalRing">IsLocalRing</a> R] [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Artinian/Defs.lean#L59" title="IsArtinianRing">IsArtinianRing</a> R]</span>
 <span id="L69"><a href="#L69">69</a> </span>
-<span id="L70"><a href="#L70">70</a> local notation &quot;𝔪&quot; =&gt; IsLocalRing.maximalIdeal R</span>
-<span id="L71"><a href="#L71">71</a> local notation &quot;κ&quot; =&gt; IsLocalRing.ResidueField R</span>
+<span id="L70"><a href="#L70">70</a> local notation "𝔪" =&gt; <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/LocalRing/MaximalIdeal/Defs.lean#L29" title="IsLocalRing.maximalIdeal">IsLocalRing.maximalIdeal</a> R</span>
+<span id="L71"><a href="#L71">71</a> local notation "κ" =&gt; <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/LocalRing/ResidueField/Defs.lean#L28" title="IsLocalRing.ResidueField">IsLocalRing.ResidueField</a> R</span>
 <span id="L72"><a href="#L72">72</a> </span>
 <span id="L73"><a href="#L73">73</a> /-- The maximal ideal of a commutative Artinian local ring is nilpotent. -/</span>
-<span id="L74"><a href="#L74">74</a> lemma maximalIdeal_isNilpotent : IsNilpotent 𝔪 := by</span>
-<span id="L75"><a href="#L75">75</a>   rw [← IsLocalRing.jacobson_eq_maximalIdeal (⊥ : Ideal R)]</span>
-<span id="L76"><a href="#L76">76</a>   · exact IsArtinianRing.isNilpotent_jacobson_bot</span>
-<span id="L77"><a href="#L77">77</a>   · exact bot_ne_top</span>
+<span id="L74"><a href="#L74">74</a> lemma maximalIdeal_isNilpotent : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/GroupWithZero/Basic.lean#L149" title="IsNilpotent">IsNilpotent</a> 𝔪 := by</span>
+<span id="L75"><a href="#L75">75</a>   rw [← <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/LocalRing/MaximalIdeal/Basic.lean#L101" title="IsLocalRing.jacobson_eq_maximalIdeal">IsLocalRing.jacobson_eq_maximalIdeal</a> (⊥ : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Defs.lean#L38" title="Ideal">Ideal</a> R)]</span>
+<span id="L76"><a href="#L76">76</a>   · exact <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Artinian/Ring.lean#L53" title="IsArtinianRing.isNilpotent_jacobson_bot">IsArtinianRing.isNilpotent_jacobson_bot</a></span>
+<span id="L77"><a href="#L77">77</a>   · exact <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Order/BoundedOrder/Basic.lean#L452" title="bot_ne_top">bot_ne_top</a></span>
 <span id="L78"><a href="#L78">78</a> </span>
 <span id="L79"><a href="#L79">79</a> /-- An equal-characteristic-zero Artinian local algebra contains a coefficient</span>
 <span id="L80"><a href="#L80">80</a> field: the residue map has a section as an algebra homomorphism over the base</span>
 <span id="L81"><a href="#L81">81</a> field. -/</span>
 <span id="L82"><a href="#L82">82</a> theorem exists_residue_algHom_section :</span>
 <span id="L83"><a href="#L83">83</a>     ∃ s : κ →ₐ[F] R,</span>
-<span id="L84"><a href="#L84">84</a>       (Ideal.Quotient.mkₐ F 𝔪).comp s = AlgHom.id F κ := by</span>
-<span id="L85"><a href="#L85">85</a>   letI : Algebra.FormallySmooth F κ :=</span>
-<span id="L86"><a href="#L86">86</a>     formallySmooth_fieldExtension_of_charZero F κ</span>
-<span id="L87"><a href="#L87">87</a>   exact Algebra.FormallySmooth.exists_lift 𝔪</span>
-<span id="L88"><a href="#L88">88</a>     (maximalIdeal_isNilpotent (R := R)) (AlgHom.id F κ)</span>
+<span id="L84"><a href="#L84">84</a>       (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Ideal/Quotient/Operations.lean#L378" title="Ideal.Quotient.mkₐ">Ideal.Quotient.mkₐ</a> F 𝔪).<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Algebra/Hom.lean#L257" title="AlgHom.comp">comp</a> s = <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Algebra/Hom.lean#L240" title="AlgHom.id">AlgHom.id</a> F κ := by</span>
+<span id="L85"><a href="#L85">85</a>   letI : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Smooth/Basic.lean#L64" title="Algebra.FormallySmooth">Algebra.FormallySmooth</a> F κ :=</span>
+<span id="L86"><a href="#L86">86</a>     <a class="ref" href="./ArtinianCoefficientField.lean.html#L37" title="Stafford38.Characteristic.ArtinianCoefficientField.formallySmooth_fieldExtension_of_charZero">formallySmooth_fieldExtension_of_charZero</a> F κ</span>
+<span id="L87"><a href="#L87">87</a>   exact <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/Smooth/Basic.lean#L126" title="Algebra.FormallySmooth.exists_lift">Algebra.FormallySmooth.exists_lift</a> 𝔪</span>
+<span id="L88"><a href="#L88">88</a>     (<a class="ref" href="./ArtinianCoefficientField.lean.html#L73" title="Stafford38.Characteristic.ArtinianCoefficientField.maximalIdeal_isNilpotent">maximalIdeal_isNilpotent</a> (R := R)) (<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Algebra/Hom.lean#L240" title="AlgHom.id">AlgHom.id</a> F κ)</span>
 <span id="L89"><a href="#L89">89</a> </span>
 <span id="L90"><a href="#L90">90</a> /-- Pointwise form of `exists_residue_algHom_section`. -/</span>
 <span id="L91"><a href="#L91">91</a> theorem exists_residue_section :</span>
-<span id="L92"><a href="#L92">92</a>     ∃ s : κ →ₐ[F] R, ∀ a : κ, IsLocalRing.residue R (s a) = a := by</span>
-<span id="L93"><a href="#L93">93</a>   obtain ⟨s, hs⟩ := exists_residue_algHom_section F R</span>
+<span id="L92"><a href="#L92">92</a>     ∃ s : κ →ₐ[F] R, ∀ a : κ, <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/RingTheory/LocalRing/ResidueField/Defs.lean#L37" title="IsLocalRing.residue">IsLocalRing.residue</a> R (s a) = a := by</span>
+<span id="L93"><a href="#L93">93</a>   obtain ⟨s, hs⟩ := <a class="ref" href="./ArtinianCoefficientField.lean.html#L79" title="Stafford38.Characteristic.ArtinianCoefficientField.exists_residue_algHom_section">exists_residue_algHom_section</a> F R</span>
 <span id="L94"><a href="#L94">94</a>   refine ⟨s, fun a ↦ ?_⟩</span>
-<span id="L95"><a href="#L95">95</a>   exact AlgHom.congr_fun hs a</span>
+<span id="L95"><a href="#L95">95</a>   exact <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Algebra/Hom.lean#L203" title="AlgHom.congr_fun">AlgHom.congr_fun</a> hs a</span>
 <span id="L96"><a href="#L96">96</a> </span>
-<span id="L97"><a href="#L97">97</a> #print axioms formallySmooth_fieldExtension_of_charZero</span>
-<span id="L98"><a href="#L98">98</a> #print axioms maximalIdeal_isNilpotent</span>
-<span id="L99"><a href="#L99">99</a> #print axioms exists_residue_algHom_section</span>
-<span id="L100"><a href="#L100">100</a> #print axioms exists_residue_section</span>
+<span id="L97"><a href="#L97">97</a> #print axioms <a class="ref" href="./ArtinianCoefficientField.lean.html#L37" title="Stafford38.Characteristic.ArtinianCoefficientField.formallySmooth_fieldExtension_of_charZero">formallySmooth_fieldExtension_of_charZero</a></span>
+<span id="L98"><a href="#L98">98</a> #print axioms <a class="ref" href="./ArtinianCoefficientField.lean.html#L73" title="Stafford38.Characteristic.ArtinianCoefficientField.maximalIdeal_isNilpotent">maximalIdeal_isNilpotent</a></span>
+<span id="L99"><a href="#L99">99</a> #print axioms <a class="ref" href="./ArtinianCoefficientField.lean.html#L79" title="Stafford38.Characteristic.ArtinianCoefficientField.exists_residue_algHom_section">exists_residue_algHom_section</a></span>
+<span id="L100"><a href="#L100">100</a> #print axioms <a class="ref" href="./ArtinianCoefficientField.lean.html#L90" title="Stafford38.Characteristic.ArtinianCoefficientField.exists_residue_section">exists_residue_section</a></span>
 <span id="L101"><a href="#L101">101</a> </span>
 <span id="L102"><a href="#L102">102</a> end ArtinianLocal</span>
 <span id="L103"><a href="#L103">103</a> </span>

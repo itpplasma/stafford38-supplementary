@@ -1,4 +1,4 @@
-<!doctype html><meta charset="utf-8"><title>Stafford38/Weyl/Domain.lean</title><style>body{font:14px monospace}pre span{display:block}pre span:target{background:#fff0ad}a{color:#666}pre{white-space:pre-wrap}</style><h1>Stafford38/Weyl/Domain.lean</h1><p>This project (Stafford38) · 0403af3f0b1a7f84d2027121932723f67bd279ae</p><pre><span id="L1"><a href="#L1">1</a> module</span>
+<!doctype html><meta charset="utf-8"><title>Stafford38/Weyl/Domain.lean</title><style>body{font:14px monospace}pre span{display:block}pre span:target{background:#fff0ad}a{color:#666}pre{white-space:pre-wrap}a.ref{color:#0645ad;text-decoration:none}a.ref:hover{text-decoration:underline}</style><h1>Stafford38/Weyl/Domain.lean</h1><p>This project (Stafford38) · 0403af3f0b1a7f84d2027121932723f67bd279ae</p><pre><span id="L1"><a href="#L1">1</a> module</span>
 <span id="L2"><a href="#L2">2</a> public import Stafford38.Statement</span>
 <span id="L3"><a href="#L3">3</a> public import Stafford38.Weyl.MonicNormalization</span>
 <span id="L4"><a href="#L4">4</a> </span>
@@ -22,24 +22,24 @@
 <span id="L22"><a href="#L22">22</a> universe u</span>
 <span id="L23"><a href="#L23">23</a> </span>
 <span id="L24"><a href="#L24">24</a> /-- The product of two nonzero elements of a Weyl algebra is nonzero. -/</span>
-<span id="L25"><a href="#L25">25</a> theorem mul_ne_zero {k : Type u} [Field k] {n : ℕ}</span>
-<span id="L26"><a href="#L26">26</a>     {a b : Stafford38Challenge.WeylAlg k n} (ha : a ≠ 0) (hb : b ≠ 0) :</span>
+<span id="L25"><a href="#L25">25</a> theorem mul_ne_zero {k : Type u} [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Field/Defs.lean#L170" title="Field">Field</a> k] {n : <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L1351" title="Nat">ℕ</a>}</span>
+<span id="L26"><a href="#L26">26</a>     {a b : <a class="ref" href="../ChallengeDefinitions.lean.html#L73" title="Stafford38Challenge.WeylAlg">Stafford38Challenge.WeylAlg</a> k n} (ha : a ≠ 0) (hb : b ≠ 0) :</span>
 <span id="L27"><a href="#L27">27</a>     a * b ≠ 0 := by</span>
-<span id="L28"><a href="#L28">28</a>   obtain ⟨N, haN, hsa⟩ := exists_top_bernstein_piece k ha</span>
-<span id="L29"><a href="#L29">29</a>   obtain ⟨M, hbM, hsb⟩ := exists_top_bernstein_piece k hb</span>
-<span id="L30"><a href="#L30">30</a>   have htop := presentedPrincipalComponent_mul_bernstein k haN hbM</span>
+<span id="L28"><a href="#L28">28</a>   obtain ⟨N, haN, hsa⟩ := <a class="ref" href="./MonicNormalization.lean.html#L73" title="Stafford38.WeylMonicNormalization.exists_top_bernstein_piece">exists_top_bernstein_piece</a> k ha</span>
+<span id="L29"><a href="#L29">29</a>   obtain ⟨M, hbM, hsb⟩ := <a class="ref" href="./MonicNormalization.lean.html#L73" title="Stafford38.WeylMonicNormalization.exists_top_bernstein_piece">exists_top_bernstein_piece</a> k hb</span>
+<span id="L30"><a href="#L30">30</a>   have htop := <a class="ref" href="./LeadingSymbol.lean.html#L497" title="Stafford38.WeylLeadingSymbol.presentedPrincipalComponent_mul_bernstein">presentedPrincipalComponent_mul_bernstein</a> k haN hbM</span>
 <span id="L31"><a href="#L31">31</a>   have hsymbol :</span>
-<span id="L32"><a href="#L32">32</a>       presentedPrincipalComponent k (@bernsteinWeight n) N a *</span>
-<span id="L33"><a href="#L33">33</a>           presentedPrincipalComponent k (@bernsteinWeight n) M b ≠ 0 :=</span>
-<span id="L34"><a href="#L34">34</a>     _root_.mul_ne_zero hsa hsb</span>
+<span id="L32"><a href="#L32">32</a>       <a class="ref" href="./LeadingSymbol.lean.html#L33" title="Stafford38.WeylLeadingSymbol.presentedPrincipalComponent">presentedPrincipalComponent</a> k (@<a class="ref" href="./Filtration.lean.html#L220" title="Stafford38.WeylFiltration.bernsteinWeight">bernsteinWeight</a> n) N a *</span>
+<span id="L33"><a href="#L33">33</a>           <a class="ref" href="./LeadingSymbol.lean.html#L33" title="Stafford38.WeylLeadingSymbol.presentedPrincipalComponent">presentedPrincipalComponent</a> k (@<a class="ref" href="./Filtration.lean.html#L220" title="Stafford38.WeylFiltration.bernsteinWeight">bernsteinWeight</a> n) M b ≠ 0 :=</span>
+<span id="L34"><a href="#L34">34</a>     <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/GroupWithZero/Basic.lean#L85" title="mul_ne_zero">_root_.mul_ne_zero</a> hsa hsb</span>
 <span id="L35"><a href="#L35">35</a>   intro hab</span>
 <span id="L36"><a href="#L36">36</a>   have hzero :</span>
-<span id="L37"><a href="#L37">37</a>       presentedPrincipalComponent k (@bernsteinWeight n) (N + M) (a * b) = 0 := by</span>
+<span id="L37"><a href="#L37">37</a>       <a class="ref" href="./LeadingSymbol.lean.html#L33" title="Stafford38.WeylLeadingSymbol.presentedPrincipalComponent">presentedPrincipalComponent</a> k (@<a class="ref" href="./Filtration.lean.html#L220" title="Stafford38.WeylFiltration.bernsteinWeight">bernsteinWeight</a> n) (N + M) (a * b) = 0 := by</span>
 <span id="L38"><a href="#L38">38</a>     simp [hab]</span>
 <span id="L39"><a href="#L39">39</a>   rw [htop] at hzero</span>
 <span id="L40"><a href="#L40">40</a>   exact hsymbol hzero</span>
 <span id="L41"><a href="#L41">41</a> </span>
-<span id="L42"><a href="#L42">42</a> #print axioms mul_ne_zero</span>
+<span id="L42"><a href="#L42">42</a> #print axioms <a class="ref" href="./Domain.lean.html#L24" title="Stafford38.WeylDomain.mul_ne_zero">mul_ne_zero</a></span>
 <span id="L43"><a href="#L43">43</a> </span>
 <span id="L44"><a href="#L44">44</a> end Stafford38.WeylDomain</span>
 <span id="L45"><a href="#L45">45</a> </span></pre>
