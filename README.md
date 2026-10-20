@@ -24,6 +24,12 @@ internet access. The [v0.2.2 release](https://github.com/itpplasma/stafford38-su
 and its [Zenodo archive](https://doi.org/10.5281/zenodo.23132562) preserve the
 earlier October 3 manuscript and retain their original citation metadata.
 
+**Proof graph:** [proof-dag.html](proof-dag.html) draws one dependency DAG per
+printed proof, with hypotheses entering and the statement exiting. An overall
+DAG runs from Lean's three base axioms to Theorem 1.1. Cited results and
+uncited standard facts appear as axioms with their sources. Regenerate it with
+`python3 scripts/build-proof-dag.py`, which requires Graphviz.
+
 [Updated paper PDF](human_readable_main.pdf) · [Archived formal proof details PDF](lean_proof_details.pdf) · [Formal proof v1.3.1](https://doi.org/10.5281/zenodo.23127367)
 
 Exact sources, licenses and review scope are in [manifest.json](manifest.json).
