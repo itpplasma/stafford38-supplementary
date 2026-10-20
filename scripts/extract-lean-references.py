@@ -41,10 +41,100 @@ def page(file, label, commit, text):
             f'<h1>{esc(file)}</h1><p>{esc(label)} · {esc(commit)}</p><pre>{lines}</pre>')
 
 
+def checkout_roots(checkout, key, url, prefix):
+    """Module roots of a built checkout: (repo key, source dir, ilean dir, link base).
+    Keys without a link base get bundled pages; the others link to GitHub."""
+    lake = json.loads((checkout / 'lake-manifest.json').read_text())
+    roots = [(key, checkout, checkout / '.lake/build/lib/lean', url)]
+    for pkg in lake['packages']:
+        pdir = checkout / '.lake/packages' / pkg['name']
+        if git(pdir, 'rev-parse', 'HEAD').strip() != pkg['rev']:
+            raise SystemExit(f'package {pkg["name"]} is not at its manifest revision')
+        name = 'library' if pkg['name'] == 'algebraicAnalysis' and not prefix else prefix + pkg['name']
+        roots.append((name, pdir, pdir / '.lake/build/lib/lean',
+                      pkg['url'].removesuffix('.git') + '/blob/' + pkg['rev'] + '/'))
+    toolchain = (checkout / 'lean-toolchain').read_text().strip()
+    tc_dir = Path.home() / '.elan/toolchains' / toolchain.replace('/', '--').replace(':', '---')
+    roots.append((prefix + 'lean4', tc_dir / 'src/lean', tc_dir / 'lib/lean',
+                  f'https://github.com/leanprover/lean4/blob/{toolchain.split(":")[1]}/src/'))
+    return roots
+
+
+def read_usages(base, repo, rel, usages, local):
+    """Single-line usages of constants in one file, as Lean recorded them."""
+    ilean = base[2] / rel.replace('.lean', '.ilean')
+    if not ilean.exists():
+        return False
+    lines = (base[1] / rel).read_text().split('\n')
+    found = usages[f'{repo}:{rel}'] = []
+    data = json.loads(ilean.read_text())
+    local[f'{repo}:{rel}'] = {n: r[0] + 1 for n, r in data['decls'].items()}
+    for key, ref in data['references'].items():
+        ident = json.loads(key).get('c')
+        for l0, c0, l1, c1, *_ in (ref['usages'] if ident else ()):
+            if l0 == l1 and l0 < len(lines):
+                a, b = utf16_to_index(lines[l0], c0), utf16_to_index(lines[l0], c1)
+                found.append((l0 + 1, a, b - a, ident['n']))
+    return True
+
+
+def lean_ranges(checkout, groups, names):
+    """Declaring module and line of each name, from Lean, importing `groups` in turn."""
+    work, mods = OUT.parent / '.names.txt', OUT.parent / '.modules.txt'
+    OUT.parent.mkdir(parents=True, exist_ok=True)
+    ranges = {}
+    for group in groups:
+        todo = [n for n in names if n not in ranges]
+        work.write_text('\n'.join(todo) + '\n')
+        mods.write_text('\n'.join(group) + '\n')
+        subprocess.run(['lake', 'env', 'lean', '--run', str(root / 'scripts/LeanDeclRanges.lean'),
+                        str(mods), str(work), str(work.with_suffix('.json'))], cwd=checkout, check=True)
+        ranges.update(json.loads(work.with_suffix('.json').read_text()))
+    for path in (work, mods, work.with_suffix('.json')):
+        path.unlink()
+    return ranges
+
+
+def locate(roots, module):
+    for key, src, ilean, url in roots:
+        if (ilean / (module.replace('.', '/') + '.ilean')).exists():
+            return key, module.replace('.', '/') + '.lean'
+    return None
+
+
+def extract_global(checkout, source, page_text, files, targets, urls, texts):
+    """References in the GlobalStafford files quoted in index.html, resolved in
+    that project's own environment and linked to its own pinned revisions."""
+    head = git(checkout, 'rev-parse', 'HEAD').strip()
+    if head != source['commit']:
+        raise SystemExit(f'GlobalStafford checkout is at {head}, expected {source["commit"]}')
+    base_url = f'https://github.com/{source["repo"]}/blob/{head}/'
+    roots = checkout_roots(checkout, 'global', base_url, 'global-')
+    quoted = sorted(set(re.findall(re.escape(base_url) + r'([^"#]+\.lean)#L', page_text)))
+    usages, local = {}, {}
+    for rel in quoted:
+        if not read_usages(roots[0], 'global', rel, usages, local):
+            raise SystemExit(f'GlobalStafford file without .ilean: {rel}')
+        texts[f'global:{rel}'] = (checkout / rel).read_text().split('\n')
+    names = sorted({u[3] for found in usages.values() for u in found})
+    ranges = lean_ranges(checkout, [['GlobalStafford']], names)
+    index = {}
+    for name in names:
+        if name in ranges and (owner := locate(roots, ranges[name][0])):
+            index[name] = len(targets)
+            targets.append([name, owner[0], owner[1], ranges[name][1]])
+    for key, found in usages.items():
+        files[key] = sorted({(l, c, n, index[t]) for l, c, n, t in found if t in index})
+    urls.update({r[0]: r[3] for r in roots if r[3]})
+    return [n for n in names if n not in index]
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--formal', type=Path, required=True,
                         help='built checkout of the pinned formal commit (lake build)')
+    parser.add_argument('--global', dest='global_checkout', type=Path,
+                        help='built checkout of the pinned GlobalStafford commit, for its quoted files')
     args = parser.parse_args()
     formal = args.formal.resolve()
     mapping = json.loads((root / 'paper-lean-map.json').read_text())
@@ -53,32 +143,9 @@ def main():
     if head != sources['formal']['commit']:
         raise SystemExit(f'formal checkout is at {head}, expected {sources["formal"]["commit"]}')
     toolchain = (formal / 'lean-toolchain').read_text().strip()
-    tc_dir = Path.home() / '.elan/toolchains' / toolchain.replace('/', '--').replace(':', '---')
-    lake = json.loads((formal / 'lake-manifest.json').read_text())
-
-    # Roots that own modules: (repo key, source dir, ilean dir, link base).
-    # 'formal' and 'library' get bundled pages; the others link to GitHub.
-    roots = [('formal', formal, formal / '.lake/build/lib/lean', None)]
-    for pkg in lake['packages']:
-        pdir = formal / '.lake/packages' / pkg['name']
-        if git(pdir, 'rev-parse', 'HEAD').strip() != pkg['rev']:
-            raise SystemExit(f'package {pkg["name"]} is not at its manifest revision')
-        key = 'library' if pkg['name'] == 'algebraicAnalysis' else pkg['name']
-        url = pkg['url'].removesuffix('.git') + '/blob/' + pkg['rev'] + '/'
-        roots.append((key, pdir, pdir / '.lake/build/lib/lean', url))
+    roots = checkout_roots(formal, 'formal', None, '')
     if git(formal / '.lake/packages/algebraicAnalysis', 'rev-parse', 'HEAD').strip() != sources['library']['commit']:
         raise SystemExit('AlgebraicAnalysis package differs from the pinned library commit')
-    tag = toolchain.split(':')[1]
-    roots.append(('lean4', tc_dir / 'src/lean', tc_dir / 'lib/lean',
-                  f'https://github.com/leanprover/lean4/blob/{tag}/src/'))
-
-    def locate(module):
-        rel = module.replace('.', '/') + '.lean'
-        for key, src, ilean, url in roots:
-            if (ilean / (module.replace('.', '/') + '.ilean')).exists():
-                return key, rel
-        return None
-
     linked = {'formal': git(formal, 'ls-files', '*.lean').split(),
               'library': git(formal / '.lake/packages/algebraicAnalysis', 'ls-files', '*.lean').split()}
     # Library files quoted in index.html from GitHub (Mathlib and the like).
@@ -96,46 +163,20 @@ def main():
     for repo, names in [*linked.items(), *quoted.items()]:
         base = next(r for r in roots if r[0] == repo)
         for rel in names:
-            ilean = base[2] / rel.replace('.lean', '.ilean')
-            if not ilean.exists():
+            if not read_usages(base, repo, rel, usages, local):
                 missing.add(f'{repo}:{rel}')
-                continue
-            lines = (base[1] / rel).read_text().split('\n')
-            found = usages[f'{repo}:{rel}'] = []
-            data = json.loads(ilean.read_text())
-            local[f'{repo}:{rel}'] = {n: r[0] + 1 for n, r in data['decls'].items()}
-            for key, ref in data['references'].items():
-                ident = json.loads(key).get('c')
-                for l0, c0, l1, c1, *_ in (ref['usages'] if ident else ()):
-                    if l0 == l1 and l0 < len(lines):
-                        a, b = utf16_to_index(lines[l0], c0), utf16_to_index(lines[l0], c1)
-                        found.append((l0 + 1, a, b - a, ident['n']))
 
     # Pass 2: Lean itself reports the declaring module and line of each constant.
     names = sorted({u[3] for found in usages.values() for u in found})
-    work = OUT.parent / '.names.txt'
-    mods = OUT.parent / '.modules.txt'
-    OUT.parent.mkdir(parents=True, exist_ok=True)
-    work.write_text('\n'.join(names) + '\n')
     # Every built module, so all referenced names are in scope. The standalone
     # challenge and solution files redefine the challenge names, so each of
     # them is imported on its own for the names still missing.
     built = [k.split(':', 1)[1].removesuffix('.lean').replace('/', '.')
              for k in usages if k.startswith('formal:') and not k.startswith('formal:tests/')]
-    groups = [[m for m in built if '.' in m]] + [[m] for m in built if '.' not in m]
-    ranges = {}
-    for group in groups:
-        todo = [n for n in names if n not in ranges]
-        work.write_text('\n'.join(todo) + '\n')
-        mods.write_text('\n'.join(group) + '\n')
-        subprocess.run(['lake', 'env', 'lean', '--run', str(root / 'scripts/LeanDeclRanges.lean'),
-                        str(mods), str(work), str(work.with_suffix('.json'))], cwd=formal, check=True)
-        ranges.update(json.loads(work.with_suffix('.json').read_text()))
-    for path in (work, mods, work.with_suffix('.json')):
-        path.unlink()
+    ranges = lean_ranges(formal, [[m for m in built if '.' in m]] + [[m] for m in built if '.' not in m], names)
     targets, index = [], {}
     for name in names:
-        if name in ranges and (owner := locate(ranges[name][0])):
+        if name in ranges and (owner := locate(roots, ranges[name][0])):
             index[name] = len(targets)
             targets.append([name, owner[0], owner[1], ranges[name][1]])
     # A name the file declares itself refers to that declaration (the
@@ -154,6 +195,9 @@ def main():
         files[key] = sorted(sp for sp in spans if sp[3] is not None)
     unresolved = [n for n in names if n not in index]
     urls = {r[0]: r[3] for r in roots if r[3]}
+    if args.global_checkout:
+        unresolved += extract_global(args.global_checkout.resolve(), sources['global'], page_text,
+                                     files, targets, urls, texts)
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(json.dumps(dict(
         schema=1, formal_commit=head, library_commit=sources['library']['commit'], toolchain=toolchain,
