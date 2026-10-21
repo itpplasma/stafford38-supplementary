@@ -26,9 +26,11 @@ def main():
     parser.add_argument('--test-log', type=Path, required=True)
     parser.add_argument('--browser-receipt', type=Path, required=True)
     parser.add_argument('--reader-log', type=Path, required=True)
+    parser.add_argument('--receipt-dir', default='verification/manuscript-20261018',
+                        help='Migration receipt directory; its migration.json may list expected warnings.')
     args = parser.parse_args()
     root = Path(__file__).resolve().parent.parent
-    target = root / 'verification/manuscript-20261018'
+    target = root / args.receipt_dir
     mapping = json.loads((root / 'paper-lean-map.json').read_text())
     manifest = json.loads((root / 'manifest.json').read_text())
     migration = json.loads((target / 'migration.json').read_text())
@@ -66,10 +68,13 @@ def main():
     reader_log = args.reader_log.read_text()
     assert 'ERRORS:' not in reader_log
     assert 'HTML rebuilt from pinned sources.' in reader_log
-    expected_refs = {'thm:asymptotic-conormal', 'def:conormal'}
+    expected_refs = set(migration.get('expected_unresolved_refs', ['thm:asymptotic-conormal', 'def:conormal']))
     assert set(re.findall(r'unresolved \\ref\{([^}]+)\}', reader_log)) == expected_refs
     paper_log = (args.paper_build / 'human_readable_main.log').read_text()
     assert set(re.findall(r"LaTeX Warning: Reference `([^']+)'", paper_log)) == expected_refs
+    if 'expected_unresolved_citations' in migration:
+        assert (set(re.findall(r"LaTeX Warning: Citation `([^']+)'", paper_log))
+                == set(migration['expected_unresolved_citations']))
     assert 'Fatal error' not in paper_log
     pdf = args.paper_build / 'human_readable_main.pdf'
     assert pdf.read_bytes().startswith(b'%PDF-')
@@ -77,7 +82,8 @@ def main():
     proof_details = root / 'lean_proof_details.pdf'
     assert proof_details.read_bytes() == git(root, 'show', 'HEAD:lean_proof_details.pdf')
     generator_tests = dict(passed=counts['pass'], failed=counts['fail'],
-        skipped=counts['skipped'], scope='Non-browser generator regression suite',
+        skipped=counts['skipped'], scope=('Generator regression suite including its browser tests' if '✔ browser' in tests
+               else 'Non-browser generator regression suite'),
         skip_reason='Historical sibling-paper fixture unavailable; current manuscript passes the actual pinned build.')
     receipt = dict(status='passed', paper=source, generator=manifest['generator'],
         manuscript_cards=len(mapping['items']), active_statements=migration['active_statements'],
@@ -108,7 +114,7 @@ def main():
         statement_relations=dict(collections.Counter(i['statement_relation'] for i in mapping['items'])),
         proof_routes=dict(collections.Counter(i['route_relation'] for i in mapping['items'])))
     manifest['status'] = 'manuscript-review-draft'
-    manifest['checks'] = dict(status='passed', receipt='verification/manuscript-20261018/verification.json',
+    manifest['checks'] = dict(status='passed', receipt=f'{args.receipt_dir}/verification.json',
         reader_build=receipt['reader_build'], generator_tests=generator_tests, browser=browser,
         scope='Supplementary source mapping, renderer and reader behavior; not a new proof-correspondence certification.')
     paths = sorted(set(git(root, 'ls-files', '--cached', '--others', '--exclude-standard').decode().splitlines()))

@@ -1,0 +1,30 @@
+From https://github.com/itpplasma/stafford38-formal
+ * branch            746952ede40ac5dd22ac57201883da7ef7a42dfb -> FETCH_HEAD
+From /home/ert/proj/stafford38-supplementary/verification/canonical-definitions/formal.bundle
+ * [new branch]      refactor/canonical-definitions -> bundle/refactor/canonical-definitions
+From https://github.com/itpplasma/stafford38-formal
+ * branch            f9448d6307fa25aff9d9f94ce0a9c7f9b03e63ff -> FETCH_HEAD
+From https://github.com/itpplasma/algebraic-analysis
+ * branch            bbbbf3fc358ca8100b158cec4cf47f336ab70163 -> FETCH_HEAD
+From https://github.com/itpplasma/global-stafford-formal
+ * branch            e676caed1253e5d09fc6699d5dc683febbabf7bb -> FETCH_HEAD
+From https://github.com/leanprover-community/mathlib4
+ * branch            c55e6e786f49471c72fbddbec5415808896aec1e -> FETCH_HEAD
+From https://github.com/itpplasma/symplectic-stafford-formal
+ * branch            dccff0d8fe723ec1478d1f63bbbdf648ba240bfa -> FETCH_HEAD
+From https://github.com/itpplasma/paper-lean-audit
+ * branch            065db3e1fbc9001071422e9c66db36c0ef7da394 -> FETCH_HEAD
+From /home/ert/proj/stafford38-supplementary/verification/manuscript-20261021/generator.bundle
+ * [new branch]      supplementary/manuscript-20261021 -> bundle/supplementary/manuscript-20261021
+
+added 3 packages, and audited 4 packages in 473ms
+
+1 package is looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+wrote /home/ert/proj/stafford38-supplementary/index.html
+1 warnings:
+  unresolved \ref{def:conormal}
+index.html: 15550 links in 5125 Lean blocks (986 references already linked to definition panels, 6 blocks without reference data, 0 blocks differing from source); 108786 links in 494 source pages.
+HTML rebuilt from pinned sources. Preserved PDF hashes are in manifest.json.

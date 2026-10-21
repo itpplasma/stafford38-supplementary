@@ -1,25 +1,25 @@
 {
   "schema": 1,
-  "version": "0.2.4-manuscript-review",
+  "version": "0.2.5-manuscript-review",
   "title": "Stafford’s Conjecture 3.8",
-  "subtitle": "October 18 manuscript · paper and Lean proof comparison",
+  "subtitle": "October 21 manuscript · paper and Lean proof comparison",
   "sources": {
     "paper": {
       "repo": "itpplasma/stafford38-paper",
-      "commit": "8834966c58b41b8a7eb7af76f15d15f71d43af23",
+      "commit": "204f5ea59c3feeba3375910c4e508e88d71cd3c3",
       "file": "human_readable_main.tex",
       "origin_repo": "itpplasma/stafford38-paper",
-      "origin_commit": "8834966c58b41b8a7eb7af76f15d15f71d43af23",
-      "sha256": "fbec43000e00ddd87eef45c174275d8a37675c8260bcc05115303ef552c47b5a",
+      "origin_commit": "204f5ea59c3feeba3375910c4e508e88d71cd3c3",
+      "sha256": "3f80cd19538fec60d2a0d170f1e5346878c8c5ce51f0c876d98ddf040f759655",
       "label": "Paper (Overleaf update)",
       "local_source_base": "./sources/paper",
-      "note": "October 18 Overleaf update, preserved verbatim. Excluded comment environments are not current manuscript passages.",
+      "note": "October 21 Overleaf update, preserved verbatim.",
       "snapshot": {
         "base": "sources/paper/raw",
         "files": {
-          "human_readable_main.tex": "fbec43000e00ddd87eef45c174275d8a37675c8260bcc05115303ef552c47b5a",
-          "references.bib": "6f58084d3a27f00c5331684d1e03b7d7b5a9d478da0cddac5b849079e05572b1",
-          "ai_review.tex": "fb502582c8e0f88544098d1aba063ea68e0674545dfe723778dcdbbede891edd"
+          "human_readable_main.tex": "3f80cd19538fec60d2a0d170f1e5346878c8c5ce51f0c876d98ddf040f759655",
+          "references.bib": "26d46b6bdf69850067b408b5f57e9f4f83cdfba8bbd26f1a47bffde9c7580922",
+          "ai_review.tex": "3b245e5178736d12e247f24963a27d10a542f6fc25018070c24cf817d52d1591"
         }
       }
     },
@@ -50,6 +50,13 @@
       "commit": "c55e6e786f49471c72fbddbec5415808896aec1e",
       "note": "Exact Mathlib dependency pin; these definitions are imported from Mathlib.",
       "label": "Mathlib"
+    },
+    "filtered": {
+      "repo": "itpplasma/symplectic-stafford-formal",
+      "commit": "dccff0d8fe723ec1478d1f63bbbdf648ba240bfa",
+      "note": "Generalization (b) of Section 7, at the revision linked by the manuscript (\\leanfilteredrepo).",
+      "file": "Solution.lean",
+      "name": "SymplecticStaffordChallenge.universalStatement"
     }
   },
   "vocab": {
@@ -184,70 +191,68 @@
       "title": "Introduction"
     },
     {
-      "number": "2",
-      "title": "Formal verification"
+      "number": "1.1",
+      "title": "Related literature"
     },
     {
-      "number": "3",
-      "title": "Notation and definitions",
+      "number": "1.2",
+      "title": "Formal verification with Lean",
+      "label": "sec:formal"
+    },
+    {
+      "number": "2",
+      "title": "Preliminaries",
       "label": "sec:setting"
     },
     {
-      "number": "3.1",
+      "number": "2.1",
       "title": "Cotangent space and symplectic structure",
       "label": "sec:cotangent"
     },
     {
-      "number": "3.2",
-      "title": "Gabber's theorem"
-    },
-    {
-      "number": "4",
-      "title": "Mapping to a monic normal form",
+      "number": "3",
+      "title": "Mapping to a normal form",
       "label": "sec:monic"
     },
     {
-      "number": "5",
+      "number": "4",
       "title": "x₁ as a surjective map",
       "label": "sec:euler"
     },
     {
-      "number": "6",
-      "title": "Vanishing cokernel",
-      "label": "sec:cokernel"
-    },
-    {
-      "number": "7",
-      "title": "Characteristics of the characteristic variety",
-      "label": "sec:char"
-    },
-    {
-      "number": "8",
-      "title": "A conormal direction at infinity",
+      "number": "5",
+      "title": "Avoiding the hyperplane {x₁ = 0}",
       "label": "sec:conormal-review"
     },
     {
-      "number": "9",
-      "title": "The involutive obstruction",
-      "label": "sec:involutive-review"
+      "number": "5.1",
+      "title": "Definitions",
+      "label": "sub:def_geom"
     },
     {
-      "number": "10",
-      "title": "Proof of Theorem 1.1 and cyclicity",
+      "number": "5.2",
+      "title": "Proof of Theorem 5.5",
+      "label": "sub:asym"
+    },
+    {
+      "number": "5.3",
+      "title": "Proof of Theorem 5.6",
+      "label": "sub:excl"
+    },
+    {
+      "number": "6",
+      "title": "Proof of Theorem 1.1",
       "label": "sec:proof"
     },
     {
-      "number": "11",
-      "title": "Outlook"
+      "number": "7",
+      "title": "Generalizations and open questions",
+      "label": "sec:generalizations"
     },
     {
       "number": "A",
       "title": "Appendix A: AI-assisted research and formalization",
       "label": "app:ai-workflow"
-    },
-    {
-      "number": "B",
-      "title": "Appendix B: Further work"
     }
   ],
   "items": [
@@ -260,7 +265,7 @@
       "title": "Abstract",
       "tex_lines": [
         53,
-        61
+        62
       ],
       "statement_relation": "partial",
       "route_relation": "n/a",
@@ -336,8 +341,8 @@
       "short": "Theorem 1.1",
       "title": "Stafford 3.8 with fixed source $F=\\ell^{\\deg_B d}$",
       "tex_lines": [
-        69,
-        114
+        70,
+        106
       ],
       "label": "thm:main",
       "statement_relation": "lean-stronger",
@@ -439,8 +444,8 @@
       "short": "Main challenge comparison",
       "title": "Unchanged Stafford38Challenge.UniversalStatement.",
       "tex_lines": [
-        95,
-        114
+        85,
+        106
       ],
       "statement_relation": "equivalent",
       "route_relation": "n/a",
@@ -521,8 +526,8 @@
       "short": "Fixed-source challenge comparison",
       "title": "Unchanged Stafford38FixedSourceChallenge.UniversalFixedSourceStatement.",
       "tex_lines": [
-        95,
-        114
+        85,
+        106
       ],
       "statement_relation": "equivalent",
       "route_relation": "n/a",
@@ -662,67 +667,15 @@
       ]
     },
     {
-      "id": "global-stafford",
-      "section": "1",
-      "kind": "Paragraph",
-      "number": "",
-      "short": "Global Stafford",
-      "title": "Palomar record and Global Stafford extension",
-      "tex_lines": [
-        115,
-        123
-      ],
-      "statement_relation": "exact",
-      "route_relation": "n/a",
-      "correspondence": "The Global Stafford identity is proved in the separate pinned repository itpplasma/global-stafford-formal at v1.0.6. The paper correctly distinguishes existence of F from the fixed linear-coordinate refinement in Theorem 1.1.",
-      "route": null,
-      "lean": [
-        {
-          "repo": "global",
-          "file": "GlobalStafford/Assembly/Closure.lean",
-          "role": "statement",
-          "name": "GlobalStafford.universalStatement",
-          "expands": [
-            {
-              "repo": "global",
-              "file": "GlobalStafford/Assembly/ChallengeTransport.lean",
-              "name": "GlobalStaffordChallenge.UniversalStatement"
-            },
-            {
-              "repo": "library",
-              "file": "AlgebraicAnalysis/RingTheory/TwoGeneratorIdentity.lean",
-              "name": "AlgebraicAnalysis.TwoGeneratorIdentity",
-              "role": "definition"
-            },
-            {
-              "repo": "library",
-              "file": "AlgebraicAnalysis/DifferentialOperators/Basic.lean",
-              "name": "AlgebraicAnalysis.DifferentialOperators.algebra",
-              "role": "definition"
-            }
-          ]
-        }
-      ],
-      "depends_on": [],
-      "in_graph": false,
-      "graph_sub": null,
-      "graph_order": 0,
-      "auditors": [
-        "F"
-      ],
-      "review_scope": "reference",
-      "issues": []
-    },
-    {
       "id": "intro-proof-sketch",
       "section": "1",
       "kind": "Proof sketch",
       "number": "§1",
-      "short": "Proof sketch",
+      "short": "Proof sketch §1",
       "title": "Proof sketch: quotient-vanishing architecture",
       "tex_lines": [
-        124,
-        139
+        107,
+        109
       ],
       "statement_relation": "n/a",
       "route_relation": "similar",
@@ -737,18 +690,27 @@
         "current-map"
       ],
       "review_scope": "reference",
-      "issues": []
+      "issues": [
+        {
+          "id": "MS21-TODO-01",
+          "severity": "editorial",
+          "summary": "The proof sketch begins “We start in section XXX”.",
+          "fix": "Replace XXX by Section 3.",
+          "aicomment": null,
+          "status": "open; paper preserved verbatim"
+        }
+      ]
     },
     {
       "id": "context-prior-art",
-      "section": "1",
+      "section": "1.1",
       "kind": "Context",
       "number": "",
-      "short": "Prior work",
+      "short": "Section 1.1",
       "title": "Citations for generator theory and algorithms",
       "tex_lines": [
-        140,
-        160
+        110,
+        129
       ],
       "statement_relation": "n/a",
       "route_relation": "n/a",
@@ -767,18 +729,18 @@
     },
     {
       "id": "formal-verification",
-      "section": "2",
-      "kind": "Section",
-      "number": "2",
-      "short": "§2 claim",
-      "title": "“Every statement of this paper is formalized”",
+      "section": "1.2",
+      "kind": "Subsection",
+      "number": "1.2",
+      "short": "Section 1.2",
+      "title": "Formal verification with Lean",
       "tex_lines": [
-        161,
-        205
+        130,
+        149
       ],
       "statement_relation": "partial",
       "route_relation": "n/a",
-      "correspondence": "The red replacement explicitly limits verification to the main identity, its fixed-source strengthening, documented consequences and inputs used by the formal route. It does not claim that every numbered statement or every printed proof step is verified verbatim; the remaining mathematical scope differences stay in the comments and item map.",
+      "correspondence": "The new subsection states that Theorem 1.1 with F = ℓ^{deg_B d} and Corollary 6.3 are proved in Lean from the three standard axioms, and that every intermediate result is proved as well, along Sections 3–6. The reader maps the formal counterparts card by card; several printed lemmas (for example Lemmas 4.7, 5.7 and 5.11) have no exact Lean declaration mapped here, their content being used inside larger formal results.",
       "route": null,
       "lean": [
         {
@@ -817,29 +779,28 @@
           "auditor": "A",
           "id": "S2-01",
           "status": "red correction present; human acceptance pending"
-        }
-      ],
-      "issues": [
+        },
         {
           "id": "MS18-REF-01",
           "severity": "minor",
           "summary": "The manuscript references thm:asymptotic-conormal, but the active theorem is labelled thm:asymptotic-conormal-formal.",
           "fix": "Review the stale cross-reference in the paper.",
           "aicomment": null,
-          "status": "open; paper preserved verbatim"
+          "status": "resolved in paper 204f5ea"
         }
-      ]
+      ],
+      "issues": []
     },
     {
       "id": "conv:pair",
-      "section": "3",
+      "section": "2",
       "kind": "Convention",
-      "number": "3.1",
-      "short": "Convention 3.1",
+      "number": "2.1",
+      "short": "Convention 2.1",
       "title": "Distinguished Weyl pair and Ore presentation",
       "tex_lines": [
-        215,
-        229
+        159,
+        173
       ],
       "label": "conv:pair",
       "statement_relation": "equivalent",
@@ -913,14 +874,14 @@
     },
     {
       "id": "def:filtration",
-      "section": "3",
+      "section": "2",
       "kind": "Definition",
-      "number": "3.2",
-      "short": "Definition 3.2",
+      "number": "2.2",
+      "short": "Definition 2.2",
       "title": "Filtrations; Bernstein and order filtrations",
       "tex_lines": [
-        230,
-        283
+        174,
+        200
       ],
       "statement_relation": "equivalent",
       "route_relation": "n/a",
@@ -1002,14 +963,14 @@
     },
     {
       "id": "cotangent",
-      "section": "3.1",
+      "section": "2.1",
       "kind": "Subsection",
-      "number": "3.1",
+      "number": "2.1",
       "short": "Cotangent space",
       "title": "Cotangent bundle, symbol ring, and symplectic form",
       "tex_lines": [
-        256,
-        283
+        201,
+        228
       ],
       "statement_relation": "partial",
       "route_relation": "n/a",
@@ -1035,14 +996,14 @@
     },
     {
       "id": "def:good-filtration",
-      "section": "3.1",
+      "section": "2.1",
       "kind": "Definition",
-      "number": "3.3",
-      "short": "Definition 3.3",
+      "number": "2.3",
+      "short": "Definition 2.3",
       "title": "Good filtrations",
       "tex_lines": [
-        284,
-        293
+        229,
+        238
       ],
       "statement_relation": "partial",
       "route_relation": "n/a",
@@ -1093,14 +1054,14 @@
     },
     {
       "id": "def:char-variety",
-      "section": "3.1",
+      "section": "2.1",
       "kind": "Definition",
-      "number": "3.4",
-      "short": "Definition 3.4",
+      "number": "2.4",
+      "short": "Definition 2.4",
       "title": "Characteristic variety",
       "tex_lines": [
-        294,
-        310
+        239,
+        255
       ],
       "statement_relation": "partial",
       "route_relation": "n/a",
@@ -1165,14 +1126,14 @@
     },
     {
       "id": "def:symplectic-poisson",
-      "section": "3.1",
+      "section": "2.1",
       "kind": "Definition",
-      "number": "3.5",
-      "short": "Definition 3.5",
+      "number": "2.5",
+      "short": "Definition 2.5",
       "title": "Symplectic form and Poisson bracket",
       "tex_lines": [
-        311,
-        335
+        256,
+        280
       ],
       "label": "def:symplectic-poisson",
       "statement_relation": "equivalent",
@@ -1228,14 +1189,14 @@
     },
     {
       "id": "def:involutive",
-      "section": "3.1",
+      "section": "2.1",
       "kind": "Definition",
-      "number": "3.6",
-      "short": "Definition 3.6",
+      "number": "2.6",
+      "short": "Definition 2.6",
       "title": "Involutive subsets",
       "tex_lines": [
-        336,
-        344
+        281,
+        288
       ],
       "statement_relation": "exact",
       "route_relation": "n/a",
@@ -1320,14 +1281,14 @@
     },
     {
       "id": "ithm:gabber",
-      "section": "3.2",
+      "section": "2.1",
       "kind": "Theorem",
-      "number": "3.7",
-      "short": "Theorem 3.7",
+      "number": "2.7",
+      "short": "Theorem 2.7",
       "title": "Gabber’s involutivity theorem",
       "tex_lines": [
-        345,
-        356
+        289,
+        296
       ],
       "label": "ithm:gabber",
       "statement_relation": "exact",
@@ -1482,15 +1443,42 @@
       "issues": []
     },
     {
+      "id": "thm:nss",
+      "label": "thm:nss",
+      "section": "2.1",
+      "kind": "Theorem",
+      "number": "2.8",
+      "short": "Theorem 2.8",
+      "title": "Hilbert's Nullstellensatz",
+      "tex_lines": [
+        297,
+        305
+      ],
+      "statement_relation": "partial",
+      "route_relation": "n/a",
+      "correspondence": "Standard algebraically closed-field Nullstellensatz, now stated explicitly. Lean uses ideal/zero-locus results in the mapped geometric proofs; no separate new verification receipt is claimed.",
+      "route": null,
+      "lean": [],
+      "depends_on": [],
+      "in_graph": false,
+      "graph_sub": null,
+      "graph_order": 0,
+      "auditors": [],
+      "review_scope": "publication",
+      "historical_issues": [],
+      "issues": [],
+      "comparison_updated_on": "2026-10-18"
+    },
+    {
       "id": "monic-scalar",
-      "section": "4",
+      "section": "3",
       "kind": "Paragraph",
       "number": "",
       "short": "Scalar case",
       "title": "Scalar case N = 0",
       "tex_lines": [
-        360,
-        362
+        309,
+        311
       ],
       "statement_relation": "exact",
       "route_relation": "same",
@@ -1545,14 +1533,14 @@
     },
     {
       "id": "lem:sympcompl",
-      "section": "4",
+      "section": "3",
       "kind": "Lemma",
-      "number": "4.1",
-      "short": "Lemma 4.1",
+      "number": "3.1",
+      "short": "Lemma 3.1",
       "title": "Symplectic completion",
       "tex_lines": [
-        374,
-        422
+        323,
+        371
       ],
       "label": "lem:sympcompl",
       "statement_relation": "partial",
@@ -1609,14 +1597,14 @@
     },
     {
       "id": "phi-g",
-      "section": "4",
+      "section": "3",
       "kind": "Construction",
       "number": "",
       "short": "Φ_g",
       "title": "Symplectic automorphisms Φ_g and their symbols",
       "tex_lines": [
-        410,
-        422
+        359,
+        371
       ],
       "statement_relation": "equivalent",
       "route_relation": "similar",
@@ -1707,14 +1695,14 @@
     },
     {
       "id": "prop:monic",
-      "section": "4",
+      "section": "3",
       "kind": "Proposition",
-      "number": "4.2",
-      "short": "Proposition 4.2",
+      "number": "3.2",
+      "short": "Proposition 3.2",
       "title": "Monic normal form in p",
       "tex_lines": [
-        423,
-        483
+        372,
+        434
       ],
       "label": "prop:monic",
       "statement_relation": "equivalent",
@@ -1809,14 +1797,14 @@
     },
     {
       "id": "rem:transport",
-      "section": "4",
+      "section": "3",
       "kind": "Remark",
-      "number": "4.3",
-      "short": "Remark 4.3",
+      "number": "3.3",
+      "short": "Remark 3.3",
       "title": "Transport back along Φ_g",
       "tex_lines": [
-        484,
-        498
+        435,
+        454
       ],
       "label": "rem:transport",
       "statement_relation": "n/a",
@@ -1874,15 +1862,74 @@
       "issues": []
     },
     {
+      "id": "eq:I-Q",
+      "section": "3",
+      "kind": "Equation",
+      "number": "3.2",
+      "short": "I, Q",
+      "title": "Canonical right ideal and quotient",
+      "tex_lines": [
+        444,
+        449
+      ],
+      "label": "eq:I-Q",
+      "statement_relation": "exact",
+      "route_relation": "n/a",
+      "correspondence": "The canonical right ideal and quotient are now defined in Section 3, after Remark 3.3. Lean Euler element is θ = x·p, same as the paper E = x₁p; Weyl relation p·x = x·p + 1 (pairMomentum_mul_coordinate, Stafford38/Ore/PairStage.lean:80).",
+      "route": null,
+      "lean": [
+        {
+          "file": "Stafford38/Weyl/EulerResidue.lean",
+          "role": "definition",
+          "name": "Stafford38.WeylEulerResidue.canonicalRightIdeal"
+        },
+        {
+          "file": "Stafford38/Weyl/QuotientTransport.lean",
+          "role": "definition",
+          "name": "Stafford38.WeylQuotientTransport.presentedCanonicalRightIdeal"
+        },
+        {
+          "file": "Stafford38/Quotient/EulerSurjectivity.lean",
+          "role": "definition",
+          "name": "Stafford38.EulerSurjectivity.rightMul"
+        },
+        {
+          "file": "proofs/weyl_pure_power.lean",
+          "role": "definition",
+          "name": "Stafford.eulerPolynomialEval"
+        }
+      ],
+      "depends_on": [],
+      "in_graph": false,
+      "graph_sub": null,
+      "graph_order": 0,
+      "auditors": [
+        "B"
+      ],
+      "review_scope": "publication",
+      "historical_issues": [
+        {
+          "severity": "editorial",
+          "summary": "'subsection' should be 'section'",
+          "fix": "reword",
+          "aicomment": null,
+          "auditor": "B",
+          "id": "S5-01",
+          "status": "historical finding; recheck against current excerpt"
+        }
+      ],
+      "issues": []
+    },
+    {
       "id": "def:monic-xi1",
-      "section": "4",
+      "section": "3",
       "kind": "Definition",
-      "number": "4.4",
-      "short": "Definition 4.4",
+      "number": "3.4",
+      "short": "Definition 3.4",
       "title": "Monic of degree N in ξ₁",
       "tex_lines": [
-        499,
-        506
+        455,
+        462
       ],
       "statement_relation": "exact",
       "route_relation": "n/a",
@@ -1913,14 +1960,14 @@
     },
     {
       "id": "lem:order-symbol",
-      "section": "4",
+      "section": "3",
       "kind": "Lemma",
-      "number": "4.5",
-      "short": "Lemma 4.5",
+      "number": "3.5",
+      "short": "Lemma 3.5",
       "title": "Order symbol P(ξ), monic in ξ₁",
       "tex_lines": [
-        507,
-        542
+        463,
+        497
       ],
       "label": "lem:order-symbol",
       "statement_relation": "exact",
@@ -1987,74 +2034,89 @@
       "issues": []
     },
     {
-      "id": "eq:I-Q",
-      "section": "5",
-      "kind": "Definition",
-      "number": "5.1",
-      "short": "I, Q",
-      "title": "Canonical right ideal and quotient",
+      "id": "cor:charP",
+      "section": "3",
+      "kind": "Proposition",
+      "number": "3.6",
+      "short": "Proposition 3.6",
+      "title": "P annihilates gr Q",
       "tex_lines": [
-        544,
-        550
+        498,
+        506
       ],
-      "label": "eq:I-Q",
+      "label": "prop:charP",
       "statement_relation": "exact",
-      "route_relation": "n/a",
-      "correspondence": "Lean Euler element is theta x p = x*p, same as paper E = x_1 p; Weyl relation p*x = x*p+1 (pairMomentum_mul_coordinate, Stafford38/Ore/PairStage.lean:80).",
+      "route_relation": "similar",
+      "correspondence": "Now Proposition 3.6, stated with the order filtration induced by the cyclic generator. Lean: Ann gr Q is the order initial ideal of the canonical right ideal, and the symbol of the normal form lies in it. The printed proof is separated from the statement (see the proof card in Section 6).",
       "route": null,
       "lean": [
         {
-          "file": "Stafford38/Weyl/EulerResidue.lean",
-          "role": "definition",
-          "name": "Stafford38.WeylEulerResidue.canonicalRightIdeal"
+          "file": "Stafford38/Characteristic/InitialIdeal.lean",
+          "role": "statement",
+          "name": "Stafford38.CharacteristicInitialIdeal.canonical_orderPrincipalComponent_mem_initialIdeal"
         },
         {
-          "file": "Stafford38/Weyl/QuotientTransport.lean",
-          "role": "definition",
-          "name": "Stafford38.WeylQuotientTransport.presentedCanonicalRightIdeal"
+          "file": "Stafford38/Characteristic/AssociatedGradedModule.lean",
+          "role": "helper",
+          "name": "Stafford38.CharacteristicAssociatedGradedModule.annihilator_orderAssociatedGradedModule"
         },
         {
-          "file": "Stafford38/Quotient/EulerSurjectivity.lean",
-          "role": "definition",
-          "name": "Stafford38.EulerSurjectivity.rightMul"
-        },
-        {
-          "file": "proofs/weyl_pure_power.lean",
-          "role": "definition",
-          "name": "Stafford.eulerPolynomialEval"
+          "file": "Stafford38/Characteristic/InitialIdeal.lean",
+          "role": "statement",
+          "name": "Stafford38.CharacteristicInitialIdeal.canonical_orderCharacteristicSupport_subset_principal_zeroLocus"
         }
       ],
-      "depends_on": [],
-      "in_graph": false,
-      "graph_sub": null,
+      "depends_on": [
+        "lem:order-symbol"
+      ],
+      "in_graph": true,
+      "graph_sub": "Char ⊆ V(P)",
       "graph_order": 0,
       "auditors": [
-        "B"
+        "C"
       ],
       "review_scope": "publication",
       "historical_issues": [
         {
           "severity": "editorial",
-          "summary": "'subsection' should be 'section'",
-          "fix": "reword",
+          "summary": "Ann_{k[x,xi]} should be k0[x,xi]; corollary placed after Section 6 which uses it.",
+          "fix": "Fix field; move before Section 6.",
           "aicomment": null,
-          "auditor": "B",
-          "id": "S5-01",
+          "auditor": "C",
+          "id": "S7-01",
+          "status": "historical finding; recheck against current excerpt"
+        },
+        {
+          "severity": "minor",
+          "summary": "Uses that d~ has order exactly N with order symbol P.",
+          "fix": "Cite lem:order-symbol.",
+          "aicomment": null,
+          "auditor": "C",
+          "id": "S7-02",
           "status": "historical finding; recheck against current excerpt"
         }
       ],
-      "issues": []
+      "issues": [
+        {
+          "id": "MS21-PROOF-01",
+          "severity": "minor",
+          "summary": "Proposition 3.6 has no adjacent proof; its proof environment is printed at the start of Section 6, before Proposition 6.1, without a heading naming the proposition.",
+          "fix": "Move the proof after Proposition 3.6 or label it as its proof.",
+          "aicomment": null,
+          "status": "open; paper preserved verbatim"
+        }
+      ]
     },
     {
       "id": "euler-grading",
-      "section": "5",
+      "section": "4",
       "kind": "Paragraph",
-      "number": "5.2",
+      "number": "",
       "short": "Transverse–Euler subring",
       "title": "Transverse–Euler subring and one-sided normality",
       "tex_lines": [
-        551,
-        566
+        508,
+        530
       ],
       "label": "eq:nonnegative-pbw",
       "statement_relation": "exact",
@@ -2138,14 +2200,14 @@
     },
     {
       "id": "lem:euler",
-      "section": "5",
+      "section": "4",
       "kind": "Lemma",
-      "number": "5.1",
-      "short": "Lemma 5.1",
+      "number": "4.1",
+      "short": "Lemma 4.1",
       "title": "Euler products",
       "tex_lines": [
-        567,
-        593
+        531,
+        557
       ],
       "label": "lem:euler",
       "statement_relation": "exact",
@@ -2192,14 +2254,14 @@
     },
     {
       "id": "lem:euler-residue",
-      "section": "5",
+      "section": "4",
       "kind": "Lemma",
-      "number": "5.2",
-      "short": "Lemma 5.2",
+      "number": "4.2",
+      "short": "Lemma 4.2",
       "title": "Euler residue 1 + U x₁ ∈ I",
       "tex_lines": [
-        594,
-        620
+        558,
+        584
       ],
       "label": "lem:euler-residue",
       "statement_relation": "equivalent",
@@ -2325,14 +2387,14 @@
     },
     {
       "id": "prop:x-surjective",
-      "section": "5",
+      "section": "4",
       "kind": "Proposition",
-      "number": "5.3",
-      "short": "Proposition 5.3",
+      "number": "4.3",
+      "short": "Proposition 4.3",
       "title": "Right multiplication by x₁ on Q is surjective",
       "tex_lines": [
-        621,
-        641
+        585,
+        606
       ],
       "label": "prop:x-surjective",
       "statement_relation": "exact",
@@ -2417,14 +2479,14 @@
     {
       "id": "def:localization",
       "label": "def:localization",
-      "section": "6",
+      "section": "4",
       "kind": "Definition",
-      "number": "6.1",
-      "short": "Definition 6.1",
+      "number": "4.4",
+      "short": "Definition 4.4",
       "title": "Localization at a multiplicative set",
       "tex_lines": [
-        643,
-        655
+        607,
+        619
       ],
       "statement_relation": "partial",
       "route_relation": "n/a",
@@ -2444,14 +2506,14 @@
     {
       "id": "def:supp",
       "label": "def:supp",
-      "section": "6",
+      "section": "4",
       "kind": "Definition",
-      "number": "6.2",
-      "short": "Definition 6.2",
+      "number": "4.5",
+      "short": "Definition 4.5",
       "title": "Support of a module",
       "tex_lines": [
-        656,
-        670
+        620,
+        625
       ],
       "statement_relation": "partial",
       "route_relation": "n/a",
@@ -2469,14 +2531,92 @@
       "comparison_updated_on": "2026-10-18"
     },
     {
+      "id": "def:length",
+      "section": "4",
+      "kind": "Definition",
+      "number": "4.6",
+      "short": "Definition 4.6",
+      "title": "Length",
+      "tex_lines": [
+        626,
+        632
+      ],
+      "statement_relation": "equivalent",
+      "route_relation": "n/a",
+      "correspondence": "Mathlib Module.length is the extended natural-valued length of the submodule lattice; IsFiniteLength records a finite sequence of simple extensions. These are the standard notions used by the formal length inequalities, not missing project-local definitions.",
+      "route": null,
+      "lean": [
+        {
+          "repo": "mathlib",
+          "file": "Mathlib/RingTheory/Length.lean",
+          "name": "Module.length",
+          "role": "definition"
+        },
+        {
+          "repo": "mathlib",
+          "file": "Mathlib/RingTheory/FiniteLength.lean",
+          "name": "IsFiniteLength",
+          "role": "definition"
+        }
+      ],
+      "depends_on": [],
+      "in_graph": false,
+      "graph_sub": null,
+      "graph_order": 0,
+      "auditors": [
+        "C"
+      ],
+      "label": "def:length",
+      "review_scope": "publication",
+      "historical_issues": [
+        {
+          "severity": "minor",
+          "summary": "Defines length for 'finite T-modules', but finitely generated T-modules need not have finite length; used over T_q.",
+          "fix": "Define length for modules of finite length over any ring R; cite Jordan-Hoelder.",
+          "aicomment": null,
+          "auditor": "C",
+          "id": "S6-03",
+          "status": "historical finding; recheck against current excerpt"
+        }
+      ],
+      "issues": []
+    },
+    {
+      "id": "lem:supp-criterion",
+      "label": "lem:supp-criterion",
+      "section": "4",
+      "kind": "Lemma",
+      "number": "4.7",
+      "short": "Lemma 4.7",
+      "title": "Support via the annihilator of an element",
+      "tex_lines": [
+        633,
+        670
+      ],
+      "statement_relation": "partial",
+      "route_relation": "similar",
+      "correspondence": "The manuscript now proves the element-annihilator criterion explicitly. The mapped finiteness and localization results consume support; a declaration proving this exact printed lemma is not asserted here.",
+      "route": null,
+      "lean": [],
+      "depends_on": [],
+      "in_graph": false,
+      "graph_sub": null,
+      "graph_order": 0,
+      "auditors": [],
+      "review_scope": "publication",
+      "historical_issues": [],
+      "issues": [],
+      "comparison_updated_on": "2026-10-18"
+    },
+    {
       "id": "vc-setup",
-      "section": "6",
+      "section": "4",
       "kind": "Setup",
       "number": "",
-      "short": "Setup §6",
+      "short": "Setup §4",
       "title": "M = gr Q, T, V, U",
       "tex_lines": [
-        661,
+        659,
         670
       ],
       "statement_relation": "exact",
@@ -2540,93 +2680,15 @@
       ]
     },
     {
-      "id": "def:length",
-      "section": "6",
-      "kind": "Definition",
-      "number": "6.3",
-      "short": "Definition 6.3",
-      "title": "Length",
-      "tex_lines": [
-        671,
-        677
-      ],
-      "statement_relation": "equivalent",
-      "route_relation": "n/a",
-      "correspondence": "Mathlib Module.length is the extended natural-valued length of the submodule lattice; IsFiniteLength records a finite sequence of simple extensions. These are the standard notions used by the formal length inequalities, not missing project-local definitions.",
-      "route": null,
-      "lean": [
-        {
-          "repo": "mathlib",
-          "file": "Mathlib/RingTheory/Length.lean",
-          "name": "Module.length",
-          "role": "definition"
-        },
-        {
-          "repo": "mathlib",
-          "file": "Mathlib/RingTheory/FiniteLength.lean",
-          "name": "IsFiniteLength",
-          "role": "definition"
-        }
-      ],
-      "depends_on": [],
-      "in_graph": false,
-      "graph_sub": null,
-      "graph_order": 0,
-      "auditors": [
-        "C"
-      ],
-      "label": "def:length",
-      "review_scope": "publication",
-      "historical_issues": [
-        {
-          "severity": "minor",
-          "summary": "Defines length for 'finite T-modules', but finitely generated T-modules need not have finite length; used over T_q.",
-          "fix": "Define length for modules of finite length over any ring R; cite Jordan-Hoelder.",
-          "aicomment": null,
-          "auditor": "C",
-          "id": "S6-03",
-          "status": "historical finding; recheck against current excerpt"
-        }
-      ],
-      "issues": []
-    },
-    {
-      "id": "lem:supp-criterion",
-      "label": "lem:supp-criterion",
-      "section": "6",
-      "kind": "Lemma",
-      "number": "6.4",
-      "short": "Lemma 6.4",
-      "title": "Support via the annihilator of an element",
-      "tex_lines": [
-        678,
-        702
-      ],
-      "statement_relation": "partial",
-      "route_relation": "similar",
-      "correspondence": "The manuscript now proves the element-annihilator criterion explicitly. The mapped finiteness and localization results consume support; a declaration proving this exact printed lemma is not asserted here.",
-      "route": null,
-      "lean": [],
-      "depends_on": [],
-      "in_graph": false,
-      "graph_sub": null,
-      "graph_order": 0,
-      "auditors": [],
-      "review_scope": "publication",
-      "historical_issues": [],
-      "issues": [],
-      "comparison_updated_on": "2026-10-18"
-    },
-    {
       "id": "lem:tangential-finiteness",
-      "section": "6",
+      "section": "4",
       "kind": "Lemma",
-      "number": "6.5",
-      "short": "Lemma 6.5",
+      "number": "4.8",
+      "short": "Lemma 4.8",
       "title": "Tangential finiteness",
       "tex_lines": [
-        703,
-        751
+        671,
+        723
       ],
       "label": "lem:tangential-finiteness",
       "statement_relation": "exact",
@@ -2726,14 +2788,14 @@
     },
     {
       "id": "lem:page-inequality",
-      "section": "6",
+      "section": "4",
       "kind": "Lemma",
-      "number": "6.6",
-      "short": "Lemma 6.6",
+      "number": "4.9",
+      "short": "Lemma 4.9",
       "title": "Filtered-page inequality ℓ(U_q) ≤ ℓ(V_q)",
       "tex_lines": [
-        752,
-        856
+        724,
+        828
       ],
       "label": "lem:page-inequality",
       "statement_relation": "exact",
@@ -2864,14 +2926,14 @@
     },
     {
       "id": "lem:strict-support-inequality",
-      "section": "6",
+      "section": "4",
       "kind": "Lemma",
-      "number": "6.7",
-      "short": "Lemma 6.7",
+      "number": "4.10",
+      "short": "Lemma 4.10",
       "title": "Strict inequality ℓ(U_q) > ℓ(V_q)",
       "tex_lines": [
-        857,
-        934
+        829,
+        909
       ],
       "label": "lem:strict-support-inequality",
       "statement_relation": "exact",
@@ -3017,8 +3079,8 @@
         {
           "id": "MS18-NOTATION-01",
           "severity": "minor",
-          "summary": "The proof introduces I as a radical annihilator but then names J, and alternates between the tangential prime q and a symbol-ring prime p in localization subscripts.",
-          "fix": "Clarify the commutative symbol ring, radical ideal and localization maps in review.",
+          "summary": "The radical annihilator is now named J, but the proof still writes p_p = I_p once, and localizes Ann over k[x,ξ]_p while M is localized at the tangential prime q.",
+          "fix": "Use J throughout and clarify the commutative symbol ring and localization maps.",
           "aicomment": null,
           "status": "open; paper preserved verbatim"
         }
@@ -3027,19 +3089,19 @@
     },
     {
       "id": "lem:Uzero",
-      "section": "6",
-      "kind": "Lemma",
-      "number": "6.8",
-      "short": "Lemma 6.8",
-      "title": "U = M / x₁M = 0",
+      "section": "4",
+      "kind": "Corollary",
+      "number": "4.11",
+      "short": "Corollary 4.11",
+      "title": "gr Q = (gr Q)x₁",
       "tex_lines": [
-        935,
-        949
+        910,
+        927
       ],
-      "label": "lem:Uzero",
+      "label": "cor:Uzero",
       "statement_relation": "exact",
       "route_relation": "same",
-      "correspondence": "Both inequalities localized at q.asIdeal.primeCompl in T k n = MvPolynomial (Fin n + Fin n) k, q minimal in Supp_T(U).",
+      "correspondence": "Now Corollary 4.11 with a short proof by contradiction from Lemmas 4.8–4.10 at a minimal support prime. Lean localizes both inequalities at q.asIdeal.primeCompl in T k n = MvPolynomial (Fin n ⊕ Fin n) k, q minimal in Supp_T(U).",
       "route": null,
       "lean": [
         {
@@ -3089,191 +3151,110 @@
       "issues": []
     },
     {
-      "id": "cor:charP",
-      "section": "7",
-      "kind": "Corollary",
-      "number": "7.1",
-      "short": "Corollary 7.1",
-      "title": "Char(Q) ⊆ V(P)",
+      "id": "conormal-intro",
+      "section": "5",
+      "kind": "Paragraph",
+      "number": "",
+      "short": "Section 5",
+      "title": "Section 5 overview",
       "tex_lines": [
-        951,
-        965
+        928,
+        937
       ],
-      "label": "cor:charP",
-      "statement_relation": "exact",
-      "route_relation": "similar",
-      "correspondence": "Lean: Ann gr Q = order initial ideal of I; symbol of d in it.",
+      "statement_relation": "n/a",
+      "route_relation": "n/a",
+      "correspondence": "Section overview; it names the two main results and where they are proved. No formal claim.",
       "route": null,
-      "lean": [
-        {
-          "file": "Stafford38/Characteristic/InitialIdeal.lean",
-          "role": "statement",
-          "name": "Stafford38.CharacteristicInitialIdeal.canonical_orderPrincipalComponent_mem_initialIdeal"
-        },
-        {
-          "file": "Stafford38/Characteristic/AssociatedGradedModule.lean",
-          "role": "helper",
-          "name": "Stafford38.CharacteristicAssociatedGradedModule.annihilator_orderAssociatedGradedModule"
-        },
-        {
-          "file": "Stafford38/Characteristic/InitialIdeal.lean",
-          "role": "statement",
-          "name": "Stafford38.CharacteristicInitialIdeal.canonical_orderCharacteristicSupport_subset_principal_zeroLocus"
-        }
-      ],
-      "depends_on": [
-        "lem:order-symbol"
-      ],
-      "in_graph": true,
-      "graph_sub": "Char ⊆ V(P)",
+      "lean": [],
+      "depends_on": [],
+      "in_graph": false,
+      "graph_sub": null,
       "graph_order": 0,
-      "auditors": [
-        "C"
-      ],
+      "auditors": [],
       "review_scope": "publication",
-      "historical_issues": [
-        {
-          "severity": "editorial",
-          "summary": "Ann_{k[x,xi]} should be k0[x,xi]; corollary placed after Section 6 which uses it.",
-          "fix": "Fix field; move before Section 6.",
-          "aicomment": null,
-          "auditor": "C",
-          "id": "S7-01",
-          "status": "historical finding; recheck against current excerpt"
-        },
-        {
-          "severity": "minor",
-          "summary": "Uses that d~ has order exactly N with order symbol P.",
-          "fix": "Cite lem:order-symbol.",
-          "aicomment": null,
-          "auditor": "C",
-          "id": "S7-02",
-          "status": "historical finding; recheck against current excerpt"
-        }
-      ],
-      "issues": []
-    },
-    {
-      "id": "prop:char-avoids",
-      "section": "7",
-      "kind": "Proposition",
-      "number": "7.2",
-      "short": "Proposition 7.2",
-      "title": "Char(Q) ∩ π⁻¹(H) = ∅",
-      "tex_lines": [
-        966,
-        992
-      ],
-      "label": "prop:char-avoids",
-      "statement_relation": "equivalent",
-      "route_relation": "same",
-      "correspondence": "The manuscript gives two consecutive proofs of support avoidance. Both use Supp(M/x1M) = Supp(M) intersect V(x1) and U=0. Both are retained verbatim. The formal support statement is transported along the fibre sign change, which fixes x1.",
-      "route": null,
-      "lean": [
-        {
-          "file": "Stafford38/Characteristic/CanonicalKoszulContradiction.lean",
-          "role": "statement",
-          "name": "Stafford38.Characteristic.CanonicalKoszulContradiction.canonical_support_avoidance"
-        },
-        {
-          "file": "Stafford38/Characteristic/CanonicalSupportAvoidanceFromCokernel.lean",
-          "role": "main-proof",
-          "name": "Stafford38.Characteristic.CanonicalSupportAvoidanceFromCokernel.canonical_support_avoidance_of_coordinate_cokernel_subsingleton"
-        },
-        {
-          "file": "Stafford38/Characteristic/TransposedFilteredModuleSupport.lean",
-          "role": "definition",
-          "name": "Stafford38.CharacteristicTransposedFilteredModuleSupport.transposedOrderAssociatedGradedSupport"
-        },
-        {
-          "file": "Stafford38/Characteristic/TransposedFilteredModuleSupport.lean",
-          "role": "helper",
-          "name": "Stafford38.CharacteristicTransposedFilteredModuleSupport.transposedOrderAssociatedGradedSupport_eq_preimage"
-        },
-        {
-          "file": "Stafford38/Characteristic/SpecializedNoncharacteristicEquality.lean",
-          "role": "helper",
-          "name": "Stafford38.SpecializedNoncharacteristicEquality.transposedSupport_disjoint_axis_iff"
-        },
-        {
-          "file": "Stafford38/PaperInputs.lean",
-          "role": "definition",
-          "name": "Stafford38.PaperInputs.CanonicalNoncharacteristicSupportAvoidance"
-        },
-        {
-          "file": "Stafford38/Characteristic/SpecializedNoncharacteristicEquality.lean",
-          "role": "helper",
-          "name": "Stafford38.SpecializedNoncharacteristicEquality.strictUnitCoordinatePreimage_of_transposedSupport_disjoint_axis",
-          "expands": [
-            {
-              "file": "Stafford38/Characteristic/CanonicalUnitCoordinatePreimage.lean",
-              "name": "Stafford38.CanonicalUnitCoordinatePreimage.StrictUnitCoordinatePreimage"
-            }
-          ]
-        }
-      ],
-      "depends_on": [
-        "lem:Uzero"
-      ],
-      "in_graph": true,
-      "graph_sub": "avoids π⁻¹(H)",
-      "graph_order": 0,
-      "auditors": [
-        "C"
-      ],
-      "review_scope": "publication",
-      "publication_proof": "Review the complete selected mathematical proof below, including its definitions and intermediate steps. The [readable correspondence note](https://itpplasma.github.io/stafford38-formal/lean_proof_details.pdf#nameddest=comparison-COMP-08) is an optional aid. Historical proof variants are outside this assignment.",
-      "historical_issues": [
-        {
-          "severity": "minor",
-          "summary": "Proof treats V(x_1) as k^{2n}-points although k was replaced by non-closed k0 and Char is defined in Spec; point form is weaker and does not base-change.",
-          "fix": "State as Ann(gr Q) + (x_1) = k0[x,xi] (empty in Spec), which base-changes to C.",
-          "aicomment": null,
-          "auditor": "C",
-          "id": "S7-03",
-          "status": "historical finding; recheck against current excerpt"
-        },
-        {
-          "severity": "minor",
-          "summary": "Lean states avoidance for the transposed (left) module support (xi -> -xi); paper's justification is commented out (l.868).",
-          "fix": "Restore one sentence: transposition maps Char by xi->-xi, fixing pi^{-1}(H).",
-          "aicomment": null,
-          "auditor": "C",
-          "id": "S7-04",
-          "status": "historical finding; recheck against current excerpt"
-        },
-        {
-          "severity": "minor",
-          "summary": "Supp M = V(Ann M) and Supp(M/xM)=Supp M cap V(x) for finite M used without citation.",
-          "fix": "Cite (Nakayama).",
-          "aicomment": null,
-          "auditor": "C",
-          "id": "S7-05",
-          "status": "historical finding; recheck against current excerpt"
-        }
-      ],
+      "historical_issues": [],
       "issues": [
         {
-          "id": "MS18-DUP-01",
+          "id": "MS21-CITE-01",
           "severity": "minor",
-          "summary": "The proposition is followed by two consecutive proofs of the same support identity.",
-          "fix": "Review whether both proofs should remain in the paper.",
+          "summary": "The section overview cites the undefined bibliography key idk; the compiled paper prints “[?]”.",
+          "fix": "Replace the placeholder citation with an algebraic-geometry textbook.",
+          "aicomment": null,
+          "status": "open; paper preserved verbatim"
+        }
+      ]
+    },
+    {
+      "id": "def:fieldextension",
+      "section": "5.1",
+      "kind": "Definition",
+      "number": "5.1",
+      "short": "Definition 5.1",
+      "title": "Algebraic and transcendental elements; transcendence bases",
+      "tex_lines": [
+        957,
+        976
+      ],
+      "statement_relation": "partial",
+      "route_relation": "n/a",
+      "correspondence": "Standard field-theory vocabulary used by the conormal argument. Lean uses the Mathlib notions (algebraicity, transcendence, transcendence bases); no separate formal theorem is claimed for this definition.",
+      "route": null,
+      "lean": [],
+      "depends_on": [],
+      "in_graph": false,
+      "graph_sub": null,
+      "graph_order": 0,
+      "auditors": [],
+      "review_scope": "publication",
+      "historical_issues": [],
+      "issues": [
+        {
+          "id": "MS21-DEF-01",
+          "severity": "editorial",
+          "summary": "The enumeration contains “\\item \\item”, which prints an empty item, and clause (iii) defines κ/K inside a definition about L/K.",
+          "fix": "Remove the duplicate \\item and write L/K.",
           "aicomment": null,
           "status": "open; paper preserved verbatim"
         }
       ],
-      "comparison_updated_on": "2026-10-18"
+      "label": "def:fieldextension"
+    },
+    {
+      "id": "def:omega",
+      "section": "5.1",
+      "kind": "Definition",
+      "number": "5.2",
+      "short": "Definition 5.2",
+      "title": "Derivations and Kähler differentials of a field extension",
+      "tex_lines": [
+        977,
+        1001
+      ],
+      "statement_relation": "partial",
+      "route_relation": "n/a",
+      "correspondence": "Standard construction of the differentials of a field extension and their duality with derivations. Lean uses Mathlib Kähler differentials; no separate formal theorem is claimed for this definition.",
+      "route": null,
+      "lean": [],
+      "depends_on": [],
+      "in_graph": false,
+      "graph_sub": null,
+      "graph_order": 0,
+      "auditors": [],
+      "review_scope": "publication",
+      "historical_issues": [],
+      "issues": [],
+      "label": "def:omega"
     },
     {
       "id": "dir-def",
-      "section": "8",
+      "section": "5.1",
       "kind": "Definition",
-      "number": "8.1",
-      "short": "Definition 8.1",
+      "number": "5.3",
+      "short": "Definition 5.3",
       "title": "Projective conormal directions Dir(Y)",
       "tex_lines": [
-        994,
-        1426
+        1002,
+        1008
       ],
       "statement_relation": "equivalent",
       "route_relation": "n/a",
@@ -3343,126 +3324,53 @@
       "label": "def:dir"
     },
     {
-      "id": "lem:place",
-      "label": "lem:place",
-      "section": "8",
-      "kind": "Lemma",
-      "number": "8.2",
-      "short": "Lemma 8.2",
-      "title": "A divisorial place with a vanishing first coordinate",
+      "id": "def:fibre-can",
+      "section": "5.1",
+      "kind": "Definition",
+      "number": "5.4",
+      "short": "Definition 5.4",
+      "title": "Fibre-conical sets",
       "tex_lines": [
-        1427,
-        1461
+        1009,
+        1013
       ],
-      "statement_relation": "partial",
-      "route_relation": "similar",
-      "correspondence": "The printed proof constructs a valuation ring, normalizes a finite-type chart and localizes at a height-one prime. The cited formal result supplies a divisorial visible frame with residue algebraicity. Compare all chart and valuation hypotheses; an exact wrapper for every clause is not claimed.",
+      "label": "def:fibre-can",
+      "statement_relation": "exact",
+      "route_relation": "n/a",
+      "correspondence": "Lean derives xi-homogeneity of I(W) from fibre-conicality (infinite field); the paper uses this implicitly.",
       "route": null,
       "lean": [
         {
-          "file": "Stafford38/Geometry/GeneralDivisorialVisibleFrame.lean",
-          "name": "Stafford38.Geometry.GeneralDivisorialVisibleFrame.generalDivisorialVisibleFrameWithResidueAlgebraicity",
-          "repo": "formal",
-          "role": "supporting result"
+          "file": "Stafford38/Geometry/FibreConicalVanishingIdeal.lean",
+          "role": "definition",
+          "name": "Stafford38.Geometry.FibreConicalVanishingIdeal.IsFibreConical"
+        },
+        {
+          "file": "Stafford38/Geometry/FibreConicalVanishingIdeal.lean",
+          "role": "helper",
+          "name": "Stafford38.Geometry.FibreConicalVanishingIdeal.vanishingIdeal_isHomogeneous_of_isFibreConical"
         }
       ],
       "depends_on": [],
       "in_graph": false,
       "graph_sub": null,
       "graph_order": 0,
-      "auditors": [],
+      "auditors": [
+        "D"
+      ],
       "review_scope": "publication",
-      "historical_issues": [],
-      "issues": [],
-      "comparison_updated_on": "2026-10-18"
-    },
-    {
-      "id": "lem:kappa",
-      "label": "lem:kappa",
-      "section": "8",
-      "kind": "Lemma",
-      "number": "8.3",
-      "short": "Lemma 8.3",
-      "title": "Residue field and differential basis",
-      "tex_lines": [
-        1462,
-        1487
-      ],
-      "statement_relation": "partial",
-      "route_relation": "similar",
-      "correspondence": "The new residue-field lemma separates algebraicity, a differential basis and finite generation of differentials. The cited formal result supports the differential span argument; it does not by itself certify all three printed clauses.",
-      "route": null,
-      "lean": [
-        {
-          "file": "Stafford38/Geometry/KaehlerDVRVisibility.lean",
-          "name": "Stafford38.Geometry.KaehlerDVRVisibility.kaehler_span_of_isAlgebraic_adjoin",
-          "repo": "formal",
-          "role": "supporting result"
-        }
-      ],
-      "depends_on": [],
-      "in_graph": false,
-      "graph_sub": null,
-      "graph_order": 0,
-      "auditors": [],
-      "review_scope": "publication",
-      "historical_issues": [],
-      "issues": [
-        {
-          "id": "MS18-ORDER-01",
-          "severity": "minor",
-          "summary": "The proof uses q0=q1=0 and j not in {0,1}; the argument establishing these facts occurs later in the theorem proof.",
-          "fix": "Check the dependency order or supply the valuation argument before this lemma.",
-          "aicomment": null,
-          "status": "open; paper preserved verbatim"
-        }
-      ],
-      "comparison_updated_on": "2026-10-18"
-    },
-    {
-      "id": "lem:tangent",
-      "label": "lem:tangent",
-      "section": "8",
-      "kind": "Lemma",
-      "number": "8.4",
-      "short": "Lemma 8.4",
-      "title": "Tangent space at the Laurent generic point",
-      "tex_lines": [
-        1488,
-        1521
-      ],
-      "statement_relation": "partial",
-      "route_relation": "similar",
-      "correspondence": "The dimension bound has a named formal analogue for the retained witness. The printed quotient-rule argument and affine conormal conclusion require comparison of their own hypotheses; this card does not mark the complete three-part lemma exact.",
-      "route": null,
-      "lean": [
-        {
-          "file": "Stafford38/Geometry/PaperSameWitnessTangentDimension.lean",
-          "name": "Stafford38.Geometry.PaperSameWitnessTangentDimension.tangent_finrank_le_residue_add_one_of_witness",
-          "repo": "formal",
-          "role": "supporting result"
-        }
-      ],
-      "depends_on": [],
-      "in_graph": false,
-      "graph_sub": null,
-      "graph_order": 0,
-      "auditors": [],
-      "review_scope": "publication",
-      "historical_issues": [],
-      "issues": [],
-      "comparison_updated_on": "2026-10-18"
+      "issues": []
     },
     {
       "id": "thm:asymptotic-conormal",
-      "section": "8",
+      "section": "5.1",
       "kind": "Theorem",
-      "number": "8.5",
-      "short": "Theorem 8.5",
+      "number": "5.5",
+      "short": "Theorem 5.5",
       "title": "Asymptotic conormal direction over an algebraically closed field",
       "tex_lines": [
-        1522,
-        1533
+        1014,
+        1026
       ],
       "label": "thm:asymptotic-conormal-formal",
       "statement_relation": "lean-stronger",
@@ -3492,9 +3400,11 @@
         }
       ],
       "depends_on": [
+        "lem:W",
         "lem:place",
         "lem:kappa",
-        "lem:tangent"
+        "lem:tangent",
+        "lem:ell"
       ],
       "in_graph": true,
       "graph_sub": "statement",
@@ -3519,19 +3429,212 @@
       "comparison_updated_on": "2026-10-18"
     },
     {
+      "id": "thm:coisotropic-exclusion",
+      "section": "5.1",
+      "kind": "Theorem",
+      "number": "5.6",
+      "short": "Theorem 5.6",
+      "title": "Involutive exclusion",
+      "tex_lines": [
+        1027,
+        1039
+      ],
+      "label": "thm:coisotropic-exclusion",
+      "statement_relation": "lean-stronger",
+      "route_relation": "same",
+      "correspondence": "Now stated contrapositively: a closed, fibre-conical, involutive W on which P vanishes and which avoids π⁻¹(H) is empty. This is equivalent to the October 18 form. Lean allows any algebraically closed characteristic-zero field and any P with P(1,0,…,0) ≠ 0, not necessarily homogeneous. The proof is a separate card.",
+      "route": "Selected set-level proof uses fibre-conical vanishing identities, finite Taylor translation, a minimal base component and separator, conormal closure and the asymptotic axis. This is the existing checked set-level route. The checked endpoint also permits nonhomogeneous P.",
+      "lean": [
+        {
+          "file": "Stafford38/Geometry/GeneralCoisotropicSets.lean",
+          "role": "statement",
+          "name": "Stafford38.Geometry.GeneralCoisotropicSets.exists_zero_base_coordinate_of_isFibreConical"
+        },
+        {
+          "file": "Stafford38/Geometry/GeneralCoisotropicExclusion.lean",
+          "role": "main-proof",
+          "name": "Stafford38.Geometry.GeneralCoisotropicExclusion.exists_zero_base_coordinate"
+        },
+        {
+          "file": "Stafford38/Geometry/GeneralCoisotropicSetsTest.lean",
+          "role": "statement",
+          "name": "Stafford38.Geometry.GeneralCoisotropicSetsTest.exact_complex_manuscript_coisotropic_consumer"
+        },
+        {
+          "file": "Stafford38/Geometry/GeneralCoisotropicSets.lean",
+          "role": "helper",
+          "name": "Stafford38.Geometry.GeneralCoisotropicSets.baseProjection_eq_zeroLocus_comap"
+        },
+        {
+          "file": "Stafford38/Geometry/GeneralCoisotropicSets.lean",
+          "role": "helper",
+          "name": "Stafford38.Geometry.GeneralCoisotropicSets.smoothConormalClosure_minimalPrime_subset_of_isFibreConical"
+        },
+        {
+          "file": "Stafford38/Geometry/GeneralConormalContainment.lean",
+          "role": "helper",
+          "name": "Stafford38.Geometry.GeneralConormalContainment.zeroSection_commonZero_of_isHomogeneous"
+        },
+        {
+          "file": "Stafford38/Geometry/GeneralConormalContainment.lean",
+          "role": "helper",
+          "name": "Stafford38.Geometry.GeneralConormalContainment.equationConormalLocus_subset_zeroLocus"
+        },
+        {
+          "file": "Stafford38/Geometry/CoisotropicTranslation.lean",
+          "role": "definition",
+          "name": "Stafford38.Geometry.CoisotropicTranslation.hamiltonIter"
+        },
+        {
+          "file": "Stafford38/Geometry/CoisotropicTranslation.lean",
+          "role": "helper",
+          "name": "Stafford38.Geometry.CoisotropicTranslation.zeroSection_stable_under_differential_translation"
+        },
+        {
+          "file": "Stafford38/Characteristic/BaseRelativePoisson.lean",
+          "role": "helper",
+          "name": "Stafford38.Characteristic.BaseRelativePoisson.zeroSection_stable_under_differential_translation_of_isBaseRelativePoisson"
+        },
+        {
+          "file": "Stafford38/Geometry/PointwiseConormalContainment.lean",
+          "role": "helper",
+          "name": "Stafford38.Geometry.PointwiseConormalContainment.differentialCombinationPoint_isCommonZero"
+        },
+        {
+          "file": "Stafford38/Geometry/AffineConormalSpan.lean",
+          "role": "helper",
+          "name": "Stafford38.Geometry.AffineConormalSpan.affineConormal_coordinatePoint_isCommonZero"
+        },
+        {
+          "file": "Stafford38/Geometry/GeneralComponentConormalContainment.lean",
+          "role": "helper",
+          "name": "Stafford38.Geometry.GeneralComponentConormalContainment.equationConormalClosure_minimalPrime_subset_zeroLocus"
+        },
+        {
+          "file": "Stafford38/Geometry/GeneralComponentConormalContainment.lean",
+          "role": "helper",
+          "name": "Stafford38.Geometry.GeneralComponentConormalContainment.smoothConormalClosure_minimalPrime_subset_zeroLocus"
+        },
+        {
+          "file": "Stafford38/Geometry/AffineConormalClosure.lean",
+          "role": "definition",
+          "name": "Stafford38.Geometry.AffineConormalClosure.equationConormalClosure"
+        },
+        {
+          "file": "Stafford38/Geometry/ConormalPrincipalOpenDensity.lean",
+          "role": "helper",
+          "name": "Stafford38.Geometry.ConormalPrincipalOpenDensity.equationConormalClosure_restricted_eq"
+        },
+        {
+          "file": "Stafford38/Geometry/SmoothAffineConormal.lean",
+          "role": "helper",
+          "name": "Stafford38.Geometry.SmoothAffineConormal.equationConormalClosure_smoothAffine_eq"
+        },
+        {
+          "file": "Stafford38/Geometry/GeneralAsymptoticConormal.lean",
+          "role": "helper",
+          "name": "Stafford38.Geometry.GeneralAsymptoticConormal.coordinate_axis_mem_smooth_fibre_closure"
+        },
+        {
+          "file": "Stafford38/Geometry/ProjectiveConormalDirections.lean",
+          "role": "definition",
+          "name": "Stafford38.Geometry.ProjectiveConormalDirections.smoothConormalFibreProjection"
+        }
+      ],
+      "depends_on": [
+        "thm:asymptotic-conormal",
+        "def:fibre-can"
+      ],
+      "in_graph": true,
+      "graph_sub": "exclusion",
+      "graph_order": 2,
+      "auditors": [
+        "D"
+      ],
+      "review_scope": "publication",
+      "publication_proof": "Review the complete selected mathematical proof below, including its definitions and intermediate steps. The [readable correspondence note](https://itpplasma.github.io/stafford38-formal/lean_proof_details.pdf#nameddest=comparison-COMP-13) is an optional aid. Historical proof variants are outside this assignment.",
+      "historical_issues": [
+        {
+          "severity": "minor",
+          "summary": "'reduced' vacuous for a point set; conclusion re-quantifies the fixed W.",
+          "fix": "Conclude: W = empty or W meets pi^{-1}(H).",
+          "aicomment": null,
+          "auditor": "D",
+          "id": "S9-01",
+          "status": "historical finding; recheck against current excerpt"
+        },
+        {
+          "severity": "minor",
+          "summary": "(5.1) asserted without argument.",
+          "fix": "Closure of punctured fibre line contains (y,0), then close up over Y; or use xi-homogeneity of I(W) (Lean).",
+          "aicomment": null,
+          "auditor": "D",
+          "id": "S9-02",
+          "status": "historical finding; recheck against current excerpt"
+        },
+        {
+          "severity": "minor",
+          "summary": "'H_f preserves W' compressed: need H_f(I(W)) subset I(W) => exp(tH_f)(I(W)) subset I(W) => translation maps W=V(I(W)) into W; composition of flows unnecessary.",
+          "fix": "Spell out; translate once along sum t_i f_i (d is linear), as in Lean.",
+          "aicomment": null,
+          "auditor": "D",
+          "id": "S9-03",
+          "status": "historical finding; recheck against current excerpt"
+        },
+        {
+          "severity": "minor",
+          "summary": "Typo I(Y\\} (tex 1097); I(Y)_y = I(Y_0)_y does not by itself give equality of spans of differentials; Jacobian criterion unstated.",
+          "fix": "Use separator s (s(y) != 0, s*I(Y_0) subset I(Y)) and d(sh)_y = s(y)dh_y; cite Jacobian criterion.",
+          "aicomment": null,
+          "auditor": "D",
+          "id": "S9-04",
+          "status": "historical finding; recheck against current excerpt"
+        },
+        {
+          "severity": "minor",
+          "summary": "Density of conormal bundle over dense open U in conormal bundle over smooth locus not justified.",
+          "fix": "Irreducible vector bundle over (Y_0)_sm; restriction to dense open is dense.",
+          "aicomment": null,
+          "auditor": "D",
+          "id": "S9-05",
+          "status": "historical finding; recheck against current excerpt"
+        },
+        {
+          "severity": "minor",
+          "summary": "'[dx_1] is a projectivized fibre direction of W' is false as stated; it is only in the closure Dir(Y_0).",
+          "fix": "Every smooth conormal direction lies in closed V_+(P), hence so does Dir(Y_0), hence P(1,0..0)=0.",
+          "aicomment": "GEO-03",
+          "auditor": "D",
+          "id": "S9-06",
+          "status": "red-proposal-present; acceptance/review pending"
+        },
+        {
+          "severity": "editorial",
+          "summary": "Hypothesis can be weakened to the base-relative fragment {f o pi, I(W)} subset I(W); 'coisotropic' label vs 'involutive' text.",
+          "fix": "Optional remark.",
+          "aicomment": null,
+          "auditor": "D",
+          "id": "S9-07",
+          "status": "historical finding; recheck against current excerpt"
+        }
+      ],
+      "issues": [],
+      "comparison_updated_on": "2026-10-18"
+    },
+    {
       "id": "thm:asymptotic-conormal-proof",
-      "section": "8",
+      "section": "5.2",
       "kind": "Proof",
-      "number": "of 8.2",
-      "short": "Proof of 8.2",
+      "number": "of 5.5",
+      "short": "Proof of 5.5",
       "title": "Proof of Theorem 8.2",
       "tex_lines": [
-        1534,
-        1866
+        1040,
+        1389
       ],
       "statement_relation": "n/a",
       "route_relation": "similar",
-      "correspondence": "The active printed proof now uses a divisorial valuation, residue-field derivations, a Laurent generic tangent frame, a unit minor, and specialization of polynomial conormal identities. The former complex closed-point/tilted-arc proof is inside a comment environment and is not current manuscript text. The unchanged formal endpoint still assembles the retained SameWitness route; the generic/Laurent declarations are comparison material, not evidence that the selected formal endpoint follows this revised printed proof step by step.",
+      "correspondence": "The proof is now Subsection 5.2: an algebraic case, a valuation ring and discrete valuation ring at infinity (Lemmas 5.7, 5.8), residue-field differentials (Lemma 5.9), the Laurent generic tangent cone (Lemma 5.10), a unit minor, and lifting the x₁-row (Lemma 5.11). The October 18 commented-out closed-point proof has been deleted from the source. The formal endpoint still assembles the retained SameWitness route; matching conclusions do not certify this printed proof step by step.",
       "route": "Selected endpoint: Stafford38.Geometry.GeneralAsymptoticConormal.coordinate_axis_mem_smooth_fibre_closure. The wrapper delegates to Stafford38.Geometry.SameWitness.coordinate_axis_mem_smooth_fibre_closure; it handles the direct algebraic case and otherwise uses the T36 retained-ground-point closure under the endpoint’s explicit output and smooth-open inputs. Stafford38.Geometry.AlternativeAsymptoticConormal.coordinate_axis_mem_smooth_fibre_closure is the separately named generic/Laurent route. The printed proof and its marked corrections remain the human review surface.",
       "lean": [
         {
@@ -4315,64 +4418,156 @@
           "status": "route description refreshed in candidate; manuscript/proof_map wording and human correspondence review pending"
         }
       ],
+      "issues": [
+        {
+          "id": "MS21-REF-03",
+          "severity": "minor",
+          "summary": "The proof cites Lemma 5.10(c) for annihilators of the tangent cone; Lemma 5.10 now has only clauses (a) and (b), and the statement used is Lemma 5.11.",
+          "fix": "Cite Lemma 5.11.",
+          "aicomment": null,
+          "status": "open; paper preserved verbatim"
+        }
+      ],
+      "comparison_updated_on": "2026-10-18"
+    },
+    {
+      "id": "lem:W",
+      "section": "5.2",
+      "kind": "Lemma",
+      "number": "5.7",
+      "short": "Lemma 5.7",
+      "title": "A valuation ring at infinity in which x̄₁ vanishes",
+      "tex_lines": [
+        1070,
+        1085
+      ],
+      "statement_relation": "partial",
+      "route_relation": "similar",
+      "correspondence": "New lemma: a valuation ring dominating K[x̄₁] localized at x̄₁ and a homogeneous chart index. The Lean annotation after the theorem proof covers the divisorial frame collectively; a declaration proving exactly this printed lemma is not asserted here.",
+      "route": null,
+      "lean": [],
+      "depends_on": [],
+      "in_graph": false,
+      "graph_sub": null,
+      "graph_order": 0,
+      "auditors": [],
+      "review_scope": "publication",
+      "historical_issues": [],
+      "issues": [],
+      "label": "lem:W"
+    },
+    {
+      "id": "lem:place",
+      "label": "lem:place",
+      "section": "5.2",
+      "kind": "Lemma",
+      "number": "5.8",
+      "short": "Lemma 5.8",
+      "title": "A divisorial place with a vanishing first coordinate",
+      "tex_lines": [
+        1092,
+        1143
+      ],
+      "statement_relation": "partial",
+      "route_relation": "similar",
+      "correspondence": "Rewritten: from the valuation ring of Lemma 5.7 the proof builds a discrete valuation ring with all qᵢ in V, x̄₁ in the maximal ideal, R ⊄ V, residue field algebraic over the residues of q, and finitely generated Ω_{V/K}. The cited formal result supplies a divisorial visible frame with residue algebraicity; an exact wrapper for every clause is not claimed.",
+      "route": null,
+      "lean": [
+        {
+          "file": "Stafford38/Geometry/GeneralDivisorialVisibleFrame.lean",
+          "name": "Stafford38.Geometry.GeneralDivisorialVisibleFrame.generalDivisorialVisibleFrameWithResidueAlgebraicity",
+          "repo": "formal",
+          "role": "supporting result"
+        }
+      ],
+      "depends_on": [
+        "lem:W"
+      ],
+      "in_graph": false,
+      "graph_sub": null,
+      "graph_order": 0,
+      "auditors": [],
+      "review_scope": "publication",
+      "historical_issues": [],
       "issues": [],
       "comparison_updated_on": "2026-10-18"
     },
     {
-      "id": "def:fibre-can",
-      "section": "9",
-      "kind": "Definition",
-      "number": "9.1",
-      "short": "Definition 9.1",
-      "title": "Fibre-conical sets",
+      "id": "lem:kappa",
+      "label": "lem:kappa",
+      "section": "5.2",
+      "kind": "Lemma",
+      "number": "5.9",
+      "short": "Lemma 5.9",
+      "title": "Residue field and differential basis",
       "tex_lines": [
-        1868,
-        1881
+        1187,
+        1217
       ],
-      "label": "def:fibre-can",
-      "statement_relation": "exact",
-      "route_relation": "n/a",
-      "correspondence": "Lean derives xi-homogeneity of I(W) from fibre-conicality (infinite field); the paper uses this implicitly.",
+      "statement_relation": "partial",
+      "route_relation": "similar",
+      "correspondence": "Rewritten: a subset of the residues q_i(0) with i ∉ {0,1,j} gives a basis of Ω_{κ/K}, with dual derivations. The vanishing q₀(0) = q₁(0) = 0 is now established before the lemma. The cited formal result supports the differential span argument; it does not certify the printed basis statement by itself.",
       "route": null,
       "lean": [
         {
-          "file": "Stafford38/Geometry/FibreConicalVanishingIdeal.lean",
-          "role": "definition",
-          "name": "Stafford38.Geometry.FibreConicalVanishingIdeal.IsFibreConical"
-        },
-        {
-          "file": "Stafford38/Geometry/FibreConicalVanishingIdeal.lean",
-          "role": "helper",
-          "name": "Stafford38.Geometry.FibreConicalVanishingIdeal.vanishingIdeal_isHomogeneous_of_isFibreConical"
+          "file": "Stafford38/Geometry/KaehlerDVRVisibility.lean",
+          "name": "Stafford38.Geometry.KaehlerDVRVisibility.kaehler_span_of_isAlgebraic_adjoin",
+          "repo": "formal",
+          "role": "supporting result"
         }
       ],
       "depends_on": [],
       "in_graph": false,
       "graph_sub": null,
       "graph_order": 0,
-      "auditors": [
-        "D"
-      ],
+      "auditors": [],
       "review_scope": "publication",
-      "issues": []
+      "historical_issues": [
+        {
+          "id": "MS18-ORDER-01",
+          "severity": "minor",
+          "summary": "The proof uses q0=q1=0 and j not in {0,1}; the argument establishing these facts occurs later in the theorem proof.",
+          "fix": "Check the dependency order or supply the valuation argument before this lemma.",
+          "aicomment": null,
+          "status": "resolved in paper 204f5ea"
+        }
+      ],
+      "issues": [
+        {
+          "id": "MS21-KAPPA-01",
+          "severity": "minor",
+          "summary": "Lemma 5.9 states indices i₁,…,i_d but then writes q_{i_r}; the proof leaves “which defines d′ = ” unfinished; the preceding text writes q₀(t) = q₁(0) = 0 for q₀(0) = q₁(0) = 0.",
+          "fix": "Use one name for the transcendence degree of L/K and complete the sentence.",
+          "aicomment": null,
+          "status": "open; paper preserved verbatim"
+        }
+      ],
+      "comparison_updated_on": "2026-10-18"
     },
     {
-      "id": "thm:nss",
-      "label": "thm:nss",
-      "section": "9",
-      "kind": "Theorem",
-      "number": "9.2",
-      "short": "Theorem 9.2",
-      "title": "Hilbert's Nullstellensatz",
+      "id": "lem:tangent",
+      "label": "lem:tangent",
+      "section": "5.2",
+      "kind": "Lemma",
+      "number": "5.10",
+      "short": "Lemma 5.10",
+      "title": "Tangent space at the Laurent generic point",
       "tex_lines": [
-        1882,
-        1890
+        1255,
+        1304
       ],
       "statement_relation": "partial",
-      "route_relation": "n/a",
-      "correspondence": "Standard algebraically closed-field Nullstellensatz, now stated explicitly. Lean uses ideal/zero-locus results in the mapped geometric proofs; no separate new verification receipt is claimed.",
+      "route_relation": "similar",
+      "correspondence": "Rewritten with two clauses: the dimension bound for the tangent space and cone, and membership of δq(t) and q(t) in the cone. The dimension bound has a named formal analogue for the retained witness; the membership clause requires its own comparison.",
       "route": null,
-      "lean": [],
+      "lean": [
+        {
+          "file": "Stafford38/Geometry/PaperSameWitnessTangentDimension.lean",
+          "name": "Stafford38.Geometry.PaperSameWitnessTangentDimension.tangent_finrank_le_residue_add_one_of_witness",
+          "repo": "formal",
+          "role": "supporting result"
+        }
+      ],
       "depends_on": [],
       "in_graph": false,
       "graph_sub": null,
@@ -4384,217 +4579,248 @@
       "comparison_updated_on": "2026-10-18"
     },
     {
-      "id": "thm:coisotropic-exclusion",
-      "section": "9",
-      "kind": "Theorem",
-      "number": "9.3",
-      "short": "Theorem 9.3",
-      "title": "Involutive exclusion",
+      "id": "lem:ell",
+      "section": "5.2",
+      "kind": "Lemma",
+      "number": "5.11",
+      "short": "Lemma 5.11",
+      "title": "Annihilators of the tangent cone are conormal",
       "tex_lines": [
-        1891,
-        1952
+        1312,
+        1326
       ],
-      "label": "thm:coisotropic-exclusion",
-      "statement_relation": "lean-stronger",
-      "route_relation": "same",
-      "correspondence": "The expanded proof establishes fibre homogeneity, the zero section over the projected base, Hamiltonian translations, component conormal containment and the axis contradiction. It allows any fibre polynomial nonzero at the coordinate axis, without a homogeneity hypothesis on P, matching the mapped formal scope. Some conormal containments in the printed proof mix fibre and cotangent-space notation; the supplementary preserves the text and records this review issue.",
-      "route": "Selected set-level proof uses fibre-conical vanishing identities, finite Taylor translation, a minimal base component and separator, conormal closure and the asymptotic axis. This is the existing checked set-level route. The checked endpoint also permits nonhomogeneous P.",
+      "statement_relation": "partial",
+      "route_relation": "similar",
+      "correspondence": "New lemma: a row vector annihilating the homogeneous tangent cone gives an affine conormal covector. The cited declaration from the theorem annotation is the closest formal counterpart (conormal row data for the witness); its hypotheses have not been compared clause by clause.",
+      "route": null,
       "lean": [
         {
-          "file": "Stafford38/Geometry/GeneralCoisotropicSets.lean",
-          "role": "statement",
-          "name": "Stafford38.Geometry.GeneralCoisotropicSets.exists_zero_base_coordinate_of_isFibreConical"
-        },
+          "file": "Stafford38/Geometry/PaperActualWitnessConormalData.lean",
+          "name": "Stafford38.Geometry.PaperActualWitnessConormalData.exists_regularizedOneRowConormalData_of_actual_witness",
+          "repo": "formal",
+          "role": "supporting result"
+        }
+      ],
+      "depends_on": [],
+      "in_graph": false,
+      "graph_sub": null,
+      "graph_order": 0,
+      "auditors": [],
+      "review_scope": "publication",
+      "historical_issues": [],
+      "issues": [],
+      "label": "lem:ell"
+    },
+    {
+      "id": "thm:coisotropic-exclusion-proof",
+      "section": "5.3",
+      "kind": "Proof",
+      "number": "of 5.6",
+      "short": "Proof of 5.6",
+      "title": "Proof of the involutive exclusion theorem",
+      "tex_lines": [
+        1390,
+        1440
+      ],
+      "statement_relation": "n/a",
+      "route_relation": "same",
+      "correspondence": "The proof now has its own subsection after both theorem statements. It establishes fibre homogeneity, the zero section over the projected base, Hamiltonian translations and component conormal containment, then applies the asymptotic conormal theorem. The theorem is stated contrapositively (W must be empty), which is equivalent to the October 18 form.",
+      "route": null,
+      "lean": [
         {
           "file": "Stafford38/Geometry/GeneralCoisotropicExclusion.lean",
-          "role": "main-proof",
-          "name": "Stafford38.Geometry.GeneralCoisotropicExclusion.exists_zero_base_coordinate"
-        },
-        {
-          "file": "Stafford38/Geometry/GeneralCoisotropicSetsTest.lean",
-          "role": "statement",
-          "name": "Stafford38.Geometry.GeneralCoisotropicSetsTest.exact_complex_manuscript_coisotropic_consumer"
-        },
-        {
-          "file": "Stafford38/Geometry/GeneralCoisotropicSets.lean",
-          "role": "helper",
-          "name": "Stafford38.Geometry.GeneralCoisotropicSets.baseProjection_eq_zeroLocus_comap"
-        },
-        {
-          "file": "Stafford38/Geometry/GeneralCoisotropicSets.lean",
-          "role": "helper",
-          "name": "Stafford38.Geometry.GeneralCoisotropicSets.smoothConormalClosure_minimalPrime_subset_of_isFibreConical"
-        },
-        {
-          "file": "Stafford38/Geometry/GeneralConormalContainment.lean",
-          "role": "helper",
-          "name": "Stafford38.Geometry.GeneralConormalContainment.zeroSection_commonZero_of_isHomogeneous"
-        },
-        {
-          "file": "Stafford38/Geometry/GeneralConormalContainment.lean",
-          "role": "helper",
-          "name": "Stafford38.Geometry.GeneralConormalContainment.equationConormalLocus_subset_zeroLocus"
-        },
-        {
-          "file": "Stafford38/Geometry/CoisotropicTranslation.lean",
-          "role": "definition",
-          "name": "Stafford38.Geometry.CoisotropicTranslation.hamiltonIter"
-        },
-        {
-          "file": "Stafford38/Geometry/CoisotropicTranslation.lean",
-          "role": "helper",
-          "name": "Stafford38.Geometry.CoisotropicTranslation.zeroSection_stable_under_differential_translation"
-        },
-        {
-          "file": "Stafford38/Characteristic/BaseRelativePoisson.lean",
-          "role": "helper",
-          "name": "Stafford38.Characteristic.BaseRelativePoisson.zeroSection_stable_under_differential_translation_of_isBaseRelativePoisson"
-        },
-        {
-          "file": "Stafford38/Geometry/PointwiseConormalContainment.lean",
-          "role": "helper",
-          "name": "Stafford38.Geometry.PointwiseConormalContainment.differentialCombinationPoint_isCommonZero"
-        },
-        {
-          "file": "Stafford38/Geometry/AffineConormalSpan.lean",
-          "role": "helper",
-          "name": "Stafford38.Geometry.AffineConormalSpan.affineConormal_coordinatePoint_isCommonZero"
+          "name": "Stafford38.Geometry.GeneralCoisotropicExclusion.exists_zero_base_coordinate",
+          "repo": "formal",
+          "role": "supporting result"
         },
         {
           "file": "Stafford38/Geometry/GeneralComponentConormalContainment.lean",
-          "role": "helper",
-          "name": "Stafford38.Geometry.GeneralComponentConormalContainment.equationConormalClosure_minimalPrime_subset_zeroLocus"
-        },
-        {
-          "file": "Stafford38/Geometry/GeneralComponentConormalContainment.lean",
-          "role": "helper",
-          "name": "Stafford38.Geometry.GeneralComponentConormalContainment.smoothConormalClosure_minimalPrime_subset_zeroLocus"
-        },
-        {
-          "file": "Stafford38/Geometry/AffineConormalClosure.lean",
-          "role": "definition",
-          "name": "Stafford38.Geometry.AffineConormalClosure.equationConormalClosure"
-        },
-        {
-          "file": "Stafford38/Geometry/ConormalPrincipalOpenDensity.lean",
-          "role": "helper",
-          "name": "Stafford38.Geometry.ConormalPrincipalOpenDensity.equationConormalClosure_restricted_eq"
-        },
-        {
-          "file": "Stafford38/Geometry/SmoothAffineConormal.lean",
-          "role": "helper",
-          "name": "Stafford38.Geometry.SmoothAffineConormal.equationConormalClosure_smoothAffine_eq"
+          "name": "Stafford38.Geometry.GeneralComponentConormalContainment.equationConormalClosure_minimalPrime_subset_zeroLocus",
+          "repo": "formal",
+          "role": "supporting result"
         },
         {
           "file": "Stafford38/Geometry/GeneralAsymptoticConormal.lean",
-          "role": "helper",
-          "name": "Stafford38.Geometry.GeneralAsymptoticConormal.coordinate_axis_mem_smooth_fibre_closure"
-        },
-        {
-          "file": "Stafford38/Geometry/ProjectiveConormalDirections.lean",
-          "role": "definition",
-          "name": "Stafford38.Geometry.ProjectiveConormalDirections.smoothConormalFibreProjection"
+          "name": "Stafford38.Geometry.GeneralAsymptoticConormal.coordinate_axis_mem_smooth_fibre_closure",
+          "repo": "formal",
+          "role": "supporting result"
         }
       ],
       "depends_on": [
-        "thm:asymptotic-conormal",
-        "def:fibre-can"
+        "thm:coisotropic-exclusion",
+        "thm:asymptotic-conormal"
       ],
-      "in_graph": true,
-      "graph_sub": "exclusion",
-      "graph_order": 2,
-      "auditors": [
-        "D"
-      ],
+      "in_graph": false,
+      "graph_sub": null,
+      "graph_order": 0,
+      "auditors": [],
       "review_scope": "publication",
-      "publication_proof": "Review the complete selected mathematical proof below, including its definitions and intermediate steps. The [readable correspondence note](https://itpplasma.github.io/stafford38-formal/lean_proof_details.pdf#nameddest=comparison-COMP-13) is an optional aid. Historical proof variants are outside this assignment.",
-      "historical_issues": [
-        {
-          "severity": "minor",
-          "summary": "'reduced' vacuous for a point set; conclusion re-quantifies the fixed W.",
-          "fix": "Conclude: W = empty or W meets pi^{-1}(H).",
-          "aicomment": null,
-          "auditor": "D",
-          "id": "S9-01",
-          "status": "historical finding; recheck against current excerpt"
-        },
-        {
-          "severity": "minor",
-          "summary": "(5.1) asserted without argument.",
-          "fix": "Closure of punctured fibre line contains (y,0), then close up over Y; or use xi-homogeneity of I(W) (Lean).",
-          "aicomment": null,
-          "auditor": "D",
-          "id": "S9-02",
-          "status": "historical finding; recheck against current excerpt"
-        },
-        {
-          "severity": "minor",
-          "summary": "'H_f preserves W' compressed: need H_f(I(W)) subset I(W) => exp(tH_f)(I(W)) subset I(W) => translation maps W=V(I(W)) into W; composition of flows unnecessary.",
-          "fix": "Spell out; translate once along sum t_i f_i (d is linear), as in Lean.",
-          "aicomment": null,
-          "auditor": "D",
-          "id": "S9-03",
-          "status": "historical finding; recheck against current excerpt"
-        },
-        {
-          "severity": "minor",
-          "summary": "Typo I(Y\\} (tex 1097); I(Y)_y = I(Y_0)_y does not by itself give equality of spans of differentials; Jacobian criterion unstated.",
-          "fix": "Use separator s (s(y) != 0, s*I(Y_0) subset I(Y)) and d(sh)_y = s(y)dh_y; cite Jacobian criterion.",
-          "aicomment": null,
-          "auditor": "D",
-          "id": "S9-04",
-          "status": "historical finding; recheck against current excerpt"
-        },
-        {
-          "severity": "minor",
-          "summary": "Density of conormal bundle over dense open U in conormal bundle over smooth locus not justified.",
-          "fix": "Irreducible vector bundle over (Y_0)_sm; restriction to dense open is dense.",
-          "aicomment": null,
-          "auditor": "D",
-          "id": "S9-05",
-          "status": "historical finding; recheck against current excerpt"
-        },
-        {
-          "severity": "minor",
-          "summary": "'[dx_1] is a projectivized fibre direction of W' is false as stated; it is only in the closure Dir(Y_0).",
-          "fix": "Every smooth conormal direction lies in closed V_+(P), hence so does Dir(Y_0), hence P(1,0..0)=0.",
-          "aicomment": "GEO-03",
-          "auditor": "D",
-          "id": "S9-06",
-          "status": "red-proposal-present; acceptance/review pending"
-        },
-        {
-          "severity": "editorial",
-          "summary": "Hypothesis can be weakened to the base-relative fragment {f o pi, I(W)} subset I(W); 'coisotropic' label vs 'involutive' text.",
-          "fix": "Optional remark.",
-          "aicomment": null,
-          "auditor": "D",
-          "id": "S9-07",
-          "status": "historical finding; recheck against current excerpt"
-        }
-      ],
+      "historical_issues": [],
       "issues": [
         {
           "id": "MS18-REF-02",
           "severity": "minor",
-          "summary": "The manuscript references def:conormal, which is now inside a comment environment. Some displayed containments also mix fibre covectors and cotangent pairs.",
-          "fix": "Review the missing definition reference and the ambient spaces of the conormal containments.",
+          "summary": "The proof of Theorem 5.6 still references def:conormal, which no longer exists in the source; the compiled paper prints “Definition ??”.",
+          "fix": "Restore the conormal-space definition or replace the reference.",
           "aicomment": null,
           "status": "open; paper preserved verbatim"
         }
+      ]
+    },
+    {
+      "id": "prop:charP-proof",
+      "section": "6",
+      "kind": "Proof",
+      "number": "of 3.6",
+      "short": "Proof of 3.6",
+      "title": "Proof of Proposition 3.6 (printed at the start of Section 6)",
+      "tex_lines": [
+        1443,
+        1449
       ],
+      "statement_relation": "n/a",
+      "route_relation": "similar",
+      "correspondence": "The proof that the order symbol P annihilates gr Q is printed at the start of Section 6, before the proposition on support avoidance, rather than after Proposition 3.6. Lean proves membership of the order principal component in the order initial ideal.",
+      "route": null,
+      "lean": [
+        {
+          "file": "Stafford38/Characteristic/InitialIdeal.lean",
+          "name": "Stafford38.CharacteristicInitialIdeal.canonical_orderPrincipalComponent_mem_initialIdeal",
+          "repo": "formal",
+          "role": "supporting result"
+        }
+      ],
+      "depends_on": [
+        "cor:charP"
+      ],
+      "in_graph": false,
+      "graph_sub": null,
+      "graph_order": 0,
+      "auditors": [],
+      "review_scope": "publication",
+      "historical_issues": [],
+      "issues": []
+    },
+    {
+      "id": "prop:char-avoids",
+      "section": "6",
+      "kind": "Proposition",
+      "number": "6.1",
+      "short": "Proposition 6.1",
+      "title": "Char(Q) ∩ π⁻¹(H) = ∅",
+      "tex_lines": [
+        1450,
+        1468
+      ],
+      "label": "prop:char-avoids",
+      "statement_relation": "equivalent",
+      "route_relation": "same",
+      "correspondence": "Now Proposition 6.1 with a single proof: Supp(M/x₁M) = Supp(M) ∩ V(x₁) and Corollary 4.11. The duplicate proof of October 18 is gone. The formal support statement is transported along the fibre sign change, which fixes x₁.",
+      "route": null,
+      "lean": [
+        {
+          "file": "Stafford38/Characteristic/CanonicalKoszulContradiction.lean",
+          "role": "statement",
+          "name": "Stafford38.Characteristic.CanonicalKoszulContradiction.canonical_support_avoidance"
+        },
+        {
+          "file": "Stafford38/Characteristic/CanonicalSupportAvoidanceFromCokernel.lean",
+          "role": "main-proof",
+          "name": "Stafford38.Characteristic.CanonicalSupportAvoidanceFromCokernel.canonical_support_avoidance_of_coordinate_cokernel_subsingleton"
+        },
+        {
+          "file": "Stafford38/Characteristic/TransposedFilteredModuleSupport.lean",
+          "role": "definition",
+          "name": "Stafford38.CharacteristicTransposedFilteredModuleSupport.transposedOrderAssociatedGradedSupport"
+        },
+        {
+          "file": "Stafford38/Characteristic/TransposedFilteredModuleSupport.lean",
+          "role": "helper",
+          "name": "Stafford38.CharacteristicTransposedFilteredModuleSupport.transposedOrderAssociatedGradedSupport_eq_preimage"
+        },
+        {
+          "file": "Stafford38/Characteristic/SpecializedNoncharacteristicEquality.lean",
+          "role": "helper",
+          "name": "Stafford38.SpecializedNoncharacteristicEquality.transposedSupport_disjoint_axis_iff"
+        },
+        {
+          "file": "Stafford38/PaperInputs.lean",
+          "role": "definition",
+          "name": "Stafford38.PaperInputs.CanonicalNoncharacteristicSupportAvoidance"
+        },
+        {
+          "file": "Stafford38/Characteristic/SpecializedNoncharacteristicEquality.lean",
+          "role": "helper",
+          "name": "Stafford38.SpecializedNoncharacteristicEquality.strictUnitCoordinatePreimage_of_transposedSupport_disjoint_axis",
+          "expands": [
+            {
+              "file": "Stafford38/Characteristic/CanonicalUnitCoordinatePreimage.lean",
+              "name": "Stafford38.CanonicalUnitCoordinatePreimage.StrictUnitCoordinatePreimage"
+            }
+          ]
+        }
+      ],
+      "depends_on": [
+        "lem:Uzero"
+      ],
+      "in_graph": true,
+      "graph_sub": "avoids π⁻¹(H)",
+      "graph_order": 0,
+      "auditors": [
+        "C"
+      ],
+      "review_scope": "publication",
+      "publication_proof": "Review the complete selected mathematical proof below, including its definitions and intermediate steps. The [readable correspondence note](https://itpplasma.github.io/stafford38-formal/lean_proof_details.pdf#nameddest=comparison-COMP-08) is an optional aid. Historical proof variants are outside this assignment.",
+      "historical_issues": [
+        {
+          "severity": "minor",
+          "summary": "Proof treats V(x_1) as k^{2n}-points although k was replaced by non-closed k0 and Char is defined in Spec; point form is weaker and does not base-change.",
+          "fix": "State as Ann(gr Q) + (x_1) = k0[x,xi] (empty in Spec), which base-changes to C.",
+          "aicomment": null,
+          "auditor": "C",
+          "id": "S7-03",
+          "status": "historical finding; recheck against current excerpt"
+        },
+        {
+          "severity": "minor",
+          "summary": "Lean states avoidance for the transposed (left) module support (xi -> -xi); paper's justification is commented out (l.868).",
+          "fix": "Restore one sentence: transposition maps Char by xi->-xi, fixing pi^{-1}(H).",
+          "aicomment": null,
+          "auditor": "C",
+          "id": "S7-04",
+          "status": "historical finding; recheck against current excerpt"
+        },
+        {
+          "severity": "minor",
+          "summary": "Supp M = V(Ann M) and Supp(M/xM)=Supp M cap V(x) for finite M used without citation.",
+          "fix": "Cite (Nakayama).",
+          "aicomment": null,
+          "auditor": "C",
+          "id": "S7-05",
+          "status": "historical finding; recheck against current excerpt"
+        },
+        {
+          "id": "MS18-DUP-01",
+          "severity": "minor",
+          "summary": "The proposition is followed by two consecutive proofs of the same support identity.",
+          "fix": "Review whether both proofs should remain in the paper.",
+          "aicomment": null,
+          "status": "resolved in paper 204f5ea"
+        }
+      ],
+      "issues": [],
       "comparison_updated_on": "2026-10-18"
     },
     {
       "id": "lem:initial-base-change",
-      "section": "10",
+      "section": "6",
       "kind": "Lemma",
-      "number": "10.1",
-      "short": "Lemma 10.1",
+      "number": "6.2",
+      "short": "Lemma 6.2",
       "title": "Base change of the canonical quotient and its characteristic variety",
       "tex_lines": [
-        1955,
-        1976
+        1469,
+        1490
       ],
       "statement_relation": "partial",
       "route_relation": "similar",
@@ -4642,14 +4868,14 @@
     },
     {
       "id": "proof-main",
-      "section": "10",
+      "section": "6",
       "kind": "Proof",
-      "number": "§10",
-      "short": "§10 assembly",
+      "number": "§6",
+      "short": "Proof §6",
       "title": "Proof of Theorem 1.1: Gabber, exclusion, descent, transport",
       "tex_lines": [
-        1977,
-        2042
+        1491,
+        1555
       ],
       "statement_relation": "lean-stronger",
       "route_relation": "same",
@@ -4919,18 +5145,18 @@
     },
     {
       "id": "cyclicity",
-      "section": "10",
+      "section": "6",
       "kind": "Corollary",
-      "number": "10.2",
-      "short": "Corollary 10.2",
+      "number": "6.3",
+      "short": "Corollary 6.3",
       "title": "Finitely generated torsion modules are cyclic",
       "tex_lines": [
-        2043,
-        2070
+        1556,
+        1586
       ],
       "statement_relation": "lean-stronger",
       "route_relation": "same",
-      "correspondence": "Selected finite-generation induction uses a common annihilator d2*e and the explicit generator t1−t2F. Its certificate calculation also has a separate literal supplementary challenge and trust-zero consumer. Main Challenge is unchanged.",
+      "correspondence": "Selected finite-generation induction uses a common annihilator d₂e and the explicit generator t₁−t₂F. Its certificate calculation also has a separate literal supplementary challenge and trust-zero consumer. The proof now adds a stable-cyclicity paragraph with a pending AI completion (CYC-01); stable cyclicity is not separately mapped to a Lean declaration.",
       "route": "Selected finite-generation induction uses a common annihilator d2*e and the explicit generator t1−t2F. Its certificate calculation also has a separate literal supplementary challenge and trust-zero consumer. Main Challenge is unchanged.",
       "lean": [
         {
@@ -5080,108 +5306,19 @@
       ]
     },
     {
-      "id": "outlook",
-      "section": "11",
-      "kind": "Section",
-      "number": "11",
-      "short": "Outlook",
-      "title": "Outlook",
-      "tex_lines": [
-        2071,
-        2081
-      ],
-      "statement_relation": "n/a",
-      "route_relation": "n/a",
-      "correspondence": "This is proposed discussion of future work, not a theorem to certify. The current snapshot contains the red outlook replacement; its suggested research directions remain prose. The current review text is discussion/prose; mathematical consequences are mapped on their individual cards.",
-      "route": null,
-      "lean": [],
-      "depends_on": [],
-      "in_graph": false,
-      "graph_sub": null,
-      "graph_order": 0,
-      "auditors": [
-        "F"
-      ],
-      "review_scope": "reference",
-      "historical_issues": [
-        {
-          "severity": "editorial",
-          "summary": "Section consists of 'We have proved' plus an AI comment.",
-          "fix": "Complete or delete.",
-          "aicomment": "EDIT-01",
-          "auditor": "F",
-          "id": "S11-01",
-          "status": "red correction/source passage present; human acceptance pending"
-        }
-      ],
-      "issues": [
-        {
-          "id": "EDIT-01",
-          "severity": "editorial",
-          "summary": "Proposed change --- review the red outlook.",
-          "fix": "Review the marked mathematical proposal in the current paper.",
-          "aicomment": "EDIT-01",
-          "status": "author acceptance pending"
-        }
-      ]
-    },
-    {
-      "id": "ai-workflow",
-      "section": "A",
-      "kind": "Appendix",
-      "number": "A",
-      "short": "AI workflow",
-      "title": "AI-assisted research, formalization and verification provenance",
-      "tex_lines": [
-        2096,
-        2149
-      ],
-      "statement_relation": "n/a",
-      "route_relation": "n/a",
-      "correspondence": "Workflow and independent-check claims are provenance, not mathematical consequences. The formal verification record is available in the pinned formal repository; tool participation and chronology require the project’s source ledgers.",
-      "route": null,
-      "lean": [
-        {
-          "repo": "formal",
-          "file": "docs/verification-results.json",
-          "role": "verification provenance",
-          "name": "",
-          "module_only": true,
-          "line": 1
-        },
-        {
-          "repo": "formal",
-          "file": "docs/paper-lean-audit/workflow-evidence/README.md",
-          "role": "historical provenance",
-          "module_only": true,
-          "note": "History/prompt reconstructions, source protocols and model inventory; provenance rather than mathematical premises."
-        }
-      ],
-      "depends_on": [],
-      "in_graph": false,
-      "graph_sub": null,
-      "graph_order": 0,
-      "auditors": [
-        "current-map"
-      ],
-      "label": "app:ai-workflow",
-      "review_scope": "reference",
-      "issues": []
-    },
-    {
       "id": "further-work",
-      "section": "B",
-      "kind": "Appendix",
-      "number": "B",
-      "short": "App B",
-      "title": "Further work and corollaries",
+      "section": "7",
+      "kind": "Section",
+      "number": "7",
+      "short": "Section 7",
+      "title": "Consequences proved in Lean",
       "tex_lines": [
-        2150,
-        2162
+        1587,
+        1601
       ],
       "statement_relation": "n/a",
       "route_relation": "n/a",
-      "correspondence": "The current appendix explicitly lists four consequences; each is mapped separately below. The general localization, left-handed, localized differential-operator, and evolutionary declarations exist at the frozen formal pin. This is not a claim that the prose is independently formalized. The current review text is discussion/prose; mathematical consequences are mapped on their individual cards.",
+      "correspondence": "The first paragraph of Section 7 lists four consequences without printed proofs; each is mapped separately below. The localization, left-handed, localized differential-operator and evolutionary declarations exist at the pinned formal commit.",
       "route": null,
       "lean": [
         {
@@ -5246,16 +5383,14 @@
           "auditor": "F",
           "id": "SB-02",
           "status": "red-proposal-present; acceptance/review pending"
-        }
-      ],
-      "issues": [
+        },
         {
           "id": "REF-01",
           "severity": "editorial",
           "summary": "Proposed change --- author acceptance pending.",
           "fix": "Review the marked mathematical proposal in the current paper.",
           "aicomment": "REF-01",
-          "status": "author acceptance pending"
+          "status": "AI comment no longer in the manuscript at 204f5ea"
         },
         {
           "id": "SCOPE-01",
@@ -5263,20 +5398,21 @@
           "summary": "Proposed change --- author acceptance pending.",
           "fix": "Review the marked mathematical proposal in the current paper.",
           "aicomment": "SCOPE-01",
-          "status": "author acceptance pending"
+          "status": "AI comment no longer in the manuscript at 204f5ea"
         }
-      ]
+      ],
+      "issues": []
     },
     {
       "id": "appendix-right-ore",
-      "section": "B",
+      "section": "7",
       "kind": "Corollary",
       "number": "",
       "short": "Right Ore localization",
       "title": "Identity in every right Ore localization",
       "tex_lines": [
-        2153,
-        2154
+        1589,
+        1590
       ],
       "statement_relation": "lean-stronger",
       "route_relation": "same",
@@ -5301,14 +5437,14 @@
     },
     {
       "id": "appendix-left-handed",
-      "section": "B",
+      "section": "7",
       "kind": "Corollary",
       "number": "",
       "short": "Left-handed identity",
       "title": "Left-handed identity via formal adjoint",
       "tex_lines": [
-        2155,
-        2156
+        1590,
+        1591
       ],
       "statement_relation": "exact",
       "route_relation": "same",
@@ -5333,14 +5469,14 @@
     },
     {
       "id": "appendix-localized-differential",
-      "section": "B",
+      "section": "7",
       "kind": "Corollary",
       "number": "",
       "short": "Localized differential",
       "title": "Differential operators over polynomial localizations",
       "tex_lines": [
-        2157,
-        2158
+        1591,
+        1593
       ],
       "statement_relation": "lean-stronger",
       "route_relation": "same",
@@ -5365,14 +5501,14 @@
     },
     {
       "id": "appendix-evolutionary",
-      "section": "B",
+      "section": "7",
       "kind": "Corollary",
       "number": "",
       "short": "Evolutionary",
       "title": "Evolutionary version with coefficients commuting with a Weyl pair",
       "tex_lines": [
-        2159,
-        2160
+        1593,
+        1596
       ],
       "statement_relation": "exact",
       "route_relation": "same",
@@ -5393,6 +5529,185 @@
         "current-map"
       ],
       "review_scope": "publication",
+      "issues": []
+    },
+    {
+      "id": "global-stafford",
+      "section": "7",
+      "kind": "Paragraph",
+      "number": "",
+      "short": "Generalization (a)",
+      "title": "Generalization (a): differential operators on smooth affine domains",
+      "tex_lines": [
+        1607,
+        1613
+      ],
+      "statement_relation": "exact",
+      "route_relation": "n/a",
+      "correspondence": "Item (a) of Section 7 states the identity for D_k(A), A a smooth finitely generated k-algebra that is a domain. It is proved in the separate pinned repository itpplasma/global-stafford-formal at v1.0.6; the paper distinguishes existence of F from the fixed linear-coordinate choice of Theorem 1.1.",
+      "route": null,
+      "lean": [
+        {
+          "repo": "global",
+          "file": "GlobalStafford/Assembly/Closure.lean",
+          "role": "statement",
+          "name": "GlobalStafford.universalStatement",
+          "expands": [
+            {
+              "repo": "global",
+              "file": "GlobalStafford/Assembly/ChallengeTransport.lean",
+              "name": "GlobalStaffordChallenge.UniversalStatement"
+            },
+            {
+              "repo": "library",
+              "file": "AlgebraicAnalysis/RingTheory/TwoGeneratorIdentity.lean",
+              "name": "AlgebraicAnalysis.TwoGeneratorIdentity",
+              "role": "definition"
+            },
+            {
+              "repo": "library",
+              "file": "AlgebraicAnalysis/DifferentialOperators/Basic.lean",
+              "name": "AlgebraicAnalysis.DifferentialOperators.algebra",
+              "role": "definition"
+            }
+          ]
+        }
+      ],
+      "depends_on": [],
+      "in_graph": false,
+      "graph_sub": null,
+      "graph_order": 0,
+      "auditors": [
+        "F"
+      ],
+      "review_scope": "reference",
+      "issues": []
+    },
+    {
+      "id": "generalization-filtered",
+      "section": "7",
+      "kind": "Paragraph",
+      "number": "",
+      "short": "Generalization (b)",
+      "title": "Generalization (b): filtered simple algebras",
+      "tex_lines": [
+        1614,
+        1623
+      ],
+      "statement_relation": "equivalent",
+      "route_relation": "n/a",
+      "correspondence": "Lean states the identity 1 = dR + (B + Ha)dS for a simple, infinite-dimensional k-algebra U with an exhaustive, multiplicative filtration by finite-dimensional pieces, F₀U = k, whose associated graded ring is a commutative, finitely generated domain encoded by graded symbol maps. Lean additionally assumes finite Krull dimension of the graded ring, which holds for every finitely generated commutative k-algebra. The paper gives no printed proof; the manuscript marks the citation as a placeholder (AI comment FV-03).",
+      "route": null,
+      "lean": [
+        {
+          "file": "Challenge.lean",
+          "name": "SymplecticStaffordChallenge.AffineSameDivisorStatement",
+          "repo": "filtered",
+          "role": "statement"
+        },
+        {
+          "file": "Solution.lean",
+          "name": "SymplecticStaffordChallenge.universalStatement",
+          "repo": "filtered",
+          "role": "statement"
+        }
+      ],
+      "depends_on": [],
+      "in_graph": false,
+      "graph_sub": null,
+      "graph_order": 0,
+      "auditors": [],
+      "review_scope": "publication",
+      "historical_issues": [],
+      "issues": []
+    },
+    {
+      "id": "outlook",
+      "section": "7",
+      "kind": "Paragraph",
+      "number": "",
+      "short": "Section 7",
+      "title": "Open questions and a terminating search",
+      "tex_lines": [
+        1624,
+        1638
+      ],
+      "statement_relation": "n/a",
+      "route_relation": "n/a",
+      "correspondence": "Discussion, not a theorem. A pending AI replacement (ALG-05) says the fixed choice of F gives a terminating search over computable fields; bounds and efficiency remain open. FV-03 marks the citation of generalization (b) as a placeholder.",
+      "route": null,
+      "lean": [],
+      "depends_on": [],
+      "in_graph": false,
+      "graph_sub": null,
+      "graph_order": 0,
+      "auditors": [
+        "F"
+      ],
+      "review_scope": "reference",
+      "historical_issues": [
+        {
+          "severity": "editorial",
+          "summary": "Section consists of 'We have proved' plus an AI comment.",
+          "fix": "Complete or delete.",
+          "aicomment": "EDIT-01",
+          "auditor": "F",
+          "id": "S11-01",
+          "status": "red correction/source passage present; human acceptance pending"
+        }
+      ],
+      "issues": [
+        {
+          "id": "EDIT-01",
+          "severity": "editorial",
+          "summary": "Proposed change --- review the red outlook.",
+          "fix": "Review the marked mathematical proposal in the current paper.",
+          "aicomment": "EDIT-01",
+          "status": "author acceptance pending"
+        }
+      ]
+    },
+    {
+      "id": "ai-workflow",
+      "section": "A",
+      "kind": "Appendix",
+      "number": "A",
+      "short": "Appendix A",
+      "title": "AI-assisted research, formalization and verification provenance",
+      "tex_lines": [
+        1653,
+        1710
+      ],
+      "statement_relation": "n/a",
+      "route_relation": "n/a",
+      "correspondence": "Workflow and independent-check claims are provenance, not mathematical consequences. The formal verification record is available in the pinned formal repository; tool participation and chronology require the project’s source ledgers.",
+      "route": null,
+      "lean": [
+        {
+          "repo": "formal",
+          "file": "docs/verification-results.json",
+          "role": "verification provenance",
+          "name": "",
+          "module_only": true,
+          "line": 1
+        },
+        {
+          "repo": "formal",
+          "file": "docs/paper-lean-audit/workflow-evidence/README.md",
+          "role": "historical provenance",
+          "module_only": true,
+          "note": "History/prompt reconstructions, source protocols and model inventory; provenance rather than mathematical premises."
+        }
+      ],
+      "depends_on": [],
+      "in_graph": false,
+      "graph_sub": null,
+      "graph_order": 0,
+      "auditors": [
+        "current-map"
+      ],
+      "label": "app:ai-workflow",
+      "review_scope": "reference",
       "issues": []
     }
   ],
@@ -5616,39 +5931,33 @@
   ],
   "aicomments": [
     {
-      "id": "INTRO-01",
-      "line": 89,
+      "id": "CYC-01",
+      "line": 1580,
       "verdict": "author review pending",
       "note": "Active annotation in the updated manuscript; no author acceptance is inferred."
     },
     {
-      "id": "WF-01",
-      "line": 176,
+      "id": "ALG-05",
+      "line": 1636,
       "verdict": "author review pending",
       "note": "Active annotation in the updated manuscript; no author acceptance is inferred."
     },
     {
-      "id": "ALG-04",
-      "line": 751,
+      "id": "FV-03",
+      "line": 1637,
       "verdict": "author review pending",
       "note": "Active annotation in the updated manuscript; no author acceptance is inferred."
     },
     {
-      "id": "REF-01",
-      "line": 2151,
-      "verdict": "author review pending",
-      "note": "Active annotation in the updated manuscript; no author acceptance is inferred."
-    },
-    {
-      "id": "SCOPE-01",
-      "line": 2161,
+      "id": "AI-01",
+      "line": 1699,
       "verdict": "author review pending",
       "note": "Active annotation in the updated manuscript; no author acceptance is inferred."
     }
   ],
-  "overview": "Compare the October 18 Overleaf manuscript with the pinned Lean results. Newly expanded support, divisorial and Laurent-tangent arguments are represented explicitly. Commented-out proofs are excluded. The selected formal endpoint still follows its recorded SameWitness route; matching conclusions do not certify the revised printed proof step by step. Johanna’s author review and Max’s correspondence review remain pending.",
+  "overview": "Compare the October 21 Overleaf manuscript with the pinned Lean results. The restructured conormal section, its new lemmas and the two generalizations of Section 7 are represented explicitly. The selected formal endpoint still follows its recorded SameWitness route; matching conclusions do not certify the revised printed proof step by step. Johanna’s author review and Max’s correspondence review remain pending.",
   "how_to_use": "Read the paper and Lean proofs side by side. Each passage and declaration links to its exact source. Review tools provide manuscript annotations, all reference passages, and note import/export.",
-  "provenance": "<p>The paper passages are the October 18 Overleaf update, pinned and reproduced verbatim. The formal source pins and historical verification receipts are retained. Mathematical edits to the manuscript have not been made by this supplementary update. Comparison labels do not certify a revised printed proof.</p>",
+  "provenance": "<p>The paper passages are the October 21 Overleaf update, pinned and reproduced verbatim. The formal source pins and historical verification receipts are retained. Mathematical edits to the manuscript have not been made by this supplementary update. Comparison labels do not certify a revised printed proof.</p>",
   "challenge_definitions": [
     {
       "repo": "formal",
@@ -5935,23 +6244,23 @@
   ],
   "global_issues": [],
   "candidate": {
-    "status": "October 18 manuscript refresh; formal source pins unchanged; human correspondence review pending",
+    "status": "October 21 manuscript refresh; formal source pins unchanged; human correspondence review pending",
     "manuscript": {
       "repo": "itpplasma/stafford38-paper",
-      "commit": "8834966c58b41b8a7eb7af76f15d15f71d43af23",
+      "commit": "204f5ea59c3feeba3375910c4e508e88d71cd3c3",
       "file": "human_readable_main.tex",
       "origin_repo": "itpplasma/stafford38-paper",
-      "origin_commit": "8834966c58b41b8a7eb7af76f15d15f71d43af23",
-      "sha256": "fbec43000e00ddd87eef45c174275d8a37675c8260bcc05115303ef552c47b5a",
+      "origin_commit": "204f5ea59c3feeba3375910c4e508e88d71cd3c3",
+      "sha256": "3f80cd19538fec60d2a0d170f1e5346878c8c5ce51f0c876d98ddf040f759655",
       "label": "Paper (Overleaf update)",
       "local_source_base": "./sources/paper",
-      "note": "October 18 Overleaf update, preserved verbatim. Excluded comment environments are not current manuscript passages.",
+      "note": "October 21 Overleaf update, preserved verbatim.",
       "snapshot": {
         "base": "sources/paper/raw",
         "files": {
-          "human_readable_main.tex": "fbec43000e00ddd87eef45c174275d8a37675c8260bcc05115303ef552c47b5a",
-          "references.bib": "6f58084d3a27f00c5331684d1e03b7d7b5a9d478da0cddac5b849079e05572b1",
-          "ai_review.tex": "fb502582c8e0f88544098d1aba063ea68e0674545dfe723778dcdbbede891edd"
+          "human_readable_main.tex": "3f80cd19538fec60d2a0d170f1e5346878c8c5ce51f0c876d98ddf040f759655",
+          "references.bib": "26d46b6bdf69850067b408b5f57e9f4f83cdfba8bbd26f1a47bffde9c7580922",
+          "ai_review.tex": "3b245e5178736d12e247f24963a27d10a542f6fc25018070c24cf817d52d1591"
         }
       }
     },
@@ -15707,7 +16016,7 @@
     ],
     "warning": "Navigational correspondence proposals only. Full statement and proof correspondence remains open."
   },
-  "comparison_scope": "The active October 18 manuscript, including visible AI markup. Comment environments are excluded. Unchanged Lean source pins retain their previous verification scope; updated printed proofs require fresh human correspondence review.",
+  "comparison_scope": "The active October 21 manuscript, including visible AI markup. Unchanged Lean source pins retain their previous verification scope; updated printed proofs require fresh human correspondence review.",
   "canonical_declarations": {
     "Stafford38FixedSourceChallengeTransport.bernsteinDegree_eq": {
       "repo": "formal",
@@ -15860,5 +16169,5 @@
       "commit": "f9448d6307fa25aff9d9f94ce0a9c7f9b03e63ff"
     }
   },
-  "reader_notice": "Manuscript updated 18 October 2026. Five review findings are recorded under Comparison notes. Formal proof details retain their archived source scope."
+  "reader_notice": "Manuscript updated 21 October 2026. 8 review findings are recorded under Comparison notes. Formal proof details retain their archived source scope."
 }
