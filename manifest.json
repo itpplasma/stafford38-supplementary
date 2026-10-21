@@ -60,7 +60,7 @@
   },
   "generator": {
     "repo": "itpplasma/paper-lean-audit",
-    "commit": "32c720bb20d7bf8744a75c9f556529077d00db16",
+    "commit": "7c0b67c9c29f68be6af7e7db9273b18e4893e149",
     "version": "manuscript-20261021",
     "base_commit": "065db3e1fbc9001071422e9c66db36c0ef7da394",
     "bundle": "verification/manuscript-20261021/generator.bundle"
@@ -74,17 +74,6 @@
       "unresolved_references": [
         "def:conormal"
       ]
-    },
-    "proof_details": {
-      "status": "retained",
-      "sha256": "a043efcace06d6fee04f2cbc205a93a53f0999c01cb9e45e4399a435215bd8de",
-      "scope": "Historical readable account of the pinned formal proof; not a regenerated account of the revised printed proof.",
-      "historical_source_receipt": {
-        "repo": "itpplasma/stafford38-formal",
-        "commit": "168b3a75ad20798ae5877fdf33cd121ff3a14b90",
-        "file": "docs/paper-lean-audit/review-pdfs.json",
-        "sha256": "548ca4d908b996fb0456b02a26a3e2b9a1d8bda4ad62210d07303fb14c13ef2a"
-      }
     }
   },
   "review": {
@@ -115,19 +104,18 @@
   "files": {
     ".github/workflows/pages.yml": "c59be78c49fed449d1c9fd31ffd6dda853c539212b60156476d19002df4554d7",
     ".github/workflows/repo-hygiene.yml": "815fed9cc72e4b2ed4f57410f11094ab5a56457394f25757da776cd681b1e992",
-    ".repo-hygiene-allow": "56377338997aaaf5a98e42f3efb2353bc4be5737437f48ff8f2ae972f72f1ea6",
+    ".repo-hygiene-allow": "cdc3b1f7c60510855d1e8bcdfc2a41f233ac92c68651af00038589815e372e42",
     ".zenodo.json": "9c3a46f9756ec0cae8f31ec3ac8ff0c075e44ce9183a17de70055d9f9d3fcfe2",
     "CITATION.cff": "6198a13bd349d35554541c82562f6f7596926c35590c103c060bae9404d50e26",
     "LICENSES/KaTeX-MIT.txt": "766ccc1f306c885aa45542a9846bbd0a505b27a0374f146778171c2254ce18e3",
     "LICENSES/generator-Apache-2.0.txt": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
     "LICENSES/manuscript-CC-BY-4.0.txt": "98b6fde2693d4044dce4a071640e90bd8d250dd789d9033dbd5b77c79f389de4",
     "NOTICE": "203492e6a24996e31d976b06a52a479c08af9904501940296d4a422e95834851",
-    "README.md": "21416483160b8fa67e024d3afe26680030d722c1bbaf9c9b5f46f663b789bd82",
+    "README.md": "0cbb07ec2ddd9ca9a414cdb4a6096c564f469dfde5451c0032935f031f277030",
     "human_readable_main.pdf": "977fd4a635eee5edf4504c274c8951f52ac82654758d73e2051fe7334a368913",
-    "index.html": "802a027cb0cdea07f9c210d60b6ce32219771f7aa700ed26f418476fa87baddb",
+    "index.html": "19413f279fd31d65919332af23ba2d3ba0f55971e4dc3897eeb41c25986bd02a",
     "lean-dag.html": "cad8b49ef713674f69d4d0775c7fbe39045eeb59c41e7cb3c834b841fe90bc28",
-    "lean_proof_details.pdf": "a043efcace06d6fee04f2cbc205a93a53f0999c01cb9e45e4399a435215bd8de",
-    "paper-lean-map.json": "60aba5ecb7389960e22885ef194700c5b0813f2df954a1fe6f2379f8685dd278",
+    "paper-lean-map.json": "ff18788dfc33dadfb6ddb7498357303d8c7fb46189c9eac70cbb2b728aebca0d",
     "proof-dag.html": "d63b814af6753bdc43ec1a6e6bf12aaed17a812faf78c584ccaf9dc5d2af0187",
     "scripts/LeanDag.lean": "0fde254ecc25ee1e8f9f8f08de254da9726d803274f42cc82deedb5ca5a25c8e",
     "scripts/LeanDeclRanges.lean": "7904945e39b31911b082975a070d6bccaa98d05d8e2a54a40eae9ae05e79f8c0",
@@ -137,9 +125,9 @@
     "scripts/check-reader.mjs": "9248c6caf236d3ac1b0592bc650494c0fccc1ce91856ee9489424dfd005e6be0",
     "scripts/extract-lean-references.py": "62e338abe80426a74a3cbf9e82a9da654dc5ba655cf76c3e9ae331a348dcb9b4",
     "scripts/link-lean-references.py": "2aa2762dc74584520ac5ef3967689e3710319aa96cbfc78caab6e49406bdf693",
-    "scripts/rebuild.py": "b442b56ed57b88ab3ce91dbc9bde83e42245a1ba7a23102a60410fa824f2743e",
-    "scripts/record-manuscript-verification.py": "e8bed4eb4b3ec5730fa8cb45e312c079dd11e0414df4520b5c761a3ae310b8f1",
-    "scripts/update-manuscript-20261021.py": "fca5c1a4e6688e25cf7379ed0c400467e77cb24f58d7b4b38ce7241a889cf70f",
+    "scripts/rebuild.py": "4647fb30ad2b3ddc24a7db3808e95d2b76123902d15979f64c93341969e16338",
+    "scripts/record-manuscript-verification.py": "b0f26fc567f8a119d9c4769adfe3ebfce653014e343d60708664412efc342b24",
+    "scripts/update-manuscript-20261021.py": "f239877003fbe7041020a16e81940e437514d4533cb11d9f6aa66008c21c589e",
     "scripts/update-manuscript.py": "2c289a528265adedae0e1e0dba2c0f83cc0a8a40d578ca081514388efb6336b3",
     "sources/formal/AlternativeFixedSourceSolution.lean.html": "c4d8987a4390ce000ce8182bd901e3e7aee48bd889812f88133ef5359bf3614f",
     "sources/formal/AlternativeSolution.lean.html": "12be0afd41e8817757bb287d53d04aaa86af1bf1b3a4c953b533da7d770c91af",
@@ -673,16 +661,16 @@
     "verification/manuscript-20261018/paper-build.log": "988f4a7fb3987f33c8538808182909afa57e4a0c8bea2194a466ebc37bd8603e",
     "verification/manuscript-20261018/reader-build.log": "9f06cde14460911f2ebf739ec9ff9a13926dd14b37caece0ce258b9b76733b92",
     "verification/manuscript-20261018/verification.json": "588dc8bd60d500989a58e0617ab3c5935edefa45a1e58a016cfccc06c7255aab",
-    "verification/manuscript-20261021/README.md": "d3430a455b94353cf8f80fc4fee2ade8c3b2cd0ee17660614afcb7770afa686a",
+    "verification/manuscript-20261021/README.md": "736144f462cf581c38fcb5860924662a36247ab1605c61d9416c0b5eb882760a",
     "verification/manuscript-20261021/browser.json": "c8f94b5adb4758b125809e24cb811c21404ac1c28df46a38da736dfcae75806d",
-    "verification/manuscript-20261021/generator-tests.log": "bade9dbe676a99c499c4b574f4b073f76eda2b50b2ddfe02ee07318aa4c0b964",
-    "verification/manuscript-20261021/generator.bundle": "1bfdba5cb6173ed7223c6a64d118e0913951d2f674344e3a108d6e4f708ccbc9",
-    "verification/manuscript-20261021/generator.patch": "3a6f9d57f1d3e518d06d0132e514edd88bfd62d40f065633f8b5b17d19255a63",
+    "verification/manuscript-20261021/generator-tests.log": "9b6b59fd09cb5aa5c8dc0c5b8c605f9f2a19fa5880e1c6819b750d1c8554a519",
+    "verification/manuscript-20261021/generator.bundle": "0b0d9602567475a03e204c90e79dedf809f2cf7a565edbfa33f086baaa5e0e06",
+    "verification/manuscript-20261021/generator.patch": "2b150e25a57f6639dcd830ec56d915825ed77f02fffdb918f49f035258367f17",
     "verification/manuscript-20261021/migration.json": "db545cf1ecda75ac642a443a2fada670eb832e4cd3a90324d228171c8e389c7f",
     "verification/manuscript-20261021/paper-build.log": "8b3eb163ac6db3bf7d201e04d1f93671baee8d5c0e1a5c91d56454cd034fdd1b",
-    "verification/manuscript-20261021/reader-build.log": "8fa5881fd6766157da1fd0448da549e3a4c8a1062467199170bbbace3ea418eb",
-    "verification/manuscript-20261021/verification.json": "c6eb16f11bff9b1f8ad3d9c3be5efcd48f3322c255cc9481651589b6cc4a3860",
-    "version.json": "f689219cc0a1b489f156d6c8b3a8753b65459a0d9e325f608dc56f0979d905f0"
+    "verification/manuscript-20261021/reader-build.log": "345e1b5bd3894ca4b6db2f967cd78106e3a685a2283422cc2511a4b1d552ba23",
+    "verification/manuscript-20261021/verification.json": "de80baefd2c224ddfccbc0c73ceb4cf5d124cd5b60210db7524256c4a62ead7c",
+    "version.json": "333c0921844cc65e54eeed02e0f3d9ae812893e61d907bf8fe90bb1e59558dc8"
   },
   "historical_release": {
     "version": "0.2.2",
@@ -756,7 +744,7 @@
       "scope": "Complete current source/reference and statement-coverage audit; warnings are unresolved references already present in the paper."
     },
     "generator_tests": {
-      "passed": 82,
+      "passed": 83,
       "failed": 0,
       "skipped": 1,
       "scope": "Generator regression suite including its browser tests",

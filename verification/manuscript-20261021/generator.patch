@@ -1,5 +1,5 @@
 diff --git a/build.mjs b/build.mjs
-index fb02528..b75fa16 100644
+index fb02528..6214198 100644
 --- a/build.mjs
 +++ b/build.mjs
 @@ -316,13 +316,16 @@ function excerpt(range) {
@@ -48,11 +48,35 @@ index fb02528..b75fa16 100644
      const originalCommit = map.manuscript_sources?.[repoKey]?.commit;
      const key = `${repoKey}:${originalCommit ?? map.sources[repoKey]?.commit}:${file}`;
      if (!fileCache.has(key)) fileCache.set(key, gitShow(repoKey, file, originalCommit ?? map.sources[repoKey]?.commit));
+@@ -815,7 +821,7 @@ const html = `<!doctype html>
+   <h1>Stafford’s Conjecture 3.8</h1>
+   <p class="sub">Paper &amp; Lean proof</p>
+   ${map.reader_notice ? `<p class="muted reader-notice">${escapeHtml(map.reader_notice)}</p>` : ''}
+-  <div class="reader-links"><a href="./human_readable_main.pdf">Paper PDF ↗</a><a href="./lean_proof_details.pdf">Formal proof details PDF ↗</a></div>
++  <div class="reader-links"><a href="./human_readable_main.pdf">Paper PDF ↗</a></div>
+   ${guidedItems.length ? `<div class="guided-start"><a data-guided-start href="#item-${slug(guidedItems[0].id)}">Begin reading →</a><a id="guided-resume" data-guided-resume hidden>Continue reading →</a></div>` : ''}
+ </header>
+ ${sectionHtml}
 diff --git a/test/build-validation.test.mjs b/test/build-validation.test.mjs
-index c019d83..3b12d7f 100644
+index c019d83..9585399 100644
 --- a/test/build-validation.test.mjs
 +++ b/test/build-validation.test.mjs
-@@ -221,11 +221,12 @@ test('check audits current manuscript links, statement coverage, pins, and secti
+@@ -154,6 +154,14 @@ test('bundled manuscript snapshots are checked and have local source links', (t)
+   assert.match(bad.stderr, /snapshot checksum mismatch/);
+ });
+ 
++test('reader header links only the published paper PDF', (t) => {
++  const f = fixture(t);
++  const result = f.run();
++  assert.equal(result.status, 0, result.stdout + result.stderr);
++  const links = fs.readFileSync(f.htmlPath, 'utf8').match(/<div class="reader-links">(.*?)<\/div>/)[1];
++  assert.deepEqual([...links.matchAll(/href="([^"]+)"/g)].map((m) => m[1]), ['./human_readable_main.pdf']);
++});
++
+ test('excluded manuscript statements and duplicate labels do not enter the audit', (t) => {
+   const f = fixture(t);
+   fs.appendFileSync(path.join(f.paper.repo, 'human_readable_main.tex'),
+@@ -221,11 +229,12 @@ test('check audits current manuscript links, statement coverage, pins, and secti
    assert.match(html, /href="#item-def">\(Manual\)<\/a>/);
    assert.match(html, /href="#item-def">\(1\.4\)<\/a>/);
  
@@ -66,7 +90,7 @@ index c019d83..3b12d7f 100644
    assert.match(result.stderr, /malformed \\leandecl reference/);
  
    fs.writeFileSync(path.join(f.paper.repo, 'human_readable_main.tex'), f.currentPaperSource);
-@@ -586,6 +587,22 @@ test('a child excerpt of replacement text keeps proposal styling and original so
+@@ -586,6 +595,22 @@ test('a child excerpt of replacement text keeps proposal styling and original so
    assert.doesNotMatch(card,/Old covered theorem/);
  });
  

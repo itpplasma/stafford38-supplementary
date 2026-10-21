@@ -79,8 +79,10 @@ def main():
     pdf = args.paper_build / 'human_readable_main.pdf'
     assert pdf.read_bytes().startswith(b'%PDF-')
     shutil.copyfile(pdf, root / 'human_readable_main.pdf')
+    # The archived proof-details PDF is optional; once removed it is not recorded.
     proof_details = root / 'lean_proof_details.pdf'
-    assert proof_details.read_bytes() == git(root, 'show', 'HEAD:lean_proof_details.pdf')
+    if proof_details.exists():
+        assert proof_details.read_bytes() == git(root, 'show', 'HEAD:lean_proof_details.pdf')
     generator_tests = dict(passed=counts['pass'], failed=counts['fail'],
         skipped=counts['skipped'], scope=('Generator regression suite including its browser tests' if '✔ browser' in tests
                else 'Non-browser generator regression suite'),
@@ -95,21 +97,24 @@ def main():
         paper_pdf=dict(sha256=sha(pdf.read_bytes()), source_commit=source['commit'],
             build='latexmk -pdf -interaction=nonstopmode -halt-on-error human_readable_main.tex',
             isolated_checkout=True, unresolved_references=sorted(expected_refs)),
-        proof_details_pdf=dict(status='retained', sha256=sha(proof_details.read_bytes()),
-            scope='Historical readable account of the pinned formal proof; not a regenerated account of the revised printed proof.'),
         comparison_review=dict(johanna='pending', max='pending', findings=browser['review_findings']),
         html_sha256=sha((root / 'index.html').read_bytes()))
+    if proof_details.exists():
+        receipt['proof_details_pdf'] = dict(status='retained', sha256=sha(proof_details.read_bytes()),
+            scope='Historical readable account of the pinned formal proof; not a regenerated account of the revised printed proof.')
     for path, name in [(args.test_log, 'generator-tests.log'),
                        (args.reader_log, 'reader-build.log'),
                        (args.browser_receipt, 'browser.json'),
                        (args.paper_build / 'human_readable_main.log', 'paper-build.log')]:
         shutil.copyfile(path, target / name)
     (target / 'verification.json').write_text(json.dumps(receipt, indent=2, ensure_ascii=False) + '\n')
-    historical_pdf_receipt = manifest['manuscript_pdfs'].get('source_receipt')
-    if historical_pdf_receipt is None:
-        historical_pdf_receipt = manifest['manuscript_pdfs']['proof_details']['historical_source_receipt']
-    manifest['manuscript_pdfs'] = dict(paper=receipt['paper_pdf'],
-        proof_details=dict(**receipt['proof_details_pdf'], historical_source_receipt=historical_pdf_receipt))
+    manuscript_pdfs = dict(paper=receipt['paper_pdf'])
+    if 'proof_details_pdf' in receipt:
+        historical_pdf_receipt = manifest['manuscript_pdfs'].get('source_receipt')
+        if historical_pdf_receipt is None:
+            historical_pdf_receipt = manifest['manuscript_pdfs']['proof_details']['historical_source_receipt']
+        manuscript_pdfs['proof_details'] = dict(**receipt['proof_details_pdf'], historical_source_receipt=historical_pdf_receipt)
+    manifest['manuscript_pdfs'] = manuscript_pdfs
     manifest['review'].update(claims=len(mapping['items']),
         statement_relations=dict(collections.Counter(i['statement_relation'] for i in mapping['items'])),
         proof_routes=dict(collections.Counter(i['route_relation'] for i in mapping['items'])))

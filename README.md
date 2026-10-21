@@ -46,7 +46,7 @@ the links. Regenerating the data needs a built checkout of the pinned formal
 commit: `python3 scripts/extract-lean-references.py --formal PATH --global GLOBAL_PATH` and
 `python3 scripts/build-lean-dag.py --formal PATH`.
 
-[Updated paper PDF](human_readable_main.pdf) · [Archived formal proof details PDF](lean_proof_details.pdf) · [Formal proof v1.3.1](https://doi.org/10.5281/zenodo.23127367)
+[Updated paper PDF](human_readable_main.pdf) · [Formal proof v1.3.1](https://doi.org/10.5281/zenodo.23127367)
 
 Exact sources, licenses and review scope are in [manifest.json](manifest.json).
 Rebuild the HTML with `python3 scripts/rebuild.py` (Git, Python, Node.js and npm

@@ -17,7 +17,7 @@ From https://github.com/itpplasma/paper-lean-audit
 From /home/ert/proj/stafford38-supplementary/verification/manuscript-20261021/generator.bundle
  * [new branch]      supplementary/manuscript-20261021 -> bundle/supplementary/manuscript-20261021
 
-added 3 packages, and audited 4 packages in 473ms
+added 3 packages, and audited 4 packages in 503ms
 
 1 package is looking for funding
   run `npm fund` for details

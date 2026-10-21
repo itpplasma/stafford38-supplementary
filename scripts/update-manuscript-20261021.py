@@ -331,7 +331,7 @@ def main():
     open_findings = sorted(i['id'] for item in items for i in item['issues'] if i['id'].startswith('MS'))
     mapping['version'] = '0.2.5-manuscript-review'
     mapping['subtitle'] = 'October 21 manuscript · paper and Lean proof comparison'
-    mapping['reader_notice'] = f'Manuscript updated 21 October 2026. {len(open_findings)} review findings are recorded under Comparison notes. Formal proof details retain their archived source scope.'
+    mapping['reader_notice'] = f'Manuscript updated 21 October 2026. {len(open_findings)} review findings are recorded under Comparison notes.'
     mapping['sources']['paper'] = source
     mapping['items'] = items
     mapping['aicomments'] = [dict(id=m[1], line=line_at(m.start()), verdict='author review pending',

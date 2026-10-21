@@ -48,10 +48,13 @@ revision and kept as history. The unresolved `def:conormal` reference and
 the `idk` citation are the only expected warnings of the reader and paper
 builds.
 
-The generator adds three commits on its October 18 branch: `\leanglobal`
+The generator adds four commits on its October 18 branch: `\leanglobal`
 and `\leanfiltered` references are checked against the pinned `global` and
 `filtered` sources like `\leandecl`, a card may quote one clause of a long
-`\AIadd` paragraph, and `\url` renders as a link. The source delta is in
+`\AIadd` paragraph, `\url` renders as a link, and the reader header links
+only the paper PDF. The archived `lean_proof_details.pdf` from the October 3–4
+releases is no longer published; the manuscript's own correspondence-note link
+keeps its original `stafford38-formal` target. The source delta is in
 `generator.patch`, the commits in `generator.bundle`. The proof graph and
 the Lean proof graph use the new statement numbers; the Lean graph data in
 `verification/lean-dag/graph.json` is unchanged.
