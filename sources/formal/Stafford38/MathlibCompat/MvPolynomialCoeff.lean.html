@@ -7,12 +7,33 @@
 <span id="L7"><a href="#L7">7</a> The canonical operation is the polynomial's coefficient at `m`. -/</span>
 <span id="L8"><a href="#L8">8</a> namespace MvPolynomial</span>
 <span id="L9"><a href="#L9">9</a> </span>
-<span id="L10"><a href="#L10">10</a> abbrev coeff {σ : Type*} {R : Type*} [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Ring/Defs.lean#L228" title="CommSemiring">CommSemiring</a> R]</span>
-<span id="L11"><a href="#L11">11</a>     (m : σ →₀ <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L1351" title="Nat">ℕ</a>) (p : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/Basic.lean#L80" title="MvPolynomial">MvPolynomial</a> σ R) : R := <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MonoidAlgebra/Defs.lean#L69" title="AddMonoidAlgebra.coeff">AddMonoidAlgebra.coeff</a> p m</span>
+<span id="L10"><a href="#L10">10</a> abbrev coeff {σ : Type*} {R : Type*} [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Ring/Defs.lean#L228" data-p="706" aria-label="CommSemiring">CommSemiring</a> R]</span>
+<span id="L11"><a href="#L11">11</a>     (m : σ →₀ <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L1351" data-p="2639" aria-label="Nat">ℕ</a>) (p : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/Basic.lean#L80" data-p="2324" aria-label="MvPolynomial">MvPolynomial</a> σ R) : R := <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MonoidAlgebra/Defs.lean#L69" data-p="32" aria-label="AddMonoidAlgebra.coeff">AddMonoidAlgebra.coeff</a> p m</span>
 <span id="L12"><a href="#L12">12</a> </span>
-<span id="L13"><a href="#L13">13</a> @[simp] theorem coeff_zero_compat {σ : Type*} {R : Type*} [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Ring/Defs.lean#L228" title="CommSemiring">CommSemiring</a> R]</span>
-<span id="L14"><a href="#L14">14</a>     (m : σ →₀ <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L1351" title="Nat">ℕ</a>) : <a class="ref" href="./MvPolynomialCoeff.lean.html#L10" title="MvPolynomial.coeff">MvPolynomial.coeff</a> m (0 : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/Basic.lean#L80" title="MvPolynomial">MvPolynomial</a> σ R) = 0 := by</span>
-<span id="L15"><a href="#L15">15</a>   simp [<a class="ref" href="./MvPolynomialCoeff.lean.html#L10" title="MvPolynomial.coeff">MvPolynomial.coeff</a>]</span>
+<span id="L13"><a href="#L13">13</a> @[simp] theorem coeff_zero_compat {σ : Type*} {R : Type*} [<a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/Ring/Defs.lean#L228" data-p="706" aria-label="CommSemiring">CommSemiring</a> R]</span>
+<span id="L14"><a href="#L14">14</a>     (m : σ →₀ <a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Prelude.lean#L1351" data-p="2639" aria-label="Nat">ℕ</a>) : <a class="ref" href="./MvPolynomialCoeff.lean.html#L10" data-p="10266" aria-label="MvPolynomial.coeff">MvPolynomial.coeff</a> m (0 : <a class="ref" href="https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Algebra/MvPolynomial/Basic.lean#L80" data-p="2324" aria-label="MvPolynomial">MvPolynomial</a> σ R) = 0 := by</span>
+<span id="L15"><a href="#L15">15</a>   simp [<a class="ref" href="./MvPolynomialCoeff.lean.html#L10" data-p="10266" aria-label="MvPolynomial.coeff">MvPolynomial.coeff</a>]</span>
 <span id="L16"><a href="#L16">16</a> </span>
 <span id="L17"><a href="#L17">17</a> end MvPolynomial</span>
-<span id="L18"><a href="#L18">18</a> </span></pre>
+<span id="L18"><a href="#L18">18</a> </span></pre><!--lean-previews--><style>.lean-preview{position:fixed;z-index:9999;display:none;max-width:min(680px,calc(100vw - 16px));background:#fffef8;color:#1d1d1f;border:1px solid #c9c5bb;border-radius:6px;box-shadow:0 6px 24px rgba(0,0,0,.18);padding:6px 9px;font:12px/1.45 ui-monospace,Menlo,Consolas,monospace;pointer-events:none;text-align:left}.lean-preview .lp-head{font-weight:600;overflow-wrap:anywhere}.lean-preview .lp-loc{color:#6b6b6b;font-size:11px;overflow-wrap:anywhere}.lean-preview pre{margin:5px 0 0;white-space:pre-wrap;overflow-wrap:anywhere;max-height:50vh;overflow:hidden;font:inherit;background:none;border:0;padding:0}@media (prefers-color-scheme:dark){.lean-preview{background:#202124;color:#e8e6e1;border-color:#44464b}.lean-preview .lp-loc{color:#a3a7ad}}</style><script type="application/json" id="lean-previews">{"32":["AddMonoidAlgebra.coeff","Mathlib/Algebra/MonoidAlgebra/Defs.lean:69 · mathlib","  coeff : M →₀ R"],"706":["CommSemiring","Mathlib/Algebra/Ring/Defs.lean:228 · mathlib","/-- A commutative semiring is a semiring with commutative multiplication. -/\nclass CommSemiring (R : Type u) extends Semiring R, CommMonoid R"],"2324":["MvPolynomial","Mathlib/Algebra/MvPolynomial/Basic.lean:80 · mathlib","/-- Multivariate polynomial, where `σ` is the index set of the variables and\n  `R` is the coefficient ring -/\nabbrev MvPolynomial (σ : Type*) (R : Type*) [CommSemiring R] :=\n  AddMonoidAlgebra R (σ →₀ ℕ)"],"2639":["Nat","Init/Prelude.lean:1351 · lean4","/--\nThe natural numbers, starting at zero.\n\n  …\n-/\n@[suggest_for ℕ]"],"10266":["MvPolynomial.coeff","Stafford38/MathlibCompat/MvPolynomialCoeff.lean:10","abbrev coeff {σ : Type*} {R : Type*} [CommSemiring R]\n    (m : σ →₀ ℕ) (p : MvPolynomial σ R) : R := AddMonoidAlgebra.coeff p m"]}</script><script>(()=>{
+const data=JSON.parse(document.getElementById('lean-previews').textContent);
+const box=document.createElement('div');box.className='lean-preview';box.setAttribute('role','tooltip');
+document.body.append(box);let timer;
+function add(cls,text){const e=document.createElement(cls==='pre'?'pre':'div');if(cls!=='pre')e.className=cls;e.textContent=text;box.append(e);}
+function show(a){
+  let head,loc,body;
+  if(a.dataset.p){const d=data[a.dataset.p];if(!d)return;[head,loc,body]=d;}
+  else{const t=document.getElementById(decodeURIComponent(a.hash.slice(1)));const pre=t&&t.querySelector('pre');if(!pre)return;
+    head=a.hash.slice(1).replace(/^definition-[a-z]+:/,'');loc='Definition panel on this page';
+    const lines=pre.textContent.split('\n');body=lines.slice(0,14).join('\n')+(lines.length>14?'\n…':'');}
+  box.replaceChildren();add('lp-head',head);add('lp-loc',loc);add('pre',body);
+  box.style.display='block';const r=a.getBoundingClientRect(),w=box.offsetWidth,h=box.offsetHeight;
+  box.style.left=Math.max(8,Math.min(r.left,innerWidth-w-8))+'px';
+  box.style.top=(r.bottom+6+h<innerHeight?r.bottom+6:Math.max(8,r.top-h-6))+'px';}
+function hide(){clearTimeout(timer);box.style.display='none';}
+const pick=e=>e.target.closest&&e.target.closest('a[data-p],a.definition-link');
+document.addEventListener('mouseover',e=>{const a=pick(e);clearTimeout(timer);if(a)timer=setTimeout(()=>show(a),150);else hide();});
+document.addEventListener('focusin',e=>{const a=pick(e);if(a)show(a);else hide();});
+document.addEventListener('focusout',hide);document.addEventListener('scroll',hide,true);
+document.addEventListener('keydown',e=>{if(e.key==='Escape')hide();});
+})();</script><!--/lean-previews-->

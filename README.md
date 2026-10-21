@@ -39,7 +39,9 @@ proof comparison and in all bundled source pages. The links come from Lean's
 own reference data (`.ilean`) of the built formal checkout, stored in
 `verification/lean-references/references.json`, not from name matching.
 Project and AlgebraicAnalysis declarations open bundled source pages. Mathlib and
-Lean core declarations open their pinned GitHub source. `rebuild.py` reapplies
+Lean core declarations open their pinned GitHub source. Hovering or focusing a
+link shows the declaration's doc comment and signature, and for a definition its
+body. The previews are embedded in each page, so they also work offline. `rebuild.py` reapplies
 the links. Regenerating the data needs a built checkout of the pinned formal
 commit: `python3 scripts/extract-lean-references.py --formal PATH --global GLOBAL_PATH` and
 `python3 scripts/build-lean-dag.py --formal PATH`.

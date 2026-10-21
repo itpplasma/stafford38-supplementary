@@ -41,6 +41,53 @@ def page(file, label, commit, text):
             f'<h1>{esc(file)}</h1><p>{esc(label)} · {esc(commit)}</p><pre>{lines}</pre>')
 
 
+PROOF_KEYWORDS = ('theorem', 'lemma', 'instance', 'example')
+DECL = re.compile(r'(?:@\[[^\]]*\]\s*)*(?:(?:private|protected|noncomputable|partial|unsafe|nonrec|public)\s+)*'
+                  r'(theorem|lemma|instance|example|def|abbrev|structure|class|inductive|opaque|axiom)\b')
+
+
+def preview(text_lines, start):
+    """Doc comment (at most 4 lines) and declaration (at most 14 lines) starting
+    at `start`. Theorems stop at `:=`; definitions keep their body up to a
+    blank line or the next top-level command."""
+    out, i = [], start - 1
+    if i < len(text_lines) and text_lines[i].lstrip().startswith('/--'):
+        doc = []
+        while i < len(text_lines):
+            doc.append(text_lines[i])
+            i += 1
+            if '-/' in doc[-1]:
+                break
+        out = doc if len(doc) <= 4 else doc[:3] + ['  …', doc[-1]]
+    head = DECL.match(text_lines[i].strip()) if i < len(text_lines) else None
+    proof = head is None or head[1] in PROOF_KEYWORDS
+    for k, line in enumerate(text_lines[i:i + 14]):
+        if k and (not line.strip() or (line[:1].strip() and not line.startswith(('|', ')')))):
+            return '\n'.join(out)
+        cut = line.find(':=')
+        if proof and cut >= 0:
+            out.append(line[:cut + 2])
+            return '\n'.join(out)
+        out.append(line)
+        body = line.strip()
+        if proof and (body.endswith(' where') or body == 'where'):
+            return '\n'.join(out)
+    more = i + 14 < len(text_lines) and text_lines[i + 14].strip() and not text_lines[i + 14][:1].strip()
+    return '\n'.join(out + (['…'] if more or proof else []))
+
+
+def add_previews(roots, targets, start, previews):
+    sources = {r[0]: r[1] for r in roots}
+    cache = {}
+    for i in range(start, len(targets)):
+        name, repo, rel, line = targets[i]
+        if (repo, rel) not in cache:
+            path = sources[repo] / rel
+            cache[repo, rel] = path.read_text().split('\n') if path.exists() else None
+        if cache[repo, rel]:
+            previews[i] = preview(cache[repo, rel], line)
+
+
 def checkout_roots(checkout, key, url, prefix):
     """Module roots of a built checkout: (repo key, source dir, ilean dir, link base).
     Keys without a link base get bundled pages; the others link to GitHub."""
@@ -102,7 +149,7 @@ def locate(roots, module):
     return None
 
 
-def extract_global(checkout, source, page_text, files, targets, urls, texts):
+def extract_global(checkout, source, page_text, files, targets, urls, texts, previews):
     """References in the GlobalStafford files quoted in index.html, resolved in
     that project's own environment and linked to its own pinned revisions."""
     head = git(checkout, 'rev-parse', 'HEAD').strip()
@@ -118,7 +165,7 @@ def extract_global(checkout, source, page_text, files, targets, urls, texts):
         texts[f'global:{rel}'] = (checkout / rel).read_text().split('\n')
     names = sorted({u[3] for found in usages.values() for u in found})
     ranges = lean_ranges(checkout, [['GlobalStafford']], names)
-    index = {}
+    index, first = {}, len(targets)
     for name in names:
         if name in ranges and (owner := locate(roots, ranges[name][0])):
             index[name] = len(targets)
@@ -126,6 +173,7 @@ def extract_global(checkout, source, page_text, files, targets, urls, texts):
     for key, found in usages.items():
         files[key] = sorted({(l, c, n, index[t]) for l, c, n, t in found if t in index})
     urls.update({r[0]: r[3] for r in roots if r[3]})
+    add_previews(roots, targets, first, previews)
     return [n for n in names if n not in index]
 
 
@@ -195,14 +243,17 @@ def main():
         files[key] = sorted(sp for sp in spans if sp[3] is not None)
     unresolved = [n for n in names if n not in index]
     urls = {r[0]: r[3] for r in roots if r[3]}
+    previews = {}
+    add_previews(roots, targets, 0, previews)
     if args.global_checkout:
         unresolved += extract_global(args.global_checkout.resolve(), sources['global'], page_text,
-                                     files, targets, urls, texts)
+                                     files, targets, urls, texts, previews)
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(json.dumps(dict(
         schema=1, formal_commit=head, library_commit=sources['library']['commit'], toolchain=toolchain,
         source='Usages from the .ilean files of the built checkout; declaration lines from Lean findDeclarationRanges?. Columns are code points.',
-        urls=urls, targets=targets, unresolved=unresolved, files=files, texts=texts), ensure_ascii=False,
+        urls=urls, targets=targets, previews=previews, unresolved=unresolved, files=files, texts=texts),
+        ensure_ascii=False,
         separators=(',', ':')) + '\n')
 
     labels = {'formal': ('sources/formal', sources['formal']),

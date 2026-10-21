@@ -7,7 +7,28 @@
 <span id="L7"><a href="#L7">7</a> </span>
 <span id="L8"><a href="#L8">8</a> namespace Stafford38.Characteristic</span>
 <span id="L9"><a href="#L9">9</a> </span>
-<span id="L10"><a href="#L10">10</a> export AlgebraicAnalysis (<a class="ref" href="../../../library/AlgebraicAnalysis/Module/EndomorphismKernelSupport.lean.html#L17" title="AlgebraicAnalysis.endomorphism_kernel_support_subset_cokernel_support">endomorphism_kernel_support_subset_cokernel_support</a>)</span>
+<span id="L10"><a href="#L10">10</a> export AlgebraicAnalysis (<a class="ref" href="../../../library/AlgebraicAnalysis/Module/EndomorphismKernelSupport.lean.html#L17" data-p="638" aria-label="AlgebraicAnalysis.endomorphism_kernel_support_subset_cokernel_support">endomorphism_kernel_support_subset_cokernel_support</a>)</span>
 <span id="L11"><a href="#L11">11</a> </span>
 <span id="L12"><a href="#L12">12</a> end Stafford38.Characteristic</span>
-<span id="L13"><a href="#L13">13</a> </span></pre>
+<span id="L13"><a href="#L13">13</a> </span></pre><!--lean-previews--><style>.lean-preview{position:fixed;z-index:9999;display:none;max-width:min(680px,calc(100vw - 16px));background:#fffef8;color:#1d1d1f;border:1px solid #c9c5bb;border-radius:6px;box-shadow:0 6px 24px rgba(0,0,0,.18);padding:6px 9px;font:12px/1.45 ui-monospace,Menlo,Consolas,monospace;pointer-events:none;text-align:left}.lean-preview .lp-head{font-weight:600;overflow-wrap:anywhere}.lean-preview .lp-loc{color:#6b6b6b;font-size:11px;overflow-wrap:anywhere}.lean-preview pre{margin:5px 0 0;white-space:pre-wrap;overflow-wrap:anywhere;max-height:50vh;overflow:hidden;font:inherit;background:none;border:0;padding:0}@media (prefers-color-scheme:dark){.lean-preview{background:#202124;color:#e8e6e1;border-color:#44464b}.lean-preview .lp-loc{color:#a3a7ad}}</style><script type="application/json" id="lean-previews">{"638":["AlgebraicAnalysis.endomorphism_kernel_support_subset_cokernel_support","AlgebraicAnalysis/Module/EndomorphismKernelSupport.lean:17","theorem endomorphism_kernel_support_subset_cokernel_support\n    {R E : Type*} [CommRing R] [AddCommGroup E] [Module R E]\n    [IsNoetherianRing R] [Module.Finite R E] (f : Module.End R E) :\n    Module.support R (LinearMap.ker f) ⊆\n      Module.support R (E ⧸ LinearMap.range f) :="]}</script><script>(()=>{
+const data=JSON.parse(document.getElementById('lean-previews').textContent);
+const box=document.createElement('div');box.className='lean-preview';box.setAttribute('role','tooltip');
+document.body.append(box);let timer;
+function add(cls,text){const e=document.createElement(cls==='pre'?'pre':'div');if(cls!=='pre')e.className=cls;e.textContent=text;box.append(e);}
+function show(a){
+  let head,loc,body;
+  if(a.dataset.p){const d=data[a.dataset.p];if(!d)return;[head,loc,body]=d;}
+  else{const t=document.getElementById(decodeURIComponent(a.hash.slice(1)));const pre=t&&t.querySelector('pre');if(!pre)return;
+    head=a.hash.slice(1).replace(/^definition-[a-z]+:/,'');loc='Definition panel on this page';
+    const lines=pre.textContent.split('\n');body=lines.slice(0,14).join('\n')+(lines.length>14?'\n…':'');}
+  box.replaceChildren();add('lp-head',head);add('lp-loc',loc);add('pre',body);
+  box.style.display='block';const r=a.getBoundingClientRect(),w=box.offsetWidth,h=box.offsetHeight;
+  box.style.left=Math.max(8,Math.min(r.left,innerWidth-w-8))+'px';
+  box.style.top=(r.bottom+6+h<innerHeight?r.bottom+6:Math.max(8,r.top-h-6))+'px';}
+function hide(){clearTimeout(timer);box.style.display='none';}
+const pick=e=>e.target.closest&&e.target.closest('a[data-p],a.definition-link');
+document.addEventListener('mouseover',e=>{const a=pick(e);clearTimeout(timer);if(a)timer=setTimeout(()=>show(a),150);else hide();});
+document.addEventListener('focusin',e=>{const a=pick(e);if(a)show(a);else hide();});
+document.addEventListener('focusout',hide);document.addEventListener('scroll',hide,true);
+document.addEventListener('keydown',e=>{if(e.key==='Escape')hide();});
+})();</script><!--/lean-previews-->

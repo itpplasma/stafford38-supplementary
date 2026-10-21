@@ -6,10 +6,31 @@
 <span id="L6"><a href="#L6">6</a> </span>
 <span id="L7"><a href="#L7">7</a> namespace Stafford38PaperPairChallenge</span>
 <span id="L8"><a href="#L8">8</a> </span>
-<span id="L9"><a href="#L9">9</a> theorem pairGeneratorStatement_consumer : <a class="ref" href="../PaperPairChallenge.lean.html#L12" title="Stafford38PaperPairChallenge.pairGeneratorStatement">pairGeneratorStatement</a>.{u, v} := by</span>
+<span id="L9"><a href="#L9">9</a> theorem pairGeneratorStatement_consumer : <a class="ref" href="../PaperPairChallenge.lean.html#L12" data-p="6829" aria-label="Stafford38PaperPairChallenge.pairGeneratorStatement">pairGeneratorStatement</a>.{u, v} := by</span>
 <span id="L10"><a href="#L10">10</a>   intro A _ M _ _ x y d F R S hx hy hcert</span>
-<span id="L11"><a href="#L11">11</a>   exact <a class="ref" href="../Stafford38/TorsionCyclicity.lean.html#L25" title="Stafford38.TorsionCyclicity.span_adjusted_pair_eq_span_pair">Stafford38.TorsionCyclicity.span_adjusted_pair_eq_span_pair</a> x y d F R S hx hy hcert</span>
+<span id="L11"><a href="#L11">11</a>   exact <a class="ref" href="../Stafford38/TorsionCyclicity.lean.html#L25" data-p="6337" aria-label="Stafford38.TorsionCyclicity.span_adjusted_pair_eq_span_pair">Stafford38.TorsionCyclicity.span_adjusted_pair_eq_span_pair</a> x y d F R S hx hy hcert</span>
 <span id="L12"><a href="#L12">12</a> </span>
-<span id="L13"><a href="#L13">13</a> #print axioms <a class="ref" href="./PaperPairConsumer.lean.html#L9" title="Stafford38PaperPairChallenge.pairGeneratorStatement_consumer">pairGeneratorStatement_consumer</a></span>
+<span id="L13"><a href="#L13">13</a> #print axioms <a class="ref" href="./PaperPairConsumer.lean.html#L9" data-p="10965" aria-label="Stafford38PaperPairChallenge.pairGeneratorStatement_consumer">pairGeneratorStatement_consumer</a></span>
 <span id="L14"><a href="#L14">14</a> end Stafford38PaperPairChallenge</span>
-<span id="L15"><a href="#L15">15</a> </span></pre>
+<span id="L15"><a href="#L15">15</a> </span></pre><!--lean-previews--><style>.lean-preview{position:fixed;z-index:9999;display:none;max-width:min(680px,calc(100vw - 16px));background:#fffef8;color:#1d1d1f;border:1px solid #c9c5bb;border-radius:6px;box-shadow:0 6px 24px rgba(0,0,0,.18);padding:6px 9px;font:12px/1.45 ui-monospace,Menlo,Consolas,monospace;pointer-events:none;text-align:left}.lean-preview .lp-head{font-weight:600;overflow-wrap:anywhere}.lean-preview .lp-loc{color:#6b6b6b;font-size:11px;overflow-wrap:anywhere}.lean-preview pre{margin:5px 0 0;white-space:pre-wrap;overflow-wrap:anywhere;max-height:50vh;overflow:hidden;font:inherit;background:none;border:0;padding:0}@media (prefers-color-scheme:dark){.lean-preview{background:#202124;color:#e8e6e1;border-color:#44464b}.lean-preview .lp-loc{color:#a3a7ad}}</style><script type="application/json" id="lean-previews">{"6337":["Stafford38.TorsionCyclicity.span_adjusted_pair_eq_span_pair","Stafford38/TorsionCyclicity.lean:25","/-- The paper's generator calculation for a specified common annihilator and\ncertificate, derived from the canonical matrix proof. -/\ntheorem span_adjusted_pair_eq_span_pair\n    (x y : M) (d F R S : A)\n    (hxann : (MulOpposite.op d : Aᵐᵒᵖ) • x = 0)\n    (hyann : (MulOpposite.op d : Aᵐᵒᵖ) • y = 0)\n    (hcert : (1 : A) = d * R + F * d * S) :\n    Submodule.span Aᵐᵒᵖ\n        ({x - (MulOpposite.op F : Aᵐᵒᵖ) • y} : Set M) =\n      Submodule.span Aᵐᵒᵖ ({x, y} : Set M) :="],"6829":["Stafford38PaperPairChallenge.pairGeneratorStatement","PaperPairChallenge.lean:12","def pairGeneratorStatement : Prop :=\n  ∀ (A : Type u) [Ring A] (M : Type v) [AddCommGroup M] [Module Aᵐᵒᵖ M]\n    (x y : M) (d F R S : A),\n    (MulOpposite.op d : Aᵐᵒᵖ) • x = 0 →\n    (MulOpposite.op d : Aᵐᵒᵖ) • y = 0 →\n    (1 : A) = d * R + F * d * S →\n    Submodule.span Aᵐᵒᵖ ({x - (MulOpposite.op F : Aᵐᵒᵖ) • y} : Set M) =\n      Submodule.span Aᵐᵒᵖ ({x, y} : Set M)"],"10965":["Stafford38PaperPairChallenge.pairGeneratorStatement_consumer","tests/PaperPairConsumer.lean:9","theorem pairGeneratorStatement_consumer : pairGeneratorStatement.{u, v} :="]}</script><script>(()=>{
+const data=JSON.parse(document.getElementById('lean-previews').textContent);
+const box=document.createElement('div');box.className='lean-preview';box.setAttribute('role','tooltip');
+document.body.append(box);let timer;
+function add(cls,text){const e=document.createElement(cls==='pre'?'pre':'div');if(cls!=='pre')e.className=cls;e.textContent=text;box.append(e);}
+function show(a){
+  let head,loc,body;
+  if(a.dataset.p){const d=data[a.dataset.p];if(!d)return;[head,loc,body]=d;}
+  else{const t=document.getElementById(decodeURIComponent(a.hash.slice(1)));const pre=t&&t.querySelector('pre');if(!pre)return;
+    head=a.hash.slice(1).replace(/^definition-[a-z]+:/,'');loc='Definition panel on this page';
+    const lines=pre.textContent.split('\n');body=lines.slice(0,14).join('\n')+(lines.length>14?'\n…':'');}
+  box.replaceChildren();add('lp-head',head);add('lp-loc',loc);add('pre',body);
+  box.style.display='block';const r=a.getBoundingClientRect(),w=box.offsetWidth,h=box.offsetHeight;
+  box.style.left=Math.max(8,Math.min(r.left,innerWidth-w-8))+'px';
+  box.style.top=(r.bottom+6+h<innerHeight?r.bottom+6:Math.max(8,r.top-h-6))+'px';}
+function hide(){clearTimeout(timer);box.style.display='none';}
+const pick=e=>e.target.closest&&e.target.closest('a[data-p],a.definition-link');
+document.addEventListener('mouseover',e=>{const a=pick(e);clearTimeout(timer);if(a)timer=setTimeout(()=>show(a),150);else hide();});
+document.addEventListener('focusin',e=>{const a=pick(e);if(a)show(a);else hide();});
+document.addEventListener('focusout',hide);document.addEventListener('scroll',hide,true);
+document.addEventListener('keydown',e=>{if(e.key==='Escape')hide();});
+})();</script><!--/lean-previews-->

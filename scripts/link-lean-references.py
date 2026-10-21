@@ -5,8 +5,10 @@ Uses verification/lean-references/references.json, which records Lean's own
 .ilean reference data (see extract-lean-references.py); no name is resolved
 lexically. Links are added to the Lean blocks of index.html and to every
 bundled source page; project and AlgebraicAnalysis declarations open their
-bundled page, other declarations their pinned GitHub source. The script is
-idempotent and is run by rebuild.py after the generator.
+bundled page, other declarations their pinned GitHub source. Hovering or
+focusing a link shows the declaration's doc comment and signature, embedded in
+the page so it works offline. The script is idempotent and is run by
+rebuild.py after the generator.
 """
 from pathlib import Path
 import html, json, os, re, sys
@@ -45,12 +47,70 @@ def link_text(data, text, spans, here, cls):
         if col < pos or col + length > len(text):
             continue
         name = data['targets'][target][0]
+        # The preview replaces the native tooltip; without one, keep the name as title.
+        hint = (f'data-p="{target}" aria-label="{html.escape(name)}"' if str(target) in data['previews']
+                else f'title="{html.escape(name)}"')
         out.append(html.escape(text[pos:col], quote=False))
         out.append(f'<a class="{cls}" href="{html.escape(href(data, target, here))}" '
-                   f'title="{html.escape(name)}">{html.escape(text[col:col + length], quote=False)}</a>')
+                   f'{hint}>{html.escape(text[col:col + length], quote=False)}</a>')
         pos = col + length
     out.append(html.escape(text[pos:], quote=False))
     return ''.join(out)
+
+
+PREVIEW_CSS = (
+    '.lean-preview{position:fixed;z-index:9999;display:none;max-width:min(680px,calc(100vw - 16px));'
+    'background:#fffef8;color:#1d1d1f;border:1px solid #c9c5bb;border-radius:6px;'
+    'box-shadow:0 6px 24px rgba(0,0,0,.18);padding:6px 9px;font:12px/1.45 ui-monospace,Menlo,Consolas,monospace;'
+    'pointer-events:none;text-align:left}'
+    '.lean-preview .lp-head{font-weight:600;overflow-wrap:anywhere}'
+    '.lean-preview .lp-loc{color:#6b6b6b;font-size:11px;overflow-wrap:anywhere}'
+    '.lean-preview pre{margin:5px 0 0;white-space:pre-wrap;overflow-wrap:anywhere;max-height:50vh;'
+    'overflow:hidden;font:inherit;background:none;border:0;padding:0}'
+    '@media (prefers-color-scheme:dark){.lean-preview{background:#202124;color:#e8e6e1;border-color:#44464b}'
+    '.lean-preview .lp-loc{color:#a3a7ad}}')
+PREVIEW_JS = r"""(()=>{
+const data=JSON.parse(document.getElementById('lean-previews').textContent);
+const box=document.createElement('div');box.className='lean-preview';box.setAttribute('role','tooltip');
+document.body.append(box);let timer;
+function add(cls,text){const e=document.createElement(cls==='pre'?'pre':'div');if(cls!=='pre')e.className=cls;e.textContent=text;box.append(e);}
+function show(a){
+  let head,loc,body;
+  if(a.dataset.p){const d=data[a.dataset.p];if(!d)return;[head,loc,body]=d;}
+  else{const t=document.getElementById(decodeURIComponent(a.hash.slice(1)));const pre=t&&t.querySelector('pre');if(!pre)return;
+    head=a.hash.slice(1).replace(/^definition-[a-z]+:/,'');loc='Definition panel on this page';
+    const lines=pre.textContent.split('\n');body=lines.slice(0,14).join('\n')+(lines.length>14?'\n…':'');}
+  box.replaceChildren();add('lp-head',head);add('lp-loc',loc);add('pre',body);
+  box.style.display='block';const r=a.getBoundingClientRect(),w=box.offsetWidth,h=box.offsetHeight;
+  box.style.left=Math.max(8,Math.min(r.left,innerWidth-w-8))+'px';
+  box.style.top=(r.bottom+6+h<innerHeight?r.bottom+6:Math.max(8,r.top-h-6))+'px';}
+function hide(){clearTimeout(timer);box.style.display='none';}
+const pick=e=>e.target.closest&&e.target.closest('a[data-p],a.definition-link');
+document.addEventListener('mouseover',e=>{const a=pick(e);clearTimeout(timer);if(a)timer=setTimeout(()=>show(a),150);else hide();});
+document.addEventListener('focusin',e=>{const a=pick(e);if(a)show(a);else hide();});
+document.addEventListener('focusout',hide);document.addEventListener('scroll',hide,true);
+document.addEventListener('keydown',e=>{if(e.key==='Escape')hide();});
+})();"""
+BEGIN, END = '<!--lean-previews-->', '<!--/lean-previews-->'
+
+
+def embed_previews(data, text, before):
+    """Embed the previews of the declarations this page links, before `before`."""
+    text = re.sub(re.escape(BEGIN) + '.*?' + re.escape(END), '', text, flags=re.S)
+    ids = sorted(set(re.findall(r'data-p="(\d+)"', text)), key=int)
+    if not ids:
+        return text
+    def location(target):
+        name, repo, path, line = data['targets'][target]
+        return f'{path}:{line}' + ('' if repo in PAGES else f' · {repo}')
+    payload = json.dumps({i: [data['targets'][int(i)][0], location(int(i)), data['previews'][i]] for i in ids},
+                         ensure_ascii=False, separators=(',', ':')).replace('</', '<\\/')
+    block = (f'{BEGIN}<style>{PREVIEW_CSS}</style><script type="application/json" id="lean-previews">'
+             f'{payload}</script><script>{PREVIEW_JS}</script>{END}')
+    if before and before in text:
+        head, sep, tail = text.rpartition(before)
+        return head + block + sep + tail
+    return text + block
 
 
 LINE = re.compile(r'<span id="L(\d+)"><a href="#L\1">\1</a> (.*?)</span>(?=\n|</pre>)')
@@ -77,7 +137,7 @@ def link_page(data, by_line, repo, page):
     head, sep, rest = text.partition('<pre>')
     if PAGE_CSS not in head:
         head = head.replace('</style>', PAGE_CSS + '</style>', 1)
-    page.write_text(head + sep + LINE.sub(line, rest))
+    page.write_text(embed_previews(data, head + sep + LINE.sub(line, rest), None))
     return count
 
 
@@ -164,7 +224,7 @@ def link_index(data, by_line):
     text = ''.join(out)
     if INDEX_CSS not in text:
         text = text.replace('</style>', INDEX_CSS + '</style>', 1)
-    index.write_text(text)
+    index.write_text(embed_previews(data, text, '</body>'))
     return stats
 
 

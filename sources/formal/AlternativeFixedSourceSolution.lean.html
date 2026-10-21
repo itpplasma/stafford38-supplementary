@@ -5,7 +5,7 @@
 <span id="L5"><a href="#L5">5</a> </span>
 <span id="L6"><a href="#L6">6</a> @[expose] public section</span>
 <span id="L7"><a href="#L7">7</a> </span>
-<span id="L8"><a href="#L8">8</a> open Stafford38FixedSourceChallenge (<a class="ref" href="./Stafford38/ChallengeDefinitions.lean.html#L161" title="Stafford38FixedSourceChallenge.UniversalFixedSourceStatement">UniversalFixedSourceStatement</a>)</span>
+<span id="L8"><a href="#L8">8</a> open Stafford38FixedSourceChallenge (<a class="ref" href="./Stafford38/ChallengeDefinitions.lean.html#L161" data-p="6815" aria-label="Stafford38FixedSourceChallenge.UniversalFixedSourceStatement">UniversalFixedSourceStatement</a>)</span>
 <span id="L9"><a href="#L9">9</a> </span>
 <span id="L10"><a href="#L10">10</a> /-!</span>
 <span id="L11"><a href="#L11">11</a> # Generic/Laurent solution variant for the fixed-source challenge</span>
@@ -19,10 +19,31 @@
 <span id="L19"><a href="#L19">19</a> </span>
 <span id="L20"><a href="#L20">20</a> universe u</span>
 <span id="L21"><a href="#L21">21</a> </span>
-<span id="L22"><a href="#L22">22</a> theorem universalFixedSourceStatement : <a class="ref" href="./Stafford38/ChallengeDefinitions.lean.html#L161" title="Stafford38FixedSourceChallenge.UniversalFixedSourceStatement">UniversalFixedSourceStatement</a> :=</span>
-<span id="L23"><a href="#L23">23</a>   <a class="ref" href="./Stafford38/FoundationClosure.lean.html#L91" title="Stafford38.GenericLaurentVariant.universalFixedSourceStatement">Stafford38.GenericLaurentVariant.universalFixedSourceStatement</a></span>
+<span id="L22"><a href="#L22">22</a> theorem universalFixedSourceStatement : <a class="ref" href="./Stafford38/ChallengeDefinitions.lean.html#L161" data-p="6815" aria-label="Stafford38FixedSourceChallenge.UniversalFixedSourceStatement">UniversalFixedSourceStatement</a> :=</span>
+<span id="L23"><a href="#L23">23</a>   <a class="ref" href="./Stafford38/FoundationClosure.lean.html#L91" data-p="4452" aria-label="Stafford38.GenericLaurentVariant.universalFixedSourceStatement">Stafford38.GenericLaurentVariant.universalFixedSourceStatement</a></span>
 <span id="L24"><a href="#L24">24</a> </span>
 <span id="L25"><a href="#L25">25</a> end Stafford38FixedSourceChallenge</span>
 <span id="L26"><a href="#L26">26</a> </span>
-<span id="L27"><a href="#L27">27</a> #print axioms <a class="ref" href="./AlternativeFixedSourceSolution.lean.html#L22" title="Stafford38FixedSourceChallenge.universalFixedSourceStatement">Stafford38FixedSourceChallenge.universalFixedSourceStatement</a></span>
-<span id="L28"><a href="#L28">28</a> </span></pre>
+<span id="L27"><a href="#L27">27</a> #print axioms <a class="ref" href="./AlternativeFixedSourceSolution.lean.html#L22" data-p="7862" aria-label="Stafford38FixedSourceChallenge.universalFixedSourceStatement">Stafford38FixedSourceChallenge.universalFixedSourceStatement</a></span>
+<span id="L28"><a href="#L28">28</a> </span></pre><!--lean-previews--><style>.lean-preview{position:fixed;z-index:9999;display:none;max-width:min(680px,calc(100vw - 16px));background:#fffef8;color:#1d1d1f;border:1px solid #c9c5bb;border-radius:6px;box-shadow:0 6px 24px rgba(0,0,0,.18);padding:6px 9px;font:12px/1.45 ui-monospace,Menlo,Consolas,monospace;pointer-events:none;text-align:left}.lean-preview .lp-head{font-weight:600;overflow-wrap:anywhere}.lean-preview .lp-loc{color:#6b6b6b;font-size:11px;overflow-wrap:anywhere}.lean-preview pre{margin:5px 0 0;white-space:pre-wrap;overflow-wrap:anywhere;max-height:50vh;overflow:hidden;font:inherit;background:none;border:0;padding:0}@media (prefers-color-scheme:dark){.lean-preview{background:#202124;color:#e8e6e1;border-color:#44464b}.lean-preview .lp-loc{color:#a3a7ad}}</style><script type="application/json" id="lean-previews">{"4452":["Stafford38.GenericLaurentVariant.universalFixedSourceStatement","Stafford38/FoundationClosure.lean:91","/-- Fixed-source strengthening assembled through the same historical route. -/\ntheorem universalFixedSourceStatement : Stafford38FixedSourceChallenge.UniversalFixedSourceStatement.{u} :="],"6815":["Stafford38FixedSourceChallenge.UniversalFixedSourceStatement","Stafford38/ChallengeDefinitions.lean:161","/-- The exact fixed-source challenge, using the canonical intrinsic degree. -/\ndef UniversalFixedSourceStatement : Prop :=\n  ∀ (k : Type u) [Field k] [CharZero k] (n : ℕ)\n    (d : WeylAlg k (n + 1)), d ≠ 0 →\n      ∃ ell R S : WeylAlg k (n + 1),\n        IsLinearWeylCoordinate k n ell ∧\n          (1 : WeylAlg k (n + 1)) =\n            d * R + ell ^ bernsteinDegree k d * d * S"],"7862":["Stafford38FixedSourceChallenge.universalFixedSourceStatement","AlternativeFixedSourceSolution.lean:22","theorem universalFixedSourceStatement : UniversalFixedSourceStatement :="]}</script><script>(()=>{
+const data=JSON.parse(document.getElementById('lean-previews').textContent);
+const box=document.createElement('div');box.className='lean-preview';box.setAttribute('role','tooltip');
+document.body.append(box);let timer;
+function add(cls,text){const e=document.createElement(cls==='pre'?'pre':'div');if(cls!=='pre')e.className=cls;e.textContent=text;box.append(e);}
+function show(a){
+  let head,loc,body;
+  if(a.dataset.p){const d=data[a.dataset.p];if(!d)return;[head,loc,body]=d;}
+  else{const t=document.getElementById(decodeURIComponent(a.hash.slice(1)));const pre=t&&t.querySelector('pre');if(!pre)return;
+    head=a.hash.slice(1).replace(/^definition-[a-z]+:/,'');loc='Definition panel on this page';
+    const lines=pre.textContent.split('\n');body=lines.slice(0,14).join('\n')+(lines.length>14?'\n…':'');}
+  box.replaceChildren();add('lp-head',head);add('lp-loc',loc);add('pre',body);
+  box.style.display='block';const r=a.getBoundingClientRect(),w=box.offsetWidth,h=box.offsetHeight;
+  box.style.left=Math.max(8,Math.min(r.left,innerWidth-w-8))+'px';
+  box.style.top=(r.bottom+6+h<innerHeight?r.bottom+6:Math.max(8,r.top-h-6))+'px';}
+function hide(){clearTimeout(timer);box.style.display='none';}
+const pick=e=>e.target.closest&&e.target.closest('a[data-p],a.definition-link');
+document.addEventListener('mouseover',e=>{const a=pick(e);clearTimeout(timer);if(a)timer=setTimeout(()=>show(a),150);else hide();});
+document.addEventListener('focusin',e=>{const a=pick(e);if(a)show(a);else hide();});
+document.addEventListener('focusout',hide);document.addEventListener('scroll',hide,true);
+document.addEventListener('keydown',e=>{if(e.key==='Escape')hide();});
+})();</script><!--/lean-previews-->
