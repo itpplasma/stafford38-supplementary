@@ -2,17 +2,17 @@
 
 ## [Open the proof comparison →](https://itpplasma.github.io/stafford38-supplementary/)
 
-Read 58 paper passages beside the pinned Lean results. The reader uses the
-October 18 Overleaf update of `human_readable_main.tex`, commit `8834966`.
-All 36 active theorem-like statements are represented. Paper source links
+Read 66 paper passages beside the pinned Lean results. The reader uses the
+October 21 Overleaf update of `human_readable_main.tex`, commit `204f5ea`.
+All 40 theorem-like statements are represented. Paper source links
 open the bundled, unmodified manuscript; search, annotations and review notes
 work offline.
 
-**Current manuscript review:** open [index.html](index.html). Expanded support,
-divisorial and Laurent-tangent arguments are mapped explicitly; commented-out
-proofs are excluded. Five findings, including two unresolved references in the
-paper, are recorded in Comparison notes. See the
-[update and verification records](verification/manuscript-20261018/README.md).
+**Current manuscript review:** open [index.html](index.html). The restructured
+conormal section, its new lemmas and the two generalizations of Section 7 are
+mapped explicitly. Eight findings, including an unresolved reference and an
+undefined citation in the paper, are recorded in Comparison notes. See the
+[update and verification records](verification/manuscript-20261021/README.md).
 The paper has not been edited. The Lean source pins and their
 [canonical-definition verification](verification/canonical-definitions/README.md)
 are retained; they do not certify the revised printed proof step by step.
@@ -46,13 +46,13 @@ the links. Regenerating the data needs a built checkout of the pinned formal
 commit: `python3 scripts/extract-lean-references.py --formal PATH --global GLOBAL_PATH` and
 `python3 scripts/build-lean-dag.py --formal PATH`.
 
-[Updated paper PDF](human_readable_main.pdf) · [Archived formal proof details PDF](lean_proof_details.pdf) · [Formal proof v1.3.1](https://doi.org/10.5281/zenodo.23127367)
+[Updated paper PDF](human_readable_main.pdf) · [Formal proof v1.3.1](https://doi.org/10.5281/zenodo.23127367)
 
 Exact sources, licenses and review scope are in [manifest.json](manifest.json).
 Rebuild the HTML with `python3 scripts/rebuild.py` (Git, Python, Node.js and npm
 required). The manuscript snapshot is bundled and checked by SHA-256; rebuilding
 does not need access to the paper repository. `--source NAME=PATH` selects an
 existing source checkout; `--skip-install` uses installed dependencies offline.
-Run `node scripts/check-reader-cdp.mjs . /tmp/stafford-reader-check` for browser
-checks; set `CHROMIUM_PATH` when Chrome is installed elsewhere.
+Run `node scripts/check-reader-cdp.mjs . /tmp/stafford-reader-check verification/manuscript-20261021/migration.json`
+for browser checks; set `CHROMIUM_PATH` when Chrome is installed elsewhere.
 Attribution: [NOTICE](NOTICE).

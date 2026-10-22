@@ -8,6 +8,12 @@ import {pathToFileURL} from 'node:url';
 
 const root = path.resolve(process.argv[2] ?? path.join(import.meta.dirname, '..'));
 const output = path.resolve(process.argv[3] ?? os.tmpdir());
+// Optional third argument: a migration receipt naming the added cards, removed
+// cards and open findings to check; without it the October 18 expectations apply.
+const migration = process.argv[4] ? JSON.parse(fs.readFileSync(path.resolve(process.argv[4]), 'utf8')) : null;
+const addedCards = migration?.added_cards ?? ['def:localization', 'def:supp', 'lem:supp-criterion', 'lem:place', 'lem:kappa', 'lem:tangent', 'thm:nss'];
+const absentCards = ['conv:H', 'lem:tangent-limit', 'def:noncar', 'prop:noncar', ...(migration?.removed_cards ?? [])];
+const findings = migration?.open_findings ?? null;
 const chrome = process.env.CHROMIUM_PATH ?? '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
 const profile = fs.mkdtempSync(path.join(os.tmpdir(), 'stafford-reader-check-'));
 const browser = spawn(chrome, ['--headless', '--no-sandbox', '--disable-gpu',
@@ -51,6 +57,9 @@ async function evaluate(expression) {
   if (r.exceptionDetails) throw Error(JSON.stringify(r.exceptionDetails));
   return r.result.value;
 }
+// A fixed delay after a reload races with parsing a large page; wait for its
+// load event, then give the saved-review restore time to run.
+const afterReload = () => evaluate(`new Promise(resolve => { const done = () => setTimeout(resolve, 350); if (document.readyState === 'complete') done(); else addEventListener('load', done, {once:true}); })`);
 try {
   const target = await send('Target.createTarget', {url: 'about:blank'});
   ({sessionId: session} = await send('Target.attachToTarget', {targetId: target.targetId, flatten: true}));
@@ -64,9 +73,9 @@ try {
   assert.equal(await evaluate('window.AUDIT_META.paper'), map.sources.paper.commit);
   assert.deepEqual(await evaluate(`Array.from(document.querySelectorAll('a.definition-link')).filter(a => !document.getElementById(a.hash.slice(1))).map(a => a.textContent)`), []);
   assert.equal(await evaluate(`document.querySelectorAll('[id="definition-formal:Stafford38Challenge.WeylAlg"]').length`), 1);
-  for (const id of ['def:localization', 'def:supp', 'lem:supp-criterion', 'lem:place', 'lem:kappa', 'lem:tangent', 'thm:nss'])
+  for (const id of addedCards)
     assert.equal(await evaluate(`Boolean(document.getElementById(${JSON.stringify('item-' + id)}))`), true, id);
-  for (const id of ['conv:H', 'lem:tangent-limit', 'def:noncar', 'prop:noncar'])
+  for (const id of absentCards)
     assert.equal(await evaluate(`Boolean(document.getElementById(${JSON.stringify('item-' + id)}))`), false, id);
   for (const [id, owner] of [
     ['definition-formal:Stafford.Reduction.Stafford38', 'This project'],
@@ -84,7 +93,8 @@ try {
   }
   assert.equal(await evaluate(`Array.from(document.querySelectorAll('.col.paper a.source-link')).every(a => a.getAttribute('href').startsWith('./sources/paper/'))`), true);
   assert.equal(await evaluate(`document.querySelectorAll('.katex-error, .tex-error').length`), 0);
-  assert.equal(await evaluate(`document.querySelectorAll('[id^="issue-MS18-"]').length`), 5);
+  if (findings) assert.deepEqual(await evaluate(`Array.from(document.querySelectorAll('[id^="issue-MS"]'), e => e.id.slice(6)).sort()`), [...findings].sort());
+  else assert.equal(await evaluate(`document.querySelectorAll('[id^="issue-MS18-"]').length`), 5);
   await evaluate(`document.getElementById('filter').value='Residue field'; document.getElementById('filter').dispatchEvent(new Event('input', {bubbles:true}));`);
   assert.equal(await evaluate(`getComputedStyle(document.getElementById('item-lem:kappa')).display !== 'none'`), true);
   assert.equal(await evaluate(`getComputedStyle(document.getElementById('item-abstract')).display === 'none'`), true);
@@ -94,7 +104,7 @@ try {
   assert.equal(await evaluate(`document.querySelector('#clean-text').checked`), true);
   await evaluate(`(() => { const r=document.querySelector('#reviewer'); r.value='Automated browser check'; r.dispatchEvent(new Event('input',{bubbles:true})); const n=document.querySelector('.review [data-notes]'); n.value='Persistence check'; n.dispatchEvent(new Event('input',{bubbles:true})); n.value=''; })()`);
   await send('Page.reload', {}, session);
-  await evaluate(`new Promise(resolve => setTimeout(resolve, 350))`);
+  await afterReload();
   assert.equal(await evaluate(`document.querySelector('.review [data-notes]').value`), 'Persistence check');
   const exported = await evaluate(`new Promise(resolve => { URL.createObjectURL=blob=>{blob.text().then(text=>resolve(JSON.parse(text)));return 'blob:automated-check';}; HTMLAnchorElement.prototype.click=function(){};document.querySelector('#export').click(); })`);
   assert.equal(exported.paper_commit, map.sources.paper.commit);
@@ -102,7 +112,7 @@ try {
   assert.equal(exported.items[map.items[0].id].notes, 'Persistence check');
   await evaluate('localStorage.clear()');
   await send('Page.reload', {}, session);
-  await evaluate(`new Promise(resolve => setTimeout(resolve, 350))`);
+  await afterReload();
   await evaluate(`document.documentElement.style.scrollBehavior='auto'; document.querySelectorAll('main details').forEach(d=>d.open=false); location.hash='overview'; window.scrollTo({top:0,left:0,behavior:'instant'}); new Promise(requestAnimationFrame);`);
   fs.mkdirSync(output, {recursive: true});
   const desktop = await send('Page.captureScreenshot', {format: 'png'}, session);
@@ -116,10 +126,10 @@ try {
   assert.deepEqual(external, []);
   const receipt = {status: 'passed', cards: map.items.length, paper: map.sources.paper.commit,
     source_links: links.length, definition_links: 'all targets present', canonical_weyl_definitions: 1,
-    ownership_labels: true, definition_clicks: true, new_cards: 7, obsolete_cards_absent: true,
+    ownership_labels: true, definition_clicks: true, new_cards: addedCards.length, obsolete_cards_absent: true,
     paper_source_links_local: true, search: true, guided_navigation: true, manuscript_annotations: true,
     notes_reload: true, review_export: true,
-    review_findings: 5, math_errors: 0, mobile_overflow: false, javascript_errors: errors, offline_requests: external.length};
+    review_findings: findings?.length ?? 5, math_errors: 0, mobile_overflow: false, javascript_errors: errors, offline_requests: external.length};
   fs.writeFileSync(path.join(output, 'browser.json'), JSON.stringify(receipt, null, 2) + '\n');
   console.log(JSON.stringify(receipt));
 } finally {
