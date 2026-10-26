@@ -1,0 +1,84 @@
+{
+  "base_supplementary_revision": "969f54a2be13af6e49e3e095969d5ae2a5e6a62c",
+  "previous_paper": {
+    "repo": "itpplasma/stafford38-paper",
+    "commit": "8834966c58b41b8a7eb7af76f15d15f71d43af23",
+    "file": "human_readable_main.tex",
+    "origin_repo": "itpplasma/stafford38-paper",
+    "origin_commit": "8834966c58b41b8a7eb7af76f15d15f71d43af23",
+    "sha256": "fbec43000e00ddd87eef45c174275d8a37675c8260bcc05115303ef552c47b5a",
+    "label": "Paper (Overleaf update)",
+    "local_source_base": "./sources/paper",
+    "note": "October 18 Overleaf update, preserved verbatim. Excluded comment environments are not current manuscript passages.",
+    "snapshot": {
+      "base": "sources/paper/raw",
+      "files": {
+        "human_readable_main.tex": "fbec43000e00ddd87eef45c174275d8a37675c8260bcc05115303ef552c47b5a",
+        "references.bib": "6f58084d3a27f00c5331684d1e03b7d7b5a9d478da0cddac5b849079e05572b1",
+        "ai_review.tex": "fb502582c8e0f88544098d1aba063ea68e0674545dfe723778dcdbbede891edd"
+      }
+    }
+  },
+  "current_paper": {
+    "repo": "itpplasma/stafford38-paper",
+    "commit": "204f5ea59c3feeba3375910c4e508e88d71cd3c3",
+    "file": "human_readable_main.tex",
+    "origin_repo": "itpplasma/stafford38-paper",
+    "origin_commit": "204f5ea59c3feeba3375910c4e508e88d71cd3c3",
+    "sha256": "3f80cd19538fec60d2a0d170f1e5346878c8c5ce51f0c876d98ddf040f759655",
+    "label": "Paper (Overleaf update)",
+    "local_source_base": "./sources/paper",
+    "note": "October 21 Overleaf update, preserved verbatim.",
+    "snapshot": {
+      "base": "sources/paper/raw",
+      "files": {
+        "human_readable_main.tex": "3f80cd19538fec60d2a0d170f1e5346878c8c5ce51f0c876d98ddf040f759655",
+        "references.bib": "26d46b6bdf69850067b408b5f57e9f4f83cdfba8bbd26f1a47bffde9c7580922",
+        "ai_review.tex": "3b245e5178736d12e247f24963a27d10a542f6fc25018070c24cf817d52d1591"
+      }
+    }
+  },
+  "renamed_labels": {
+    "cor:charP": "prop:charP",
+    "lem:Uzero": "cor:Uzero"
+  },
+  "deleted_commented_statements": [
+    "def:conormal",
+    "def:divisorial",
+    "def:proj-closure",
+    "def:smooth-conormal",
+    "lem:lift",
+    "lem:special"
+  ],
+  "removed_cards": [],
+  "added_cards": [
+    "conormal-intro",
+    "def:fieldextension",
+    "def:omega",
+    "generalization-filtered",
+    "lem:W",
+    "lem:ell",
+    "prop:charP-proof",
+    "thm:coisotropic-exclusion-proof"
+  ],
+  "active_statements": 40,
+  "current_cards": 66,
+  "open_findings": [
+    "MS18-NOTATION-01",
+    "MS18-REF-02",
+    "MS21-CITE-01",
+    "MS21-DEF-01",
+    "MS21-KAPPA-01",
+    "MS21-PROOF-01",
+    "MS21-REF-03",
+    "MS21-TODO-01"
+  ],
+  "expected_unresolved_refs": [
+    "def:conormal"
+  ],
+  "expected_unresolved_citations": [
+    "idk"
+  ],
+  "paper_worktree_status_before": "",
+  "note": "The paper repository is read-only throughout this migration."
+}
