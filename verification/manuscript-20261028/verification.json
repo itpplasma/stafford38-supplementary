@@ -1,0 +1,85 @@
+{
+  "status": "passed",
+  "paper": {
+    "repo": "itpplasma/stafford38-paper",
+    "commit": "498a741686012734832547d9f33705130a37d218",
+    "file": "human_readable_main.tex",
+    "origin_repo": "itpplasma/stafford38-paper",
+    "origin_commit": "498a741686012734832547d9f33705130a37d218",
+    "sha256": "a101d635ec230a67b9801a8ac10e814f4234e29c44ed900ffcbc1ea1699706f8",
+    "label": "Paper (Overleaf update)",
+    "local_source_base": "./sources/paper",
+    "note": "October 28 Overleaf update, preserved verbatim.",
+    "snapshot": {
+      "base": "sources/paper/raw",
+      "files": {
+        "human_readable_main.tex": "a101d635ec230a67b9801a8ac10e814f4234e29c44ed900ffcbc1ea1699706f8",
+        "references.bib": "dd9ca2fb6ca2abae741af600c4ac1728dac2b4758a1cc564a30f9c6043df0d4f",
+        "ai_review.tex": "3b245e5178736d12e247f24963a27d10a542f6fc25018070c24cf817d52d1591"
+      }
+    }
+  },
+  "generator": {
+    "repo": "itpplasma/paper-lean-audit",
+    "commit": "7c0b67c9c29f68be6af7e7db9273b18e4893e149",
+    "version": "manuscript-20261021",
+    "base_commit": "065db3e1fbc9001071422e9c66db36c0ef7da394",
+    "bundle": "verification/manuscript-20261021/generator.bundle"
+  },
+  "manuscript_cards": 69,
+  "active_statements": 46,
+  "manuscript_snapshot_byte_identical": true,
+  "paper_worktree_unchanged": true,
+  "formal_source_pins_unchanged": true,
+  "reader_build": {
+    "status": "passed",
+    "warnings": [],
+    "scope": "Complete current source/reference and statement-coverage audit; warnings are unresolved references already present in the paper."
+  },
+  "generator_tests": {
+    "passed": 83,
+    "failed": 0,
+    "skipped": 1,
+    "scope": "Generator regression suite including its browser tests",
+    "skip_reason": "Historical sibling-paper fixture unavailable; current manuscript passes the actual pinned build.",
+    "rerun": false,
+    "log": "verification/manuscript-20261021/generator-tests.log",
+    "reason": "Generator unchanged at the October 21 commit; the run was not repeated for this refresh."
+  },
+  "browser": {
+    "status": "passed",
+    "cards": 69,
+    "paper": "498a741686012734832547d9f33705130a37d218",
+    "source_links": 2555,
+    "definition_links": "all targets present",
+    "canonical_weyl_definitions": 1,
+    "ownership_labels": true,
+    "definition_clicks": true,
+    "new_cards": 5,
+    "obsolete_cards_absent": true,
+    "paper_source_links_local": true,
+    "search": true,
+    "guided_navigation": true,
+    "manuscript_annotations": true,
+    "notes_reload": true,
+    "review_export": true,
+    "review_findings": 4,
+    "math_errors": 0,
+    "mobile_overflow": false,
+    "javascript_errors": [],
+    "offline_requests": 0
+  },
+  "paper_pdf": {
+    "sha256": "7d6a59fd331ab2715886ea9a79a525b1b56fe5be4e5ce356b5b23058249f479b",
+    "source_commit": "498a741686012734832547d9f33705130a37d218",
+    "build": "latexmk -pdf -interaction=nonstopmode -halt-on-error human_readable_main.tex",
+    "isolated_checkout": true,
+    "unresolved_references": []
+  },
+  "comparison_review": {
+    "johanna": "pending",
+    "max": "pending",
+    "findings": 4
+  },
+  "html_sha256": "62a2c2b250cef1488c97991506b79a2e319cc64558a996bdded0bb3ce292c0d8"
+}

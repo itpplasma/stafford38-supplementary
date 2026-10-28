@@ -1,7 +1,7 @@
 {
-  "version": "0.2.5-manuscript-review",
-  "paper": "204f5ea59c3feeba3375910c4e508e88d71cd3c3",
+  "version": "0.2.6-manuscript-review",
+  "paper": "498a741686012734832547d9f33705130a37d218",
   "formal": "0403af3f0b1a7f84d2027121932723f67bd279ae",
   "generator": "09c5a08cd6fe4209",
-  "release_version": "0.2.5-manuscript-review"
+  "release_version": "0.2.6-manuscript-review"
 }

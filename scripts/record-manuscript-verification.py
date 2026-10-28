@@ -28,6 +28,9 @@ def main():
     parser.add_argument('--reader-log', type=Path, required=True)
     parser.add_argument('--receipt-dir', default='verification/manuscript-20261018',
                         help='Migration receipt directory; its migration.json may list expected warnings.')
+    parser.add_argument('--tests-not-rerun', metavar='REASON',
+                        help='--test-log is a committed log of an earlier receipt at the same generator commit; '
+                             'record it by path with this reason instead of copying it as a new run.')
     args = parser.parse_args()
     root = Path(__file__).resolve().parent.parent
     target = root / args.receipt_dir
@@ -87,6 +90,12 @@ def main():
         skipped=counts['skipped'], scope=('Generator regression suite including its browser tests' if '✔ browser' in tests
                else 'Non-browser generator regression suite'),
         skip_reason='Historical sibling-paper fixture unavailable; current manuscript passes the actual pinned build.')
+    if args.tests_not_rerun:
+        log = args.test_log.resolve().relative_to(root).as_posix()
+        assert not git(root, 'diff', 'HEAD', '--name-only', '--', log), 'Reused test log must be committed'
+        earlier = json.loads((args.test_log.parent / 'verification.json').read_text())
+        assert earlier['generator']['commit'] == manifest['generator']['commit']
+        generator_tests.update(rerun=False, log=log, reason=args.tests_not_rerun)
     receipt = dict(status='passed', paper=source, generator=manifest['generator'],
         manuscript_cards=len(mapping['items']), active_statements=migration['active_statements'],
         manuscript_snapshot_byte_identical=True, paper_worktree_unchanged=True,
@@ -102,8 +111,8 @@ def main():
     if proof_details.exists():
         receipt['proof_details_pdf'] = dict(status='retained', sha256=sha(proof_details.read_bytes()),
             scope='Historical readable account of the pinned formal proof; not a regenerated account of the revised printed proof.')
-    for path, name in [(args.test_log, 'generator-tests.log'),
-                       (args.reader_log, 'reader-build.log'),
+    logs = [] if args.tests_not_rerun else [(args.test_log, 'generator-tests.log')]
+    for path, name in logs + [(args.reader_log, 'reader-build.log'),
                        (args.browser_receipt, 'browser.json'),
                        (args.paper_build / 'human_readable_main.log', 'paper-build.log')]:
         shutil.copyfile(path, target / name)

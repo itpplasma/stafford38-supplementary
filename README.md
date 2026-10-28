@@ -2,17 +2,18 @@
 
 ## [Open the proof comparison →](https://itpplasma.github.io/stafford38-supplementary/)
 
-Read 66 paper passages beside the pinned Lean results. The reader uses the
-October 21 Overleaf update of `human_readable_main.tex`, commit `204f5ea`.
-All 40 theorem-like statements are represented. Paper source links
+Read 69 paper passages beside the pinned Lean results. The reader uses the
+October 28 Overleaf update of `human_readable_main.tex`, commit `498a741`.
+All 46 theorem-like statements are represented. Paper source links
 open the bundled, unmodified manuscript; search, annotations and review notes
 work offline.
 
-**Current manuscript review:** open [index.html](index.html). The restructured
-conormal section, its new lemmas and the two generalizations of Section 7 are
-mapped explicitly. Eight findings, including an unresolved reference and an
-undefined citation in the paper, are recorded in Comparison notes. See the
-[update and verification records](verification/manuscript-20261021/README.md).
+**Current manuscript review:** open [index.html](index.html). The new
+definitions of Sections 2 and 5, the renumbered conormal lemmas and the two
+generalizations of Section 7 are mapped explicitly. Four editorial findings
+are recorded in Comparison notes; seven October 21 findings are resolved in
+this revision. See the
+[update and verification records](verification/manuscript-20261028/README.md).
 The paper has not been edited. The Lean source pins and their
 [canonical-definition verification](verification/canonical-definitions/README.md)
 are retained; they do not certify the revised printed proof step by step.
@@ -53,6 +54,6 @@ Rebuild the HTML with `python3 scripts/rebuild.py` (Git, Python, Node.js and npm
 required). The manuscript snapshot is bundled and checked by SHA-256; rebuilding
 does not need access to the paper repository. `--source NAME=PATH` selects an
 existing source checkout; `--skip-install` uses installed dependencies offline.
-Run `node scripts/check-reader-cdp.mjs . /tmp/stafford-reader-check verification/manuscript-20261021/migration.json`
+Run `node scripts/check-reader-cdp.mjs . /tmp/stafford-reader-check verification/manuscript-20261028/migration.json`
 for browser checks; set `CHROMIUM_PATH` when Chrome is installed elsewhere.
 Attribution: [NOTICE](NOTICE).
