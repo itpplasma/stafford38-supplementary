@@ -43,15 +43,15 @@ KEYS = {
              'descent: empty over k̄ ⇒ empty over k', 'L6.2'),
     'EXCL': ([S + 'Geometry.GeneralCoisotropicCanonicalAdapter.algebraicallyClosedCanonicalSupportVanishing_of_generalCoisotropic',
               S + 'Geometry.GeneralCoisotropicCanonicalAdapter.algebraicallyClosedCanonicalSupportVanishing_using'],
-             'over k̄: involutive, fibre-conical support avoiding H is empty', 'T5.6'),
+             'over k̄: involutive, fibre-conical support avoiding H is empty', 'T5.8'),
     'AXIS': ([S + 'Geometry.GeneralAsymptoticConormal.coordinate_axis_mem_smooth_fibre_closure'],
-             'P|N(Y) = 0 ⇒ P(1,0,…,0) = 0', 'T5.5'),
+             'P|N(Y) = 0 ⇒ P(1,0,…,0) = 0', 'T5.7'),
     'ARC': ([S + 'Geometry.SameWitness.axis_mem_smoothConormalFibreProjection_closure_of_groundPointOutput'],
-            'Laurent arc: conormal covectors tend to dx₁', 'T5.5'),
+            'Laurent arc: conormal covectors tend to dx₁', 'T5.7'),
     'PLACE': ([S + 'Geometry.ActualSameWitnessGroundPointCompletion.exists_actual_same_witness_groundpoint_chart'],
-              'divisorial place at infinity with ground-point chart', 'L5.8'),
+              'divisorial place at infinity with ground-point chart', 'L5.10'),
     'TRDEG': ([S + 'Geometry.SameWitnessTranscendenceDegreeBound.component_trdeg_le_residue_trdeg_add_one_of_witness'],
-              'tangent bound: trdeg ≤ residue trdeg + 1', 'L5.10'),
+              'tangent bound: trdeg ≤ residue trdeg + 1', 'L5.12'),
     'BRIDGE': ([S + 'SpecializedNoncharacteristicEquality.strictUnitCoordinatePreimage_of_transposedSupport_disjoint_axis'],
                'support avoiding H ⇒ x₁ is a strict unit on gr Q', None),
     'AVOID': ([S + 'Characteristic.CanonicalKoszulContradiction.canonical_support_avoidance',
@@ -76,7 +76,7 @@ KEYS = {
                 S + 'Characteristic.GabberGlobalAssembly.minimalPrime_isInvolutive'],
                'Gabber: √Ann gr M and its minimal primes are involutive', 'cited'),
 }
-GABBER_SOURCE = 'Gab81 · SK14 · HTT 2.3.1; proved in Lean'
+GABBER_SOURCE = 'Gab81 · SK14 · HTT D.3.4; proved in Lean'
 
 # Cited external inputs: id -> (label, source, module prefixes). Theorems
 # from these modules count as uses; general algebra (ideals, polynomials,
@@ -88,7 +88,7 @@ LEAVES = {
                'AlgebraicAnalysis.Module.UniformBoundaryVanishing']),
     'aasupp': ('minimal support, localized lengths, Koszul positivity', 'AlgebraicAnalysis Module.*',
                ['AlgebraicAnalysis.Module.']),
-    'nss': ('Nullstellensatz', 'paper Thm 2.8; Mathlib RingTheory.Nullstellensatz, Jacobson',
+    'nss': ('Nullstellensatz', 'paper Thm 2.12; Mathlib RingTheory.Nullstellensatz, Jacobson',
             ['Mathlib.RingTheory.Nullstellensatz', 'Mathlib.RingTheory.Jacobson']),
     'length': ('length, Artinian and Noetherian modules', 'paper Def 4.6; Mathlib RingTheory.Length, SimpleModule, Artinian',
                ['Mathlib.RingTheory.Length', 'Mathlib.RingTheory.FiniteLength', 'Mathlib.RingTheory.SimpleModule',
@@ -97,15 +97,15 @@ LEAVES = {
                 ['Mathlib.RingTheory.Support', 'Mathlib.RingTheory.Localization', 'Mathlib.RingTheory.Spectrum',
                  'Mathlib.RingTheory.Ideal.MinimalPrime', 'Mathlib.RingTheory.LocalRing', 'Mathlib.RingTheory.Nakayama',
                  'Mathlib.RingTheory.QuotSMulTop']),
-    'flat': ('flat base change, algebraic closure', 'Stacks 05DT; Mathlib RingTheory.Flat, IsAlgClosed',
+    'flat': ('flat base change, algebraic closure', 'Stacks 07T8; Mathlib RingTheory.Flat, IsAlgClosed',
              ['Mathlib.RingTheory.Flat', 'Mathlib.RingTheory.TensorProduct', 'Mathlib.FieldTheory.IsAlgClosed']),
-    'val': ('valuations, DVRs, integral closure, Krull dimension', 'paper Lemmas 5.7, 5.8 inputs; Mathlib',
+    'val': ('valuations, DVRs, integral closure, Krull dimension', 'paper Lemmas 5.9, 5.10 inputs; Mathlib',
             ['Mathlib.RingTheory.Valuation', 'Mathlib.RingTheory.DiscreteValuationRing',
              'Mathlib.RingTheory.DedekindDomain', 'Mathlib.RingTheory.IntegralClosure',
              'Mathlib.RingTheory.NoetherNormalization', 'Mathlib.RingTheory.KrullDimension',
              'Mathlib.RingTheory.Ideal.Height', 'Mathlib.RingTheory.Ideal.KrullsHeightTheorem',
              'Mathlib.RingTheory.Ideal.GoingUp']),
-    'series': ('power and Laurent series, adic completion', 'Stacks 0C0S; Mathlib',
+    'series': ('power and Laurent series, adic completion', 'Matsumura Thm 28.3; Mathlib',
                ['Mathlib.RingTheory.PowerSeries', 'Mathlib.RingTheory.MvPowerSeries', 'Mathlib.RingTheory.LaurentSeries',
                 'Mathlib.RingTheory.HahnSeries', 'Mathlib.RingTheory.AdicCompletion']),
     'kahler': ('Kähler differentials, étale and smooth maps, transcendence', 'Hartshorne II.8; Mathlib',
@@ -260,7 +260,7 @@ def name_lines(name, width):
 def lean_label(nid, width, ref_line=True):
     """Paper counterpart as title, the claim, then the Lean name in small type."""
     names, text, ref = KEYS[nid]
-    head = ('cited: Thm 2.7 (Gabber)' if ref == 'cited' else
+    head = ('cited: Thm 2.11 (Gabber)' if ref == 'cited' else
             ('≈ ' + paperdag.ST[ref][0] if ref in paperdag.ST else 'formal only'))
     small = names[0].split('.')[-1] + (f' (+{len(names) - 1})' if len(names) > 1 else '')
     parts = [f'<B>{esc(head)}</B>'] + [esc(l) for l in paperdag.wrap(text, width)]

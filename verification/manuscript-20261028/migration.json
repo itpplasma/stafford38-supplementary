@@ -1,0 +1,91 @@
+{
+  "base_supplementary_revision": "1882b88d470c24967f5c6e4ea6f048b950d4ef62",
+  "previous_paper": {
+    "repo": "itpplasma/stafford38-paper",
+    "commit": "204f5ea59c3feeba3375910c4e508e88d71cd3c3",
+    "file": "human_readable_main.tex",
+    "origin_repo": "itpplasma/stafford38-paper",
+    "origin_commit": "204f5ea59c3feeba3375910c4e508e88d71cd3c3",
+    "sha256": "3f80cd19538fec60d2a0d170f1e5346878c8c5ce51f0c876d98ddf040f759655",
+    "label": "Paper (Overleaf update)",
+    "local_source_base": "./sources/paper",
+    "note": "October 21 Overleaf update, preserved verbatim.",
+    "snapshot": {
+      "base": "sources/paper/raw",
+      "files": {
+        "human_readable_main.tex": "3f80cd19538fec60d2a0d170f1e5346878c8c5ce51f0c876d98ddf040f759655",
+        "references.bib": "26d46b6bdf69850067b408b5f57e9f4f83cdfba8bbd26f1a47bffde9c7580922",
+        "ai_review.tex": "3b245e5178736d12e247f24963a27d10a542f6fc25018070c24cf817d52d1591"
+      }
+    }
+  },
+  "current_paper": {
+    "repo": "itpplasma/stafford38-paper",
+    "commit": "498a741686012734832547d9f33705130a37d218",
+    "file": "human_readable_main.tex",
+    "origin_repo": "itpplasma/stafford38-paper",
+    "origin_commit": "498a741686012734832547d9f33705130a37d218",
+    "sha256": "a101d635ec230a67b9801a8ac10e814f4234e29c44ed900ffcbc1ea1699706f8",
+    "label": "Paper (Overleaf update)",
+    "local_source_base": "./sources/paper",
+    "note": "October 28 Overleaf update, preserved verbatim.",
+    "snapshot": {
+      "base": "sources/paper/raw",
+      "files": {
+        "human_readable_main.tex": "a101d635ec230a67b9801a8ac10e814f4234e29c44ed900ffcbc1ea1699706f8",
+        "references.bib": "dd9ca2fb6ca2abae741af600c4ac1728dac2b4758a1cc564a30f9c6043df0d4f",
+        "ai_review.tex": "3b245e5178736d12e247f24963a27d10a542f6fc25018070c24cf817d52d1591"
+      }
+    }
+  },
+  "renamed_labels": {
+    "sec:cotangent": "def:cotangent",
+    "def:symplectic-poisson": "def:symplectic"
+  },
+  "deleted_labels": [
+    "def:symplectic-poisson",
+    "sec:cotangent"
+  ],
+  "renumbered_statements": {
+    "2.1": "2.2",
+    "2.2": "2.3",
+    "2.3": "2.4",
+    "2.4": "2.7",
+    "2.6": "2.10",
+    "2.7": "2.11",
+    "2.8": "2.12",
+    "5.3": "5.5",
+    "5.4": "5.6",
+    "5.5": "5.7",
+    "5.6": "5.8",
+    "5.7": "5.9",
+    "5.8": "5.10",
+    "5.9": "5.11",
+    "5.10": "5.12",
+    "5.11": "5.13",
+    "2.5": "2.8"
+  },
+  "removed_cards": [
+    "appendix-right-ore",
+    "prop:charP-proof"
+  ],
+  "added_cards": [
+    "def:conormal",
+    "def:cyclic",
+    "def:poisson",
+    "def:spec",
+    "def:valuation"
+  ],
+  "active_statements": 46,
+  "current_cards": 69,
+  "open_findings": [
+    "MS21-DEF-01",
+    "MS28-FIELD-01",
+    "MS28-REF-01",
+    "MS28-TYPO-01"
+  ],
+  "expected_unresolved_refs": [],
+  "expected_unresolved_citations": [],
+  "paper_worktree_status_before": "",
+  "note": "The paper repository is read-only throughout this migration."
+}

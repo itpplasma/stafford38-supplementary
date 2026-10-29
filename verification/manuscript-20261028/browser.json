@@ -1,0 +1,23 @@
+{
+  "status": "passed",
+  "cards": 69,
+  "paper": "498a741686012734832547d9f33705130a37d218",
+  "source_links": 2555,
+  "definition_links": "all targets present",
+  "canonical_weyl_definitions": 1,
+  "ownership_labels": true,
+  "definition_clicks": true,
+  "new_cards": 5,
+  "obsolete_cards_absent": true,
+  "paper_source_links_local": true,
+  "search": true,
+  "guided_navigation": true,
+  "manuscript_annotations": true,
+  "notes_reload": true,
+  "review_export": true,
+  "review_findings": 4,
+  "math_errors": 0,
+  "mobile_overflow": false,
+  "javascript_errors": [],
+  "offline_requests": 0
+}

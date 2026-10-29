@@ -17,7 +17,7 @@
 \newtheorem{corollary}[theorem]{Corollary}
 \theoremstyle{plain}
 \newtheorem{definition}[theorem]{Definition}
-\newtheorem{convention}[theorem]{Convention}
+\newtheorem{convention}[theorem]{Notation}
 \theoremstyle{remark}
 \newtheorem{remark}[theorem]{Remark}
 
@@ -62,7 +62,6 @@ $\{x_1=0\}$. Finally, Gabber's involutivity theorem together with an argument ab
 \end{abstract}
 
 \maketitle
-\AIreviewlegend
 
 
 \section{Introduction}
@@ -72,27 +71,21 @@ Let $k$ be a field of characteristic zero, and let
 be the $n$th Weyl algebra, with $[\partial_i,x_j]=\delta_{ij}$ and
 $[\partial_i,\partial_j]=[x_i,x_j]=0$.
 
-
-Stafford's Conjecture~3.8 asks whether every nonzero $d\in A_n(k)$
-admits $F\in A_n(k)$ with $A_n(k)=dA_n(k)+FdA_n(k)$
-\cite[p.~438]{Stafford1978}. Stafford identifies this with stable cyclicity
-for finitely generated torsion right Weyl-algebra modules
-\cite[pp.~437--438]{Stafford1978}. Bellamy's survey
-states the weaker ordinary-cyclicity question for finitely generated torsion
-$A_n(\mathbb C)$-modules as open~\cite[Section~3, Conjecture~3.4]{Bellamy2026}.
+Stafford's Conjecture~3.8 in \cite{Stafford1978} asks whether every nonzero $d\in A_n(k)$ admits $F\in A_n(k)$ with $A_n(k)=dA_n(k)+FdA_n(k)$
+\cite[p.~438]{Stafford1978}. Stafford shows that this is a formulation that implies stable cyclicity for all finitely generated torsion right Weyl-algebra modules
+\cite[pp.~437--438]{Stafford1978}. 
 We prove Stafford's conjecture:
-
 \begin{theorem}\label{thm:main}
-For every characteristic-zero field $k$, every $n\geq0$, and every
-nonzero $d\in A_n(k)$, there exist $F,R,S\in A_n(k)$ such that
+For every field of characteristic zero $k$, every $n\geq0$, and every
+nonzero $d\in A_n(k)$, there exists an $F\in A_n(k)$ such that
+\[ A_n(k)=dA_n(k)+FdA_n(k),\]
+or equivalenty, there exist $F, S, R\in A_n(k)$ such that
 \[ 1=dR+FdS.\]
-Moreover, if $n\ge1$, one may choose $F=\ell^{\deg_Bd}$ for a linear Weyl coordinate
-$\ell$, obtained by an invertible linear symplectic change of generators.
-\AIadd{Explicitly, $\ell=\Phi_g^{-1}(x_1)$ for a linear
-$\omega$-preserving automorphism $g$ as in Section~\ref{sec:monic}.}
+Moreover, if $n\ge1$, one may choose $F=\Phi_g^{-1}(x_1)^{\deg_Bd}$ for a linear
+$\omega$-preserving automorphism $g$ as in Section~\ref{sec:monic}. 
 \end{theorem}
 
-\AIadd{\formalref[]{%
+\AIadd{\formalref{
 \leandecl{Stafford38/FoundationClosure.lean}{67}{Stafford38.universalStatement} proves
 \leandecl{Stafford38/Statement.lean}{23}{Stafford38.UniversalStatement};
 \leandecl{Stafford38/FoundationClosure.lean}{71}{Stafford38.universalFixedSourceStatement} proves
@@ -105,30 +98,26 @@ Mathlib-only statements compared by Comparator:
 
 
 \textit{Proof sketch:}
-We start in section XXX by defining a map $\Phi_g$ sending any chosen $d$ of Bernstein degree $N$ to a monic normal form $\tilde d$ with order symbol $P$ using Bernstein and order filtrations of $A_n(k)$. For $\tilde d$, we prove in sections XXX that the module $Q = A_n(k)/(\tilde d A_n(k) + x_1^N\tilde d A_n(k)) = 0$, and find the final form of Theorem \ref{thm:main} by applying the inverse map $\Phi_g^{-1}$ to $\tilde d A_n(k) + x_1^N\tilde d A_n(k).$ The main components of the proof are the following: in section XXX, we show that $Q = Qx_1$ using the extended euclidean algorithm, and $\gr Q = x_1\gr Q,$ through two contradictory length estimations of localized modules. In section XXX using mainly results from algebraic geometry, we show that a set $W$ fulfilling certain criteria (Zariski closed over an algebraically closed field of characteristic zero, fibre-conical, involutive, and there exists a polynomial with $P(1,0\dots,0)\neq 0$ vanishing on $W$, and $W$ does not contain points with $x_1 = 0$) must always be empty (Theorem \ref{thm:coisotropic-exclusion}). Finally, we show in section XXX that by defining $W$ to be the characteristic variety of the closed-field pendant to $Q$, the results of section XXX as well as the definition of $P$ in section XXX ensure that $W$ fulfills all criteria and must thus be empty. We conclude that therefore, also $Q$ itself must be zero, from which Theorem \ref{thm:main} follows directly. Lastly, we provide the proof by Stafford \cite{Stafford1978} that hence, every finitely generated torsion module is stably cyclic (Corollary \ref{cor:cyclic}). 
+We state some preliminaries in section \ref{sec:setting}, then start in section \ref{sec:monic} by defining a map $\Phi_g$ sending any chosen $d$ of Bernstein degree $N$ to a monic normal form $\tilde d$ with order symbol $P$ using Bernstein and order filtrations of $A_n(k)$. For $\tilde d$, we prove in sections \ref{sec:euler}-\ref{sec:proof} that the module $Q = A_n(k)/(\tilde d A_n(k) + x_1^N\tilde d A_n(k)) = 0$, and find the final form of Theorem \ref{thm:main} by applying the inverse map $\Phi_g^{-1}$ to $\tilde d A_n(k) + x_1^N\tilde d A_n(k).$ The main components of the proof are the following: in section \ref{sec:euler}, we show that $Q = Qx_1$ using the extended euclidean algorithm, and $\gr Q = x_1\gr Q,$ through two contradictory length estimations of localized modules. In section \ref{sec:conormal-review} using mainly results from algebraic geometry, we show that a set $W$ fulfilling certain criteria (Zariski closed over an algebraically closed field of characteristic zero, fibre-conical, involutive, and there exists a polynomial with $P(1,0\dots,0)\neq 0$ vanishing on $W$, and $W$ does not contain points with $x_1 = 0$) must always be empty (Theorem \ref{thm:coisotropic-exclusion}). Finally, we show in section \ref{sec:proof} that by defining $W$ to be the characteristic variety of the closed-field pendant to $Q$, the results of section \ref{sec:euler} as well as the definition of $P$ in section \ref{sec:monic} ensure that $W$ fulfills all criteria and must thus be empty. We conclude that therefore, also $Q$ itself must be zero, from which Theorem \ref{thm:main} follows directly. Lastly, we provide the proof by Stafford \cite{Stafford1978} that hence, every finitely generated torsion module is stably cyclic (Corollary \ref{cor:cyclic}). 
+
 
 \subsection{Related literature}
-\AIadd{Constructive predecessors concern Stafford's established generator
-theorems. Hillebrand--Schmale and Leykin give effective two-generator
-methods, and Leykin also constructs cyclic generators of holonomic
-modules~\cite{HillebrandSchmale2001,Leykin2004}. Quadrat--Robertz develop
-module-decomposition and basis algorithms~\cite{QuadratRobertz2007,
-QuadratRobertz2014}; Caro--Levcovitz and Caro-Tuesta--Levcovitz study
-differential-operator rings with series coefficients~\cite{CaroLevcovitz2010,
-CaroTuestaLevcovitz2020}. The constrained identity for arbitrary nonzero $d$
-requires the additional quotient-vanishing argument developed here.}
+Dixmier showed that over the first Weyl algebra $A_1(k)$ with $k$ having characteristic zero, any right ideal can be generated by at most two elements \cite{dixmier}. In a seminal paper in 1978, Stafford extended this result to all $A_n(k)$ and moreover showed, that any finitely generated left torsion $A_n(k)$-module is isomorphic to a right ideal, and as such can also be (stably) generated be at most two elements \cite[Theorem 3.7]{Stafford1978}. 
+Hillebrand and Schmale \cite{HillebrandSchmale2001}, as well as Leykin \cite{Leykin2004} give an algorithm to find the two generators of left ideals, also valid for rational coefficient algebras $B_n(k)$. Caro and Lefcovitz \cite{CaroLevcovitz2010} generalize the result for both left and right ideals to formal and to convergent Laurent series, and and Quadrat and Robertz \cite{QuadratRobertz2014} provide a \textit{constructive} proof method to calculate the two generators of torsion modules over the Weyl algebras, as well as rings with rational coefficients, formal or convergent Laurent series, and, for ordinary differential operators with formal or locally convergent power series coefficients. 
 
-\AIadd{The surrounding generator theory includes Stafford's stable-range
-and noncommutative Forster--Swan results~\cite{StaffordStableRange1981,
-StaffordGenerating1981}. The generator article has a corrigendum and
-related exposition~\cite{StaffordGeneratingCorrigendum1983,
-StaffordGeneratingChapter1982}. Stafford also constructed stably free
-Weyl-algebra ideals~\cite{StaffordStablyFree1985}.
-OreModules supplies computational methods for modules over Ore algebras
-\cite{OreModules2007}. }
+In the same paper, Stafford states the Conjecture 3.8, which is Theorem \ref{thm:main}, and shows that this conjecture implies that any finitely generated right torsion module can be stably generated by one element, i.e. is stably cyclic (Corollary \ref{cor:cyclic}). He shows that cyclicity is true if $n = 1$ (since $A_1(k)$ has the restricted minimum condition which makes torsion modules Artinian and he proves that Artinian modules are cyclic) and also states that the conjecture is true if $d$ is monomial, but provides, as far as the authors are aware, no proof of this. This case is also contained in our proof.
+For \textit{holonomic} modules over "simple rings such that they do not have finite length over themselves as left modules" (which all Weyl algebras are), Leykin \cite{Leykin2004} proved cyclicity constructively, and attributed the proof method to Stafford. However, torsion modules need not be holonomic: for $n\ge2$, Stafford constructed quotients $A_n(k)/dA_n(k)$ of Gelfand--Kirillov dimension $2n-1$ as counterexamples  \cite{StaffordNonholonomic1985}, so the question about cyclicity remained open for non-holonomic torsion modules. A survey by Bellamy in 2026 \cite{Bellamy2026} states this explicitly (Conjecture 3.4). 
+
+We base our proof on the Weyl algebra and on filtrations and characteristic
+varieties of $A_n(k)$-modules as treated in the textbooks
+\cite{coutinho,Bjork,HTT,MR,SchnellNotes}; on the involutivity of
+the characteristic variety due to Gabber \cite{Gabber1981,Gabber1982,SinghKumar2014}; on commutative algebra, in particular localization, length, valuation rings, Kähler differentials and completions
+\cite{atiyah,matsumura,Stacks}, together with field theory and
+bilinear forms \cite{lang} and spectral sequences \cite{weibel}; and on
+algebraic geometry, mostly based on \cite{hartshorne}.
 
 \subsection{Formal verification with Lean}\label{sec:formal}
-Theorem~\ref{thm:main}, including the choice $F=\ell^{\deg_Bd}$, and
+Theorem~\ref{thm:main} and
 Corollary~\ref{cor:cyclic} are proved in Lean~4~\cite{Lean4} with
 Mathlib~\cite{Mathlib2020} and AlgebraicAnalysis
 v0.3.3~\cite{AlgebraicAnalysis033}. The proofs use only Lean's three
@@ -143,8 +132,7 @@ archived~\cite{Stafford38Zenodo131}. Tooling and the role of AI assistance
 are described in Appendix~\ref{app:ai-workflow}. Section~\ref{sec:generalizations} states further consequences proved in Lean and two generalizations, to rings of differential operators on smooth affine varieties and to simple filtered algebras.
 The supplementary
 material~\cite{Stafford38Supplementary022} shows each formalized statement of
-this paper next to its Lean version and explains the formal proofs in
-mathematical language. It can be browsed at
+this paper next to its Lean version and proof. It can be browsed at
 \url{https://itpplasma.github.io/stafford38-supplementary/}.
 
 \section{Preliminaries}\label{sec:setting}
@@ -155,20 +143,21 @@ Throughout, $k$ is a field of characteristic zero and for the $n$-th Weyl algebr
   \quad [\partial_i,x_j]=\delta_{ij},\quad [x_i,x_j]=[\partial_i,\partial_j]=0 .\]
 All ideals are \emph{right} ideals and all modules are \emph{right} modules
 unless the contrary is said explicitly.
-
+\begin{definition}[e.g. \cite{coutinho}]\label{def:cyclic}
+Let $M$ be a right $A_n(k)$-module. $M$ is \emph{torsion} if for every $m\in M$ there is
+$0\ne d\in A_n(k)$ with $md=0$, and \emph{cyclic} if $M=mA_n(k)$ for some $m$. 
+\end{definition}
 \begin{convention}\label{conv:pair}
 We single out the first Weyl pair $(x_1, \partial_1)$ and write
 \[\qquad p:=\partial_1,\qquad
   C:=A_{n-1}(k)[x_1],\qquad A_n(k)=C[p;\delta],\]
-Here $\delta(x_1)=1$ and $\delta$ vanishes on $A_{n-1}(k)$.
-so that $x_1$ is central in $C$, $[p,x_1] = 1$, and the transverse algebra $A_{n-1}(k)$ commutes with $x_1$ and $p$.
-Every element of $A_n(k)$ can uniquely be written as $\sum_j p^j c_j$ with $c_j\in C$.
+Here $\delta(x_1)=1$ and $\delta$ vanishes on $A_{n-1}(k)$. 
+so that $x_1$ is central in $C$, $[p,x_1] = 1$, and the \emph{transverse algebra} $A_{n-1}(k)=k\langle x_i,\partial_i : i\ge2\rangle$ commutes with $x_1$ and $p$.
+Every element of $A_n(k)$ can uniquely be written as $\sum_j p^j c_j$ with $c_j\in C$. \cite[Prop. 1.2.1]{coutinho}
 \end{convention}
 \AIadd{\formalref{%
 \leandecl{Stafford38/Weyl/IteratedEquivalence.lean}{636}{Stafford38.WeylIteratedEquivalence.presentedIteratedEquiv},
 \leandecl{Stafford38/Weyl/OuterOreMonic.lean}{47}{Stafford38.WeylOuterOreMonic.presentedOuterPolynomial}}}
-
-
 
 
 \begin{definition}[{[Def.~2.6 and ~2.9 \cite{SchnellNotes}]}]\label{def:filtration}
@@ -181,7 +170,7 @@ Let $a\neq 0 \in A_n(k)$ and let $j$ be the smallest integer, such that $a \in F
 degree, i.e.\ contains only terms of that total degree.
 \end{definition}
 
-In the proof, we use two filtrations of $A_n(k)$.
+In the proof, we use two filtrations of $A_n(k)$ (for more details, see e.g. \cite[Chapter 7]{coutinho})
 \begin{itemize}[nosep,leftmargin=1.4em]
 \item The \emph{Bernstein filtration} $B_\bullet$ assigns degree $1$ to every
   $x_i$ and every $\partial_i$. The Bernstein degree of $d$ is
@@ -194,58 +183,64 @@ In the proof, we use two filtrations of $A_n(k)$.
 \leandecl{Stafford38/Weyl/Filtration.lean}{284}{Stafford38.WeylFiltration.bernsteinPiece},
 \leandecl{Stafford38/Weyl/Filtration.lean}{288}{Stafford38.WeylFiltration.orderPiece},
 \leandecl{Stafford38/FixedSourceStatement.lean}{23}{Stafford38.FixedSource.bernsteinDegree}}}
-For both the order filtration and the Bernstein filtration, the associated graded algebra $\mathrm{gr} A_n(k)$ is simply the polynomial ring $k[x,\xi]=k[x_1,\dots,x_n,\xi_1,\dots,\xi_n]$ in $2n$ variables with $\xi_i$ the symbol of $\partial_i$. In particular, $\mathrm{gr} A_n(k)$ is commutative \cite[\AIadd{Prop.~2.10}]{SchnellNotes}.
-Good filtrations and characteristic varieties are treated systematically for example in \cite{Bjork,HTT}. %Bj\"ork and Hotta--Takeuchi--Tanisaki
+For both the order filtration and the Bernstein filtration, the associated graded algebra $\mathrm{gr} A_n(k)$ is simply the polynomial ring $k[x,\xi]=k[x_1,\dots,x_n,\xi_1,\dots,\xi_n]$ in $2n$ variables with $\xi_i$ the symbol of $\partial_i$ \cite[Th. 7.3.1]{coutinho}. In particular, $\mathrm{gr} A_n(k)$ is commutative \cite[Prop.~2.10]{SchnellNotes}.
+Good filtrations and characteristic varieties are treated systematically for example in \cite{Bjork,HTT}. 
 
-
-\subsection{Cotangent space and symplectic structure}\label{sec:cotangent}
-
-
-Let $X=\mathbb A^n_k$ be affine $n$-space over a field $k$ of characteristic zero, with coordinates
-$x_1,\ldots,x_n$. Its \emph{cotangent bundle} $T^*X$ is the space of pairs
-$(y,\xi)$ consisting of a point $y\in X$ together with a covector $\xi$
-at $y$; since $X$ is affine space, this cotangent space is the same
-vector space $(k^n)^*$ at every point, and we may identify
-\[
- T^*X \;\cong\; X\times(k^n)^*.
-\]
-We write $\xi_1,\ldots,\xi_n$ for the coordinates on $(k^n)^*$ dual to
-$x_1,\ldots,x_n$, so that a covector is $\sum_i\xi_i\,dx_i$, and identify
-$\gr^BA_n(k)=k[x,\xi]$ with the coordinate ring of $T^*X$. We write
-$\pi\colon T^*X\to X$ for the projection forgetting the covector, and for
-$y\in X$ write $T_y^*X=\pi^{-1}(y)\cong(k^n)^*$ for the \emph{fibre} of
-$T^*X$ over $y$.
-\AIadd{\formalref{\leandecl{Stafford38/Characteristic/Polynomial.lean}{22}{Stafford38.Characteristic.SymbolRing}
-(the ring $k[x,\xi]$; the first summand indexes base coordinates $x_i$, and the second indexes fibre coordinates $\xi_i$)}}
-
-We single out the first coordinate $x_1$ and define the distinguished
-hyperplane
-\[
- H:=\{x_1=0\}=\{(0,x_2,\ldots,x_n)\}\subseteq X;
-\]
-its conormal covector is $dx_1$, i.e.\ $\xi=(1,0,\ldots,0)$.
-
-
-\begin{definition}\label{def:good-filtration}
-A filtration of a right $A_n$-module $M$ compatible with $F_\bullet$
+\begin{definition}[{\cite[Ch. 8.3]{coutinho}}]\label{def:good-filtration}
+A filtration of a right $A_n$-module $M$ compatible with a filtration $F_\bullet$
 is an exhaustive increasing chain of $k$-subspaces $M_\bullet$ with
-$M_iF_j\subseteq M_{i+j}$ and $M_i=0$ for $i<0$. It is \emph{good} if the associated graded module
-$\gr M=\bigoplus_iM_i/M_{i-1}$ is finitely generated over $\gr^FA_n$.
+$M_iF_j\subseteq M_{i+j}$ and $M_i=0$ for $i<0$. The associated graded module is $\operatorname{gr}M=\bigoplus_iM_i/M_{i-1}$; it is a graded module over $\operatorname{gr}_FA_n(k)$ via the maps
+$M_i/M_{i-1}\times F_j/F_{j-1}\to M_{i+j}/M_{i+j-1}$, $(\bar m,\bar a)\mapsto\overline{ma}$,
+which are well defined because $M_{i-1}F_j\subseteq M_{i+j-1}$ and $M_iF_{j-1}\subseteq M_{i+j-1}$.
+It is \emph{good} if the associated graded module is finitely generated over $\gr^FA_n$.
 \end{definition}
 As an example, the filtration $M_i:=qF_i$ of a cyclic module over $A_n$ induced by its generator $q$ is good, since $\gr Q$ is generated by the element $\bar{q}$ denoting the class of $q$ in $Q_0/Q_{-1}.$
 
 For a finitely generated right $A_n$-module $M$ with a good order filtration
 $M_\bullet$, the graded module $\gr M$ is a finitely generated $k[x,\xi]$-module.
-\begin{definition}\label{def:char-variety}
-    The \emph{characteristic variety} (also called symbol variety) of a finitely generated $A_n$-module $M$ with a good order filtration
-$M_\bullet$ is defined by
-\[
-  \Char(M):=V\bigl(\Ann_{k[x,\xi]}\gr M\bigr)\subseteq
-  T^*\bbA^n=\Spec k[x,\xi],
-\]
-$\Ann_{k[x,\xi]}\gr M = \{f \in k[x,\xi]: f\cdot m = 0\,\forall m \in \gr M\}$ are the \emph{annihilators} of $\gr M$ over $k[x,\xi]$, and $V$ denotes their \emph{vanishing locus}, i.e. the set of points $(x, \xi)$ for which all annihilator polynomials vanish. This set of points lies in the \emph{cotangent bundle} $T^*\bbA^n$ of the affine $n$-space $\bbA^n.$
 
-$\Char(M)$ is independent of the choice of the good filtration.
+\begin{definition}\label{def:cotangent}
+Let $X=\mathbb A^n_k$ be affine $n$-space over $k$ with coordinates
+$x_1,\dots,x_n$. Since $X$ has a global coordinate frame, the \emph{cotangent
+bundle} of $X$ is
+\[ T^*X=X\times(k^n)^*.\]
+We write $\xi_1,\dots,\xi_n$ for the coordinates on $(k^n)^*$ dual to $x_1,\dots,x_n$,
+so that a covector is $\sum_i\xi_i\,dx_i$. The coordinate ring of $T^*X$ is
+$k[x,\xi]=\gr A_n(k)$, and we regard $X=\operatorname{Spec}k[x]$ and
+$T^*X=\operatorname{Spec}k[x,\xi]$ as sets of prime ideals \cite[Tag 00DZ]{Stacks} (Definition~\ref{def:spec}).
+If $k$ is algebraically closed, the closed points are the pairs $(y,\xi)$ with
+$y\in k^n$ a point and $\xi$ a covector at $y$ (Theorem \ref{thm:nss}(a)). The \emph{projection} is
+$\pi\colon T^*X\to X$, $(y,\xi)\mapsto y$, and for $y\in X$ the \emph{fibre} over $y$
+is $T_y^*X=\pi^{-1}(y)\cong(k^n)^*$.
+\end{definition}
+\AIadd{\formalref{\leandecl{Stafford38/Characteristic/Polynomial.lean}{22}{Stafford38.Characteristic.SymbolRing}
+(the ring $k[x,\xi]$; the first summand indexes base coordinates $x_i$, and the second indexes fibre coordinates $\xi_i$)}}
+
+
+\begin{definition}\label{def:spec}
+Let $S$ be a commutative ring. The \emph{spectrum} $\operatorname{Spec}S$ is the set
+of all prime ideals of $S$. We say that $f\in S$ vanishes at the point
+$\mathfrak p\in\operatorname{Spec}S$ if $f\in\mathfrak p$. The \emph{vanishing locus}
+of an ideal $J\subseteq S$ is
+\[ V(J)=\{\mathfrak p\in\operatorname{Spec}S:\ \mathfrak p\supseteq J\},\]
+the set of points at which all elements of $J$ vanish; these sets are the (Zariski) closed sets
+of the Zariski topology on $\operatorname{Spec}S$. For a field $K$ and an ideal $J\subseteq K[z_1,\dots,z_N]$ we write
+\[V_K(J)=\{a\in K^N : f(a)=0\ \forall f\in J\}\]
+for its (classical) zero set, and for $S\subseteq K^N$ we write
+$I(S)=\{f\in K[z]: f(a)=0\ \forall a\in S\}$ for the \emph{vanishing ideal} of $S$.
+The sets $V_K(J)$ are the closed sets of the Zariski topology on $K^N$.
+Since $f\in\mathfrak m_a:=(z_1-a_1,\dots,z_N-a_N)$ iff $f(a)=0$, we have
+$a\in V_K(J)$ iff $\mathfrak m_a\in V(J)$.
+\end{definition}
+
+\begin{definition}\label{def:char-variety}
+    The \emph{characteristic variety} of a finitely generated $A_n$-module $M$ with a good order filtration
+$M_\bullet$ is defined by
+\[\Char(M):=V\bigl(\Ann_{k[x,\xi]}\gr M\bigr)\subseteq
+  T^*X=\Spec k[x,\xi],\]
+$\Ann_{k[x,\xi]}\gr M = \{f \in k[x,\xi]: f\cdot m = 0\,\forall m \in \gr M\}$ are the \emph{annihilators} of $\gr M$ over $k[x,\xi]$, and $V$ denotes their vanishing locus.
+
+$\Char(M)$ is independent of the choice of the good filtration. \cite[Lemma D.3.1]{HTT}
 \end{definition}
 \AIadd{\formalref[{for $M=A_n/I$}]{%
 \leandecl{Stafford38/Characteristic/InitialIdeal.lean}{189}{Stafford38.CharacteristicInitialIdeal.orderInitialIdeal},
@@ -253,60 +248,77 @@ $\Char(M)$ is independent of the choice of the good filtration.
 \leandecl{Stafford38/Characteristic/AssociatedGradedModule.lean}{373}{Stafford38.CharacteristicAssociatedGradedModule.annihilator_orderAssociatedGradedModule}}}
 
 
-\begin{definition}\label{def:symplectic-poisson}
-A bilinear form $\omega$ on a $k$-vector space is \emph{symplectic} if it
-is antisymmetric and nondegenerate.
-
-The standard symplectic form on the vector space $k^{2n}$, with basis
-$x_1,\ldots,x_n,\partial_1,\ldots,\partial_n$, is determined by the
-relations
+\begin{definition}[{\cite[Ch. E.1]{HTT}}]\label{def:symplectic}
+A bilinear form $\omega$ on a $k$-vector space is \emph{symplectic} if it is
+antisymmetric and nondegenerate. The \emph{standard symplectic form} on $k^{2n}$
+with basis $x_1,\dots,x_n,\partial_1,\dots,\partial_n$ is determined by
 \[ \omega(x_i,\partial_j)=\delta_{ij},\qquad
  \omega(x_i,x_j)=\omega(\partial_i,\partial_j)=0,\]
-analogously to the Weyl relations. Identifying $T^*X\cong X\times(k^n)^*$ via the coordinates $x_1,\ldots,x_n$ and their duals
-$\xi_1,\ldots,\xi_n$, on $T^*X$ this $\omega$ takes the familiar form
-\[ \omega=\sum_{i=1}^n dx_i\wedge d\xi_i.\]
+analogously to the Weyl relations. Under the correspondence $\partial_i\leftrightarrow\xi_i$,
+on $T^*X$ (Definition~\ref{def:cotangent}) it takes the familiar form
+$\omega=\sum_{i=1}^n dx_i\wedge d\xi_i$.
+The form is \emph{nondegenerate} if $\omega(u,\cdot)=0$ implies $u=0$. For a subspace $U$,
+$U^\perp=\{v:\omega(u,v)=0\ \forall u\in U\}$. A \emph{symplectic basis} is a basis
+$e_1,\dots,e_n,f_1,\dots,f_n$ with $\omega(e_i,f_j)=\delta_{ij}$ and
+$\omega(e_i,e_j)=\omega(f_i,f_j)=0$. The \emph{Gram matrix} of $\omega$ in a basis
+$(b_i)$ is $J=(\omega(b_i,b_j))_{ij}$.
+\end{definition}
 
-The associated \emph{Poisson bracket} on $k[x,\xi]$, the coordinate ring
-of $T^*X$, is
+\begin{definition}[{\cite[Appendix D.3]{HTT}}]\label{def:poisson}
+The \emph{Poisson bracket} on $k[x,\xi]$ is
 \[ \{f,g\}=\sum_{i=1}^n\left(
    \frac{\partial f}{\partial x_i}\frac{\partial g}{\partial \xi_i}
-   -\frac{\partial f}{\partial \xi_i}\frac{\partial g}{\partial x_i}
- \right).\]
+   -\frac{\partial f}{\partial \xi_i}\frac{\partial g}{\partial x_i}\right).\]
 \end{definition}
 
 \AIadd{\formalref[{}]{%
 \leandecl{Stafford38/Characteristic/Polynomial.lean}{31}{Stafford38.Characteristic.poissonBracket},
 \leandecl{Stafford38/Characteristic/SymplecticCompletion.lean}{31}{Stafford38.CharacteristicSymplecticCompletion.phasePairing}}}
 
-\begin{definition}\label{def:involutive}
+\begin{definition}[{\cite[Appendix D.3]{HTT}}]\label{def:involutive}
 An ideal $J$ is \emph{involutive} if $\{J,J\}\subseteq J$. 
+A closed set $W \subseteq T^*X$ is involutive if $I(W)$ is.
 \end{definition}
 
 \AIadd{\formalref{\leandecl{Stafford38/Characteristic/PostScalarExtensionPoisson.lean}{33}{Stafford38.Characteristic.PostScalarExtensionPoisson.IsInvolutive};
 negative control \leandecl{Stafford38/Geometry/GeneralCoisotropicSetsTest.lean}{164}{Stafford38.Geometry.GeneralCoisotropicSetsTest.zeroSectionIdealOne_not_isPoisson}}}
 
 
-\begin{theorem}[Gabber {\cite{Gabber1981}\cite{SinghKumar2014}}{\cite[{Theorem~2.3.1 and Appendix~D}]{HTT}}]\label{ithm:gabber}
-Let $R$ be a filtered ring such that $\gr(R)$ is a Noetherian commutative algebra over $\mathbb Q$. Let $M$ be a finitely generated $R$ module. Let $J = \sqrt{Ann_{\gr R}\gr M}$ be the radical of the annihilators of $M$. Then $J$ is involutive, i.e.
-\[\{J, J\} \subset J.\]
+\begin{theorem}[Gabber {\cite{Gabber1981}\cite{SinghKumar2014}}{\cite[{Thm. D.3.4}]{HTT}}]\label{ithm:gabber}
+Let $K$ be a field of characteristic zero and $M$ a finitely generated $A_n(K)$-module
+with a good order filtration. Let $J = \sqrt{Ann_{k[x, \xi]}\gr M}$ be the radical of the annihilators of $M$. Then $J$ is involutive, i.e. \[\{J, J\} \subset J.\]
+%original: Let $R$ be a filtered ring such that $\gr(R)$ is a Noetherian commutative algebra over $\mathbb Q$. Let $M$ be a finitely generated $R$ module. Let $J = \sqrt{Ann_{\gr R}\gr M}$ be the radical of the annihilators of $M$. Then $J$ is involutive, i.e. \[\{J, J\} \subset J.\]
 \end{theorem}
 \AIadd{\formalref[{proved in Lean; a standard theorem, so its formal proof need not be compared}]{%
 \leandecl{Stafford38/Characteristic/GabberGlobalAssembly.lean}{224}{Stafford38.Characteristic.GabberGlobalAssembly.weylAssociatedGradedRadicalInvolutivity},
 statement \leandecl{Stafford38/Characteristic/CanonicalGabberInvolutivityInterface.lean}{86}{Stafford38.Characteristic.CanonicalGabberInvolutivityInterface.WeylAssociatedGradedRadicalInvolutivity},
 minimal primes \leandecl{Stafford38/Characteristic/GabberGlobalAssembly.lean}{144}{Stafford38.Characteristic.GabberGlobalAssembly.minimalPrime_isInvolutive}}}
-\begin{theorem}[Hilbert's Nullstellensatz]\label{thm:nss}
+%\begin{theorem}[{Hilbert's Nullstellensatz, see e.g. \cite[Cor 7.10, Ex. 7.14]{atiyah}}]\label{thm:nss}
+%Let $K$ be an algebraically closed field and $J\subseteq K[z_1,\dots,z_N]$ an
+%ideal. Then 
+%\begin{enumerate}[label=(\alph*)]
+%    \item $V(J)=\varnothing\iff 1 \in J$
+%    \item $I(V(J))=\sqrt J$
+%\end{enumerate}
+%\end{theorem}
+
+\begin{theorem}[{Hilbert's Nullstellensatz, see e.g. \cite[Thm. I.1.3A, Cor. I.1.4, Thm. I.3.2]{hartshorne} and \cite[Cor 7.10, Ex. 7.14]{atiyah}}]\label{thm:nss}
 Let $K$ be an algebraically closed field and $J\subseteq K[z_1,\dots,z_N]$ an
-ideal. Then 
-\begin{enumerate}[label=(\alph*)]
-    \item $V(J)=\varnothing\iff 1 \in J$
-    \item $I(V(J))=\sqrt J$
+ideal. Then
+\begin{enumerate}
+\item[(a)] the maximal ideals of $K[z]$ are exactly the $\mathfrak m_a$,
+  $a\in K^N$; hence $a\mapsto\mathfrak m_a$ identifies $K^N$ with the closed
+  points of $\operatorname{Spec}K[z]$, and $V_K(J)$ with the closed points of
+  $V(J)$;
+\item[(b)] $V_K(J)=\emptyset$ if and only if $1\in J$;
+\item[(c)] $I(V_K(J))=\sqrt J$.
 \end{enumerate}
 \end{theorem}
 
 \section{Mapping to a normal form}\label{sec:monic}
 Given a fixed nonzero $d \in A_n(k)$ of Bernstein degree $N$, our first goal is to find a map to replace $d$ by a normal form $\tilde{d}$ that is monic in $p$, i.e. of the form $\tilde d=p^N+\sum_{j<N}p^ja_j$ with coefficients $a_j$ in $C$. \\
 
-If $N=0$, then $d \in B_0 = k$ is a nonzero scalar, hence a unit, and $1 = dR+FdS$ holds trivially with $F=1=\ell^0$, $R=d^{-1}$, $S=0$. We therefore assume $N\geq1$.
+If $N=0$, then $d \in B_0 = k$ is a nonzero scalar, hence a unit, and $1 = dR+FdS$ holds trivially with $F=1$, $R=d^{-1}$, $S=0$. We therefore assume $N\geq1$.
 
 
 We want to construct a well-behaved automorphism of $\gr^BA_n(k)=k[x,\xi]$
@@ -318,7 +330,7 @@ extension leaves on the associated graded ring.
 We can identify $\mathbb V = k^{2n}$ with the Bernstein-degree-one part $B_1/B_0$ of
 $A_n(k)$, i.e.\ linear combinations of $x_1,\ldots,x_n,\partial_1,\ldots,
 \partial_n$; the coordinates of a vector are then the coefficients of
-these generators. By this identification, $\mathbb V$ carries the standard symplectic form $\omega$ (Def. \ref{def:symplectic-poisson}). 
+these generators. By this identification, $\mathbb V$ carries the standard symplectic form $\omega$ (Def. \ref{def:symplectic}). 
 
 \begin{lemma}\label{lem:sympcompl}
 Let $(\mathbb V,\omega)$ be a symplectic $k$-space of dimension $2n$ and $0\neq v\in \mathbb V$.
@@ -338,14 +350,14 @@ way $av+bw$ pairs nontrivially with something in $U$, so $\omega|_U$ is
 nondegenerate.
 
 Since $\omega|_U$ is nondegenerate, $U\cap U^\perp=0$, and as
-$\dim U+\dim U^\perp=\dim\mathbb V$ for a nondegenerate form, this gives
+$\dim U+\dim U^\perp=2n = \dim\mathbb V$ \cite[Prop. 11.2.1]{coutinho} for a nondegenerate form, this gives
 $\mathbb V=U\oplus U^\perp$. If $u\in U^\perp$ pairs to zero with all of
 $U^\perp$, it also pairs to zero with $U$ (as $u\in U^\perp$), hence with
 all of $\mathbb V$, forcing $u=0$; so $\omega|_{U^\perp}$ is nondegenerate
 too.
 
 By induction on $n$ (trivial for $n=1$, where $U=\mathbb V$), a
-symplectic basis $e_2,\ldots,f_n$ of $U^\perp$ exists; setting $e_1:=v$,
+symplectic basis $e_2,\ldots,f_n$ of $U^\perp$ exists \cite[XV.8.1 and XV.8.2]{lang}; setting $e_1:=v$,
 $f_1:=w$ gives a symplectic basis of $\mathbb V=U\oplus U^\perp$, since
 cross-pairings between $U$ and $U^\perp$ vanish by definition of
 $U^\perp$.
@@ -362,7 +374,7 @@ $g$ assigns to each generator $u$ a linear combination $g(u)$ of generators.
 Because $A_n(k)$ is presented by generators and the Weyl relations
 $[v,u]=\omega(u,v)$, and $g$ preserves $\omega$, the elements $g(u)$ satisfy
 the same relations as the $u$. Hence the substitution $u\mapsto g(u)$ extends
-to a unique $k$-algebra endomorphism $\Phi_{g}$ of $A_n(k)$. Because $g$ is an automorphism, so is $\Phi_g$, and we have $\Phi_g^{-1} = \Phi_{g^{-1}}.$
+to a unique $k$-algebra endomorphism $\Phi_{g}$ of $A_n(k)$ \cite[Th. 1.3.1, Ex. 7.6.9]{coutinho}. Because $g$ is an automorphism, so is $\Phi_g$, and we have $\Phi_g^{-1} = \Phi_{g^{-1}}.$
 
 
 \AIadd{\formalref{\leandecl{Stafford38/Weyl/Symplectic.lean}{46}{Stafford38.WeylSymplectic.standardSymplecticAlgHom},
@@ -376,7 +388,7 @@ $c\in k^{\times}$ such that
   \tilde d:=c^{-1}\Phi_g(d)=p^{\,N}+\sum_{j<N}p^{\,j}a_j, 
   \qquad a_j\in C,\quad \deg_B a_j\le N-j\label{eq:monic-d}
 \end{equation}
-in the notation of Convention~\ref{conv:pair}. $\tilde d$ itself has $\deg_B \tilde d = N.$
+in the Notation \ref{conv:pair}. $\tilde d$ itself has $\deg_B \tilde d = N.$
 \end{proposition}
 
 \begin{proof}
@@ -403,8 +415,8 @@ substituting $u_i\mapsto\sum_j M_{ij}u_j$ in the corresponding commutative
 monomial. Hence $\Phi_g(d)\equiv s(Mu)\bmod B_{N-1}$. As $M$ is invertible,
 $s(Mu)$ is again a nonzero homogeneous polynomial of degree $N$, so
 $\deg_B\Phi_g(d)=N$ and the Bernstein symbol of $\Phi_g(d)$ is the
-function $s_g\colon a\mapsto s(Ma)$. Because $g=h^{\mathsf T}$,
-the rows of $M$ are the columns of $h$, i.e.\ $Me_j=h(e_j)$. Hence the
+function $s_g\colon a\mapsto s(Ma)$. Since the rows of $M$ are the coordinate vectors of the $g(u_i)$, the matrix of
+$g$ is $M^T$; as $g=h^T$, this gives $M=h$, i.e.\ $Me_j=h(e_j)$. Hence the
 value of $s_g$ at $e_p$ is
 \[ s_g(e_p) = s(Me_p)=s(h(e_p))=s(v)\neq0 .\]
 Set $c:=s(v)$. Since $c$ is a nonzero scalar, it is a central unit of
@@ -479,7 +491,7 @@ contributing to the order-$N$ part has $|\beta|=N$, hence $|\alpha|=0$: it
 is a pure $\partial^\beta$ with scalar coefficient. Thus $\tilde d$ has
 order $N$, and its order-$N$ part is a $k$-linear combination of
 $\partial^\beta$ with $|\beta|=N$, giving $\sigma^{\mathrm{ord}}_N(\tilde
-d)=P(\xi)$, homogeneous of degree $N$ with coefficients in $k$.
+d)=P(\xi_1, \dots, \xi_n)$, homogeneous of degree $N$ with coefficients in $k$.
 
 The monomial $p^N=\partial_1^N$ occurs in $\tilde d$ with coefficient $1$;
 every other order-$N$ monomial comes from some $p^ja_j$ with $j<N$ and
@@ -502,17 +514,18 @@ induced by the cyclic generator $q = [1]$, the class of $1$ in $Q$ and write $P=
  P\in\Ann_{k[x,\xi]}\gr Q.
 \end{equation}
 \end{proposition}
-
+\begin{proof}
+$Q_\bullet$ is a good filtration because $Q$ is cyclic. Let $\bar q$ be the class of $q$ in $\gr Q$. We know that $q\,\tilde d=[\tilde d]=0$ in $Q$ (because $\tilde d \in I$) and $\tilde d$ has order $N$ (Lemma \ref{lem:order-symbol}), so $q\tilde d \in Q_N$. Therefore $\bar q\cdot P$ , its image in $Q_N/Q_{N-1}$, must also be zero, and hence $P$ annihilates the class $\bar q$ of $q$ in $\gr Q$.
+Since $\gr Q$ is generated over $k[x,\xi]$ by $\bar q$, we get $P\in\Ann_{k[x,\xi]}\gr Q$. 
+\end{proof}
 
 \section{$x_1$ as a surjective map}\label{sec:euler}
-We define $E=x_1p$ and
-
 The first goal of this section will be to show that for $Q$ defined as in Eq. \eqref{eq:I-Q}, we have $Q = Qx_1$ (Proposition \ref{prop:x-surjective}). We will then use this result, as well as Gabber's theorem (Theorem \ref{ithm:gabber}) to establish two contradictory length estimations for the graded module $\gr Q/(\gr Q)x_1$ that we have assumed to be nonzero, concluding that therefore, also $\gr Q = (\gr Q)x_1$ (Corollary \ref{cor:Uzero}).\\
 
 \AIadd{\formalref{\leandecl{Stafford38/Weyl/EulerResidue.lean}{26}{Stafford38.WeylEulerResidue.canonicalRightIdeal}
 $=\operatorname{span}\{d,x^Nd\}$ as a right ideal}}
 
-The commutator of $E$ defines a grading of $A_n$: 
+We define $E=x_1p$. The commutator of $E$ defines a grading of $A_n$: 
 $x_1$ has Euler degree $1$, $p$ has Euler degree $-1$, and the transverse Weyl algebra
 has Euler degree zero. Let $A_{\geq0}$ denote the nonnegative part of $A_n$ in this grading. In PBW form (with $x_i$ on the left of $\partial_i$), $A_{\geq0}$ is generated by the transverse algebra, $E$, and $x_1$. 
 
@@ -523,13 +536,13 @@ By the commutation relations of the Weyl algebra, it holds that
     Ep=p(E-1), \qquad pE=(E+1)p
     \label{eq:nonnegative-pbw}
 \end{align}
-Additionally, $x_1$ commutes with the transverse algebra, so $x_1$ is normal in $A_{\geq 0}.$ This also means that every element of Euler degree $\ge1$ lies in $A_{\ge0}x_1$. 
+Additionally, $x_1$ commutes with the transverse algebra, so $x_1$ is normal in $A_{\geq 0}$ (i.e. for every $r \in A_{\geq 0}$, there exists $r'\in A_{\geq 0}$ such that $x_1r=r'x_1$ \cite[4.1.10]{MR}) . This also means that every element of Euler degree $\ge1$ lies in $A_{\ge0}x_1$. 
 \AIadd{\formalref[{Lean uses the subring generated by the transverse algebra, $x_1$ and $x_1p$, and one-sided normality $x_1r=r'x_1$, which is all that is used}]{%
 \leandecl{Stafford38/Weyl/EulerSubring.lean}{25}{Stafford38.WeylEulerSubring.eulerSubring},
 \leandecl{Stafford38/Weyl/EulerSubring.lean}{71}{Stafford38.WeylEulerSubring.coordinate_normal_eulerSubring}}}
 
 \begin{lemma}\label{lem:euler}
-For every $m\ge0$,
+For every $m\ge1$,
 \begin{equation}\label{eq:eulerprod}
   x_1^{m}p^{\,m}=\prod_{i=0}^{m-1}(E-i), \qquad p^{\,m} x_1^{m}=\prod_{i=1}^{m}(E+i),
 \end{equation}
@@ -538,7 +551,7 @@ the factors in each product commuting with one another.
 
 \begin{proof}
 Since both products in \eqref{eq:eulerprod} are polynomials in the single element $E$, their factors commute.
-We induct on $m$; both identities are trivial for $m=0$. Assuming the
+We induct on $m$; both identities are trivial for $m=1$. Assuming the
 first identity for $m$,
 \[\begin{aligned}
 x_1^{m+1}p^{\,m+1}
@@ -556,8 +569,8 @@ identically from $Ep=p(E-1)$.
 \leandecl{proofs/weyl_pure_power.lean}{148}{Stafford.exists_eulerPolynomial_x_pow_mul_d_pow}}}
 
 \begin{lemma}\label{lem:euler-residue}
-There exists an element $U\in A_{\geq0}$ such that
-\begin{equation} 1+Ux_1\in \mathcal I.
+There exists an element $u_0\in A_{\geq0}$ such that
+\begin{equation} 1+u_0x_1\in \mathcal I.
  \label{eq:euler-residue}\end{equation}
 \end{lemma}
 
@@ -574,7 +587,7 @@ We write $\tilde d=p^N+\Sigma$ with $\Sigma = \sum_{j<N}p^{\,j}a_j$. Then
 \[(\tilde d\,x_1^N)u(E)+(x_1^N\tilde d)v(E)=1+w\in \mathcal I,\]
 where
 \[w=\Sigma x_1^Nu(E)+x_1^N\Sigma v(E).\]
-We can write each $a_j$ in $\Sigma$ in powers of $x_1$, with coefficients in the transverse Weyl algebra. A term $p^jx_1^rb$ coming from $p^ja_j$ has $r\geq0$ and $j<N$, and multiplication by $x_1^N$ gives that term Euler degree at least $N-j>0$. $u$ and $v$ only depend on $E$, so they have Euler degree 0. Therefore every term of $w$ has positive Euler degree, and thus $w\in A_{\geq0}x_1$ - or equivalently, there exists a $U\in A_{\geq0}$, such that $w=Ux_1$.
+We can write each $a_j$ in $\Sigma$ in powers of $x_1$, with coefficients in the transverse Weyl algebra. A term $p^jx_1^lb$ coming from $p^ja_j$ has $l\geq0$ and $j<N$, and multiplication by $x_1^N$ gives that term Euler degree at least $N-j>0$. $u$ and $v$ only depend on $E$, so they have Euler degree 0. Therefore every term of $w$ has positive Euler degree, and thus $w\in A_{\geq0}x_1$ - or equivalently, there exists a $u_0\in A_{\geq0}$, such that $w=u_0x_1$.
 \end{proof}
 \AIadd{\formalref[{the ring identity is Lean's; the factorization uses left coefficients $c\,x^ap^j$ but that does not change anything because Euler degree does not depend on the order of x and p}]{%
 \leandecl{Stafford38/Weyl/EulerResidue.lean}{41}{Stafford38.WeylEulerResidue.positiveEulerResidue_identity},
@@ -587,12 +600,12 @@ Right multiplication by $x_1$ on $Q$ is surjective.
 \end{proposition}
 \begin{proof}
 Let $q$ be the class of $1$ in $Q$. By Equation \eqref{eq:euler-residue}, we have
-$q=-qUx_1$, so $q\in(qA_{\geq0})x_1$. We use the normality of $x_1$ to show
+$q=-qu_0x_1$, so $q\in(qA_{\geq0})x_1$. We use the normality of $x_1$ to show
 \begin{equation} qA_{\geq0}=(qA_{\geq0})x_1.
  \label{eq:normal-surj}\end{equation}
-The inclusion $\supseteq$ holds because $x_1\in A^{\geq0}$ and
-$A^{\geq0}$ is a ring. For $\subseteq$, let $r\in A^{\geq0}$ and choose
-$r'$ with $x_1r=r'x_1$ (possible since $x_1$ is normal) then $qr=-(qU)x_1r=-(qUr')x_1\in(qA^{\geq0})x_1$ since $Ur'\in A^{\geq0}$.
+The inclusion $\supseteq$ holds because $x_1\in A_{\geq0}$ and
+$A_{\geq0}$ is a ring. For $\subseteq$, let $r\in A_{\geq0}$ and choose
+$r'$ with $x_1r=r'x_1$ (possible since $x_1$ is normal) then $qr=-(qu_0)x_1r=-(qu_0r')x_1\in(qA_{\geq0})x_1$ since $u_0r'\in A_{\geq0}$.
 
 $qA_{\geq0}$ is stable under right multiplication by $p$: If $m=m'x_1$, then
 \[ mp=m'(x_1p)=m'E\in qA_{\geq0}.\]
@@ -615,7 +628,7 @@ $y/s$ ($y\in N$, $s\in S$), with $y/s=y'/s'$ iff $t(s'y-sy')=0$ for some
 $t\in S$. For a prime $\mathfrak p\subset R$ we write
 $R_{\mathfrak p}=S^{-1}R$ and $N_{\mathfrak p}=S^{-1}N$ for
 $S=R\setminus\mathfrak p$. Localization is exact: it sends exact sequences
-of $R$-modules to exact sequences of $S^{-1}R$-modules.
+of $R$-modules to exact sequences of $S^{-1}R$-modules \cite[Tag 00CS]{Stacks}.
 \end{definition}
 \begin{definition}[{\cite{Stacks}[Definition 10.40.1]}]\label{def:supp}
     Let $R$ be a ring and let $M$ be an $R$-module. The \emph{support} of $M$ is the set 
@@ -626,7 +639,7 @@ of $R$-modules to exact sequences of $S^{-1}R$-modules.
 \begin{definition}[\mbox{\cite{coutinho, cohn}, \cite[Tags~02LY, 00J3, 00IV]{Stacks}}]\label{def:length}
     The length $\ell_T$ of a $T$-module of finite length $N$ is defined as the number of steps in a composition series of $N$ such that
     \[0 = N_0\subsetneq N_1\subsetneq \dots \subsetneq N_{\ell_T} = N\]
-    where each successive quotient $N_i/N_{i-1}$ is simple (i.e. has no proper nontrivial submodules). The length is well-defined, as it does not depend on the choice of the composition series. Lengths are additive for short exact sequences.
+    where each successive quotient $N_i/N_{i-1}$ is simple (i.e. has no proper nontrivial submodules). The length is well-defined, as it does not depend on the choice of the composition series \cite[Tag 00J3]{Stacks}. Lengths are additive for short exact sequences.
 \end{definition}
 \AIadd{\formalref{\texttt{Module.length} (Mathlib); finite length of the localized modules:
 \leanlib{AlgebraicAnalysis/Module/MinimalSupportKernelCokernelLengths.lean}{48}{AlgebraicAnalysis.localized_kernel_and_cokernel_isFiniteLength}}}
@@ -635,7 +648,7 @@ Let $R$ be a commutative ring, $N$ an $R$-module and $\mathfrak p\subset R$ a
 prime. Then $\mathfrak p\in\operatorname{Supp}_R(N)$ if and only if there is
 $y\in N$ with $\operatorname{Ann}_R(y)\subseteq\mathfrak p$.
 \end{lemma}
-\AIadd{[\formalref{Lemma used in subsequent proof, possibly not explicitly mentioned in Lean}]}
+\AIadd{\formalref{Lemma used in subsequent proof, possibly not explicitly mentioned in Lean}}
 \begin{proof}
 In $N_{\mathfrak p}$, a
 fraction is zero when it can be cleared by an element outside $\mathfrak p$.
@@ -679,43 +692,64 @@ $T_{\mathfrak q}$.
 \begin{proof}
 The good quotient filtration makes $M = \operatorname{gr} Q$ finitely generated over $\operatorname{gr} A_n = k[x,\xi] = T[{x_1}, \xi_1]$.
 Since $P$ annihilates $M$ (Proposition~\ref{prop:charP}), the action of
-$T[x_1,\xi_1]$ on $M$ factors through $S:=T[x_1,\xi_1]/(P)$. As $P$ is monic of
-degree $N$ in $\xi_1$, in $S$ we have $\xi_1^N=-\sum_{i<N}c_i\xi_1^i$ with
-$c_i\in T$, so $S$ is generated as a $T[x_1]$-module by $1,\xi_1,\dots,\xi_1^{N-1}$.
-If $m_1,\dots,m_r$ generate $M$ over $S$, then the products $\xi_1^im_s$
-($0\le i<N$, $1\le s\le r$) generate $M$ over $T[x_1]$. Hence $M$ is finite over
+$T[x_1,\xi_1]$ on $M$ factors through $T[x_1,\xi_1]/(P)$. As $P$ is monic of
+degree $N$ in $\xi_1$, in $T[x_1,\xi_1]/(P)$ we have $\xi_1^N=-\sum_{i<N}c_i\xi_1^i$ with
+$c_i\in T$, so $T[x_1,\xi_1]/(P)$ is generated as a $T[x_1]$-module by $1,\xi_1,\dots,\xi_1^{N-1}$.
+If $m_1,\dots,m_l$ generate $M$ over $T[x_1,\xi_1]/(P)$, then the products $\xi_1^im_s$
+($0\le i<N$, $1\le s\le l$) generate $M$ over $T[x_1]$. Hence $M$ is finite over
 $T[x_1]$.
 Because $M$ is finite, and $T[{x_1}]$ is a Noetherian ring, the kernel $V$ and cokernel $U$ of multiplication in $M$ by ${x_1}$ are also finite over $T[{x_1}]$. Since they are annihilated by ${x_1}$, they are finite over $T$. %Noetherian theorem 3.5 https://www.cambridge.org/core/services/aop-cambridge-core/content/view/5DD13688B6CC1628C3FD7A318CD479FE/9781139171762c1_p1-19_CBO.pdf/commutative-rings-and-modules.pdf
 
 Let $\mathfrak p\in\operatorname{Supp}_T(V)$. By Lemma \ref{lem:supp-criterion}, we can choose $v\in V=\ker f$ with
-$\operatorname{Ann}_T(v)\subseteq\mathfrak p$. Let us now consider the annihilators of $v$ in $k[x,\xi]=T[x_1, \xi_1]$, defining $S$ as the image of $T\setminus \mathfrak p$ in $k[x,\xi]$: $\operatorname{Ann}_{k[x,\xi]}(v)\cap S = \varnothing$, because were $r \in T\setminus\mathfrak p$ and in $\operatorname{Ann}_{k[x,\xi]}(v)$, then $v$ would be annihilated by $r$, which in turn would imply that $r$ is also in $\operatorname{Ann}_T(v)$. Since $\operatorname{Ann}_T(v) \subseteq \mathfrak p$, but we assumed $r \in T\setminus\mathfrak p$, this is a contradiction. There must therefore exist a prime $\mathfrak q \in k[x,\xi]$ with $\mathfrak q \cap S = \varnothing$ and $\operatorname{Ann}_{k[x,\xi]}(v) \subseteq \mathfrak q$. Since $v \in V = \ker f$, by Lemma \ref{lem:supp-criterion}, it follows that $\mathfrak q \in \Supp_{k[x,\xi]}(\ker f).$
-From Vasconcelos' theorem \cite[Theorem~2.4]{matsumura} follows that $\operatorname{Supp}_{k[x,\xi]}(\ker f)\subseteq \operatorname{Supp}_{k[x,\xi]}(\operatorname{coker}f)$: 
-We prove the contrapositive. Let $\mathfrak q$ be a prime of ${k[x,\xi]}$ with
-$\mathfrak q\notin\operatorname{Supp}_{k[x,\xi]}(\operatorname{coker}f)$, i.e.\
-$(\operatorname{coker}f)_{\mathfrak q}=0$.
-Since localization is exact, $(\operatorname{coker}f)_{\mathfrak q}=
-\operatorname{coker}(f_{\mathfrak q})$, so
-$\operatorname{coker}(f_{\mathfrak q})=0$: the endomorphism
-$f_{\mathfrak q}\colon M_{\mathfrak q}\to M_{\mathfrak q}$ is therefore surjective.
-The localization $M_{\mathfrak q}$ is a finite module over the Noetherian ring
-${k[x,\xi]}_{\mathfrak q}$, and $f_{\mathfrak q}$ is ${k[x,\xi]}_{\mathfrak q}$-linear, because
+$\operatorname{Ann}_T(v)\subseteq\mathfrak p$. Let us now consider the annihilators of $v$ in $k[x,\xi]=T[x_1, \xi_1]$, defining $S$ as the image of $T\setminus \mathfrak p$ in $k[x,\xi]$: $\operatorname{Ann}_{k[x,\xi]}(v)\cap S = \varnothing$, because were $r \in T\setminus\mathfrak p$ and in $\operatorname{Ann}_{k[x,\xi]}(v)$, then $v$ would be annihilated by $r$, which in turn would imply that $r$ is also in $\operatorname{Ann}_T(v)$. Since $\operatorname{Ann}_T(v) \subseteq \mathfrak p$, but we assumed $r \in T\setminus\mathfrak p$, this is a contradiction. There must therefore exist a prime $\mathfrak Q \in k[x,\xi]$ with $\mathfrak Q \cap S = \varnothing$ and $\operatorname{Ann}_{k[x,\xi]}(v) \subseteq \mathfrak Q$. Since $v \in V = \ker f$, by Lemma \ref{lem:supp-criterion}, it follows that $\mathfrak Q \in \Supp_{k[x,\xi]}(\ker f).$
+From Vasconcelos' theorem \cite[Theorem~2.4]{matsumura} \cite{vasconcelos} follows that $\operatorname{Supp}_{k[x,\xi]}(\ker f)\subseteq \operatorname{Supp}_{k[x,\xi]}(\operatorname{coker}f)$: 
+We prove the contrapositive. Let $\mathfrak Q$ be a prime of ${k[x,\xi]}$ with
+$\mathfrak Q\notin\operatorname{Supp}_{k[x,\xi]}(\operatorname{coker}f)$, i.e.\
+$(\operatorname{coker}f)_{\mathfrak Q}=0$.
+Since localization is exact, $(\operatorname{coker}f)_{\mathfrak Q}=
+\operatorname{coker}(f_{\mathfrak Q})$, so
+$\operatorname{coker}(f_{\mathfrak Q})=0$: the endomorphism
+$f_{\mathfrak Q}\colon M_{\mathfrak Q}\to M_{\mathfrak Q}$ is therefore surjective.
+The localization $M_{\mathfrak Q}$ is a finite module over the Noetherian ring
+${k[x,\xi]}_{\mathfrak Q}$, and $f_{\mathfrak Q}$ is ${k[x,\xi]}_{\mathfrak Q}$-linear, because
 $f$ is multiplication by $x_1\in {k[x,\xi]}$ and ${k[x,\xi]}$ is commutative. By Vasconcelos'
 theorem, a surjective endomorphism of a finite module is injective. Hence
-$f_{\mathfrak q}$ is injective, and by exactness of localization,
-$(\ker f)_{\mathfrak q}=\ker(f_{\mathfrak q})=0$, i.e.\
-$\mathfrak q\notin\operatorname{Supp}_{k[x,\xi]}(\ker f)$. The contrapositive is therefore $\mathfrak q\in\operatorname{Supp}_{k[x,\xi]}(\ker f)$,
-then $\mathfrak q\in\operatorname{Supp}_{k[x,\xi]}(\operatorname{coker}f) = \Supp_{k[x,\xi]}(U).$ By
+$f_{\mathfrak Q}$ is injective, and by exactness of localization,
+$(\ker f)_{\mathfrak Q}=\ker(f_{\mathfrak Q})=0$, i.e.\
+$\mathfrak Q\notin\operatorname{Supp}_{k[x,\xi]}(\ker f)$. The contrapositive is therefore $\mathfrak Q\in\operatorname{Supp}_{k[x,\xi]}(\ker f)$,
+then $\mathfrak Q\in\operatorname{Supp}_{k[x,\xi]}(\operatorname{coker}f) = \Supp_{k[x,\xi]}(U).$ By
 Lemma~\ref{lem:supp-criterion} there therefore exists an $u\in U$ with
-$\operatorname{Ann}_{k[x,\xi]}(u)\subseteq\mathfrak q$. 
+$\operatorname{Ann}_{k[x,\xi]}(u)\subseteq\mathfrak Q$. 
 To get back to the support over $T$, we define $r\in\operatorname{Ann}_T(u)$. Then $ru=0$, so
-$r\in\operatorname{Ann}_{k[x,\xi]}(u)\subseteq\mathfrak q$. If $r\notin\mathfrak p$,
-the image of $r$ would lie in $\mathfrak q\cap S=\varnothing$, which is
+$r\in\operatorname{Ann}_{k[x,\xi]}(u)\subseteq\mathfrak Q$. If $r\notin\mathfrak p$,
+the image of $r$ would lie in $\mathfrak Q\cap S=\varnothing$, which is
 impossible. Hence $r\in\mathfrak p$, i.e.\
 $\operatorname{Ann}_T(u)\subseteq\mathfrak p$, and
 Lemma~\ref{lem:supp-criterion} gives
 $\mathfrak p\in\operatorname{Supp}_T(U)$. Since $\mathfrak p\in
 \operatorname{Supp}_T(V)$ was arbitrary,
 $\operatorname{Supp}_T(V)\subseteq\operatorname{Supp}_T(U)$.
+
+Let now $\mathfrak q$ be a minimal prime in $\operatorname{Supp}_TU$. The primes of
+$T_{\mathfrak q}$ correspond to the primes $\mathfrak p'\subseteq\mathfrak q$ of $T$\cite[Prop 3.11]{atiyah}, and
+$(U_{\mathfrak q})_{\mathfrak p'}=U_{\mathfrak p'}$. Hence $\operatorname{Supp}(U_{\mathfrak q})$
+corresponds to the primes $\mathfrak p'\subseteq\mathfrak q$ lying in $\operatorname{Supp}_TU$;
+by minimality of $\mathfrak q$ the only such prime is $\mathfrak q$ itself, so
+$\operatorname{Supp}(U_{\mathfrak q})=\{\mathfrak qT_{\mathfrak q}\}$, the set consisting
+only of the maximal ideal of $T_{\mathfrak q}$. The same argument applies to $V$: a prime
+$\mathfrak p'\subseteq\mathfrak q$ in $\operatorname{Supp}_TV$ lies in $\operatorname{Supp}_TU$
+by the inclusion just proved, hence equals $\mathfrak q$, so
+$\operatorname{Supp}(V_{\mathfrak q})\subseteq\{\mathfrak qT_{\mathfrak q}\}$.
+
+Now $T_{\mathfrak q}$ is a Noetherian local ring with maximal ideal $\mathfrak qT_{\mathfrak q}$,
+and $U_{\mathfrak q}$, $V_{\mathfrak q}$ are finite modules (localizations of the finite
+$T$-modules $U$, $V$) whose support is contained in $\{\mathfrak qT_{\mathfrak q}\}$. For a
+finite module $L$ over $T_{\mathfrak q}$ $\operatorname{Supp}L$ is equal to the vanishing locus of its annihilators \cite[Tag 00L2]{Stacks},
+so the only prime containing $\operatorname{Ann}L$ is the maximal ideal (if $L\neq0$). Hence
+$T_{\mathfrak q}/\operatorname{Ann}L$ is a Noetherian ring in which every prime is maximal,
+i.e.\ an Artinian ring, and a finite module over an Artinian ring has finite length \cite[Thm. 8.5]{atiyah}\cite[Tag 00KH]{Stacks}. Thus
+$U_{\mathfrak q}$ and $V_{\mathfrak q}$ have finite length over $T_{\mathfrak q}$
+($V_{\mathfrak q}$ possibly zero).
 \end{proof}
 \AIadd{\formalref{\leandecl{Stafford38/Characteristic/CanonicalOldTangentialFiniteness.lean}{73}{Stafford38.Characteristic.CanonicalOldTangentialFiniteness.canonical_finite_old_coordinate_kernel_cokernel},
 \leandecl{Stafford38/Characteristic/CanonicalTangentialSymbolFiniteness.lean}{116}{Stafford38.Characteristic.CanonicalTangentialSymbolFiniteness.canonical_orderAssociatedGradedModule_finite_tangential_coordinate}}}
@@ -741,7 +775,7 @@ ${x_1}$ on $M=\operatorname{gr}Q$. This is the crudest approximation to $\ker_Q(
 $\operatorname{coker}_Q(f)$: it correctly identifies $V,U$ as approximations, but it
 does not yet see elements that vanish to higher order than this naive count
 predicts. The spectral sequence refines this approximation in successive stages,
-called \emph{pages}: for each $r\ge0$, the source and target pages are
+called \emph{pages} (see also \cite[Construction 5.4.6]{weibel}): for each $r\ge0$, the source and target pages are
 \[
  A_r=\bigoplus_{p\in\mathbb Z}\frac{G^p\cap f^{-1}(G^{p+r})}{G^{p+1}\cap f^{-1}(G^{p+r})},
  \qquad
@@ -820,7 +854,7 @@ As $\ell((A_{R})_{\mathfrak q})\ge0$, we conclude
 \[ \ell_{T_{\mathfrak q}}(U_{\mathfrak q})\le\ell_{T_{\mathfrak q}}(V_{\mathfrak q}).\]
 \end{proof}
 
-\AIadd{[{\href{https://itpplasma.github.io/stafford38-formal/lean_proof_details.pdf\#nameddest=comparison-COMP-06}{Readable correspondence note.}}]\formalref{\leandecl{Stafford38/Characteristic/CanonicalPageEulerInequality.lean}{25}{Stafford38.Characteristic.CanonicalPageEulerInequality.canonicalPage_length_target_le_source};
+\AIadd{\formalref{\leandecl{Stafford38/Characteristic/CanonicalPageEulerInequality.lean}{25}{Stafford38.Characteristic.CanonicalPageEulerInequality.canonicalPage_length_target_le_source};
 exhaustion \leanlib{AlgebraicAnalysis/Module/UniformBoundaryVanishing.lean}{106}{AlgebraicAnalysis.exists_uniform_subsingleton_localized}}}
 
 
@@ -834,18 +868,12 @@ For every minimal prime $\mathfrak q$ in $\operatorname{Supp}_T U$,
 \]
 \end{lemma}
 \begin{proof}
-We start by showing, that by Gabber's involutivity theorem, $x_1$ cannot lie in any minimal prime. We then define a module $K$ as the kernel of multiplication by a power of $x_1$ over the localized $M_\mathfrak q$, which allows us to split the length of $U_{\mathfrak q}$ into two parts, $\ell(U_{\mathfrak q}) = \ell(V_{\mathfrak q}) + \ell\bigl((M_{\mathfrak q}/K)/({x_1}(M_{\mathfrak q}/K))\bigr)$. It remains to show that the second term is nonzero. For this we use the fact that $x_1$ does not lie in any minimal prime to deduce that $x_1$ must therefore be invertible at the minimal primes while lying in every prime of the support of $U_{\mathfrak q}$. Nakayama's lemma then shows that  $(M_\mathfrak q/K)/x_1(M_\mathfrak q/K)\neq0$. \\
+We start by showing, that by Gabber's involutivity theorem, $x_1$ cannot lie in any minimal prime. We then define a module $K_{\infty}$ as the kernel of multiplication by a power of $x_1$ over the localized $M_\mathfrak q$, which allows us to split the length of $U_{\mathfrak q}$ into two parts, $\ell(U_{\mathfrak q}) = \ell(V_{\mathfrak q}) + \ell\bigl((M_{\mathfrak q}/K_{\infty})/({x_1}(M_{\mathfrak q}/K_{\infty}))\bigr)$. It remains to show that the second term is nonzero. For this we use the fact that $x_1$ does not lie in any minimal prime to deduce that $x_1$ must therefore be invertible at the minimal primes while lying in every prime of the support of $U_{\mathfrak q}$. Nakayama's lemma then shows that  $(M_\mathfrak q/K_{\infty})/x_1(M_\mathfrak q/K_{\infty})\neq0$. \\
 
 
-Let us consider $\operatorname{Ann}_C M$. By Gabber's Theorem (\ref{ithm:gabber}, \cite{Gabber1981}), $J = \sqrt{\operatorname{Ann}_C M}$ is involutive. 
+Let us consider $\operatorname{Ann}_{k[x,\xi]} M$. By Gabber's Theorem (\ref{ithm:gabber}, \cite{Gabber1981}), $J = \sqrt{\operatorname{Ann}_{k[x,\xi]} M}$ is involutive.
 If $\mathfrak p$ is a minimal prime of $J$,
-then $\mathfrak p$ is itself involutive, i.e. $\{\mathfrak p,\mathfrak p\}\subseteq\mathfrak p$. We can show this the following way:
-We localize $k[x,\xi]$ at $\mathfrak p$. Since $\mathfrak p$ is minimal over $J$, the only prime of $k[x,\xi]_{\mathfrak p}$ containing $J_{\mathfrak p}$ is $\mathfrak p_{\mathfrak p}$ itself; as $J$ is already radical, so is its localization, giving
-\[J_{\mathfrak p} = \sqrt{J_{\mathfrak p}} = \mathfrak p_{\mathfrak p}.\]
-The Poisson bracket extends to $k[x,\xi]_{\mathfrak p}$ since by the Leibniz rule, $\{a/s,\,b/t\}$ is determined by $\{a,b\}$ and the brackets of $a,b$ with $s,t$, giving a well-defined bracket on $k[x,\xi]_\mathfrak p$ agreeing with the one on $k[x,\xi]$ under $f\mapsto f/1$; in particular $\{f/1,g/1\}=\{f,g\}/1$ for $f,g\in k[x,\xi]$, and the involutivity of $J$ localizes to $\{J_\mathfrak p,J_\mathfrak p\}\subseteq J_\mathfrak p$.
-Now take $f,g\in\mathfrak p$. Then $f/1,g/1\in\mathfrak p_\mathfrak p=I_\mathfrak p$, so
-\[ \{f,g\}/1 = \{f/1,g/1\} \in J_\mathfrak p = \mathfrak p_\mathfrak p.\]
-Thus there is $t\notin\mathfrak p$ with $t\{f,g\}\in\mathfrak p$. Since $\mathfrak p$ is prime and $t\notin\mathfrak p$, this forces $\{f,g\}\in\mathfrak p$.
+then $\mathfrak p$ is itself involutive, i.e. $\{\mathfrak p,\mathfrak p\}\subseteq\mathfrak p$ \cite[Thm. D.3.4]{HTT}.
 
 \AIadd{\formalref{%
 \leandecl{Stafford38/Characteristic/PaperLocalizedInvolutivity.lean}{187}{Stafford38.Characteristic.PaperLocalizedInvolutivity.minimalPrimes_isInvolutive_of_radical_isInvolutive_viaLocalization}}}
@@ -853,58 +881,59 @@ Thus there is $t\notin\mathfrak p$ with $t\{f,g\}\in\mathfrak p$. Since $\mathfr
 From the involutivity of $\mathfrak p$ follows that no $\mathfrak p$ contains ${x_1}$: Assume ${x_1}\in \mathfrak p$. Since $P \in \mathfrak p$,  also the Poisson brackets
 \[ \{{x_1}, P\}, \quad \{{x_1}, \{x_1, P\}\}, \dots\]
 lie in $\mathfrak p$. $\{{x_1},-\}$ differentiates once with respect to $\xi_1$, and because $P$ is homogeneous of degree $N$ and monic in $\xi_1$, its $N$th derivative is the nonzero constant $N!$ - therefore the $N$th bracket would put $N!$ in $\mathfrak p$. Since $\mathfrak p$ is a proper prime ideal, no nonzero constant can be in $\mathfrak p$, so we must conclude ${x_1} \notin \mathfrak p$.
-This result holds under localization at $T\setminus\mathfrak q$: no minimal prime of $\operatorname{Ann}_{k[x,\xi]_\mathfrak p}(M_{\mathfrak q})$ contains ${x_1}$ either, since the annihilator of the finite module $M$ commutes with localization.
+This persists after localizing at $S=T\setminus\mathfrak q$: write $k[x,\xi]_{\mathfrak q}:=S^{-1}k[x,\xi]$. Since $M$ is finite, $\operatorname{Ann}(M_{\mathfrak q})=S^{-1}\operatorname{Ann}(M)$ \cite[Prop 3.14]{atiyah}, and primes of $k[x,\xi]_{\mathfrak q}$ correspond to primes of $k[x,\xi]$ disjoint from $S$ \cite[Prop 3.11(iv)]{atiyah}. A prime minimal among those containing $J$ and disjoint from $S$ is minimal over $J$ (any smaller prime containing $J$ is again disjoint from $S$). Hence every minimal prime of $\operatorname{Supp}(M_{\mathfrak q})$ is of the form $S^{-1}\mathfrak p$ with $\mathfrak p$ a minimal prime of $J$, and does not contain ${x_1}$.
 
 Consider the increasing chain of kernels of powers of the localization $f_{\mathfrak q}$ of right multiplication with $x_1$
 $\operatorname{ker}(f_{\mathfrak q})$ $\subseteq \operatorname{ker}(f^2_{\mathfrak q})$ $\subseteq \dots$.
 Since $M_{\mathfrak q}$ is Noetherian, this chain stabilizes. Let
-$K:=\ker(f^m_{\mathfrak q})$ at a stage where it stabilizes, so $f_{\mathfrak q}(K) = {x_1}K\subseteq K$ and
-$\ker(f^{m+1}_{\mathfrak q})=\ker(f_{\mathfrak q}^m)=K$. Each quotient $\ker(f_{\mathfrak q}^{i+1})/\ker(f_{\mathfrak q}^i)$ maps to
+$K_{\infty}:=\ker(f^m_{\mathfrak q})$ at a stage where it stabilizes, so $f_{\mathfrak q}(K_{\infty}) = {x_1}K_{\infty}\subseteq K_{\infty}$ and
+$\ker(f^{m+1}_{\mathfrak q})=\ker(f_{\mathfrak q}^m)=K_{\infty}$. Each quotient $\ker(f_{\mathfrak q}^{i+1})/\ker(f_{\mathfrak q}^i)$ maps to
 $V_{\mathfrak q}=\ker(f_{\mathfrak q})$ injectively via $v\mapsto {x_1}^iv$, so, as $V_{\mathfrak q}$ has
-finite length, so does each quotient and hence $K$ itself.
+finite length, so does each quotient and hence $K_{\infty}$ itself.
 
-Two elementary facts about $K$:
+Two elementary facts about $K_{\infty}$:
 \begin{itemize}
-\item ${f_{\mathfrak q}}^{-1}K=K$: if $v\in K$ then $f_{\mathfrak q}(v)\in K$ (as $f_{\mathfrak q}(K)\subseteq K$); if $f_{\mathfrak q}(v)\in K=\ker(f_{\mathfrak q}^m)$
-then $f_{\mathfrak q}^{m+1}(v)=0$, so $v\in\ker({f_{\mathfrak q}}^{m+1})=K$.
-\item $K\cap {x_1}M_{\mathfrak q}={x_1}K = f_{\mathfrak q}(K)$: "$\supseteq$" is trivial. For "$\subseteq$", if $w=f_{\mathfrak q}(v)\in K$ for
-some $v\in M_{\mathfrak q}$, then $v\in f_{\mathfrak q}^{-1}K=K$, so $w\in f_{\mathfrak q}(K) = x_1K$.
+\item ${f_{\mathfrak q}}^{-1}K_{\infty}=K_{\infty}$: if $v\in K_{\infty}$ then $f_{\mathfrak q}(v)\in K_{\infty}$ (as $f_{\mathfrak q}(K_{\infty})\subseteq K_{\infty}$); if $f_{\mathfrak q}(v)\in K_{\infty}=\ker(f_{\mathfrak q}^m)$
+then $f_{\mathfrak q}^{m+1}(v)=0$, so $v\in\ker({f_{\mathfrak q}}^{m+1})=K_{\infty}$.
+\item $K_{\infty}\cap {x_1}M_{\mathfrak q}={x_1}K_{\infty} = f_{\mathfrak q}(K_{\infty})$: "$\supseteq$" is trivial. For "$\subseteq$", if $w=f_{\mathfrak q}(v)\in K_{\infty}$ for
+some $v\in M_{\mathfrak q}$, then $v\in f_{\mathfrak q}^{-1}K_{\infty}=K_{\infty}$, so $w\in f_{\mathfrak q}(K_{\infty}) = x_1K_{\infty}$.
 \end{itemize}
 
-For any endomorphism $\varphi$ of a finite-length module $N$,
-additivity along $0\to\ker \varphi\to N\to \varphi(N)\to0$ and $0\to \varphi(N)\to N\to N/\varphi(N)\to0$ gives
-$\ell(\ker \varphi)=\ell(N/\varphi(N))$. We can apply this to $\varphi=f_{\mathfrak q}|_K$: since $\ker(f_{\mathfrak q})\subseteq K$, we
-have $\ker(f_{\mathfrak q}|_K)=\ker(f_{\mathfrak q})=V_{\mathfrak q}$, so with $f_{\mathfrak q}(K) = x_1K,$
-\[\ell(K/{x_1}K)=\ell(V_{\mathfrak q}).\]
+For any endomorphism $\varphi$ of a finite-length module $L$,
+additivity along $0\to\ker \varphi\to L\to \varphi(L)\to0$ and $0\to \varphi(L)\to L\to L/\varphi(L)\to0$ gives
+$\ell(\ker \varphi)=\ell(L/\varphi(L))$. We can apply this to $\varphi=f_{\mathfrak q}|_{K_{\infty}}$: since $\ker(f_{\mathfrak q})\subseteq K_{\infty}$, we
+have $\ker(f_{\mathfrak q}|_{K_{\infty}})=\ker(f_{\mathfrak q})=V_{\mathfrak q}$, so with $f_{\mathfrak q}(K_{\infty}) = x_1K_{\infty},$
+\[\ell(K_{\infty}/{x_1}K_{\infty})=\ell(V_{\mathfrak q}).\]
 
-On the other hand, the natural surjection $M_{\mathfrak q}/({x_1}M_{\mathfrak q})\to (M_{\mathfrak q}/K)/({x_1}(M_{\mathfrak q}/K))$ has
-the kernel $(K+({x_1}M_{\mathfrak q}))/({x_1}M_{\mathfrak q})\cong K/(K\cap ({x_1}M_{\mathfrak q}))=K/({x_1}K)$, giving (we now write $E = (M_{\mathfrak q}/K)$ for better readability) the exact sequence
-\[0\longrightarrow K/({x_1}K)\longrightarrow U_{\mathfrak q}\longrightarrow
- E/({x_1}E)\longrightarrow0,\]
-so by additivity and using $\ell(K/({x_1}K))=\ell(V_{\mathfrak q})$,
-\[\ell(U_{\mathfrak q}) = \ell(V_{\mathfrak q}) + \ell\bigl(E/({x_1}E)\bigr).\]
+On the other hand, the natural surjection $M_{\mathfrak q}/({x_1}M_{\mathfrak q})\to (M_{\mathfrak q}/K_{\infty})/({x_1}(M_{\mathfrak q}/K_{\infty}))$ has
+the kernel $(K_{\infty}+({x_1}M_{\mathfrak q}))/({x_1}M_{\mathfrak q})\cong K_{\infty}/(K_{\infty}\cap ({x_1}M_{\mathfrak q}))=K_{\infty}/({x_1}K_{\infty})$, giving (we now write $\tilde E = (M_{\mathfrak q}/K_{\infty})$ for better readability) the exact sequence
+\[0\longrightarrow K_{\infty}/({x_1}K_{\infty})\longrightarrow U_{\mathfrak q}\longrightarrow
+ \tilde E/({x_1}\tilde E)\longrightarrow0,\]
+so by additivity and using $\ell(K_{\infty}/({x_1}K_{\infty}))=\ell(V_{\mathfrak q})$,
+\[\ell(U_{\mathfrak q}) = \ell(V_{\mathfrak q}) + \ell\bigl(\tilde E/({x_1}\tilde E)\bigr).\]
 It remains to show the last term is positive.
 
 Since $\mathfrak q\in\operatorname{Supp}_TU$,
-$U_{\mathfrak q}=M_{\mathfrak q}/({x_1}M_{\mathfrak q})\ne0$. We choose $\mathfrak P\in\operatorname{Supp}_{k[x,\xi]_\mathfrak p}(M_{\mathfrak q}/({x_1}M_{\mathfrak q}))$
-and a minimal prime $\mathfrak p\subseteq\mathfrak P$ of $M_{\mathfrak q}$. We have shown above that ${x_1}\notin\mathfrak p$, so ${x_1}$ is a unit in the localization at $\mathfrak p$; as $K$ is annihilated by a power of ${x_1}$, $K_{\mathfrak p}=0$. From
-$0\to K_{\mathfrak p}\to (M_{\mathfrak q})_{\mathfrak p}\to E_{\mathfrak p}\to0$ we get
-$E_{\mathfrak p}\cong (M_{\mathfrak q})_{\mathfrak p}\ne0$, so $\mathfrak p$ lies in the support of $M_{\mathfrak q}/K$ in $k[x,\xi]_\mathfrak p$.
-Since support is closed under passing to larger primes \cite[Lemma 10.40.5 (Tag 00L2)]{Stacks} and
-$\mathfrak p\subseteq\mathfrak P$, also $\mathfrak P\in\operatorname{Supp}_{k[x,\xi]_\mathfrak p}E$, i.e.
-$E_{\mathfrak P}\ne0$.
+$U_{\mathfrak q}=M_{\mathfrak q}/({x_1}M_{\mathfrak q})\ne0$. We choose $\mathfrak P\in\operatorname{Supp}_{k[x,\xi]_{\mathfrak q}}(M_{\mathfrak q}/({x_1}M_{\mathfrak q}))$
+and a prime $\mathfrak p'\subseteq\mathfrak P$ minimal in $\operatorname{Supp}(M_{\mathfrak q})$ \cite[Tag 00E0]{Stacks}. By the above, ${x_1}\notin\mathfrak p'$, so ${x_1}$ is a unit in the localization at $\mathfrak p'$; as $K_{\infty}$ is annihilated by a power of ${x_1}$, $(K_{\infty})_{\mathfrak p'}=0$. From
+$0\to (K_{\infty})_{\mathfrak p'}\to (M_{\mathfrak q})_{\mathfrak p'}\to \tilde E_{\mathfrak p'}\to0$ we get
+$\tilde E_{\mathfrak p'}\cong (M_{\mathfrak q})_{\mathfrak p'}\ne0$, so $\mathfrak p'$ lies in the support of $M_{\mathfrak q}/K_{\infty}$ in $k[x,\xi]_{\mathfrak q}$.
+Since support is closed under passing to larger primes \cite[Tag 00L2]{Stacks} and
+$\mathfrak p'\subseteq\mathfrak P$, also $\mathfrak P\in\operatorname{Supp}_{k[x,\xi]_{\mathfrak q}}\tilde E$, i.e.
+$\tilde E_{\mathfrak P}\ne0$.
 
-Since $\mathfrak P\in\operatorname{Supp}_{k[x,\xi]_\mathfrak p}(M_{\mathfrak q}/({x_1}M_{\mathfrak q}))$ and $M_{\mathfrak q}/({x_1}M_{\mathfrak q})$ is annihilated by
-${x_1}$, we have ${x_1}\in\mathfrak P$. If $({x_1}E_{\mathfrak P})=E_{\mathfrak P}$, then as
-${x_1}$ lies in the maximal ideal of the local ring $(k[x,\xi]_\mathfrak p)_{\mathfrak P}$, Nakayama's lemma \cite{nakayama}, (see also \cite[Tag~00DV]{Stacks})
-would force $E_{\mathfrak P}=0$, a contradiction. Hence
-$\bigl(E/({x_1}E)\bigr)_{\mathfrak P}\ne0$, so $E/({x_1}E)\ne0$ and $\ell\left(E/({x_1}E)\right) > 0$.
+Since $\mathfrak P\in\operatorname{Supp}_{k[x,\xi]_{\mathfrak q}}(M_{\mathfrak q}/({x_1}M_{\mathfrak q}))$ and $M_{\mathfrak q}/({x_1}M_{\mathfrak q})$ is annihilated by
+${x_1}$, we have ${x_1}\in\mathfrak P$. If $({x_1}\tilde E_{\mathfrak P})=\tilde E_{\mathfrak P}$, then as
+${x_1}$ lies in the maximal ideal of the local ring $(k[x,\xi]_{\mathfrak q})_{\mathfrak P}$, Nakayama's lemma \cite{nakayama}, (see also \cite[Tag~00DV]{Stacks})
+would force $\tilde E_{\mathfrak P}=0$, a contradiction. Hence
+$\bigl(\tilde E/({x_1}\tilde E)\bigr)_{\mathfrak P}\ne0$, so $\tilde E/({x_1}\tilde E)\ne0$ and $\ell\left(\tilde E/({x_1}\tilde E)\right) > 0$.
 
-Therefore $\ell(U_{\mathfrak q})=\ell(V_{\mathfrak q})+\ell\bigl(E/{x_1}E\bigr)
+Therefore $\ell(U_{\mathfrak q})=\ell(V_{\mathfrak q})+\ell\bigl(\tilde E/{x_1}\tilde E\bigr)
 >\ell(V_{\mathfrak q})$.
 \end{proof}
-\AIadd{\formalref{\leanlib{AlgebraicAnalysis/Module/BaseLocalizedKoszulPositivity.lean}{25}{AlgebraicAnalysis.BaseLocalizedKoszulPositivity.localized_length_cokernel_gt_kernel};
-$x_1$ in no minimal prime: \leandecl{Stafford38/Characteristic/NoncharacteristicMinimalPrime.lean}{118}{Stafford38.Characteristic.NoncharacteristicMinimalPrime.canonical_minimalPrime_mem_of_normalCoordinate_false}}}
+\AIadd{\formalref{\leandecl{Stafford38/Characteristic/CanonicalKoszulContradiction.lean}{86}{Stafford38.Characteristic.CanonicalKoszulContradiction.coordinate_cokernel_subsingleton},
+\leandecl{Stafford38/Characteristic/CanonicalKoszulContradiction.lean}{50}{Stafford38.Characteristic.CanonicalKoszulContradiction.no_minimal_coordinate_cokernel_support}}}
+
 
 
 \begin{corollary} 
@@ -923,46 +952,57 @@ Thus $U = M/{x_1}M=0$ and therefore $\gr Q=(\gr Q)\,x_1$.
 \leandecl{Stafford38/Characteristic/CanonicalKoszulContradiction.lean}{50}{Stafford38.Characteristic.CanonicalKoszulContradiction.no_minimal_coordinate_cokernel_support}}}
 
 
-
-
 \section{Avoiding the hyperplane $\{x_1 = 0\}$}\label{sec:conormal-review}
-This section uses mainly vocabulary and concepts from algebraic geometry. We will define the most important quantities used here (for a comprehensive overview of the concepts of algebraic geometry, we refer to textbooks such as \cite{idk}), then state the two main results. Theorem~\ref{thm:asymptotic-conormal-formal}
+This section uses mainly vocabulary and concepts from algebraic geometry. We will define the most important quantities used here (for a comprehensive overview of the concepts of algebraic geometry, we refer to textbooks such as \cite{hartshorne}), then state the two main results. Theorem~\ref{thm:asymptotic-conormal-formal}
 shows that for a closed irreducible subvariety $Y\subseteq X$ not meeting the hyperplane
-$H=\{x_1=0\}$, the covector $dx_1$ is an asymptotic conormal direction of $Y$.
+$\{x_1=0\}$, the covector $dx_1$ is an asymptotic conormal direction of $Y$.
 Theorem~\ref{thm:coisotropic-exclusion} uses it to show that no nonempty closed,
-fibre-conical, involutive subset $W\subseteq T^*X$ that lies over the complement of $H$
+fibre-conical, involutive subset $W\subseteq T^*X$ whose projection to $X$ does not meet the hyperplane $\{x_1 = 0\}$ 
 can be contained in the zero set of a polynomial $P(\xi)$ with $P(1,0,\dots,0)\neq0$.
 We prove the first theorem in Subsection~\ref{sub:asym}, with the lemmas stated and
 proved where they are used, and the second in Subsection~\ref{sub:excl}.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Definitions}\label{sub:def_geom}
-Throughout this section $K$ denotes an algebraically closed field of
-characteristic zero, and $X=K^n$ is affine $n$-space with
-\emph{affine coordinates} $x=(x_1,\dots,x_n)$. Since $X$ has a global coordinate
-frame, $T^*X=X\times(K^n)^*$, so all cotangent fibres are identified with
-$(K^n)^*$. We write $\pi\colon T^*X\to X$ for the projection forgetting the
-covector.
+\subsection{Preliminaries and definitions from algebraic geometry}\label{sub:def_geom}
+Throughout this section $K$ denotes an algebraically closed field of characteristic
+zero. We apply the same notation as in Definition \ref{def:cotangent} with $k=K$ and, by Theorem~\ref{thm:nss}, identify $X=K^n$ with the closed points of
+$\mathbb A^n_K$ and $T^*X=K^n\times(K^n)^*$ with the closed points of
+$\operatorname{Spec}K[x,\xi]$, with \emph{affine coordinates} $x=(x_1,\dots,x_n)$. 
+Closed subsets of $X=K^n$ and of $T^*X=K^n\times(K^n)^*$ are the sets $V_K(J)$
+(Definition~\ref{def:spec}) for ideals $J\subseteq K[x]$, resp.\
+$J\subseteq K[x,\xi]$; by Theorem~\ref{thm:nss}(a) they are the
+closed points of the corresponding $V(J)$. As in Definition \ref{def:cotangent}, every fibre $T_yX$ is identified with $(K^n)^*.$
+Via the dual coordinates $\xi_1,\dots,\xi_n$ we regard
+polynomials $P\in K[\xi_1,\dots,\xi_n]$ as functions on $(K^n)^*$; in
+particular $P(1,0,\dots,0)=P(dx_1)$.
 
-The projective space $\mathbb P^n$ has \emph{homogeneous coordinates}
-$[Z_0:\dots:Z_n]$: a nonzero vector $(Z_0,\dots,Z_n)\in K^{n+1}$, taken up to
-multiplication by a common nonzero scalar. We embed $X\hookrightarrow\mathbb P^n$
-by $(x_1,\dots,x_n)\mapsto[1:x_1:\dots:x_n]$. Its image is the chart
-$\{Z_0\neq0\}$, and a point of this chart with homogeneous coordinates
-$(Z_0,\dots,Z_n)$ has affine coordinates $x_i=Z_i/Z_0$ (dehomogenization). The
-complement $\{Z_0=0\}$ is the hyperplane at infinity. A vector in $K^{n+1}$
-representing a point of $\mathbb P^n$ is called a homogeneous column vector; analogously to the affine coordinates, we call
-its entry $i$ its $x_i$-coordinate, entry $0$ being the homogenizing coordinate.
-For a row vector $\ell=(\ell_0,\dots,\ell_n)$, its \emph{affine part} is
-$(\ell_1,\dots,\ell_n)$.
-\begin{definition}\label{def:fieldextension}
+We write $H:=V_K(x_1)=\{(0,y_2,\dots,y_n)\}\subseteq X$ for the hyperplane on
+which the $x_1$-coordinate vanishes; then $\pi^{-1}(H)=H\times (K^n)^* = \{(y,\xi)\in T^*X:y_1 = 0\}\subseteq T^*X$.
+The covector $dx_1$, i.e.\ $\xi=(1,0,\dots,0)$, is conormal to $H$: it vanishes
+on every direction tangent to $H$.
+
+The projective space $\mathbb P^n$ consists of nonzero vectors
+$(q_0,\dots,q_n)\in K^{n+1}$ taken up to a common nonzero scalar (\emph{homogeneous
+coordinates}); we embed $X\hookrightarrow\mathbb P^n$ by $x\mapsto(1,x_1,\dots,x_n)$. A
+point with $q_0\neq0$ has \emph{affine coordinates} $x_i=q_i/q_0$, and the points with
+$q_0=0$ form the hyperplane at infinity. For a vector $q\in K^{n+1}$ representing a point
+of $\mathbb P^n$ we call its entry $i$ its $i$-coordinate, entry $0$ being the
+homogenizing coordinate. The \emph{affine part} of a row vector
+$\ell=(\ell_0,\dots,\ell_n)$ is $(\ell_1,\dots,\ell_n)$.
+\begin{definition}[{\cite[VIII.1, V]{lang}}]\label{def:fieldextension}
 If $K\subseteq L$ are fields, we call $L$ an extension of $K$ and write $L/K$. For $z\in L$ and $B\subseteq L$ we say:
 \begin{enumerate}
 \item $z$ is \emph{algebraic over $K$} if there exists a nonzero polynomial $g$
-in one variable over $K$ with $g(z)=0$;
+in one variable over $K$ with $g(z)=0$
 \item $z$ is \emph{transcendental over $K$} if no such polynomial exists, i.e.\
-$g(z)=0\Rightarrow g=0$;
-\item $\kappa/K$ is \emph{algebraic} if every element of $\kappa$ is algebraic over $K$;
-\item \item $B$ is \emph{algebraically independent} over $K$ if
+$g(z)=0\Rightarrow g=0$
+\item The \emph{minimal polynomial} of an algebraic $z$ over $K$ is the polynomial of
+least degree over $K$ with $g(z)=0$ and coefficient 1 for the highest degree term.
+\item $\kappa/K$ is \emph{algebraic} if every element of $\kappa$ is algebraic over $K$
+\item $\kappa/K$ is \emph{finitely generated} if $\kappa=K(z_1,\dots,z_m)$ for
+  finitely many $z_i$, and \emph{separable} if every $z\in\kappa$ that is algebraic over
+  $K$ has a minimal polynomial without repeated roots - in characteristic zero every
+  algebraic extension is separable.
+\item $B$ is \emph{algebraically independent} over $K$ if
 no nonzero polynomial over $K$ in finitely many elements of $B$ vanishes.
 \item A maximal algebraically independent subset is a \emph{transcendence basis} of
 $L/K$. If $B$ is a transcendence basis, then $L$ is algebraic over the subfield
@@ -974,7 +1014,7 @@ The elements of $\kappa$ that are algebraic over $K$ form a subfield, and every
 finite set generating $\kappa$ over $K$ contains a transcendence basis.
 \end{definition}
 
-\begin{definition}\label{def:omega}
+\begin{definition}[{\cite[§25]{matsumura}}]\label{def:omega}
 Let $\kappa/K$ be a field extension.
 \begin{enumerate}[label=(\alph*)]
 \item A \emph{$K$-derivation} of $\kappa$ is a $K$-linear map
@@ -997,6 +1037,29 @@ $\Omega_{\kappa/K}$ has dual derivations $D_1,\dots,D_d$ with
 $D_k(\beta_l)=\delta_{kl}$.
 \end{enumerate}
 \end{definition}
+\begin{definition}[{\cite[§10-§11]{matsumura}}]\label{def:valuation}
+Let $F$ be a field. 
+\begin{enumerate}[label=(\alph*)]
+\item A subring $W\subseteq F$ is a \emph{valuation ring} of $F$ if for
+every $a\in F^\times$ we have $a\in W$ or $a^{-1}\in W$. It is a local ring with
+maximal ideal $\mathfrak m_W=W\setminus W^\times$. 
+\item A \emph{discrete valuation ring} (DVR) is a Noetherian valuation ring $V\ne F$. Then $\mathfrak m_V$ is generated by some $\varpi\in V$, and every $f\in F^\times$ is $f=\varpi^ku$ with $k\in\mathbb Z$
+and $u\in V^\times$, and $\operatorname{ord}_V(f):=k$. 
+\item For a field $\kappa = V/\mathfrak m_V$ we write $\kappa[[t]]$ for the ring of formal power series, and $\kappa((t))$ for its fraction field (formal Laurent series).
+\end{enumerate}
+\end{definition}
+\begin{definition}\label{def:conormal}
+We say
+\begin{enumerate}[label=(\alph*)]
+\item A closed set $Y$ is \emph{irreducible} if it is not a union of two proper closed subsets, equivalently if $I(Y)$ is prime \cite[Cor I.1.4]{hartshorne}. 
+\item For irreducible closed $Y$, the \emph{smooth locus} $Y_{\mathrm{sm}}$ is the set of $y\in Y$ at which the Jacobian matrix of generators of $I(Y)$ has rank $n-\dim Y$, i.e.\ the points where $Y$ has a well-defined tangent space of the expected dimension $\dim Y$ (i.e. without kinks etc.). It is open and dense in $Y$. \cite[Ch. I.5]{hartshorne} 
+\item For $y\in Y$ the \emph{conormal space} is
+\[N^*_yY=\operatorname{span}_K\{\,df_y : f\in I(Y)\,\}\subseteq(K^n)^*,\qquad
+ df_y=\textstyle\sum_i\partial_if(y)\,dx_i,\]
+ \item $N(Y)=\bigcup_{y\in Y_{\mathrm{sm}}}N^*_yY\subseteq (K^n)^*$ denotes the \emph{conormal
+cone}. 
+\end{enumerate}
+\end{definition}
 
 
 \begin{definition}\label{def:dir}
@@ -1007,13 +1070,14 @@ the Zariski closure of the projectivization of $N(Y)$.
 \end{definition}
 
 \begin{definition}\label{def:fibre-can}
-A closed subset $W\subseteq T^*X$ is \emph{fibre-conical} if it is stable under the fibrewise scaling $(y,\xi)\mapsto(y,t\xi)$, $t\in\mathbb{G}_m$.
+A closed subset $W\subseteq T^*X$ is \emph{fibre-conical} if it is stable under the
+fibrewise scaling $(y,\xi)\mapsto(y,t\xi)$ for all $t\in K^\times$.
 \end{definition}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{theorem}\label{thm:asymptotic-conormal-formal}
 Let $Y\subseteq X$ be nonempty, closed, and irreducible with $Y\cap H=\varnothing$, and let
-$N(Y)=\bigcup_{y\in Y_{\mathrm{sm}}}N^*_yY\subseteq K^n$ be the conormal cone over the smooth locus $Y_{sm}$.
+$N(Y)=\bigcup_{y\in Y_{\mathrm{sm}}}N^*_yY\subseteq (K^n)^*$ be the conormal cone over the smooth locus $Y_{sm}$.
 \begin{enumerate}[label=(\roman*)]
 \item Every polynomial $P\in K[\xi_1,\dots,\xi_n]$ vanishing on $N(Y)$ satisfies $P(1,0,\dots,0)=0$.
 \item $[dx_1]\in\operatorname{Dir}(Y)$.
@@ -1041,13 +1105,13 @@ a polynomial with $P(1,0,\dots,0)\neq0$. If $P$ vanishes on $W$ and $W\cap\pi^{-
 \begin{proof}
 
 If $Y$ is nonempty, closed and irreducible, then $\mathfrak p:=I(Y)$ is a prime
-ideal and $Y=V(\mathfrak p)$. We will write $R=K[x]/\mathfrak p$, $F=\operatorname{Frac}(R)$ for the field of fractions, and $\bar x_i$ for the image of $x_i$ in $R$. \\
+ideal and $Y=V_K(\mathfrak p)$. We will write $R=K[x]/\mathfrak p$, $F=\operatorname{Frac}(R)$ for the field of fractions, and $\bar x_i$ for the image of $x_i$ in $R$. \\
 
 If $\bar x_1$ is algebraic over $K$, there exists a nonzero polynomial $g$ over $K$
 in one variable with $g(\bar x_1)=0$ (Def. \ref{def:fieldextension}), therefore \ $g(x_1)\in\mathfrak p$. Since $K$
 is algebraically closed, $g(x_1)=\lambda\prod_i(x_1-c_i)$ with
 $\lambda\in K^\times$, and as $\mathfrak p$ is prime, some factor $x_1-c$ lies
-in $\mathfrak p$. Thus $x_1=c$ on $Y=V(\mathfrak p)$, and since $Y\cap \{x_1 = 0\} = \varnothing$ and $Y\neq\varnothing$, we have $c\neq0$.
+in $\mathfrak p$. Thus $x_1=c$ on $Y=V_K(\mathfrak p)$, and since $Y\cap H = \varnothing$ and $Y\neq\varnothing$, we have $c\neq0$.
 In this case $f=x_1-c$ lies in $\mathfrak p=I(Y)$ and has the differential
 $df_y=dx_1$ at every point $y\in Y_{\mathrm{sm}}$, so $dx_1\in N_y^*Y$, and its coordinate vector in the dual basis $(1,0,\dots , 0) \in N(Y)$. Every polynomial vanishing on $N(Y)$ therefore vanishes at $(1,0,\dots , 0)$, and
 $[dx_1]\in\operatorname{Dir}(Y)$. So we may assume from now on that
@@ -1055,10 +1119,10 @@ $\bar x_1$ is transcendental over $K$.\\
 
 The rest of the proof follows this rough logic. We construct a discrete valuation
 ring $V$ of $F$ at infinity in which $x_1$ vanishes, and the corresponding
-generic point $y\in\kappa((t))^n$ of $Y$. The tangent cone $\mathcal C$ of $Y$ at
+generic point $y\in\kappa((t))^n$ of $Y$. The affine cone $\mathcal C$ of $Y$ over the projective tangent plane at
 $y$ has a basis $M$ of power series in $t$ that remains a basis at $t=0$, and
-whose reduction $M(0)$ has vanishing $x_1$-coordinate. Hence the row vector
-$u=(0,1,0,\dots,0)$, which reads off the $x_1$-coordinate, satisfies
+whose reduction $M(0)$ has vanishing $1$-coordinate. Hence the row vector
+$u=(0,1,0,\dots,0)$, which reads off the $1$-coordinate, satisfies
 $uM(0)=0$, and we lift it to row vectors $\ell(t)$ annihilating $\mathcal C$,
 with $\ell(0)=u$. By construction the affine part $\tilde\ell(t)$ consists of
 conormal covectors to $Y$ at $y$, and $\tilde\ell(0)=dx_1$. A polynomial
@@ -1076,7 +1140,7 @@ index $j$ with $\bar x_i/\bar x_j\in W$ for all $0\le i\le n$.
 ince $\bar x_1$ is transcendental over $K$, $S=K[\bar x_1]$ is a polynomial
 ring, and $\mathfrak q=\bar x_1S$ is a prime ideal of $S$. The localization
 $S_{\mathfrak q}\subseteq F$ is a local ring with maximal ideal
-$\bar x_1S_{\mathfrak q}$. By \cite[Tag~00IA, Lemma~10.50.2]{Stacks} there exists a valuation ring
+$\bar x_1S_{\mathfrak q}$. By \cite[Tag~00IA]{Stacks} there exists a valuation ring
 $W$ of $F$ dominating $S_{\mathfrak q}$, i.e.\ $S_{\mathfrak q}\subseteq W$ and
 $\mathfrak m_{S_{\mathfrak q}}=\mathfrak m_W\cap S_{\mathfrak q}$. Hence $K\subseteq W$ and
 $\bar x_1\in\mathfrak m_{S_{\mathfrak q}}\subseteq\mathfrak m_W$. For nonzero $a,b\in F$ either $a/b\in W$ or $b/a\in W$,
@@ -1101,20 +1165,20 @@ residue of $q_i$ in $\kappa$:
 \end{lemma}
 \begin{proof}
 Let $C_0=K[q_0,\dots,q_n,\bar x_1]\subseteq W$; it is finitely generated with
-$\operatorname{Frac}C_0=F$ since on one hand $\bar x_i = q_i/q_0$ so every $\bar x_i$ is in $\operatorname{Frac}C_0$ and on the other hand, $F$ is generated by the $\bar x_i$. Let $A$ be its integral closure in $F$. Since $C_0$ is a domain finitely generated over a field, $A$ is a finite $C_0$-module, hence a finitely generated, integrally
+$\operatorname{Frac}C_0=F$ since on one hand $\bar x_i = q_i/q_0$ so every $\bar x_i$ is in $\operatorname{Frac}C_0$ and on the other hand, $F$ is generated by the $\bar x_i$. Let $A$ be its integral closure in $F$. Since $C_0$ is a domain finitely generated over a field, $A$ is a finite $C_0$-module \cite[Thm. I.3.9A]{hartshorne}, hence a finitely generated, integrally
 closed Noetherian domain with $\operatorname{Frac}A=F$ and $q_i\in A$. As $W$ is a valuation ring and thereby is
-integrally closed, $A\subseteq W$. $\bar x_1 \in \mathfrak m_W$, so $x_1$ is a nonzero nonunit of $W$ and therefore also of $A$. Since $\bar x_1$ is a nonzero nonunit of the Noetherian domain $A$, the ideal
+integrally closed \cite[Prop 5.18]{atiyah}, $A\subseteq W$. $\bar x_1 \in \mathfrak m_W$, so $x_1$ is a nonzero nonunit of $W$ and therefore also of $A$. Since $\bar x_1$ is a nonzero nonunit of the Noetherian domain $A$, the ideal
 $\bar x_1A$ is proper, so some prime $\mathfrak p_D$ is minimal among the primes
 containing $\bar x_1$. By Krull's principal ideal theorem
-\cite[Lemma 10.60.11]{Stacks}, $\operatorname{ht}\mathfrak p_D\le1$. Because $A$
+\cite[Corr. 11.17]{atiyah}, $\operatorname{ht}\mathfrak p_D\le1$. Because $A$
 is a domain, the only prime of height $0$ is $(0)$, and $\bar x_1\neq0$ lies in
 $\mathfrak p_D$; hence $\operatorname{ht}\mathfrak p_D=1$.
 
 Put $V:=A_{\mathfrak p_D}$. This is a Noetherian local domain. It is normal,
-since a localization of an integrally closed domain is integrally closed, and
+since a localization of an integrally closed domain is integrally closed \cite[Prop 5.12]{atiyah}, and
 its dimension equals $\operatorname{ht}\mathfrak p_D=1$. A Noetherian local
 normal domain of dimension one is a discrete valuation ring
-\cite[Lemma~10.119.7]{Stacks}, so $V$ is a discrete valuation ring.
+\cite[Thm. 11.2]{matsumura}, so $V$ is a discrete valuation ring.
 
 It remains to check the listed properties.
 \begin{itemize}
@@ -1124,7 +1188,7 @@ domain $A$ embeds into its localization $V$.
 $\operatorname{Frac}A=F$.
 \item $q_i\in V$ for all $i$: since $q_i\in A\subseteq V$.
 \item $\bar x_1\in\mathfrak m_V$: since $\mathfrak m_V=\mathfrak p_DA_{\mathfrak p_D}$
-and $\bar x_1\in\mathfrak p_D$. Since $Y\cap H = Y\cap \{x_1 = 0\}=\varnothing$, the ideal $(\mathfrak p,x_1)$ has empty zero set, so $1=p+gx_1$ for some $p\in\mathfrak p$, $g\in K[x]$ (by the Nullstellensatz, Theorem \ref{thm:nss}). Modulo
+and $\bar x_1\in\mathfrak p_D$. $V_K(p, x_1) = Y \cap H = \varnothing$, so $1 \in (p, x_1)$ by Theorem \ref{thm:nss}, i.e. $1=p+gx_1$ for some $p\in\mathfrak p$, $g\in K[x]$. Modulo
 $\mathfrak p$ this gives $1=\bar g\,\bar x_1$, so $\bar x_1\in R^\times$.
 If $R\subseteq V$, then $\bar x_1\in R^\times\subseteq V^\times$, contradicting
 $\bar x_1\in\mathfrak m_V$.
@@ -1139,7 +1203,7 @@ $K[\operatorname{res}(q_0),\dots,\operatorname{res}(q_n)]\subseteq L$. So every 
 $A/\mathfrak p_D$, and hence of its fraction field $\kappa$, is algebraic over $L$.
 
 (c) $A$ is a finitely generated $K$-algebra, so $\Omega_{A/K}$ is a finite
-$A$-module, and $\Omega_{V/K}=V\otimes_A\Omega_{A/K}$ since $V$ is a localization of $A$.
+$A$-module, and $\Omega_{V/K}=V\otimes_A\Omega_{A/K}$ since $V$ is a localization of $A$ \cite[Prop II.8.2A]{hartshorne}.
 \end{proof}
 
 By Lemma~\ref{lem:place} there exists a discrete valuation ring $V\subset F$ with
@@ -1148,9 +1212,9 @@ generator of $\mathfrak m_V$, then every nonzero $f \in F$ can be written as $f 
 
 Let $\widehat V$ be the completion of $V$. Since $V\supseteq K$
 and $K$ is of characteristic zero, there exists a coefficient field of $\widehat V$
-containing $K$ and mapping isomorphically onto $\kappa$ \cite[Tag~0C0S]{Stacks};
+containing $K$ and mapping isomorphically onto $\kappa$ \cite[Thm. 28.3]{matsumura};
 choosing one gives us an isomorphism $\widehat V\cong\kappa[[t]]$ under which
-$\varpi$ corresponds to the formal variable $t$. Since the natural map $V\to\widehat V$ is injective ($\bigcap_k\varpi^kV=0$) and extends to an embedding $F\hookrightarrow\kappa((t))$, we can identify elements of $F$ with
+$\varpi$ corresponds to the formal variable $t$. Since the natural map $V\to\widehat V$ is injective ($\bigcap_k\varpi^kV=0$ \cite[Corr. 10.20]{atiyah}) and extends to an embedding $F\hookrightarrow\kappa((t))$, we can identify elements of $F$ with
 Laurent series. The residue $\operatorname{res}(f)$ of $f \in V$ is then just the constant term $f(0)$ of its series; in particular $\operatorname{res}(q_i) = q_i(0).$
 
 Let $a=\operatorname{ord}_V(q_0)$ and $b=\operatorname{ord}_V(q_1)$. $a,b\geq 0$ since $q_0,q_1$ are elements of $V$, so that in $\kappa[[t]]$
@@ -1180,46 +1244,33 @@ $\mathcal C=\rho^{-1}(\Theta_y)$ for the affine cone over the projective tangent
 plane. Our goal is to build a basis of $\mathcal C$ whose entries are power
 series in $t$ and which also remains a basis at $t=0$. 
 We do so by building independent vectors from the tangent planes of $q(t)$.
-Since $0<a<b$, in $\kappa$ we have $q_0(t)=q_1(0)=0$ and $q_j(0)=1$. Let
+Since $0<a<b$, in $\kappa$ we have $q_0(0)=q_1(0)=0$ and $q_j(0)=1$. Let
 $L=K(q_0(0),\dots,q_n(0))\subseteq\kappa$; by Lemma~\ref{lem:place}(b),
 $\kappa/L$ is algebraic.
 
 \begin{lemma}\label{lem:kappa}
-There exist indices $i_1,\dots,i_d\notin\{0,1,j\}$ such that
-$d(q_{i_1}(0)),\dots,d(q_{i_r}(0))$ form a basis of $\Omega_{\kappa/K}$. In
-particular $d'=\dim_\kappa\Omega_{\kappa/K}<\infty$.
+There exist indices $i_1,\dots,i_{d'}\notin\{0,1,j\}$ such that
+$d(q_{i_1}(0)),\dots,d(q_{i_{d'}}(0))$ form a basis of $\Omega_{\kappa/K}$. In
+particular $d' = \dim_\kappa\Omega_{\kappa/K}<\infty$.
 \end{lemma}
 \begin{proof}
-Since $q_0(0)=q_1(0)=0$ and $q_j(0)=1$, the field $L$ is
-generated over $K$ by the (finitely many) $q_i(0)$ with $i\notin\{0,1,j\}$. By
-Definition~\ref{def:fieldextension}, some subset
-$B=\{q_{i_1}(0),\dots,q_{i_{d'}}(0)\}$ of these is a transcendence basis of
-$L/K$; which defines $d' = $. As $L/K(B)$ and $\kappa/L$ are algebraic, so is
-$\kappa/K(B)$.\\
 
-By Definition~\ref{def:omega}, the differentials $da$, $a\in\kappa$, span
-$\Omega_{\kappa/K}$, so it suffices to show $da\in\operatorname{span}_\kappa
-\{d(q_{i_k}(0))\}$ for an arbitrary $a\in\kappa$. Fix $a\in\kappa$. Since
-$\kappa/K(B)$ is algebraic, $a$ has a minimal polynomial $g$ over $K(B)$, i.e.\
-the monic polynomial of least degree over $K(B)$ with $g(a)=0$. 
-Since $K$ has characteristic zero, $g'(a)\neq0$. Applying $d$ to $g(a)=0$
-and defining $\partial_k := \partial_{q_{i_k}(0)}$ gives
-$g'(a)\,da+\sum_k(\partial_kg)(a)\,d(q_{i_k}(0))=0$, so
-$da\in\operatorname{span}_\kappa\{d(q_{i_k}(0))\}$. As the $da$ span
-$\Omega_{\kappa/K}$, so do the $d(q_{i_k}(0))$.\\
-
-$K(B)$ is a rational function field, so the partial
-derivatives $\partial_k$ are $K$-derivations of $K(B)$, and
-each extends to a $K$-derivation $D_k$ of the separable algebraic extension
-$\kappa$ (by differentiating the minimal polynomials). Then
-$D_k(q_{i_l}(0))=\delta_{kl}$, so if $\sum_lc_l\,d(q_{i_l}(0))=0$, applying
-$D_k$ gives $c_k=0$, i.e. they are linearly independent.
+Since $q_0(0)=q_1(0)=0$ and $q_j(0)=1$, the field $L$ is generated over $K$ by
+the finitely many $q_i(0)$ with $i\notin\{0,1,j\}$, so some subset
+$B=\{q_{i_1}(0),\dots,q_{i_{d'}}(0)\}$ of them is a transcendence basis of $L/K$
+\cite[Thm. VIII.1.1]{lang}. As $L/K(B)$ and $\kappa/L$ are algebraic
+(Lemma~\ref{lem:place}(b)), so is $\kappa/K(B)$; hence $B$ is also a
+transcendence basis of $\kappa/K$. Since $K$ has characteristic zero, a
+transcendence basis of $\kappa/K$ is a differential basis, i.e.\ its
+differentials form a $\kappa$-basis of $\Omega_{\kappa/K}$
+\cite[Thm.~26.5]{matsumura}.
 \end{proof}
 
-We write for all $q_i(t) = \sum_rc_{ir}t^r$. The derivative with respect to $t$ is then $q'_i(t) = \sum_rr\,c_rt^{r-1}$. This is a $K$-derivation of $\kappa((t))$. By Lemma \ref{lem:kappa} there exist $i_1,\dots,i_{d'}\notin\{0,1,j\}$ such that $\{d(q_{i_1}(0)),\dots,d(q_{i_{d'}}(0))\}$ form a basis of $\Omega_{\kappa/K}$. Let $D_1,\dots,D_{d'}$ be the dual $K$-derivations of this basis (Definition~\ref{def:omega}(c)). 
-We apply $D_k$ coefficientwise to $q_i(t)=\sum_rc_{ir}t^r$ and define $Z_{ik}(t):=\sum_rD_k(c_{ir})t^r$. Since $D_k(q_{i_l}(0))=\delta_{kl}$, the reduction $Z(0)$ is the identity on the rows $i_1,\dots,i_d$, and since $q_j(t) = 1$ is constant, $Z_{jk}(t)=0$. Rows $0$ and $1$ of $Z(t)$ have order at least $a$ and $b$, since $D_k$ does not differentiate with respect to t. 
 
-Let $\tilde Z(t)$ be the ${d'}\times {d'}$ submatrix of $(t)Z$ consisting of the rows
+We write for all $q_i(t) = \sum_rc_{ir}t^r$. The derivative with respect to $t$ is then $q'_i(t) = \sum_rr\,c_rt^{r-1}$. This is a $K$-derivation of $\kappa((t))$. By Lemma \ref{lem:kappa} there exist $i_1,\dots,i_{d'}\notin\{0,1,j\}$ such that $\{d(q_{i_1}(0)),\dots,d(q_{i_{d'}}(0))\}$ form a basis of $\Omega_{\kappa/K}$. Let $D_1,\dots,D_{d'}$ be the dual $K$-derivations of this basis (Definition~\ref{def:omega}(c)). 
+We apply $D_k$ coefficientwise to $q_i(t)=\sum_rc_{ir}t^r$ and define $Z_{ik}(t):=\sum_rD_k(c_{ir})t^r$. Since $D_k(q_{i_l}(0))=\delta_{kl}$, the reduction $Z(0)$ is the identity on the rows $i_1,\dots,i_{d'}$, and since $q_j(t) = 1$ is constant, $Z_{jk}(t)=0$. Rows $0$ and $1$ of $Z(t)$ have order at least $a$ and $b$, since $D_k$ does not differentiate with respect to t. 
+
+Let $\tilde Z(t)$ be the ${d'}\times {d'}$ submatrix of $Z(t)$ consisting of the rows
 $i_1,\dots,i_{d'}$ and all columns. Its reduction $\tilde Z(0)$ is the identity
 matrix, so $\tilde Z(t)$ is invertible over $\kappa[[t]]$. Hence there exists a unique vector
 $\lambda(t)=(\lambda_1(t),\dots,\lambda_{d'}(t))^{\mathsf T}\in\kappa[[t]]^{d'}$ with
@@ -1247,9 +1298,9 @@ there; and $\tau(0)\neq0$, i.e. we have ${d'}+2$ independent reduced column vect
 minor of $M(t)$ is a unit of $\kappa[[t]]$; hence the columns of $M(t)$ are also
 linearly independent over $\kappa((t))$, so they span a $({d'}+2)$-dimensional
 subspace there.
-Furthermore, every column of $M(0)$ has a vanishing entry for the $x_1$-coordinate:
+Furthermore, every column of $M(0)$ has a vanishing entry for the $1$-coordinate:
 $q_1(0)=0$ (as $b>0$), the entries $Z_{1k}(t)$ have order at least $b>0$, hence $Z_{1k}(0) = 0$, and
-$\tau_1(0)=0$. Thus the span of $q(0), Z_{\bullet1}(0),\dots, Z_{\bullet {d'}}(0), \tau(0)$ is contained in $\{x_1=0\}$ and also has dimension ${d'}+2$. 
+$\tau_1(0)=0$. Thus the span of $q(0), Z_{\bullet1}(0),\dots, Z_{\bullet {d'}}(0), \tau(0)$ is contained in $ \{v \in \kappa^{n+1} : v_1 = 0\}$ and also has dimension ${d'}+2$. 
 
 To show that the columns of $M(t)$ really span all of $\mathcal C$, we must still show that a) the dimensions match and b) the columns actually lie in $\mathcal C$. The following Lemma will help us with that.
 \begin{lemma}\label{lem:tangent}
@@ -1262,12 +1313,12 @@ $\delta q(t)=(\delta q_i(t))_i$ lies in $\mathcal C$; moreover $q(t)\in\mathcal 
 \end{lemma}
 \begin{proof}
 (a) For a finitely generated field extension $F/K$ in characteristic $0$, $\dim_F\Omega_{F/K}=\operatorname{trdeg}_KF = m$ \cite[Thm.~II.8.6A]{hartshorne}.
-The second fundamental exact sequence \cite{matsumura, hartshorne}[...] for $K[x]\to R=K[x]/\mathfrak p$ is
+The second fundamental exact sequence \cite[Theorem 25.2]{matsumura} for $K[x]\to R=K[x]/\mathfrak p$ is
 \[\mathfrak p/\mathfrak p^2\to\Omega_{K[x]/K}\otimes_{K[x]}R\to\Omega_{R/K}\to0 ,\]
 where $\Omega_{K[x]/K}$ is free on $dx_1,\dots,dx_n$, so the middle term is $R^n$
 and the first map sends $f$ to $df(\bar x)$. Hence
 $\Omega_{R/K}=R^n/\operatorname{span}_R\{df(\bar x):f\in\mathfrak p\}$.
-For a multiplicative set $S\subseteq R$, $\Omega_{S^{-1}R/K}=S^{-1}\Omega_{R/K}$. In particular, this means for $F=S^{-1}R$ with
+For a multiplicative set $S\subseteq R$, $\Omega_{S^{-1}R/K}=S^{-1}\Omega_{R/K}$ \cite[Prop II.8.2A]{hartshorne}. In particular, this means for $F=S^{-1}R$ with
 $S=R\smallsetminus\{0\}$ $\Omega_{F/K}=F\otimes_R\Omega_{R/K}$ and since localization is exact, applying $F\otimes_R-$ to the description of
 $\Omega_{R/K}$ above gives
 \[ \Omega_{F/K}=F^n/\operatorname{span}_F\{df(\bar x):f\in\mathfrak p\}.\]
@@ -1324,21 +1375,22 @@ As $\rho(\mathcal C)=\Theta_y$, the vector $(\ell_1,\dots,\ell_n)$ annihilates
 $\Theta_y=\bigcap_f\ker df_y$, hence lies in
 $\Theta_y^\perp=\operatorname{span}\{df_y:f\in\mathfrak p\}$.
 \end{proof}
-Let $u=(0,1,0,\dots,0)$ be the row vector reading off the $x_1$-coordinate;
-since $\operatorname{im}M(0)\subseteq\{x_1=0\}$, we know that $uM(0)=0$.
+
+Let $u=(0,1,0,\dots,0)$ be the row vector reading off the $1$-coordinate;
+since $\operatorname{im}M(0)\subseteq \{v \in \kappa^{n+1} : v_1 = 0\}$, we know that $uM(0)=0$.
 We can lift $u$ to a row vector $\ell(t)\in\kappa[[t]]^{n+1}$ with $\ell(t) M(t)=0$ and
-$\ell(0)=u$: Since $M(0)$ has full column rank ${d'}+2$, there is a set $I$ of
-${d'}+2$ row indices for which the square submatrix $M_I(0)$ of $M(0)$ is
-invertible; then $M_I$ is invertible over $\kappa[[t]]$, since its determinant
-has a nonzero constant term. Let $J$ be the complementary set of row indices,
+$\ell(0)=u$: Since $M(0)$ has full column rank ${d'}+2$, there is a set $\iota$ of
+${d'}+2$ row indices for which the square submatrix $M_\iota(0)$ of $M(0)$ is
+invertible; then $M_\iota$ is invertible over $\kappa[[t]]$, since its determinant
+has a nonzero constant term. Let $\upsilon$ be the complementary set of row indices,
 and define $\ell(t)$ by
-\[\ell_J(t)=u_J,\qquad \ell_I(t)=-u_JM_J(t)M_I^{-1}(t),\]
-where $M_J(t)$ denotes the submatrix of $M(t)$ with rows in $J$. Then
-$\ell(t) M(t)=\ell_I(t)M_I(t)+\ell_J(t)M_J(t)=-u_JM_J(t)+u_JM_J(t)=0$. Moreover
-$uM(0)=0$ gives $u_I=-u_JM_J(0)M_I(0)^{-1}$, hence $\ell(0)=u$.
+\[\ell_\upsilon(t)=u_\upsilon,\qquad \ell_\iota(t)=-u_\upsilon M_\upsilon (t)M_\iota^{-1}(t),\]
+where $M_\upsilon(t)$ denotes the submatrix of $M(t)$ with rows in $\upsilon$. Then
+$\ell(t) M(t)=\ell_\iota(t)M_\iota(t)+\ell_\upsilon(t)M_\upsilon(t)=-u_\upsilon M_\upsilon(t)+u_\upsilon M_\upsilon(t)=0$. Moreover
+$uM(0)=0$ gives $u_\iota=-u_\upsilon M_\upsilon(0)M_\iota(0)^{-1}$, hence $\ell(0)=u$.
 
 Since the columns of $M(t)$ span $\mathcal C$, $\ell(t)$ annihilates $\mathcal C$, so by
-Lemma~\ref{lem:tangent}(c) its affine part
+Lemma~\ref{lem:ell} its affine part
 $\tilde\ell(t)=(\ell_1(t),\dots,\ell_n(t))$ lies in
 $\operatorname{span}\{df_y:f\in\mathfrak p\}$, and since $\ell(0)=u$,
 $\tilde\ell(0)=(1,0,\dots,0)$.
@@ -1368,15 +1420,13 @@ Now $\tilde\ell(t)\in\kappa[[t]]^n$ and $P$ has coefficients in $K$, so
 $P(\tilde\ell(t))\in\kappa[[t]]$, and its constant term is $P(\tilde\ell(0))$. Since $P(\tilde\ell(t))=0$, we get
 $P(\tilde\ell(0))=P(1,0,\dots,0)=0$, which is statement~(i).
 
-We have shown that every polynomial $P$ vanishing on $N(Y)$ vanishes at
-$(1,0,\dots,0)$ (statement~(i)). By the definition of the Zariski closure,
-$\operatorname{Dir}(Y)$ is the common zero set of all homogeneous polynomials
-vanishing on $\{[\xi]:0\ne\xi\in N(Y)\}$, equivalently on $N(Y)$. Each such
-polynomial vanishes at $(1,0,\dots,0)$, hence at its class
-$[dx_1]=[1:0:\dots:0]$. Therefore $[dx_1]\in\operatorname{Dir}(Y)$. 
+By statement~(i), every polynomial vanishing on $N(Y)$ vanishes at $(1,0,\dots,0)$. We
+use this to show $[dx_1]\in\operatorname{Dir}(Y)$. Recall that $\operatorname{Dir}(Y)$ is the Zariski closure of the set of classes $[\xi]$ with $0\ne\xi\in N(Y)$, and that a point of $\mathbb P((K^n)^*)$ lies in the closure of a set $S$ if and only if every homogeneous polynomial vanishing on $S$ also vanishes at that point. So let $G$ be a homogeneous polynomial vanishing on all classes $[\xi]$ with $0\ne\xi\in N(Y)$. Since also $G(t\xi)=t^{\deg G}G(\xi)$ by homogeneity, $G$ vanishes on every nonzero $\xi\in N(Y)$ (and at $0$ if $\deg G>0$), hence on $N(Y)$; if $\deg G=0$, $G$ is a constant that vanishes somewhere, so $G=0$. By~(i), $G(1,0,\dots,0)=0$,
+i.e.\ $G$ vanishes at $[dx_1]=[1:0:\dots:0]$. As $G$ was arbitrary,
+$[dx_1]\in\operatorname{Dir}(Y)$.
 \end{proof}
 
-\AIadd{\formalref[{any algebraically closed field of characteristic $0$; (i) is the affine-cone form used in Section~\ref{sub:excl}}]{%
+\AIadd{\formalref{
 \leandecl{Stafford38/Geometry/GeneralAsymptoticConormal.lean}{42}{Stafford38.Geometry.GeneralAsymptoticConormal.coordinate_axis_mem_projective_conormal_directions};
 \leandecl{Stafford38/Geometry/GeneralDivisorialVisibleFrame.lean}{55}{Stafford38.Geometry.GeneralDivisorialVisibleFrame.generalDivisorialVisibleFrameWithResidueAlgebraicity};
 \leandecl{Stafford38/Geometry/PaperSameWitnessTangentDimension.lean}{70}{Stafford38.Geometry.PaperSameWitnessTangentDimension.tangent_finrank_le_residue_add_one_of_witness};
@@ -1400,34 +1450,30 @@ polynomial in $J$ again lie in $J$: if $g=\sum_dg_d\in J$ and
 $(y,\xi)\in W$, then $\sum_da^dg_d(y,\xi)=g(y,a\xi)=0$ for all $a\in K^\times$,
 and a polynomial in $a$ with infinitely many roots is zero, so every
 $g_d(y,\xi)=0$ and therefore $g_d \in J$. 
-Let $g \in J$ be written in its $\xi$-homogeneous components form. In particular, $g_0 \in J$. Since $g_0$ has $\xi$-degree $0$, it is a polynomial in $x$ alone, so $g_0 \in B$. Let $Y = V(B)$. For $y \in Y$ we therefore have $g(y, 0) = g_0(y) = 0$, so every $g \in J$ vanishes at $(y,0)$, i.e. $(y,0)\in V(J)$. Since $W$ is closed, $V(J) = V(I(W)) = W$, hence $(y, 0) \in W$, or $Y \times \{0\} \subseteq W$. 
-Furthermore, $Y$ is the projection of $W$ and is therefore per definition of $Y$ closed: $\pi(W)\subseteq Y$ since for ($y',\xi')\in W$ and $f \in B\subseteq J$, we have $f(y') = f(y',\xi') = 0$ so $y' \in V(B) = Y$, and $Y\subseteq \pi(W)$, since if $y \in Y$, then also $(y,0)\in W$, so $y = \pi(y,0) \in \pi(W)$.\\
+Let $g \in J$ be written in its $\xi$-homogeneous components form. In particular, $g_0 \in J$. Since $g_0$ has $\xi$-degree $0$, it is a polynomial in $x$ alone, so $g_0 \in B$. Let $Y = V_K(B)$. For $y \in Y$ we therefore have $g(y, 0) = g_0(y) = 0$, so every $g \in J$ vanishes at $(y,0)$, i.e. $(y,0)\in V_K(J)$. $V_K(J) = V_K(I(W)) = W$, since $W$ is closed \cite[Prop. I.1.2]{hartshorne},  hence $(y, 0) \in W$, or $Y \times \{0\} \subseteq W$. 
+Furthermore, $Y$ is the projection of $W$ and is therefore per definition of $Y$ closed: $\pi(W)\subseteq Y$ since for ($y',\xi')\in W$ and $f \in B\subseteq J$, we have $f(y') = f(y',\xi') = 0$ so $y' \in V_K(B) = Y$, and $Y\subseteq \pi(W)$, since if $y \in Y$, then also $(y,0)\in W$, so $y = \pi(y,0) \in \pi(W)$.\\
 Lastly, assume there exists a $y \in Y\cap H$, then $(y,0)\in W$ and $\pi(y,0) = y \in H$, which would put $(y,0)\in W\cap \pi^{-1}(H)$, which is wrong by our assumption. Therefore, $Y \cap H = \varnothing$.\\
 
-Let $f\in B$. Then $f\circ\pi\in J$.
+For the next argument, we also refer to \cite[Ch. E.2]{HTT}. Let $f\in B$. Then $f\circ\pi\in J$.
 The Hamiltonian derivation of $f$ applied to a $a \in J$ is
-\[
- H_f g=\sum_i\frac{\partial f}{\partial x_i}
- \frac{\partial g}{\partial\xi_i} = \{f,g\}
-\]
+\[ H_f g=\sum_i\frac{\partial f}{\partial x_i}
+ \frac{\partial g}{\partial\xi_i} = \{f,g\}\]
 since the second term of the Poisson bracket vanishes because $f$ does not depend on $\xi$. Since $f, g \in J$ and $\{J, J\} \subseteq J$ by the involutivity of $W$, it follows that $H_f g \in J$ and by induction also $H^m_fg \in J$. 
 For a fixed $y \in Y$ and $g \in J$, we define the polynomial $\varphi(t)=g(y,t\,df_y)\in K[t]$. Its derivative is $\varphi'(t) = \sum_i\partial_{x_i}f(y)\frac{\partial g}{\partial \xi_i}{(y, tdf_y)} = H_fg(y, tdf_y)$, so by iteration, $\varphi^{(m)}(t) = H^m_fg(y, tdf_y)$ for $m\geq 0.$ 
-Evaluating at $t = 0$, $\varphi^{(m)}(0) = H_f^mg(y,0).$ Since we have established that $(y,0)\in W$ and $H^m_fg \in J$, and all polynomials in $J$ vanish on $W$, we have $\varphi^{(m)}(0) = 0$ for all $m\geq 0$ -- so $\varphi(t)$ is a polynomial it $t$ all of whose derivatives vanish at $t = 0$.  If we write $\varphi(t) = \sum_m c_mt^m$, then $\varphi^{(m)}(0) = m!c_m$ and since $m!\neq 0$ because $K$ has characteristic zero, $c_m = 0$ for all $m$, and therefore, $\varphi(t) = 0$ everywhere. Remembering the definition of $\phi = g(y,t\,df_y) = 0$, so $(y,t\,df_y) \in V(J) = W$.
+Evaluating at $t = 0$, $\varphi^{(m)}(0) = H_f^mg(y,0).$ Since we have established that $(y,0)\in W$ and $H^m_fg \in J$, and all polynomials in $J$ vanish on $W$, we have $\varphi^{(m)}(0) = 0$ for all $m\geq 0$ -- so $\varphi(t)$ is a polynomial it $t$ all of whose derivatives vanish at $t = 0$.  If we write $\varphi(t) = \sum_m c_mt^m$, then $\varphi^{(m)}(0) = m!c_m$ and since $m!\neq 0$ because $K$ has characteristic zero, $c_m = 0$ for all $m$, and therefore, $\varphi(t) = 0$ everywhere. Remembering the definition of $\phi = g(y,t\,df_y) = 0$, so $(y,t\,df_y) \in V_K(J) = W$.
 More generally, since any linear combination of elements in $B$ is again in $B$, we can apply this result to $f = \sum_a c_af_a \in B$ and evaluating at $t = 1$, it follows that 
 \[(y, df_y) = (y, d(\sum_ac_af_a)_y) = (y, \sum_a c_ad(f_a)_y) \in W,\]
 so the whole linear span $\{y\}\times \operatorname{span}\{df_y:f \in B\}$ is a subset of $W$.\\
 
 
-Since $V(B)=Y=\pi(W)\neq\varnothing$, $B \neq K[x]$, so $B$ must have at least one minimal prime. The ideal $B$ is radical (by construction since it is a vanishing ideal) in the Noetherian ring $K[x]$, so $B$ has only finitely many minimal primes $\mathfrak q_1,\dots,\mathfrak q_r$ and $B=\bigcap_i\mathfrak q_i$. We choose $\mathfrak q=\mathfrak q_1$ and set $Y_0=V(\mathfrak q)$. Since $\mathfrak q$ is prime, $1\notin\mathfrak q$, so $Y_0\neq\varnothing$ by the Nullstellensatz (Theorem~\ref{thm:nss}); moreover $Y_0$ is closed and irreducible since $\mathfrak q$ is prime \cite[Cor.~I.1.4]{hartshorne}, and $Y_0\subseteq Y$, hence
+Since $V_K(B)=Y=\pi(W)\neq\varnothing$, $B \neq K[x]$, so $B$ must have at least one minimal prime. The ideal $B$ is radical (by construction since it is a vanishing ideal) in the Noetherian ring $K[x]$, so $B$ has only finitely many minimal primes $\mathfrak q_1,\dots,\mathfrak q_r$ and $B=\bigcap_i\mathfrak q_i$ \cite[Cor. I.1.4 and Prop. I.1.5]{hartshorne}. We choose $\mathfrak q=\mathfrak q_1$ and set $Y_0=V_K(\mathfrak q)$. Since $\mathfrak q$ is prime, $1\notin\mathfrak q$, so $Y_0\neq\varnothing$ by Theorem~\ref{thm:nss}; moreover $Y_0$ is closed and irreducible since $\mathfrak q$ is prime \cite[Cor.~I.1.4]{hartshorne}, and since primeness implies $\mathfrak q$ is radical, $\mathfrak q = I(Y_0)$ by Theorem \ref{thm:nss}. Additionally, $Y_0\subseteq Y$, hence
 $Y_0\cap H=\varnothing$, as we have already established $Y\cap H=\varnothing$.
 
-Furthermore, if $r = 1$, we choose $s = 1$, then $sh \in \mathfrak q = B$, and if $r\geq 2$, choose for every $i\geq 2$ elemens $s_i \in \mathfrak q_i \setminus \mathfrak q$. Then $s = s_2s_3\dots s_r$ does not lie in $\mathfrak q$ since no factor lies in $\mathfrak q,$ but does lie in every other $\mathfrak q_i$ since they are ideals and one of the factors lies in them. On the other hand, if $h \in \mathfrak q$, then $sh \in \mathfrak q$ since $h\in \mathfrak q$, and $sh \in \mathfrak q_i$ since $s \in \mathfrak q_i$ for all $i\geq 2$. Therefore, $sh \in \bigcap_i \mathfrak q_i = B,$ i.e. $s\mathfrak q \subseteq B.$ We now fix such a $h \in \mathfrak q,$ and define $Y_0 = V(\mathfrak q).$ For a $y \in Y_0\cap\{s\neq0\}$, $(y, dh_y) \in W:$
+Furthermore, if $r = 1$, we choose $s = 1$, then $sh \in \mathfrak q = B$, and if $r\geq 2$, choose for every $i\geq 2$ elemens $s_i \in \mathfrak q_i \setminus \mathfrak q$. Then $s = s_2s_3\dots s_r$ does not lie in $\mathfrak q$ since no factor lies in $\mathfrak q,$ but does lie in every other $\mathfrak q_i$ since they are ideals and one of the factors lies in them. On the other hand, if $h \in \mathfrak q$, then $sh \in \mathfrak q$ since $h\in \mathfrak q$, and $sh \in \mathfrak q_i$ since $s \in \mathfrak q_i$ for all $i\geq 2$. Therefore, $sh \in \bigcap_i \mathfrak q_i = B,$ i.e. $s\mathfrak q \subseteq B.$ We now fix such a $h \in \mathfrak q.$ For a $y \in Y_0\cap\{s\neq0\}$, $(y, dh_y) \in W:$
 Since $sh \in B,$ and $d(sh)_y = s(y)dh_y+h(y)ds_y = s(y)dh_y$ since $h(y) = 0$, so $(y, s(y)dh_y) \in W$ and since $s(y)\neq 0,$ also $(y, dh_y)\in W$. 
-For $g\in J$, the polynomial $G(x)=g(x,dh_x)$ therefore vanishes on $Y_0\cap\{s\neq0\}$, and $sG$ vanishes on all of $Y_0$, so $sG \in \mathfrak q$ and therefore $G \in \mathfrak q$, which means that $G$ vanishes on all of $Y_0$. Since this is true for every $g \in J$, we have $g(y, dh_y = G(y) = 0$ for all $g\in J$, so $(y,dh_y) \in V(J)= W.$  As before, we can argue that since $\mathfrak q$ is an ideal, it is closed under $K$-linear combinations, so for $h_1,\dots ,h_k \in \mathfrak q$ and $c_a \in K$, also $(y, \sum_a c_a (dh_a)_y) \in W$, or put differently, $\{y\} \times \operatorname{span}\{dh_y: h \in \mathfrak q\} \subseteq W$ for all $y \in Y_0$. At a smooth point $y$ of $Y_0$, by Definition \ref{def:conormal}, the conormal space is 
+For $g\in J$, the polynomial $G(x)=g(x,dh_x)$ therefore vanishes on $Y_0\cap\{s\neq0\}$, and $sG$ vanishes on all of $Y_0$, so $sG \in \mathfrak q$ and therefore $G \in \mathfrak q$, which means that $G$ vanishes on all of $Y_0$. Since this is true for every $g \in J$, we have $g(y, dh_y = G(y) = 0$ for all $g\in J$, so $(y,dh_y) \in V_K(J)= W.$  As before, we can argue that since $\mathfrak q$ is an ideal, it is closed under $K$-linear combinations, so for $h_1,\dots ,h_k \in \mathfrak q$ and $c_a \in K$, also $(y, \sum_a c_a (dh_a)_y) \in W$, or put differently, $\{y\} \times \operatorname{span}\{dh_y: h \in \mathfrak q\} \subseteq W$ for all $y \in Y_0$. At a smooth point $y$ of $Y_0$, by Definition \ref{def:conormal}, the conormal space is 
 \[N_y^*Y_0 = \operatorname{span}\{df_y : f \in \mathfrak q\}\]
-since $\mathfrak q$ is prime and hence radical, and so $\mathfrak q = I(Y_0).$ We therefore have that $N_y^*Y_0 \subseteq \{y\} \times W$ for every smooth $y \in Y_0$, and hence $N(Y_0) \subseteq W.$
-
-By assumption, $P$ vanishes on $W$ and hence on $N(Y_0)$. Because we have established, that $Y_0$ is closed, irreducible, and $Y_0 \cap H = \varnothing $, $Y_0$ therefore fulfills all requirements of Theorem \ref{thm:asymptotic-conormal-formal}, so $P(1,0,\dots,0) = 0,$ contradicting our initial assumption. Therefore, $W$ must be empty.
+and we have already established that $\mathfrak q = I(Y_0)$. We therefore have that $\{y\} \times N_y^*Y_0 \subseteq  W$ for every smooth $y \in Y_0$, so $P$, which only depends on $\xi$, vanishes on $N(Y_0)$. Because we have established, that $Y_0$ is closed, irreducible, and $Y_0 \cap H = \varnothing $, $Y_0$ therefore fulfills all requirements of Theorem \ref{thm:asymptotic-conormal-formal}, so $P(1,0,\dots,0) = 0,$ contradicting our initial assumption. Therefore, $W$ must be empty.
 \end{proof}
 
 
@@ -1440,24 +1486,18 @@ By assumption, $P$ vanishes on $W$ and hence on $N(Y_0)$. Because we have establ
 
 \section{Proof of Theorem~\ref{thm:main}}\label{sec:proof}
 
-\begin{proof}
-$Q_\bullet$ is a good filtration because $Q$ is cyclic. Let $\bar q$ be the class of $q$ in $\gr Q$. We know that $q\,\tilde d=[\tilde d]=0$ in $Q$ (because $\tilde d \in I$) and $\tilde d$ has order $N$ (Lemma \ref{lem:order-symbol}), so $q\tilde d \in Q_N$. Therefore $\bar q\cdot P$ , its image in $Q_N/Q_{N-1}$, must also be zero, and hence $P$ annihilates the class $\bar q$ of $q$ in $\gr Q$.
-Since $\gr Q$ is generated over $k[x,\xi]$ by $\bar q$, we get $P\in\Ann_{k[x,\xi]}\gr Q$. 
-\end{proof}
-
 \AIadd{\formalref{\leandecl{Stafford38/Characteristic/InitialIdeal.lean}{281}{Stafford38.CharacteristicInitialIdeal.canonical_orderPrincipalComponent_mem_initialIdeal},
 \leandecl{Stafford38/Characteristic/InitialIdeal.lean}{291}{Stafford38.CharacteristicInitialIdeal.canonical_orderCharacteristicSupport_subset_principal_zeroLocus}}}
 \begin{proposition}\label{prop:char-avoids}
-$\Char(Q)\cap\pi^{-1}(H)=\varnothing.$
+$\Char(Q)\cap V(x_1)=\varnothing,$
+where $V(x_1)\subseteq \Spec k[x, \xi]$ is the set of primes containing $x_1$.
 \end{proposition}
 \begin{proof}
 Write $M=\gr Q$. Since $M$ is finite over $k[x,\xi]$,
-$\Supp_{k[x,\xi]}(M/x_1M)=\Supp_{k[x,\xi]}(M)\cap V(x_1)$ \cite[Tag~00L3]{Stacks}, where $V(x_1)$ is
-the set of primes of $k[x,\xi]$ containing $x_1$. By Corollary~\ref{cor:Uzero},
+$\Supp_{k[x,\xi]}(M/x_1M)=\Supp_{k[x,\xi]}(M)\cap V(x_1)$ \cite[Tag~00L3]{Stacks}. By Corollary~\ref{cor:Uzero},
 $M/x_1M=0$, so its support is empty, hence $\Supp_{k[x,\xi]}(M)\cap V(x_1)=\varnothing$.
-By definition $\Supp_{k[x,\xi]}(M)=\Char(Q)$, and $V(x_1)=\pi^{-1}(H)$ is the preimage of
-$H=\{x_1=0\}$ under the projection $\pi$. Therefore
-$\Char(Q)\cap\pi^{-1}(H)=\varnothing$.
+Since $M$ is finitely generated, $\Char(Q)=V(\Ann_{k[x,\xi]}M)=\Supp_{k[x,\xi]}(M)$
+\cite[Tag~00L2]{Stacks}. Therefore $\Char(Q)\cap V(x_1)=\varnothing$.
 \end{proof}
 
 \AIadd{\formalref[{stated for the support transported along $\xi\mapsto-\xi$, which fixes $x_1$; transported back verbatim}]{%
@@ -1478,13 +1518,13 @@ and $Q=0\iff Q_K=0$. In particular, $\Char(Q_K)$ is the preimage of $\Char(Q)$
 under $\Spec K[x,\xi]\to\Spec k[x,\xi]$.
 \end{lemma}
 \begin{proof}
-By the PBW basis, $F_iA_n(K)=F_iA_n(k)\otimes_kK$ and $\mathcal I_K=\mathcal I\otimes_kK$, so
+By the PBW basis \cite[Prop 1.2.1]{coutinho}, $F_iA_n(K)=F_iA_n(k)\otimes_kK$ and $\mathcal I_K=\mathcal I\otimes_kK$, so
 $Q_{K,i}=Q_i\otimes_kK$. As $K$ is flat over $k$,
 $Q_{K,i}/Q_{K,i-1}=(Q_i/Q_{i-1})\otimes_kK$, and summing over $i$ gives
 $\gr Q_K=\gr Q\otimes_kK$. The module $\gr Q$ is finitely generated (cyclic,
 generated by the class of $q$) over the Noetherian ring $k[x,\xi]$, and
 $k[x,\xi]\to K[x,\xi]$ is flat, so the annihilator of the finite module
-commutes with this base change \cite[Tag~05DT]{Stacks}. Finally, $Q\otimes_kK=0$
+commutes with this base change \cite[Tag~07T8]{Stacks}. Finally, $Q\otimes_kK=0$
 implies $Q=0$, because $K$ is a nonzero free $k$-module.
 \end{proof}
 
@@ -1496,9 +1536,11 @@ a unit anyways, so let $n\ge1$. As in Section \ref{sec:euler} we define
 It suffices to show $Q=0$: then $1\in \mathcal I$, i.e.\ there are
 $R,S\in A_n(k)$ with $1=\tilde dR+x_1^N\tilde dS$.
 
-Let $K=\overline k$, and let
-\[W=\Char(Q_K)=V\bigl(\Ann_{K[x,\xi]}\gr Q_K\bigr)\subseteq K^n\times K^n,\]
-with vanishing ideal $I(W)=\sqrt{\Ann\gr Q_K}$ by the Nullstellensatz (Theorem \ref{thm:nss}). We check
+Let $K=\bar k$, and let
+\[W = V_K\bigl(\operatorname{Ann}_{K[x,\xi]}\operatorname{gr}Q_K\bigr)\subseteq K^n\times (K^n)^*,\]
+be the set of closed points of $\operatorname{Char}(Q_K)$ (Theorem~\ref{thm:nss}),
+with vanishing ideal $I(W)=\sqrt{\operatorname{Ann}\operatorname{gr}Q_K}$.
+We check
 the hypotheses of Theorem~\ref{thm:coisotropic-exclusion} for $W$ and the
 polynomial $P=\sigma^{\mathrm{\ord}}_N(\tilde d)$ of Section~\ref{sec:monic}:
 
@@ -1514,15 +1556,15 @@ $(y,t\xi)\in W$, i.e.\ $W$ is fibre-conical.
 \Ann_{k[x,\xi]}\gr Q$, hence $P\in\Ann_{K[x,\xi]}\gr Q_K$ by
 Lemma~\ref{lem:base-change}, so $P$ vanishes on $W$.
 \item By eq.~\eqref{eq:P-e1}, $P(1,0,\dots,0)=1\neq 0$.
-\item  $W=\Char(Q_K)$ is the preimage of $\Char(Q)$ under
-$\Spec K[x,\xi]\to\Spec k[x,\xi]$ (Lemma~\ref{lem:base-change}), and
-$\pi^{-1}(H)=V(x_1)$ over $K$ is the preimage of $\pi^{-1}(H)=V(x_1)$ over $k$.
-By Proposition~\ref{prop:char-avoids}, $\Char(Q)\cap\pi^{-1}(H)=\varnothing$, and
-the preimage of an empty set is also empty, therefore $W\cap\pi^{-1}(H)=\varnothing$.
-
+\item  By Lemma~\ref{lem:base-change}, $\operatorname{Char}(Q_K)$ is the preimage of
+  $\operatorname{Char}(Q)$ under $\operatorname{Spec}K[x,\xi]\to\operatorname{Spec}k[x,\xi]$,
+  and $V(x_1)\subseteq\operatorname{Spec}K[x,\xi]$ is the preimage of
+  $V(x_1)\subseteq\operatorname{Spec}k[x,\xi]$. Since preimages commute with
+  intersections, Proposition~\ref{prop:char-avoids} gives
+  $\operatorname{Char}(Q_K)\cap V(x_1)=\emptyset$. By Theorem~\ref{thm:nss}(a) and Definition~\ref{def:spec}, a closed point $\mathfrak m_{(y,\xi)}$ lies in $V(x_1)$ if and only if $y_1=0$, i.e.\ the closed points of $V(x_1)$ form $\pi^{-1}(H)=H\times(K^n)^*$. Hence the closed points of $\operatorname{Char}(Q_K)\cap V(x_1)$ are $W\cap\pi^{-1}(H)$, and so $W\cap\pi^{-1}(H)=\emptyset$.
 \end{itemize}
 By Theorem~\ref{thm:coisotropic-exclusion}, $W=\varnothing$. As $K$ is
-algebraically closed, by the Nullstellensatz (Theorem \ref{thm:nss})  $1 \in \Ann_{K[x,\xi]}\gr Q_K$,
+algebraically closed, by Theorem \ref{thm:nss}  $1 \in \Ann_{K[x,\xi]}\gr Q_K$,
 so $\gr Q_K=0$. Since the filtration of $Q_K$ is exhaustive with $Q_{K,-1}=0$,
 induction on $m$ implies $Q_{K,m}=0$ for all $m$, so $Q_K=0$, and
 $Q=0$ by Lemma~\ref{lem:base-change}. Therefore, $A_n(k) = \tilde dA_n(k) + x_1^N\tilde dA_n(k)$, or equivalently $1=\tilde dR+x_1^N\tilde dS$
@@ -1553,19 +1595,19 @@ certificate \leandecl{Stafford38/Characteristic/CanonicalCertificate.lean}{33}{S
 
 
 Lastly, as Stafford already showed, from $1 = dR+FdS$ follows cyclicity of the torsion right module:
-\begin{corollary}\label{cor:cyclic}
+\begin{corollary}[\cite{Stafford1978}]\label{cor:cyclic}
 Every finitely generated torsion right $A_n(k)$-module is cyclic.
 \end{corollary}
 
 \begin{proof}
-    Suppose for every $d\neq 0 \in A_n$, there exists $F, R, S \in A_n$, such that $1 = dR + FdS$. Let us denote a torsion module by $T$. Stafford's theorem (Theorem 3.7 \mbox{\cite[p.~438]{Stafford1978}}) established, that every finitely generated torsion module can be generated by 2 generators, so let us denote the generators of $T$ with $t_1$ and $t_2$. We can define a homomorphism
+    Suppose for every $d\neq 0 \in A_n$, there exists $F, R, S \in A_n$, such that $1 = dR + FdS$. Let us denote a torsion module by $T$. Stafford's theorem (the right module analogue to Theorem 3.7 \mbox{\cite[p.~438]{Stafford1978}}) established, that every finitely generated (right) torsion module can be generated by 2 generators, so let us denote the generators of $T$ with $t_1$ and $t_2$. We can define a homomorphism
     \[\phi:A_n \oplus A_n\rightarrow T \quad \phi(r,s)\mapsto t_1r+t_2s.\]
-    This map is surjective, since $t_1, t_2$ generate all of $T$. By the first isomorphism theorem (for $\phi:M\rightarrow N$, $im(\phi) \cong M/ker(\phi)$), it follows
+    This map is surjective, since $t_1, t_2$ generate all of $T$. By the first isomorphism theorem (for $\varphi:M\rightarrow N$, $im(\varphi) \cong M/ker(\varphi)$), it follows
     \[T \cong (A_n\oplus A_n)/M\]
     with $M = ker(\phi)$. \\
     $T$ is torsion and therefore $\forall t\in T: \exists m \in A_n\backslash\{0\}: tm = 0.$ Specifically, let us denote with $d_1$ and $d_2$ the annihilators of $t_1$ and $t_2$, i.e.
     \[t_1d_1 = t_2d_2 = 0.\]
-    $A_n$ is a right Ore domain, which means it has the property that for any nonzero $d_1, d_2$ there exists elements $r_1, r_2 \in A_n$ such that $d_1r_1 = d_2r_2 \neq 0.$
+    $A_n$ is a right Ore domain \cite[Prop. 1.8.4]{Bjork}, which means it has the property that for any nonzero $d_1, d_2$ there exists elements $r_1, r_2 \in A_n$ such that $d_1r_1 = d_2r_2 \neq 0.$
     Defining therefore $d := d_1r_1 = d_2r_2$ yields us a common annihilator of $t_1$ and $t_2$.\\
     $(d, 0)$ and $(0,d)$ are elements in $M = ker(\phi)$, since $\phi(d, 0) = t_1d = 0$ and $\phi(0, d) = t_2d = 0.$\\
     Because $(0,d), (d, 0) \in M$, also
@@ -1574,34 +1616,29 @@ Every finitely generated torsion right $A_n(k)$-module is cyclic.
     \[(x,y) = (a, 1-Fa)u + (1, -F)v.\]
     Suitable choices are $u = y+Fx$ and $v = x-a(y+Fx)$.\\
     Lastly, since  $A_n\oplus A_n$ can be generated by $(a, 1-Fa)$ and $(1, -F)$ and $(a, 1-Fa)$ is an element of $M$, it follows that $T \cong (A_n\oplus A_n)/M$ can be generated by $\phi(1, -F)$, i.e. $T$ is cyclic. \\
-    Moreover, Stafford defined a module $T$ to be stably cyclic, if, given $r\geq 1$ and $a_1,...a_{r+1} \in T$ that generate $T$, there exist $f_i \in A_n$ such that $(a_i + a_{r+1}f_i)$ $i = 1,...r$ also generate $T$ \cite[p. 435]{Stafford1978}. Since $t_1, t_2$ were arbitrary generators, for $r = 1$ we can set $a_1 = t_1, a_2 = t_2$ and choose $f_1 = -F$, then $\phi(1, -F) = t_1 - t_2F$ generates $T$. For $r\geq 2$ we simply note that by \cite[Theorem~3.7]{Stafford1978}, $T$ is already proven to be stably two-generated, i.e. the case reduces again to $r = 1.$
-    By choosing $a_1 = (1, 0), a_2 = (0, -1), f_0 = F$, we therefore see that our $T$ is stably cyclic. \AIadd{Since $t_1,t_2$ above is an arbitrary generating pair of $T$, this settles the case $r=1$ for every pair; for $r\ge2$, $T$ is stably two-generated by \cite[Theorem~3.7]{Stafford1978}.}  
+    Moreover, Stafford defined a module $T$ to be stably cyclic, if, given $l\geq 1$ and $a_1,...a_{l+1} \in T$ that generate $T$, there exist $f_i \in A_n$ such that $(a_i + a_{l+1}f_i)$ $i = 1,...l$ also generate $T$ \cite[p. 435]{Stafford1978}. Since $t_1, t_2$ were arbitrary generators, for $l = 1$ we can set $a_1 = t_1, a_2 = t_2$ and choose $f_1 = -F$, then $\phi(1, -F) = t_1 - t_2F$ generates $T$. For $l\geq 2$ we simply note that by the right module version of \cite[Theorem~3.7]{Stafford1978}, $T$ is already proven to be stably two-generated.
+    
 \end{proof}
-\AIcomment{CYC-01}{\textbf{Proposed completion --- author acceptance pending.} The conclusion is correct. Stable cyclicity is required for every generating tuple $a_1,\dots,a_{r+1}$, $r\ge1$; the added sentence covers all pairs and $r\ge2$, following Stafford's own argument on p.~438.}
 \AIadd{\formalref{\leandecl{Stafford38/TorsionCyclicity.lean}{66}{Stafford38.TorsionCyclicity.weyl_isCyclic_of_isRightTorsion},
 paper generator \leandecl{Stafford38/TorsionCyclicity.lean}{39}{Stafford38.TorsionCyclicity.exists_span_adjusted_pair},
 two generators \leandecl{Stafford38/TorsionCyclicity.lean}{52}{Stafford38.TorsionCyclicity.exists_span_singleton_eq_span_pair},
 domain \leandecl{Stafford38/Weyl/Domain.lean}{25}{Stafford38.WeylDomain.mul_ne_zero};
 Mathlib-only statement \leandecl{CorollaryChallenge.lean}{34}{Stafford38CorollaryChallenge.torsionCyclicStatement}}}
 
-\section{\texorpdfstring{\AIadd{Generalizations and open questions}}{Generalizations and open questions}}\label{sec:generalizations}
-\AIadd{The formalization of Section~\ref{sec:formal} also proves the following consequences, which are
-not used here and have no printed proof: the identity in every right Ore
-localization of $A_n(k)$; the left-handed identity $1=Rd+SdF$, via the
-formal adjoint; the identity for finite-order differential operators on
-localizations of $k[x_1,\dots,x_n]$, including principal opens,
-Laurent-polynomial coefficients and the fraction field; and, independently
-of the geometric argument, the identity with $F=x^r$ for
+\section{Generalizations and open questions}\label{sec:generalizations}
+The formalization in Lean discussed in Section~\ref{sec:formal} also proves the following consequences, which have no printed proof: the left-handed identity $1=Rd+SdF$, via the
+formal adjoint, which implies Corollary \ref{cor:cyclic} also for left torsion modules; the identity for finite-order differential operators on localizations of $k[x_1,\dots,x_n]$, including principal opens,
+Laurent-polynomial coefficients and the fraction field $k(x_1,\dots,x_n)$; and, independently
+of the geometric part of Section \ref{sec:conormal-review}, the identity with $F=x^r$ for
 $d=p^r-\sum_j a_jx^{m_j}$, $r\ge1$, in any $k$-algebra containing elements
 $x,p$ with $px=xp+1$, provided each $a_j$ commutes with $x$ and $p$.
 \formalref{\leandecl{Stafford38/LocalizationCorollaries.lean}{31}{Stafford38.LocalizationCorollaries.s38_rightOreLocalization};
 \leandecl{Stafford38/LeftHandedCorollary.lean}{23}{Stafford38.LeftHandedCorollary.leftHanded_of_universalStatement};
 \leandecl{Stafford38/LocalizedDifferentialCorollaries.lean}{83}{Stafford38.LocalizedDifferentialCorollaries.s38_unconditional_localized_differential};
-\leandecl{Stafford38/EvolutionaryCorollary.lean}{36}{Stafford38.Evolution.evolutionaryCorollary}}}
+\leandecl{Stafford38/EvolutionaryCorollary.lean}{36}{Stafford38.Evolution.evolutionaryCorollary}}
 
-\AIadd{Two further results, also proved
-in Lean, give the identity $1=dR+FdS$ in larger classes of rings, without the
-choice of $F$ in Theorem~\ref{thm:main}. Let $k$ be a field of
+Two further results, also proved in Lean, give the identity $1=dR+FdS$ in larger classes of rings, though without the
+choice of $F$ in Theorem~\ref{thm:main}: Let $k$ be a field of
 characteristic zero.
 \begin{enumerate}[label=(\alph*),nosep,leftmargin=1.6em]
 \item Let $A$ be a smooth finitely generated $k$-algebra that is a domain,
@@ -1622,27 +1659,20 @@ $A_n(k)$ such an algebra, and $B=0$, $a=1$ gives $1=dR+HdS$.
 statement \leanfiltered{Challenge.lean}{54}{SymplecticStaffordChallenge.AffineSameDivisorStatement}}
 \end{enumerate}
 The proof of Theorem~\ref{thm:main} shows $Q=0$ without producing $R$ and
-$S$. \AIreplace{Effective bounds for $\deg_BR$ and $\deg_BS$ in terms of $\deg_Bd$, and
-an algorithm in the spirit of the constructive two-generator methods, remain
-open, as do the corresponding questions for (a) and (b).}{Over a computable
-field, the fixed choice of $F$ nevertheless gives a terminating algorithm:
-enumerate pairs $(g,D)$ of linear symplectic changes of generators and degree
+$S$. Over a computable field, the fixed choice of $F$ nevertheless gives a terminating algorithm:
+enumerate the countably many pairs $(g,D)$ of linear symplectic changes of generators and degree
 bounds, and solve the linear system $1=dR+FdS$ with
 $F=\Phi_g^{-1}(x_1)^{\deg_Bd}$ for $R,S$ of Bernstein degree at most $D$.
-Theorem~\ref{thm:main} guarantees that some pair succeeds. Bounds for
-$\deg_BR$ and $\deg_BS$ in terms of $\deg_Bd$, and with them an efficient
-algorithm, remain open. In (a) and (b), $F$ is not fixed, so this search does
-not apply directly.}}
-\AIcomment{ALG-05}{\textbf{Proposed correction --- author acceptance pending.} The earlier text called any algorithm open. The fixed-source form makes the search above terminate; what remains open is efficiency and degree bounds.}
-\AIcomment{FV-03}{\textbf{Placeholder.} Statement (b) is formalized without \texttt{sorry} and uses only the three standard axioms; its citation is a placeholder until the manuscript and archive exist. This section replaces the former Outlook and collects the extensions previously in the introduction.}
+Theorem~\ref{thm:main} guarantees that some pair succeeds. We cannot provide bounds for
+$\deg_BR$ and $\deg_BS$ in terms of $\deg_Bd$, so the question for an efficient
+algorithm remains open. In (a) and (b), $F$ is not fixed, so this search does
+not apply.
 
-\clearpage
+\AIcomment{FV-03}{\textbf{Placeholder.} Statement (b) is formalized without \texttt{sorry} and uses only the three standard axioms; its citation is a placeholder until the manuscript and archive exist. }
+
+
 \bibliographystyle{amsplain}
 \bibliography{references}
-
-
-
-
 
 
 \begin{appendix}
@@ -1652,61 +1682,44 @@ not apply directly.}}
 % records, independent reviews, and canonical formal-proof provenance.
 \section{AI-assisted research and formalization}\label{app:ai-workflow}
 
-Proof discovery, counterexample searches, review, and formalization were
-assisted by agentic AI tools. The work began with
-cyclic-extension computations in Macaulay2 and Maple. Attempts to construct
-universal cofactors directly produced special cases and reductions but
-eventually stalled. The decisive change was to study the canonical quotient
-$Q=A_n/(dA_n+x^N dA_n)$: Euler surjectivity and monicity constrained its
-characteristic support, while Gabber's involutivity and asymptotic conormal
-geometry forced that support to be empty. This turned cofactor selection
-into a quotient-vanishing problem. Full Lean formalization was deferred
-until the paper argument was complete, although small formal checks
-continued throughout. In the final formal development, support avoidance
-over the coordinate hyperplane was proved by a localized filtered Koszul
-length contradiction.
+AI agents assisted with proof discovery, counterexample searches,
+review, formalization and writing. The work began with computations in
+Macaulay2 and Maple. Direct attempts to construct universal cofactors
+produced special cases and reductions, but no general construction. The
+decisive step was to study the quotient $Q=A_n/(dA_n+x_1^N dA_n)$ and to show
+that its characteristic support is empty. The Lean formalization followed
+once the paper argument was complete.
 
-The workflow separated proposed ideas from verified claims. One controller
-maintained the authoritative proof state, while parallel workers explored
-distinct mechanisms and returned evidence with an explicit scope.
-Independent reviewers checked fixed revisions for quantifiers, sidedness,
-circularity, and missing hypotheses. The project protocols were based
-on \AIreplace{a \texttt{math-frontier} agent skill}{agent instructions} developed for this purpose: freeze the
-claim, identify its first unresolved dependency, and specify how a route
-could fail. Conceptual prompts requested a small number of distinct
-mechanisms; paper-only tasks sought complete arguments before implementation.
-A condensed representative prompt, adapted from the archived protocols, is:
-\begin{quote}\small
-Work on one precisely stated unresolved claim. Propose at most three
-distinct mechanisms, each with an intermediate lemma, a noncircular
-justification, and an adversarial test. Preserve the quantifiers and
-right-sided cofactors. For a paper task, supply a complete argument; for
-formalization, prove the required hypotheses without adding axioms or
-using \texttt{sorry}. Return evidence and the first unsupported bridge; do not
-promote a conditional result to a theorem.
-\end{quote}
+One controlling agent kept the authoritative state of the proof.
+Parallel agents worked on separate approaches and returned evidence together
+with its scope, and independent reviewer agents checked each result before it was
+accepted. The first author steered the work with short instructions, and the
+agents wrote the detailed task prompts for each other. Advice from
+consultations counted only after an independent check.
 
-Research and review sessions used GPT-5.5, GPT-5.6 Luna and Sol,
-GPT-6 Astra, and Claude Fable 5, Haiku 4.5 and Opus 5. The project protocols
-assigned routine implementation and replay to Luna and conceptual
-consultation to Sol; independent reports also record Opus reviews.
-Subsequent manuscript, proof-map, build and release work used Fable 5.1,
-Opus 5, Sonnet 5 and GPT-6 Luna. These records establish participation and task roles,
-without assigning a particular mathematical idea to one model.
-\AIadd{The final formal campaign, which connected the printed asymptotic
-conormal argument to the terminal theorem and prepared the releases, used
-GPT-6 Luna workers and escalated failed bounded tasks to GPT-6.1 Sol.}
-\AIcomment{AI-01}{\textbf{Chris --- please confirm.} The campaign ledger records an earlier serial Pi/Qwen run that ported three archived helper lemmas before the final campaign, but no exact model identifier. Name the Qwen model here if it should be disclosed.}
+The working rules developed together with the proof into a reusable
+agent skill for open mathematical problems. Early versions emphasized
+falsification and keeping conditional results apart from established ones.
+Once a candidate proof existed, the emphasis moved to repairing the first
+invalid step of a promising argument, and
+to auditing proofs.
 
-The completed proof uses Lean~4 and Mathlib and pins AlgebraicAnalysis \AIreplace{v0.3.0}{v0.3.3}
-\cite{Lean4,Mathlib2020,AlgebraicAnalysis033}\AIremove{; the later library archive is v0.3.3}.
-Formalization distinguished theorems proving required inputs from
-conditional theorems merely consuming them. Statement comparison and
-independent NanoDa and Lean kernel checks verified the submitted declarations
-\cite{Comparator,NanoDa,PalomarDocs}; their proofs use only
-\texttt{propext}, \texttt{Classical.choice}, and \texttt{Quot.sound}.
-\AIreplace{The Stafford38 and Global Stafford headline proofs}{Theorem~\ref{thm:main} and generalization~(a) of Section~\ref{sec:generalizations}} are registered separately in
-Palomar~\cite{Stafford38Palomar2026,GlobalStaffordPalomar2026}; their Lean developments are archived~\cite{Stafford38Zenodo131,GlobalStaffordZenodo106}.
+Research and review used OpenAI GPT models from GPT-5.5 to GPT-6.1,
+Anthropic Claude models from Haiku~4.5 to Opus~5, and locally hosted Qwen
+and DeepSeek models. GPT and Claude models, most recently Claude Opus~5.5,
+helped draft and revise the manuscript and the supplementary material. The
+authors are responsible for the final text.
+
+The formal proof uses Lean~4, Mathlib and AlgebraicAnalysis
+v0.3.3~\cite{Lean4,Mathlib2020,AlgebraicAnalysis033}. Conditional results
+were kept apart from proved ones until every hypothesis was discharged.
+Comparator checked that the proved theorems have exactly the statements of
+separate challenge files that use only Mathlib definitions, and both the Lean
+kernel and the independent checker NanoDa accepted the proofs
+\cite{Comparator,NanoDa,PalomarDocs}. Theorem~\ref{thm:main} and
+generalization~(a) of Section~\ref{sec:generalizations} are registered in the
+Palomar registry~\cite{Stafford38Palomar2026,GlobalStaffordPalomar2026}, and
+their Lean sources are archived~\cite{Stafford38Zenodo131,GlobalStaffordZenodo106}.
 
 \end{appendix}
 
