@@ -25,12 +25,10 @@
     },
     "formal": {
       "repo": "itpplasma/stafford38-formal",
-      "commit": "0403af3f0b1a7f84d2027121932723f67bd279ae",
-      "note": "Local canonical-definition refactor; review source pages and the bundled patch. Publication is pending.",
+      "commit": "e2cf515da2601fa894a96c807040ad93d6597feb",
+      "note": "Formal proof at the merge that adds one Lean declaration per statement of Section 5.2 (Stafford38/Paper/Section5.lean).",
       "label": "This project (Stafford38)",
-      "local_source_base": "./sources/formal",
-      "base_commit": "746952ede40ac5dd22ac57201883da7ef7a42dfb",
-      "bundle": "verification/canonical-definitions/formal.bundle"
+      "local_source_base": "./sources/formal"
     },
     "library": {
       "repo": "itpplasma/algebraic-analysis",
@@ -954,7 +952,7 @@
           "name": "Stafford38FixedSourceChallenge.bernsteinDegree"
         },
         {
-          "file": "Stafford38/Weyl/BernsteinDegree.lean",
+          "file": "Stafford38/FixedSourceChallengeTransport.lean",
           "role": "helper",
           "name": "Stafford38FixedSourceChallengeTransport.bernsteinDegree_eq",
           "repo": "formal"
@@ -5514,7 +5512,7 @@
     },
     {
       "name": "Stafford38FixedSourceChallengeTransport.bernsteinDegree_eq",
-      "file": "Stafford38/Weyl/BernsteinDegree.lean",
+      "file": "Stafford38/FixedSourceChallengeTransport.lean",
       "note": "Identifies the intrinsic “least N with d in span of ordered PBW words of degree ≤ N” with the PBW-normal-form degree used internally.",
       "related": [
         "def:filtration",
@@ -15708,11 +15706,11 @@
     ],
     "warning": "Navigational correspondence proposals only. Full statement and proof correspondence remains open."
   },
-  "comparison_scope": "The active November 2 manuscript, including visible AI markup. Unchanged Lean source pins retain their previous verification scope; updated printed proofs require fresh human correspondence review.",
+  "comparison_scope": "The active November 2 manuscript, including visible AI markup. Lean sources are pinned to the formal commit that adds one declaration per statement of Section 5.2; it passes the repository verifier. Updated printed proofs require fresh human correspondence review.",
   "canonical_declarations": {
     "Stafford38FixedSourceChallengeTransport.bernsteinDegree_eq": {
       "repo": "formal",
-      "file": "Stafford38/Weyl/BernsteinDegree.lean",
+      "file": "Stafford38/FixedSourceChallengeTransport.lean",
       "name": "Stafford38FixedSourceChallengeTransport.bernsteinDegree_eq"
     },
     "Stafford38.WeylAlg": {

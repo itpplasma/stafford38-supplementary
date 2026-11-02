@@ -13,9 +13,9 @@ and Lemmas 5.9–5.13 are each mapped to their own Lean theorem, and Theorem 5.7
 is proved in Lean along the printed route. Four editorial findings are
 recorded in Comparison notes. See the
 [update and verification records](verification/manuscript-20261102/README.md).
-The paper has not been edited. The Lean source pins and their
-[canonical-definition verification](verification/canonical-definitions/README.md)
-are retained; they do not certify the revised printed proof step by step.
+The paper has not been edited. The Lean sources are pinned to formal commit
+e2cf515, which adds these Section 5 theorems and passes the repository
+verifier ([log](verification/manuscript-20261102/formal-verify.log)).
 This review update has no new journal release or Zenodo DOI.
 
 **Offline:** download this repository, unzip it, and open **index.html**.

@@ -39,5 +39,23 @@ Lemmas 5.11–5.13. The cards say so, and the Theorem 5.7 cards keep the route
 “similar” for this reason. The Section 1.2 card no longer says that Lemmas
 5.9 and 5.13 lack an exact declaration; Lemma 4.7 still has none.
 
+The Lean sources are re-pinned from the unpublished canonical-definition
+commit 0403af3 to formal commit e2cf515da2601fa894a96c807040ad93d6597feb on the
+public main branch, which adds `Stafford38/Paper/Section5.lean`. Its repository
+verifier passed (`formal-verify.log`): a full build of every module and the
+strict dependency guard of the four terminal theorems, which use only
+`propext`, `Classical.choice` and `Quot.sound`. On main, `bernsteinDegree_eq`
+lives in `Stafford38/FixedSourceChallengeTransport.lean`; its two references
+are updated. The bundled formal source pages and the Lean reference data
+(`verification/lean-references/`) are regenerated from that commit.
+
+The Lean proof graph gains nodes for the paper-route proof of Theorem 5.7, the
+construction of its discrete valuation ring, the step from the matrix with a
+unit minor to the lifted row, Lemmas 5.9–5.13 and the two witness theorems.
+Its edges are computed by Lean: the paper-route Theorem 5.7 uses the ring
+construction and the lifting step, and the witness theorems use Lemmas
+5.11–5.13. The same-witness nodes no longer carry the labels of Lemmas 5.10
+and 5.12.
+
 The four open editorial findings of the October 28 refresh are unchanged.
 The paper build has no unresolved references or citations.

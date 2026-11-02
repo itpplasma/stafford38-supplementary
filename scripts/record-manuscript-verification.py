@@ -31,6 +31,8 @@ def main():
     parser.add_argument('--tests-not-rerun', metavar='REASON',
                         help='--test-log is a committed log of an earlier receipt at the same generator commit; '
                              'record it by path with this reason instead of copying it as a new run.')
+    parser.add_argument('--formal-repinned', action='store_true',
+                        help='The formal pin changed in the committed HEAD; record it instead of asserting the earlier pin.')
     args = parser.parse_args()
     root = Path(__file__).resolve().parent.parent
     target = root / args.receipt_dir
@@ -44,6 +46,10 @@ def main():
         assert manifest['sources'][name] == baseline['sources'][name]
     assert manifest['formal_verification'] == baseline['formal_verification']
     assert not git(root, 'diff', '--name-only', '--', 'sources/formal')
+    if args.formal_repinned:
+        previous = json.loads(git(root, 'show', 'HEAD~1:manifest.json'))
+        assert manifest['sources']['formal']['commit'] != previous['sources']['formal']['commit']
+        assert manifest['formal_verification']['source'] == manifest['sources']['formal']['commit']
     status = git(args.paper, 'status', '--porcelain=v1').decode()
     assert status == migration['paper_worktree_status_before'] == '', 'Paper must remain clean'
     assert git(args.paper, 'rev-parse', 'HEAD').decode().strip() == source['commit']
@@ -99,7 +105,8 @@ def main():
     receipt = dict(status='passed', paper=source, generator=manifest['generator'],
         manuscript_cards=len(mapping['items']), active_statements=migration['active_statements'],
         manuscript_snapshot_byte_identical=True, paper_worktree_unchanged=True,
-        formal_source_pins_unchanged=True,
+        formal_source_pins_unchanged=not args.formal_repinned,
+        formal_verification=manifest['formal_verification'],
         reader_build=dict(status='passed', warnings=sorted(expected_refs),
             scope='Complete current source/reference and statement-coverage audit; warnings are unresolved references already present in the paper.'),
         generator_tests=generator_tests, browser=browser,

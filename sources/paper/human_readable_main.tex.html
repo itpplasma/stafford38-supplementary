@@ -1,4 +1,4 @@
-<!doctype html><meta charset="utf-8"><title>human_readable_main.tex</title><style>body{font:14px monospace}pre span{display:block}pre span:target{background:#fff0ad}a{color:#666}pre{white-space:pre-wrap}</style><h1>human_readable_main.tex</h1><p>Paper (Overleaf update) · 498a741686012734832547d9f33705130a37d218</p><pre><span id="L1"><a href="#L1">1</a> \documentclass[11pt]{amsart}</span>
+<!doctype html><meta charset="utf-8"><title>human_readable_main.tex</title><style>body{font:14px monospace}pre span{display:block}pre span:target{background:#fff0ad}a{color:#666}pre{white-space:pre-wrap}</style><h1>human_readable_main.tex</h1><p>Paper (frozen version) · 0dd6189bdf1bf2c670a8421cfc9952d5b6b811b9</p><pre><span id="L1"><a href="#L1">1</a> \documentclass[11pt]{amsart}</span>
 <span id="L2"><a href="#L2">2</a> </span>
 <span id="L3"><a href="#L3">3</a> \usepackage[T1]{fontenc}</span>
 <span id="L4"><a href="#L4">4</a> \usepackage[utf8]{inputenc}</span>
@@ -125,8 +125,8 @@
 <span id="L125"><a href="#L125">125</a> of choice (\texttt{Classical.choice}) and soundness of quotient types</span>
 <span id="L126"><a href="#L126">126</a> (\texttt{Quot.sound}). Every intermediate result is proved in Lean as well,</span>
 <span id="L127"><a href="#L127">127</a> including Gabber's involutivity theorem for cyclic $A_n(k)$-modules. The</span>
-<span id="L128"><a href="#L128">128</a> formal proof is organized along the same steps as</span>
-<span id="L129"><a href="#L129">129</a> Sections~\ref{sec:monic}--\ref{sec:proof}. The main theorem is registered</span>
+<span id="L128"><a href="#L128">128</a> proof in Sections~\ref{sec:monic}--\ref{sec:proof} follows the formal proof</span>
+<span id="L129"><a href="#L129">129</a> step by step; where the two routes differ, the text says so. The main theorem is registered</span>
 <span id="L130"><a href="#L130">130</a> in Palomar~\cite{Stafford38Palomar2026}, and the Lean sources are</span>
 <span id="L131"><a href="#L131">131</a> archived~\cite{Stafford38Zenodo131}. Tooling and the role of AI assistance</span>
 <span id="L132"><a href="#L132">132</a> are described in Appendix~\ref{app:ai-workflow}. Section~\ref{sec:generalizations} states further consequences proved in Lean and two generalizations, to rings of differential operators on smooth affine varieties and to simple filtered algebras.</span>
@@ -1678,51 +1678,58 @@
 <span id="L1678"><a href="#L1678">1678</a> \begin{appendix}</span>
 <span id="L1679"><a href="#L1679">1679</a> </span>
 <span id="L1680"><a href="#L1680">1680</a> </span>
-<span id="L1681"><a href="#L1681">1681</a> % Evidence: project ledgers, archived outward session messages, model-use</span>
-<span id="L1682"><a href="#L1682">1682</a> % records, independent reviews, and canonical formal-proof provenance.</span>
-<span id="L1683"><a href="#L1683">1683</a> \section{AI-assisted research and formalization}\label{app:ai-workflow}</span>
-<span id="L1684"><a href="#L1684">1684</a> </span>
-<span id="L1685"><a href="#L1685">1685</a> AI agents assisted with proof discovery, counterexample searches,</span>
-<span id="L1686"><a href="#L1686">1686</a> review, formalization and writing. The work began with computations in</span>
-<span id="L1687"><a href="#L1687">1687</a> Macaulay2 and Maple. Direct attempts to construct universal cofactors</span>
-<span id="L1688"><a href="#L1688">1688</a> produced special cases and reductions, but no general construction. The</span>
-<span id="L1689"><a href="#L1689">1689</a> decisive step was to study the quotient $Q=A_n/(dA_n+x_1^N dA_n)$ and to show</span>
-<span id="L1690"><a href="#L1690">1690</a> that its characteristic support is empty. The Lean formalization followed</span>
-<span id="L1691"><a href="#L1691">1691</a> once the paper argument was complete.</span>
-<span id="L1692"><a href="#L1692">1692</a> </span>
-<span id="L1693"><a href="#L1693">1693</a> One controlling agent kept the authoritative state of the proof.</span>
-<span id="L1694"><a href="#L1694">1694</a> Parallel agents worked on separate approaches and returned evidence together</span>
-<span id="L1695"><a href="#L1695">1695</a> with its scope, and independent reviewer agents checked each result before it was</span>
-<span id="L1696"><a href="#L1696">1696</a> accepted. The first author steered the work with short instructions, and the</span>
-<span id="L1697"><a href="#L1697">1697</a> agents wrote the detailed task prompts for each other. Advice from</span>
-<span id="L1698"><a href="#L1698">1698</a> consultations counted only after an independent check.</span>
+<span id="L1681"><a href="#L1681">1681</a> \section{AI-assisted research and formalization}\label{app:ai-workflow}</span>
+<span id="L1682"><a href="#L1682">1682</a> </span>
+<span id="L1683"><a href="#L1683">1683</a> AI agents assisted with proof discovery, counterexample searches,</span>
+<span id="L1684"><a href="#L1684">1684</a> review, formalization and writing. The work began with computations in</span>
+<span id="L1685"><a href="#L1685">1685</a> Macaulay2 and Maple. Direct attempts to construct universal cofactors</span>
+<span id="L1686"><a href="#L1686">1686</a> produced special cases and reductions, but no general construction. The</span>
+<span id="L1687"><a href="#L1687">1687</a> decisive step was to study the quotient $Q=A_n/(dA_n+x_1^N dA_n)$ and to show</span>
+<span id="L1688"><a href="#L1688">1688</a> that its characteristic support is empty.</span>
+<span id="L1689"><a href="#L1689">1689</a> </span>
+<span id="L1690"><a href="#L1690">1690</a> The first complete argument was written by AI agents in the style of a paper</span>
+<span id="L1691"><a href="#L1691">1691</a> proof. Agents then formalized it in Lean, and the formalization changed parts</span>
+<span id="L1692"><a href="#L1692">1692</a> of the argument where the original steps could not be checked as written.</span>
+<span id="L1693"><a href="#L1693">1693</a> After the Lean proof was complete and published, the paper proof was rewritten</span>
+<span id="L1694"><a href="#L1694">1694</a> from the checked Lean proof, so that every statement corresponds to a Lean</span>
+<span id="L1695"><a href="#L1695">1695</a> declaration and every difference between the two routes is marked in the</span>
+<span id="L1696"><a href="#L1696">1696</a> text. The authors are reviewing this correspondence and revising the text for</span>
+<span id="L1697"><a href="#L1697">1697</a> clarity together with the agents, until both the human review and the AI</span>
+<span id="L1698"><a href="#L1698">1698</a> checks raise no further objections.</span>
 <span id="L1699"><a href="#L1699">1699</a> </span>
-<span id="L1700"><a href="#L1700">1700</a> The working rules developed together with the proof into a reusable</span>
-<span id="L1701"><a href="#L1701">1701</a> agent skill for open mathematical problems. Early versions emphasized</span>
-<span id="L1702"><a href="#L1702">1702</a> falsification and keeping conditional results apart from established ones.</span>
-<span id="L1703"><a href="#L1703">1703</a> Once a candidate proof existed, the emphasis moved to repairing the first</span>
-<span id="L1704"><a href="#L1704">1704</a> invalid step of a promising argument, and</span>
-<span id="L1705"><a href="#L1705">1705</a> to auditing proofs.</span>
+<span id="L1700"><a href="#L1700">1700</a> One controlling agent kept the authoritative state of the proof.</span>
+<span id="L1701"><a href="#L1701">1701</a> Parallel agents worked on separate approaches and returned evidence together</span>
+<span id="L1702"><a href="#L1702">1702</a> with its scope, and independent reviewer agents checked each result before it was</span>
+<span id="L1703"><a href="#L1703">1703</a> accepted. The first author steered the work with short instructions, and the</span>
+<span id="L1704"><a href="#L1704">1704</a> agents wrote the detailed task prompts for each other. Advice from</span>
+<span id="L1705"><a href="#L1705">1705</a> consultations counted only after an independent check.</span>
 <span id="L1706"><a href="#L1706">1706</a> </span>
-<span id="L1707"><a href="#L1707">1707</a> Research and review used OpenAI GPT models from GPT-5.5 to GPT-6.1,</span>
-<span id="L1708"><a href="#L1708">1708</a> Anthropic Claude models from Haiku~4.5 to Opus~5, and locally hosted Qwen</span>
-<span id="L1709"><a href="#L1709">1709</a> and DeepSeek models. GPT and Claude models, most recently Claude Opus~5.5,</span>
-<span id="L1710"><a href="#L1710">1710</a> helped draft and revise the manuscript and the supplementary material. The</span>
-<span id="L1711"><a href="#L1711">1711</a> authors are responsible for the final text.</span>
-<span id="L1712"><a href="#L1712">1712</a> </span>
-<span id="L1713"><a href="#L1713">1713</a> The formal proof uses Lean~4, Mathlib and AlgebraicAnalysis</span>
-<span id="L1714"><a href="#L1714">1714</a> v0.3.3~\cite{Lean4,Mathlib2020,AlgebraicAnalysis033}. Conditional results</span>
-<span id="L1715"><a href="#L1715">1715</a> were kept apart from proved ones until every hypothesis was discharged.</span>
-<span id="L1716"><a href="#L1716">1716</a> Comparator checked that the proved theorems have exactly the statements of</span>
-<span id="L1717"><a href="#L1717">1717</a> separate challenge files that use only Mathlib definitions, and both the Lean</span>
-<span id="L1718"><a href="#L1718">1718</a> kernel and the independent checker NanoDa accepted the proofs</span>
-<span id="L1719"><a href="#L1719">1719</a> \cite{Comparator,NanoDa,PalomarDocs}. Theorem~\ref{thm:main} and</span>
-<span id="L1720"><a href="#L1720">1720</a> generalization~(a) of Section~\ref{sec:generalizations} are registered in the</span>
-<span id="L1721"><a href="#L1721">1721</a> Palomar registry~\cite{Stafford38Palomar2026,GlobalStaffordPalomar2026}, and</span>
-<span id="L1722"><a href="#L1722">1722</a> their Lean sources are archived~\cite{Stafford38Zenodo131,GlobalStaffordZenodo106}.</span>
-<span id="L1723"><a href="#L1723">1723</a> </span>
-<span id="L1724"><a href="#L1724">1724</a> \end{appendix}</span>
-<span id="L1725"><a href="#L1725">1725</a> </span>
-<span id="L1726"><a href="#L1726">1726</a> </span>
-<span id="L1727"><a href="#L1727">1727</a> \end{document}</span>
-<span id="L1728"><a href="#L1728">1728</a> </span></pre>
+<span id="L1707"><a href="#L1707">1707</a> The working rules developed together with the proof into a reusable</span>
+<span id="L1708"><a href="#L1708">1708</a> agent skill for open mathematical problems. Early versions emphasized</span>
+<span id="L1709"><a href="#L1709">1709</a> falsification and keeping conditional results apart from established ones.</span>
+<span id="L1710"><a href="#L1710">1710</a> Once a candidate proof existed, the emphasis moved to repairing the first</span>
+<span id="L1711"><a href="#L1711">1711</a> invalid step of a promising argument, and</span>
+<span id="L1712"><a href="#L1712">1712</a> to auditing proofs.</span>
+<span id="L1713"><a href="#L1713">1713</a> </span>
+<span id="L1714"><a href="#L1714">1714</a> Research and review used OpenAI GPT models from GPT-5.5 to GPT-6.1,</span>
+<span id="L1715"><a href="#L1715">1715</a> Anthropic Claude models from Haiku~4.5 to Opus~5, and locally hosted Qwen</span>
+<span id="L1716"><a href="#L1716">1716</a> and DeepSeek models. GPT and Claude models, most recently Claude Opus~5.5,</span>
+<span id="L1717"><a href="#L1717">1717</a> helped draft and revise the manuscript and the supplementary material. The</span>
+<span id="L1718"><a href="#L1718">1718</a> authors are responsible for the final text.</span>
+<span id="L1719"><a href="#L1719">1719</a> </span>
+<span id="L1720"><a href="#L1720">1720</a> The formal proof uses Lean~4, Mathlib and AlgebraicAnalysis</span>
+<span id="L1721"><a href="#L1721">1721</a> v0.3.3~\cite{Lean4,Mathlib2020,AlgebraicAnalysis033}. Conditional results</span>
+<span id="L1722"><a href="#L1722">1722</a> were kept apart from proved ones until every hypothesis was discharged.</span>
+<span id="L1723"><a href="#L1723">1723</a> Comparator checked that the proved theorems have exactly the statements of</span>
+<span id="L1724"><a href="#L1724">1724</a> separate challenge files that use only Mathlib definitions, and both the Lean</span>
+<span id="L1725"><a href="#L1725">1725</a> kernel and the independent checker NanoDa accepted the proofs</span>
+<span id="L1726"><a href="#L1726">1726</a> \cite{Comparator,NanoDa,PalomarDocs}. Theorem~\ref{thm:main} and</span>
+<span id="L1727"><a href="#L1727">1727</a> generalization~(a) of Section~\ref{sec:generalizations} are registered in the</span>
+<span id="L1728"><a href="#L1728">1728</a> Palomar registry~\cite{Stafford38Palomar2026,GlobalStaffordPalomar2026}, and</span>
+<span id="L1729"><a href="#L1729">1729</a> their Lean sources are archived~\cite{Stafford38Zenodo131,GlobalStaffordZenodo106}.</span>
+<span id="L1730"><a href="#L1730">1730</a> </span>
+<span id="L1731"><a href="#L1731">1731</a> \end{appendix}</span>
+<span id="L1732"><a href="#L1732">1732</a> </span>
+<span id="L1733"><a href="#L1733">1733</a> </span>
+<span id="L1734"><a href="#L1734">1734</a> \end{document}</span>
+<span id="L1735"><a href="#L1735">1735</a> </span></pre>
