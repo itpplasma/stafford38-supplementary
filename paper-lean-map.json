@@ -25,8 +25,8 @@
     },
     "formal": {
       "repo": "itpplasma/stafford38-formal",
-      "commit": "e2cf515da2601fa894a96c807040ad93d6597feb",
-      "note": "Formal proof at the merge that adds one Lean declaration per statement of Section 5.2 (Stafford38/Paper/Section5.lean).",
+      "commit": "97f1da4fd0244a9d390a2f60d7531d39a8927914",
+      "note": "Formal proof at the merge that proves Theorem 5.7 along the printed proof of Section 5.2 (Stafford38/Paper/Section5).",
       "label": "This project (Stafford38)",
       "local_source_base": "./sources/formal"
     },
@@ -734,7 +734,7 @@
       ],
       "statement_relation": "partial",
       "route_relation": "n/a",
-      "correspondence": "The subsection states that Theorem 1.1 and Corollary 6.3 are proved in Lean from the three standard axioms, that every intermediate result is proved as well, and that the proof in Sections 3–6 follows the formal proof step by step, the text saying where the two routes differ. The reader maps the formal counterparts card by card; a card marked “similar” says where Lean reorganizes a step. In Subsection 5.2 each printed statement, Theorem 5.7 and Lemmas 5.9–5.13, has its own Lean theorem in Stafford38.Paper.Section5, and Theorem 5.7 is proved along the printed route. Lemma 4.7 has no exact Lean declaration mapped here; its content is used inside larger formal results.",
+      "correspondence": "The subsection states that Theorem 1.1 and Corollary 6.3 are proved in Lean from the three standard axioms, that every intermediate result is proved as well, and that the proof in Sections 3–6 follows the formal proof step by step, the text saying where the two routes differ. The reader maps the formal counterparts card by card; a card marked “similar” says where Lean reorganizes a step. In Subsection 5.2 each printed statement, Theorem 5.7 and Lemmas 5.9–5.13, has its own Lean theorem in Stafford38.Paper.Section5, and the Lean proof of Theorem 5.7 follows the printed proof paragraph by paragraph and uses these lemmas. Lemma 4.7 has no exact Lean declaration mapped here; its content is used inside larger formal results.",
       "route": null,
       "lean": [
         {
@@ -3533,8 +3533,8 @@
       "label": "thm:asymptotic-conormal-formal",
       "statement_relation": "equivalent",
       "route_relation": "similar",
-      "correspondence": "Lean theorem_5_7_i and theorem_5_7_ii state (i) and (ii) over any algebraically closed field K of characteristic zero, the setting of Section 5, for the prime ideal 𝔭 = I(Y) instead of the set Y; Y ∩ H = ∅ is written as x₁ ≠ 0 on V_K(𝔭). Statement (i) is the membership of (1,0,…,0) in the zero set of the ideal of polynomials vanishing on N(Y), which is the printed condition. Both are proved by the printed route (see the proof card). The terminal theorem GeneralAsymptoticConormal.coordinate_axis_mem_smooth_fibre_closure proves the same statement by a second, chart-based route.",
-      "route": "Stafford38.Paper.Section5.theorem_5_7_i applies Stafford38.Geometry.AlternativeAsymptoticConormal.coordinate_axis_mem_smooth_fibre_closure, the printed route; theorem_5_7_ii deduces (ii) from (i) as in the last paragraph of the printed proof.",
+      "correspondence": "Lean theorem_5_7_i and theorem_5_7_ii state (i) and (ii) over any algebraically closed field K of characteristic zero, the setting of Section 5, for the prime ideal 𝔭 = I(Y) instead of the set Y; Y ∩ H = ∅ is written as x₁ ≠ 0 on V_K(𝔭). Statement (i) is the membership of (1,0,…,0) in the zero set of the ideal of polynomials vanishing on N(Y), which is the printed condition. Both are proved along the printed proof (see the proof card). The terminal theorem GeneralAsymptoticConormal.coordinate_axis_mem_smooth_fibre_closure proves the same statement by a second, chart-based route.",
+      "route": "theorem_5_7_i is theorem_5_7_i_paper, which follows the printed proof paragraph by paragraph (see the proof card); theorem_5_7_ii deduces (ii) from (i) as in the last paragraph of the printed proof.",
       "lean": [
         {
           "file": "Stafford38/Paper/Section5.lean",
@@ -3549,11 +3549,11 @@
           "role": "statement"
         },
         {
-          "file": "Stafford38/Geometry/AlternativeAsymptoticConormal.lean",
-          "name": "Stafford38.Geometry.AlternativeAsymptoticConormal.coordinate_axis_mem_smooth_fibre_closure",
+          "file": "Stafford38/Paper/Section5/Proof.lean",
+          "name": "Stafford38.Paper.Section5.theorem_5_7_i_paper",
           "repo": "formal",
           "role": "main-proof",
-          "note": "The printed route of Subsection 5.2."
+          "note": "The printed proof of Subsection 5.2."
         },
         {
           "file": "Stafford38/Geometry/GeneralAsymptoticConormal.lean",
@@ -3817,10 +3817,17 @@
         1439
       ],
       "statement_relation": "n/a",
-      "route_relation": "similar",
-      "correspondence": "Lean follows the printed proof: the algebraic case, the valuation ring and the discrete valuation ring at infinity, the differential basis of the residue field, the Laurent generic point y with its tangent space and cone, the matrix M(t) with a unit minor, and the lift ℓ(t) of the 1-coordinate row with ℓ(0) = u. theorem_5_7_i applies AlternativeAsymptoticConormal.coordinate_axis_mem_smooth_fibre_closure. The discrete valuation ring is built by GeneralDivisorialVisibleFrame.generalDivisorialVisibleFrameWithResidueAlgebraicity, and the steps between the lemmas (λ, τ, M(t) and the lift of ℓ) are in PaperActualDivisorTangent.exists_regularizedOneRowConormalData_of_actual_columns. One difference: the formal proof does not call lemma_5_9 and lemma_5_10 themselves. It builds its ring from the same intermediate results as their proofs, with an additional coefficient field, and witness_lemma_5_11 and witness_lemma_5_12_5_13 show that this ring and its Laurent column satisfy Lemmas 5.11–5.13, including the bound dim Θ_y ≤ d′+1. The terminal theorem GeneralAsymptoticConormal.coordinate_axis_mem_smooth_fibre_closure proves the same statement by a second route through SameWitness.coordinate_axis_mem_smooth_fibre_closure; its key declarations are listed as the alternative proof.",
-      "route": "Main route: Stafford38.Paper.Section5.theorem_5_7_i → Stafford38.Geometry.AlternativeAsymptoticConormal.coordinate_axis_mem_smooth_fibre_closure. Alternative route: Stafford38.Geometry.GeneralAsymptoticConormal.coordinate_axis_mem_smooth_fibre_closure → Stafford38.Geometry.SameWitness.coordinate_axis_mem_smooth_fibre_closure, which treats the algebraic case directly and otherwise closes the conormal fibre through a ground point on a common chart (SameWitness.axis_mem_smoothConormalFibreProjection_closure_of_groundPointOutput).",
+      "route_relation": "same",
+      "correspondence": "Lean theorem_5_7_i_paper is the printed proof, one declaration per paragraph, in the printed order. The algebraic case uses x₁ − c ∈ 𝔭 as in the first paragraph. In the transcendental case the discrete valuation ring comes from Lemmas 5.9 and 5.10 (LaneC.divisorialVisibleFrameExistence calls lemma_5_9 and lemma_5_10_place), read in V̂ ≅ κ[[t]]; then step_orders (0 < a < b, j ∉ {0,1}), step_generic_point (equation (generic)), Lemma 5.11 for this ring, step_dual_derivations (D_k dual to the basis, Z(0) the identity on the rows i_l), step_lambda_tau (λ, w = q′ − Zλ = t^c τ with τ(0) ≠ 0, τ_{i_l} = τ_j = 0, τ₁(0) = 0), step_M_full_rank, Lemma 5.12(a) for the bound dim Θ_y ≤ d′+1, step_M_spans_cone (columns of M lie in 𝒞 by Lemma 5.12(b) and span it by Lemma 5.12(a)), step_lift_ell (ℓM = 0, ℓ(0) = u), step_ell_conormal (Lemma 5.13) and step_polynomial_limit (the final paragraph). Two steps are packaged differently: the invertible (d′+2)-minor of M and the formula for ℓ are replaced by a left inverse of M over κ[[t]], which gives the same lift; and the coefficient field of the completion (Matsumura Thm. 28.3) is obtained through a subfield E of F over which κ is finite. The terminal theorem GeneralAsymptoticConormal.coordinate_axis_mem_smooth_fibre_closure proves the same statement by a second, chart-based route; it uses the same place, built with Lemmas 5.9 and 5.10.",
+      "route": "theorem_5_7_i_paper → LaneC.divisorialVisibleFrameExistence (lemma_5_9, lemma_5_10_place) → step_orders → step_generic_point → witness_lemma_5_11 (lemma_5_11) → step_dual_derivations → step_lambda_tau → step_M_full_rank → witness_lemma_5_12_5_13 → step_M_spans_cone (lemma_5_12_b, lemma_5_12_a_cone) → step_lift_ell → step_ell_conormal (lemma_5_13) → step_polynomial_limit. Alternative route: GeneralAsymptoticConormal.coordinate_axis_mem_smooth_fibre_closure → SameWitness.coordinate_axis_mem_smooth_fibre_closure.",
       "lean": [
+        {
+          "file": "Stafford38/Paper/Section5/Proof.lean",
+          "name": "Stafford38.Paper.Section5.theorem_5_7_i_paper",
+          "repo": "formal",
+          "role": "main-proof",
+          "note": "The printed proof of Subsection 5.2, one declaration per paragraph."
+        },
         {
           "file": "Stafford38/Paper/Section5.lean",
           "name": "Stafford38.Paper.Section5.theorem_5_7_i",
@@ -3828,141 +3835,88 @@
           "role": "main-proof"
         },
         {
-          "file": "Stafford38/Geometry/AlternativeAsymptoticConormal.lean",
-          "name": "Stafford38.Geometry.AlternativeAsymptoticConormal.coordinate_axis_mem_smooth_fibre_closure",
+          "file": "Stafford38/Geometry/DivisorialVisibleFrameStageAssembly.lean",
+          "name": "Stafford38.Geometry.LaneC.divisorialVisibleFrameExistence",
           "repo": "formal",
-          "role": "main-proof",
-          "note": "The printed route of Subsection 5.2."
+          "role": "supporting result",
+          "note": "Builds the place of the formal proof: calls lemma_5_9, then lemma_5_10_place, then chooses the coefficient field."
         },
         {
-          "file": "Stafford38/Geometry/GeneralDivisorialVisibleFrame.lean",
-          "name": "Stafford38.Geometry.GeneralDivisorialVisibleFrame.generalDivisorialVisibleFrameWithResidueAlgebraicity",
+          "file": "Stafford38/Paper/Section5/Steps.lean",
+          "name": "Stafford38.Paper.Section5.step_orders",
           "repo": "formal",
-          "role": "helper"
+          "role": "helper",
+          "note": "Paragraph “Let a = ord q₀ and b = ord q₁”."
         },
         {
-          "file": "Stafford38/Geometry/PaperActualDivisorTangent.lean",
-          "name": "Stafford38.Geometry.PaperActualDivisorTangent.exists_regularizedOneRowConormalData_of_actual_columns",
+          "file": "Stafford38/Paper/Section5/Steps.lean",
+          "name": "Stafford38.Paper.Section5.step_generic_point",
           "repo": "formal",
-          "role": "helper"
+          "role": "helper",
+          "note": "Definition of y and equation (generic)."
         },
         {
-          "file": "Stafford38/Paper/Section5.lean",
+          "file": "Stafford38/Paper/Section5/Steps.lean",
           "name": "Stafford38.Paper.Section5.witness_lemma_5_11",
           "repo": "formal",
-          "role": "supporting result"
+          "role": "helper",
+          "note": "Lemma 5.11 for the ring of Lemmas 5.9–5.10."
         },
         {
-          "file": "Stafford38/Paper/Section5.lean",
+          "file": "Stafford38/Paper/Section5/Steps.lean",
+          "name": "Stafford38.Paper.Section5.step_dual_derivations",
+          "repo": "formal",
+          "role": "helper",
+          "note": "Paragraph after Lemma 5.11: D_k and Z(t)."
+        },
+        {
+          "file": "Stafford38/Paper/Section5/Steps.lean",
+          "name": "Stafford38.Paper.Section5.step_lambda_tau",
+          "repo": "formal",
+          "role": "helper",
+          "note": "Paragraph defining λ, w, c and τ."
+        },
+        {
+          "file": "Stafford38/Paper/Section5/Steps.lean",
+          "name": "Stafford38.Paper.Section5.step_M_full_rank",
+          "repo": "formal",
+          "role": "helper",
+          "note": "Paragraph “M(0) has full column rank”."
+        },
+        {
+          "file": "Stafford38/Paper/Section5/Steps.lean",
           "name": "Stafford38.Paper.Section5.witness_lemma_5_12_5_13",
           "repo": "formal",
-          "role": "supporting result"
+          "role": "helper",
+          "note": "Lemma 5.12(a): dim Θ_y = dim Ω_{F/K} = trdeg_K F ≤ d′+1 for this ring."
         },
         {
-          "file": "Stafford38/Geometry/GeneralAsymptoticLaurentAxis.lean",
+          "file": "Stafford38/Paper/Section5/Steps.lean",
+          "name": "Stafford38.Paper.Section5.step_M_spans_cone",
+          "repo": "formal",
           "role": "helper",
-          "name": "Stafford38.Geometry.GeneralAsymptoticLaurentAxis.exists_groundConormalAxis_of_prime_coordinate_avoidance"
+          "note": "Paragraph “the columns of M span 𝒞”, using Lemma 5.12."
         },
         {
-          "file": "Stafford38/Geometry/GeneralConstantCoordinateAxis.lean",
+          "file": "Stafford38/Paper/Section5/Steps.lean",
+          "name": "Stafford38.Paper.Section5.step_lift_ell",
+          "repo": "formal",
           "role": "helper",
-          "name": "Stafford38.Geometry.GeneralConstantCoordinateAxis.exists_constant_coordinate_equation_and_pure_axis"
+          "note": "Paragraph lifting u to ℓ(t)."
         },
         {
-          "file": "Stafford38/Geometry/GeneralConormalAxis.lean",
+          "file": "Stafford38/Paper/Section5/Steps.lean",
+          "name": "Stafford38.Paper.Section5.step_ell_conormal",
+          "repo": "formal",
           "role": "helper",
-          "name": "Stafford38.Geometry.GeneralConormalAxis.exists_groundConormalAxis_of_minimalPrime_unit_transcendental"
+          "note": "Lemma 5.13 applied to ℓ."
         },
         {
-          "file": "Stafford38/Geometry/GeneralDivisorialVisibleFrame.lean",
+          "file": "Stafford38/Paper/Section5/Steps.lean",
+          "name": "Stafford38.Paper.Section5.step_polynomial_limit",
+          "repo": "formal",
           "role": "helper",
-          "name": "Stafford38.Geometry.GeneralDivisorialVisibleFrame.generalDivisorialVisibleFrameExistence",
-          "expands": [
-            {
-              "file": "Stafford38/Geometry/ExactVisibleDivisorFrameInterface.lean",
-              "name": "Stafford38.Geometry.ExactVisibleDivisorFrameInterface.HasNormalizedCompatibleVisibleFrame"
-            }
-          ]
-        },
-        {
-          "file": "Stafford38/Geometry/DivisorialVisibleFrameStageAssembly.lean",
-          "role": "helper",
-          "name": "Stafford38.Geometry.LaneC.divisorialVisibleFrameExistence"
-        },
-        {
-          "file": "Stafford38/Geometry/DivisorialVisibleFrameStage2.lean",
-          "role": "helper",
-          "name": "Stafford38.Geometry.DivisorialVisibleFrameStage2.stage2_exists_chart_normalization"
-        },
-        {
-          "file": "Stafford38/Geometry/DivisorialVisibleFrameCore.lean",
-          "role": "helper",
-          "name": "Stafford38.Geometry.LaneC.stage3_exists_height_one_prime_valuation"
-        },
-        {
-          "file": "Stafford38/Geometry/NormalizationHeightOne.lean",
-          "role": "helper",
-          "name": "Stafford38.Geometry.NormalizationHeightOne.exists_height_one_minimal_prime"
-        },
-        {
-          "file": "Stafford38/Geometry/ComponentProjectiveOrder.lean",
-          "role": "helper",
-          "name": "Stafford38.Geometry.ComponentProjectiveOrder.normalized_denominator_nonunit_of_polynomial_inverse"
-        },
-        {
-          "file": "Stafford38/Geometry/ProjectiveDivisorOrderGap.lean",
-          "role": "helper",
-          "name": "Stafford38.Geometry.ProjectiveDivisorOrderGap.exists_uniformizer_strict_orderGap"
-        },
-        {
-          "file": "Stafford38/Geometry/KaehlerDVRVisibility.lean",
-          "role": "helper",
-          "name": "Stafford38.Geometry.KaehlerDVRVisibility.kaehler_span_of_isAlgebraic_adjoin"
-        },
-        {
-          "file": "Stafford38/Geometry/KaehlerDVRVisibility.lean",
-          "role": "helper",
-          "name": "Stafford38.Geometry.KaehlerDVRVisibility.exists_visibleDivisorFrame_of_kaehler_image"
-        },
-        {
-          "file": "Stafford38/Geometry/DivisorTangentLattice.lean",
-          "role": "helper",
-          "name": "Stafford38.Geometry.DivisorTangentLattice.VisibleDivisorFrame.exists_maximalIdeal_coefficients"
-        },
-        {
-          "file": "Stafford38/Geometry/CanonicalVisibleDivisorFrameProduction.lean",
-          "role": "helper",
-          "name": "Stafford38.Geometry.CanonicalVisibleDivisorFrameProduction.exists_finiteGradientBoundaryCertificateOver_of_hasVisibleDivisorFrame"
-        },
-        {
-          "file": "Stafford38/Geometry/CanonicalVisibleDivisorFrameProduction.lean",
-          "role": "helper",
-          "name": "Stafford38.Geometry.CanonicalVisibleDivisorFrameProduction.component_kaehler_bridge"
-        },
-        {
-          "file": "Stafford38/Geometry/FiniteGradientResidueExtension.lean",
-          "role": "helper",
-          "name": "Stafford38.Geometry.FiniteGradientResidueExtension.exists_groundConormalAxis_of_finiteGradientBoundaryCertificateOver"
-        },
-        {
-          "file": "Stafford38/Geometry/LaurentConormalResidueExtension.lean",
-          "role": "helper",
-          "name": "Stafford38.Geometry.LaurentConormalResidueExtension.residue_mem_residueExtensionFibreClosure_of_laurent_generic"
-        },
-        {
-          "file": "Stafford38/Geometry/ConormalScalarExtensionVanishing.lean",
-          "role": "helper",
-          "name": "Stafford38.Geometry.ConormalScalarExtensionVanishing.scalarExtension_vanishing"
-        },
-        {
-          "file": "Stafford38/Geometry/SmoothConormalFibreVanishing.lean",
-          "role": "helper",
-          "name": "Stafford38.Geometry.SmoothConormalFibreVanishing.fibreLift_mem_vanishingIdeal_equationConormal"
-        },
-        {
-          "file": "Stafford38/Geometry/SmoothAffineConormal.lean",
-          "role": "helper",
-          "name": "Stafford38.Geometry.SmoothAffineConormal.equationConormalClosure_smoothAffine_eq"
+          "note": "Final paragraph: P(ℓ̃(0)) = 0."
         },
         {
           "file": "Stafford38/Geometry/SameWitness/AffineFibreClosure.lean",
@@ -4118,7 +4072,7 @@
       ],
       "statement_relation": "exact",
       "route_relation": "same",
-      "correspondence": "Lean lemma_5_9: if x̄₁ is transcendental over K, there are a valuation ring W of F with K ⊆ W ≠ F and x̄₁ ∈ 𝔪_W, and an index j with x̄_j ≠ 0 and x̄ᵢ/x̄_j ∈ W for 0 ≤ i ≤ n, where x̄₀ = 1. The proof is the printed one: a valuation ring dominating K[x̄₁] localized at x̄₁ (Stacks Tag 00IA), then j maximal for the preorder x̄_a/x̄_b ∈ W.",
+      "correspondence": "Lean lemma_5_9: if x̄₁ is transcendental over K, there are a valuation ring W of F with K ⊆ W ≠ F and x̄₁ ∈ 𝔪_W, and an index j with x̄_j ≠ 0 and x̄ᵢ/x̄_j ∈ W for 0 ≤ i ≤ n, where x̄₀ = 1. The proof is the printed one: a valuation ring dominating K[x̄₁] localized at x̄₁ (Stacks Tag 00IA), then j maximal for the preorder x̄_a/x̄_b ∈ W. The formal proof of Theorem 5.7 calls lemma_5_9 to build its place (LaneC.divisorialVisibleFrameExistence).",
       "route": null,
       "lean": [
         {
@@ -4132,6 +4086,13 @@
           "name": "Stafford38.Geometry.LaneC.stage1_exists_valuationSubring_of_transcendental",
           "repo": "formal",
           "role": "helper"
+        },
+        {
+          "file": "Stafford38/Geometry/DivisorialVisibleFrameStageAssembly.lean",
+          "name": "Stafford38.Geometry.LaneC.divisorialVisibleFrameExistence",
+          "repo": "formal",
+          "role": "supporting result",
+          "note": "Builds the place of the formal proof: calls lemma_5_9, then lemma_5_10_place, then chooses the coefficient field."
         }
       ],
       "depends_on": [],
@@ -4159,7 +4120,7 @@
       ],
       "statement_relation": "exact",
       "route_relation": "same",
-      "correspondence": "Lean lemma_5_10 takes W and j from Lemma 5.9 and gives a discrete valuation ring V of F containing K with (a) qᵢ ∈ V, x̄₁ ∈ 𝔪_V and R ⊄ V, (b) κ algebraic over K(res q₀,…,res qₙ) and (c) Ω_{V/K} finitely generated. Its hypothesis 1 = ḡx̄₁ with ḡ ∈ R is what the paper derives from Y ∩ H = ∅ by the Nullstellensatz. The proof follows the printed one, through the normalization A of C₀ and a height-one prime over x̄₁A. The formal proof of Theorem 5.7 builds its ring with GeneralDivisorialVisibleFrame.generalDivisorialVisibleFrameWithResidueAlgebraicity from the same intermediate results and an additional coefficient field.",
+      "correspondence": "Lean lemma_5_10 takes W and j from Lemma 5.9 and gives a discrete valuation ring V of F containing K with (a) qᵢ ∈ V, x̄₁ ∈ 𝔪_V and R ⊄ V, (b) κ algebraic over K(res q₀,…,res qₙ) and (c) Ω_{V/K} finitely generated. Its hypothesis 1 = ḡx̄₁ with ḡ ∈ R is what the paper derives from Y ∩ H = ∅ by the Nullstellensatz. The proof is the printed one, through the normalization A of C₀ and a height-one prime 𝔭_D over x̄₁A with V = A_{𝔭_D}; lemma_5_10_place records this construction, and Lemma510Place.not_R_le is the clause R ⊄ V. The formal proof of Theorem 5.7 calls lemma_5_10_place to build its place (LaneC.divisorialVisibleFrameExistence).",
       "route": null,
       "lean": [
         {
@@ -4169,14 +4130,28 @@
           "role": "statement"
         },
         {
+          "file": "Stafford38/Paper/Section5/Place.lean",
+          "name": "Stafford38.Paper.Section5.lemma_5_10_place",
+          "repo": "formal",
+          "role": "statement",
+          "note": "Lemma 5.10 with the construction V = A_{𝔭_D} of its proof."
+        },
+        {
+          "file": "Stafford38/Paper/Section5/Place.lean",
+          "name": "Stafford38.Paper.Section5.Lemma510Place.not_R_le",
+          "repo": "formal",
+          "role": "statement",
+          "note": "The clause R ⊄ V."
+        },
+        {
           "file": "Stafford38/Geometry/DivisorialVisibleFrameCore.lean",
           "name": "Stafford38.Geometry.LaneC.stage3_exists_height_one_prime_valuation",
           "repo": "formal",
           "role": "helper"
         },
         {
-          "file": "Stafford38/Geometry/DivisorialVisibleFrameStageAssembly.lean",
-          "name": "Stafford38.Geometry.LaneC.stage4_of_verified",
+          "file": "Stafford38/Geometry/DivisorialVisibleFrameStage4.lean",
+          "name": "Stafford38.Geometry.DivisorialVisibleFrameStage4.stage4_residueField_isAlgebraic_of_isIntegral",
           "repo": "formal",
           "role": "helper"
         },
@@ -4187,10 +4162,11 @@
           "role": "helper"
         },
         {
-          "file": "Stafford38/Geometry/GeneralDivisorialVisibleFrame.lean",
-          "name": "Stafford38.Geometry.GeneralDivisorialVisibleFrame.generalDivisorialVisibleFrameWithResidueAlgebraicity",
+          "file": "Stafford38/Geometry/DivisorialVisibleFrameStageAssembly.lean",
+          "name": "Stafford38.Geometry.LaneC.divisorialVisibleFrameExistence",
           "repo": "formal",
-          "role": "supporting result"
+          "role": "supporting result",
+          "note": "Builds the place of the formal proof: calls lemma_5_9, then lemma_5_10_place, then chooses the coefficient field."
         }
       ],
       "depends_on": [
@@ -4219,7 +4195,7 @@
       ],
       "statement_relation": "exact",
       "route_relation": "same",
-      "correspondence": "Lean lemma_5_11 takes residues r₀,…,rₙ ∈ κ with r₀ = r₁ = 0, r_j = 1 and κ algebraic over K(r₀,…,rₙ), and gives distinct indices outside {0,1,j} whose differentials form a basis of Ω_{κ/K}; their number is dim_κ Ω_{κ/K}. The proof is the printed one: a transcendence basis chosen among these residues (Lang Thm. VIII.1.1) is a differential basis in characteristic zero (Matsumura Thm. 26.5). witness_lemma_5_11 shows that the discrete valuation ring of the formal proof of Theorem 5.7 has res q₀ = res q₁ = 0 and res q_j = 1 and satisfies the lemma.",
+      "correspondence": "Lean lemma_5_11 takes residues r₀,…,rₙ ∈ κ with r₀ = r₁ = 0, r_j = 1 and κ algebraic over K(r₀,…,rₙ), and gives distinct indices outside {0,1,j} whose differentials form a basis of Ω_{κ/K}; their number is dim_κ Ω_{κ/K}. The proof is the printed one: a transcendence basis chosen among these residues (Lang Thm. VIII.1.1) is a differential basis in characteristic zero (Matsumura Thm. 26.5). witness_lemma_5_11 shows that the discrete valuation ring of the formal proof of Theorem 5.7 has res q₀ = res q₁ = 0 and res q_j = 1 and satisfies the lemma. The formal proof of Theorem 5.7 uses this basis through witness_lemma_5_11 and step_dual_derivations.",
       "route": null,
       "lean": [
         {
@@ -4229,7 +4205,7 @@
           "role": "statement"
         },
         {
-          "file": "Stafford38/Paper/Section5.lean",
+          "file": "Stafford38/Paper/Section5/Steps.lean",
           "name": "Stafford38.Paper.Section5.witness_lemma_5_11",
           "repo": "formal",
           "role": "supporting result"
@@ -4239,6 +4215,13 @@
           "name": "Stafford38.Geometry.KaehlerDVRVisibility.kaehler_span_of_isAlgebraic_adjoin",
           "repo": "formal",
           "role": "helper"
+        },
+        {
+          "file": "Stafford38/Paper/Section5/Steps.lean",
+          "name": "Stafford38.Paper.Section5.step_dual_derivations",
+          "repo": "formal",
+          "role": "supporting result",
+          "note": "Where the formal proof of Theorem 5.7 uses the lemma."
         }
       ],
       "depends_on": [],
@@ -4282,7 +4265,7 @@
       ],
       "statement_relation": "exact",
       "route_relation": "similar",
-      "correspondence": "Lean states the lemma for a column q with q₀ ≠ 0 over a field L ⊇ K, with Θ_y and 𝒞 = ρ⁻¹(Θ_y) as in the text. (a) generic_tangent_finrank_eq_component_kaehler_finrank gives dim Θ_y = dim_F Ω_{F/K} at the generic point, component_kaehler_finrank_eq_trdeg gives dim_F Ω_{F/K} = trdeg_K F = m, and lemma_5_12_a_cone gives dim 𝒞 = dim Θ_y + 1. (b) is lemma_5_12_b. The bound m ≤ d′+1 depends on the discrete valuation ring; witness_lemma_5_12_5_13 proves it for the ring of the formal proof of Theorem 5.7 and applies (a) and (b) to its Laurent point. Route: (b) and the cone dimension follow the printed proof; for dim Θ_y ≥ m Lean uses the derivations of F/K, each of which gives a tangent vector, instead of the Jacobian rank.",
+      "correspondence": "Lean states the lemma for a column q with q₀ ≠ 0 over a field L ⊇ K, with Θ_y and 𝒞 = ρ⁻¹(Θ_y) as in the text. (a) generic_tangent_finrank_eq_component_kaehler_finrank gives dim Θ_y = dim_F Ω_{F/K} at the generic point, component_kaehler_finrank_eq_trdeg gives dim_F Ω_{F/K} = trdeg_K F = m, and lemma_5_12_a_cone gives dim 𝒞 = dim Θ_y + 1. (b) is lemma_5_12_b. The bound m ≤ d′+1 depends on the discrete valuation ring; witness_lemma_5_12_5_13 proves it for the ring of the formal proof of Theorem 5.7 and applies (a) and (b) to its Laurent point. Route: (b) and the cone dimension follow the printed proof; for dim Θ_y ≥ m Lean uses the derivations of F/K, each of which gives a tangent vector, instead of the Jacobian rank. The formal proof of Theorem 5.7 uses (a) and (b) in step_M_spans_cone.",
       "route": null,
       "lean": [
         {
@@ -4310,7 +4293,7 @@
           "role": "statement"
         },
         {
-          "file": "Stafford38/Paper/Section5.lean",
+          "file": "Stafford38/Paper/Section5/Steps.lean",
           "name": "Stafford38.Paper.Section5.witness_lemma_5_12_5_13",
           "repo": "formal",
           "role": "supporting result"
@@ -4320,6 +4303,13 @@
           "name": "Stafford38.Geometry.PaperSameWitnessTangentDimension.tangent_finrank_le_residue_add_one_of_witness",
           "repo": "formal",
           "role": "alternative-support"
+        },
+        {
+          "file": "Stafford38/Paper/Section5/Steps.lean",
+          "name": "Stafford38.Paper.Section5.step_M_spans_cone",
+          "repo": "formal",
+          "role": "supporting result",
+          "note": "Where the formal proof of Theorem 5.7 uses the lemma."
         }
       ],
       "depends_on": [],
@@ -4345,7 +4335,7 @@
       ],
       "statement_relation": "exact",
       "route_relation": "same",
-      "correspondence": "Lean lemma_5_13: for q with q₀ ≠ 0, a row vector ℓ annihilating 𝒞 has affine part (ℓ₁,…,ℓₙ) in span{df_y : f ∈ 𝔭}. The proof is the printed one: ℓ(q) = 0 and ℓ(v) = 0 give Σ ℓᵢρ(v)ᵢ = 0, and ρ(𝒞) = Θ_y. witness_lemma_5_12_5_13 applies it to the Laurent point of the formal proof of Theorem 5.7.",
+      "correspondence": "Lean lemma_5_13: for q with q₀ ≠ 0, a row vector ℓ annihilating 𝒞 has affine part (ℓ₁,…,ℓₙ) in span{df_y : f ∈ 𝔭}. The proof is the printed one: ℓ(q) = 0 and ℓ(v) = 0 give Σ ℓᵢρ(v)ᵢ = 0, and ρ(𝒞) = Θ_y. witness_lemma_5_12_5_13 applies it to the Laurent point of the formal proof of Theorem 5.7. The formal proof of Theorem 5.7 uses it in step_ell_conormal.",
       "route": null,
       "lean": [
         {
@@ -4355,7 +4345,7 @@
           "role": "statement"
         },
         {
-          "file": "Stafford38/Paper/Section5.lean",
+          "file": "Stafford38/Paper/Section5/Steps.lean",
           "name": "Stafford38.Paper.Section5.witness_lemma_5_12_5_13",
           "repo": "formal",
           "role": "supporting result"
@@ -4365,6 +4355,13 @@
           "name": "Stafford38.Geometry.PaperActualWitnessConormalData.exists_regularizedOneRowConormalData_of_actual_witness",
           "repo": "formal",
           "role": "supporting result"
+        },
+        {
+          "file": "Stafford38/Paper/Section5/Steps.lean",
+          "name": "Stafford38.Paper.Section5.step_ell_conormal",
+          "repo": "formal",
+          "role": "supporting result",
+          "note": "Where the formal proof of Theorem 5.7 uses the lemma."
         }
       ],
       "depends_on": [],
