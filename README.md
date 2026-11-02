@@ -9,13 +9,14 @@ open the bundled, unmodified manuscript; search, annotations and review notes
 work offline.
 
 **Current manuscript review:** open [index.html](index.html). Theorem 5.7
-and Lemmas 5.9–5.13 are each mapped to their own Lean theorem, and Theorem 5.7
-is proved in Lean along the printed route. Four editorial findings are
-recorded in Comparison notes. See the
-[update and verification records](verification/manuscript-20261102/README.md).
+and Lemmas 5.9–5.13 are each mapped to their own Lean theorem, and the Lean
+proof of Theorem 5.7 follows the printed proof paragraph by paragraph and uses
+these lemmas. Four editorial findings are recorded in Comparison notes. See
+the [manuscript records](verification/manuscript-20261102/README.md) and the
+[Section 5 update](verification/section5-proof-20261102/README.md).
 The paper has not been edited. The Lean sources are pinned to formal commit
-e2cf515, which adds these Section 5 theorems and passes the repository
-verifier ([log](verification/manuscript-20261102/formal-verify.log)).
+97f1da4, which passes the repository verifier
+([log](verification/section5-proof-20261102/formal-verify.log)).
 This review update has no new journal release or Zenodo DOI.
 
 **Offline:** download this repository, unzip it, and open **index.html**.

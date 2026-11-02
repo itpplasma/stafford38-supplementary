@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "formal_commit": "e2cf515da2601fa894a96c807040ad93d6597feb",
+ "formal_commit": "97f1da4fd0244a9d390a2f60d7531d39a8927914",
  "source": "Constants used by types and proofs (scripts/LeanDag.lean); lines from findDeclarationRanges?.",
  "nodes": {
   "T": {
@@ -725,8 +725,16 @@
   },
   "AXISP": {
    "keys": [
+    "DUAL",
     "FRAME",
-    "ROWS"
+    "L511",
+    "L512",
+    "LIFT",
+    "LIM",
+    "MRANK",
+    "MSPAN",
+    "ORD",
+    "TAU"
    ],
    "leaves": [
     "flat",
@@ -738,16 +746,47 @@
     "val"
    ],
    "helpers": {
-    "Stafford38.Geometry.AlternativeAsymptoticConormal.coordinate_axis_mem_smooth_fibre_closure": {
-     "keys": [
-      "FRAME",
-      "ROWS"
-     ],
+    "Stafford38.Geometry.GeneralCoordinateAvoidance.exists_coordinate_inverse_of_avoidance": {
+     "keys": [],
+     "leaves": [
+      "nss"
+     ]
+    },
+    "Stafford38.Geometry.AsymptoticDivisorExistence.coordinateZeroPrime_isPrime": {
+     "keys": [],
+     "leaves": []
+    },
+    "Stafford38.Geometry.RetainedDVR.RetainedDVRPlace.isDiscrete": {
+     "keys": [],
+     "leaves": []
+    },
+    "Stafford38.Geometry.FiniteGradientResidueExtension.eval₂_extensionAxis_eq_algebraMap_eval_axis": {
+     "keys": [],
+     "leaves": []
+    },
+    "Stafford38.Geometry.GeneralConstantCoordinateAxis.exists_constant_coordinate_equation_and_pure_axis": {
+     "keys": [],
+     "leaves": [
+      "flat",
+      "kahler",
+      "nss",
+      "support"
+     ]
+    },
+    "Stafford38.Geometry.SmoothConormalFibreVanishing.fibreLift_mem_vanishingIdeal_equationConormal": {
+     "keys": [],
      "leaves": [
       "flat",
       "kahler",
       "length",
       "nss",
+      "support"
+     ]
+    },
+    "Stafford38.Geometry.PaperResidueDerivationFrame.constantCoeff_retainedToCompleted_eq_residue": {
+     "keys": [],
+     "leaves": [
+      "kahler",
       "series",
       "support",
       "val"
@@ -762,9 +801,11 @@
    }
   },
   "FRAME": {
-   "keys": [],
+   "keys": [
+    "L510",
+    "L59"
+   ],
    "leaves": [
-    "flat",
     "kahler",
     "support",
     "val"
@@ -842,9 +883,11 @@
      "leaves": []
     },
     "Stafford38.Geometry.LaneC.divisorialVisibleFrameExistence": {
-     "keys": [],
+     "keys": [
+      "L510",
+      "L59"
+     ],
      "leaves": [
-      "flat",
       "kahler",
       "support",
       "val"
@@ -860,71 +903,6 @@
       "support",
       "val"
      ]
-    }
-   }
-  },
-  "ROWS": {
-   "keys": [],
-   "leaves": [
-    "kahler",
-    "series",
-    "support",
-    "val"
-   ],
-   "helpers": {
-    "Stafford38.Geometry.CanonicalVisibleDivisorFrameProduction.affineConormalSpace_map_minimalPrime_le": {
-     "keys": [],
-     "leaves": [
-      "support",
-      "val"
-     ]
-    },
-    "Stafford38.Geometry.PaperActualDivisorTangent.tangentSpace_eq_dehomogenizedTangentSpan_of_actual_columns": {
-     "keys": [],
-     "leaves": [
-      "kahler",
-      "series"
-     ]
-    },
-    "Stafford38.GeometryPowerSeriesTangentLimit.axisRow_apply_of_ne": {
-     "keys": [],
-     "leaves": []
-    },
-    "Stafford38.Geometry.FormalDivisorLaurentConormal.laurentColumn_dot_eq_zero_of_formalTangent_rowMul": {
-     "keys": [],
-     "leaves": []
-    },
-    "Stafford38.Geometry.PaperActualDivisorTangent.coefficientwiseDerivation_X_pow_mul": {
-     "keys": [],
-     "leaves": [
-      "kahler",
-      "series"
-     ]
-    },
-    "Stafford38.Geometry.FormalDivisorLaurentConormal.residueColumn_tail": {
-     "keys": [],
-     "leaves": []
-    },
-    "Stafford38.Geometry.FormalDivisorLaurentConormal.laurentNonposition_rowMul_eq_zero_of_formalTangent_rowMul": {
-     "keys": [],
-     "leaves": []
-    },
-    "Stafford38.Geometry.FormalDivisorLaurentConormal.laurentColumn_ne_zero_of_ne_zero": {
-     "keys": [],
-     "leaves": [
-      "series"
-     ]
-    },
-    "Stafford38.Geometry.PaperActualDivisorTangent.exists_formalDivisorAxisLift_with_derivative_relation": {
-     "keys": [],
-     "leaves": [
-      "kahler",
-      "series"
-     ]
-    },
-    "Stafford38.Geometry.ProjectiveTangentInclusion.coordinateCovector_mem_affineConormalSpace_of_zariski_le_span": {
-     "keys": [],
-     "leaves": []
     }
    }
   },
@@ -983,6 +961,14 @@
       "val"
      ]
     },
+    "Stafford38.Geometry.DivisorialVisibleFrameStage4.stage4_residueField_isAlgebraic_of_isIntegral": {
+     "keys": [],
+     "leaves": [
+      "kahler",
+      "support",
+      "val"
+     ]
+    },
     "Stafford38.Geometry.LaneC.ofField_mem_maximalIdeal_iff_v": {
      "keys": [],
      "leaves": [
@@ -995,14 +981,6 @@
      "leaves": [
       "kahler",
       "support"
-     ]
-    },
-    "Stafford38.Geometry.LaneC.stage4_of_verified": {
-     "keys": [],
-     "leaves": [
-      "kahler",
-      "support",
-      "val"
      ]
     },
     "Stafford38.Paper.Section5.valuationSubringToSubringIsLocal": {
@@ -1021,6 +999,73 @@
     "Stafford38.Geometry.LaneC.ofField_mem_algebraMap_v": {
      "keys": [],
      "leaves": []
+    },
+    "Stafford38.Paper.Section5.Lemma510Place.fractionRing": {
+     "keys": [],
+     "leaves": [
+      "val"
+     ]
+    },
+    "Stafford38.Paper.Section5.Lemma510Place.isDVR": {
+     "keys": [],
+     "leaves": [
+      "val"
+     ]
+    },
+    "Stafford38.Paper.Section5.Lemma510Place.place": {
+     "keys": [],
+     "leaves": [
+      "val"
+     ]
+    },
+    "Stafford38.Paper.Section5.Lemma510Place.x_mem": {
+     "keys": [],
+     "leaves": [
+      "val"
+     ]
+    },
+    "Stafford38.Paper.Section5.Lemma510Place.not_R_le": {
+     "keys": [],
+     "leaves": [
+      "support",
+      "val"
+     ]
+    },
+    "Stafford38.Paper.Section5.Lemma510Place.x_mem_p": {
+     "keys": [],
+     "leaves": [
+      "val"
+     ]
+    },
+    "Stafford38.Paper.Section5.Lemma510Place.q_mem": {
+     "keys": [],
+     "leaves": [
+      "val"
+     ]
+    },
+    "Stafford38.Paper.Section5.Lemma510Place.kaehler_finite": {
+     "keys": [],
+     "leaves": [
+      "val"
+     ]
+    },
+    "Stafford38.Paper.Section5.Lemma510Place.residue_algebraic": {
+     "keys": [],
+     "leaves": [
+      "val"
+     ]
+    },
+    "Stafford38.Geometry.LaneC.valuationSubringToSubringIsLocal": {
+     "keys": [],
+     "leaves": [
+      "val"
+     ]
+    },
+    "Stafford38.Paper.Section5.Lemma510Place.isPrime": {
+     "keys": [],
+     "leaves": [
+      "val"
+     ]
     }
    }
   },
@@ -1028,7 +1073,9 @@
    "keys": [],
    "leaves": [
     "kahler",
-    "support"
+    "series",
+    "support",
+    "val"
    ],
    "helpers": {
     "Stafford38.Geometry.kaehlerFinrankOfTranscendenceBasis": {
@@ -1043,13 +1090,55 @@
      "leaves": [
       "kahler"
      ]
+    },
+    "Stafford38.Geometry.AsymptoticDivisorExistence.coordinateZeroPrime_isPrime": {
+     "keys": [],
+     "leaves": []
+    },
+    "Stafford38.Geometry.RetainedDVR.RetainedDVRPlace.isDiscrete": {
+     "keys": [],
+     "leaves": []
+    },
+    "Stafford38.Geometry.GeneralDivisorialVisibleFrame.GeneralDivisorialVisibleFrameColumn.chart_one": {
+     "keys": [],
+     "leaves": [
+      "support"
+     ]
+    },
+    "Stafford38.Geometry.GeneralDivisorialVisibleFrame.GeneralDivisorialVisibleFrameWitness.halg": {
+     "keys": [],
+     "leaves": [
+      "support",
+      "val"
+     ]
+    },
+    "Stafford38.Geometry.ActualWitnessConormalAssembly.order_gap_of_actual_witness": {
+     "keys": [],
+     "leaves": [
+      "kahler",
+      "series",
+      "support",
+      "val"
+     ]
+    },
+    "Stafford38.Geometry.PaperResidueDerivationFrame.constantCoeff_retainedToCompleted_eq_residue": {
+     "keys": [],
+     "leaves": [
+      "kahler",
+      "series",
+      "support",
+      "val"
+     ]
     }
    }
   },
   "L512": {
-   "keys": [],
+   "keys": [
+    "L513"
+   ],
    "leaves": [
     "kahler",
+    "series",
     "support",
     "val"
    ],
@@ -1091,84 +1180,12 @@
     "Stafford38.Paper.Section5.rho_apply": {
      "keys": [],
      "leaves": []
-    }
-   }
-  },
-  "L513": {
-   "keys": [],
-   "leaves": [],
-   "helpers": {
-    "Stafford38.Paper.Section5.rho_map_tangentCone": {
-     "keys": [],
-     "leaves": []
-    },
-    "Stafford38.Geometry.AffineConormalSpan.coordinateCovector_apply": {
-     "keys": [],
-     "leaves": []
-    },
-    "Stafford38.Paper.Section5.ker_rho": {
-     "keys": [],
-     "leaves": []
-    },
-    "Stafford38.Geometry.AffineConormalSpan.affineConormalSpace_eq_equationCovectorSpan": {
-     "keys": [],
-     "leaves": []
-    }
-   }
-  },
-  "WIT": {
-   "keys": [
-    "L511",
-    "L512",
-    "L513"
-   ],
-   "leaves": [
-    "kahler",
-    "series",
-    "support",
-    "val"
-   ],
-   "helpers": {
-    "Stafford38.Geometry.AsymptoticDivisorExistence.coordinateZeroPrime_isPrime": {
-     "keys": [],
-     "leaves": []
-    },
-    "Stafford38.Geometry.RetainedDVR.RetainedDVRPlace.isDiscrete": {
-     "keys": [],
-     "leaves": []
-    },
-    "Stafford38.Geometry.GeneralDivisorialVisibleFrame.GeneralDivisorialVisibleFrameColumn.chart_one": {
-     "keys": [],
-     "leaves": [
-      "support"
-     ]
-    },
-    "Stafford38.Geometry.GeneralDivisorialVisibleFrame.GeneralDivisorialVisibleFrameWitness.halg": {
-     "keys": [],
-     "leaves": [
-      "support",
-      "val"
-     ]
-    },
-    "Stafford38.Geometry.ActualWitnessConormalAssembly.order_gap_of_actual_witness": {
-     "keys": [],
-     "leaves": [
-      "kahler",
-      "series",
-      "support",
-      "val"
-     ]
-    },
-    "Stafford38.Geometry.PaperResidueDerivationFrame.constantCoeff_retainedToCompleted_eq_residue": {
-     "keys": [],
-     "leaves": [
-      "kahler",
-      "series",
-      "support",
-      "val"
-     ]
     },
     "Stafford38.Geometry.PaperRetainedChartAssembly.component_equations_vanish_after_point_transport": {
+     "keys": [],
+     "leaves": []
+    },
+    "Stafford38.Geometry.AsymptoticDivisorExistence.coordinateZeroPrime_isPrime": {
      "keys": [],
      "leaves": []
     },
@@ -1177,6 +1194,10 @@
      "leaves": [
       "support"
      ]
+    },
+    "Stafford38.Geometry.RetainedDVR.RetainedDVRPlace.isDiscrete": {
+     "keys": [],
+     "leaves": []
     },
     "Stafford38.Geometry.RetainedPlaceConormalTransport.retainedLaurentLift_comp_algebraMap": {
      "keys": [],
@@ -1226,6 +1247,267 @@
       "support",
       "val"
      ]
+    }
+   }
+  },
+  "L513": {
+   "keys": [],
+   "leaves": [],
+   "helpers": {
+    "Stafford38.Paper.Section5.rho_map_tangentCone": {
+     "keys": [],
+     "leaves": []
+    },
+    "Stafford38.Geometry.AffineConormalSpan.coordinateCovector_apply": {
+     "keys": [],
+     "leaves": []
+    },
+    "Stafford38.Paper.Section5.ker_rho": {
+     "keys": [],
+     "leaves": []
+    },
+    "Stafford38.Geometry.AffineConormalSpan.affineConormalSpace_eq_equationCovectorSpan": {
+     "keys": [],
+     "leaves": []
+    }
+   }
+  },
+  "ORD": {
+   "keys": [],
+   "leaves": [
+    "kahler",
+    "series",
+    "support",
+    "val"
+   ],
+   "helpers": {
+    "Stafford38.Geometry.AsymptoticDivisorExistence.coordinateZeroPrime_isPrime": {
+     "keys": [],
+     "leaves": []
+    },
+    "Stafford38.Geometry.GeneralDivisorialVisibleFrame.GeneralDivisorialVisibleFrameColumn.q0_ne": {
+     "keys": [],
+     "leaves": [
+      "support"
+     ]
+    },
+    "Stafford38.Geometry.RetainedDVR.RetainedDVRPlace.isDiscrete": {
+     "keys": [],
+     "leaves": []
+    },
+    "Stafford38.Geometry.RetainedDVR.RetainedDVRPlace.parameter_ne": {
+     "keys": [],
+     "leaves": []
+    },
+    "Stafford38.Geometry.GeneralDivisorialVisibleFrame.GeneralDivisorialVisibleFrameColumn.chart_one": {
+     "keys": [],
+     "leaves": [
+      "support"
+     ]
+    },
+    "Stafford38.Geometry.ActualWitnessConormalAssembly.order_gap_of_actual_witness": {
+     "keys": [],
+     "leaves": [
+      "kahler",
+      "series",
+      "support",
+      "val"
+     ]
+    },
+    "Stafford38.Geometry.GeneralDivisorialVisibleFrame.GeneralDivisorialVisibleFrameColumn.q_parameter": {
+     "keys": [],
+     "leaves": [
+      "support"
+     ]
+    },
+    "Stafford38.Geometry.RetainedProjectiveCompletion.retainedToCompletedPowerSeries_injective": {
+     "keys": [],
+     "leaves": [
+      "kahler",
+      "series",
+      "support",
+      "val"
+     ]
+    },
+    "Stafford38.Geometry.RetainedPlaceConormalTransport.retainedLaurentLift_comp_algebraMap": {
+     "keys": [],
+     "leaves": [
+      "kahler",
+      "series",
+      "support",
+      "val"
+     ]
+    },
+    "Stafford38.Geometry.GeneralDivisorialVisibleFrame.GeneralDivisorialVisibleFrameColumn.q_commonScale": {
+     "keys": [],
+     "leaves": [
+      "support"
+     ]
+    },
+    "Stafford38.Geometry.RetainedPlaceConormalTransport.retainedLaurentLift_componentCoordinate": {
+     "keys": [],
+     "leaves": [
+      "kahler",
+      "series",
+      "support",
+      "val"
+     ]
+    },
+    "Stafford38.Geometry.PaperRetainedChartAssembly.component_generic_kernel_after_point_transport": {
+     "keys": [],
+     "leaves": [
+      "support"
+     ]
+    }
+   }
+  },
+  "DUAL": {
+   "keys": [],
+   "leaves": [
+    "kahler",
+    "series"
+   ],
+   "helpers": {
+    "Stafford38.Geometry.KaehlerVisibleDerivationFrame.constantCoeff_coefficientwiseTangentMatrix": {
+     "keys": [],
+     "leaves": [
+      "kahler",
+      "series"
+     ]
+    },
+    "Stafford38.Geometry.PaperActualDivisorTangent.coefficientwiseDerivation_X_pow_mul": {
+     "keys": [],
+     "leaves": [
+      "kahler",
+      "series"
+     ]
+    },
+    "Stafford38.GeometryResidueMinorSelection.constantCoeff_selectedMinor_det": {
+     "keys": [],
+     "leaves": []
+    }
+   }
+  },
+  "TAU": {
+   "keys": [],
+   "leaves": [
+    "kahler",
+    "series"
+   ],
+   "helpers": {
+    "Stafford38.GeometryFormalDivisorAxisLift.exists_formalDivisorAxisLift": {
+     "keys": [],
+     "leaves": [
+      "kahler",
+      "series"
+     ]
+    }
+   }
+  },
+  "MRANK": {
+   "keys": [],
+   "leaves": [
+    "series"
+   ],
+   "helpers": {
+    "Stafford38.GeometryFormalDivisorAxisLift.constantCoeff_formalTangentMatrix_axis_eq_zero": {
+     "keys": [],
+     "leaves": [
+      "series"
+     ]
+    },
+    "Stafford38.GeometryResidueMinorSelection.powerSeries_exists_leftInverse_of_residue_mulVec_injective": {
+     "keys": [],
+     "leaves": [
+      "series"
+     ]
+    },
+    "Stafford38.GeometryFormalDivisorTangent.residue_formalTangentMatrix_mulVec_injective": {
+     "keys": [],
+     "leaves": []
+    }
+   }
+  },
+  "MSPAN": {
+   "keys": [
+    "L512"
+   ],
+   "leaves": [
+    "kahler",
+    "series"
+   ],
+   "helpers": {
+    "Stafford38.Geometry.PaperLaurentChartDerivation.extendPowerSeriesDerivation_on_powerSeries": {
+     "keys": [],
+     "leaves": [
+      "series"
+     ]
+    },
+    "Stafford38.Geometry.FormalDivisorLaurentConormal.laurentColumn_ne_zero_of_ne_zero": {
+     "keys": [],
+     "leaves": [
+      "series"
+     ]
+    }
+   }
+  },
+  "LIFT": {
+   "keys": [
+    "L513"
+   ],
+   "leaves": [
+    "series"
+   ],
+   "helpers": {
+    "Stafford38.GeometryRetractionSpecialization.powerSeries_annihilatorLift_spec": {
+     "keys": [],
+     "leaves": []
+    },
+    "Stafford38.GeometryRetractionSpecialization.residueColumn_constantColumn": {
+     "keys": [],
+     "leaves": []
+    },
+    "Stafford38.GeometryPowerSeriesTangentLimit.axisRow_apply_of_ne": {
+     "keys": [],
+     "leaves": []
+    },
+    "Stafford38.Geometry.FormalDivisorLaurentConormal.residueColumn_tail": {
+     "keys": [],
+     "leaves": []
+    },
+    "Stafford38.Geometry.FormalDivisorLaurentConormal.laurentColumn_ne_zero_of_ne_zero": {
+     "keys": [],
+     "leaves": [
+      "series"
+     ]
+    }
+   }
+  },
+  "LIM": {
+   "keys": [],
+   "leaves": [
+    "flat",
+    "kahler",
+    "length",
+    "nss",
+    "series",
+    "support"
+   ],
+   "helpers": {
+    "Stafford38.Paper.Section5.eval_residue_eq_zero_of_mem_groundEquationConormalLocus": {
+     "keys": [],
+     "leaves": [
+      "flat",
+      "kahler",
+      "length",
+      "nss",
+      "series",
+      "support"
+     ]
+    },
+    "Stafford38.Geometry.AffineConormalSpan.affineConormalSpace_eq_equationCovectorSpan": {
+     "keys": [],
+     "leaves": []
     }
    }
   },
@@ -1889,17 +2171,9 @@
    "Stafford38.Geometry.AffineConormalSpan",
    124
   ],
-  "Stafford38.Geometry.AlternativeAsymptoticConormal.coordinate_axis_mem_smooth_fibre_closure": [
-   "Stafford38.Geometry.AlternativeAsymptoticConormal",
-   31
-  ],
   "Stafford38.Geometry.AsymptoticDivisorExistence.coordinateZeroPrime_isPrime": [
    "Stafford38.Geometry.AsymptoticDivisorExistence",
    57
-  ],
-  "Stafford38.Geometry.CanonicalVisibleDivisorFrameProduction.affineConormalSpace_map_minimalPrime_le": [
-   "Stafford38.Geometry.CanonicalVisibleDivisorFrameProduction",
-   117
   ],
   "Stafford38.Geometry.ChartGenericPointFractionRing.chartGenericPointSubalgebra_finiteType": [
    "Stafford38.Geometry.ChartGenericPointFractionRing",
@@ -1945,21 +2219,21 @@
    "Stafford38.Geometry.DivisorTangentLattice",
    90
   ],
+  "Stafford38.Geometry.DivisorialVisibleFrameStage4.stage4_residueField_isAlgebraic_of_isIntegral": [
+   "Stafford38.Geometry.DivisorialVisibleFrameStage4",
+   18
+  ],
   "Stafford38.Geometry.ExactDivisorialVisibleFrameExistence.componentCoordinate_adjoin_eq_top": [
    "Stafford38.Geometry.ExactDivisorialVisibleFrameExistence",
    45
   ],
-  "Stafford38.Geometry.FormalDivisorLaurentConormal.laurentColumn_dot_eq_zero_of_formalTangent_rowMul": [
-   "Stafford38.Geometry.FormalDivisorLaurentConormal",
-   56
+  "Stafford38.Geometry.FiniteGradientResidueExtension.eval₂_extensionAxis_eq_algebraMap_eval_axis": [
+   "Stafford38.Geometry.FiniteGradientResidueExtension",
+   69
   ],
   "Stafford38.Geometry.FormalDivisorLaurentConormal.laurentColumn_ne_zero_of_ne_zero": [
    "Stafford38.Geometry.FormalDivisorLaurentConormal",
    91
-  ],
-  "Stafford38.Geometry.FormalDivisorLaurentConormal.laurentNonposition_rowMul_eq_zero_of_formalTangent_rowMul": [
-   "Stafford38.Geometry.FormalDivisorLaurentConormal",
-   70
   ],
   "Stafford38.Geometry.FormalDivisorLaurentConormal.residueColumn_tail": [
    "Stafford38.Geometry.FormalDivisorLaurentConormal",
@@ -1981,6 +2255,14 @@
    "Stafford38.Geometry.GeneralCoisotropicSets",
    114
   ],
+  "Stafford38.Geometry.GeneralConstantCoordinateAxis.exists_constant_coordinate_equation_and_pure_axis": [
+   "Stafford38.Geometry.GeneralConstantCoordinateAxis",
+   18
+  ],
+  "Stafford38.Geometry.GeneralCoordinateAvoidance.exists_coordinate_inverse_of_avoidance": [
+   "Stafford38.Geometry.GeneralCoordinateAvoidance",
+   17
+  ],
   "Stafford38.Geometry.GeneralDivisorialVisibleFrame.GeneralDivisorialVisibleFrameColumn.chart_one": [
    "Stafford38.Geometry.GeneralDivisorialVisibleFrameColumn",
    75
@@ -1996,6 +2278,10 @@
   "Stafford38.Geometry.GeneralDivisorialVisibleFrame.GeneralDivisorialVisibleFrameColumn.q_commonScale": [
    "Stafford38.Geometry.GeneralDivisorialVisibleFrameColumn",
    83
+  ],
+  "Stafford38.Geometry.GeneralDivisorialVisibleFrame.GeneralDivisorialVisibleFrameColumn.q_parameter": [
+   "Stafford38.Geometry.GeneralDivisorialVisibleFrameColumn",
+   87
   ],
   "Stafford38.Geometry.GeneralDivisorialVisibleFrame.GeneralDivisorialVisibleFrameWitness.halg": [
    "Stafford38.Geometry.GeneralDivisorialVisibleFrameWitness",
@@ -2025,9 +2311,13 @@
    "Stafford38.Geometry.KaehlerDVRVisibility",
    134
   ],
+  "Stafford38.Geometry.KaehlerVisibleDerivationFrame.constantCoeff_coefficientwiseTangentMatrix": [
+   "Stafford38.Geometry.KaehlerVisibleDerivationFrame",
+   100
+  ],
   "Stafford38.Geometry.LaneC.divisorialVisibleFrameExistence": [
    "Stafford38.Geometry.DivisorialVisibleFrameStageAssembly",
-   35
+   36
   ],
   "Stafford38.Geometry.LaneC.isDiscreteValuationRing_of_isLocalization_atPrime": [
    "Stafford38.Geometry.DivisorialVisibleFrameCore",
@@ -2053,13 +2343,13 @@
    "Stafford38.Geometry.DivisorialVisibleFrameCore",
    275
   ],
-  "Stafford38.Geometry.LaneC.stage4_of_verified": [
-   "Stafford38.Geometry.DivisorialVisibleFrameStageAssembly",
-   23
-  ],
   "Stafford38.Geometry.LaneC.stage7_kaehler_finite_ofField": [
    "Stafford38.Geometry.DivisorialVisibleFrameCore",
    332
+  ],
+  "Stafford38.Geometry.LaneC.valuationSubringToSubringIsLocal": [
+   "Stafford38.Geometry.DivisorialVisibleFrameCore",
+   75
   ],
   "Stafford38.Geometry.LaurentConormalDirection.eval₂_fibreLift": [
    "Stafford38.Geometry.LaurentConormalDirection",
@@ -2073,21 +2363,13 @@
    "Stafford38.Geometry.PaperActualDivisorTangent",
    196
   ],
-  "Stafford38.Geometry.PaperActualDivisorTangent.exists_formalDivisorAxisLift_with_derivative_relation": [
-   "Stafford38.Geometry.PaperActualDivisorTangent",
-   109
-  ],
-  "Stafford38.Geometry.PaperActualDivisorTangent.exists_regularizedOneRowConormalData_of_actual_columns": [
-   "Stafford38.Geometry.PaperActualDivisorTangent",
-   440
-  ],
-  "Stafford38.Geometry.PaperActualDivisorTangent.tangentSpace_eq_dehomogenizedTangentSpan_of_actual_columns": [
-   "Stafford38.Geometry.PaperActualDivisorTangent",
-   215
-  ],
   "Stafford38.Geometry.PaperGenericTangentRank.generic_tangent_finrank_le_component_kaehler_finrank": [
    "Stafford38.Geometry.PaperGenericTangentRank",
    499
+  ],
+  "Stafford38.Geometry.PaperLaurentChartDerivation.extendPowerSeriesDerivation_on_powerSeries": [
+   "Stafford38.Geometry.PaperLaurentChartDerivation",
+   92
   ],
   "Stafford38.Geometry.PaperResidueDerivationFrame.constantCoeff_retainedToCompleted_eq_residue": [
    "Stafford38.Geometry.PaperResidueDerivationFrame",
@@ -2096,6 +2378,10 @@
   "Stafford38.Geometry.PaperRetainedChartAssembly.component_equations_vanish_after_point_transport": [
    "Stafford38.Geometry.PaperRetainedChartAssembly",
    93
+  ],
+  "Stafford38.Geometry.PaperRetainedChartAssembly.component_generic_kernel_after_point_transport": [
+   "Stafford38.Geometry.PaperRetainedChartAssembly",
+   118
   ],
   "Stafford38.Geometry.PaperSameWitnessComponentFieldRank.component_field_rank_of_witness": [
    "Stafford38.Geometry.PaperSameWitnessComponentFieldRank",
@@ -2121,10 +2407,6 @@
    "Stafford38.Geometry.ProjectiveDivisorOrderGap",
    42
   ],
-  "Stafford38.Geometry.ProjectiveTangentInclusion.coordinateCovector_mem_affineConormalSpace_of_zariski_le_span": [
-   "Stafford38.Geometry.ProjectiveTangentInclusion",
-   34
-  ],
   "Stafford38.Geometry.ProjectiveValuationNormalization.exists_normalized_projective_lift": [
    "Stafford38.Geometry.ProjectiveValuationNormalization",
    73
@@ -2148,6 +2430,10 @@
   "Stafford38.Geometry.RetainedDVR.RetainedDVRPlace.isDiscrete": [
    "Stafford38.Geometry.RetainedDVRPlace",
    46
+  ],
+  "Stafford38.Geometry.RetainedDVR.RetainedDVRPlace.parameter_ne": [
+   "Stafford38.Geometry.RetainedDVRPlace",
+   49
   ],
   "Stafford38.Geometry.RetainedDVR.RetainedDVRPlace.parameter_nonunit": [
    "Stafford38.Geometry.RetainedDVRPlace",
@@ -2253,13 +2539,85 @@
    "Stafford38.Geometry.SameWitnessTranscendenceDegreeBound",
    37
   ],
+  "Stafford38.Geometry.SmoothConormalFibreVanishing.fibreLift_mem_vanishingIdeal_equationConormal": [
+   "Stafford38.Geometry.SmoothConormalFibreVanishing",
+   24
+  ],
   "Stafford38.Geometry.kaehlerFinrankOfTranscendenceBasis": [
    "Stafford38.Geometry.KaehlerTranscendenceBasis",
    136
   ],
+  "Stafford38.GeometryFormalDivisorAxisLift.constantCoeff_formalTangentMatrix_axis_eq_zero": [
+   "Stafford38.Geometry.FormalDivisorAxisLift",
+   91
+  ],
+  "Stafford38.GeometryFormalDivisorAxisLift.exists_formalDivisorAxisLift": [
+   "Stafford38.Geometry.FormalDivisorAxisLift",
+   219
+  ],
+  "Stafford38.GeometryFormalDivisorTangent.residue_formalTangentMatrix_mulVec_injective": [
+   "Stafford38.Geometry.FormalDivisorTangent",
+   177
+  ],
   "Stafford38.GeometryPowerSeriesTangentLimit.axisRow_apply_of_ne": [
    "Stafford38.Geometry.PowerSeriesTangentLimit",
    42
+  ],
+  "Stafford38.GeometryResidueMinorSelection.constantCoeff_selectedMinor_det": [
+   "Stafford38.Geometry.ResidueMinorSelection",
+   90
+  ],
+  "Stafford38.GeometryResidueMinorSelection.powerSeries_exists_leftInverse_of_residue_mulVec_injective": [
+   "Stafford38.Geometry.ResidueMinorSelection",
+   111
+  ],
+  "Stafford38.GeometryRetractionSpecialization.powerSeries_annihilatorLift_spec": [
+   "Stafford38.Geometry.RetractionSpecialization",
+   176
+  ],
+  "Stafford38.GeometryRetractionSpecialization.residueColumn_constantColumn": [
+   "Stafford38.Geometry.RetractionSpecialization",
+   151
+  ],
+  "Stafford38.Paper.Section5.Lemma510Place.fractionRing": [
+   "Stafford38.Paper.Section5.Place",
+   109
+  ],
+  "Stafford38.Paper.Section5.Lemma510Place.isDVR": [
+   "Stafford38.Paper.Section5.Place",
+   114
+  ],
+  "Stafford38.Paper.Section5.Lemma510Place.isPrime": [
+   "Stafford38.Paper.Section5.Place",
+   111
+  ],
+  "Stafford38.Paper.Section5.Lemma510Place.kaehler_finite": [
+   "Stafford38.Paper.Section5.Place",
+   129
+  ],
+  "Stafford38.Paper.Section5.Lemma510Place.not_R_le": [
+   "Stafford38.Paper.Section5.Place",
+   343
+  ],
+  "Stafford38.Paper.Section5.Lemma510Place.place": [
+   "Stafford38.Paper.Section5.Place",
+   112
+  ],
+  "Stafford38.Paper.Section5.Lemma510Place.q_mem": [
+   "Stafford38.Paper.Section5.Place",
+   115
+  ],
+  "Stafford38.Paper.Section5.Lemma510Place.residue_algebraic": [
+   "Stafford38.Paper.Section5.Place",
+   118
+  ],
+  "Stafford38.Paper.Section5.Lemma510Place.x_mem": [
+   "Stafford38.Paper.Section5.Place",
+   116
+  ],
+  "Stafford38.Paper.Section5.Lemma510Place.x_mem_p": [
+   "Stafford38.Paper.Section5.Place",
+   117
   ],
   "Stafford38.Paper.Section5.component_kaehler_finrank_eq_trdeg": [
    "Stafford38.Paper.Section5.GenericTangentRank",
@@ -2268,6 +2626,10 @@
   "Stafford38.Paper.Section5.component_kaehler_finrank_le_generic_tangent_finrank": [
    "Stafford38.Paper.Section5.GenericTangentRank",
    100
+  ],
+  "Stafford38.Paper.Section5.eval_residue_eq_zero_of_mem_groundEquationConormalLocus": [
+   "Stafford38.Paper.Section5.Steps",
+   403
   ],
   "Stafford38.Paper.Section5.generic_tangent_finrank_eq_component_kaehler_finrank": [
    "Stafford38.Paper.Section5.GenericTangentRank",
@@ -2279,7 +2641,11 @@
   ],
   "Stafford38.Paper.Section5.lemma_5_10": [
    "Stafford38.Paper.Section5.Place",
-   98
+   365
+  ],
+  "Stafford38.Paper.Section5.lemma_5_10_place": [
+   "Stafford38.Paper.Section5.Place",
+   144
   ],
   "Stafford38.Paper.Section5.lemma_5_11": [
    "Stafford38.Paper.Section5.ResidueBasis",
@@ -2299,7 +2665,7 @@
   ],
   "Stafford38.Paper.Section5.lemma_5_9": [
    "Stafford38.Paper.Section5.Place",
-   45
+   46
   ],
   "Stafford38.Paper.Section5.rho_apply": [
    "Stafford38.Paper.Section5.TangentCone",
@@ -2313,25 +2679,65 @@
    "Stafford38.Paper.Section5.TangentCone",
    62
   ],
+  "Stafford38.Paper.Section5.step_M_full_rank": [
+   "Stafford38.Paper.Section5.Steps",
+   187
+  ],
+  "Stafford38.Paper.Section5.step_M_spans_cone": [
+   "Stafford38.Paper.Section5.Steps",
+   241
+  ],
+  "Stafford38.Paper.Section5.step_dual_derivations": [
+   "Stafford38.Paper.Section5.Steps",
+   88
+  ],
+  "Stafford38.Paper.Section5.step_ell_conormal": [
+   "Stafford38.Paper.Section5.Steps",
+   347
+  ],
+  "Stafford38.Paper.Section5.step_generic_point": [
+   "Stafford38.Paper.Section5.Steps",
+   536
+  ],
+  "Stafford38.Paper.Section5.step_lambda_tau": [
+   "Stafford38.Paper.Section5.Steps",
+   156
+  ],
+  "Stafford38.Paper.Section5.step_lift_ell": [
+   "Stafford38.Paper.Section5.Steps",
+   327
+  ],
+  "Stafford38.Paper.Section5.step_orders": [
+   "Stafford38.Paper.Section5.Steps",
+   469
+  ],
+  "Stafford38.Paper.Section5.step_polynomial_limit": [
+   "Stafford38.Paper.Section5.Steps",
+   431
+  ],
   "Stafford38.Paper.Section5.theorem_5_7_i": [
    "Stafford38.Paper.Section5",
-   67
+   40
+  ],
+  "Stafford38.Paper.Section5.theorem_5_7_i_paper": [
+   "Stafford38.Paper.Section5.Proof",
+   52
   ],
   "Stafford38.Paper.Section5.theorem_5_7_ii": [
    "Stafford38.Paper.Section5",
-   81
+   54
   ],
   "Stafford38.Paper.Section5.valuationSubringToSubringIsLocal": [
    "Stafford38.Paper.Section5.Place",
-   36
+   37
   ],
   "Stafford38.Paper.Section5.witness_lemma_5_11": [
-   "Stafford38.Paper.Section5",
-   95
+   "Stafford38.Paper.Section5.Steps",
+   573
   ],
   "Stafford38.Paper.Section5.witness_lemma_5_12_5_13": [
-   "Stafford38.Paper.Section5",
-   160
+   "Stafford38.Paper.Section5.Steps",
+   638
   ],
   "Stafford38.PaperCyclicity.paper_torsion_module_is_cyclic": [
    "Stafford38.PaperCyclicity",
