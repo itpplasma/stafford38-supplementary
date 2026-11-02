@@ -1,22 +1,22 @@
 {
   "schema": 2,
-  "version": "0.2.6-manuscript-review",
+  "version": "0.2.7-manuscript-review",
   "reader": "https://itpplasma.github.io/stafford38-supplementary/",
   "sources": {
     "paper": {
       "repo": "itpplasma/stafford38-paper",
-      "commit": "498a741686012734832547d9f33705130a37d218",
+      "commit": "0dd6189bdf1bf2c670a8421cfc9952d5b6b811b9",
       "file": "human_readable_main.tex",
       "origin_repo": "itpplasma/stafford38-paper",
-      "origin_commit": "498a741686012734832547d9f33705130a37d218",
-      "sha256": "a101d635ec230a67b9801a8ac10e814f4234e29c44ed900ffcbc1ea1699706f8",
-      "label": "Paper (Overleaf update)",
+      "origin_commit": "0dd6189bdf1bf2c670a8421cfc9952d5b6b811b9",
+      "sha256": "9cdf65e2419f8a2c9c28c27a5b531d9d2a12be2305c190eafa726f0255d9db66",
+      "label": "Paper (frozen version)",
       "local_source_base": "./sources/paper",
-      "note": "October 28 Overleaf update, preserved verbatim.",
+      "note": "November 2 frozen version, preserved verbatim.",
       "snapshot": {
         "base": "sources/paper/raw",
         "files": {
-          "human_readable_main.tex": "a101d635ec230a67b9801a8ac10e814f4234e29c44ed900ffcbc1ea1699706f8",
+          "human_readable_main.tex": "9cdf65e2419f8a2c9c28c27a5b531d9d2a12be2305c190eafa726f0255d9db66",
           "references.bib": "dd9ca2fb6ca2abae741af600c4ac1728dac2b4758a1cc564a30f9c6043df0d4f",
           "ai_review.tex": "3b245e5178736d12e247f24963a27d10a542f6fc25018070c24cf817d52d1591"
         }
@@ -67,8 +67,8 @@
   },
   "manuscript_pdfs": {
     "paper": {
-      "sha256": "7d6a59fd331ab2715886ea9a79a525b1b56fe5be4e5ce356b5b23058249f479b",
-      "source_commit": "498a741686012734832547d9f33705130a37d218",
+      "sha256": "f3c60faad33327fba463b5ba7ef92471dc893c09d0ff2224bc7205fe51a9560d",
+      "source_commit": "0dd6189bdf1bf2c670a8421cfc9952d5b6b811b9",
       "build": "latexmk -pdf -interaction=nonstopmode -halt-on-error human_readable_main.tex",
       "isolated_checkout": true,
       "unresolved_references": []
@@ -77,19 +77,19 @@
   "review": {
     "claims": 69,
     "statement_relations": {
-      "partial": 22,
-      "lean-stronger": 6,
-      "equivalent": 12,
+      "partial": 17,
+      "lean-stronger": 5,
+      "equivalent": 13,
       "n/a": 9,
-      "exact": 20
+      "exact": 25
     },
     "proof_routes": {
       "n/a": 35,
-      "same": 16,
-      "similar": 17,
+      "same": 20,
+      "similar": 13,
       "lean-only": 1
     },
-    "scope": "The active October 28 manuscript, including visible AI markup. Unchanged Lean source pins retain their previous verification scope; updated printed proofs require fresh human correspondence review.",
+    "scope": "The active November 2 manuscript, including visible AI markup. Unchanged Lean source pins retain their previous verification scope; updated printed proofs require fresh human correspondence review.",
     "johanna": "pending",
     "max": "pending"
   },
@@ -726,7 +726,7 @@
       "status": "byte-verified"
     }
   },
-  "status": "manuscript-review-draft",
+  "status": "manuscript-update-in-progress",
   "manuscript_sources": {
     "formal": {
       "commit": "f9448d6307fa25aff9d9f94ce0a9c7f9b03e63ff"
@@ -739,46 +739,8 @@
     "scope": "Local verifier, public challenge interfaces, both proof routes, literal consumers, and three-kernel comparison. No Palomar service-runner receipt is claimed."
   },
   "checks": {
-    "status": "passed",
-    "receipt": "verification/manuscript-20261028/verification.json",
-    "reader_build": {
-      "status": "passed",
-      "warnings": [],
-      "scope": "Complete current source/reference and statement-coverage audit; warnings are unresolved references already present in the paper."
-    },
-    "generator_tests": {
-      "passed": 83,
-      "failed": 0,
-      "skipped": 1,
-      "scope": "Generator regression suite including its browser tests",
-      "skip_reason": "Historical sibling-paper fixture unavailable; current manuscript passes the actual pinned build.",
-      "rerun": false,
-      "log": "verification/manuscript-20261021/generator-tests.log",
-      "reason": "Generator unchanged at the October 21 commit; the run was not repeated for this refresh."
-    },
-    "browser": {
-      "status": "passed",
-      "cards": 69,
-      "paper": "498a741686012734832547d9f33705130a37d218",
-      "source_links": 2555,
-      "definition_links": "all targets present",
-      "canonical_weyl_definitions": 1,
-      "ownership_labels": true,
-      "definition_clicks": true,
-      "new_cards": 5,
-      "obsolete_cards_absent": true,
-      "paper_source_links_local": true,
-      "search": true,
-      "guided_navigation": true,
-      "manuscript_annotations": true,
-      "notes_reload": true,
-      "review_export": true,
-      "review_findings": 4,
-      "math_errors": 0,
-      "mobile_overflow": false,
-      "javascript_errors": [],
-      "offline_requests": 0
-    },
-    "scope": "Supplementary source mapping, renderer and reader behavior; not a new proof-correspondence certification."
+    "status": "pending",
+    "receipt": "verification/manuscript-20261102/verification.json",
+    "note": "Historical checks remain in their original receipts; they do not verify the updated manuscript build."
   }
 }

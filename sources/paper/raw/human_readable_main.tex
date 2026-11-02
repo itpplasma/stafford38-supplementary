@@ -125,8 +125,8 @@ standard axioms: propositional extensionality (\texttt{propext}), the axiom
 of choice (\texttt{Classical.choice}) and soundness of quotient types
 (\texttt{Quot.sound}). Every intermediate result is proved in Lean as well,
 including Gabber's involutivity theorem for cyclic $A_n(k)$-modules. The
-formal proof is organized along the same steps as
-Sections~\ref{sec:monic}--\ref{sec:proof}. The main theorem is registered
+proof in Sections~\ref{sec:monic}--\ref{sec:proof} follows the formal proof
+step by step; where the two routes differ, the text says so. The main theorem is registered
 in Palomar~\cite{Stafford38Palomar2026}, and the Lean sources are
 archived~\cite{Stafford38Zenodo131}. Tooling and the role of AI assistance
 are described in Appendix~\ref{app:ai-workflow}. Section~\ref{sec:generalizations} states further consequences proved in Lean and two generalizations, to rings of differential operators on smooth affine varieties and to simple filtered algebras.
@@ -1678,8 +1678,6 @@ not apply.
 \begin{appendix}
 
 
-% Evidence: project ledgers, archived outward session messages, model-use
-% records, independent reviews, and canonical formal-proof provenance.
 \section{AI-assisted research and formalization}\label{app:ai-workflow}
 
 AI agents assisted with proof discovery, counterexample searches,
@@ -1687,8 +1685,17 @@ review, formalization and writing. The work began with computations in
 Macaulay2 and Maple. Direct attempts to construct universal cofactors
 produced special cases and reductions, but no general construction. The
 decisive step was to study the quotient $Q=A_n/(dA_n+x_1^N dA_n)$ and to show
-that its characteristic support is empty. The Lean formalization followed
-once the paper argument was complete.
+that its characteristic support is empty.
+
+The first complete argument was written by AI agents in the style of a paper
+proof. Agents then formalized it in Lean, and the formalization changed parts
+of the argument where the original steps could not be checked as written.
+After the Lean proof was complete and published, the paper proof was rewritten
+from the checked Lean proof, so that every statement corresponds to a Lean
+declaration and every difference between the two routes is marked in the
+text. The authors are reviewing this correspondence and revising the text for
+clarity together with the agents, until both the human review and the AI
+checks raise no further objections.
 
 One controlling agent kept the authoritative state of the proof.
 Parallel agents worked on separate approaches and returned evidence together

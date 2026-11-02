@@ -1,23 +1,23 @@
 {
   "schema": 1,
-  "version": "0.2.6-manuscript-review",
+  "version": "0.2.7-manuscript-review",
   "title": "Stafford’s Conjecture 3.8",
-  "subtitle": "October 28 manuscript · paper and Lean proof comparison",
+  "subtitle": "November 2 manuscript · paper and Lean proof comparison",
   "sources": {
     "paper": {
       "repo": "itpplasma/stafford38-paper",
-      "commit": "498a741686012734832547d9f33705130a37d218",
+      "commit": "0dd6189bdf1bf2c670a8421cfc9952d5b6b811b9",
       "file": "human_readable_main.tex",
       "origin_repo": "itpplasma/stafford38-paper",
-      "origin_commit": "498a741686012734832547d9f33705130a37d218",
-      "sha256": "a101d635ec230a67b9801a8ac10e814f4234e29c44ed900ffcbc1ea1699706f8",
-      "label": "Paper (Overleaf update)",
+      "origin_commit": "0dd6189bdf1bf2c670a8421cfc9952d5b6b811b9",
+      "sha256": "9cdf65e2419f8a2c9c28c27a5b531d9d2a12be2305c190eafa726f0255d9db66",
+      "label": "Paper (frozen version)",
       "local_source_base": "./sources/paper",
-      "note": "October 28 Overleaf update, preserved verbatim.",
+      "note": "November 2 frozen version, preserved verbatim.",
       "snapshot": {
         "base": "sources/paper/raw",
         "files": {
-          "human_readable_main.tex": "a101d635ec230a67b9801a8ac10e814f4234e29c44ed900ffcbc1ea1699706f8",
+          "human_readable_main.tex": "9cdf65e2419f8a2c9c28c27a5b531d9d2a12be2305c190eafa726f0255d9db66",
           "references.bib": "dd9ca2fb6ca2abae741af600c4ac1728dac2b4758a1cc564a30f9c6043df0d4f",
           "ai_review.tex": "3b245e5178736d12e247f24963a27d10a542f6fc25018070c24cf817d52d1591"
         }
@@ -736,7 +736,7 @@
       ],
       "statement_relation": "partial",
       "route_relation": "n/a",
-      "correspondence": "The subsection states that Theorem 1.1 and Corollary 6.3 are proved in Lean from the three standard axioms, and that every intermediate result is proved as well, along Sections 3–6. The reader maps the formal counterparts card by card; several printed lemmas (for example Lemmas 4.7, 5.9 and 5.13) have no exact Lean declaration mapped here, their content being used inside larger formal results.",
+      "correspondence": "The subsection states that Theorem 1.1 and Corollary 6.3 are proved in Lean from the three standard axioms, that every intermediate result is proved as well, and that the proof in Sections 3–6 follows the formal proof step by step, the text saying where the two routes differ. The reader maps the formal counterparts card by card; a card marked “similar” says where Lean reorganizes a step. In Subsection 5.2 each printed statement, Theorem 5.7 and Lemmas 5.9–5.13, has its own Lean theorem in Stafford38.Paper.Section5, and Theorem 5.7 is proved along the printed route. Lemma 4.7 has no exact Lean declaration mapped here; its content is used inside larger formal results.",
       "route": null,
       "lean": [
         {
@@ -785,7 +785,8 @@
           "status": "resolved in paper 204f5ea"
         }
       ],
-      "issues": []
+      "issues": [],
+      "comparison_updated_on": "2026-11-02"
     },
     {
       "id": "def:cyclic",
@@ -3532,30 +3533,54 @@
         1090
       ],
       "label": "thm:asymptotic-conormal-formal",
-      "statement_relation": "lean-stronger",
+      "statement_relation": "equivalent",
       "route_relation": "similar",
-      "correspondence": "The active statement now includes both polynomial vanishing at the coordinate axis and projective conormal-direction membership over any algebraically closed characteristic-zero field. The retained Lean results prove the corresponding affine-cone and projective conclusions. Proof correspondence remains separate.",
-      "route": "Pending final-source-pin refresh. The route recorded in the historical formal snapshot is not asserted as the current route; compare the current endpoint and hypotheses after final pins arrive.",
+      "correspondence": "Lean theorem_5_7_i and theorem_5_7_ii state (i) and (ii) over any algebraically closed field K of characteristic zero, the setting of Section 5, for the prime ideal 𝔭 = I(Y) instead of the set Y; Y ∩ H = ∅ is written as x₁ ≠ 0 on V_K(𝔭). Statement (i) is the membership of (1,0,…,0) in the zero set of the ideal of polynomials vanishing on N(Y), which is the printed condition. Both are proved by the printed route (see the proof card). The terminal theorem GeneralAsymptoticConormal.coordinate_axis_mem_smooth_fibre_closure proves the same statement by a second, chart-based route.",
+      "route": "Stafford38.Paper.Section5.theorem_5_7_i applies Stafford38.Geometry.AlternativeAsymptoticConormal.coordinate_axis_mem_smooth_fibre_closure, the printed route; theorem_5_7_ii deduces (ii) from (i) as in the last paragraph of the printed proof.",
       "lean": [
         {
-          "file": "Stafford38/Geometry/GeneralAsymptoticConormal.lean",
-          "role": "statement",
-          "name": "Stafford38.Geometry.GeneralAsymptoticConormal.coordinate_axis_mem_projective_conormal_directions"
+          "file": "Stafford38/Paper/Section5.lean",
+          "name": "Stafford38.Paper.Section5.theorem_5_7_i",
+          "repo": "formal",
+          "role": "statement"
+        },
+        {
+          "file": "Stafford38/Paper/Section5.lean",
+          "name": "Stafford38.Paper.Section5.theorem_5_7_ii",
+          "repo": "formal",
+          "role": "statement"
+        },
+        {
+          "file": "Stafford38/Geometry/AlternativeAsymptoticConormal.lean",
+          "name": "Stafford38.Geometry.AlternativeAsymptoticConormal.coordinate_axis_mem_smooth_fibre_closure",
+          "repo": "formal",
+          "role": "main-proof",
+          "note": "The printed route of Subsection 5.2."
         },
         {
           "file": "Stafford38/Geometry/GeneralAsymptoticConormal.lean",
-          "role": "main-proof",
-          "name": "Stafford38.Geometry.GeneralAsymptoticConormal.coordinate_axis_mem_smooth_fibre_closure"
+          "name": "Stafford38.Geometry.GeneralAsymptoticConormal.coordinate_axis_mem_smooth_fibre_closure",
+          "repo": "formal",
+          "role": "alternative-proof",
+          "note": "Terminal theorem; proves the same statement by the second, chart-based route."
+        },
+        {
+          "file": "Stafford38/Geometry/GeneralAsymptoticConormal.lean",
+          "name": "Stafford38.Geometry.GeneralAsymptoticConormal.coordinate_axis_mem_projective_conormal_directions",
+          "repo": "formal",
+          "role": "alternative-proof"
         },
         {
           "file": "Stafford38/Geometry/ProjectiveConormalDirections.lean",
-          "role": "helper",
-          "name": "Stafford38.Geometry.ProjectiveConormalDirections.mk_mem_projectiveHomogeneousClosure_of_fibre_zeroLocus"
+          "name": "Stafford38.Geometry.ProjectiveConormalDirections.mk_mem_projectiveHomogeneousClosure_of_fibre_zeroLocus",
+          "repo": "formal",
+          "role": "helper"
         },
         {
           "file": "Stafford38/Geometry/GeneralCoisotropicExclusion.lean",
-          "role": "helper",
-          "name": "Stafford38.Geometry.GeneralCoisotropicExclusion.exists_zero_base_coordinate"
+          "name": "Stafford38.Geometry.GeneralCoisotropicExclusion.exists_zero_base_coordinate",
+          "repo": "formal",
+          "role": "helper"
         }
       ],
       "depends_on": [
@@ -3587,7 +3612,7 @@
         }
       ],
       "issues": [],
-      "comparison_updated_on": "2026-10-18"
+      "comparison_updated_on": "2026-11-02"
     },
     {
       "id": "thm:coisotropic-exclusion",
@@ -3795,12 +3820,49 @@
       ],
       "statement_relation": "n/a",
       "route_relation": "similar",
-      "correspondence": "Subsection 5.2: an algebraic case, a valuation ring and discrete valuation ring at infinity (Lemmas 5.9, 5.10), residue-field differentials (Lemma 5.11, now proved via a differential basis, Matsumura Thm. 26.5), the Laurent generic tangent cone (Lemma 5.12), a unit minor, and lifting the 1-coordinate row (Lemma 5.13). Most cited sources are now pinned to textbook statements. The formal endpoint still assembles the retained SameWitness route; matching conclusions do not certify this printed proof step by step.",
-      "route": "Selected endpoint: Stafford38.Geometry.GeneralAsymptoticConormal.coordinate_axis_mem_smooth_fibre_closure. The wrapper delegates to Stafford38.Geometry.SameWitness.coordinate_axis_mem_smooth_fibre_closure; it handles the direct algebraic case and otherwise uses the T36 retained-ground-point closure under the endpoint’s explicit output and smooth-open inputs. Stafford38.Geometry.AlternativeAsymptoticConormal.coordinate_axis_mem_smooth_fibre_closure is the separately named generic/Laurent route. The printed proof and its marked corrections remain the human review surface.",
+      "correspondence": "Lean follows the printed proof: the algebraic case, the valuation ring and the discrete valuation ring at infinity, the differential basis of the residue field, the Laurent generic point y with its tangent space and cone, the matrix M(t) with a unit minor, and the lift ℓ(t) of the 1-coordinate row with ℓ(0) = u. theorem_5_7_i applies AlternativeAsymptoticConormal.coordinate_axis_mem_smooth_fibre_closure. The discrete valuation ring is built by GeneralDivisorialVisibleFrame.generalDivisorialVisibleFrameWithResidueAlgebraicity, and the steps between the lemmas (λ, τ, M(t) and the lift of ℓ) are in PaperActualDivisorTangent.exists_regularizedOneRowConormalData_of_actual_columns. One difference: the formal proof does not call lemma_5_9 and lemma_5_10 themselves. It builds its ring from the same intermediate results as their proofs, with an additional coefficient field, and witness_lemma_5_11 and witness_lemma_5_12_5_13 show that this ring and its Laurent column satisfy Lemmas 5.11–5.13, including the bound dim Θ_y ≤ d′+1. The terminal theorem GeneralAsymptoticConormal.coordinate_axis_mem_smooth_fibre_closure proves the same statement by a second route through SameWitness.coordinate_axis_mem_smooth_fibre_closure; its key declarations are listed as the alternative proof.",
+      "route": "Main route: Stafford38.Paper.Section5.theorem_5_7_i → Stafford38.Geometry.AlternativeAsymptoticConormal.coordinate_axis_mem_smooth_fibre_closure. Alternative route: Stafford38.Geometry.GeneralAsymptoticConormal.coordinate_axis_mem_smooth_fibre_closure → Stafford38.Geometry.SameWitness.coordinate_axis_mem_smooth_fibre_closure, which treats the algebraic case directly and otherwise closes the conormal fibre through a ground point on a common chart (SameWitness.axis_mem_smoothConormalFibreProjection_closure_of_groundPointOutput).",
       "lean": [
         {
+          "file": "Stafford38/Paper/Section5.lean",
+          "name": "Stafford38.Paper.Section5.theorem_5_7_i",
+          "repo": "formal",
+          "role": "main-proof"
+        },
+        {
+          "file": "Stafford38/Geometry/AlternativeAsymptoticConormal.lean",
+          "name": "Stafford38.Geometry.AlternativeAsymptoticConormal.coordinate_axis_mem_smooth_fibre_closure",
+          "repo": "formal",
+          "role": "main-proof",
+          "note": "The printed route of Subsection 5.2."
+        },
+        {
+          "file": "Stafford38/Geometry/GeneralDivisorialVisibleFrame.lean",
+          "name": "Stafford38.Geometry.GeneralDivisorialVisibleFrame.generalDivisorialVisibleFrameWithResidueAlgebraicity",
+          "repo": "formal",
+          "role": "helper"
+        },
+        {
+          "file": "Stafford38/Geometry/PaperActualDivisorTangent.lean",
+          "name": "Stafford38.Geometry.PaperActualDivisorTangent.exists_regularizedOneRowConormalData_of_actual_columns",
+          "repo": "formal",
+          "role": "helper"
+        },
+        {
+          "file": "Stafford38/Paper/Section5.lean",
+          "name": "Stafford38.Paper.Section5.witness_lemma_5_11",
+          "repo": "formal",
+          "role": "supporting result"
+        },
+        {
+          "file": "Stafford38/Paper/Section5.lean",
+          "name": "Stafford38.Paper.Section5.witness_lemma_5_12_5_13",
+          "repo": "formal",
+          "role": "supporting result"
+        },
+        {
           "file": "Stafford38/Geometry/GeneralAsymptoticLaurentAxis.lean",
-          "role": "alternative-support",
+          "role": "helper",
           "name": "Stafford38.Geometry.GeneralAsymptoticLaurentAxis.exists_groundConormalAxis_of_prime_coordinate_avoidance"
         },
         {
@@ -3810,12 +3872,12 @@
         },
         {
           "file": "Stafford38/Geometry/GeneralConormalAxis.lean",
-          "role": "alternative-support",
+          "role": "helper",
           "name": "Stafford38.Geometry.GeneralConormalAxis.exists_groundConormalAxis_of_minimalPrime_unit_transcendental"
         },
         {
           "file": "Stafford38/Geometry/GeneralDivisorialVisibleFrame.lean",
-          "role": "main-proof",
+          "role": "helper",
           "name": "Stafford38.Geometry.GeneralDivisorialVisibleFrame.generalDivisorialVisibleFrameExistence",
           "expands": [
             {
@@ -3906,85 +3968,13 @@
         },
         {
           "file": "Stafford38/Geometry/SameWitness/AffineFibreClosure.lean",
-          "name": "Stafford38.Geometry.SameWitness.retainedClosureChartData",
-          "role": "helper",
-          "visibility": "module-private"
-        },
-        {
-          "file": "Stafford38/Geometry/SameWitness/AffineFibreClosure.lean",
-          "name": "Stafford38.Geometry.SameWitness.retainedClosureChartData_lift",
-          "role": "helper",
-          "visibility": "module-private"
-        },
-        {
-          "file": "Stafford38/Geometry/SameWitness/AffineFibreClosure.lean",
           "name": "Stafford38.Geometry.SameWitness.axis_mem_smoothConormalFibreProjection_closure_of_groundPointOutput",
-          "role": "helper"
-        },
-        {
-          "file": "Stafford38/Geometry/SameWitness/AwayFactorToAtPrime.lean",
-          "name": "Stafford38.Geometry.SameWitness.factorization_to_atPrime",
-          "role": "helper"
-        },
-        {
-          "file": "Stafford38/Geometry/SameWitness/AwayFactorToAtPrime.lean",
-          "name": "Stafford38.Geometry.SameWitness.pair_factorizations_to_atPrime",
-          "role": "helper"
+          "role": "alternative-support"
         },
         {
           "file": "Stafford38/Geometry/SameWitness/AxisLiftFromGroundPoint.lean",
           "name": "Stafford38.Geometry.SameWitness.exists_axis_lift_of_groundPointChartOutput",
-          "role": "helper"
-        },
-        {
-          "file": "Stafford38/Geometry/SameWitness/ChartGroundMap.lean",
-          "name": "Stafford38.Geometry.SameWitness.originalAffineChartToCommonOpen_groundMap",
-          "role": "helper"
-        },
-        {
-          "file": "Stafford38/Geometry/SameWitness/ChartSetup.lean",
-          "name": "Stafford38.Geometry.SameWitness.ChartSetup",
-          "role": "definition"
-        },
-        {
-          "file": "Stafford38/Geometry/SameWitness/ChartSetup.lean",
-          "name": "Stafford38.Geometry.SameWitness.nonempty_chartSetup",
-          "role": "helper"
-        },
-        {
-          "file": "Stafford38/Geometry/SameWitness/CommonOpen.lean",
-          "name": "Stafford38.Geometry.SameWitness.CommonOpenArcFactors",
-          "role": "helper"
-        },
-        {
-          "file": "Stafford38/Geometry/SameWitness/CommonOpen.lean",
-          "name": "Stafford38.Geometry.SameWitness.commonOpenArcFactors_of_tiltedProduct",
-          "role": "helper"
-        },
-        {
-          "file": "Stafford38/Geometry/SameWitness/CommonOpen.lean",
-          "name": "Stafford38.Geometry.SameWitness.essFiniteType_of_coordinateMap",
-          "role": "helper"
-        },
-        {
-          "file": "Stafford38/Geometry/SameWitness/CommonOpen.lean",
-          "name": "Stafford38.Geometry.SameWitness.CommonOpenPointData",
-          "role": "definition"
-        },
-        {
-          "file": "Stafford38/Geometry/SameWitness/CommonOpen.lean",
-          "name": "Stafford38.Geometry.SameWitness.CommonOpenChartData",
-          "role": "definition"
-        },
-        {
-          "file": "Stafford38/Geometry/SameWitness/CommonOpen.lean",
-          "name": "Stafford38.Geometry.SameWitness.CommonOpenMapData",
-          "role": "definition"
-        },
-        {
-          "file": "Stafford38/Geometry/SameWitness/CommonOpen.lean",
-          "name": "Stafford38.Geometry.SameWitness.CommonOpenArcCompatibility",
-          "role": "definition"
+          "role": "alternative-support"
         },
         {
           "file": "Stafford38/Geometry/SameWitness/CommonOpen.lean",
@@ -3993,498 +3983,25 @@
         },
         {
           "file": "Stafford38/Geometry/SameWitness/CommonOpen.lean",
-          "name": "Stafford38.Geometry.SameWitness.CommonOpenData.M",
-          "role": "helper"
-        },
-        {
-          "file": "Stafford38/Geometry/SameWitness/CommonOpen.lean",
-          "name": "Stafford38.Geometry.SameWitness.CommonOpenData.hM",
-          "role": "helper"
-        },
-        {
-          "file": "Stafford38/Geometry/SameWitness/CommonOpen.lean",
-          "name": "Stafford38.Geometry.SameWitness.CommonOpenData.eM",
-          "role": "helper"
-        },
-        {
-          "file": "Stafford38/Geometry/SameWitness/CommonOpen.lean",
-          "name": "Stafford38.Geometry.SameWitness.CommonOpenData.hEtM",
-          "role": "helper"
-        },
-        {
-          "file": "Stafford38/Geometry/SameWitness/CommonOpen.lean",
-          "name": "Stafford38.Geometry.SameWitness.CommonOpenData.fUnit",
-          "role": "helper"
-        },
-        {
-          "file": "Stafford38/Geometry/SameWitness/CommonOpen.lean",
-          "name": "Stafford38.Geometry.SameWitness.CommonOpenData.hfUnitM",
-          "role": "helper"
-        },
-        {
-          "file": "Stafford38/Geometry/SameWitness/CommonOpen.lean",
-          "name": "Stafford38.Geometry.SameWitness.CommonOpenData.u0",
-          "role": "helper"
-        },
-        {
-          "file": "Stafford38/Geometry/SameWitness/CommonOpen.lean",
-          "name": "Stafford38.Geometry.SameWitness.CommonOpenData.u1",
-          "role": "helper"
-        },
-        {
-          "file": "Stafford38/Geometry/SameWitness/CommonOpen.lean",
-          "name": "Stafford38.Geometry.SameWitness.CommonOpenData.hu0",
-          "role": "helper"
-        },
-        {
-          "file": "Stafford38/Geometry/SameWitness/CommonOpen.lean",
-          "name": "Stafford38.Geometry.SameWitness.CommonOpenData.hu1",
-          "role": "helper"
-        },
-        {
-          "file": "Stafford38/Geometry/SameWitness/CommonOpen.lean",
-          "name": "Stafford38.Geometry.SameWitness.CommonOpenData.hq0M",
-          "role": "helper"
-        },
-        {
-          "file": "Stafford38/Geometry/SameWitness/CommonOpen.lean",
-          "name": "Stafford38.Geometry.SameWitness.CommonOpenData.hq1M",
-          "role": "helper"
-        },
-        {
-          "file": "Stafford38/Geometry/SameWitness/CommonOpen.lean",
-          "name": "Stafford38.Geometry.SameWitness.CommonOpenData.alpha",
-          "role": "helper"
-        },
-        {
-          "file": "Stafford38/Geometry/SameWitness/CommonOpen.lean",
-          "name": "Stafford38.Geometry.SameWitness.CommonOpenData.havoid",
-          "role": "helper"
-        },
-        {
-          "file": "Stafford38/Geometry/SameWitness/CommonOpen.lean",
-          "name": "Stafford38.Geometry.SameWitness.CommonOpenData.hdata",
-          "role": "helper"
-        },
-        {
-          "file": "Stafford38/Geometry/SameWitness/CommonOpen.lean",
-          "name": "Stafford38.Geometry.SameWitness.CommonOpenData.hxj",
-          "role": "helper"
-        },
-        {
-          "file": "Stafford38/Geometry/SameWitness/CommonOpen.lean",
-          "name": "Stafford38.Geometry.SameWitness.CommonOpenData.hsel",
-          "role": "helper"
-        },
-        {
-          "file": "Stafford38/Geometry/SameWitness/CommonOpen.lean",
-          "name": "Stafford38.Geometry.SameWitness.CommonOpenData.qQ",
-          "role": "helper"
-        },
-        {
-          "file": "Stafford38/Geometry/SameWitness/CommonOpen.lean",
-          "name": "Stafford38.Geometry.SameWitness.CommonOpenData.hqchartQ",
-          "role": "helper"
-        },
-        {
-          "file": "Stafford38/Geometry/SameWitness/CommonOpen.lean",
-          "name": "Stafford38.Geometry.SameWitness.CommonOpenData.hqQF",
-          "role": "helper"
-        },
-        {
-          "file": "Stafford38/Geometry/SameWitness/CommonOpen.lean",
-          "name": "Stafford38.Geometry.SameWitness.CommonOpenData.hq0",
-          "role": "helper"
-        },
-        {
-          "file": "Stafford38/Geometry/SameWitness/CommonOpen.lean",
-          "name": "Stafford38.Geometry.SameWitness.CommonOpenData.hqvars",
-          "role": "helper"
-        },
-        {
-          "file": "Stafford38/Geometry/SameWitness/CommonOpen.lean",
-          "name": "Stafford38.Geometry.SameWitness.CommonOpenData.hqA",
-          "role": "helper"
-        },
-        {
-          "file": "Stafford38/Geometry/SameWitness/CommonOpen.lean",
-          "name": "Stafford38.Geometry.SameWitness.CommonOpenData.hqUPoint",
-          "role": "helper"
-        },
-        {
-          "file": "Stafford38/Geometry/SameWitness/CommonOpen.lean",
-          "name": "Stafford38.Geometry.SameWitness.CommonOpenData.hchartU",
-          "role": "helper"
-        },
-        {
-          "file": "Stafford38/Geometry/SameWitness/CommonOpen.lean",
-          "name": "Stafford38.Geometry.SameWitness.CommonOpenData.hq0B",
-          "role": "helper"
-        },
-        {
-          "file": "Stafford38/Geometry/SameWitness/CommonOpen.lean",
-          "name": "Stafford38.Geometry.SameWitness.CommonOpenData.hbaseMap",
-          "role": "helper"
-        },
-        {
-          "file": "Stafford38/Geometry/SameWitness/CommonOpen.lean",
-          "name": "Stafford38.Geometry.SameWitness.CommonOpenData.hfactor",
-          "role": "helper"
-        },
-        {
-          "file": "Stafford38/Geometry/SameWitness/CommonOpen.lean",
-          "name": "Stafford38.Geometry.SameWitness.CommonOpenData.g",
-          "role": "helper"
-        },
-        {
-          "file": "Stafford38/Geometry/SameWitness/CommonOpen.lean",
-          "name": "Stafford38.Geometry.SameWitness.CommonOpenData.Cq",
-          "role": "helper"
-        },
-        {
-          "file": "Stafford38/Geometry/SameWitness/CommonOpen.lean",
-          "name": "Stafford38.Geometry.SameWitness.CommonOpenData.U",
-          "role": "helper"
-        },
-        {
-          "file": "Stafford38/Geometry/SameWitness/CommonOpen.lean",
-          "name": "Stafford38.Geometry.SameWitness.CommonOpenData.qU",
-          "role": "helper"
-        },
-        {
-          "file": "Stafford38/Geometry/SameWitness/CommonOpen.lean",
-          "name": "Stafford38.Geometry.SameWitness.CommonOpenData.qT",
-          "role": "helper"
-        },
-        {
-          "file": "Stafford38/Geometry/SameWitness/CommonOpen.lean",
-          "name": "Stafford38.Geometry.SameWitness.CommonOpenData.φ",
-          "role": "helper"
-        },
-        {
-          "file": "Stafford38/Geometry/SameWitness/CommonOpen.lean",
-          "name": "Stafford38.Geometry.SameWitness.exists_selected_chart_coordinate_data",
-          "role": "helper"
-        },
-        {
-          "file": "Stafford38/Geometry/SameWitness/CommonOpen.lean",
-          "name": "Stafford38.Geometry.SameWitness.exists_common_open_map_data",
-          "role": "helper"
-        },
-        {
-          "file": "Stafford38/Geometry/SameWitness/CommonOpen.lean",
-          "name": "Stafford38.Geometry.SameWitness.nonempty_commonOpenPointData",
-          "role": "helper"
-        },
-        {
-          "file": "Stafford38/Geometry/SameWitness/CommonOpen.lean",
-          "name": "Stafford38.Geometry.SameWitness.nonempty_commonOpenArcCompatibility",
-          "role": "helper"
-        },
-        {
-          "file": "Stafford38/Geometry/SameWitness/CommonOpen.lean",
           "name": "Stafford38.Geometry.SameWitness.nonempty_commonOpenData",
-          "role": "helper"
-        },
-        {
-          "file": "Stafford38/Geometry/SameWitness/CommonOpenArc.lean",
-          "name": "Stafford38.Geometry.SameWitness.CommonOpenArcTransport",
-          "role": "definition"
-        },
-        {
-          "file": "Stafford38/Geometry/SameWitness/CommonOpenArc.lean",
-          "name": "Stafford38.Geometry.SameWitness.pointLocalArc_unit_of_not_mem",
-          "role": "helper",
-          "visibility": "module-private"
-        },
-        {
-          "file": "Stafford38/Geometry/SameWitness/CommonOpenArc.lean",
-          "name": "Stafford38.Geometry.SameWitness.exists_commonOpenArcTransport",
-          "role": "helper",
-          "visibility": "module-private"
-        },
-        {
-          "file": "Stafford38/Geometry/SameWitness/CommonOpenArc.lean",
-          "name": "Stafford38.Geometry.SameWitness.CommonOpenArcData",
-          "role": "definition"
-        },
-        {
-          "file": "Stafford38/Geometry/SameWitness/CommonOpenArc.lean",
-          "name": "Stafford38.Geometry.SameWitness.CommonOpenArcData.rhoA",
-          "role": "helper"
-        },
-        {
-          "file": "Stafford38/Geometry/SameWitness/CommonOpenArc.lean",
-          "name": "Stafford38.Geometry.SameWitness.CommonOpenArcData.hcanonicalRhoA",
-          "role": "helper"
-        },
-        {
-          "file": "Stafford38/Geometry/SameWitness/CommonOpenArc.lean",
-          "name": "Stafford38.Geometry.SameWitness.CommonOpenArcData.hf",
-          "role": "helper"
-        },
-        {
-          "file": "Stafford38/Geometry/SameWitness/CommonOpenArc.lean",
-          "name": "Stafford38.Geometry.SameWitness.CommonOpenArcData.hg",
-          "role": "helper"
-        },
-        {
-          "file": "Stafford38/Geometry/SameWitness/CommonOpenArc.lean",
-          "name": "Stafford38.Geometry.SameWitness.CommonOpenArcData.hunitM",
-          "role": "helper"
-        },
-        {
-          "file": "Stafford38/Geometry/SameWitness/CommonOpenArc.lean",
-          "name": "Stafford38.Geometry.SameWitness.CommonOpenArcData.rhoU",
-          "role": "helper"
-        },
-        {
-          "file": "Stafford38/Geometry/SameWitness/CommonOpenArc.lean",
-          "name": "Stafford38.Geometry.SameWitness.CommonOpenArcData.hcanonicalRhoU",
-          "role": "helper"
-        },
-        {
-          "file": "Stafford38/Geometry/SameWitness/CommonOpenArc.lean",
-          "name": "Stafford38.Geometry.SameWitness.CommonOpenArcData.hcomp'",
-          "role": "helper"
-        },
-        {
-          "file": "Stafford38/Geometry/SameWitness/CommonOpenArc.lean",
-          "name": "Stafford38.Geometry.SameWitness.CommonOpenArcData.hgroundB'",
-          "role": "helper"
-        },
-        {
-          "file": "Stafford38/Geometry/SameWitness/CommonOpenArc.lean",
-          "name": "Stafford38.Geometry.SameWitness.CommonOpenArcData.hbaseMap",
-          "role": "helper"
-        },
-        {
-          "file": "Stafford38/Geometry/SameWitness/CommonOpenArc.lean",
-          "name": "Stafford38.Geometry.SameWitness.CommonOpenArcData.hgroundU",
-          "role": "helper"
-        },
-        {
-          "file": "Stafford38/Geometry/SameWitness/CommonOpenArc.lean",
-          "name": "Stafford38.Geometry.SameWitness.CommonOpenArcData.hbadU",
-          "role": "helper"
-        },
-        {
-          "file": "Stafford38/Geometry/SameWitness/CommonOpenArc.lean",
-          "name": "Stafford38.Geometry.SameWitness.CommonOpenArcData.hrU",
-          "role": "helper"
-        },
-        {
-          "file": "Stafford38/Geometry/SameWitness/CommonOpenArc.lean",
-          "name": "Stafford38.Geometry.SameWitness.CommonOpenArcData.hq0U",
-          "role": "helper"
-        },
-        {
-          "file": "Stafford38/Geometry/SameWitness/CommonOpenArc.lean",
-          "name": "Stafford38.Geometry.SameWitness.CommonOpenArcData.hq1U",
-          "role": "helper"
-        },
-        {
-          "file": "Stafford38/Geometry/SameWitness/CommonOpenArc.lean",
-          "name": "Stafford38.Geometry.SameWitness.commonOpenMap_comp_groundMap",
-          "role": "helper",
-          "visibility": "module-private"
-        },
-        {
-          "file": "Stafford38/Geometry/SameWitness/CommonOpenArc.lean",
-          "name": "Stafford38.Geometry.SameWitness.exists_commonOpenArcData",
-          "role": "helper"
-        },
-        {
-          "file": "Stafford38/Geometry/SameWitness/CommonOpenArcDerivatives.lean",
-          "name": "Stafford38.Geometry.SameWitness.retainedArcDerivativeCertificate",
-          "role": "helper",
-          "visibility": "module-private"
-        },
-        {
-          "file": "Stafford38/Geometry/SameWitness/CommonOpenArcDerivatives.lean",
-          "name": "Stafford38.Geometry.SameWitness.commonOpen_arcDerivativeData",
-          "role": "helper",
-          "expands": [
-            {
-              "file": "Stafford38/Geometry/SameWitness/CommonOpenColumnDerivatives.lean",
-              "name": "Stafford38.Geometry.SameWitness.CommonOpenDerivativeData",
-              "role": "definition"
-            }
-          ]
-        },
-        {
-          "file": "Stafford38/Geometry/SameWitness/CommonOpenColumnDerivatives.lean",
-          "name": "Stafford38.Geometry.SameWitness.commonOpenDerivativeIdentities",
-          "role": "helper"
-        },
-        {
-          "file": "Stafford38/Geometry/SameWitness/CommonOpenColumnDerivatives.lean",
-          "name": "Stafford38.Geometry.SameWitness.commonOpenDerivativeIdentities_transport",
-          "role": "helper"
-        },
-        {
-          "file": "Stafford38/Geometry/SameWitness/CommonOpenColumnDerivatives.lean",
-          "name": "Stafford38.Geometry.SameWitness.CommonOpenDerivativeData",
-          "role": "definition"
-        },
-        {
-          "file": "Stafford38/Geometry/SameWitness/CommonOpenColumnDerivatives.lean",
-          "name": "Stafford38.Geometry.SameWitness.commonOpenDerivativeData_of_rawCertificate",
-          "role": "helper",
-          "expands": [
-            {
-              "file": "Stafford38/Geometry/SameWitness/CommonOpenColumnDerivatives.lean",
-              "name": "Stafford38.Geometry.SameWitness.CommonOpenDerivativeData",
-              "role": "definition"
-            }
-          ]
-        },
-        {
-          "file": "Stafford38/Geometry/SameWitness/CommonOpenColumnDerivatives.lean",
-          "name": "Stafford38.Geometry.SameWitness.commonOpen_rawDerivativeCertificate_of_pointColumns",
-          "role": "helper"
-        },
-        {
-          "file": "Stafford38/Geometry/SameWitness/CommonOpenColumnDerivatives.lean",
-          "name": "Stafford38.Geometry.SameWitness.commonOpen_derivatives_of_pointColumns",
-          "role": "helper"
-        },
-        {
-          "file": "Stafford38/Geometry/SameWitness/CommonOpenColumnDerivatives.lean",
-          "name": "Stafford38.Geometry.SameWitness.commonOpen_derivatives_of_retainedArc",
-          "role": "helper"
-        },
-        {
-          "file": "Stafford38/Geometry/SameWitness/CommonOpenColumns.lean",
-          "name": "Stafford38.Geometry.SameWitness.CommonOpenColumnsData",
-          "role": "definition"
-        },
-        {
-          "file": "Stafford38/Geometry/SameWitness/CommonOpenColumns.lean",
-          "name": "Stafford38.Geometry.SameWitness.CommonOpenColumnsData.htransverse",
-          "role": "helper"
-        },
-        {
-          "file": "Stafford38/Geometry/SameWitness/CommonOpenColumns.lean",
-          "name": "Stafford38.Geometry.SameWitness.CommonOpenColumnsData.hraw",
-          "role": "helper"
-        },
-        {
-          "file": "Stafford38/Geometry/SameWitness/CommonOpenColumns.lean",
-          "name": "Stafford38.Geometry.SameWitness.commonOpen_selectedNumerator_ne_zero",
-          "role": "helper"
-        },
-        {
-          "file": "Stafford38/Geometry/SameWitness/CommonOpenColumns.lean",
-          "name": "Stafford38.Geometry.SameWitness.commonOpenColumnsData_of_arc",
-          "role": "helper",
-          "expands": [
-            {
-              "file": "Stafford38/Geometry/SameWitness/CommonOpenColumns.lean",
-              "name": "Stafford38.Geometry.SameWitness.CommonOpenColumnsData",
-              "role": "definition"
-            }
-          ]
-        },
-        {
-          "file": "Stafford38/Geometry/SameWitness/CommonOpenEtale.lean",
-          "name": "Stafford38.Geometry.SameWitness.coordinateMapToOpen",
-          "role": "helper",
-          "visibility": "module-private"
-        },
-        {
-          "file": "Stafford38/Geometry/SameWitness/CommonOpenEtale.lean",
-          "name": "Stafford38.Geometry.SameWitness.formallyEtale_coordinateMapToOpen",
-          "role": "helper",
-          "visibility": "module-private"
-        },
-        {
-          "file": "Stafford38/Geometry/SameWitness/CommonOpenEtale.lean",
-          "name": "Stafford38.Geometry.SameWitness.CommonOpenEtaleData",
-          "role": "definition"
-        },
-        {
-          "file": "Stafford38/Geometry/SameWitness/CommonOpenEtale.lean",
-          "name": "Stafford38.Geometry.SameWitness.originalChartToCommonOpen_groundMap_k",
-          "role": "helper",
-          "visibility": "module-private"
-        },
-        {
-          "file": "Stafford38/Geometry/SameWitness/CommonOpenEtale.lean",
-          "name": "Stafford38.Geometry.SameWitness.nonempty_commonOpenEtaleData",
-          "role": "helper"
-        },
-        {
-          "file": "Stafford38/Geometry/SameWitness/CommonOpenPositions.lean",
-          "name": "Stafford38.Geometry.SameWitness.pointLocalPowerSeriesChart",
-          "role": "helper"
-        },
-        {
-          "file": "Stafford38/Geometry/SameWitness/CommonOpenPositions.lean",
-          "name": "Stafford38.Geometry.SameWitness.commonOpen_position_of_pointColumns",
-          "role": "helper"
-        },
-        {
-          "file": "Stafford38/Geometry/SameWitness/CommonOpenPositions.lean",
-          "name": "Stafford38.Geometry.SameWitness.genericOpenArc_eq_of_source_eq",
-          "role": "helper"
-        },
-        {
-          "file": "Stafford38/Geometry/SameWitness/CommonOpenPositions.lean",
-          "name": "Stafford38.Geometry.SameWitness.CommonOpenPositionData",
-          "role": "definition"
-        },
-        {
-          "file": "Stafford38/Geometry/SameWitness/CommonOpenPositions.lean",
-          "name": "Stafford38.Geometry.SameWitness.commonOpenPositionData_of_arc",
-          "role": "helper"
-        },
-        {
-          "file": "Stafford38/Geometry/SameWitness/CoordinatePresentation.lean",
-          "name": "Stafford38.Geometry.SameWitness.CoordinatePresentation",
-          "role": "definition"
-        },
-        {
-          "file": "Stafford38/Geometry/SameWitness/CoordinatePresentation.lean",
-          "name": "Stafford38.Geometry.SameWitness.CoordinatePresentation.fFin",
-          "role": "helper"
-        },
-        {
-          "file": "Stafford38/Geometry/SameWitness/CoordinatePresentation.lean",
-          "name": "Stafford38.Geometry.SameWitness.chart_rows_injective",
-          "role": "helper"
-        },
-        {
-          "file": "Stafford38/Geometry/SameWitness/CoordinatePresentation.lean",
-          "name": "Stafford38.Geometry.SameWitness.selected_rows_chart_eq",
-          "role": "helper"
-        },
-        {
-          "file": "Stafford38/Geometry/SameWitness/CoordinatePresentation.lean",
-          "name": "Stafford38.Geometry.SameWitness.nonempty_coordinatePresentation",
-          "role": "helper"
+          "role": "alternative-support"
         },
         {
           "file": "Stafford38/Geometry/SameWitness/EndpointOfAlgHoms.lean",
           "name": "Stafford38.Geometry.SameWitness.axis_mem_smoothConormalFibreProjection_closure_of_algHoms",
-          "role": "helper"
+          "role": "alternative-support"
         },
         {
           "file": "Stafford38/Geometry/SameWitness/OriginalPrimeAxis.lean",
           "name": "Stafford38.Geometry.SameWitness.coordinate_axis_mem_smooth_fibre_closure",
-          "role": "helper"
+          "role": "alternative-support"
         },
         {
           "file": "Stafford38/Geometry/GeneralAsymptoticConormal.lean",
           "name": "Stafford38.Geometry.GeneralAsymptoticConormal.coordinate_axis_mem_smooth_fibre_closure",
-          "role": "main-proof",
-          "note": "Selected main endpoint; delegates to the retained-witness original-prime theorem."
-        },
-        {
-          "file": "Stafford38/Geometry/AlternativeAsymptoticConormal.lean",
-          "name": "Stafford38.Geometry.AlternativeAsymptoticConormal.coordinate_axis_mem_smooth_fibre_closure",
+          "repo": "formal",
           "role": "alternative-proof",
-          "note": "Separately named generic/Laurent route; not the selected main route."
+          "note": "Terminal theorem; proves the same statement by the second, chart-based route."
         }
       ],
       "depends_on": [],
@@ -4588,7 +4105,7 @@
         }
       ],
       "issues": [],
-      "comparison_updated_on": "2026-10-18"
+      "comparison_updated_on": "2026-11-02"
     },
     {
       "id": "lem:W",
@@ -4601,11 +4118,24 @@
         1134,
         1149
       ],
-      "statement_relation": "partial",
-      "route_relation": "similar",
-      "correspondence": "New lemma: a valuation ring dominating K[x̄₁] localized at x̄₁ and a homogeneous chart index. The Lean annotation after the theorem proof covers the divisorial frame collectively; a declaration proving exactly this printed lemma is not asserted here.",
+      "statement_relation": "exact",
+      "route_relation": "same",
+      "correspondence": "Lean lemma_5_9: if x̄₁ is transcendental over K, there are a valuation ring W of F with K ⊆ W ≠ F and x̄₁ ∈ 𝔪_W, and an index j with x̄_j ≠ 0 and x̄ᵢ/x̄_j ∈ W for 0 ≤ i ≤ n, where x̄₀ = 1. The proof is the printed one: a valuation ring dominating K[x̄₁] localized at x̄₁ (Stacks Tag 00IA), then j maximal for the preorder x̄_a/x̄_b ∈ W.",
       "route": null,
-      "lean": [],
+      "lean": [
+        {
+          "file": "Stafford38/Paper/Section5/Place.lean",
+          "name": "Stafford38.Paper.Section5.lemma_5_9",
+          "repo": "formal",
+          "role": "statement"
+        },
+        {
+          "file": "Stafford38/Geometry/DivisorialVisibleFrameCore.lean",
+          "name": "Stafford38.Geometry.LaneC.stage1_exists_valuationSubring_of_transcendental",
+          "repo": "formal",
+          "role": "helper"
+        }
+      ],
       "depends_on": [],
       "in_graph": false,
       "graph_sub": null,
@@ -4614,7 +4144,8 @@
       "review_scope": "publication",
       "historical_issues": [],
       "issues": [],
-      "label": "lem:W"
+      "label": "lem:W",
+      "comparison_updated_on": "2026-11-02"
     },
     {
       "id": "lem:place",
@@ -4628,11 +4159,35 @@
         1156,
         1207
       ],
-      "statement_relation": "partial",
-      "route_relation": "similar",
-      "correspondence": "Rewritten: from the valuation ring of Lemma 5.9 the proof builds a discrete valuation ring with all qᵢ in V, x̄₁ in the maximal ideal, R ⊄ V, residue field algebraic over the residues of q, and finitely generated Ω_{V/K}. The cited formal result supplies a divisorial visible frame with residue algebraicity; an exact wrapper for every clause is not claimed.",
+      "statement_relation": "exact",
+      "route_relation": "same",
+      "correspondence": "Lean lemma_5_10 takes W and j from Lemma 5.9 and gives a discrete valuation ring V of F containing K with (a) qᵢ ∈ V, x̄₁ ∈ 𝔪_V and R ⊄ V, (b) κ algebraic over K(res q₀,…,res qₙ) and (c) Ω_{V/K} finitely generated. Its hypothesis 1 = ḡx̄₁ with ḡ ∈ R is what the paper derives from Y ∩ H = ∅ by the Nullstellensatz. The proof follows the printed one, through the normalization A of C₀ and a height-one prime over x̄₁A. The formal proof of Theorem 5.7 builds its ring with GeneralDivisorialVisibleFrame.generalDivisorialVisibleFrameWithResidueAlgebraicity from the same intermediate results and an additional coefficient field.",
       "route": null,
       "lean": [
+        {
+          "file": "Stafford38/Paper/Section5/Place.lean",
+          "name": "Stafford38.Paper.Section5.lemma_5_10",
+          "repo": "formal",
+          "role": "statement"
+        },
+        {
+          "file": "Stafford38/Geometry/DivisorialVisibleFrameCore.lean",
+          "name": "Stafford38.Geometry.LaneC.stage3_exists_height_one_prime_valuation",
+          "repo": "formal",
+          "role": "helper"
+        },
+        {
+          "file": "Stafford38/Geometry/DivisorialVisibleFrameStageAssembly.lean",
+          "name": "Stafford38.Geometry.LaneC.stage4_of_verified",
+          "repo": "formal",
+          "role": "helper"
+        },
+        {
+          "file": "Stafford38/Geometry/DivisorialVisibleFrameCore.lean",
+          "name": "Stafford38.Geometry.LaneC.stage7_kaehler_finite_ofField",
+          "repo": "formal",
+          "role": "helper"
+        },
         {
           "file": "Stafford38/Geometry/GeneralDivisorialVisibleFrame.lean",
           "name": "Stafford38.Geometry.GeneralDivisorialVisibleFrame.generalDivisorialVisibleFrameWithResidueAlgebraicity",
@@ -4650,7 +4205,7 @@
       "review_scope": "publication",
       "historical_issues": [],
       "issues": [],
-      "comparison_updated_on": "2026-10-18"
+      "comparison_updated_on": "2026-11-02"
     },
     {
       "id": "lem:kappa",
@@ -4664,16 +4219,28 @@
         1251,
         1267
       ],
-      "statement_relation": "partial",
-      "route_relation": "similar",
-      "correspondence": "A subset of the residues q_i(0) with i ∉ {0,1,j} gives a basis of Ω_{κ/K}. The proof now takes a transcendence basis of L/K (Lang Thm. VIII.1.1), shows it is one of κ/K, and cites Matsumura Thm. 26.5 for the differential basis in characteristic zero instead of extending derivations by hand. The cited formal result supports the differential span argument; it does not certify the printed basis statement by itself.",
+      "statement_relation": "exact",
+      "route_relation": "same",
+      "correspondence": "Lean lemma_5_11 takes residues r₀,…,rₙ ∈ κ with r₀ = r₁ = 0, r_j = 1 and κ algebraic over K(r₀,…,rₙ), and gives distinct indices outside {0,1,j} whose differentials form a basis of Ω_{κ/K}; their number is dim_κ Ω_{κ/K}. The proof is the printed one: a transcendence basis chosen among these residues (Lang Thm. VIII.1.1) is a differential basis in characteristic zero (Matsumura Thm. 26.5). witness_lemma_5_11 shows that the discrete valuation ring of the formal proof of Theorem 5.7 has res q₀ = res q₁ = 0 and res q_j = 1 and satisfies the lemma.",
       "route": null,
       "lean": [
+        {
+          "file": "Stafford38/Paper/Section5/ResidueBasis.lean",
+          "name": "Stafford38.Paper.Section5.lemma_5_11",
+          "repo": "formal",
+          "role": "statement"
+        },
+        {
+          "file": "Stafford38/Paper/Section5.lean",
+          "name": "Stafford38.Paper.Section5.witness_lemma_5_11",
+          "repo": "formal",
+          "role": "supporting result"
+        },
         {
           "file": "Stafford38/Geometry/KaehlerDVRVisibility.lean",
           "name": "Stafford38.Geometry.KaehlerDVRVisibility.kaehler_span_of_isAlgebraic_adjoin",
           "repo": "formal",
-          "role": "supporting result"
+          "role": "helper"
         }
       ],
       "depends_on": [],
@@ -4701,7 +4268,7 @@
         }
       ],
       "issues": [],
-      "comparison_updated_on": "2026-10-18"
+      "comparison_updated_on": "2026-11-02"
     },
     {
       "id": "lem:tangent",
@@ -4715,16 +4282,46 @@
         1306,
         1355
       ],
-      "statement_relation": "partial",
+      "statement_relation": "exact",
       "route_relation": "similar",
-      "correspondence": "Rewritten with two clauses: the dimension bound for the tangent space and cone, and membership of δq(t) and q(t) in the cone. The dimension bound has a named formal analogue for the retained witness; the membership clause requires its own comparison.",
+      "correspondence": "Lean states the lemma for a column q with q₀ ≠ 0 over a field L ⊇ K, with Θ_y and 𝒞 = ρ⁻¹(Θ_y) as in the text. (a) generic_tangent_finrank_eq_component_kaehler_finrank gives dim Θ_y = dim_F Ω_{F/K} at the generic point, component_kaehler_finrank_eq_trdeg gives dim_F Ω_{F/K} = trdeg_K F = m, and lemma_5_12_a_cone gives dim 𝒞 = dim Θ_y + 1. (b) is lemma_5_12_b. The bound m ≤ d′+1 depends on the discrete valuation ring; witness_lemma_5_12_5_13 proves it for the ring of the formal proof of Theorem 5.7 and applies (a) and (b) to its Laurent point. Route: (b) and the cone dimension follow the printed proof; for dim Θ_y ≥ m Lean uses the derivations of F/K, each of which gives a tangent vector, instead of the Jacobian rank.",
       "route": null,
       "lean": [
+        {
+          "file": "Stafford38/Paper/Section5/GenericTangentRank.lean",
+          "name": "Stafford38.Paper.Section5.generic_tangent_finrank_eq_component_kaehler_finrank",
+          "repo": "formal",
+          "role": "statement"
+        },
+        {
+          "file": "Stafford38/Paper/Section5/TangentCone.lean",
+          "name": "Stafford38.Paper.Section5.lemma_5_12_b",
+          "repo": "formal",
+          "role": "statement"
+        },
+        {
+          "file": "Stafford38/Paper/Section5/GenericTangentRank.lean",
+          "name": "Stafford38.Paper.Section5.component_kaehler_finrank_eq_trdeg",
+          "repo": "formal",
+          "role": "statement"
+        },
+        {
+          "file": "Stafford38/Paper/Section5/TangentCone.lean",
+          "name": "Stafford38.Paper.Section5.lemma_5_12_a_cone",
+          "repo": "formal",
+          "role": "statement"
+        },
+        {
+          "file": "Stafford38/Paper/Section5.lean",
+          "name": "Stafford38.Paper.Section5.witness_lemma_5_12_5_13",
+          "repo": "formal",
+          "role": "supporting result"
+        },
         {
           "file": "Stafford38/Geometry/PaperSameWitnessTangentDimension.lean",
           "name": "Stafford38.Geometry.PaperSameWitnessTangentDimension.tangent_finrank_le_residue_add_one_of_witness",
           "repo": "formal",
-          "role": "supporting result"
+          "role": "alternative-support"
         }
       ],
       "depends_on": [],
@@ -4735,7 +4332,7 @@
       "review_scope": "publication",
       "historical_issues": [],
       "issues": [],
-      "comparison_updated_on": "2026-10-18"
+      "comparison_updated_on": "2026-11-02"
     },
     {
       "id": "lem:ell",
@@ -4748,11 +4345,23 @@
         1363,
         1377
       ],
-      "statement_relation": "partial",
-      "route_relation": "similar",
-      "correspondence": "New lemma: a row vector annihilating the homogeneous tangent cone gives an affine conormal covector. The cited declaration from the theorem annotation is the closest formal counterpart (conormal row data for the witness); its hypotheses have not been compared clause by clause.",
+      "statement_relation": "exact",
+      "route_relation": "same",
+      "correspondence": "Lean lemma_5_13: for q with q₀ ≠ 0, a row vector ℓ annihilating 𝒞 has affine part (ℓ₁,…,ℓₙ) in span{df_y : f ∈ 𝔭}. The proof is the printed one: ℓ(q) = 0 and ℓ(v) = 0 give Σ ℓᵢρ(v)ᵢ = 0, and ρ(𝒞) = Θ_y. witness_lemma_5_12_5_13 applies it to the Laurent point of the formal proof of Theorem 5.7.",
       "route": null,
       "lean": [
+        {
+          "file": "Stafford38/Paper/Section5/TangentCone.lean",
+          "name": "Stafford38.Paper.Section5.lemma_5_13",
+          "repo": "formal",
+          "role": "statement"
+        },
+        {
+          "file": "Stafford38/Paper/Section5.lean",
+          "name": "Stafford38.Paper.Section5.witness_lemma_5_12_5_13",
+          "repo": "formal",
+          "role": "supporting result"
+        },
         {
           "file": "Stafford38/Geometry/PaperActualWitnessConormalData.lean",
           "name": "Stafford38.Geometry.PaperActualWitnessConormalData.exists_regularizedOneRowConormalData_of_actual_witness",
@@ -4768,7 +4377,8 @@
       "review_scope": "publication",
       "historical_issues": [],
       "issues": [],
-      "label": "lem:ell"
+      "label": "lem:ell",
+      "comparison_updated_on": "2026-11-02"
     },
     {
       "id": "thm:coisotropic-exclusion-proof",
@@ -5775,8 +5385,8 @@
       "short": "Appendix A",
       "title": "AI-assisted research, formalization and verification provenance",
       "tex_lines": [
-        1683,
-        1723
+        1681,
+        1730
       ],
       "statement_relation": "n/a",
       "route_relation": "n/a",
@@ -6037,9 +5647,9 @@
       "note": "Active annotation in the updated manuscript; no author acceptance is inferred."
     }
   ],
-  "overview": "Compare the October 28 Overleaf manuscript with the pinned Lean results. The new preliminary definitions of Sections 2 and 5, the renumbered conormal lemmas and the two generalizations of Section 7 are represented explicitly. The selected formal endpoint still follows its recorded SameWitness route; matching conclusions do not certify the revised printed proof step by step. Johanna’s author review and Max’s correspondence review remain pending.",
+  "overview": "Compare the November 2 frozen manuscript with the pinned Lean results. Every theorem-like statement has a card. In Subsection 5.2 Theorem 5.7 and Lemmas 5.9–5.13 each have their own Lean theorem, and Theorem 5.7 is proved in Lean along the printed route; the earlier chart-based proof is kept as an alternative. Matching conclusions elsewhere do not by themselves certify a printed proof step by step.",
   "how_to_use": "Read the paper and Lean proofs side by side. Each passage and declaration links to its exact source. Review tools provide manuscript annotations, all reference passages, and note import/export.",
-  "provenance": "<p>The paper passages are the October 28 Overleaf update, pinned and reproduced verbatim. The formal source pins and historical verification receipts are retained. Mathematical edits to the manuscript have not been made by this supplementary update. Comparison labels do not certify a revised printed proof.</p>",
+  "provenance": "<p>The paper passages are the November 2 frozen version, pinned and reproduced verbatim. The formal source pins and historical verification receipts are retained. Mathematical edits to the manuscript have not been made by this supplementary update. Comparison labels do not certify a revised printed proof.</p>",
   "challenge_definitions": [
     {
       "repo": "formal",
@@ -6326,21 +5936,21 @@
   ],
   "global_issues": [],
   "candidate": {
-    "status": "October 28 manuscript refresh; formal source pins unchanged; human correspondence review pending",
+    "status": "November 2 frozen manuscript refresh",
     "manuscript": {
       "repo": "itpplasma/stafford38-paper",
-      "commit": "498a741686012734832547d9f33705130a37d218",
+      "commit": "0dd6189bdf1bf2c670a8421cfc9952d5b6b811b9",
       "file": "human_readable_main.tex",
       "origin_repo": "itpplasma/stafford38-paper",
-      "origin_commit": "498a741686012734832547d9f33705130a37d218",
-      "sha256": "a101d635ec230a67b9801a8ac10e814f4234e29c44ed900ffcbc1ea1699706f8",
-      "label": "Paper (Overleaf update)",
+      "origin_commit": "0dd6189bdf1bf2c670a8421cfc9952d5b6b811b9",
+      "sha256": "9cdf65e2419f8a2c9c28c27a5b531d9d2a12be2305c190eafa726f0255d9db66",
+      "label": "Paper (frozen version)",
       "local_source_base": "./sources/paper",
-      "note": "October 28 Overleaf update, preserved verbatim.",
+      "note": "November 2 frozen version, preserved verbatim.",
       "snapshot": {
         "base": "sources/paper/raw",
         "files": {
-          "human_readable_main.tex": "a101d635ec230a67b9801a8ac10e814f4234e29c44ed900ffcbc1ea1699706f8",
+          "human_readable_main.tex": "9cdf65e2419f8a2c9c28c27a5b531d9d2a12be2305c190eafa726f0255d9db66",
           "references.bib": "dd9ca2fb6ca2abae741af600c4ac1728dac2b4758a1cc564a30f9c6043df0d4f",
           "ai_review.tex": "3b245e5178736d12e247f24963a27d10a542f6fc25018070c24cf817d52d1591"
         }
@@ -16098,7 +15708,7 @@
     ],
     "warning": "Navigational correspondence proposals only. Full statement and proof correspondence remains open."
   },
-  "comparison_scope": "The active October 28 manuscript, including visible AI markup. Unchanged Lean source pins retain their previous verification scope; updated printed proofs require fresh human correspondence review.",
+  "comparison_scope": "The active November 2 manuscript, including visible AI markup. Unchanged Lean source pins retain their previous verification scope; updated printed proofs require fresh human correspondence review.",
   "canonical_declarations": {
     "Stafford38FixedSourceChallengeTransport.bernsteinDegree_eq": {
       "repo": "formal",
@@ -16251,5 +15861,5 @@
       "commit": "f9448d6307fa25aff9d9f94ce0a9c7f9b03e63ff"
     }
   },
-  "reader_notice": "Manuscript updated 28 October 2026. 4 review findings are recorded under Comparison notes."
+  "reader_notice": "Manuscript updated 2 November 2026. 4 review findings are recorded under Comparison notes."
 }
