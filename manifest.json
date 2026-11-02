@@ -100,7 +100,7 @@
   "files": {
     ".github/workflows/pages.yml": "c59be78c49fed449d1c9fd31ffd6dda853c539212b60156476d19002df4554d7",
     ".github/workflows/repo-hygiene.yml": "260383f8f71b5027ddb74ad7009fbd0ee098c2471d567f5b0a949c3b83c3e857",
-    ".repo-hygiene-allow": "cdc3b1f7c60510855d1e8bcdfc2a41f233ac92c68651af00038589815e372e42",
+    ".repo-hygiene-allow": "bcd64eb7a3b2bce5011593e7d9f4111d318a58499fbec2fa763e56a3e049958d",
     ".zenodo.json": "9c3a46f9756ec0cae8f31ec3ac8ff0c075e44ce9183a17de70055d9f9d3fcfe2",
     "CITATION.cff": "6198a13bd349d35554541c82562f6f7596926c35590c103c060bae9404d50e26",
     "LICENSES/KaTeX-MIT.txt": "766ccc1f306c885aa45542a9846bbd0a505b27a0374f146778171c2254ce18e3",
