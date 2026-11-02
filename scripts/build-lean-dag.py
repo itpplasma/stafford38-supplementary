@@ -49,9 +49,25 @@ KEYS = {
     'ARC': ([S + 'Geometry.SameWitness.axis_mem_smoothConormalFibreProjection_closure_of_groundPointOutput'],
             'Laurent arc: conormal covectors tend to dx₁', 'T5.7'),
     'PLACE': ([S + 'Geometry.ActualSameWitnessGroundPointCompletion.exists_actual_same_witness_groundpoint_chart'],
-              'divisorial place at infinity with ground-point chart', 'L5.10'),
+              'same-witness route: ground-point chart of the place', None),
     'TRDEG': ([S + 'Geometry.SameWitnessTranscendenceDegreeBound.component_trdeg_le_residue_trdeg_add_one_of_witness'],
-              'tangent bound: trdeg ≤ residue trdeg + 1', 'L5.12'),
+              'same-witness route: trdeg ≤ residue trdeg + 1', None),
+    'AXISP': ([S + 'Paper.Section5.theorem_5_7_i', S + 'Paper.Section5.theorem_5_7_ii'],
+              'paper route: P|N(Y) = 0 ⇒ P(1,0,…,0) = 0; [dx₁] ∈ Dir(Y)', 'T5.7'),
+    'FRAME': ([S + 'Geometry.GeneralDivisorialVisibleFrame.generalDivisorialVisibleFrameWithResidueAlgebraicity'],
+              'DVR at infinity, chart and residue algebraicity', None),
+    'ROWS': ([S + 'Geometry.PaperActualDivisorTangent.exists_regularizedOneRowConormalData_of_actual_columns'],
+             'λ, τ, M(t) with a unit minor, lift ℓ with ℓ(0) = u', None),
+    'L59': ([S + 'Paper.Section5.lemma_5_9'], 'valuation ring W, x̄₁ ∈ 𝔪_W, chart j', 'L5.9'),
+    'L510': ([S + 'Paper.Section5.lemma_5_10'], 'DVR V: q_i ∈ V, x̄₁ ∈ 𝔪_V, R ⊄ V; κ algebraic; Ω_V finite', 'L5.10'),
+    'L511': ([S + 'Paper.Section5.lemma_5_11'], 'residues q_i(0), i ∉ {0,1,j}, give a basis of Ω_κ', 'L5.11'),
+    'L512': ([S + 'Paper.Section5.generic_tangent_finrank_eq_component_kaehler_finrank',
+              S + 'Paper.Section5.component_kaehler_finrank_eq_trdeg',
+              S + 'Paper.Section5.lemma_5_12_a_cone', S + 'Paper.Section5.lemma_5_12_b'],
+             'dim Θ_y = trdeg F, dim C = dim Θ_y + 1; δq, q ∈ C', 'L5.12'),
+    'L513': ([S + 'Paper.Section5.lemma_5_13'], 'annihilators of C are conormal', 'L5.13'),
+    'WIT': ([S + 'Paper.Section5.witness_lemma_5_11', S + 'Paper.Section5.witness_lemma_5_12_5_13'],
+            'the DVR and Laurent column of the paper-route proof satisfy Lemmas 5.11–5.13', None),
     'BRIDGE': ([S + 'SpecializedNoncharacteristicEquality.strictUnitCoordinatePreimage_of_transposedSupport_disjoint_axis'],
                'support avoiding H ⇒ x₁ is a strict unit on gr Q', None),
     'AVOID': ([S + 'Characteristic.CanonicalKoszulContradiction.canonical_support_avoidance',
@@ -118,7 +134,8 @@ LEAVES = {
     'symp': ('symplectic group', 'Mathlib LinearAlgebra.SymplecticGroup', ['Mathlib.LinearAlgebra.SymplecticGroup']),
 }
 ORDER = ['T', 'CYC', 'ASM', 'MON', 'SYMP', 'CERT', 'VAN', 'DESC', 'BRIDGE', 'EXCL', 'GABBER', 'AXIS',
-         'ARC', 'PLACE', 'TRDEG', 'AVOID', 'UZERO', 'STRICT', 'PAGE', 'FIN', 'SURJ', 'EULER', 'CHARP', 'MONICP']
+         'ARC', 'PLACE', 'TRDEG', 'AXISP', 'FRAME', 'ROWS', 'L59', 'L510', 'L511', 'L512', 'L513',
+         'WIT', 'AVOID', 'UZERO', 'STRICT', 'PAGE', 'FIN', 'SURJ', 'EULER', 'CHARP', 'MONICP']
 assert sorted(ORDER) == sorted(KEYS)
 HELPERS = 6  # direct helper lemmas drawn per theorem graph
 
