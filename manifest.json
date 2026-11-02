@@ -107,7 +107,7 @@
     "LICENSES/generator-Apache-2.0.txt": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
     "LICENSES/manuscript-CC-BY-4.0.txt": "98b6fde2693d4044dce4a071640e90bd8d250dd789d9033dbd5b77c79f389de4",
     "NOTICE": "203492e6a24996e31d976b06a52a479c08af9904501940296d4a422e95834851",
-    "README.md": "8cfb33b52722658a77c02afc464e261db46fa426fae9bd8d6e62c5f1684edd7a",
+    "README.md": "46a6f5d8fef7b35b813a8714cee94476f15bc95d582f201e12c8d53fbc46c124",
     "human_readable_main.pdf": "f3c60faad33327fba463b5ba7ef92471dc893c09d0ff2224bc7205fe51a9560d",
     "index.html": "a98c24810c61753f641bc9529872da3b45f0202fda54d2afe05e53c36a3ce9ff",
     "lean-dag.html": "49a1a72551349a81d208aa2c45f59e4e7fb3bd380cb6e7e3a266ae4e444867c5",
@@ -122,7 +122,7 @@
     "scripts/extract-lean-references.py": "62e338abe80426a74a3cbf9e82a9da654dc5ba655cf76c3e9ae331a348dcb9b4",
     "scripts/link-lean-references.py": "2aa2762dc74584520ac5ef3967689e3710319aa96cbfc78caab6e49406bdf693",
     "scripts/rebuild.py": "4647fb30ad2b3ddc24a7db3808e95d2b76123902d15979f64c93341969e16338",
-    "scripts/record-manuscript-verification.py": "376749c63cd40000694af2fc2dc0081bb88fdaffaaea0d071ba335cad59c8170",
+    "scripts/record-manuscript-verification.py": "1c286e96a27abc265cdd43e989e41c6c93ef524123847dc88ffa1ac92a18b7aa",
     "scripts/update-manuscript-20261021.py": "f239877003fbe7041020a16e81940e437514d4533cb11d9f6aa66008c21c589e",
     "scripts/update-manuscript-20261028.py": "f4604b71a44364d7991ce0c970a8bf98905a16220a048d303b9b98220b8ce943",
     "scripts/update-manuscript-20261102.py": "f92bd57b94df79069b77d27ad88c7fe5a8adcd91b3415e3641497f0a31632c24",
@@ -678,10 +678,13 @@
     "verification/manuscript-20261028/paper-build.log": "19a81c1d4eed57acf63e49116820d3dc5405f4cd2bd4850bd6e18dbcb6b07590",
     "verification/manuscript-20261028/reader-build.log": "e893fbfb641a48cf1e34fff50f2bed89d08a8c96b05216b9f8f0b61a03cd4b42",
     "verification/manuscript-20261028/verification.json": "ef828e7ab8a0de1695ff689d419a31f86bbe5aca1f252abd77218fa7347e1cbc",
-    "verification/manuscript-20261102/README.md": "33b35836cd0d77fd8363000ed177635861c0500ef3a8289bd7dbfa347175d139",
+    "verification/manuscript-20261102/README.md": "4bae0a18fc59c0bd8e1168395ca8a2b7828b516cb59997287da338b969c60f79",
+    "verification/manuscript-20261102/browser.json": "7360e76c8a1e5f40c5980434bf75938e3089a84c4dc88237574dad4f9b4520d5",
     "verification/manuscript-20261102/formal-verify.log": "287ec1895241bf46035aee860a11019efed67983c6c9468352299435426d0ec7",
     "verification/manuscript-20261102/migration.json": "53e53504669b60601ff4aae4ea8f6fe5e472b7fee7f3f2b7a9d728b05620fcaf",
     "verification/manuscript-20261102/paper-build.log": "0a4df0e306bb50f047314c93c6a04eb88ddd156d4e1c895632ea16acbc825578",
+    "verification/manuscript-20261102/reader-build.log": "5996f426b41572bcd9da3fc809f9e3e5d643a3cb9d20730b933911304190e78b",
+    "verification/manuscript-20261102/verification.json": "adcadd3ebfcd8bb4d2fd5274dcc5611ce6acbc5cdf5872fe98b048a55ec22623",
     "version.json": "0a9e0320f0978b74770a7ed21f5e2f8ead42aaf2802d9c4ff46eae0a3682f11b"
   },
   "historical_release": {
@@ -733,7 +736,7 @@
       "status": "byte-verified"
     }
   },
-  "status": "manuscript-update-in-progress",
+  "status": "manuscript-review-draft",
   "manuscript_sources": {
     "formal": {
       "commit": "f9448d6307fa25aff9d9f94ce0a9c7f9b03e63ff"
@@ -746,8 +749,46 @@
     "scope": "Repository verifier scripts/verify.sh: full Lake build of every module, all solution and challenge roots, and the strict dependency guard of the four terminal roots (only propext, Classical.choice, Quot.sound). No Palomar service-runner receipt is claimed."
   },
   "checks": {
-    "status": "pending",
+    "status": "passed",
     "receipt": "verification/manuscript-20261102/verification.json",
-    "note": "Historical checks remain in their original receipts; they do not verify the updated manuscript build."
+    "reader_build": {
+      "status": "passed",
+      "warnings": [],
+      "scope": "Complete current source/reference and statement-coverage audit; warnings are unresolved references already present in the paper."
+    },
+    "generator_tests": {
+      "passed": 83,
+      "failed": 0,
+      "skipped": 1,
+      "scope": "Generator regression suite including its browser tests",
+      "skip_reason": "Historical sibling-paper fixture unavailable; current manuscript passes the actual pinned build.",
+      "rerun": false,
+      "log": "verification/manuscript-20261021/generator-tests.log",
+      "reason": "Generator unchanged at 7c0b67c; its October 21 regression run is recorded at the same commit."
+    },
+    "browser": {
+      "status": "passed",
+      "cards": 69,
+      "paper": "0dd6189bdf1bf2c670a8421cfc9952d5b6b811b9",
+      "source_links": 2345,
+      "definition_links": "all targets present",
+      "canonical_weyl_definitions": 1,
+      "ownership_labels": true,
+      "definition_clicks": true,
+      "new_cards": 0,
+      "obsolete_cards_absent": true,
+      "paper_source_links_local": true,
+      "search": true,
+      "guided_navigation": true,
+      "manuscript_annotations": true,
+      "notes_reload": true,
+      "review_export": true,
+      "review_findings": 4,
+      "math_errors": 0,
+      "mobile_overflow": false,
+      "javascript_errors": [],
+      "offline_requests": 0
+    },
+    "scope": "Supplementary source mapping, renderer and reader behavior; not a new proof-correspondence certification."
   }
 }
