@@ -1,0 +1,1721 @@
+{
+ "anchors": {
+  "cor:cyclic": {
+   "lean": [
+    {
+     "name": "Stafford38.Paper.corollary_6_3",
+     "range": {
+      "end": [
+       74,
+       52
+      ],
+      "start": [
+       63,
+       0
+      ]
+     }
+    },
+    {
+     "name": "Stafford38.Paper.corollary_6_3_stablyCyclic",
+     "range": {
+      "end": [
+       88,
+       52
+      ],
+      "start": [
+       76,
+       0
+      ]
+     }
+    },
+    {
+     "name": "Stafford38.Paper.Section6.IsStablyGenerated",
+     "range": {
+      "end": [
+       145,
+       9
+      ],
+      "start": [
+       137,
+       0
+      ]
+     }
+    },
+    {
+     "name": "Stafford38Challenge.PaperCorollary_6_3",
+     "range": {
+      "end": [
+       306,
+       36
+      ],
+      "start": [
+       300,
+       0
+      ]
+     }
+    },
+    {
+     "name": "Stafford38Challenge.PaperCorollary_6_3_stablyCyclic",
+     "range": {
+      "end": [
+       37,
+       36
+      ],
+      "start": [
+       31,
+       0
+      ]
+     }
+    },
+    {
+     "name": "Stafford38Challenge.IsCyclicModule",
+     "range": {
+      "end": [
+       284,
+       53
+      ],
+      "start": [
+       281,
+       0
+      ]
+     }
+    },
+    {
+     "name": "Stafford38Challenge.IsStablyCyclic",
+     "range": {
+      "end": [
+       29,
+       9
+      ],
+      "start": [
+       20,
+       0
+      ]
+     }
+    }
+   ],
+   "paper": {
+    "line": 1598,
+    "start": 119917
+   }
+  },
+  "cor:cyclic.proof.sentences[0]": {
+   "paper": {
+    "line": 1603,
+    "start": 120037
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.corollary_6_3",
+     "range": {
+      "end": [
+       74,
+       52
+      ],
+      "start": [
+       63,
+       0
+      ]
+     },
+     "type": "a000d8d23a8ba05f"
+    }
+   ]
+  },
+  "cor:cyclic.proof.sentences[10]": {
+   "paper": {
+    "line": 1612,
+    "start": 121290
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section6.step_6_3_kernel",
+     "index": 0,
+     "start": [
+      77,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section6.step_6_3_kernel",
+     "index": 3,
+     "start": [
+      80,
+      2
+     ]
+    }
+   ]
+  },
+  "cor:cyclic.proof.sentences[11]": {
+   "paper": {
+    "line": 1613,
+    "start": 121409
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section6.step_6_3_kernel",
+     "index": 6,
+     "start": [
+      83,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section6.step_6_3_kernel",
+     "index": 11,
+     "start": [
+      90,
+      4
+     ]
+    }
+   ]
+  },
+  "cor:cyclic.proof.sentences[12]": {
+   "paper": {
+    "line": 1615,
+    "start": 121560
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section6.step_6_3_generators",
+     "index": 5,
+     "start": [
+      109,
+      2
+     ]
+    }
+   ]
+  },
+  "cor:cyclic.proof.sentences[13]": {
+   "paper": {
+    "line": 1615,
+    "start": 121642
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section6.step_6_3_generators",
+     "index": 0,
+     "start": [
+      102,
+      2
+     ]
+    }
+   ]
+  },
+  "cor:cyclic.proof.sentences[14]": {
+   "paper": {
+    "line": 1617,
+    "start": 121776
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section6.step_6_3_generators",
+     "index": 3,
+     "start": [
+      108,
+      4
+     ]
+    }
+   ]
+  },
+  "cor:cyclic.proof.sentences[15]": {
+   "paper": {
+    "line": 1618,
+    "start": 121835
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section6.step_6_3_pair",
+     "range": {
+      "end": [
+       135,
+       37
+      ],
+      "start": [
+       115,
+       0
+      ]
+     },
+     "type": "bd94dc2b418d4582"
+    },
+    {
+     "index": 3,
+     "start": [
+      228,
+      2
+     ]
+    }
+   ]
+  },
+  "cor:cyclic.proof.sentences[16]": {
+   "paper": {
+    "line": 1619,
+    "start": 122056
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section6.IsStablyGenerated",
+     "range": {
+      "end": [
+       145,
+       9
+      ],
+      "start": [
+       137,
+       0
+      ]
+     },
+     "type": "dcf9b74b226dc610"
+    },
+    {
+     "index": 4,
+     "start": [
+      230,
+      2
+     ]
+    }
+   ]
+  },
+  "cor:cyclic.proof.sentences[17]": {
+   "paper": {
+    "line": 1619,
+    "start": 122300
+   },
+   "steps": [
+    {
+     "index": 5,
+     "start": [
+      231,
+      2
+     ]
+    },
+    {
+     "index": 6,
+     "start": [
+      232,
+      4
+     ]
+    },
+    {
+     "index": 8,
+     "start": [
+      233,
+      4
+     ]
+    },
+    {
+     "index": 9,
+     "start": [
+      234,
+      4
+     ]
+    },
+    {
+     "index": 10,
+     "start": [
+      235,
+      4
+     ]
+    },
+    {
+     "index": 11,
+     "start": [
+      236,
+      4
+     ]
+    },
+    {
+     "index": 15,
+     "start": [
+      242,
+      4
+     ]
+    },
+    {
+     "index": 18,
+     "start": [
+      245,
+      4
+     ]
+    }
+   ]
+  },
+  "cor:cyclic.proof.sentences[18]": {
+   "paper": {
+    "line": 1619,
+    "start": 122460
+   },
+   "steps": [
+    {
+     "index": 19,
+     "start": [
+      246,
+      4
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section6.stably_generated_of_identity",
+     "range": {
+      "end": [
+       209,
+       13
+      ],
+      "start": [
+       176,
+       0
+      ]
+     },
+     "type": "411c81a5b8c18422"
+    }
+   ]
+  },
+  "cor:cyclic.proof.sentences[1]": {
+   "paper": {
+    "line": 1603,
+    "start": 120132
+   },
+   "steps": []
+  },
+  "cor:cyclic.proof.sentences[2]": {
+   "paper": {
+    "line": 1603,
+    "start": 120171
+   },
+   "steps": [
+    {
+     "index": 0,
+     "start": [
+      225,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section6.stafford_1978_theorem_3_7",
+     "range": {
+      "end": [
+       55,
+       74
+      ],
+      "start": [
+       39,
+       0
+      ]
+     },
+     "type": "94e0c29e816eede3"
+    }
+   ]
+  },
+  "cor:cyclic.proof.sentences[3]": {
+   "paper": {
+    "line": 1603,
+    "start": 120429
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section6.phi63",
+     "range": {
+      "end": [
+       35,
+       85
+      ],
+      "start": [
+       27,
+       0
+      ]
+     },
+     "type": "e68c2c4fc4ce10d3"
+    }
+   ]
+  },
+  "cor:cyclic.proof.sentences[4]": {
+   "paper": {
+    "line": 1605,
+    "start": 120537
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section6.step_6_3_phi_range",
+     "range": {
+      "end": [
+       50,
+       37
+      ],
+      "start": [
+       37,
+       0
+      ]
+     },
+     "type": "a698d4d7e4bf05be"
+    }
+   ]
+  },
+  "cor:cyclic.proof.sentences[5]": {
+   "paper": {
+    "line": 1605,
+    "start": 120599
+   },
+   "steps": []
+  },
+  "cor:cyclic.proof.sentences[6]": {
+   "paper": {
+    "line": 1608,
+    "start": 120778
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section6.step_6_3_common_annihilator",
+     "index": 0,
+     "start": [
+      58,
+      2
+     ]
+    }
+   ]
+  },
+  "cor:cyclic.proof.sentences[7]": {
+   "paper": {
+    "line": 1608,
+    "start": 120867
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section6.step_6_3_common_annihilator",
+     "index": 1,
+     "start": [
+      59,
+      2
+     ]
+    }
+   ]
+  },
+  "cor:cyclic.proof.sentences[8]": {
+   "paper": {
+    "line": 1610,
+    "start": 120991
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section6.step_6_3_common_annihilator",
+     "index": 2,
+     "start": [
+      60,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section6.weyl_rightOreCondition",
+     "range": {
+      "end": [
+       189,
+       7
+      ],
+      "start": [
+       153,
+       0
+      ]
+     },
+     "type": "29445ff7dd5774d7"
+    }
+   ]
+  },
+  "cor:cyclic.proof.sentences[9]": {
+   "paper": {
+    "line": 1611,
+    "start": 121191
+   },
+   "steps": [
+    {
+     "index": 1,
+     "start": [
+      226,
+      2
+     ]
+    },
+    {
+     "index": 2,
+     "start": [
+      227,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:base-change": {
+   "lean": [
+    {
+     "name": "Stafford38.Paper.Section6.lemma_6_2",
+     "range": {
+      "end": [
+       468,
+       69
+      ],
+      "start": [
+       453,
+       0
+      ]
+     }
+    },
+    {
+     "name": "Stafford38.Paper.Section6.dtK",
+     "range": {
+      "end": [
+       53,
+       59
+      ],
+      "start": [
+       50,
+       0
+      ]
+     }
+    },
+    {
+     "name": "Stafford38.Paper.Section6.σ",
+     "range": {
+      "end": [
+       58,
+       61
+      ],
+      "start": [
+       55,
+       0
+      ]
+     }
+    },
+    {
+     "name": "Stafford38.Paper.Section6.Qpiece",
+     "range": {
+      "end": [
+       140,
+       75
+      ],
+      "start": [
+       137,
+       0
+      ]
+     }
+    }
+   ],
+   "paper": {
+    "line": 1509,
+    "start": 113831
+   }
+  },
+  "lem:base-change.proof.sentences[0]": {
+   "paper": {
+    "line": 1521,
+    "start": 114295
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section6.step_6_2_ideal",
+     "range": {
+      "end": [
+       66,
+       47
+      ],
+      "start": [
+       60,
+       0
+      ]
+     },
+     "type": "d3d1356d0304fe61"
+    },
+    {
+     "decl": "Stafford38.Paper.Section6.step_6_2_quotient",
+     "range": {
+      "end": [
+       98,
+       78
+      ],
+      "start": [
+       68,
+       0
+      ]
+     },
+     "type": "134e25bcf9b218b0"
+    },
+    {
+     "decl": "Stafford38.Paper.Section6.theta62",
+     "range": {
+      "end": [
+       129,
+       23
+      ],
+      "start": [
+       113,
+       0
+      ]
+     },
+     "type": "64d80bfd6121e0fb"
+    },
+    {
+     "decl": "Stafford38.Paper.Section6.step_6_2_pieces",
+     "range": {
+      "end": [
+       178,
+       24
+      ],
+      "start": [
+       142,
+       0
+      ]
+     },
+     "type": "000374e9cf82b8bb"
+    }
+   ]
+  },
+  "lem:base-change.proof.sentences[1]": {
+   "paper": {
+    "line": 1522,
+    "start": 114442
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section6.step_6_2_graded_pieces",
+     "range": {
+      "end": [
+       259,
+       66
+      ],
+      "start": [
+       250,
+       0
+      ]
+     },
+     "type": "8ea99e1f7af02ccb"
+    },
+    {
+     "decl": "Stafford38.Paper.Section6.step_6_2_sum",
+     "range": {
+      "end": [
+       265,
+       72
+      ],
+      "start": [
+       261,
+       0
+      ]
+     },
+     "type": "fad82f7954e46048"
+    },
+    {
+     "decl": "Stafford38.Paper.Section6.step_6_2_graded",
+     "range": {
+      "end": [
+       273,
+       76
+      ],
+      "start": [
+       268,
+       0
+      ]
+     },
+     "type": "c30407769f5f3aff"
+    }
+   ]
+  },
+  "lem:base-change.proof.sentences[2]": {
+   "paper": {
+    "line": 1524,
+    "start": 114566
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section6.step_6_2_annihilator",
+     "range": {
+      "end": [
+       431,
+       63
+      ],
+      "start": [
+       366,
+       0
+      ]
+     },
+     "type": "b0f6139021dde574"
+    }
+   ]
+  },
+  "lem:base-change.proof.sentences[3]": {
+   "paper": {
+    "line": 1527,
+    "start": 114816
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section6.step_6_2_vanishing",
+     "range": {
+      "end": [
+       443,
+       74
+      ],
+      "start": [
+       433,
+       0
+      ]
+     },
+     "type": "07a784bd31bc3579"
+    }
+   ]
+  },
+  "proof:thm-main": {
+   "lean": [
+    {
+     "name": "Stafford38.Paper.Section6.theorem_1_1_paper",
+     "range": {
+      "end": [
+       365,
+       50
+      ],
+      "start": [
+       351,
+       0
+      ]
+     }
+    },
+    {
+     "name": "Stafford38.Paper.Section6.W",
+     "range": {
+      "end": [
+       54,
+       71
+      ],
+      "start": [
+       51,
+       0
+      ]
+     }
+    }
+   ],
+   "paper": {
+    "line": 1531,
+    "start": 114911
+   }
+  },
+  "proof:thm-main.proof.sentences[0]": {
+   "paper": {
+    "line": 1531,
+    "start": 114911
+   },
+   "steps": [
+    {
+     "index": 0,
+     "start": [
+      358,
+      2
+     ]
+    },
+    {
+     "index": 5,
+     "start": [
+      362,
+      6
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section3.section_3_reduction",
+     "range": {
+      "end": [
+       120,
+       38
+      ],
+      "start": [
+       100,
+       0
+      ]
+     },
+     "type": "78ce431e0b38aa07"
+    }
+   ]
+  },
+  "proof:thm-main.proof.sentences[10]": {
+   "paper": {
+    "line": 1554,
+    "start": 116334
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section6.step_W_involutive",
+     "range": {
+      "end": [
+       164,
+       61
+      ],
+      "start": [
+       158,
+       0
+      ]
+     },
+     "type": "4e05b90623185633"
+    },
+    {
+     "decl": "Stafford38.Paper.Section6.step_W_empty",
+     "index": 1,
+     "start": [
+      254,
+      2
+     ]
+    }
+   ]
+  },
+  "proof:thm-main.proof.sentences[11]": {
+   "paper": {
+    "line": 1555,
+    "start": 116411
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section6.step_W_P_vanishes",
+     "range": {
+      "end": [
+       183,
+       9
+      ],
+      "start": [
+       166,
+       0
+      ]
+     },
+     "type": "32f02117a76b83db"
+    }
+   ]
+  },
+  "proof:thm-main.proof.sentences[12]": {
+   "paper": {
+    "line": 1558,
+    "start": 116570
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section6.step_W_P_axis",
+     "range": {
+      "end": [
+       202,
+       17
+      ],
+      "start": [
+       185,
+       0
+      ]
+     },
+     "type": "a0b0f93ed8eac4a5"
+    }
+   ]
+  },
+  "proof:thm-main.proof.sentences[13]": {
+   "paper": {
+    "line": 1559,
+    "start": 116627
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section6.step_Vx₁_preimage",
+     "range": {
+      "end": [
+       212,
+       25
+      ],
+      "start": [
+       205,
+       0
+      ]
+     },
+     "type": "807a0834781ba3ed"
+    }
+   ]
+  },
+  "proof:thm-main.proof.sentences[14]": {
+   "paper": {
+    "line": 1562,
+    "start": 116917
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section6.step_char_K_avoids",
+     "range": {
+      "end": [
+       222,
+       49
+      ],
+      "start": [
+       214,
+       0
+      ]
+     },
+     "type": "911fc4bd6e8c4456"
+    }
+   ]
+  },
+  "proof:thm-main.proof.sentences[15]": {
+   "paper": {
+    "line": 1564,
+    "start": 117055
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section6.step_closedPoint_mem_Vx₁",
+     "range": {
+      "end": [
+       231,
+       46
+      ],
+      "start": [
+       224,
+       0
+      ]
+     },
+     "type": "36fc57130719a751"
+    }
+   ]
+  },
+  "proof:thm-main.proof.sentences[16]": {
+   "paper": {
+    "line": 1564,
+    "start": 117265
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section6.step_W_avoids_H",
+     "range": {
+      "end": [
+       246,
+       12
+      ],
+      "start": [
+       233,
+       0
+      ]
+     },
+     "type": "b8ac032983915d92"
+    }
+   ]
+  },
+  "proof:thm-main.proof.sentences[17]": {
+   "paper": {
+    "line": 1566,
+    "start": 117405
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section6.step_W_empty",
+     "index": 2,
+     "start": [
+      257,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section6.theorem_6_Q_eq_zero",
+     "index": 2,
+     "start": [
+      323,
+      2
+     ]
+    }
+   ]
+  },
+  "proof:thm-main.proof.sentences[18]": {
+   "paper": {
+    "line": 1566,
+    "start": 117466
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section6.step_grQK_zero",
+     "range": {
+      "end": [
+       271,
+       63
+      ],
+      "start": [
+       263,
+       0
+      ]
+     },
+     "type": "f4283312b6e06055"
+    }
+   ]
+  },
+  "proof:thm-main.proof.sentences[19]": {
+   "paper": {
+    "line": 1568,
+    "start": 117572
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section6.step_QK_zero",
+     "range": {
+      "end": [
+       312,
+       73
+      ],
+      "start": [
+       305,
+       0
+      ]
+     },
+     "type": "b92eb1ebbfdb362f"
+    },
+    {
+     "decl": "Stafford38.Paper.Section6.step_filtration_zero",
+     "range": {
+      "end": [
+       303,
+       13
+      ],
+      "start": [
+       274,
+       0
+      ]
+     },
+     "type": "6ce9fe93e0548acf"
+    },
+    {
+     "decl": "Stafford38.Paper.Section6.theorem_6_Q_eq_zero",
+     "index": 3,
+     "start": [
+      324,
+      2
+     ]
+    }
+   ]
+  },
+  "proof:thm-main.proof.sentences[1]": {
+   "paper": {
+    "line": 1533,
+    "start": 115054
+   },
+   "steps": [
+    {
+     "index": 4,
+     "start": [
+      360,
+      12
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section6.step_rank_zero",
+     "range": {
+      "end": [
+       349,
+       20
+      ],
+      "start": [
+       326,
+       0
+      ]
+     },
+     "type": "81a9d7300f06fad0"
+    }
+   ]
+  },
+  "proof:thm-main.proof.sentences[20]": {
+   "paper": {
+    "line": 1570,
+    "start": 117739
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section3.exists_eq_of_Q_eq_zero",
+     "range": {
+      "end": [
+       54,
+       5
+      ],
+      "start": [
+       43,
+       0
+      ]
+     },
+     "type": "5e67db3512368169"
+    }
+   ]
+  },
+  "proof:thm-main.proof.sentences[21]": {
+   "paper": {
+    "line": 1573,
+    "start": 117867
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section3.remark_3_3_of_Q_eq_zero",
+     "range": {
+      "end": [
+       98,
+       86
+      ],
+      "start": [
+       89,
+       0
+      ]
+     },
+     "type": "5c2539ff9a360439"
+    }
+   ]
+  },
+  "proof:thm-main.proof.sentences[22]": {
+   "paper": {
+    "line": 1574,
+    "start": 117956
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section3.remark_3_3",
+     "range": {
+      "end": [
+       87,
+       80
+      ],
+      "start": [
+       74,
+       0
+      ]
+     },
+     "type": "c17f7f94b37f8b41"
+    },
+    {
+     "index": 8,
+     "start": [
+      365,
+      8
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section6.theorem_1_1_fixedSource_paper",
+     "range": {
+      "end": [
+       379,
+       50
+      ],
+      "start": [
+       367,
+       0
+      ]
+     },
+     "type": "f53f81a4573b2aab"
+    }
+   ]
+  },
+  "proof:thm-main.proof.sentences[2]": {
+   "paper": {
+    "line": 1534,
+    "start": 115137
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section3.idealI",
+     "range": {
+      "end": [
+       37,
+       35
+      ],
+      "start": [
+       34,
+       0
+      ]
+     },
+     "type": "483ba95aceae7fb8"
+    },
+    {
+     "decl": "Stafford38.Paper.Section3.Q",
+     "range": {
+      "end": [
+       41,
+       31
+      ],
+      "start": [
+       39,
+       0
+      ]
+     },
+     "type": "e7e4426af8d61fef"
+    }
+   ]
+  },
+  "proof:thm-main.proof.sentences[3]": {
+   "paper": {
+    "line": 1536,
+    "start": 115257
+   },
+   "steps": [
+    {
+     "index": 7,
+     "start": [
+      364,
+      8
+     ]
+    }
+   ]
+  },
+  "proof:thm-main.proof.sentences[4]": {
+   "paper": {
+    "line": 1539,
+    "start": 115376
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section6.theorem_6_Q_eq_zero",
+     "index": 0,
+     "start": [
+      321,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section6.step_W_closed_points",
+     "range": {
+      "end": [
+       62,
+       95
+      ],
+      "start": [
+       56,
+       0
+      ]
+     },
+     "type": "de3508ae2c4a8850"
+    }
+   ]
+  },
+  "proof:thm-main.proof.sentences[5]": {
+   "paper": {
+    "line": 1543,
+    "start": 115659
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section6.step_W_empty",
+     "index": 0,
+     "start": [
+      253,
+      2
+     ]
+    }
+   ]
+  },
+  "proof:thm-main.proof.sentences[6]": {
+   "paper": {
+    "line": 1548,
+    "start": 115843
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section6.step_W_closed",
+     "range": {
+      "end": [
+       67,
+       26
+      ],
+      "start": [
+       64,
+       0
+      ]
+     },
+     "type": "3c37a01cd771b55f"
+    }
+   ]
+  },
+  "proof:thm-main.proof.sentences[7]": {
+   "paper": {
+    "line": 1549,
+    "start": 115925
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section6.step_annihilator_homogeneous",
+     "range": {
+      "end": [
+       131,
+       19
+      ],
+      "start": [
+       73,
+       0
+      ]
+     },
+     "type": "1bece9b8c5110e80"
+    }
+   ]
+  },
+  "proof:thm-main.proof.sentences[8]": {
+   "paper": {
+    "line": 1550,
+    "start": 116093
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section6.step_W_fibreConical",
+     "index": 10,
+     "start": [
+      146,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section6.step_W_fibreConical",
+     "index": 16,
+     "start": [
+      154,
+      2
+     ]
+    }
+   ]
+  },
+  "proof:thm-main.proof.sentences[9]": {
+   "paper": {
+    "line": 1552,
+    "start": 116280
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section6.step_W_fibreConical",
+     "index": 18,
+     "start": [
+      156,
+      2
+     ]
+    }
+   ]
+  },
+  "prop:char-avoids": {
+   "lean": [
+    {
+     "name": "Stafford38.Paper.Section6.proposition_6_1",
+     "range": {
+      "end": [
+       75,
+       40
+      ],
+      "start": [
+       69,
+       0
+      ]
+     }
+    },
+    {
+     "name": "Stafford38.Paper.Section6.Vx₁",
+     "range": {
+      "end": [
+       39,
+       31
+      ],
+      "start": [
+       37,
+       0
+      ]
+     }
+    },
+    {
+     "name": "Stafford38.Paper.Section6.x₁Symbol",
+     "range": {
+      "end": [
+       35,
+       41
+      ],
+      "start": [
+       33,
+       0
+      ]
+     }
+    }
+   ],
+   "paper": {
+    "line": 1491,
+    "start": 112762
+   }
+  },
+  "prop:char-avoids.proof.sentences[0]": {
+   "paper": {
+    "line": 1496,
+    "start": 112933
+   },
+   "steps": []
+  },
+  "prop:char-avoids.proof.sentences[1]": {
+   "paper": {
+    "line": 1496,
+    "start": 112950
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section6.step_6_1_finite",
+     "range": {
+      "end": [
+       45,
+       43
+      ],
+      "start": [
+       41,
+       0
+      ]
+     },
+     "type": "137ca32b4b8f548b"
+    },
+    {
+     "decl": "Stafford38.Paper.Section6.step_6_1_support_quotient",
+     "range": {
+      "end": [
+       52,
+       83
+      ],
+      "start": [
+       47,
+       0
+      ]
+     },
+     "type": "79a64c3b202e7bdc"
+    }
+   ]
+  },
+  "prop:char-avoids.proof.sentences[2]": {
+   "paper": {
+    "line": 1497,
+    "start": 113070
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section6.step_6_1_support_avoids",
+     "range": {
+      "end": [
+       60,
+       31
+      ],
+      "start": [
+       54,
+       0
+      ]
+     },
+     "type": "b9d602e7082f1bea"
+    }
+   ]
+  },
+  "prop:char-avoids.proof.sentences[3]": {
+   "paper": {
+    "line": 1499,
+    "start": 113189
+   },
+   "steps": [
+    {
+     "index": 0,
+     "start": [
+      74,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section6.step_6_1_char_eq_support",
+     "range": {
+      "end": [
+       67,
+       52
+      ],
+      "start": [
+       62,
+       0
+      ]
+     },
+     "type": "74999e76f3ec52bf"
+    }
+   ]
+  },
+  "prop:char-avoids.proof.sentences[4]": {
+   "paper": {
+    "line": 1500,
+    "start": 113298
+   },
+   "steps": [
+    {
+     "index": 1,
+     "start": [
+      75,
+      2
+     ]
+    }
+   ]
+  }
+ },
+ "cards": [
+  {
+   "account": {
+    "cited": [
+     "cor:Uzero"
+    ],
+    "large": 0,
+    "lean_adds": 0,
+    "matched": 4,
+    "only_lean": [
+     "par:cyclic-good"
+    ],
+    "only_paper": [],
+    "prose": 1,
+    "sentences": 5,
+    "used": [
+     "cor:Uzero",
+     "par:cyclic-good"
+    ]
+   },
+   "fingerprint": "fa84596cb6641592",
+   "flags": [
+    "Lean-only definitions",
+    "prose"
+   ],
+   "id": "prop:char-avoids",
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section6.proposition_6_1",
+    "Stafford38.Paper.Section6.Vx₁",
+    "Stafford38.Paper.Section6.x₁Symbol"
+   ],
+   "paper_line": 1491,
+   "title": "Proposition 6.1"
+  },
+  {
+   "account": {
+    "cited": [],
+    "large": 3,
+    "lean_adds": 0,
+    "matched": 4,
+    "only_lean": [],
+    "only_paper": [],
+    "prose": 0,
+    "sentences": 4,
+    "used": []
+   },
+   "fingerprint": "c11bfb6b17e8d802",
+   "flags": [
+    "Lean-only definitions",
+    "large step"
+   ],
+   "id": "lem:base-change",
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section6.lemma_6_2",
+    "Stafford38.Paper.Section6.dtK",
+    "Stafford38.Paper.Section6.σ",
+    "Stafford38.Paper.Section6.Qpiece"
+   ],
+   "paper_line": 1509,
+   "title": "Lemma 6.2"
+  },
+  {
+   "account": {
+    "cited": [
+     "ithm:gabber",
+     "lem:base-change",
+     "lem:order-symbol",
+     "prop:char-avoids",
+     "prop:charP",
+     "thm:coisotropic-exclusion",
+     "thm:main",
+     "thm:nss"
+    ],
+    "large": 10,
+    "lean_adds": 1,
+    "matched": 23,
+    "only_lean": [
+     "par:cyclic-good",
+     "prop:monic",
+     "rem:transport"
+    ],
+    "only_paper": [
+     "thm:main"
+    ],
+    "prose": 0,
+    "sentences": 23,
+    "used": [
+     "ithm:gabber",
+     "lem:base-change",
+     "lem:order-symbol",
+     "par:cyclic-good",
+     "prop:char-avoids",
+     "prop:charP",
+     "prop:monic",
+     "rem:transport",
+     "thm:coisotropic-exclusion",
+     "thm:nss"
+    ]
+   },
+   "fingerprint": "9d8b637a85cd2934",
+   "flags": [
+    "Lean adds",
+    "large step"
+   ],
+   "id": "proof:thm-main",
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section6.theorem_1_1_paper",
+    "Stafford38.Paper.Section6.W"
+   ],
+   "paper_line": 1531,
+   "title": "Proof of Theorem 1.1"
+  },
+  {
+   "account": {
+    "cited": [],
+    "large": 6,
+    "lean_adds": 0,
+    "matched": 17,
+    "only_lean": [],
+    "only_paper": [],
+    "prose": 2,
+    "sentences": 19,
+    "used": []
+   },
+   "fingerprint": "5e504d1fa891fdbb",
+   "flags": [
+    "large step",
+    "prose"
+   ],
+   "id": "cor:cyclic",
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.corollary_6_3",
+    "Stafford38.Paper.corollary_6_3_stablyCyclic",
+    "Stafford38.Paper.Section6.IsStablyGenerated",
+    "Stafford38Challenge.PaperCorollary_6_3",
+    "Stafford38Challenge.PaperCorollary_6_3_stablyCyclic",
+    "Stafford38Challenge.IsCyclicModule",
+    "Stafford38Challenge.IsStablyCyclic"
+   ],
+   "paper_line": 1598,
+   "title": "Corollary 6.3"
+  }
+ ],
+ "errors": [],
+ "graph": {
+  "graphviz": "dot - graphviz version 16.1.0 (0)",
+  "overall": [
+   {
+    "from": "prop:char-avoids",
+    "kind": "both",
+    "to": "proof:thm-main"
+   },
+   {
+    "from": "lem:base-change",
+    "kind": "both",
+    "to": "proof:thm-main"
+   }
+  ]
+ },
+ "schema": "paper-lean-audit/report-2",
+ "warnings": [
+  "unresolved \\leandecl{Stafford38/Characteristic/InitialIdeal.lean}{281}{Stafford38.CharacteristicInitialIdeal.canonical_orderPrincipalComponent_mem_initialIdeal}",
+  "unresolved \\leandecl{Stafford38/Characteristic/InitialIdeal.lean}{291}{Stafford38.CharacteristicInitialIdeal.canonical_orderCharacteristicSupport_subset_principal_zeroLocus}",
+  "unresolved \\leandecl{Stafford38/Characteristic/CanonicalKoszulContradiction.lean}{123}{Stafford38.Characteristic.CanonicalKoszulContradiction.canonical_support_avoidance}",
+  "unresolved \\leandecl{Stafford38/Characteristic/SpecializedNoncharacteristicEquality.lean}{151}{Stafford38.SpecializedNoncharacteristicEquality.transposedSupport_disjoint_axis_iff}",
+  "kept unknown text command \\qed",
+  "unresolved \\leandecl{Stafford38/FoundationClosure.lean}{41}{Stafford38.FoundationClosure.canonicalSupportVanishingViaGeneralCoisotropic}",
+  "unresolved \\leandecl{Stafford38/Geometry/GeneralCoisotropicCanonicalAdapter.lean}{222}{Stafford38.Geometry.GeneralCoisotropicCanonicalAdapter.algebraicallyClosedCanonicalSupportVanishing_of_generalCoisotropic}",
+  "unresolved \\leandecl{Stafford38/Weyl/FilteredScalarLifting.lean}{472}{Stafford38.Weyl.FilteredScalarLifting.canonicalSupportDescent}",
+  "unresolved \\leandecl{Stafford38/Characteristic/CanonicalCertificate.lean}{33}{Stafford38.CharacteristicCanonicalCertificate.exists_fixedSource_certificate_of_orderCharacteristicSupport_eq_empty}",
+  "unresolved \\leandecl{Stafford38/Weyl/FilteredScalarLifting.lean}{449}{Stafford38.Weyl.FilteredScalarLifting.presentedWeylScalarExtension_map_orderInitialIdeal_eq}",
+  "unresolved \\leandecl{Stafford38/Weyl/FilteredScalarLifting.lean}{387}{Stafford38.Weyl.FilteredScalarLifting.target_orderInitialIdeal_le_map_source_orderInitialIdeal}",
+  "unresolved \\leandecl{Stafford38/Weyl/PresentedScalarExtension.lean}{390}{Stafford38.Weyl.PresentedScalarExtension.presentedWeylScalarExtension_map_orderInitialIdeal_le}",
+  "unresolved \\leandecl{Stafford38/Characteristic/EmptySupportVanishing.lean}{83}{Stafford38.CharacteristicEmptySupportVanishing.orderInitialIdeal_eq_top_iff_rightQuotient_subsingleton}",
+  "unresolved \\leandecl{Stafford38/Characteristic/GeometricSupportDescent.lean}{101}{Stafford38.Characteristic.GeometricSupportDescent.map_scalarPolynomialMap_eq_top_iff}",
+  "unresolved \\leandecl{Stafford38/TorsionCyclicity.lean}{66}{Stafford38.TorsionCyclicity.weyl_isCyclic_of_isRightTorsion}",
+  "unresolved \\leandecl{Stafford38/TorsionCyclicity.lean}{39}{Stafford38.TorsionCyclicity.exists_span_adjusted_pair}",
+  "unresolved \\leandecl{Stafford38/TorsionCyclicity.lean}{52}{Stafford38.TorsionCyclicity.exists_span_singleton_eq_span_pair}",
+  "unresolved \\leandecl{Stafford38/Weyl/Domain.lean}{25}{Stafford38.WeylDomain.mul_ne_zero}",
+  "unresolved \\leandecl{CorollaryChallenge.lean}{34}{Stafford38CorollaryChallenge.torsionCyclicStatement}"
+ ]
+}

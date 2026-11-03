@@ -1,0 +1,1137 @@
+{
+ "schema": "paper-lean-audit/map-2",
+ "title": "Stafford's conjecture: Section 6, the proof of Theorem 1.1 and Corollary 6.3, paper beside Lean",
+ "output_stem": "stafford38-sec6",
+ "sources": {
+  "paper": {
+   "repo": "itpplasma/stafford38-paper",
+   "commit": "c8f0d615ba3ad7271c1c99ad4b0085071da6a793",
+   "file": "human_readable_main.tex",
+   "snapshot": "../../sources/paper/raw/human_readable_main.tex",
+   "sha256": "9cdf65e2419f8a2c9c28c27a5b531d9d2a12be2305c190eafa726f0255d9db66",
+   "bib_snapshot": "../../sources/paper/raw/references.bib"
+  },
+  "formal": {
+   "repo": "itpplasma/stafford38-formal",
+   "commit": "665fb5bbd26967bfde5c9c30f27513f4cea37f24"
+  },
+  "generator": {
+   "repo": "itpplasma/paper-lean-audit",
+   "commit": "cb3d99ebb21bdeac6d36ee6856372d691a35668b",
+   "note": "v2/extract.mjs and v2/build.mjs at this commit produce sec6.extraction.json and the reader."
+  }
+ },
+ "lean": {
+  "extraction": "sec6.extraction.json",
+  "imports": [
+   "Stafford38.Paper.Main",
+   "Solution"
+  ],
+  "project_modules": [
+   "Stafford38",
+   "Challenge",
+   "FixedSourceChallenge",
+   "Solution"
+  ],
+  "open": [
+   "Stafford38.Paper.Section6",
+   "Stafford38.Paper.Section3",
+   "Stafford38.Paper.Section2",
+   "Stafford38Challenge"
+  ]
+ },
+ "scope": {
+  "sections": [
+   "6"
+  ]
+ },
+ "entries": [
+  {
+   "id": "intro:weyl",
+   "paper": {
+    "quote": "be the $n$th Weyl algebra"
+   },
+   "kind": "formalizes",
+   "short": "Weyl algebra",
+   "lean": [
+    "Stafford38Challenge.WeylAlg",
+    "Stafford.FreeWeyl",
+    "Stafford.freeWeylRelation",
+    "Stafford38.WeylIteratedEquivalence.PresentedWeyl"
+   ],
+   "note": "Lean defines A_n(k) as the free algebra on x_i, ∂_i modulo the commutator relations given by the standard symplectic matrix; PresentedWeyl is the same algebra."
+  },
+  {
+   "id": "thm:main",
+   "paper": {
+    "quote": "\\label{thm:main}"
+   },
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.theorem_1_1",
+    "Stafford38.Paper.theorem_1_1_fixedSource",
+    "Stafford38Challenge.UniversalStatement",
+    "Stafford.Reduction.Stafford38",
+    "Stafford38FixedSourceChallenge.UniversalFixedSourceStatement",
+    "Stafford38FixedSourceChallenge.UniversalFixedSourceStatementWithDegree",
+    "Stafford38FixedSourceChallenge.IsLinearWeylCoordinate",
+    "Stafford38FixedSourceChallenge.bernsteinDegree"
+   ],
+   "note": "Lean writes A_n(k) as the Mathlib-only quotient Stafford38Challenge.WeylAlg k n and the moreover clause as the fixed-source statement with F = ℓ^{deg_B d} for a linear symplectic coordinate ℓ; the printed proof is Section 6, outside this slice.",
+   "short": "main theorem"
+  },
+  {
+   "id": "def:cyclic",
+   "paper": {
+    "quote": "\\label{def:cyclic}"
+   },
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section2.IsTorsion",
+    "Stafford38.Paper.Section2.IsCyclic",
+    "Stafford38.TorsionCyclicity.IsRightTorsion"
+   ],
+   "short": "torsion, cyclic"
+  },
+  {
+   "id": "conv:pair",
+   "paper": {
+    "quote": "\\label{conv:pair}"
+   },
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section2.x₁",
+    "Stafford38.Paper.Section2.p",
+    "Stafford38.Paper.Section2.transverse",
+    "Stafford38.Paper.Section2.C",
+    "Stafford38.Paper.Section2.convention_2_2_relations",
+    "Stafford38.Paper.Section2.convention_2_2_exists",
+    "Stafford38.Paper.Section2.convention_2_2_unique"
+   ],
+   "note": "Lean indexes the paper's A_n(k), n ≥ 1, as PresentedWeyl k (n + 1), and proves the stated relations and the normal form instead of citing them.",
+   "short": "x₁, p, C"
+  },
+  {
+   "id": "def:filtration",
+   "paper": {
+    "quote": "\\label{def:filtration}"
+   },
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section2.IsFiltration",
+    "Stafford38.Paper.Section2.gr",
+    "Stafford38.Paper.Section2.filtrationDegree",
+    "Stafford38.Paper.Section2.symbol"
+   ],
+   "note": "Lean indexes the filtration by ℕ with F_{-1} = 0 implicit, and defines the degree and symbol for every element, the paper only for a ≠ 0.",
+   "short": "filtration, gr, symbol"
+  },
+  {
+   "id": "par:filtrations",
+   "paper": {
+    "quote": "The \\emph{Bernstein filtration} $B_\\bullet$"
+   },
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section2.bernsteinFiltration",
+    "Stafford38.Paper.Section2.orderFiltration",
+    "Stafford38.Paper.Section2.bernsteinDegree",
+    "Stafford38.Paper.Section2.grEquivSymbolRing"
+   ],
+   "note": "Lean defines both filtrations as spans of ordered PBW words of bounded weight and proves gr A_n(k) ≅ k[x, ξ] (cited by the paper).",
+   "short": "Bernstein and order filtrations"
+  },
+  {
+   "id": "def:good-filtration",
+   "paper": {
+    "quote": "\\label{def:good-filtration}"
+   },
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section2.IsCompatibleFiltration",
+    "Stafford38.Paper.Section2.IsGoodFiltration"
+   ],
+   "short": "good filtration"
+  },
+  {
+   "id": "par:cyclic-good",
+   "paper": {
+    "quote": "As an example, the filtration $M_i:=qF_i$"
+   },
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section2.cyclicFiltration",
+    "Stafford38.Paper.Section2.cyclicFiltration_order_isCompatible",
+    "Stafford38.Paper.Section2.grCyclic",
+    "Stafford38.Paper.Section2.grCyclic_good",
+    "Stafford38.Paper.Section2.qFilt_isGoodFiltration"
+   ],
+   "short": "qF_i is good"
+  },
+  {
+   "id": "def:cotangent",
+   "paper": {
+    "quote": "\\label{def:cotangent}"
+   },
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section2.CotangentBundle",
+    "Stafford38.Paper.Section2.proj",
+    "Stafford38.Paper.Section2.fibre",
+    "Stafford38.Characteristic.SymbolRing",
+    "Stafford38.Characteristic.PhaseVar"
+   ],
+   "note": "Lean takes T*X to be Spec k[x, ξ] and states the projection and fibres on closed points K^{2n}.",
+   "short": "T*X"
+  },
+  {
+   "id": "def:spec",
+   "paper": {
+    "quote": "\\label{def:spec}"
+   },
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section2.V",
+    "Stafford38.Paper.Section2.VK",
+    "Stafford38.Paper.Section2.vanishingIdealOf",
+    "Stafford38.Paper.Section2.maxIdealAt",
+    "Stafford38.Paper.Section2.mem_VK_iff_closedPoint_mem_V",
+    "Stafford38.Paper.Section2.closedPoint"
+   ],
+   "short": "Spec, V, I"
+  },
+  {
+   "id": "def:char-variety",
+   "paper": {
+    "quote": "\\label{def:char-variety}"
+   },
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section2.CharOf",
+    "Stafford38.Paper.Section2.Char",
+    "Stafford38.Paper.Section2.definition_2_7_independent"
+   ],
+   "note": "Lean proves the independence of the good filtration that the paper cites from [HTT, Lemma D.3.1].",
+   "short": "Char"
+  },
+  {
+   "id": "def:symplectic",
+   "paper": {
+    "quote": "\\label{def:symplectic}"
+   },
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section2.IsSymplectic",
+    "Stafford38.Paper.Section2.gramMatrix",
+    "Stafford38.Paper.Section2.IsSymplecticBasis",
+    "Stafford38.Paper.Section2.omega",
+    "Stafford38.Paper.Section2.omega_isSymplectic"
+   ],
+   "short": "symplectic form"
+  },
+  {
+   "id": "def:poisson",
+   "paper": {
+    "quote": "\\label{def:poisson}"
+   },
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section2.poisson"
+   ],
+   "short": "Poisson bracket"
+  },
+  {
+   "id": "def:involutive",
+   "paper": {
+    "quote": "\\label{def:involutive}"
+   },
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section2.IsInvolutive",
+    "Stafford38.Paper.Section2.IsInvolutiveSet"
+   ],
+   "short": "involutive"
+  },
+  {
+   "id": "ithm:gabber",
+   "paper": {
+    "quote": "\\label{ithm:gabber}"
+   },
+   "kind": "cites",
+   "lean": [
+    "Stafford38.Paper.Section2.theorem_2_11",
+    "Stafford38.Paper.Section2.theorem_2_11_cyclic"
+   ],
+   "note": "Lean states Gabber's theorem for a good order filtration of a finitely generated module and proves it; theorem_2_11_cyclic is the case A_n(K)/I used later.",
+   "short": "Gabber"
+  },
+  {
+   "id": "thm:nss",
+   "paper": {
+    "quote": "\\label{thm:nss}"
+   },
+   "kind": "cites",
+   "lean": [
+    "Stafford38.Paper.Section2.theorem_2_12"
+   ],
+   "short": "Nullstellensatz"
+  },
+  {
+   "id": "prop:monic",
+   "paper": {
+    "quote": "\\label{prop:monic}"
+   },
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section3.proposition_3_2",
+    "Stafford38.Paper.Section3.IsMonicNormalForm"
+   ]
+  },
+  {
+   "id": "rem:transport",
+   "paper": {
+    "quote": "\\label{rem:transport}"
+   },
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section3.remark_3_3",
+    "Stafford38.Paper.Section3.remark_3_3_of_Q_eq_zero"
+   ]
+  },
+  {
+   "id": "par:I-Q",
+   "paper": {
+    "quote": "We will now define the modules"
+   },
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section3.idealI",
+    "Stafford38.Paper.Section3.Q"
+   ]
+  },
+  {
+   "id": "lem:order-symbol",
+   "paper": {
+    "quote": "\\label{lem:order-symbol}"
+   },
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section3.lemma_3_5",
+    "Stafford38.Paper.Section3.lemma_3_5_eval_axis",
+    "Stafford38.Paper.Section3.orderSymbol"
+   ]
+  },
+  {
+   "id": "prop:charP",
+   "paper": {
+    "quote": "\\label{prop:charP}"
+   },
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section3.proposition_3_6",
+    "Stafford38.Paper.Section3.grQ"
+   ]
+  },
+  {
+   "id": "cor:Uzero",
+   "paper": {
+    "quote": "\\label{cor:Uzero}"
+   },
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section4.corollary_4_11",
+    "Stafford38.Paper.Section4.corollary_4_11_quotSMulTop"
+   ]
+  },
+  {
+   "id": "thm:coisotropic-exclusion",
+   "paper": {
+    "quote": "\\label{thm:coisotropic-exclusion}"
+   },
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section5.theorem_5_8"
+   ]
+  },
+  {
+   "id": "prop:char-avoids",
+   "paper": {
+    "quote": "\\label{prop:char-avoids}"
+   },
+   "kind": "formalizes",
+   "short": "Char(Q) avoids V(x₁)",
+   "lean": [
+    "Stafford38.Paper.Section6.proposition_6_1",
+    "Stafford38.Paper.Section6.Vx₁",
+    "Stafford38.Paper.Section6.x₁Symbol"
+   ],
+   "note": "Lean states the proposition for d̃ in the normal form (3.1) with N ≥ 1 (hypotheses hN, hform), the standing notation of Sections 3 and 4; paper n is Lean n + 1 and x₁ is X (Sum.inl 0).",
+   "proof": {
+    "lean": "Stafford38.Paper.Section6.proposition_6_1",
+    "sentences": [
+     {
+      "quote": "Write $M=\\gr Q$.",
+      "kind": "prose",
+      "note": "Notation: Lean writes M as grQ k N dt (Proposition 3.6)."
+     },
+     {
+      "quote": "Since $M$ is finite over $k[x,\\xi]$,",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section6.step_6_1_finite"
+       },
+       {
+        "decl": "Stafford38.Paper.Section6.step_6_1_support_quotient"
+       }
+      ]
+     },
+     {
+      "quote": "By Corollary~\\ref{cor:Uzero},",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section6.step_6_1_support_avoids"
+       }
+      ]
+     },
+     {
+      "quote": "Since $M$ is finitely generated, $\\Char(Q)",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "rw [step_6_1_char_eq_support]"
+       },
+       {
+        "decl": "Stafford38.Paper.Section6.step_6_1_char_eq_support"
+       }
+      ]
+     },
+     {
+      "quote": "Therefore $\\Char(Q)\\cap V(x_1)=\\varnothing$.",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "exact step_6_1_support_avoids hN hform"
+       }
+      ]
+     }
+    ]
+   },
+   "citations": {
+    "par:cyclic-good": "Lean gets the finiteness of M from the good filtration qF_i of Section 2 (step_6_1_finite); the paper states it without reference."
+   }
+  },
+  {
+   "id": "lem:base-change",
+   "paper": {
+    "quote": "\\label{lem:base-change}"
+   },
+   "kind": "formalizes",
+   "short": "base change to K",
+   "lean": [
+    "Stafford38.Paper.Section6.lemma_6_2",
+    "Stafford38.Paper.Section6.dtK",
+    "Stafford38.Paper.Section6.σ",
+    "Stafford38.Paper.Section6.Qpiece"
+   ],
+   "note": "Lean writes the factor K on the left (gr Q_K ≅ K ⊗_k gr Q, as K-modules), the extended annihilator as Ideal.map σ, and Q = 0 as Subsingleton; the in-particular clause about Char has no sentence in the printed proof and is step_6_2_char.",
+   "proof": {
+    "lean": "Stafford38.Paper.Section6.lemma_6_2",
+    "sentences": [
+     {
+      "quote": "By the PBW basis \\cite[Prop 1.2.1]{coutinho}",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section6.step_6_2_ideal"
+       },
+       {
+        "decl": "Stafford38.Paper.Section6.step_6_2_quotient"
+       },
+       {
+        "decl": "Stafford38.Paper.Section6.theta62"
+       },
+       {
+        "decl": "Stafford38.Paper.Section6.step_6_2_pieces"
+       }
+      ]
+     },
+     {
+      "quote": "As $K$ is flat over $k$,",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section6.step_6_2_graded_pieces"
+       },
+       {
+        "decl": "Stafford38.Paper.Section6.step_6_2_sum"
+       },
+       {
+        "decl": "Stafford38.Paper.Section6.step_6_2_graded"
+       }
+      ]
+     },
+     {
+      "quote": "The module $\\gr Q$ is finitely generated (cyclic,",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section6.step_6_2_annihilator"
+       }
+      ]
+     },
+     {
+      "quote": "Finally, $Q\\otimes_kK=0$",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section6.step_6_2_vanishing"
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "proof:thm-main",
+   "title": "Proof of Theorem 1.1",
+   "paper": {
+    "quote": "Let $d\\in A_n(k)$ be nonzero of Bernstein degree $N$"
+   },
+   "kind": "formalizes",
+   "short": "proof of Theorem 1.1",
+   "lean": [
+    "Stafford38.Paper.Section6.theorem_1_1_paper",
+    "Stafford38.Paper.Section6.W"
+   ],
+   "note": "Lean proves the theorem along this text: theorem_6_Q_eq_zero is the body (Q = 0) and step_W_empty checks the six hypotheses of Theorem 5.8, one step lemma per bullet; K is AlgebraicClosure k.",
+   "proof": {
+    "lean": "Stafford38.Paper.Section6.theorem_1_1_paper",
+    "paper": {
+     "quote": "Let $d\\in A_n(k)$ be nonzero of Bernstein degree $N$"
+    },
+    "end": {
+     "quote": "which proves Theorem~\\ref{thm:main}."
+    },
+    "sentences": [
+     {
+      "quote": "Let $d\\in A_n(k)$ be nonzero of Bernstein degree $N$",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "intro k _ _ n d hd"
+       },
+       {
+        "quote": "rcases section_3_reduction k hd with"
+       },
+       {
+        "decl": "Stafford38.Paper.Section3.section_3_reduction"
+       }
+      ]
+     },
+     {
+      "quote": "If $n=0$, then $A_0(k)=k$",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "exact step_rank_zero d hd"
+       },
+       {
+        "decl": "Stafford38.Paper.Section6.step_rank_zero"
+       }
+      ]
+     },
+     {
+      "quote": "As in Section \\ref{sec:euler} we define",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section3.idealI"
+       },
+       {
+        "decl": "Stafford38.Paper.Section3.Q"
+       }
+      ]
+     },
+     {
+      "quote": "It suffices to show $Q=0$",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "obtain ⟨ell, R, S, -, h⟩ := himp (theorem_6_Q_eq_zero hN hform hdeg)"
+       }
+      ]
+     },
+     {
+      "quote": "Let $K=\\bar k$, and let",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section6.theorem_6_Q_eq_zero",
+        "quote": "let K := AlgebraicClosure k"
+       },
+       {
+        "decl": "Stafford38.Paper.Section6.step_W_closed_points"
+       }
+      ]
+     },
+     {
+      "quote": "We check\nthe hypotheses of Theorem~\\ref{thm:coisotropic-exclusion}",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section6.step_W_empty",
+        "quote": "obtain ⟨-, P, hP, -⟩ := lemma_3_5 k hform hdeg"
+       }
+      ]
+     },
+     {
+      "quote": "$W$ is Zariski closed",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section6.step_W_closed"
+       }
+      ]
+     },
+     {
+      "quote": "The module $\\gr Q_K$ is graded by the order filtration",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section6.step_annihilator_homogeneous"
+       }
+      ]
+     },
+     {
+      "quote": "Hence if $(y,\\xi)\\in W$",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section6.step_W_fibreConical",
+        "quote": "have hline"
+       },
+       {
+        "decl": "Stafford38.Paper.Section6.step_W_fibreConical",
+        "quote": "have heval := eval_fibreLinePolynomial y ξ f a"
+       }
+      ]
+     },
+     {
+      "quote": "So\n$(y,t\\xi)\\in W$",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section6.step_W_fibreConical",
+        "quote": "simpa [y, ξ] using heval.symm"
+       }
+      ]
+     },
+     {
+      "quote": "By Gabber's theorem (Theorem~\\ref{ithm:gabber}) $I(W)$ is involutive.",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section6.step_W_involutive"
+       },
+       {
+        "decl": "Stafford38.Paper.Section6.step_W_empty",
+        "quote": "have hinv"
+       }
+      ]
+     },
+     {
+      "quote": "By eq.~\\eqref{eq:P-annihilates}",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section6.step_W_P_vanishes"
+       }
+      ]
+     },
+     {
+      "quote": "By eq.~\\eqref{eq:P-e1}",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section6.step_W_P_axis"
+       }
+      ]
+     },
+     {
+      "quote": "By Lemma~\\ref{lem:base-change}, $\\operatorname{Char}(Q_K)$ is the preimage",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section6.step_Vx₁_preimage"
+       }
+      ]
+     },
+     {
+      "quote": "Since preimages commute with\n  intersections",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section6.step_char_K_avoids"
+       }
+      ]
+     },
+     {
+      "quote": "By Theorem~\\ref{thm:nss}(a) and Definition~\\ref{def:spec}",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section6.step_closedPoint_mem_Vx₁"
+       }
+      ]
+     },
+     {
+      "quote": "Hence the closed points of $\\operatorname{Char}(Q_K)\\cap V(x_1)$",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section6.step_W_avoids_H"
+       }
+      ]
+     },
+     {
+      "quote": "By Theorem~\\ref{thm:coisotropic-exclusion}, $W=\\varnothing$.",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section6.step_W_empty",
+        "quote": "exact Stafford38.Paper.Section5.theorem_5_8"
+       },
+       {
+        "decl": "Stafford38.Paper.Section6.theorem_6_Q_eq_zero",
+        "quote": "have hW := step_W_empty (K := K) hN hform hdeg"
+       }
+      ]
+     },
+     {
+      "quote": "As $K$ is\nalgebraically closed",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section6.step_grQK_zero"
+       }
+      ]
+     },
+     {
+      "quote": "Since the filtration of $Q_K$ is exhaustive",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section6.step_QK_zero"
+       },
+       {
+        "decl": "Stafford38.Paper.Section6.step_filtration_zero"
+       },
+       {
+        "decl": "Stafford38.Paper.Section6.theorem_6_Q_eq_zero",
+        "quote": "exact ((lemma_6_2 (K := K) (N := N) dt).2.2.1).2"
+       }
+      ]
+     },
+     {
+      "quote": "Therefore, $A_n(k) = \\tilde dA_n(k) + x_1^N\\tilde dA_n(k)$",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section3.exists_eq_of_Q_eq_zero"
+       }
+      ]
+     },
+     {
+      "quote": "Lastly, we apply the inverse of the automorphism",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section3.remark_3_3_of_Q_eq_zero"
+       }
+      ]
+     },
+     {
+      "quote": "Since $\\tilde d=c^{-1}\\Phi_g(d)$ with $c\\in k^\\times$\ncentral",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section3.remark_3_3"
+       },
+       {
+        "quote": "exact ⟨ell ^ bernsteinDegree k d, R, S, h⟩"
+       },
+       {
+        "decl": "Stafford38.Paper.Section6.theorem_1_1_fixedSource_paper"
+       }
+      ]
+     }
+    ],
+    "lean_adds": [
+     {
+      "step": {
+       "quote": "exact h\n"
+      },
+      "note": "deg_B d = 0: d is a nonzero scalar, a unit; the paper settles this case at the start of Section 3."
+     }
+    ]
+   },
+   "citations": {
+    "thm:main": "This text is the proof of Theorem 1.1: Stafford38.Paper.theorem_1_1 is defined as theorem_1_1_paper.",
+    "par:cyclic-good": "Lean gets the finiteness of gr Q from the good filtration qF_i of Section 2 (inside Proposition 6.1 and Lemma 6.2).",
+    "prop:monic": "The monic normal form d̃ of Proposition 3.2, cited in the text as \"its monic normal form\" with Remark 3.3.",
+    "rem:transport": "Cited as Remark 3.3; the account counts only theorems, lemmas, propositions and corollaries as cited results."
+   }
+  },
+  {
+   "id": "cor:cyclic",
+   "paper": {
+    "quote": "\\label{cor:cyclic}"
+   },
+   "kind": "formalizes",
+   "short": "torsion modules are cyclic",
+   "lean": [
+    "Stafford38.Paper.corollary_6_3",
+    "Stafford38.Paper.corollary_6_3_stablyCyclic",
+    "Stafford38.Paper.Section6.IsStablyGenerated",
+    "Stafford38Challenge.PaperCorollary_6_3",
+    "Stafford38Challenge.PaperCorollary_6_3_stablyCyclic",
+    "Stafford38Challenge.IsCyclicModule",
+    "Stafford38Challenge.IsStablyCyclic"
+   ],
+   "note": "A right A_n(k)-module is a module over the opposite ring (t • op a is ta). The stable cyclicity of the closing paragraph is a separate Lean statement (corollary_6_3_stablyCyclic, Challenge form PaperCorollary_6_3_stablyCyclic). Lean proves the cited [Sta78, Thm. 3.7] from Theorem 1.1 (stafford_1978_theorem_3_7) instead of citing it.",
+   "proof": {
+    "lean": "Stafford38.Paper.Section6.corollary_6_3_of",
+    "sentences": [
+     {
+      "quote": "Suppose for every $d\\neq 0 \\in A_n$",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.corollary_6_3"
+       }
+      ]
+     },
+     {
+      "quote": "Let us denote a torsion module by $T$.",
+      "kind": "prose",
+      "note": "Names the module; Lean’s T with hypothesis htorsion."
+     },
+     {
+      "quote": "Stafford's theorem (the right module analogue",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "obtain ⟨⟨t₁, t₂, ht⟩, h2⟩ := h37"
+       },
+       {
+        "decl": "Stafford38.Paper.Section6.stafford_1978_theorem_3_7"
+       }
+      ]
+     },
+     {
+      "quote": "We can define a homomorphism",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section6.phi63"
+       }
+      ]
+     },
+     {
+      "quote": "This map is surjective, since $t_1, t_2$ generate all of $T$.",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section6.step_6_3_phi_range"
+       }
+      ]
+     },
+     {
+      "quote": "By the first isomorphism theorem",
+      "kind": "prose",
+      "note": "Lean does not form the quotient (A_n ⊕ A_n)/M; it pushes spans forward along φ (step_6_3_pair)."
+     },
+     {
+      "quote": "$T$ is torsion and therefore",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section6.step_6_3_common_annihilator",
+        "quote": "obtain ⟨d₁, hd₁, h₁⟩ := htorsion t₁"
+       }
+      ]
+     },
+     {
+      "quote": "Specifically, let us denote with $d_1$ and $d_2$",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section6.step_6_3_common_annihilator",
+        "quote": "obtain ⟨d₂, hd₂, h₂⟩ := htorsion t₂"
+       }
+      ]
+     },
+     {
+      "quote": "$A_n$ is a right Ore domain",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section6.step_6_3_common_annihilator",
+        "quote": "obtain ⟨r₁, r₂, hr, hne⟩ := hOre hd₁ hd₂"
+       },
+       {
+        "decl": "Stafford38.Paper.Section6.weyl_rightOreCondition"
+       }
+      ]
+     },
+     {
+      "quote": "Defining therefore $d := d_1r_1 = d_2r_2$",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "obtain ⟨d, hd, h₁, h₂⟩ := step_6_3_common_annihilator hOre htorsion t₁ t₂"
+       },
+       {
+        "quote": "obtain ⟨F, R, S, hcert⟩ := hone d hd"
+       }
+      ]
+     },
+     {
+      "quote": "$(d, 0)$ and $(0,d)$ are elements in $M = ker(\\phi)$",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section6.step_6_3_kernel",
+        "quote": "have hd0"
+       },
+       {
+        "decl": "Stafford38.Paper.Section6.step_6_3_kernel",
+        "quote": "have h0d"
+       }
+      ]
+     },
+     {
+      "quote": "Because $(0,d), (d, 0) \\in M$",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section6.step_6_3_kernel",
+        "quote": "have hcomb"
+       },
+       {
+        "decl": "Stafford38.Paper.Section6.step_6_3_kernel",
+        "quote": "rw [← hcomb]"
+       }
+      ]
+     },
+     {
+      "quote": "On the other hand, $A_n\\oplus A_n$ can be generated",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section6.step_6_3_generators",
+        "quote": "refine ⟨hid, top_unique ?_⟩"
+       }
+      ]
+     },
+     {
+      "quote": "We can check this by finding $u,v$",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section6.step_6_3_generators",
+        "quote": "have hid"
+       }
+      ]
+     },
+     {
+      "quote": "Suitable choices are $u = y+Fx$",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section6.step_6_3_generators",
+        "quote": "constructor <;> noncomm_ring"
+       }
+      ]
+     },
+     {
+      "quote": "Lastly, since  $A_n\\oplus A_n$ can be generated",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section6.step_6_3_pair"
+       },
+       {
+        "quote": "refine ⟨(Stafford38.Paper.Section2.isCyclic_iff_span A T).2"
+       }
+      ]
+     },
+     {
+      "quote": "Moreover, Stafford defined a module $T$ to be stably cyclic",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section6.IsStablyGenerated"
+       },
+       {
+        "quote": "intro l hl a ha"
+       }
+      ]
+     },
+     {
+      "quote": "Since $t_1, t_2$ were arbitrary generators",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "rcases Nat.lt_or_ge l 2 with hl2 | hl2"
+       },
+       {
+        "quote": "obtain rfl : l = 1 := by omega"
+       },
+       {
+        "quote": "obtain ⟨d', hd', h₁', h₂'⟩ := step_6_3_common_annihilator hOre htorsion (a 0) (a 1)"
+       },
+       {
+        "quote": "obtain ⟨F', R', S', hcert'⟩ := hone d' hd'"
+       },
+       {
+        "quote": "refine ⟨fun _ => -F', ?_⟩"
+       },
+       {
+        "quote": "have hrange"
+       },
+       {
+        "quote": "have hpair2"
+       },
+       {
+        "quote": "rw [hrange, step_6_3_pair (a 0) (a 1) d' F' R' S' h₁' h₂' hcert', hpair2, ha]"
+       }
+      ],
+      "note": "Lean takes an arbitrary generating pair a₀, a₁ and builds a new common annihilator d' and F' for it; f₁ = −F' depends on the pair."
+     },
+     {
+      "quote": "For $l\\geq 2$ we simply note",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "exact h2 l hl2 a ha"
+       },
+       {
+        "decl": "Stafford38.Paper.Section6.stably_generated_of_identity"
+       }
+      ],
+      "note": "h2 is the stable two-generation in stafford_1978_theorem_3_7, which Lean proves from Theorem 1.1 by stably_generated_of_identity; that lemma gives every l ≥ 1, so the case l = 1 above is also covered by it."
+     }
+    ]
+   }
+  }
+ ],
+ "lean_only": [
+  {
+   "decl": "Stafford38.WeylEulerResidue.canonicalRightIdeal",
+   "note": "The right ideal d̃A_n(k) + x₁^N d̃A_n(k) as a span, the body of idealI (the paper's 𝓘)."
+  },
+  {
+   "decl": "Stafford38.Weyl.PresentedScalarExtension.presentedWeylScalarExtension",
+   "note": "The coefficient extension A_n(k) → A_n(K), which the paper leaves implicit in A_n(K) and Q ⊗_k K."
+  },
+  {
+   "decl": "Stafford38.Weyl.PresentedScalarExtension.symbolScalarExtension",
+   "note": "The coefficient extension k[x, ξ] → K[x, ξ] under which the paper extends Ann gr Q and takes preimages in Spec."
+  },
+  {
+   "prefix": "Stafford38.Ore",
+   "note": "Iterated Ore-extension construction A_n(k) = C[p; δ], used to prove the normal form of Notation 2.2 that the paper cites from Coutinho, Prop. 1.2.1."
+  },
+  {
+   "prefix": "Stafford38.WeylIteratedEquivalence.",
+   "note": "Isomorphism between the presented Weyl algebra and the iterated Ore construction, with its generators; the paper identifies the two without comment."
+  },
+  {
+   "prefix": "Stafford38.WeylPBW.",
+   "note": "Basis of A_n(k) by ordered monomials x^α ∂^β (normal form), used to define the filtrations."
+  },
+  {
+   "prefix": "Stafford38.WeylFiltration.",
+   "note": "Weights of the generators and the spans of ordered monomials of bounded weight that define the Bernstein and order filtrations."
+  },
+  {
+   "prefix": "Stafford38.WeylLeadingSymbol.",
+   "note": "Principal component of an element, used to identify gr A_n(k) with k[x, ξ]."
+  },
+  {
+   "prefix": "Stafford38.WeylAssociatedGraded.",
+   "note": "Strict lower pieces and principal components on a filtration piece, used to identify gr A_n(k) with k[x, ξ]."
+  },
+  {
+   "prefix": "Stafford38.WeylUniversal.",
+   "note": "Universal property of the free-algebra presentation of A_n(k)."
+  },
+  {
+   "decl": "Stafford38.Characteristic.fibreWeight",
+   "note": "Weight 1 on the fibre coordinates ξ_i and 0 on x_i, which defines the order filtration."
+  },
+  {
+   "prefix": "Stafford38.CharacteristicFilteredQuotient",
+   "note": "The quotient Q = A_n(k)/I with the filtration Q_m = qF_m, its graded pieces and associated graded module."
+  },
+  {
+   "prefix": "Stafford38.CharacteristicAssociatedGradedModule.",
+   "note": "The associated graded module of Q = A_n(k)/I for the order filtration."
+  },
+  {
+   "decl": "Stafford38.CharacteristicSymplecticCompletion.phasePairing",
+   "note": "The pairing Σ_i (u_{ξ_i} v_{x_i} − u_{x_i} v_{ξ_i}) on k^{2n} from which ω is built."
+  },
+  {
+   "prefix": "Stafford38.EulerSurjectivity.",
+   "note": "Right ideals of A_n(k) as submodules of the regular right module, and the quotient module A_n(k)/I."
+  },
+  {
+   "decl": "Stafford38.Paper.Section2.lowerPiece",
+   "note": "F_{j−1}, with F_{−1} = 0."
+  },
+  {
+   "decl": "Stafford38.Paper.Section2.grPiece",
+   "note": "The graded piece F_j/F_{j−1}."
+  },
+  {
+   "decl": "Stafford38.Paper.Section2.grPieceEquiv",
+   "note": "Graded piece of A_n(k) identified with the homogeneous polynomials of that weight."
+  },
+  {
+   "decl": "Stafford38.Paper.Section2.orbitMap",
+   "note": "The map a ↦ qa from A_n(k) to a module M."
+  },
+  {
+   "decl": "Stafford38.Paper.Section2.qClass",
+   "note": "The class q of 1 in A_n(k)/I."
+  },
+  {
+   "decl": "Stafford38.Paper.Support.Gabber.qFilt",
+   "note": "The filtration Q_m = qF_m of Q = A_n(k)/I."
+  },
+  {
+   "decl": "Stafford38.Paper.Support.Gabber.GrModule",
+   "note": "The associated graded module as a module over k[x, ξ]."
+  },
+  {
+   "decl": "MvPolynomial.coeff",
+   "note": "Project abbreviation for the coefficient of a monomial in a multivariate polynomial."
+  },
+  {
+   "prefix": "Stafford38Challenge.",
+   "note": "Generators x_i, ∂_i, their index type, the standard symplectic matrix and the relations of the Mathlib-only formulation."
+  },
+  {
+   "prefix": "Stafford38FixedSourceChallenge.",
+   "note": "Generators, ordered monomials, Bernstein pieces and linear changes of generators used to state the moreover clause in the Mathlib-only formulation."
+  },
+  {
+   "prefix": "Stafford.",
+   "note": "Linear combinations of generators and the generator map of the free-algebra presentation."
+  }
+ ]
+}
