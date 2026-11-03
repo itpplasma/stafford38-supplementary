@@ -1,0 +1,4802 @@
+{
+ "anchors": {
+  "def:conormal": {
+   "lean": [
+    {
+     "name": "Stafford38.Paper.Section5.IsZariskiClosed",
+     "range": {
+      "end": [
+       47,
+       70
+      ],
+      "start": [
+       45,
+       0
+      ]
+     }
+    },
+    {
+     "name": "Stafford38.Paper.Section5.IsIrreducibleClosed",
+     "range": {
+      "end": [
+       53,
+       33
+      ],
+      "start": [
+       49,
+       0
+      ]
+     }
+    },
+    {
+     "name": "Stafford38.Paper.Section5.definition_5_4_a",
+     "range": {
+      "end": [
+       138,
+       18
+      ],
+      "start": [
+       78,
+       0
+      ]
+     }
+    },
+    {
+     "name": "Stafford38.Paper.Section5.JacobianSmoothPoint",
+     "range": {
+      "end": [
+       368,
+       61
+      ],
+      "start": [
+       359,
+       0
+      ]
+     }
+    },
+    {
+     "name": "Stafford38.Paper.Section5.definition_5_4_b_iff",
+     "range": {
+      "end": [
+       537,
+       10
+      ],
+      "start": [
+       508,
+       0
+      ]
+     }
+    },
+    {
+     "name": "Stafford38.Paper.Section5.definition_5_4_c",
+     "range": {
+      "end": [
+       174,
+       22
+      ],
+      "start": [
+       157,
+       0
+      ]
+     }
+    },
+    {
+     "name": "Stafford38.Paper.Section5.conormalCone",
+     "range": {
+      "end": [
+       555,
+       78
+      ],
+      "start": [
+       550,
+       0
+      ]
+     }
+    },
+    {
+     "name": "Stafford38.Paper.Section5.definition_5_4_d",
+     "range": {
+      "end": [
+       187,
+       48
+      ],
+      "start": [
+       176,
+       0
+      ]
+     }
+    },
+    {
+     "name": "Stafford38.Paper.Section5.conormalCone_paper_eq",
+     "range": {
+      "end": [
+       563,
+       67
+      ],
+      "start": [
+       557,
+       0
+      ]
+     }
+    }
+   ],
+   "paper": {
+    "line": 1051,
+    "start": 76154
+   }
+  },
+  "def:dir": {
+   "lean": [
+    {
+     "name": "Stafford38.Paper.Section5.conormalDirections",
+     "range": {
+      "end": [
+       582,
+       75
+      ],
+      "start": [
+       577,
+       0
+      ]
+     }
+    },
+    {
+     "name": "Stafford38.Paper.Section5.definition_5_5",
+     "range": {
+      "end": [
+       590,
+       26
+      ],
+      "start": [
+       584,
+       0
+      ]
+     }
+    }
+   ],
+   "paper": {
+    "line": 1065,
+    "start": 77055
+   }
+  },
+  "def:fibre-can": {
+   "lean": [
+    {
+     "name": "Stafford38.Geometry.FibreConicalVanishingIdeal.IsFibreConical",
+     "range": {
+      "end": [
+       24,
+       64
+      ],
+      "start": [
+       21,
+       0
+      ]
+     }
+    },
+    {
+     "name": "Stafford38.Paper.Section5.definition_5_6",
+     "range": {
+      "end": [
+       205,
+       55
+      ],
+      "start": [
+       189,
+       0
+      ]
+     }
+    }
+   ],
+   "paper": {
+    "line": 1072,
+    "start": 77338
+   }
+  },
+  "def:fieldextension": {
+   "lean": [
+    {
+     "name": "IsAlgebraic",
+     "range": {
+      "end": [
+       46,
+       35
+      ],
+      "start": [
+       42,
+       0
+      ]
+     }
+    },
+    {
+     "name": "Transcendental",
+     "range": {
+      "end": [
+       50,
+       18
+      ],
+      "start": [
+       48,
+       0
+      ]
+     }
+    },
+    {
+     "name": "minpoly",
+     "range": {
+      "end": [
+       42,
+       58
+      ],
+      "start": [
+       31,
+       0
+      ]
+     }
+    },
+    {
+     "name": "Algebra.IsAlgebraic",
+     "range": {
+      "end": [
+       69,
+       40
+      ],
+      "start": [
+       66,
+       0
+      ]
+     }
+    },
+    {
+     "name": "AlgebraicIndependent",
+     "range": {
+      "end": [
+       55,
+       61
+      ],
+      "start": [
+       51,
+       0
+      ]
+     }
+    },
+    {
+     "name": "IsTranscendenceBasis",
+     "range": {
+      "end": [
+       175,
+       78
+      ],
+      "start": [
+       172,
+       0
+      ]
+     }
+    },
+    {
+     "name": "Algebra.trdeg",
+     "range": {
+      "end": [
+       46,
+       72
+      ],
+      "start": [
+       43,
+       0
+      ]
+     }
+    },
+    {
+     "name": "Stafford38.Paper.Section5.definition_5_1_g_h",
+     "range": {
+      "end": [
+       230,
+       48
+      ],
+      "start": [
+       225,
+       0
+      ]
+     }
+    },
+    {
+     "name": "Stafford38.Paper.Section5.definition_5_1_closing",
+     "range": {
+      "end": [
+       244,
+       44
+      ],
+      "start": [
+       232,
+       0
+      ]
+     }
+    }
+   ],
+   "paper": {
+    "line": 991,
+    "start": 72556
+   }
+  },
+  "def:omega": {
+   "lean": [
+    {
+     "name": "Derivation",
+     "range": {
+      "end": [
+       49,
+       92
+      ],
+      "start": [
+       40,
+       0
+      ]
+     }
+    },
+    {
+     "name": "Stafford38.Paper.Section5.differentialRelations",
+     "range": {
+      "end": [
+       256,
+       64
+      ],
+      "start": [
+       246,
+       0
+      ]
+     }
+    },
+    {
+     "name": "Stafford38.Paper.Section5.definition_5_2_b",
+     "range": {
+      "end": [
+       304,
+       46
+      ],
+      "start": [
+       297,
+       0
+      ]
+     }
+    },
+    {
+     "name": "Stafford38.Paper.Section5.definition_5_2_c_correspondence",
+     "range": {
+      "end": [
+       315,
+       50
+      ],
+      "start": [
+       306,
+       0
+      ]
+     }
+    },
+    {
+     "name": "Stafford38.Paper.Section5.definition_5_2_c",
+     "range": {
+      "end": [
+       332,
+       23
+      ],
+      "start": [
+       317,
+       0
+      ]
+     }
+    }
+   ],
+   "paper": {
+    "line": 1017,
+    "start": 74184
+   }
+  },
+  "def:valuation": {
+   "lean": [
+    {
+     "name": "ValuationSubring",
+     "range": {
+      "end": [
+       42,
+       56
+      ],
+      "start": [
+       35,
+       0
+      ]
+     }
+    },
+    {
+     "name": "IsDiscreteValuationRing",
+     "range": {
+      "end": [
+       60,
+       35
+      ],
+      "start": [
+       56,
+       0
+      ]
+     }
+    },
+    {
+     "name": "Stafford38.Paper.Section5.definition_5_3",
+     "range": {
+      "end": [
+       168,
+       87
+      ],
+      "start": [
+       131,
+       0
+      ]
+     }
+    }
+   ],
+   "paper": {
+    "line": 1040,
+    "start": 75387
+   }
+  },
+  "lem:W": {
+   "lean": [
+    {
+     "name": "Stafford38.Paper.Section5.lemma_5_9",
+     "range": {
+      "end": [
+       100,
+       48
+      ],
+      "start": [
+       47,
+       0
+      ]
+     }
+    }
+   ],
+   "paper": {
+    "line": 1134,
+    "start": 81778
+   }
+  },
+  "lem:W.proof.sentences[0]": {
+   "paper": {
+    "line": 1140,
+    "start": 82022
+   },
+   "steps": [
+    {
+     "index": 1,
+     "start": [
+      59,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:W.proof.sentences[1]": {
+   "paper": {
+    "line": 1141,
+    "start": 82157
+   },
+   "steps": [
+    {
+     "index": 1,
+     "start": [
+      59,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:W.proof.sentences[2]": {
+   "paper": {
+    "line": 1143,
+    "start": 82265
+   },
+   "steps": [
+    {
+     "index": 1,
+     "start": [
+      59,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:W.proof.sentences[3]": {
+   "paper": {
+    "line": 1145,
+    "start": 82469
+   },
+   "steps": [
+    {
+     "index": 3,
+     "start": [
+      62,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:W.proof.sentences[4]": {
+   "paper": {
+    "line": 1146,
+    "start": 82560
+   },
+   "steps": [
+    {
+     "index": 18,
+     "start": [
+      79,
+      2
+     ]
+    },
+    {
+     "index": 30,
+     "start": [
+      90,
+      2
+     ]
+    },
+    {
+     "index": 37,
+     "start": [
+      97,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:ell": {
+   "lean": [
+    {
+     "name": "Stafford38.Paper.Section5.lemma_5_13",
+     "range": {
+      "end": [
+       208,
+       9
+      ],
+      "start": [
+       169,
+       0
+      ]
+     }
+    }
+   ],
+   "paper": {
+    "line": 1363,
+    "start": 98419
+   }
+  },
+  "lem:ell.proof.sentences[0]": {
+   "paper": {
+    "line": 1368,
+    "start": 98606
+   },
+   "steps": []
+  },
+  "lem:ell.proof.sentences[1]": {
+   "paper": {
+    "line": 1368,
+    "start": 98642
+   },
+   "steps": [
+    {
+     "index": 6,
+     "start": [
+      185,
+      2
+     ]
+    },
+    {
+     "index": 13,
+     "start": [
+      193,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:ell.proof.sentences[2]": {
+   "paper": {
+    "line": 1369,
+    "start": 98721
+   },
+   "steps": [
+    {
+     "index": 14,
+     "start": [
+      194,
+      2
+     ]
+    },
+    {
+     "index": 18,
+     "start": [
+      198,
+      2
+     ]
+    },
+    {
+     "index": 23,
+     "start": [
+      205,
+      2
+     ]
+    },
+    {
+     "index": 25,
+     "start": [
+      206,
+      2
+     ]
+    },
+    {
+     "index": 28,
+     "start": [
+      208,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:ell.proof.sentences[3]": {
+   "paper": {
+    "line": 1374,
+    "start": 98954
+   },
+   "steps": [
+    {
+     "index": 0,
+     "start": [
+      177,
+      2
+     ]
+    },
+    {
+     "index": 2,
+     "start": [
+      181,
+      2
+     ]
+    },
+    {
+     "index": 5,
+     "start": [
+      184,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:kappa": {
+   "lean": [
+    {
+     "name": "Stafford38.Paper.Section5.lemma_5_11",
+     "range": {
+      "end": [
+       116,
+       26
+      ],
+      "start": [
+       32,
+       0
+      ]
+     }
+    }
+   ],
+   "paper": {
+    "line": 1251,
+    "start": 90128
+   }
+  },
+  "lem:kappa.proof.sentences[0]": {
+   "paper": {
+    "line": 1258,
+    "start": 90371
+   },
+   "steps": [
+    {
+     "index": 4,
+     "start": [
+      51,
+      2
+     ]
+    },
+    {
+     "index": 38,
+     "start": [
+      78,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:kappa.proof.sentences[1]": {
+   "paper": {
+    "line": 1261,
+    "start": 90626
+   },
+   "steps": [
+    {
+     "index": 39,
+     "start": [
+      81,
+      2
+     ]
+    },
+    {
+     "index": 41,
+     "start": [
+      83,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:kappa.proof.sentences[2]": {
+   "paper": {
+    "line": 1263,
+    "start": 90771
+   },
+   "steps": [
+    {
+     "index": 47,
+     "start": [
+      90,
+      2
+     ]
+    },
+    {
+     "index": 48,
+     "start": [
+      92,
+      2
+     ]
+    },
+    {
+     "index": 60,
+     "start": [
+      109,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:place": {
+   "lean": [
+    {
+     "name": "Stafford38.Paper.Section5.lemma_5_10",
+     "range": {
+      "end": [
+       358,
+       47
+      ],
+      "start": [
+       147,
+       0
+      ]
+     }
+    },
+    {
+     "name": "Stafford38.Paper.Section5.Lemma510Place",
+     "range": {
+      "end": [
+       137,
+       56
+      ],
+      "start": [
+       102,
+       0
+      ]
+     }
+    },
+    {
+     "name": "Stafford38.Paper.Section5.Lemma510Place.V",
+     "range": {
+      "end": [
+       145,
+       39
+      ],
+      "start": [
+       141,
+       0
+      ]
+     }
+    },
+    {
+     "name": "Stafford38.Paper.Section5.lemma_5_10_a_not_R_le",
+     "range": {
+      "end": [
+       379,
+       12
+      ],
+      "start": [
+       360,
+       0
+      ]
+     }
+    }
+   ],
+   "paper": {
+    "line": 1156,
+    "start": 83033
+   }
+  },
+  "lem:place.proof.sentences[0]": {
+   "paper": {
+    "line": 1167,
+    "start": 83591
+   },
+   "steps": [
+    {
+     "index": 16,
+     "start": [
+      180,
+      2
+     ]
+    },
+    {
+     "index": 18,
+     "start": [
+      183,
+      2
+     ]
+    },
+    {
+     "index": 26,
+     "start": [
+      189,
+      2
+     ]
+    },
+    {
+     "index": 41,
+     "start": [
+      204,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:place.proof.sentences[10]": {
+   "paper": {
+    "line": 1177,
+    "start": 84772
+   },
+   "steps": [
+    {
+     "index": 116,
+     "start": [
+      292,
+      4
+     ]
+    }
+   ]
+  },
+  "lem:place.proof.sentences[11]": {
+   "paper": {
+    "line": 1177,
+    "start": 84807
+   },
+   "steps": [
+    {
+     "index": 115,
+     "start": [
+      291,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:place.proof.sentences[12]": {
+   "paper": {
+    "line": 1179,
+    "start": 84981
+   },
+   "steps": [
+    {
+     "index": 117,
+     "start": [
+      294,
+      4
+     ]
+    }
+   ]
+  },
+  "lem:place.proof.sentences[13]": {
+   "paper": {
+    "line": 1183,
+    "start": 85127
+   },
+   "steps": []
+  },
+  "lem:place.proof.sentences[14]": {
+   "paper": {
+    "line": 1185,
+    "start": 85186
+   },
+   "steps": [
+    {
+     "index": 103,
+     "start": [
+      273,
+      2
+     ]
+    },
+    {
+     "index": 106,
+     "start": [
+      279,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:place.proof.sentences[15]": {
+   "paper": {
+    "line": 1187,
+    "start": 85309
+   },
+   "steps": []
+  },
+  "lem:place.proof.sentences[16]": {
+   "paper": {
+    "line": 1189,
+    "start": 85403
+   },
+   "steps": [
+    {
+     "index": 109,
+     "start": [
+      283,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:place.proof.sentences[17]": {
+   "paper": {
+    "line": 1190,
+    "start": 85462
+   },
+   "steps": [
+    {
+     "index": 114,
+     "start": [
+      288,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:place.proof.sentences[18]": {
+   "paper": {
+    "line": 1191,
+    "start": 85581
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Geometry.GeneralCoordinateAvoidance.exists_coordinate_inverse_of_avoidance",
+     "index": 2,
+     "start": [
+      24,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Geometry.GeneralCoordinateAvoidance.exists_coordinate_inverse_of_avoidance",
+     "index": 17,
+     "start": [
+      39,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:place.proof.sentences[19]": {
+   "paper": {
+    "line": 1192,
+    "start": 85745
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section5.step_a_pos",
+     "index": 16,
+     "start": [
+      668,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section5.step_a_pos",
+     "index": 22,
+     "start": [
+      675,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:place.proof.sentences[1]": {
+   "paper": {
+    "line": 1168,
+    "start": 83845
+   },
+   "steps": [
+    {
+     "index": 48,
+     "start": [
+      212,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:place.proof.sentences[20]": {
+   "paper": {
+    "line": 1193,
+    "start": 85805
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section5.lemma_5_10_a_not_R_le",
+     "index": 5,
+     "start": [
+      374,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section5.lemma_5_10_a_not_R_le",
+     "index": 8,
+     "start": [
+      377,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:place.proof.sentences[21]": {
+   "paper": {
+    "line": 1196,
+    "start": 85927
+   },
+   "steps": []
+  },
+  "lem:place.proof.sentences[22]": {
+   "paper": {
+    "line": 1198,
+    "start": 85945
+   },
+   "steps": [
+    {
+     "index": 105,
+     "start": [
+      276,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:place.proof.sentences[23]": {
+   "paper": {
+    "line": 1200,
+    "start": 86214
+   },
+   "steps": [
+    {
+     "index": 150,
+     "start": [
+      325,
+      4
+     ]
+    },
+    {
+     "index": 153,
+     "start": [
+      329,
+      4
+     ]
+    },
+    {
+     "index": 154,
+     "start": [
+      331,
+      4
+     ]
+    }
+   ]
+  },
+  "lem:place.proof.sentences[24]": {
+   "paper": {
+    "line": 1202,
+    "start": 86443
+   },
+   "steps": [
+    {
+     "index": 174,
+     "start": [
+      355,
+      4
+     ]
+    },
+    {
+     "index": 175,
+     "start": [
+      356,
+      4
+     ]
+    }
+   ]
+  },
+  "lem:place.proof.sentences[25]": {
+   "paper": {
+    "line": 1205,
+    "start": 86548
+   },
+   "steps": [
+    {
+     "index": 177,
+     "start": [
+      358,
+      4
+     ]
+    }
+   ]
+  },
+  "lem:place.proof.sentences[2]": {
+   "paper": {
+    "line": 1168,
+    "start": 83885
+   },
+   "steps": [
+    {
+     "index": 61,
+     "start": [
+      230,
+      2
+     ]
+    },
+    {
+     "index": 73,
+     "start": [
+      242,
+      2
+     ]
+    },
+    {
+     "index": 74,
+     "start": [
+      244,
+      2
+     ]
+    },
+    {
+     "index": 79,
+     "start": [
+      249,
+      2
+     ]
+    },
+    {
+     "index": 85,
+     "start": [
+      255,
+      2
+     ]
+    },
+    {
+     "index": 57,
+     "start": [
+      223,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:place.proof.sentences[3]": {
+   "paper": {
+    "line": 1169,
+    "start": 84113
+   },
+   "steps": [
+    {
+     "index": 51,
+     "start": [
+      216,
+      2
+     ]
+    },
+    {
+     "index": 52,
+     "start": [
+      217,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:place.proof.sentences[4]": {
+   "paper": {
+    "line": 1170,
+    "start": 84215
+   },
+   "steps": [
+    {
+     "index": 4,
+     "start": [
+      168,
+      2
+     ]
+    },
+    {
+     "index": 58,
+     "start": [
+      225,
+      2
+     ]
+    },
+    {
+     "index": 88,
+     "start": [
+      259,
+      2
+     ]
+    },
+    {
+     "index": 89,
+     "start": [
+      260,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:place.proof.sentences[5]": {
+   "paper": {
+    "line": 1170,
+    "start": 84309
+   },
+   "steps": [
+    {
+     "index": 97,
+     "start": [
+      267,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:place.proof.sentences[6]": {
+   "paper": {
+    "line": 1172,
+    "start": 84491
+   },
+   "steps": [
+    {
+     "index": 97,
+     "start": [
+      267,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:place.proof.sentences[7]": {
+   "paper": {
+    "line": 1173,
+    "start": 84538
+   },
+   "steps": [
+    {
+     "index": 97,
+     "start": [
+      267,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:place.proof.sentences[8]": {
+   "paper": {
+    "line": 1174,
+    "start": 84604
+   },
+   "steps": [
+    {
+     "index": 97,
+     "start": [
+      267,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:place.proof.sentences[9]": {
+   "paper": {
+    "line": 1177,
+    "start": 84744
+   },
+   "steps": [
+    {
+     "index": 99,
+     "start": [
+      269,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:tangent": {
+   "lean": [
+    {
+     "name": "Stafford38.Paper.Section5.rho",
+     "range": {
+      "end": [
+       47,
+       8
+      ],
+      "start": [
+       37,
+       0
+      ]
+     }
+    },
+    {
+     "name": "Stafford38.Paper.Section5.ker_rho",
+     "range": {
+      "end": [
+       91,
+       8
+      ],
+      "start": [
+       71,
+       0
+      ]
+     }
+    },
+    {
+     "name": "Stafford38.Paper.Section5.tangentSpaceAt",
+     "range": {
+      "end": [
+       55,
+       88
+      ],
+      "start": [
+       52,
+       0
+      ]
+     }
+    },
+    {
+     "name": "Stafford38.Paper.Section5.tangentCone",
+     "range": {
+      "end": [
+       60,
+       36
+      ],
+      "start": [
+       57,
+       0
+      ]
+     }
+    },
+    {
+     "name": "Stafford38.Paper.Section5.generic_tangent_finrank_eq_component_kaehler_finrank",
+     "range": {
+      "end": [
+       205,
+       72
+      ],
+      "start": [
+       184,
+       0
+      ]
+     }
+    },
+    {
+     "name": "Stafford38.Paper.Section5.component_kaehler_finrank_eq_trdeg",
+     "range": {
+      "end": [
+       230,
+       45
+      ],
+      "start": [
+       207,
+       0
+      ]
+     }
+    },
+    {
+     "name": "Stafford38.Paper.Section5.lemma_5_12_a_bound",
+     "range": {
+      "end": [
+       146,
+       49
+      ],
+      "start": [
+       134,
+       0
+      ]
+     }
+    },
+    {
+     "name": "Stafford38.Paper.Section5.lemma_5_12_a_cone",
+     "range": {
+      "end": [
+       138,
+       7
+      ],
+      "start": [
+       99,
+       0
+      ]
+     }
+    },
+    {
+     "name": "Stafford38.Paper.Section5.lemma_5_12_b",
+     "range": {
+      "end": [
+       167,
+       20
+      ],
+      "start": [
+       140,
+       0
+      ]
+     }
+    }
+   ],
+   "paper": {
+    "line": 1306,
+    "start": 94537
+   }
+  },
+  "lem:tangent.proof.sentences[0]": {
+   "paper": {
+    "line": 1315,
+    "start": 94989
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section5.component_kaehler_finrank_eq_trdeg",
+     "index": 4,
+     "start": [
+      221,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section5.component_kaehler_finrank_eq_trdeg",
+     "index": 7,
+     "start": [
+      224,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section5.component_kaehler_finrank_eq_trdeg",
+     "index": 8,
+     "start": [
+      226,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:tangent.proof.sentences[10]": {
+   "paper": {
+    "line": 1336,
+    "start": 96763
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section5.lemma_5_12_a_bound",
+     "index": 0,
+     "start": [
+      143,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section5.exists_kaehler_generators",
+     "index": 3,
+     "start": [
+      98,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:tangent.proof.sentences[11]": {
+   "paper": {
+    "line": 1338,
+    "start": 96916
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section5.lemma_5_12_a_bound",
+     "index": 1,
+     "start": [
+      144,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section5.lemma_5_12_a_bound",
+     "index": 3,
+     "start": [
+      146,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:tangent.proof.sentences[12]": {
+   "paper": {
+    "line": 1339,
+    "start": 97014
+   },
+   "steps": [
+    {
+     "index": 2,
+     "start": [
+      106,
+      2
+     ]
+    },
+    {
+     "index": 13,
+     "start": [
+      117,
+      2
+     ]
+    },
+    {
+     "index": 35,
+     "start": [
+      136,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:tangent.proof.sentences[13]": {
+   "paper": {
+    "line": 1344,
+    "start": 97167
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section5.lemma_5_12_b",
+     "index": 2,
+     "start": [
+      149,
+      4
+     ]
+    }
+   ]
+  },
+  "lem:tangent.proof.sentences[14]": {
+   "paper": {
+    "line": 1344,
+    "start": 97234
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section5.lemma_5_12_b",
+     "index": 3,
+     "start": [
+      151,
+      4
+     ]
+    }
+   ]
+  },
+  "lem:tangent.proof.sentences[15]": {
+   "paper": {
+    "line": 1350,
+    "start": 97534
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section5.lemma_5_12_b",
+     "index": 4,
+     "start": [
+      154,
+      4
+     ]
+    }
+   ]
+  },
+  "lem:tangent.proof.sentences[16]": {
+   "paper": {
+    "line": 1352,
+    "start": 97666
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section5.lemma_5_12_b",
+     "index": 10,
+     "start": [
+      160,
+      4
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section5.lemma_5_12_b",
+     "index": 11,
+     "start": [
+      161,
+      4
+     ]
+    }
+   ]
+  },
+  "lem:tangent.proof.sentences[17]": {
+   "paper": {
+    "line": 1352,
+    "start": 97740
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section5.lemma_5_12_b",
+     "index": 13,
+     "start": [
+      162,
+      4
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section5.lemma_5_12_b",
+     "index": 14,
+     "start": [
+      163,
+      4
+     ]
+    }
+   ]
+  },
+  "lem:tangent.proof.sentences[1]": {
+   "paper": {
+    "line": 1316,
+    "start": 95145
+   },
+   "steps": []
+  },
+  "lem:tangent.proof.sentences[2]": {
+   "paper": {
+    "line": 1319,
+    "start": 95461
+   },
+   "steps": []
+  },
+  "lem:tangent.proof.sentences[3]": {
+   "paper": {
+    "line": 1321,
+    "start": 95539
+   },
+   "steps": []
+  },
+  "lem:tangent.proof.sentences[4]": {
+   "paper": {
+    "line": 1321,
+    "start": 95653
+   },
+   "steps": []
+  },
+  "lem:tangent.proof.sentences[5]": {
+   "paper": {
+    "line": 1325,
+    "start": 95943
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section5.finrank_fraction_kaehler_le_of_span",
+     "index": 1,
+     "start": [
+      109,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section5.finrank_fraction_kaehler_le_of_span",
+     "index": 11,
+     "start": [
+      118,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:tangent.proof.sentences[6]": {
+   "paper": {
+    "line": 1326,
+    "start": 96058
+   },
+   "steps": []
+  },
+  "lem:tangent.proof.sentences[7]": {
+   "paper": {
+    "line": 1328,
+    "start": 96229
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section5.component_kaehler_finrank_le_generic_tangent_finrank",
+     "index": 22,
+     "start": [
+      149,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section5.component_kaehler_finrank_le_generic_tangent_finrank",
+     "index": 23,
+     "start": [
+      150,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section5.component_kaehler_finrank_le_generic_tangent_finrank",
+     "index": 24,
+     "start": [
+      153,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section5.component_kaehler_finrank_le_generic_tangent_finrank",
+     "index": 46,
+     "start": [
+      180,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:tangent.proof.sentences[8]": {
+   "paper": {
+    "line": 1332,
+    "start": 96465
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section5.finrank_residue_tensor_kaehler_le",
+     "index": 4,
+     "start": [
+      49,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section5.finrank_residue_tensor_kaehler_le",
+     "index": 27,
+     "start": [
+      77,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:tangent.proof.sentences[9]": {
+   "paper": {
+    "line": 1334,
+    "start": 96614
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section5.finrank_residue_tensor_kaehler_le",
+     "index": 30,
+     "start": [
+      82,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section5.finrank_residue_tensor_kaehler_le",
+     "index": 33,
+     "start": [
+      87,
+      2
+     ]
+    }
+   ]
+  },
+  "sec5:conventions": {
+   "lean": [],
+   "paper": {
+    "line": 966,
+    "start": 70695
+   }
+  },
+  "sec5:hyperplane": {
+   "lean": [],
+   "paper": {
+    "line": 978,
+    "start": 71589
+   }
+  },
+  "thm:asymptotic-conormal-formal": {
+   "lean": [
+    {
+     "name": "Stafford38.Paper.Section5.theorem_5_7_i_printed",
+     "range": {
+      "end": [
+       662,
+       57
+      ],
+      "start": [
+       646,
+       0
+      ]
+     }
+    },
+    {
+     "name": "Stafford38.Paper.Section5.theorem_5_7_ii_printed",
+     "range": {
+      "end": [
+       678,
+       57
+      ],
+      "start": [
+       664,
+       0
+      ]
+     }
+    }
+   ],
+   "paper": {
+    "line": 1078,
+    "start": 77624
+   }
+  },
+  "thm:asymptotic-conormal-formal.proof.sentences[0]": {
+   "paper": {
+    "line": 1107,
+    "start": 79714
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section5.theorem_5_7_i_printed",
+     "index": 0,
+     "start": [
+      659,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section5.theorem_5_7_i_printed",
+     "index": 2,
+     "start": [
+      661,
+      2
+     ]
+    }
+   ]
+  },
+  "thm:asymptotic-conormal-formal.proof.sentences[10]": {
+   "paper": {
+    "line": 1122,
+    "start": 81051
+   },
+   "steps": []
+  },
+  "thm:asymptotic-conormal-formal.proof.sentences[11]": {
+   "paper": {
+    "line": 1124,
+    "start": 81255
+   },
+   "steps": []
+  },
+  "thm:asymptotic-conormal-formal.proof.sentences[12]": {
+   "paper": {
+    "line": 1127,
+    "start": 81439
+   },
+   "steps": []
+  },
+  "thm:asymptotic-conormal-formal.proof.sentences[13]": {
+   "paper": {
+    "line": 1128,
+    "start": 81559
+   },
+   "steps": []
+  },
+  "thm:asymptotic-conormal-formal.proof.sentences[14]": {
+   "paper": {
+    "line": 1132,
+    "start": 81742
+   },
+   "steps": []
+  },
+  "thm:asymptotic-conormal-formal.proof.sentences[15]": {
+   "paper": {
+    "line": 1151,
+    "start": 82760
+   },
+   "steps": [
+    {
+     "index": 8,
+     "start": [
+      86,
+      2
+     ]
+    }
+   ]
+  },
+  "thm:asymptotic-conormal-formal.proof.sentences[16]": {
+   "paper": {
+    "line": 1151,
+    "start": 82812
+   },
+   "steps": [
+    {
+     "index": 9,
+     "start": [
+      89,
+      2
+     ]
+    }
+   ]
+  },
+  "thm:asymptotic-conormal-formal.proof.sentences[17]": {
+   "paper": {
+    "line": 1209,
+    "start": 86758
+   },
+   "steps": [
+    {
+     "index": 8,
+     "start": [
+      86,
+      2
+     ]
+    },
+    {
+     "index": 12,
+     "start": [
+      93,
+      2
+     ]
+    }
+   ]
+  },
+  "thm:asymptotic-conormal-formal.proof.sentences[18]": {
+   "paper": {
+    "line": 1210,
+    "start": 86915
+   },
+   "steps": []
+  },
+  "thm:asymptotic-conormal-formal.proof.sentences[19]": {
+   "paper": {
+    "line": 1211,
+    "start": 87163
+   },
+   "steps": [
+    {
+     "index": 16,
+     "start": [
+      98,
+      2
+     ]
+    }
+   ]
+  },
+  "thm:asymptotic-conormal-formal.proof.sentences[1]": {
+   "paper": {
+    "line": 1108,
+    "start": 79826
+   },
+   "steps": []
+  },
+  "thm:asymptotic-conormal-formal.proof.sentences[20]": {
+   "paper": {
+    "line": 1213,
+    "start": 87224
+   },
+   "steps": [
+    {
+     "index": 19,
+     "start": [
+      103,
+      2
+     ]
+    }
+   ]
+  },
+  "thm:asymptotic-conormal-formal.proof.sentences[21]": {
+   "paper": {
+    "line": 1214,
+    "start": 87288
+   },
+   "steps": [
+    {
+     "index": 19,
+     "start": [
+      103,
+      2
+     ]
+    }
+   ]
+  },
+  "thm:asymptotic-conormal-formal.proof.sentences[22]": {
+   "paper": {
+    "line": 1217,
+    "start": 87584
+   },
+   "steps": [
+    {
+     "index": 19,
+     "start": [
+      103,
+      2
+     ]
+    }
+   ]
+  },
+  "thm:asymptotic-conormal-formal.proof.sentences[23]": {
+   "paper": {
+    "line": 1217,
+    "start": 87688
+   },
+   "steps": [
+    {
+     "index": 19,
+     "start": [
+      103,
+      2
+     ]
+    }
+   ]
+  },
+  "thm:asymptotic-conormal-formal.proof.sentences[24]": {
+   "paper": {
+    "line": 1218,
+    "start": 87800
+   },
+   "steps": [
+    {
+     "index": 19,
+     "start": [
+      103,
+      2
+     ]
+    },
+    {
+     "index": 20,
+     "start": [
+      104,
+      2
+     ]
+    }
+   ]
+  },
+  "thm:asymptotic-conormal-formal.proof.sentences[25]": {
+   "paper": {
+    "line": 1220,
+    "start": 87953
+   },
+   "steps": [
+    {
+     "index": 22,
+     "start": [
+      107,
+      2
+     ]
+    }
+   ]
+  },
+  "thm:asymptotic-conormal-formal.proof.sentences[26]": {
+   "paper": {
+    "line": 1220,
+    "start": 88022
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section5.step_orders",
+     "index": 11,
+     "start": [
+      758,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section5.step_orders",
+     "index": 18,
+     "start": [
+      774,
+      2
+     ]
+    }
+   ]
+  },
+  "thm:asymptotic-conormal-formal.proof.sentences[27]": {
+   "paper": {
+    "line": 1222,
+    "start": 88173
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section5.step_orders",
+     "index": 8,
+     "start": [
+      755,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section5.step_orders",
+     "index": 11,
+     "start": [
+      758,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section5.step_orders",
+     "index": 20,
+     "start": [
+      777,
+      2
+     ]
+    }
+   ]
+  },
+  "thm:asymptotic-conormal-formal.proof.sentences[28]": {
+   "paper": {
+    "line": 1222,
+    "start": 88279
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section5.step_orders",
+     "index": 5,
+     "start": [
+      752,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section5.step_a_pos",
+     "index": 33,
+     "start": [
+      688,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section5.step_a_pos",
+     "index": 34,
+     "start": [
+      689,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section5.step_a_pos",
+     "index": 38,
+     "start": [
+      694,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section5.step_a_pos",
+     "index": 53,
+     "start": [
+      707,
+      2
+     ]
+    }
+   ]
+  },
+  "thm:asymptotic-conormal-formal.proof.sentences[29]": {
+   "paper": {
+    "line": 1224,
+    "start": 88460
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section5.step_orders",
+     "index": 28,
+     "start": [
+      784,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section5.step_orders",
+     "index": 35,
+     "start": [
+      789,
+      2
+     ]
+    }
+   ]
+  },
+  "thm:asymptotic-conormal-formal.proof.sentences[2]": {
+   "paper": {
+    "line": 1110,
+    "start": 79967
+   },
+   "steps": [
+    {
+     "index": 2,
+     "start": [
+      76,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Geometry.GeneralConstantCoordinateAxis.exists_constant_coordinate_equation_and_pure_axis",
+     "index": 0,
+     "start": [
+      29,
+      2
+     ]
+    }
+   ]
+  },
+  "thm:asymptotic-conormal-formal.proof.sentences[30]": {
+   "paper": {
+    "line": 1226,
+    "start": 88547
+   },
+   "steps": [
+    {
+     "index": 23,
+     "start": [
+      108,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section5.step_generic_point",
+     "index": 7,
+     "start": [
+      827,
+      2
+     ]
+    }
+   ]
+  },
+  "thm:asymptotic-conormal-formal.proof.sentences[31]": {
+   "paper": {
+    "line": 1228,
+    "start": 88762
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section5.step_generic_point",
+     "index": 8,
+     "start": [
+      829,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section5.step_generic_point",
+     "index": 11,
+     "start": [
+      833,
+      2
+     ]
+    },
+    {
+     "index": 33,
+     "start": [
+      117,
+      2
+     ]
+    }
+   ]
+  },
+  "thm:asymptotic-conormal-formal.proof.sentences[32]": {
+   "paper": {
+    "line": 1235,
+    "start": 89025
+   },
+   "steps": []
+  },
+  "thm:asymptotic-conormal-formal.proof.sentences[33]": {
+   "paper": {
+    "line": 1236,
+    "start": 89086
+   },
+   "steps": []
+  },
+  "thm:asymptotic-conormal-formal.proof.sentences[34]": {
+   "paper": {
+    "line": 1238,
+    "start": 89306
+   },
+   "steps": []
+  },
+  "thm:asymptotic-conormal-formal.proof.sentences[35]": {
+   "paper": {
+    "line": 1242,
+    "start": 89646
+   },
+   "steps": []
+  },
+  "thm:asymptotic-conormal-formal.proof.sentences[36]": {
+   "paper": {
+    "line": 1244,
+    "start": 89743
+   },
+   "steps": []
+  },
+  "thm:asymptotic-conormal-formal.proof.sentences[37]": {
+   "paper": {
+    "line": 1246,
+    "start": 89868
+   },
+   "steps": []
+  },
+  "thm:asymptotic-conormal-formal.proof.sentences[38]": {
+   "paper": {
+    "line": 1247,
+    "start": 89944
+   },
+   "steps": [
+    {
+     "index": 34,
+     "start": [
+      121,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section5.witness_lemma_5_11",
+     "index": 12,
+     "start": [
+      879,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section5.witness_lemma_5_11",
+     "index": 15,
+     "start": [
+      882,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section5.witness_lemma_5_11",
+     "index": 18,
+     "start": [
+      885,
+      2
+     ]
+    }
+   ]
+  },
+  "thm:asymptotic-conormal-formal.proof.sentences[39]": {
+   "paper": {
+    "line": 1247,
+    "start": 90013
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section5.witness_lemma_5_11",
+     "index": 20,
+     "start": [
+      887,
+      2
+     ]
+    }
+   ]
+  },
+  "thm:asymptotic-conormal-formal.proof.sentences[3]": {
+   "paper": {
+    "line": 1112,
+    "start": 80167
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Geometry.GeneralConstantCoordinateAxis.exists_constant_coordinate_equation_and_pure_axis",
+     "index": 0,
+     "start": [
+      29,
+      2
+     ]
+    }
+   ]
+  },
+  "thm:asymptotic-conormal-formal.proof.sentences[40]": {
+   "paper": {
+    "line": 1270,
+    "start": 90979
+   },
+   "steps": []
+  },
+  "thm:asymptotic-conormal-formal.proof.sentences[41]": {
+   "paper": {
+    "line": 1270,
+    "start": 91024
+   },
+   "steps": []
+  },
+  "thm:asymptotic-conormal-formal.proof.sentences[42]": {
+   "paper": {
+    "line": 1270,
+    "start": 91100
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section5.step_M_spans_cone",
+     "index": 20,
+     "start": [
+      376,
+      2
+     ]
+    }
+   ]
+  },
+  "thm:asymptotic-conormal-formal.proof.sentences[43]": {
+   "paper": {
+    "line": 1270,
+    "start": 91143
+   },
+   "steps": [
+    {
+     "index": 34,
+     "start": [
+      121,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section5.witness_lemma_5_11",
+     "index": 26,
+     "start": [
+      897,
+      2
+     ]
+    },
+    {
+     "index": 38,
+     "start": [
+      126,
+      2
+     ]
+    }
+   ]
+  },
+  "thm:asymptotic-conormal-formal.proof.sentences[44]": {
+   "paper": {
+    "line": 1270,
+    "start": 91304
+   },
+   "steps": [
+    {
+     "index": 40,
+     "start": [
+      129,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section5.step_dual_derivations",
+     "index": 2,
+     "start": [
+      120,
+      2
+     ]
+    }
+   ]
+  },
+  "thm:asymptotic-conormal-formal.proof.sentences[45]": {
+   "paper": {
+    "line": 1271,
+    "start": 91403
+   },
+   "steps": [
+    {
+     "index": 41,
+     "start": [
+      131,
+      2
+     ]
+    }
+   ]
+  },
+  "thm:asymptotic-conormal-formal.proof.sentences[46]": {
+   "paper": {
+    "line": 1271,
+    "start": 91508
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section5.step_dual_derivations",
+     "index": 3,
+     "start": [
+      122,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section5.step_dual_derivations",
+     "index": 24,
+     "start": [
+      139,
+      4
+     ]
+    }
+   ]
+  },
+  "thm:asymptotic-conormal-formal.proof.sentences[47]": {
+   "paper": {
+    "line": 1271,
+    "start": 91665
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section5.step_dual_derivations",
+     "index": 29,
+     "start": [
+      143,
+      4
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section5.step_dual_derivations",
+     "index": 34,
+     "start": [
+      147,
+      4
+     ]
+    }
+   ]
+  },
+  "thm:asymptotic-conormal-formal.proof.sentences[48]": {
+   "paper": {
+    "line": 1273,
+    "start": 91781
+   },
+   "steps": []
+  },
+  "thm:asymptotic-conormal-formal.proof.sentences[49]": {
+   "paper": {
+    "line": 1274,
+    "start": 91903
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section5.step_dual_derivations",
+     "index": 15,
+     "start": [
+      131,
+      4
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section5.step_lambda_w_tau",
+     "index": 6,
+     "start": [
+      227,
+      4
+     ]
+    }
+   ]
+  },
+  "thm:asymptotic-conormal-formal.proof.sentences[4]": {
+   "paper": {
+    "line": 1114,
+    "start": 80327
+   },
+   "steps": []
+  },
+  "thm:asymptotic-conormal-formal.proof.sentences[50]": {
+   "paper": {
+    "line": 1275,
+    "start": 92006
+   },
+   "steps": [
+    {
+     "index": 42,
+     "start": [
+      133,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section5.step_lambda_w_tau",
+     "index": 1,
+     "start": [
+      218,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section5.step_lambda_w_tau",
+     "index": 4,
+     "start": [
+      223,
+      2
+     ]
+    }
+   ]
+  },
+  "thm:asymptotic-conormal-formal.proof.sentences[51]": {
+   "paper": {
+    "line": 1277,
+    "start": 92196
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section5.step_lambda_w_tau",
+     "index": 25,
+     "start": [
+      251,
+      2
+     ]
+    }
+   ]
+  },
+  "thm:asymptotic-conormal-formal.proof.sentences[52]": {
+   "paper": {
+    "line": 1279,
+    "start": 92280
+   },
+   "steps": []
+  },
+  "thm:asymptotic-conormal-formal.proof.sentences[53]": {
+   "paper": {
+    "line": 1279,
+    "start": 92343
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section5.step_lambda_w_tau",
+     "index": 13,
+     "start": [
+      235,
+      2
+     ]
+    }
+   ]
+  },
+  "thm:asymptotic-conormal-formal.proof.sentences[54]": {
+   "paper": {
+    "line": 1284,
+    "start": 92644
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section5.step_lambda_w_tau",
+     "index": 14,
+     "start": [
+      236,
+      2
+     ]
+    }
+   ]
+  },
+  "thm:asymptotic-conormal-formal.proof.sentences[55]": {
+   "paper": {
+    "line": 1284,
+    "start": 92682
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section5.step_lambda_w_tau",
+     "index": 1,
+     "start": [
+      218,
+      2
+     ]
+    }
+   ]
+  },
+  "thm:asymptotic-conormal-formal.proof.sentences[56]": {
+   "paper": {
+    "line": 1286,
+    "start": 92857
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section5.step_lambda_w_tau",
+     "index": 19,
+     "start": [
+      242,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section5.step_lambda_w_tau",
+     "index": 20,
+     "start": [
+      244,
+      2
+     ]
+    }
+   ]
+  },
+  "thm:asymptotic-conormal-formal.proof.sentences[57]": {
+   "paper": {
+    "line": 1288,
+    "start": 93033
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section5.step_lambda_w_tau",
+     "index": 1,
+     "start": [
+      218,
+      2
+     ]
+    }
+   ]
+  },
+  "thm:asymptotic-conormal-formal.proof.sentences[58]": {
+   "paper": {
+    "line": 1292,
+    "start": 93117
+   },
+   "steps": [
+    {
+     "index": 43,
+     "start": [
+      137,
+      2
+     ]
+    }
+   ]
+  },
+  "thm:asymptotic-conormal-formal.proof.sentences[59]": {
+   "paper": {
+    "line": 1294,
+    "start": 93348
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section5.step_M_minor",
+     "index": 1,
+     "start": [
+      320,
+      2
+     ]
+    }
+   ]
+  },
+  "thm:asymptotic-conormal-formal.proof.sentences[5]": {
+   "paper": {
+    "line": 1115,
+    "start": 80441
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Geometry.GeneralConstantCoordinateAxis.exists_constant_coordinate_equation_and_pure_axis",
+     "index": 2,
+     "start": [
+      31,
+      4
+     ]
+    },
+    {
+     "decl": "Stafford38.Geometry.GeneralConstantCoordinateAxis.exists_constant_coordinate_equation_and_pure_axis",
+     "index": 10,
+     "start": [
+      40,
+      4
+     ]
+    },
+    {
+     "index": 4,
+     "start": [
+      79,
+      4
+     ]
+    }
+   ]
+  },
+  "thm:asymptotic-conormal-formal.proof.sentences[60]": {
+   "paper": {
+    "line": 1297,
+    "start": 93630
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section5.step_M_minor",
+     "index": 4,
+     "start": [
+      322,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section5.step_M_minor",
+     "index": 5,
+     "start": [
+      324,
+      2
+     ]
+    }
+   ]
+  },
+  "thm:asymptotic-conormal-formal.proof.sentences[61]": {
+   "paper": {
+    "line": 1301,
+    "start": 93953
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section5.step_M_minor",
+     "index": 6,
+     "start": [
+      325,
+      2
+     ]
+    }
+   ]
+  },
+  "thm:asymptotic-conormal-formal.proof.sentences[62]": {
+   "paper": {
+    "line": 1303,
+    "start": 94151
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section5.step_M_minor",
+     "index": 6,
+     "start": [
+      325,
+      2
+     ]
+    }
+   ]
+  },
+  "thm:asymptotic-conormal-formal.proof.sentences[63]": {
+   "paper": {
+    "line": 1305,
+    "start": 94315
+   },
+   "steps": []
+  },
+  "thm:asymptotic-conormal-formal.proof.sentences[64]": {
+   "paper": {
+    "line": 1305,
+    "start": 94480
+   },
+   "steps": []
+  },
+  "thm:asymptotic-conormal-formal.proof.sentences[65]": {
+   "paper": {
+    "line": 1357,
+    "start": 97871
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section5.step_M_spans_cone",
+     "index": 7,
+     "start": [
+      361,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section5.step_M_spans_cone",
+     "index": 15,
+     "start": [
+      371,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section5.step_M_spans_cone",
+     "index": 20,
+     "start": [
+      376,
+      2
+     ]
+    }
+   ]
+  },
+  "thm:asymptotic-conormal-formal.proof.sentences[66]": {
+   "paper": {
+    "line": 1359,
+    "start": 98062
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section5.step_M_spans_cone",
+     "index": 6,
+     "start": [
+      360,
+      2
+     ]
+    }
+   ]
+  },
+  "thm:asymptotic-conormal-formal.proof.sentences[67]": {
+   "paper": {
+    "line": 1359,
+    "start": 98118
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section5.step_M_spans_cone",
+     "index": 24,
+     "start": [
+      382,
+      2
+     ]
+    }
+   ]
+  },
+  "thm:asymptotic-conormal-formal.proof.sentences[68]": {
+   "paper": {
+    "line": 1361,
+    "start": 98273
+   },
+   "steps": [
+    {
+     "index": 44,
+     "start": [
+      142,
+      2
+     ]
+    },
+    {
+     "index": 45,
+     "start": [
+      143,
+      2
+     ]
+    },
+    {
+     "index": 48,
+     "start": [
+      148,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section5.step_M_spans_cone",
+     "index": 51,
+     "start": [
+      407,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section5.step_M_spans_cone",
+     "index": 49,
+     "start": [
+      404,
+      2
+     ]
+    }
+   ]
+  },
+  "thm:asymptotic-conormal-formal.proof.sentences[69]": {
+   "paper": {
+    "line": 1379,
+    "start": 99153
+   },
+   "steps": [
+    {
+     "index": 49,
+     "start": [
+      152,
+      2
+     ]
+    }
+   ]
+  },
+  "thm:asymptotic-conormal-formal.proof.sentences[6]": {
+   "paper": {
+    "line": 1116,
+    "start": 80660
+   },
+   "steps": [
+    {
+     "index": 5,
+     "start": [
+      80,
+      4
+     ]
+    },
+    {
+     "index": 6,
+     "start": [
+      81,
+      4
+     ]
+    }
+   ]
+  },
+  "thm:asymptotic-conormal-formal.proof.sentences[70]": {
+   "paper": {
+    "line": 1381,
+    "start": 99324
+   },
+   "steps": [
+    {
+     "index": 53,
+     "start": [
+      157,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section5.step_lift_ell_minor",
+     "index": 1,
+     "start": [
+      460,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section5.step_lift_ell_minor",
+     "index": 4,
+     "start": [
+      463,
+      2
+     ]
+    }
+   ]
+  },
+  "thm:asymptotic-conormal-formal.proof.sentences[71]": {
+   "paper": {
+    "line": 1385,
+    "start": 99685
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section5.step_lift_ell_minor",
+     "index": 5,
+     "start": [
+      465,
+      2
+     ]
+    }
+   ]
+  },
+  "thm:asymptotic-conormal-formal.proof.sentences[72]": {
+   "paper": {
+    "line": 1388,
+    "start": 99940
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section5.step_lift_ell_minor",
+     "index": 6,
+     "start": [
+      467,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section5.step_lift_ell_minor",
+     "index": 8,
+     "start": [
+      471,
+      2
+     ]
+    }
+   ]
+  },
+  "thm:asymptotic-conormal-formal.proof.sentences[73]": {
+   "paper": {
+    "line": 1389,
+    "start": 100068
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section5.step_lift_ell_minor",
+     "index": 22,
+     "start": [
+      488,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section5.step_lift_ell_minor",
+     "index": 23,
+     "start": [
+      489,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section5.step_lift_ell_minor",
+     "index": 26,
+     "start": [
+      492,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section5.step_lift_ell_minor",
+     "index": 42,
+     "start": [
+      508,
+      2
+     ]
+    }
+   ]
+  },
+  "thm:asymptotic-conormal-formal.proof.sentences[74]": {
+   "paper": {
+    "line": 1392,
+    "start": 100165
+   },
+   "steps": [
+    {
+     "index": 54,
+     "start": [
+      160,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section5.step_ell_conormal",
+     "index": 9,
+     "start": [
+      542,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section5.step_ell_conormal",
+     "index": 16,
+     "start": [
+      550,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section5.step_ell_conormal",
+     "index": 17,
+     "start": [
+      552,
+      2
+     ]
+    }
+   ]
+  },
+  "thm:asymptotic-conormal-formal.proof.sentences[75]": {
+   "paper": {
+    "line": 1398,
+    "start": 100444
+   },
+   "steps": [
+    {
+     "index": 1,
+     "start": [
+      75,
+      2
+     ]
+    }
+   ]
+  },
+  "thm:asymptotic-conormal-formal.proof.sentences[76]": {
+   "paper": {
+    "line": 1398,
+    "start": 100503
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section5.step_polynomial_limit",
+     "index": 0,
+     "start": [
+      615,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section5.step_polynomial_limit",
+     "index": 1,
+     "start": [
+      616,
+      2
+     ]
+    }
+   ]
+  },
+  "thm:asymptotic-conormal-formal.proof.sentences[77]": {
+   "paper": {
+    "line": 1403,
+    "start": 100770
+   },
+   "steps": []
+  },
+  "thm:asymptotic-conormal-formal.proof.sentences[78]": {
+   "paper": {
+    "line": 1405,
+    "start": 100906
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section5.eval_residue_eq_zero_of_mem_groundEquationConormalLocus",
+     "index": 0,
+     "start": [
+      584,
+      2
+     ]
+    }
+   ]
+  },
+  "thm:asymptotic-conormal-formal.proof.sentences[79]": {
+   "paper": {
+    "line": 1409,
+    "start": 101207
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section5.eval_residue_eq_zero_of_mem_groundEquationConormalLocus",
+     "index": 0,
+     "start": [
+      584,
+      2
+     ]
+    }
+   ]
+  },
+  "thm:asymptotic-conormal-formal.proof.sentences[7]": {
+   "paper": {
+    "line": 1117,
+    "start": 80776
+   },
+   "steps": [
+    {
+     "index": 2,
+     "start": [
+      76,
+      2
+     ]
+    }
+   ]
+  },
+  "thm:asymptotic-conormal-formal.proof.sentences[80]": {
+   "paper": {
+    "line": 1411,
+    "start": 101346
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section5.eval_residue_eq_zero_of_mem_groundEquationConormalLocus",
+     "index": 0,
+     "start": [
+      584,
+      2
+     ]
+    }
+   ]
+  },
+  "thm:asymptotic-conormal-formal.proof.sentences[81]": {
+   "paper": {
+    "line": 1412,
+    "start": 101464
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section5.eval_residue_eq_zero_of_mem_groundEquationConormalLocus",
+     "index": 0,
+     "start": [
+      584,
+      2
+     ]
+    }
+   ]
+  },
+  "thm:asymptotic-conormal-formal.proof.sentences[82]": {
+   "paper": {
+    "line": 1414,
+    "start": 101589
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section5.step_polynomial_limit",
+     "index": 3,
+     "start": [
+      617,
+      4
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section5.eval_residue_eq_zero_of_mem_groundEquationConormalLocus",
+     "index": 1,
+     "start": [
+      586,
+      2
+     ]
+    }
+   ]
+  },
+  "thm:asymptotic-conormal-formal.proof.sentences[83]": {
+   "paper": {
+    "line": 1416,
+    "start": 101718
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section5.eval_residue_eq_zero_of_mem_groundEquationConormalLocus",
+     "index": 5,
+     "start": [
+      592,
+      2
+     ]
+    }
+   ]
+  },
+  "thm:asymptotic-conormal-formal.proof.sentences[84]": {
+   "paper": {
+    "line": 1419,
+    "start": 101940
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section5.eval_residue_eq_zero_of_mem_groundEquationConormalLocus",
+     "index": 6,
+     "start": [
+      595,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section5.eval_residue_eq_zero_of_mem_groundEquationConormalLocus",
+     "index": 7,
+     "start": [
+      597,
+      2
+     ]
+    }
+   ]
+  },
+  "thm:asymptotic-conormal-formal.proof.sentences[85]": {
+   "paper": {
+    "line": 1420,
+    "start": 102091
+   },
+   "steps": [
+    {
+     "index": 55,
+     "start": [
+      163,
+      2
+     ]
+    },
+    {
+     "index": 56,
+     "start": [
+      164,
+      2
+     ]
+    },
+    {
+     "index": 57,
+     "start": [
+      165,
+      2
+     ]
+    }
+   ]
+  },
+  "thm:asymptotic-conormal-formal.proof.sentences[86]": {
+   "paper": {
+    "line": 1423,
+    "start": 102188
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section5.step_dir_of_fibre",
+     "index": 0,
+     "start": [
+      92,
+      2
+     ]
+    }
+   ]
+  },
+  "thm:asymptotic-conormal-formal.proof.sentences[87]": {
+   "paper": {
+    "line": 1424,
+    "start": 102275
+   },
+   "steps": []
+  },
+  "thm:asymptotic-conormal-formal.proof.sentences[88]": {
+   "paper": {
+    "line": 1424,
+    "start": 102326
+   },
+   "steps": []
+  },
+  "thm:asymptotic-conormal-formal.proof.sentences[89]": {
+   "paper": {
+    "line": 1424,
+    "start": 102603
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section5.step_dir_of_fibre",
+     "index": 0,
+     "start": [
+      92,
+      2
+     ]
+    }
+   ]
+  },
+  "thm:asymptotic-conormal-formal.proof.sentences[8]": {
+   "paper": {
+    "line": 1120,
+    "start": 80852
+   },
+   "steps": []
+  },
+  "thm:asymptotic-conormal-formal.proof.sentences[90]": {
+   "paper": {
+    "line": 1424,
+    "start": 102699
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section5.step_dir_of_fibre",
+     "index": 1,
+     "start": [
+      94,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section5.step_dir_of_fibre",
+     "index": 6,
+     "start": [
+      100,
+      4
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section5.step_dir_of_fibre",
+     "index": 16,
+     "start": [
+      109,
+      6
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section5.step_dir_of_fibre",
+     "index": 29,
+     "start": [
+      123,
+      6
+     ]
+    }
+   ]
+  },
+  "thm:asymptotic-conormal-formal.proof.sentences[91]": {
+   "paper": {
+    "line": 1424,
+    "start": 102910
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section5.step_dir_of_fibre",
+     "index": 40,
+     "start": [
+      132,
+      6
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section5.step_dir_of_fibre",
+     "index": 42,
+     "start": [
+      135,
+      2
+     ]
+    }
+   ]
+  },
+  "thm:asymptotic-conormal-formal.proof.sentences[92]": {
+   "paper": {
+    "line": 1425,
+    "start": 102984
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section5.step_dir_of_fibre",
+     "index": 48,
+     "start": [
+      141,
+      2
+     ]
+    }
+   ]
+  },
+  "thm:asymptotic-conormal-formal.proof.sentences[9]": {
+   "paper": {
+    "line": 1120,
+    "start": 80900
+   },
+   "steps": []
+  },
+  "thm:coisotropic-exclusion": {
+   "lean": [
+    {
+     "name": "Stafford38.Paper.Section5.theorem_5_8",
+     "range": {
+      "end": [
+       469,
+       42
+      ],
+      "start": [
+       443,
+       0
+      ]
+     }
+    },
+    {
+     "name": "Stafford38.Paper.Section5.exclusionBaseIdeal",
+     "range": {
+      "end": [
+       51,
+       70
+      ],
+      "start": [
+       48,
+       0
+      ]
+     }
+    }
+   ],
+   "paper": {
+    "line": 1091,
+    "start": 78545
+   }
+  },
+  "thm:coisotropic-exclusion.proof.sentences[0]": {
+   "paper": {
+    "line": 1442,
+    "start": 104520
+   },
+   "steps": [
+    {
+     "index": 0,
+     "start": [
+      459,
+      2
+     ]
+    },
+    {
+     "index": 1,
+     "start": [
+      460,
+      2
+     ]
+    }
+   ]
+  },
+  "thm:coisotropic-exclusion.proof.sentences[10]": {
+   "paper": {
+    "line": 1453,
+    "start": 105969
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section5.step_zero_section",
+     "index": 1,
+     "start": [
+      94,
+      2
+     ]
+    }
+   ]
+  },
+  "thm:coisotropic-exclusion.proof.sentences[11]": {
+   "paper": {
+    "line": 1453,
+    "start": 105997
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section5.step_zero_section",
+     "index": 2,
+     "start": [
+      97,
+      2
+     ]
+    }
+   ]
+  },
+  "thm:coisotropic-exclusion.proof.sentences[12]": {
+   "paper": {
+    "line": 1453,
+    "start": 106080
+   },
+   "steps": []
+  },
+  "thm:coisotropic-exclusion.proof.sentences[13]": {
+   "paper": {
+    "line": 1453,
+    "start": 106098
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section5.step_zero_section",
+     "index": 2,
+     "start": [
+      97,
+      2
+     ]
+    }
+   ]
+  },
+  "thm:coisotropic-exclusion.proof.sentences[14]": {
+   "paper": {
+    "line": 1453,
+    "start": 106218
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section5.step_zero_section",
+     "index": 7,
+     "start": [
+      101,
+      2
+     ]
+    }
+   ]
+  },
+  "thm:coisotropic-exclusion.proof.sentences[15]": {
+   "paper": {
+    "line": 1454,
+    "start": 106353
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section5.step_projection",
+     "index": 3,
+     "start": [
+      113,
+      4
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section5.step_projection",
+     "index": 8,
+     "start": [
+      117,
+      4
+     ]
+    }
+   ]
+  },
+  "thm:coisotropic-exclusion.proof.sentences[16]": {
+   "paper": {
+    "line": 1455,
+    "start": 106673
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section5.step_Y_avoids_H",
+     "index": 1,
+     "start": [
+      127,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section5.step_Y_avoids_H",
+     "index": 2,
+     "start": [
+      129,
+      2
+     ]
+    }
+   ]
+  },
+  "thm:coisotropic-exclusion.proof.sentences[17]": {
+   "paper": {
+    "line": 1455,
+    "start": 106844
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section5.step_Y_avoids_H",
+     "index": 3,
+     "start": [
+      130,
+      2
+     ]
+    }
+   ]
+  },
+  "thm:coisotropic-exclusion.proof.sentences[18]": {
+   "paper": {
+    "line": 1457,
+    "start": 106884
+   },
+   "steps": []
+  },
+  "thm:coisotropic-exclusion.proof.sentences[19]": {
+   "paper": {
+    "line": 1457,
+    "start": 106945
+   },
+   "steps": []
+  },
+  "thm:coisotropic-exclusion.proof.sentences[1]": {
+   "paper": {
+    "line": 1442,
+    "start": 104626
+   },
+   "steps": []
+  },
+  "thm:coisotropic-exclusion.proof.sentences[20]": {
+   "paper": {
+    "line": 1457,
+    "start": 106959
+   },
+   "steps": []
+  },
+  "thm:coisotropic-exclusion.proof.sentences[21]": {
+   "paper": {
+    "line": 1458,
+    "start": 106982
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section5.step_hamiltonian",
+     "index": 2,
+     "start": [
+      147,
+      4
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section5.step_hamiltonian",
+     "index": 3,
+     "start": [
+      148,
+      4
+     ]
+    }
+   ]
+  },
+  "thm:coisotropic-exclusion.proof.sentences[22]": {
+   "paper": {
+    "line": 1461,
+    "start": 107227
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section5.step_hamiltonian",
+     "index": 5,
+     "start": [
+      149,
+      4
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section5.step_hamiltonian",
+     "index": 7,
+     "start": [
+      151,
+      19
+     ]
+    }
+   ]
+  },
+  "thm:coisotropic-exclusion.proof.sentences[23]": {
+   "paper": {
+    "line": 1462,
+    "start": 107370
+   },
+   "steps": []
+  },
+  "thm:coisotropic-exclusion.proof.sentences[24]": {
+   "paper": {
+    "line": 1462,
+    "start": 107467
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section5.step_phi_derivatives",
+     "index": 0,
+     "start": [
+      165,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section5.step_phi_derivatives",
+     "index": 6,
+     "start": [
+      169,
+      2
+     ]
+    }
+   ]
+  },
+  "thm:coisotropic-exclusion.proof.sentences[25]": {
+   "paper": {
+    "line": 1463,
+    "start": 107959
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section5.step_line_mem",
+     "index": 2,
+     "start": [
+      184,
+      2
+     ]
+    }
+   ]
+  },
+  "thm:coisotropic-exclusion.proof.sentences[26]": {
+   "paper": {
+    "line": 1463,
+    "start": 108158
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section5.step_line_mem",
+     "index": 0,
+     "start": [
+      182,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section5.step_line_mem",
+     "index": 7,
+     "start": [
+      192,
+      2
+     ]
+    }
+   ]
+  },
+  "thm:coisotropic-exclusion.proof.sentences[27]": {
+   "paper": {
+    "line": 1464,
+    "start": 108248
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section5.step_span_mem",
+     "index": 0,
+     "start": [
+      206,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section5.step_span_mem",
+     "index": 1,
+     "start": [
+      207,
+      2
+     ]
+    }
+   ]
+  },
+  "thm:coisotropic-exclusion.proof.sentences[28]": {
+   "paper": {
+    "line": 1469,
+    "start": 108598
+   },
+   "steps": [
+    {
+     "index": 2,
+     "start": [
+      462,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section5.step_minimal_primes",
+     "index": 1,
+     "start": [
+      222,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section5.step_minimal_primes",
+     "index": 14,
+     "start": [
+      233,
+      2
+     ]
+    }
+   ]
+  },
+  "thm:coisotropic-exclusion.proof.sentences[29]": {
+   "paper": {
+    "line": 1469,
+    "start": 108698
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section5.step_minimal_primes",
+     "index": 0,
+     "start": [
+      220,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section5.step_minimal_primes",
+     "index": 15,
+     "start": [
+      235,
+      2
+     ]
+    }
+   ]
+  },
+  "thm:coisotropic-exclusion.proof.sentences[2]": {
+   "paper": {
+    "line": 1444,
+    "start": 104682
+   },
+   "steps": []
+  },
+  "thm:coisotropic-exclusion.proof.sentences[30]": {
+   "paper": {
+    "line": 1469,
+    "start": 108961
+   },
+   "steps": [
+    {
+     "index": 2,
+     "start": [
+      462,
+      2
+     ]
+    }
+   ]
+  },
+  "thm:coisotropic-exclusion.proof.sentences[31]": {
+   "paper": {
+    "line": 1469,
+    "start": 109031
+   },
+   "steps": [
+    {
+     "index": 3,
+     "start": [
+      463,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section5.step_component",
+     "index": 1,
+     "start": [
+      253,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section5.step_component",
+     "index": 4,
+     "start": [
+      260,
+      2
+     ]
+    }
+   ]
+  },
+  "thm:coisotropic-exclusion.proof.sentences[32]": {
+   "paper": {
+    "line": 1469,
+    "start": 109337
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section5.step_component",
+     "index": 2,
+     "start": [
+      255,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section5.step_component",
+     "index": 3,
+     "start": [
+      258,
+      2
+     ]
+    }
+   ]
+  },
+  "thm:coisotropic-exclusion.proof.sentences[33]": {
+   "paper": {
+    "line": 1472,
+    "start": 109455
+   },
+   "steps": [
+    {
+     "index": 4,
+     "start": [
+      465,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section5.step_separator",
+     "index": 4,
+     "start": [
+      279,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section5.step_separator",
+     "index": 10,
+     "start": [
+      285,
+      2
+     ]
+    }
+   ]
+  },
+  "thm:coisotropic-exclusion.proof.sentences[34]": {
+   "paper": {
+    "line": 1472,
+    "start": 109630
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section5.step_separator",
+     "index": 11,
+     "start": [
+      286,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section5.step_separator",
+     "index": 14,
+     "start": [
+      288,
+      4
+     ]
+    }
+   ]
+  },
+  "thm:coisotropic-exclusion.proof.sentences[35]": {
+   "paper": {
+    "line": 1472,
+    "start": 109829
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section5.step_separator",
+     "index": 20,
+     "start": [
+      293,
+      4
+     ]
+    }
+   ]
+  },
+  "thm:coisotropic-exclusion.proof.sentences[36]": {
+   "paper": {
+    "line": 1472,
+    "start": 109998
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section5.step_separator",
+     "index": 18,
+     "start": [
+      291,
+      4
+     ]
+    }
+   ]
+  },
+  "thm:coisotropic-exclusion.proof.sentences[37]": {
+   "paper": {
+    "line": 1473,
+    "start": 110171
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section5.step_dh_on_open",
+     "index": 2,
+     "start": [
+      323,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section5.step_dh_on_open",
+     "index": 5,
+     "start": [
+      326,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section5.step_dh_on_open",
+     "index": 7,
+     "start": [
+      330,
+      2
+     ]
+    }
+   ]
+  },
+  "thm:coisotropic-exclusion.proof.sentences[38]": {
+   "paper": {
+    "line": 1474,
+    "start": 110325
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section5.step_dh_on_component",
+     "index": 2,
+     "start": [
+      351,
+      2
+     ]
+    }
+   ]
+  },
+  "thm:coisotropic-exclusion.proof.sentences[39]": {
+   "paper": {
+    "line": 1474,
+    "start": 110555
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section5.step_dh_on_component",
+     "index": 0,
+     "start": [
+      349,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section5.step_dh_on_component",
+     "index": 7,
+     "start": [
+      356,
+      2
+     ]
+    }
+   ]
+  },
+  "thm:coisotropic-exclusion.proof.sentences[3]": {
+   "paper": {
+    "line": 1444,
+    "start": 104793
+   },
+   "steps": []
+  },
+  "thm:coisotropic-exclusion.proof.sentences[40]": {
+   "paper": {
+    "line": 1474,
+    "start": 110674
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section5.step_span_component",
+     "index": 0,
+     "start": [
+      374,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section5.step_span_component",
+     "index": 1,
+     "start": [
+      375,
+      2
+     ]
+    }
+   ]
+  },
+  "thm:coisotropic-exclusion.proof.sentences[41]": {
+   "paper": {
+    "line": 1474,
+    "start": 110991
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section5.step_P_vanishes_on_conormal_cone",
+     "index": 1,
+     "start": [
+      409,
+      2
+     ]
+    }
+   ]
+  },
+  "thm:coisotropic-exclusion.proof.sentences[42]": {
+   "paper": {
+    "line": 1476,
+    "start": 111204
+   },
+   "steps": [
+    {
+     "index": 5,
+     "start": [
+      466,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section5.step_P_vanishes_on_conormal_cone",
+     "index": 2,
+     "start": [
+      410,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section5.step_P_vanishes_on_conormal_cone",
+     "index": 3,
+     "start": [
+      412,
+      2
+     ]
+    }
+   ]
+  },
+  "thm:coisotropic-exclusion.proof.sentences[43]": {
+   "paper": {
+    "line": 1476,
+    "start": 111353
+   },
+   "steps": [
+    {
+     "index": 6,
+     "start": [
+      468,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section5.step_theorem_5_7_applies",
+     "index": 0,
+     "start": [
+      437,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section5.step_theorem_5_7_applies",
+     "index": 1,
+     "start": [
+      438,
+      2
+     ]
+    }
+   ]
+  },
+  "thm:coisotropic-exclusion.proof.sentences[44]": {
+   "paper": {
+    "line": 1476,
+    "start": 111604
+   },
+   "steps": [
+    {
+     "index": 6,
+     "start": [
+      468,
+      2
+     ]
+    }
+   ]
+  },
+  "thm:coisotropic-exclusion.proof.sentences[4]": {
+   "paper": {
+    "line": 1444,
+    "start": 104940
+   },
+   "steps": []
+  },
+  "thm:coisotropic-exclusion.proof.sentences[5]": {
+   "paper": {
+    "line": 1444,
+    "start": 105132
+   },
+   "steps": []
+  },
+  "thm:coisotropic-exclusion.proof.sentences[6]": {
+   "paper": {
+    "line": 1444,
+    "start": 105190
+   },
+   "steps": []
+  },
+  "thm:coisotropic-exclusion.proof.sentences[7]": {
+   "paper": {
+    "line": 1447,
+    "start": 105339
+   },
+   "steps": []
+  },
+  "thm:coisotropic-exclusion.proof.sentences[8]": {
+   "paper": {
+    "line": 1448,
+    "start": 105578
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section5.step_zero_section",
+     "index": 1,
+     "start": [
+      94,
+      2
+     ]
+    }
+   ]
+  },
+  "thm:coisotropic-exclusion.proof.sentences[9]": {
+   "paper": {
+    "line": 1453,
+    "start": 105902
+   },
+   "steps": []
+  }
+ },
+ "cards": [
+  {
+   "account": null,
+   "fingerprint": "3c3d58d7d12d1c19",
+   "flags": [],
+   "id": "sec5:conventions",
+   "kind": "prose",
+   "lean": [],
+   "paper_line": 966,
+   "title": "Paragraph: conventions"
+  },
+  {
+   "account": null,
+   "fingerprint": "0b3beaa67168e725",
+   "flags": [],
+   "id": "sec5:hyperplane",
+   "kind": "prose",
+   "lean": [],
+   "paper_line": 978,
+   "title": "Paragraph: H and dx₁"
+  },
+  {
+   "account": null,
+   "fingerprint": "a52a18fdd164281c",
+   "flags": [],
+   "id": "def:fieldextension",
+   "kind": "formalizes",
+   "lean": [
+    "IsAlgebraic",
+    "Transcendental",
+    "minpoly",
+    "Algebra.IsAlgebraic",
+    "AlgebraicIndependent",
+    "IsTranscendenceBasis",
+    "Algebra.trdeg",
+    "Stafford38.Paper.Section5.definition_5_1_g_h",
+    "Stafford38.Paper.Section5.definition_5_1_closing"
+   ],
+   "paper_line": 991,
+   "title": "Definition 5.1"
+  },
+  {
+   "account": null,
+   "fingerprint": "611b7bdc68d2a855",
+   "flags": [],
+   "id": "def:omega",
+   "kind": "formalizes",
+   "lean": [
+    "Derivation",
+    "Stafford38.Paper.Section5.differentialRelations",
+    "Stafford38.Paper.Section5.definition_5_2_b",
+    "Stafford38.Paper.Section5.definition_5_2_c_correspondence",
+    "Stafford38.Paper.Section5.definition_5_2_c"
+   ],
+   "paper_line": 1017,
+   "title": "Definition 5.2"
+  },
+  {
+   "account": null,
+   "fingerprint": "4b81133565b706b0",
+   "flags": [],
+   "id": "def:valuation",
+   "kind": "formalizes",
+   "lean": [
+    "ValuationSubring",
+    "IsDiscreteValuationRing",
+    "Stafford38.Paper.Section5.definition_5_3"
+   ],
+   "paper_line": 1040,
+   "title": "Definition 5.3"
+  },
+  {
+   "account": null,
+   "fingerprint": "8e6bb40491c12890",
+   "flags": [
+    "unused hypotheses",
+    "Lean-only definitions"
+   ],
+   "id": "def:conormal",
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section5.IsZariskiClosed",
+    "Stafford38.Paper.Section5.IsIrreducibleClosed",
+    "Stafford38.Paper.Section5.definition_5_4_a",
+    "Stafford38.Paper.Section5.JacobianSmoothPoint",
+    "Stafford38.Paper.Section5.definition_5_4_b_iff",
+    "Stafford38.Paper.Section5.definition_5_4_c",
+    "Stafford38.Paper.Section5.conormalCone",
+    "Stafford38.Paper.Section5.definition_5_4_d",
+    "Stafford38.Paper.Section5.conormalCone_paper_eq"
+   ],
+   "paper_line": 1051,
+   "title": "Definition 5.4"
+  },
+  {
+   "account": null,
+   "fingerprint": "33b889ef0058913d",
+   "flags": [
+    "Lean-only definitions"
+   ],
+   "id": "def:dir",
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section5.conormalDirections",
+    "Stafford38.Paper.Section5.definition_5_5"
+   ],
+   "paper_line": 1065,
+   "title": "Definition 5.5"
+  },
+  {
+   "account": null,
+   "fingerprint": "30990199fbd4f716",
+   "flags": [
+    "unused hypotheses",
+    "Lean-only definitions"
+   ],
+   "id": "def:fibre-can",
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Geometry.FibreConicalVanishingIdeal.IsFibreConical",
+    "Stafford38.Paper.Section5.definition_5_6"
+   ],
+   "paper_line": 1072,
+   "title": "Definition 5.6"
+  },
+  {
+   "account": {
+    "cited": [
+     "lem:W",
+     "lem:ell",
+     "lem:kappa",
+     "lem:place",
+     "lem:tangent"
+    ],
+    "large": 18,
+    "lean_adds": 136,
+    "matched": 68,
+    "only_lean": [],
+    "only_paper": [],
+    "prose": 25,
+    "sentences": 93,
+    "used": [
+     "lem:W",
+     "lem:ell",
+     "lem:kappa",
+     "lem:place",
+     "lem:tangent"
+    ]
+   },
+   "fingerprint": "b178dfd21444652a",
+   "flags": [
+    "Lean-only definitions",
+    "Lean adds",
+    "large step",
+    "prose"
+   ],
+   "id": "thm:asymptotic-conormal-formal",
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section5.theorem_5_7_i_printed",
+    "Stafford38.Paper.Section5.theorem_5_7_ii_printed"
+   ],
+   "paper_line": 1078,
+   "title": "Theorem 5.7"
+  },
+  {
+   "account": {
+    "cited": [
+     "thm:asymptotic-conormal-formal"
+    ],
+    "large": 2,
+    "lean_adds": 52,
+    "matched": 32,
+    "only_lean": [],
+    "only_paper": [],
+    "prose": 13,
+    "sentences": 42,
+    "used": [
+     "thm:asymptotic-conormal-formal"
+    ]
+   },
+   "fingerprint": "8a29dbe6c769fc4a",
+   "flags": [
+    "Lean-only definitions",
+    "Lean adds",
+    "large step",
+    "prose"
+   ],
+   "id": "thm:coisotropic-exclusion",
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section5.theorem_5_8",
+    "Stafford38.Paper.Section5.exclusionBaseIdeal"
+   ],
+   "paper_line": 1091,
+   "title": "Theorem 5.8"
+  },
+  {
+   "account": {
+    "cited": [],
+    "large": 1,
+    "lean_adds": 18,
+    "matched": 5,
+    "only_lean": [],
+    "only_paper": [],
+    "prose": 0,
+    "sentences": 5,
+    "used": []
+   },
+   "fingerprint": "5408604edf458de0",
+   "flags": [
+    "Lean-only definitions",
+    "Lean adds",
+    "large step"
+   ],
+   "id": "lem:W",
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section5.lemma_5_9"
+   ],
+   "paper_line": 1134,
+   "title": "Lemma 5.9"
+  },
+  {
+   "account": {
+    "cited": [],
+    "large": 7,
+    "lean_adds": 72,
+    "matched": 23,
+    "only_lean": [],
+    "only_paper": [],
+    "prose": 3,
+    "sentences": 26,
+    "used": []
+   },
+   "fingerprint": "b8dfcb6e7cc7e160",
+   "flags": [
+    "Lean-only definitions",
+    "Lean adds",
+    "large step",
+    "prose"
+   ],
+   "id": "lem:place",
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section5.lemma_5_10",
+    "Stafford38.Paper.Section5.Lemma510Place",
+    "Stafford38.Paper.Section5.Lemma510Place.V",
+    "Stafford38.Paper.Section5.lemma_5_10_a_not_R_le"
+   ],
+   "paper_line": 1156,
+   "title": "Lemma 5.10"
+  },
+  {
+   "account": {
+    "cited": [
+     "lem:place"
+    ],
+    "large": 1,
+    "lean_adds": 22,
+    "matched": 3,
+    "only_lean": [],
+    "only_paper": [
+     "lem:place"
+    ],
+    "prose": 0,
+    "sentences": 3,
+    "used": []
+   },
+   "fingerprint": "82c7128692943c85",
+   "flags": [
+    "Lean adds",
+    "large step"
+   ],
+   "id": "lem:kappa",
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section5.lemma_5_11"
+   ],
+   "paper_line": 1251,
+   "title": "Lemma 5.11"
+  },
+  {
+   "account": {
+    "cited": [
+     "lem:place"
+    ],
+    "large": 4,
+    "lean_adds": 41,
+    "matched": 13,
+    "only_lean": [],
+    "only_paper": [
+     "lem:place"
+    ],
+    "prose": 5,
+    "sentences": 18,
+    "used": []
+   },
+   "fingerprint": "bc47addd73ea241a",
+   "flags": [
+    "Lean-only definitions",
+    "Lean adds",
+    "large step",
+    "prose"
+   ],
+   "id": "lem:tangent",
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section5.rho",
+    "Stafford38.Paper.Section5.ker_rho",
+    "Stafford38.Paper.Section5.tangentSpaceAt",
+    "Stafford38.Paper.Section5.tangentCone",
+    "Stafford38.Paper.Section5.generic_tangent_finrank_eq_component_kaehler_finrank",
+    "Stafford38.Paper.Section5.component_kaehler_finrank_eq_trdeg",
+    "Stafford38.Paper.Section5.lemma_5_12_a_bound",
+    "Stafford38.Paper.Section5.lemma_5_12_a_cone",
+    "Stafford38.Paper.Section5.lemma_5_12_b"
+   ],
+   "paper_line": 1306,
+   "title": "Lemma 5.12"
+  },
+  {
+   "account": {
+    "cited": [],
+    "large": 2,
+    "lean_adds": 6,
+    "matched": 3,
+    "only_lean": [
+     "lem:tangent"
+    ],
+    "only_paper": [],
+    "prose": 1,
+    "sentences": 4,
+    "used": [
+     "lem:tangent"
+    ]
+   },
+   "fingerprint": "6dc7802146d9dcee",
+   "flags": [
+    "Lean adds",
+    "large step",
+    "prose"
+   ],
+   "id": "lem:ell",
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section5.lemma_5_13"
+   ],
+   "paper_line": 1363,
+   "title": "Lemma 5.13"
+  }
+ ],
+ "errors": [],
+ "graph": {
+  "graphviz": "dot - graphviz version 16.1.0 (0)",
+  "overall": [
+   {
+    "from": "def:conormal",
+    "kind": "lean",
+    "to": "def:dir"
+   },
+   {
+    "from": "def:dir",
+    "kind": "def",
+    "to": "thm:asymptotic-conormal-formal"
+   },
+   {
+    "from": "def:fibre-can",
+    "kind": "def",
+    "to": "thm:coisotropic-exclusion"
+   },
+   {
+    "from": "thm:asymptotic-conormal-formal",
+    "kind": "paper",
+    "to": "sec5:conventions"
+   },
+   {
+    "from": "thm:asymptotic-conormal-formal",
+    "kind": "both",
+    "to": "thm:coisotropic-exclusion"
+   },
+   {
+    "from": "thm:coisotropic-exclusion",
+    "kind": "paper",
+    "to": "sec5:conventions"
+   },
+   {
+    "from": "lem:W",
+    "kind": "both",
+    "to": "thm:asymptotic-conormal-formal"
+   },
+   {
+    "from": "lem:place",
+    "kind": "both",
+    "to": "thm:asymptotic-conormal-formal"
+   },
+   {
+    "from": "lem:place",
+    "kind": "paper-only",
+    "to": "lem:kappa"
+   },
+   {
+    "from": "lem:place",
+    "kind": "paper-only",
+    "to": "lem:tangent"
+   },
+   {
+    "from": "lem:kappa",
+    "kind": "both",
+    "to": "thm:asymptotic-conormal-formal"
+   },
+   {
+    "from": "lem:tangent",
+    "kind": "lean",
+    "to": "def:conormal"
+   },
+   {
+    "from": "lem:tangent",
+    "kind": "both",
+    "to": "thm:asymptotic-conormal-formal"
+   },
+   {
+    "from": "lem:tangent",
+    "kind": "lean-only",
+    "to": "lem:ell"
+   },
+   {
+    "from": "lem:ell",
+    "kind": "both",
+    "to": "thm:asymptotic-conormal-formal"
+   }
+  ]
+ },
+ "schema": "paper-lean-audit/report-2",
+ "warnings": [
+  "unresolved \\leandecl{Stafford38/Geometry/GeneralAsymptoticConormal.lean}{42}{Stafford38.Geometry.GeneralAsymptoticConormal.coordinate_axis_mem_projective_conormal_directions}",
+  "unresolved \\leandecl{Stafford38/Geometry/GeneralAsymptoticConormal.lean}{32}{Stafford38.Geometry.GeneralAsymptoticConormal.coordinate_axis_mem_smooth_fibre_closure}",
+  "unresolved \\leandecl{Stafford38/Geometry/GeneralCoisotropicSets.lean}{160}{Stafford38.Geometry.GeneralCoisotropicSets.exists_zero_base_coordinate_of_isFibreConical}",
+  "unresolved \\leandecl{Stafford38/Geometry/GeneralCoisotropicExclusion.lean}{84}{Stafford38.Geometry.GeneralCoisotropicExclusion.exists_zero_base_coordinate}",
+  "unresolved \\leandecl{Stafford38/Characteristic/BaseRelativePoisson.lean}{29}{Stafford38.Characteristic.BaseRelativePoisson.IsBaseRelativePoisson}",
+  "unresolved \\leandecl{Stafford38/Geometry/GeneralCoisotropicSetsTest.lean}{104}{Stafford38.Geometry.GeneralCoisotropicSetsTest.exact_complex_manuscript_coisotropic_consumer}",
+  "unresolved \\leandecl{Stafford38/Geometry/GeneralDivisorialVisibleFrame.lean}{55}{Stafford38.Geometry.GeneralDivisorialVisibleFrame.generalDivisorialVisibleFrameWithResidueAlgebraicity}",
+  "unresolved \\leandecl{Stafford38/Geometry/PaperSameWitnessTangentDimension.lean}{70}{Stafford38.Geometry.PaperSameWitnessTangentDimension.tangent_finrank_le_residue_add_one_of_witness}",
+  "unresolved \\leandecl{Stafford38/Geometry/PaperActualWitnessConormalData.lean}{59}{Stafford38.Geometry.PaperActualWitnessConormalData.exists_regularizedOneRowConormalData_of_actual_witness}",
+  "unresolved \\leandecl{Stafford38/Geometry/GeneralConormalAxis.lean}{53}{Stafford38.Geometry.GeneralConormalAxis.exists_groundConormalAxis_of_minimalPrime_unit_transcendental}",
+  "unresolved \\leandecl{Stafford38/Geometry/GeneralAsymptoticLaurentAxis.lean}{31}{Stafford38.Geometry.GeneralAsymptoticLaurentAxis.exists_groundConormalAxis_of_prime_coordinate_avoidance}",
+  "unresolved \\leandecl{Stafford38/Characteristic/BaseRelativePoisson.lean}{72}{Stafford38.Characteristic.BaseRelativePoisson.zeroSection_stable_under_differential_translation_of_isBaseRelativePoisson}",
+  "unresolved \\leandecl{Stafford38/Geometry/GeneralComponentConormalContainment.lean}{72}{Stafford38.Geometry.GeneralComponentConormalContainment.equationConormalClosure_minimalPrime_subset_zeroLocus}"
+ ]
+}

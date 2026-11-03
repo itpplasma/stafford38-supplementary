@@ -1,0 +1,2557 @@
+{
+ "schema": "paper-lean-audit/map-2",
+ "title": "Stafford's conjecture: Section 5, paper beside Lean",
+ "output_stem": "sec5",
+ "sources": {
+  "paper": {
+   "repo": "itpplasma/stafford38-paper",
+   "commit": "c8f0d615ba3ad7271c1c99ad4b0085071da6a793",
+   "file": "human_readable_main.tex",
+   "snapshot": "../../sources/paper/raw/human_readable_main.tex",
+   "sha256": "9cdf65e2419f8a2c9c28c27a5b531d9d2a12be2305c190eafa726f0255d9db66",
+   "bib_snapshot": "../../sources/paper/raw/references.bib"
+  },
+  "formal": {
+   "repo": "itpplasma/stafford38-formal",
+   "commit": "665fb5bbd26967bfde5c9c30f27513f4cea37f24"
+  },
+  "generator": {
+   "repo": "itpplasma/paper-lean-audit",
+   "commit": "a9f07c0",
+   "note": "v2/extract.mjs and v2/build.mjs at this commit produce sec5.extraction.json and the reader."
+  }
+ },
+ "lean": {
+  "extraction": "sec5.extraction.json",
+  "imports": [
+   "Stafford38.Paper.Main"
+  ],
+  "project_modules": [
+   "Stafford38",
+   "Challenge",
+   "FixedSourceChallenge"
+  ],
+  "open": [
+   "Stafford38.Paper.Section5",
+   "Stafford38.Paper.Section2",
+   "Stafford38Challenge"
+  ]
+ },
+ "scope": {
+  "sections": [
+   "5"
+  ]
+ },
+ "entries": [
+  {
+   "id": "sec5:conventions",
+   "paper": {
+    "quote": "Throughout this section $K$ denotes an algebraically closed field of characteristic"
+   },
+   "kind": "prose",
+   "note": "Lean states each result for a field k with [IsAlgClosed k] and [CharZero k] where they are needed, X = Fin m → k with m ≥ 1 (hypothesis hm : 0 < m), and T*X as PhaseVar m → k, the base coordinates .inl i and the fibre coordinates .inr i (Definition 2.5). Closed sets are zero sets of ideals, MvPolynomial.zeroLocus.",
+   "short": "conventions"
+  },
+  {
+   "id": "sec5:hyperplane",
+   "paper": {
+    "quote": "We write $H:=V_K(x_1)=\\{(0,y_2,\\dots,y_n)\\}\\subseteq X$"
+   },
+   "kind": "prose",
+   "note": "Lean writes x_1 as the coordinate ⟨0, hm⟩, H as {y | y ⟨0, hm⟩ = 0}, π⁻¹(H) as {q | q (.inl ⟨0, hm⟩) = 0} and (1, 0, …, 0) = dx_1 as fun i => if i = ⟨0, hm⟩ then 1 else 0.",
+   "short": "H and dx₁"
+  },
+  {
+   "id": "def:fieldextension",
+   "paper": {
+    "quote": "\\label{def:fieldextension}"
+   },
+   "kind": "formalizes",
+   "lean": [
+    "IsAlgebraic",
+    "Transcendental",
+    "minpoly",
+    "Algebra.IsAlgebraic",
+    "AlgebraicIndependent",
+    "IsTranscendenceBasis",
+    "Algebra.trdeg",
+    "Stafford38.Paper.Section5.definition_5_1_g_h",
+    "Stafford38.Paper.Section5.definition_5_1_closing"
+   ],
+   "note": "Items (a)–(f) are Mathlib definitions, shown here; Lean restates only the facts the proofs use: (g)–(h) and the closing sentence. Separability in characteristic zero is used inside the Mathlib results and not restated."
+  },
+  {
+   "id": "def:omega",
+   "paper": {
+    "quote": "\\label{def:omega}"
+   },
+   "kind": "formalizes",
+   "lean": [
+    "Derivation",
+    "Stafford38.Paper.Section5.differentialRelations",
+    "Stafford38.Paper.Section5.definition_5_2_b",
+    "Stafford38.Paper.Section5.definition_5_2_c_correspondence",
+    "Stafford38.Paper.Section5.definition_5_2_c"
+   ],
+   "note": "Lean's Ω_{κ/K} is Mathlib's KaehlerDifferential; definition_5_2_b identifies it with the printed quotient of the free module by the relations differentialRelations."
+  },
+  {
+   "id": "def:valuation",
+   "paper": {
+    "quote": "\\label{def:valuation}"
+   },
+   "kind": "formalizes",
+   "lean": [
+    "ValuationSubring",
+    "IsDiscreteValuationRing",
+    "Stafford38.Paper.Section5.definition_5_3"
+   ],
+   "note": "Lean uses Mathlib's ValuationSubring, IsDiscreteValuationRing, PowerSeries and LaurentSeries; definition_5_3 proves that they satisfy the printed definitions (a)–(c)."
+  },
+  {
+   "id": "def:conormal",
+   "paper": {
+    "quote": "\\label{def:conormal}"
+   },
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section5.IsZariskiClosed",
+    "Stafford38.Paper.Section5.IsIrreducibleClosed",
+    "Stafford38.Paper.Section5.definition_5_4_a",
+    "Stafford38.Paper.Section5.JacobianSmoothPoint",
+    "Stafford38.Paper.Section5.definition_5_4_b_iff",
+    "Stafford38.Paper.Section5.definition_5_4_c",
+    "Stafford38.Paper.Section5.conormalCone",
+    "Stafford38.Paper.Section5.definition_5_4_d",
+    "Stafford38.Paper.Section5.conormalCone_paper_eq"
+   ],
+   "note": "JacobianSmoothPoint is the printed Y_sm with dim Y the Krull dimension of K[x]/𝔭; definition_5_4_b_iff proves it equals Mathlib's smooth locus (SmoothAffinePoint), which the proofs use. The claim \"open and dense\" is not restated; the proofs use density through fibreLift_mem_vanishingIdeal_equationConormal."
+  },
+  {
+   "id": "def:dir",
+   "paper": {
+    "quote": "\\label{def:dir}"
+   },
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section5.conormalDirections",
+    "Stafford38.Paper.Section5.definition_5_5"
+   ],
+   "note": "Zariski closed sets of ℙ((K^n)*) are the common zero sets of homogeneous polynomials (projectiveHomogeneousClosure)."
+  },
+  {
+   "id": "def:fibre-can",
+   "paper": {
+    "quote": "\\label{def:fibre-can}"
+   },
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Geometry.FibreConicalVanishingIdeal.IsFibreConical",
+    "Stafford38.Paper.Section5.definition_5_6"
+   ]
+  },
+  {
+   "id": "thm:asymptotic-conormal-formal",
+   "paper": {
+    "quote": "\\label{thm:asymptotic-conormal-formal}"
+   },
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section5.theorem_5_7_i_printed",
+    "Stafford38.Paper.Section5.theorem_5_7_ii_printed"
+   ],
+   "note": "The printed proof of (i) is theorem_5_7_i_paper, for Y = V_K(I) with I prime; theorem_5_7_i_printed passes to it with I = I(Y), and theorem_5_7_ii follows by step_dir_of_fibre. The Lean proof follows the printed route; where a step differs, the row says so.",
+   "proof": {
+    "lean": "Stafford38.Paper.Section5.theorem_5_7_i_paper",
+    "paper": {
+     "quote": "If $Y$ is nonempty, closed and irreducible, then $\\mathfrak p:=I(Y)$ is a prime"
+    },
+    "sentences": [
+     {
+      "quote": "If $Y$ is nonempty, closed and irreducible, then $\\mathfrak p:=I(Y)$ is a prime",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section5.theorem_5_7_i_printed",
+        "quote": "refine theorem_5_7_i_prime hm (idealPoint Y hne hY)"
+       },
+       {
+        "decl": "Stafford38.Paper.Section5.theorem_5_7_i_printed",
+        "quote": "rw [zeroLocus_vanishingIdeal_of_isZariskiClosed hY.1] at hy"
+       }
+      ],
+      "note": "In the printed statement theorem_5_7_i_printed, 𝔭 = I(Y) is idealPoint Y (prime by Definition 5.4(a)) and V_K(𝔭) = Y; theorem_5_7_i_paper then works with the prime I directly."
+     },
+     {
+      "quote": "We will write $R=K[x]/\\mathfrak p$",
+      "kind": "prose",
+      "note": "Notation. Lean writes F as ComponentFractionField I and x̄_i as componentCoordinate I i."
+     },
+     {
+      "quote": "If $\\bar x_1$ is algebraic over $K$, there exists",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "by_cases halg : IsAlgebraic k (componentCoordinate I ⟨0, hm⟩)"
+       },
+       {
+        "decl": "Stafford38.Geometry.GeneralConstantCoordinateAxis.exists_constant_coordinate_equation_and_pure_axis",
+        "quote": "obtain ⟨c, hc⟩ | htrans :="
+       }
+      ],
+      "note": "Lean obtains x_1 − c ∈ 𝔭 at once from coordinate_constant_or_transcendental, which contains the factorisation argument of the next sentence."
+     },
+     {
+      "quote": "is algebraically closed, $g(x_1)=\\lambda\\prod_i(x_1-c_i)$",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Geometry.GeneralConstantCoordinateAxis.exists_constant_coordinate_equation_and_pure_axis",
+        "quote": "obtain ⟨c, hc⟩ | htrans :="
+       }
+      ]
+     },
+     {
+      "quote": "Thus $x_1=c$ on $Y=V_K(\\mathfrak p)$",
+      "kind": "prose",
+      "note": "Lean does not need c ≠ 0: dx_1 = d(x_1 − c) is conormal for every c."
+     },
+     {
+      "quote": "In this case $f=x_1-c$ lies in",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Geometry.GeneralConstantCoordinateAxis.exists_constant_coordinate_equation_and_pure_axis",
+        "quote": "obtain ⟨M, hMmax, hPM⟩ := Ideal.exists_le_maximal P.asIdeal P.isPrime.ne_top"
+       },
+       {
+        "decl": "Stafford38.Geometry.GeneralConstantCoordinateAxis.exists_constant_coordinate_equation_and_pure_axis",
+        "quote": "exact constantCoordinate_phasePoint_mem_equationConormalLocus"
+       },
+       {
+        "quote": "obtain ⟨c, y, -, -, hmem⟩ := exists_constant_coordinate_equation_and_pure_axis hm I halg"
+       }
+      ],
+      "note": "Lean takes one point y of Y (a maximal ideal containing 𝔭), not a smooth point, and puts (y, dx_1) in the equation conormal locus {(y, Σ μ_k dg_k(y)) : g_k ∈ 𝔭}; it reaches N(Y) by the density argument of the final paragraph (next sentence), so it does not need Y_sm ≠ ∅."
+     },
+     {
+      "quote": "Every polynomial vanishing on $N(Y)$ therefore vanishes at $(1,0,\\dots , 0)$, and",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "have h := fibreLift_mem_vanishingIdeal_equationConormal"
+       },
+       {
+        "quote": "simpa [fibreLift, MvPolynomial.eval_rename, Function.comp_def] using h"
+       }
+      ],
+      "note": "fibreLift_mem_vanishingIdeal_equationConormal: a polynomial vanishing on N(Y) vanishes on the whole equation conormal locus. [dx_1] ∈ Dir(Y) then follows from (i) as in the last paragraph (step_dir_of_fibre)."
+     },
+     {
+      "quote": "So we may assume from now on that",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "by_cases halg : IsAlgebraic k (componentCoordinate I ⟨0, hm⟩)"
+       }
+      ],
+      "note": "The second branch of the case split."
+     },
+     {
+      "quote": "The rest of the proof follows this rough logic.",
+      "kind": "prose",
+      "note": "Outline of the argument that follows; each claim is mapped where it is proved."
+     },
+     {
+      "quote": "We construct a discrete valuation",
+      "kind": "prose",
+      "note": "Outline of the argument that follows; each claim is mapped where it is proved."
+     },
+     {
+      "quote": "The affine cone $\\mathcal C$ of $Y$ over the projective tangent plane at",
+      "kind": "prose",
+      "note": "Outline of the argument that follows; each claim is mapped where it is proved."
+     },
+     {
+      "quote": "Hence the row vector",
+      "kind": "prose",
+      "note": "Outline of the argument that follows; each claim is mapped where it is proved."
+     },
+     {
+      "quote": "By construction the affine part $\\tilde\\ell(t)$ consists of",
+      "kind": "prose",
+      "note": "Outline of the argument that follows; each claim is mapped where it is proved."
+     },
+     {
+      "quote": "A polynomial\nvanishing on $N(Y)$ therefore vanishes at $dx_1$",
+      "kind": "prose",
+      "note": "Outline of the argument that follows; each claim is mapped where it is proved."
+     },
+     {
+      "quote": "We set $\\bar x_0:=1$.",
+      "kind": "prose",
+      "note": "Notation; Lean writes (x̄_0, …, x̄_n) = (1, x̄_1, …, x̄_n) as homogeneousCoordinates (Lemma 5.9)."
+     },
+     {
+      "quote": "Let $W$ be the valuation ring of Lemma \\ref{lem:W}.",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "obtain ⟨w, hfin⟩ :="
+       }
+      ],
+      "note": "Lemmas 5.9 and 5.10 are applied inside generalDivisorialVisibleFrameWithKaehlerFinite, which returns a witness w holding W, the index j, the column q and the discrete valuation ring V, and the finiteness of Ω_{V/K}."
+     },
+     {
+      "quote": "We define the column vector $q$ in homogeneous coordinates by",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "let C := w.column"
+       }
+      ],
+      "note": "The column is w.column; the identities q_j = 1, q_i = x̄_i/x̄_j and q_1 = q_0 x̄_1 are its fields chart_one, q_commonScale and q_parameter, used in step_orders and step_a_pos."
+     },
+     {
+      "quote": "By Lemma~\\ref{lem:place} there exists a discrete valuation ring $V\\subset F$ with",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "obtain ⟨w, hfin⟩ :="
+       },
+       {
+        "quote": "let V := W.place.valuation.toSubring"
+       }
+      ],
+      "note": "R ⊄ V (Lemma 5.10(a)) enters through step_a_pos, which applies lemma_5_10_a_not_R_le."
+     },
+     {
+      "quote": "Let $\\varpi$ be a\ngenerator of $\\mathfrak m_V$",
+      "kind": "prose",
+      "note": "Recalls ord_V from Definition 5.3(b); Lean measures orders as PowerSeries.order after the embedding into κ[[t]] of the next paragraph."
+     },
+     {
+      "quote": "We denote the residual field with $\\kappa=V/\\mathfrak m_V$.",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "let κ := ResidueField V"
+       }
+      ]
+     },
+     {
+      "quote": "Let $\\widehat V$ be the completion of $V$.",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "obtain ⟨-, -, -, -, hres, -, -, -⟩ := step_completion hm I w"
+       }
+      ],
+      "note": "step_completion states 𝔪_V = (ϖ), that V → κ[[t]] (retainedToCompletedPowerSeries) is injective, sends c ∈ K to the constant c and ϖ to t, has constant term res, and extends to F ↪ κ((t)); the proof keeps the constant-term identity hres."
+     },
+     {
+      "quote": "and $K$ is of characteristic zero, there exists a coefficient field of $\\widehat V$",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "obtain ⟨-, -, -, -, hres, -, -, -⟩ := step_completion hm I w"
+       }
+      ]
+     },
+     {
+      "quote": "Since the natural map $V\\to\\widehat V$ is injective",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "obtain ⟨-, -, -, -, hres, -, -, -⟩ := step_completion hm I w"
+       }
+      ]
+     },
+     {
+      "quote": "and extends to an embedding $F\\hookrightarrow\\kappa((t))$",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "obtain ⟨-, -, -, -, hres, -, -, -⟩ := step_completion hm I w"
+       }
+      ]
+     },
+     {
+      "quote": "The residue $\\operatorname{res}(f)$ of $f \\in V$ is then just the constant term",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "obtain ⟨-, -, -, -, hres, -, -, -⟩ := step_completion hm I w"
+       },
+       {
+        "quote": "let q : Fin (m + 1) → PowerSeries κ := fun a ↦ retainedToCompletedPowerSeries W (C.q a)"
+       }
+      ]
+     },
+     {
+      "quote": "Let $a=\\operatorname{ord}_V(q_0)$ and $b=\\operatorname{ord}_V(q_1)$.",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "obtain ⟨a, b, u₀, u₁, ha, hab, hq0, hu₀, hq1, -, hqj, -, -⟩ := step_orders hm I w hunit"
+       }
+      ]
+     },
+     {
+      "quote": "$a,b\\geq 0$ since $q_0,q_1$ are elements of $V$",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section5.step_orders",
+        "quote": "obtain ⟨a, b', u₀, u₁', ha, hab', hq0, hu₀, hq1'⟩ := completed_order_gap"
+       },
+       {
+        "decl": "Stafford38.Paper.Section5.step_orders",
+        "quote": "have hu₁ : PowerSeries.constantCoeff"
+       }
+      ]
+     },
+     {
+      "quote": "Since $\\bar x_1\\in\\mathfrak m_V$, $b-a=",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section5.step_orders",
+        "quote": "have hparammax : W.place.parameter ∈ maximalIdeal V := by"
+       },
+       {
+        "decl": "Stafford38.Paper.Section5.step_orders",
+        "quote": "obtain ⟨a, b', u₀, u₁', ha, hab', hq0, hu₀, hq1'⟩ := completed_order_gap"
+       },
+       {
+        "decl": "Stafford38.Paper.Section5.step_orders",
+        "quote": "have hb : b' ≤ (q (Fin.succ ⟨0, hm⟩)).order.toNat := by"
+       }
+      ],
+      "note": "completed_order_gap reads q_1 = q_0 x̄_1 in κ[[t]]; in the witness x̄_1 is the chosen parameter of V (W.place.parameter), so ord_V(x̄_1) = 1."
+     },
+     {
+      "quote": "Moreover\n$a>0$: if $a=0$",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section5.step_orders",
+        "quote": "have hq₀max : C.q 0 ∈ maximalIdeal V := by"
+       },
+       {
+        "decl": "Stafford38.Paper.Section5.step_a_pos",
+        "quote": "have hR := lemma_5_10_a_not_R_le x ⟨0, hm⟩ V hxV hxm ⟨_, hgR, hinverse⟩"
+       },
+       {
+        "decl": "Stafford38.Paper.Section5.step_a_pos",
+        "quote": "rintro ⟨u, hu⟩"
+       },
+       {
+        "decl": "Stafford38.Paper.Section5.step_a_pos",
+        "quote": "have hxjV : ∀ j, x j ∈ V.toSubring := by"
+       },
+       {
+        "decl": "Stafford38.Paper.Section5.step_a_pos",
+        "quote": "induction hz using Algebra.adjoin_induction with"
+       }
+      ]
+     },
+     {
+      "quote": "It follows that $j \\notin \\{0,1\\}$",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section5.step_orders",
+        "quote": "have hconst : ∀ i"
+       },
+       {
+        "decl": "Stafford38.Paper.Section5.step_orders",
+        "quote": "have hconst1 : C.chart ≠ Fin.succ ⟨0, hm⟩ := by"
+       }
+      ]
+     },
+     {
+      "quote": "Dividing by $q_0(t)\\neq 0$, we define",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "have hq0ne : q 0 ≠ 0 := by"
+       },
+       {
+        "decl": "Stafford38.Paper.Section5.step_generic_point",
+        "quote": "have hpoint := retainedLaurentLift_componentCoordinate"
+       }
+      ]
+     },
+     {
+      "quote": "Since ring homomorphisms commute with polynomial evaluation and",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section5.step_generic_point",
+        "quote": "have hker := component_generic_kernel_after_point_transport"
+       },
+       {
+        "decl": "Stafford38.Paper.Section5.step_generic_point",
+        "quote": "exact hker f"
+       },
+       {
+        "quote": "have hbase : ∀ f ∈ I.asIdeal"
+       }
+      ],
+      "note": "Equation (5.1) is step_generic_point; the proof of (i) uses its direction f ∈ 𝔭 ⇒ f(y) = 0 (hbase)."
+     },
+     {
+      "quote": "Let $df_y=\\nabla f(y)\\in\\kappa((t))^n$ for a polynomial $f$.",
+      "kind": "prose",
+      "note": "Notation; Lean writes the gradient as differentialAt y f."
+     },
+     {
+      "quote": "We define $\\Theta_y$ to be the tangent space of $Y$ at the generic point $y$,",
+      "kind": "prose",
+      "note": "Definition; Lean: tangentSpaceAt (shown with Lemma 5.12)."
+     },
+     {
+      "quote": "We now pass to homogeneous coordinates by defining a map",
+      "kind": "prose",
+      "note": "Definition of ρ; Lean: rho, with kernel L·q by ker_rho (shown with Lemma 5.12)."
+     },
+     {
+      "quote": "We write\n$\\mathcal C=\\rho^{-1}(\\Theta_y)$",
+      "kind": "prose",
+      "note": "Definition; Lean: tangentCone (shown with Lemma 5.12)."
+     },
+     {
+      "quote": "Our goal is to build a basis of $\\mathcal C$",
+      "kind": "prose",
+      "note": "Announces the construction that follows."
+     },
+     {
+      "quote": "We do so by building independent vectors from the tangent planes of $q(t)$.",
+      "kind": "prose",
+      "note": "Announces the construction that follows."
+     },
+     {
+      "quote": "Since $0<a<b$, in $\\kappa$ we have $q_0(0)=q_1(0)=0$ and $q_j(0)=1$.",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "obtain ⟨-, -, -, d, rows, hinj, -, hli, hspan, hd⟩ := witness_lemma_5_11 hm I w hunit"
+       },
+       {
+        "decl": "Stafford38.Paper.Section5.witness_lemma_5_11",
+        "quote": "have hr0 : residue V (C.q 0) = 0 := by"
+       },
+       {
+        "decl": "Stafford38.Paper.Section5.witness_lemma_5_11",
+        "quote": "have hr1 : residue V (C.q (Fin.succ ⟨0, hm⟩)) = 0 := by"
+       },
+       {
+        "decl": "Stafford38.Paper.Section5.witness_lemma_5_11",
+        "quote": "have hrj : residue V (C.q C.chart) = 1 := by"
+       }
+      ]
+     },
+     {
+      "quote": "Let\n$L=K(q_0(0),\\dots,q_n(0))\\subseteq\\kappa$",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section5.witness_lemma_5_11",
+        "quote": "have halg : Algebra.IsAlgebraic"
+       }
+      ],
+      "note": "κ/L algebraic is the witness field w.halg, from Lemma 5.10(b)."
+     },
+     {
+      "quote": "We write for all $q_i(t) = \\sum_rc_{ir}t^r$.",
+      "kind": "prose",
+      "note": "Notation for the coefficients of q_i(t)."
+     },
+     {
+      "quote": "The derivative with respect to $t$ is then",
+      "kind": "prose",
+      "note": "Definition; Lean: PowerSeries.derivative."
+     },
+     {
+      "quote": "This is a $K$-derivation of $\\kappa((t))$.",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section5.step_M_spans_cone",
+        "quote": "hder (uniformizerDerivation (k := k) (K := κ))"
+       }
+      ],
+      "note": "uniformizerDerivation is d/dt as a K-derivation, extended to κ((t)) by extendPowerSeriesDerivation."
+     },
+     {
+      "quote": "By Lemma \\ref{lem:kappa} there exist",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "obtain ⟨-, -, -, d, rows, hinj, -, hli, hspan, hd⟩ := witness_lemma_5_11 hm I w hunit"
+       },
+       {
+        "decl": "Stafford38.Paper.Section5.witness_lemma_5_11",
+        "quote": "lemma_5_11 hm (fun a ↦ residue V (C.q a)) C.chart hr0 hr1 hrj halg⟩"
+       },
+       {
+        "quote": "rw [← hresRows] at hli hspan"
+       }
+      ]
+     },
+     {
+      "quote": "Let $D_1,\\dots,D_{d'}$ be the dual $K$-derivations of this basis",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "obtain ⟨D, -, -, hminor, hZj, hZ0, hZ1⟩ :="
+       },
+       {
+        "decl": "Stafford38.Paper.Section5.step_dual_derivations",
+        "quote": "obtain ⟨D, hdual⟩ := definition_5_2_c"
+       }
+      ]
+     },
+     {
+      "quote": "We apply $D_k$ coefficientwise to",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "let Z := coefficientwiseTangentMatrix q D"
+       }
+      ]
+     },
+     {
+      "quote": "Since $D_k(q_{i_l}(0))=\\delta_{kl}$, the reduction $Z(0)$ is the identity",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section5.step_dual_derivations",
+        "quote": "have hentry : ∀ l k',"
+       },
+       {
+        "decl": "Stafford38.Paper.Section5.step_dual_derivations",
+        "quote": "exact (coefficientwiseDerivation (D k')).map_one_eq_zero"
+       }
+      ]
+     },
+     {
+      "quote": "Rows $0$ and $1$ of $Z(t)$ have order at least $a$ and $b$",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section5.step_dual_derivations",
+        "quote": "exact coefficientwiseDerivation_X_pow_mul (D k') a u₀"
+       },
+       {
+        "decl": "Stafford38.Paper.Section5.step_dual_derivations",
+        "quote": "exact coefficientwiseDerivation_X_pow_mul (D k') b u₁"
+       }
+      ]
+     },
+     {
+      "quote": "Let $\\tilde Z(t)$ be the ${d'}\\times {d'}$ submatrix",
+      "kind": "prose",
+      "note": "Definition; Lean: selectedMinor Z rows."
+     },
+     {
+      "quote": "Its reduction $\\tilde Z(0)$ is the identity\nmatrix",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section5.step_dual_derivations",
+        "quote": "have hone : selectedMinor (residueMatrix (coefficientwiseTangentMatrix q D)) rows = 1 := by"
+       },
+       {
+        "decl": "Stafford38.Paper.Section5.step_lambda_w_tau",
+        "quote": "have hunit : IsUnit (selectedMinor Z rows) :="
+       }
+      ]
+     },
+     {
+      "quote": "Hence there exists a unique vector",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "obtain ⟨lambda, c, tau, -, -, -, -, -, -, -, hfactor, hprim, htaurows, -, htau1, htauj⟩ :="
+       },
+       {
+        "decl": "Stafford38.Paper.Section5.step_lambda_w_tau",
+        "quote": "exists_formalDivisorAxisLift q Z rows j 0"
+       },
+       {
+        "decl": "Stafford38.Paper.Section5.step_lambda_w_tau",
+        "quote": "have huniq : ∀ lambda'"
+       }
+      ],
+      "note": "Existence of λ, and of c and τ below, comes from exists_formalDivisorAxisLift; uniqueness is huniq."
+     },
+     {
+      "quote": "We define $w(t)=q'(t)-Z(t)\\lambda(t)$, so",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section5.step_lambda_w_tau",
+        "quote": "refine ⟨lambda, c, tau, hsel, huniq, fun l ↦ sub_eq_zero.mpr (hsel l)"
+       }
+      ],
+      "note": "Lean writes w as derivative q − Z.mulVec λ."
+     },
+     {
+      "quote": "Its $0$th entry is $w_0(t)=q_0'(t)-Z_{0\\bullet}(t)\\lambda(t)$.",
+      "kind": "prose",
+      "note": "Notation for the entry w_0."
+     },
+     {
+      "quote": "Here\n$q_0'(t)=at^{a-1}u_0(t)+t^au_0(t)'$ has order exactly $a-1$",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section5.step_lambda_w_tau",
+        "quote": "obtain ⟨r₀, hr₀, hr₀c⟩ := derivative_sub_mulVec_eq_X_pow_mul q Z lambda 0 a ha u₀ hq0 hZ0"
+       }
+      ],
+      "note": "derivative_sub_mulVec_eq_X_pow_mul: w_0 = t^{a−1} r_0 with r_0(0) = a u_0(0)."
+     },
+     {
+      "quote": "Hence $\\operatorname{ord}w_0(t)=a-1$.",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section5.step_lambda_w_tau",
+        "quote": "have hw0 :"
+       }
+      ]
+     },
+     {
+      "quote": "Let $c$ be the minimal order",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section5.step_lambda_w_tau",
+        "quote": "exists_formalDivisorAxisLift q Z rows j 0"
+       }
+      ]
+     },
+     {
+      "quote": "In row $1$, both",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section5.step_lambda_w_tau",
+        "quote": "derivative_sub_mulVec_eq_X_pow_mul q Z lambda _ b (ha.trans hab) u₁ hq1 hZ1"
+       },
+       {
+        "decl": "Stafford38.Paper.Section5.step_lambda_w_tau",
+        "quote": "have htau1' :"
+       }
+      ]
+     },
+     {
+      "quote": "Finally $q_j'(t)=0$ and",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section5.step_lambda_w_tau",
+        "quote": "exists_formalDivisorAxisLift q Z rows j 0"
+       }
+      ],
+      "note": "τ_j = 0 is the field htauj of exists_formalDivisorAxisLift."
+     },
+     {
+      "quote": "We now show that $q(t), Z_{\\bullet1}(t),\\dots, Z_{\\bullet {d'}}(t), \\tau(t)$ span all of $\\mathcal C$",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "obtain ⟨hinjM, -, hliM, haxis⟩ :="
+       }
+      ],
+      "note": "M is formalTangentMatrix q Z τ, with columns q, Z_{•1}, …, Z_{•d′}, τ."
+     },
+     {
+      "quote": "Its reduction $M(0)$ has full\ncolumn rank",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section5.step_M_minor",
+        "quote": "have hinj := residue_formalTangentMatrix_mulVec_injective"
+       }
+      ]
+     },
+     {
+      "quote": "This also translates to the column vectors of $M(t)$ themselves",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section5.step_M_minor",
+        "quote": "obtain ⟨rowsι, hρ⟩ :="
+       },
+       {
+        "decl": "Stafford38.Paper.Section5.step_M_minor",
+        "quote": "obtain ⟨hunit, hli⟩ := linearIndependent_laurent_of_selectedMinor _ rowsι hρ"
+       }
+      ]
+     },
+     {
+      "quote": "Furthermore, every column of $M(0)$ has a vanishing entry",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section5.step_M_minor",
+        "quote": "exact ⟨hinj, ⟨rowsι, hρ, hunit⟩, hli,"
+       }
+      ],
+      "note": "constantCoeff_formalTangentMatrix_axis_eq_zero."
+     },
+     {
+      "quote": "Thus the span of $q(0), Z_{\\bullet1}(0)",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section5.step_M_minor",
+        "quote": "exact ⟨hinj, ⟨rowsι, hρ, hunit⟩, hli,"
+       }
+      ]
+     },
+     {
+      "quote": "To show that the columns of $M(t)$ really span all of $\\mathcal C$",
+      "kind": "prose",
+      "note": "Announces Lemma 5.12."
+     },
+     {
+      "quote": "The following Lemma will help us with that.",
+      "kind": "prose",
+      "note": "Announces Lemma 5.12."
+     },
+     {
+      "quote": "The column vectors $q(t)$, $Z_{\\bullet k}(t)$ and $q'(t)$ are of the form",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section5.step_M_spans_cone",
+        "quote": "have hder : ∀ δ"
+       },
+       {
+        "decl": "Stafford38.Paper.Section5.step_M_spans_cone",
+        "quote": "have hZcol"
+       },
+       {
+        "decl": "Stafford38.Paper.Section5.step_M_spans_cone",
+        "quote": "have hq' :"
+       }
+      ]
+     },
+     {
+      "quote": "By Lemma~\\ref{lem:tangent}(b) they lie in $\\mathcal C$.",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section5.step_M_spans_cone",
+        "quote": "obtain ⟨hδ, hq⟩ := lemma_5_12_b qL hq0L I hbase"
+       }
+      ]
+     },
+     {
+      "quote": "Since\n$\\tau(t)=t^{-c}(q'(t)-Z(t)\\lambda(t))$",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section5.step_M_spans_cone",
+        "quote": "have htau : (fun i ↦ f (tau i)) ∈ 𝒞 := by"
+       }
+      ]
+     },
+     {
+      "quote": "By Lemma~\\ref{lem:tangent}(a), $\\dim \\mathcal C\\le {d'}+2$",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "obtain ⟨⟨hdim, -, hfieldRank, -⟩, -, -⟩ := witness_lemma_5_12_5_13_paper hm I w hfin"
+       },
+       {
+        "quote": "have hbound : Module.finrank"
+       },
+       {
+        "quote": "obtain ⟨-, hspanC⟩ :="
+       },
+       {
+        "decl": "Stafford38.Paper.Section5.step_M_spans_cone",
+        "quote": "have hcone :"
+       },
+       {
+        "decl": "Stafford38.Paper.Section5.step_M_spans_cone",
+        "quote": "apply Submodule.eq_of_le_of_finrank_le hle"
+       }
+      ]
+     },
+     {
+      "quote": "Let $u=(0,1,0,\\dots,0)$ be the row vector reading off the $1$-coordinate;",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "have hu : rowMul (axisRow"
+       }
+      ]
+     },
+     {
+      "quote": "We can lift $u$ to a row vector",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "obtain ⟨rowsι, -, -, -, -, hell, hellres⟩ :="
+       },
+       {
+        "decl": "Stafford38.Paper.Section5.step_lift_ell_minor",
+        "quote": "obtain ⟨rowsι, h0⟩ := exists_selectedMinor_det_ne_zero_of_mulVec_injective"
+       },
+       {
+        "decl": "Stafford38.Paper.Section5.step_lift_ell_minor",
+        "quote": "have hunit : IsUnit (selectedMinor M rowsι).det :="
+       }
+      ]
+     },
+     {
+      "quote": "Let $\\upsilon$ be the complementary set of row indices",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section5.step_lift_ell_minor",
+        "quote": "set ℓ := liftRow M rowsι u"
+       }
+      ],
+      "note": "liftRow: ℓ_υ = u_υ and ℓ_ι = −u_υ M_υ M_ι⁻¹ (liftBlock)."
+     },
+     {
+      "quote": "Then\n$\\ell(t) M(t)=",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section5.step_lift_ell_minor",
+        "quote": "have hblock :"
+       },
+       {
+        "decl": "Stafford38.Paper.Section5.step_lift_ell_minor",
+        "quote": "have hell : rowMul ℓ M = 0 := by"
+       }
+      ]
+     },
+     {
+      "quote": "Moreover\n$uM(0)=0$ gives",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section5.step_lift_ell_minor",
+        "quote": "let δ : R → κ := residueColumn ℓ - u"
+       },
+       {
+        "decl": "Stafford38.Paper.Section5.step_lift_ell_minor",
+        "quote": "have hoff :"
+       },
+       {
+        "decl": "Stafford38.Paper.Section5.step_lift_ell_minor",
+        "quote": "have hδ :"
+       },
+       {
+        "decl": "Stafford38.Paper.Section5.step_lift_ell_minor",
+        "quote": "have hzero := Matrix.vecMul_injective_of_isUnit hA"
+       }
+      ],
+      "note": "Lean argues that ℓ(0) − u vanishes off ι and is killed by the invertible M_ι(0), hence is 0, instead of solving for u_ι."
+     },
+     {
+      "quote": "Since the columns of $M(t)$ span $\\mathcal C$, $\\ell(t)$ annihilates $\\mathcal C$, so by",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "obtain ⟨hconormal, htail⟩ :="
+       },
+       {
+        "decl": "Stafford38.Paper.Section5.step_ell_conormal",
+        "quote": "have hle : tangentCone (laurentColumn q) I ≤ LinearMap.ker φ := by"
+       },
+       {
+        "decl": "Stafford38.Paper.Section5.step_ell_conormal",
+        "quote": "refine ⟨lemma_5_13"
+       },
+       {
+        "decl": "Stafford38.Paper.Section5.step_ell_conormal",
+        "quote": "calc"
+       }
+      ]
+     },
+     {
+      "quote": "Finally, let $P\\in K[\\xi_1,\\dots,\\xi_n]$ vanish on $N(Y)$.",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "intro Pol hPol"
+       }
+      ],
+      "note": "In Lean P is introduced at the start of the proof."
+     },
+     {
+      "quote": "We will show\n$P(\\tilde\\ell(0))=0$",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section5.step_polynomial_limit",
+        "quote": "apply eval_residue_eq_zero_of_mem_groundEquationConormalLocus I Pol hPol y ell"
+       },
+       {
+        "decl": "Stafford38.Paper.Section5.step_polynomial_limit",
+        "quote": "refine ⟨?_, ?_⟩"
+       }
+      ],
+      "note": "Lean does not choose g_k and μ_k: it puts (y, ℓ̃(t)) in the equation conormal locus over κ((t)) (the second goal of refine)."
+     },
+     {
+      "quote": "Here $\\nabla g(x)=",
+      "kind": "prose",
+      "note": "Notation; Lean: differentialAt."
+     },
+     {
+      "quote": "We furthermore define",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section5.eval_residue_eq_zero_of_mem_groundEquationConormalLocus",
+        "quote": "have hfull := fibreLift_mem_vanishingIdeal_equationConormal I.asIdeal I.isPrime Pol hPol"
+       }
+      ],
+      "note": "fibreLift_mem_vanishingIdeal_equationConormal proves that P(ξ), read as a polynomial in (x, ξ), vanishes on the equation conormal locus {(y′, Σ μ_k dg_k(y′))} over K; this is the argument of this and the next three sentences (smooth points, K infinite, density of Y_sm), carried out in that lemma."
+     },
+     {
+      "quote": "For a smooth point $y'\\in Y_{\\mathrm{sm}}$ and",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section5.eval_residue_eq_zero_of_mem_groundEquationConormalLocus",
+        "quote": "have hfull := fibreLift_mem_vanishingIdeal_equationConormal I.asIdeal I.isPrime Pol hPol"
+       }
+      ]
+     },
+     {
+      "quote": "As $K$ is infinite, a polynomial in $\\mu$ vanishing on all of",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section5.eval_residue_eq_zero_of_mem_groundEquationConormalLocus",
+        "quote": "have hfull := fibreLift_mem_vanishingIdeal_equationConormal I.asIdeal I.isPrime Pol hPol"
+       }
+      ]
+     },
+     {
+      "quote": "Since $Y_{\\mathrm{sm}}$\nis dense in $Y$",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section5.eval_residue_eq_zero_of_mem_groundEquationConormalLocus",
+        "quote": "have hfull := fibreLift_mem_vanishingIdeal_equationConormal I.asIdeal I.isPrime Pol hPol"
+       }
+      ]
+     },
+     {
+      "quote": "By \\eqref{eq:generic} (applied to the generic",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section5.step_polynomial_limit",
+        "quote": "have hker : I.asIdeal.map"
+       },
+       {
+        "decl": "Stafford38.Paper.Section5.eval_residue_eq_zero_of_mem_groundEquationConormalLocus",
+        "quote": "have hvan :"
+       }
+      ]
+     },
+     {
+      "quote": "Hence $\\Phi(y,\\mu(t))=",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section5.eval_residue_eq_zero_of_mem_groundEquationConormalLocus",
+        "quote": "have hpoly := residueFibreLift_mem_extensionValuedVanishingIdeal_of_ground_vanishing"
+       }
+      ]
+     },
+     {
+      "quote": "Now $\\tilde\\ell(t)\\in\\kappa[[t]]^n$ and $P$ has coefficients in $K$",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section5.eval_residue_eq_zero_of_mem_groundEquationConormalLocus",
+        "quote": "have hclosure := residue_mem_residueExtensionFibreClosure_of_laurent_generic"
+       },
+       {
+        "decl": "Stafford38.Paper.Section5.eval_residue_eq_zero_of_mem_groundEquationConormalLocus",
+        "quote": "have hzero := hclosure _ hpoly"
+       }
+      ]
+     },
+     {
+      "quote": "Since $P(\\tilde\\ell(t))=0$, we get",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "have hzero := step_polynomial_limit I Pol hPol _ hbase _ hconormal"
+       },
+       {
+        "quote": "rw [htail, eval₂_extensionAxis_eq_algebraMap_eval_axis (K := κ) hm Pol] at hzero"
+       },
+       {
+        "quote": "exact (FaithfulSMul.algebraMap_injective k κ) (hzero.trans (map_zero _).symm)"
+       }
+      ]
+     },
+     {
+      "quote": "By statement~(i), every polynomial vanishing on $N(Y)$ vanishes at",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section5.step_dir_of_fibre",
+        "quote": "intro G d hG hT"
+       }
+      ],
+      "note": "(ii) is theorem_5_7_ii, which applies step_dir_of_fibre to (i); (i) enters as its hypothesis hvan."
+     },
+     {
+      "quote": "use this to show $[dx_1]\\in\\operatorname{Dir}(Y)$.",
+      "kind": "prose",
+      "note": "Announces the argument that follows."
+     },
+     {
+      "quote": "Recall that $\\operatorname{Dir}(Y)$ is the Zariski closure",
+      "kind": "prose",
+      "note": "Lean defines the closure this way (projectiveHomogeneousClosure, Definition 5.5), so nothing is to be proved."
+     },
+     {
+      "quote": "So let $G$ be a homogeneous polynomial vanishing on all classes",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section5.step_dir_of_fibre",
+        "quote": "intro G d hG hT"
+       }
+      ]
+     },
+     {
+      "quote": "Since also $G(t\\xi)=t^{\\deg G}G(\\xi)$ by homogeneity",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section5.step_dir_of_fibre",
+        "quote": "have hnonzero"
+       },
+       {
+        "decl": "Stafford38.Paper.Section5.step_dir_of_fibre",
+        "quote": "rcases Nat.eq_zero_or_pos d with hd | hd"
+       },
+       {
+        "decl": "Stafford38.Paper.Section5.step_dir_of_fibre",
+        "quote": "obtain ⟨v, hv, hv0⟩ : ∃ v ∈ smoothConormalFibreProjection I, v ≠ 0 := by"
+       },
+       {
+        "decl": "Stafford38.Paper.Section5.step_dir_of_fibre",
+        "quote": "have hGvan"
+       }
+      ],
+      "note": "For deg G = 0 Lean needs a class [ξ′] with 0 ≠ ξ′ ∈ N(Y), which the text takes for granted; Lean derives it from (i): if N(Y) ⊆ {0}, then ξ_i vanishes on N(Y) and hence at ξ, for every i."
+     },
+     {
+      "quote": "By~(i), $G(1,0,\\dots,0)=0$",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section5.step_dir_of_fibre",
+        "quote": "exact (MvPolynomial.mem_zeroLocus_iff.mp hvan) _ hGvan"
+       },
+       {
+        "decl": "Stafford38.Paper.Section5.step_dir_of_fibre",
+        "quote": "obtain ⟨a, ha⟩ := (Projectivization.mk_eq_mk_iff k ξ v hξ hv).mp hz"
+       }
+      ]
+     },
+     {
+      "quote": "As $G$ was arbitrary,",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section5.step_dir_of_fibre",
+        "quote": "exact (mul_eq_zero.mp hscaled.symm).resolve_left (pow_ne_zero d (Units.ne_zero a))"
+       }
+      ]
+     }
+    ],
+    "lean_adds": [
+     {
+      "step": {
+       "quote": "have hunit := exists_coordinate_inverse_of_avoidance I.asIdeal ⟨0, hm⟩ havoid"
+      },
+      "note": "Y ∩ H = ∅ makes x̄_1 a unit of R (Nullstellensatz); the text does this inside the proof of Lemma 5.10(a)."
+     }
+    ]
+   }
+  },
+  {
+   "id": "thm:coisotropic-exclusion",
+   "paper": {
+    "quote": "\\label{thm:coisotropic-exclusion}"
+   },
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section5.theorem_5_8",
+    "Stafford38.Paper.Section5.exclusionBaseIdeal"
+   ],
+   "note": "W is closed as the zero set of an ideal of K[x, ξ]; involutive means I(W) is involutive (Definition 2.10); P(ξ) vanishing on W is stated on the fibre coordinates.",
+   "proof": {
+    "paper": {
+     "quote": "Suppose we have a \\textit{nonempty} closed subset"
+    },
+    "sentences": [
+     {
+      "quote": "Suppose we have a \\textit{nonempty} closed subset",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "by_contra hne"
+       },
+       {
+        "quote": "have hW : W.Nonempty := Set.nonempty_iff_ne_empty.2 hne"
+       }
+      ]
+     },
+     {
+      "quote": "Suppose further, that $W\\cap\\pi^{-1}(H)=\\varnothing$.",
+      "kind": "prose",
+      "note": "The hypothesis hH of theorem_5_8."
+     },
+     {
+      "quote": "We will give a proof by contradiction, with this rough logic",
+      "kind": "prose",
+      "note": "Outline of the argument that follows; each claim is mapped where it is proved."
+     },
+     {
+      "quote": "Since $W$ is by assumption fibre-conical, we start by showing",
+      "kind": "prose",
+      "note": "Outline of the argument that follows; each claim is mapped where it is proved."
+     },
+     {
+      "quote": "Using involutivity, we then show",
+      "kind": "prose",
+      "note": "Outline of the argument that follows; each claim is mapped where it is proved."
+     },
+     {
+      "quote": "This means $P$ vanishes on all of $W$, hence on $N(Y_0)$.",
+      "kind": "prose",
+      "note": "Outline of the argument that follows; each claim is mapped where it is proved."
+     },
+     {
+      "quote": "This gives us the setup of Theorem \\ref{thm:asymptotic-conormal-formal}",
+      "kind": "prose",
+      "note": "Outline of the argument that follows; each claim is mapped where it is proved."
+     },
+     {
+      "quote": "We define the (radical) vanishing ideal $J=I(W)",
+      "kind": "prose",
+      "note": "Definitions; Lean: J = MvPolynomial.vanishingIdeal k W and B = exclusionBaseIdeal W, the preimage of J under f ↦ f∘π."
+     },
+     {
+      "quote": "Because $W$ is fibre-conical, the $\\xi$-homogeneous components",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section5.step_zero_section",
+        "quote": "have hhom : (MvPolynomial.vanishingIdeal k W).IsHomogeneous"
+       }
+      ],
+      "note": "step_homogeneous_components (a term proof, by vanishingIdeal_isHomogeneous_of_isFibreConical) gives the homogeneous components."
+     },
+     {
+      "quote": "Let $g \\in J$ be written in its $\\xi$-homogeneous components form.",
+      "kind": "prose",
+      "note": "Notation."
+     },
+     {
+      "quote": "In particular, $g_0 \\in J$.",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section5.step_zero_section",
+        "quote": "have hhom : (MvPolynomial.vanishingIdeal k W).IsHomogeneous"
+       }
+      ]
+     },
+     {
+      "quote": "Since $g_0$ has $\\xi$-degree $0$",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section5.step_zero_section",
+        "quote": "have hzero := zeroSection_commonZero_of_isHomogeneous"
+       }
+      ]
+     },
+     {
+      "quote": "Let $Y = V_K(B)$.",
+      "kind": "prose",
+      "note": "Notation; Lean: MvPolynomial.zeroLocus k (exclusionBaseIdeal W)."
+     },
+     {
+      "quote": "For $y \\in Y$ we therefore have $g(y, 0) = g_0(y) = 0$",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section5.step_zero_section",
+        "quote": "have hzero := zeroSection_commonZero_of_isHomogeneous"
+       }
+      ]
+     },
+     {
+      "quote": "$V_K(J) = V_K(I(W)) = W$, since $W$ is closed",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section5.step_zero_section",
+        "quote": "rw [← zeroLocus_vanishingIdeal_of_algebraic_closed W hclosed, hpoint]"
+       }
+      ]
+     },
+     {
+      "quote": "Furthermore, $Y$ is the projection of $W$",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section5.step_projection",
+        "quote": "rintro ⟨ξ, hξ⟩ f hf"
+       },
+       {
+        "decl": "Stafford38.Paper.Section5.step_projection",
+        "quote": "exact ⟨0, step_zero_section W hclosed hcone y hy⟩"
+       }
+      ],
+      "note": "step_projection is used through step_minimal_primes (B ≠ K[x])."
+     },
+     {
+      "quote": "Lastly, assume there exists a $y \\in Y\\cap H$",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section5.step_Y_avoids_H",
+        "quote": "have hmem :"
+       },
+       {
+        "decl": "Stafford38.Paper.Section5.step_Y_avoids_H",
+        "quote": "rw [hH] at hmem"
+       }
+      ]
+     },
+     {
+      "quote": "Therefore, $Y \\cap H = \\varnothing$.",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section5.step_Y_avoids_H",
+        "quote": "exact hmem"
+       }
+      ]
+     },
+     {
+      "quote": "For the next argument, we also refer to",
+      "kind": "prose",
+      "note": "Reference."
+     },
+     {
+      "quote": "Let $f\\in B$.",
+      "kind": "prose",
+      "note": "f is a hypothesis of step_hamiltonian and step_line_mem."
+     },
+     {
+      "quote": "Then $f\\circ\\pi\\in J$.",
+      "kind": "prose",
+      "note": "B = exclusionBaseIdeal W is defined as the preimage of J under f ↦ f∘π, so this holds by definition."
+     },
+     {
+      "quote": "The Hamiltonian derivation of $f$ applied to",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section5.step_hamiltonian",
+        "quote": "rw [Stafford38.Paper.Section2.poisson_eq]"
+       },
+       {
+        "decl": "Stafford38.Paper.Section5.step_hamiltonian",
+        "quote": "simp [poissonBracket, pderiv_baseLift_base, pderiv_baseLift_fibre]"
+       }
+      ]
+     },
+     {
+      "quote": "Since $f, g \\in J$ and $\\{J, J\\} \\subseteq J$",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section5.step_hamiltonian",
+        "quote": "induction j with"
+       },
+       {
+        "decl": "Stafford38.Paper.Section5.step_hamiltonian",
+        "quote": "exact hinv _ hf _ hj"
+       }
+      ],
+      "note": "hamiltonIter f j g is H_f^j g."
+     },
+     {
+      "quote": "For a fixed $y \\in Y$ and $g \\in J$, we define the polynomial",
+      "kind": "prose",
+      "note": "Definition; Lean: fibreLinePolynomial y (differentialAt y f) g."
+     },
+     {
+      "quote": "Its derivative is $\\varphi'(t)",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section5.step_phi_derivatives",
+        "quote": "rw [iterate_derivative_fibreLinePolynomial, eval_zero_fibreLinePolynomial]"
+       },
+       {
+        "decl": "Stafford38.Paper.Section5.step_phi_derivatives",
+        "quote": "exact (step_hamiltonian W hinv f hf g hg).2 j _"
+       }
+      ]
+     },
+     {
+      "quote": "If we write $\\varphi(t) = \\sum_m c_mt^m$",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section5.step_line_mem",
+        "quote": "have hphi : fibreLinePolynomial y (differentialAt y f) g = 0 :="
+       }
+      ]
+     },
+     {
+      "quote": "Remembering the definition of",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section5.step_line_mem",
+        "quote": "rw [← zeroLocus_vanishingIdeal_of_algebraic_closed W hclosed]"
+       },
+       {
+        "decl": "Stafford38.Paper.Section5.step_line_mem",
+        "quote": "exact h.symm"
+       }
+      ]
+     },
+     {
+      "quote": "More generally, since any linear combination of elements in $B$",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section5.step_span_mem",
+        "quote": "obtain ⟨f, hf, rfl⟩ := exists_mem_differentialAt_eq_of_mem_span _ y ξ hξ"
+       },
+       {
+        "decl": "Stafford38.Paper.Section5.step_span_mem",
+        "quote": "simpa using step_line_mem W hclosed hcone hinv y hy f hf 1"
+       }
+      ]
+     },
+     {
+      "quote": "Since $V_K(B)=Y=\\pi(W)\\neq\\varnothing$",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "obtain ⟨hrad, -, -, 𝔮, h𝔮⟩ := step_minimal_primes W hclosed hcone hW"
+       },
+       {
+        "decl": "Stafford38.Paper.Section5.step_minimal_primes",
+        "quote": "have hproper"
+       },
+       {
+        "decl": "Stafford38.Paper.Section5.step_minimal_primes",
+        "quote": "refine ⟨hrad, Ideal.finite_minimalPrimes_of_isNoetherianRing _ _, ?_,"
+       }
+      ]
+     },
+     {
+      "quote": "The ideal $B$ is radical",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section5.step_minimal_primes",
+        "quote": "have hrad"
+       },
+       {
+        "decl": "Stafford38.Paper.Section5.step_minimal_primes",
+        "quote": "rw [Ideal.sInf_minimalPrimes, hrad.radical]"
+       }
+      ]
+     },
+     {
+      "quote": "We choose $\\mathfrak q=\\mathfrak q_1$",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "obtain ⟨hrad, -, -, 𝔮, h𝔮⟩ := step_minimal_primes W hclosed hcone hW"
+       }
+      ]
+     },
+     {
+      "quote": "Since $\\mathfrak q$ is prime, $1\\notin\\mathfrak q$",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "obtain ⟨hprime, -, -, -, havoid⟩ := step_component hm W hclosed hcone hH 𝔮 h𝔮"
+       },
+       {
+        "decl": "Stafford38.Paper.Section5.step_component",
+        "quote": "have hI : MvPolynomial.vanishingIdeal"
+       },
+       {
+        "decl": "Stafford38.Paper.Section5.step_component",
+        "quote": "rw [Set.nonempty_iff_ne_empty]"
+       }
+      ],
+      "note": "Closed and irreducible is shown where Theorem 5.7 is applied (irreducibleClosed_zeroLocus_of_isPrime in step_theorem_5_7_applies)."
+     },
+     {
+      "quote": "Additionally, $Y_0\\subseteq Y$, hence",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section5.step_component",
+        "quote": "have hsub"
+       },
+       {
+        "decl": "Stafford38.Paper.Section5.step_component",
+        "quote": "refine ⟨hprime, ?_, hI, hsub, fun y hy =>"
+       }
+      ]
+     },
+     {
+      "quote": "Furthermore, if $r = 1$, we choose $s = 1$",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "obtain ⟨s, hs𝔮, hs⟩ := step_separator W 𝔮 hrad h𝔮"
+       },
+       {
+        "decl": "Stafford38.Paper.Section5.step_separator",
+        "quote": "have hchoice"
+       },
+       {
+        "decl": "Stafford38.Paper.Section5.step_separator",
+        "quote": "choose s hsQ hsP using hchoice"
+       }
+      ],
+      "note": "Lean takes s as the product over the other minimal primes, which is 1 when r = 1."
+     },
+     {
+      "quote": "Then $s = s_2s_3\\dots s_r$ does not lie in",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section5.step_separator",
+        "quote": "refine ⟨∏ Q ∈ T.attach, s Q.1 Q.2, ?_, ?_⟩"
+       },
+       {
+        "decl": "Stafford38.Paper.Section5.step_separator",
+        "quote": "obtain ⟨Q, -, hQ⟩ := (h𝔮.1.1.prod_mem_iff).1 hs"
+       }
+      ]
+     },
+     {
+      "quote": "On the other hand, if $h \\in \\mathfrak q$",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section5.step_separator",
+        "quote": "by_cases hQP : Q = 𝔮"
+       }
+      ]
+     },
+     {
+      "quote": "Therefore, $sh \\in \\bigcap_i \\mathfrak q_i = B,$",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section5.step_separator",
+        "quote": "rw [← hrad.radical, ← Ideal.sInf_minimalPrimes, Ideal.mem_sInf]"
+       }
+      ]
+     },
+     {
+      "quote": "Since $sh \\in B,$ and $d(sh)_y",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section5.step_dh_on_open",
+        "quote": "have hd : differentialAt y (s * h)"
+       },
+       {
+        "decl": "Stafford38.Paper.Section5.step_dh_on_open",
+        "quote": "have hsh :"
+       },
+       {
+        "decl": "Stafford38.Paper.Section5.step_dh_on_open",
+        "quote": "have := ((definition_5_6 W).1 hcone y _"
+       }
+      ]
+     },
+     {
+      "quote": "For $g\\in J$, the polynomial $G(x)=g(x,dh_x)$",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section5.step_dh_on_component",
+        "quote": "have hG : gradientGraphSubstitution h g ∈ 𝔮 := by"
+       }
+      ],
+      "note": "mem_of_vanishes_on_principal_open: sG ∈ 𝔮 and s ∉ 𝔮 give G ∈ 𝔮."
+     },
+     {
+      "quote": "Since this is true for every $g \\in J$",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section5.step_dh_on_component",
+        "quote": "rw [← zeroLocus_vanishingIdeal_of_algebraic_closed W hclosed]"
+       },
+       {
+        "decl": "Stafford38.Paper.Section5.step_dh_on_component",
+        "quote": "have h0 : MvPolynomial.eval y"
+       }
+      ]
+     },
+     {
+      "quote": "As before, we can argue that since $\\mathfrak q$ is an ideal",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section5.step_span_component",
+        "quote": "obtain ⟨h, hh, rfl⟩ := exists_mem_differentialAt_eq_of_mem_span 𝔮 y ξ hξ"
+       },
+       {
+        "decl": "Stafford38.Paper.Section5.step_span_component",
+        "quote": "exact step_dh_on_component"
+       }
+      ]
+     },
+     {
+      "quote": "At a smooth point $y$ of $Y_0$, by Definition",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section5.step_P_vanishes_on_conormal_cone",
+        "quote": "obtain ⟨y, hy, hspan⟩ := (definition_5_4_d 𝔮 ξ).1 hξ"
+       }
+      ],
+      "note": "step_conormal_subset (a term proof) reads N*_y Y_0 = span{df_y : f ∈ 𝔮} by Definition 5.4(c)."
+     },
+     {
+      "quote": "We therefore have that $\\{y\\} \\times N_y^*Y_0 \\subseteq  W$",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "have hPN := step_P_vanishes_on_conormal_cone W hclosed hcone hinv 𝔮 h𝔮 s hs𝔮 hs P hPW"
+       },
+       {
+        "decl": "Stafford38.Paper.Section5.step_P_vanishes_on_conormal_cone",
+        "quote": "have hyξ := step_conormal_subset"
+       },
+       {
+        "decl": "Stafford38.Paper.Section5.step_P_vanishes_on_conormal_cone",
+        "quote": "simpa using hPW _ hyξ"
+       }
+      ]
+     },
+     {
+      "quote": "Because we have established, that $Y_0$ is closed",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "exact haxis (step_theorem_5_7_applies hm 𝔮 hprime havoid P"
+       },
+       {
+        "decl": "Stafford38.Paper.Section5.step_theorem_5_7_applies",
+        "quote": "obtain ⟨hne, hY, hpt⟩ := irreducibleClosed_zeroLocus_of_isPrime"
+       },
+       {
+        "decl": "Stafford38.Paper.Section5.step_theorem_5_7_applies",
+        "quote": "refine theorem_5_7_i_printed hm _ hne hY ?_ P (hpt ▸ hP)"
+       }
+      ]
+     },
+     {
+      "quote": "Therefore, $W$ must be empty.",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "exact haxis (step_theorem_5_7_applies hm 𝔮 hprime havoid P"
+       }
+      ]
+     }
+    ],
+    "lean_adds": []
+   }
+  },
+  {
+   "id": "lem:W",
+   "paper": {
+    "quote": "\\label{lem:W}"
+   },
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section5.lemma_5_9"
+   ],
+   "proof": {
+    "sentences": [
+     {
+      "quote": "ince $\\bar x_1$ is transcendental over $K$, $S=K[\\bar x_1]$",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "obtain ⟨W, hkW, hxW, hxinvW⟩ := stage1_exists_valuationSubring_of_transcendental (x i) htrans"
+       }
+      ],
+      "note": "stage1_exists_valuationSubring_of_transcendental builds K[x̄_1] localized at x̄_1 and a dominating valuation ring; it returns x̄_1 ∈ W and x̄_1⁻¹ ∉ W."
+     },
+     {
+      "quote": "The localization",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "obtain ⟨W, hkW, hxW, hxinvW⟩ := stage1_exists_valuationSubring_of_transcendental (x i) htrans"
+       }
+      ]
+     },
+     {
+      "quote": "By \\cite[Tag~00IA]{Stacks} there exists a valuation ring",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "obtain ⟨W, hkW, hxW, hxinvW⟩ := stage1_exists_valuationSubring_of_transcendental (x i) htrans"
+       }
+      ]
+     },
+     {
+      "quote": "Hence $K\\subseteq W$ and",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "have hxmax : (⟨x i, hxW⟩ : W.toSubring) ∈ maximalIdeal W.toSubring := by"
+       }
+      ]
+     },
+     {
+      "quote": "For nonzero $a,b\\in F$ either $a/b\\in W$ or $b/a\\in W$",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "have hS : S.Nonempty"
+       },
+       {
+        "quote": "obtain ⟨j, hjS, hjmax⟩ := S.toFinite.exists_maximalFor id S hS"
+       },
+       {
+        "quote": "rcases (definition_5_3.1 W.toSubring).2 ⟨W, rfl⟩ (Y a / Y j) (div_ne_zero ha hjS) with h | h"
+       }
+      ],
+      "note": "Lean takes j maximal for a ≼ b ⟺ x̄_a/x̄_b ∈ W among the nonzero coordinates."
+     }
+    ],
+    "lean_adds": []
+   }
+  },
+  {
+   "id": "lem:place",
+   "paper": {
+    "quote": "\\label{lem:place}"
+   },
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section5.lemma_5_10",
+    "Stafford38.Paper.Section5.Lemma510Place",
+    "Stafford38.Paper.Section5.Lemma510Place.V",
+    "Stafford38.Paper.Section5.lemma_5_10_a_not_R_le"
+   ],
+   "note": "The conclusions (a)–(c) are the fields of Lemma510Place; the clause R ⊄ V of (a) is lemma_5_10_a_not_R_le, which takes the unit x̄_1 ∈ R^× as hypothesis.",
+   "proof": {
+    "sentences": [
+     {
+      "quote": "Let $C_0=K[q_0,\\dots,q_n,\\bar x_1]\\subseteq W$",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "let C₀ : Subalgebra k F :="
+       },
+       {
+        "quote": "have hC₀W : C₀ ≤ SW := by"
+       },
+       {
+        "quote": "have htop : IntermediateField.adjoin k"
+       },
+       {
+        "quote": "letI : IsFractionRing C₀ F := IsFractionRing.of_field C₀ F fun z ↦ by"
+       }
+      ]
+     },
+     {
+      "quote": "Let $A$ be its integral closure in $F$.",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "let A₀ : Subalgebra C₀ F := integralClosure C₀ F"
+       }
+      ]
+     },
+     {
+      "quote": "Since $C_0$ is a domain finitely generated over a field",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "haveI : Module.Finite C₀ D := finite_normalization_of_fg_domain k C₀ D"
+       },
+       {
+        "quote": "haveI hAft : Algebra.FiniteType k A :="
+       },
+       {
+        "quote": "have hAic : IsIntegrallyClosedIn A F := by"
+       },
+       {
+        "quote": "letI : IsFractionRing A F := IsFractionRing.of_field A F fun z ↦ by"
+       },
+       {
+        "quote": "letI : IsNoetherianRing A := Algebra.FiniteType.isNoetherianRing k A"
+       },
+       {
+        "quote": "have hnormA"
+       }
+      ]
+     },
+     {
+      "quote": "As $W$ is a valuation ring and thereby is",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "letI : IsIntegrallyClosedIn W.toSubring F := inferInstanceAs (IsIntegrallyClosedIn W F)"
+       },
+       {
+        "quote": "have hA₀W : A₀.toSubring ≤ W.toSubring := by"
+       }
+      ]
+     },
+     {
+      "quote": "$\\bar x_1 \\in \\mathfrak m_W$, so $x_1$ is a nonzero nonunit of $W$",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "have hxiInvW : (x i)⁻¹ ∉ W := by"
+       },
+       {
+        "quote": "have hinvA : (x i)⁻¹ ∉ A := fun h ↦ hxiInvW (hA₀W h)"
+       },
+       {
+        "quote": "have hxA0 : xA ≠ 0"
+       },
+       {
+        "quote": "have hxAu : ¬ IsUnit xA := by"
+       }
+      ]
+     },
+     {
+      "quote": "Since $\\bar x_1$ is a nonzero nonunit of the Noetherian domain $A$",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "obtain ⟨p, hp, hpheight, hxp, hplace⟩ := stage3_exists_height_one_prime_valuation A xA hxA0 hxAu"
+       }
+      ],
+      "note": "stage3_exists_height_one_prime_valuation gives a prime 𝔭_D of height one containing x̄_1 (a minimal prime over x̄_1A, by Krull) and shows that A_{𝔭_D} is a valuation ring of F."
+     },
+     {
+      "quote": "By Krull's principal ideal theorem",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "obtain ⟨p, hp, hpheight, hxp, hplace⟩ := stage3_exists_height_one_prime_valuation A xA hxA0 hxAu"
+       }
+      ]
+     },
+     {
+      "quote": "11.17]{atiyah}, $\\operatorname{ht}\\mathfrak p_D\\le1$.",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "obtain ⟨p, hp, hpheight, hxp, hplace⟩ := stage3_exists_height_one_prime_valuation A xA hxA0 hxAu"
+       }
+      ]
+     },
+     {
+      "quote": "is a domain, the only prime of height $0$ is $(0)$",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "obtain ⟨p, hp, hpheight, hxp, hplace⟩ := stage3_exists_height_one_prime_valuation A xA hxA0 hxAu"
+       }
+      ]
+     },
+     {
+      "quote": "Put $V:=A_{\\mathfrak p_D}$.",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "let V : ValuationSubring F := placeValuationSubring A p hplace"
+       }
+      ]
+     },
+     {
+      "quote": "This is a Noetherian local domain.",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "have hN : IsNoetherianRing (placeSubalgebra A p) :="
+       }
+      ]
+     },
+     {
+      "quote": "It is normal,",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "have hVdvr : IsDiscreteValuationRing V.toSubring := by"
+       }
+      ],
+      "note": "Lean does not use normality or dimension here: A_{𝔭_D} is a valuation ring (stage3), and a Noetherian valuation ring other than F is a discrete valuation ring (Definition 5.3(b)); V ≠ F because x̄_1 ∈ 𝔪_V."
+     },
+     {
+      "quote": "A Noetherian local\nnormal domain of dimension one is a discrete valuation ring",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "refine (definition_5_3.2.2.1 V).2 ⟨hN, fun htop => ?_⟩"
+       }
+      ]
+     },
+     {
+      "quote": "It remains to check the listed properties.",
+      "kind": "prose",
+      "note": "Announces the list."
+     },
+     {
+      "quote": "\\item $K\\subseteq A\\subseteq V$",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "have hAV : ∀ a : A, (a : F) ∈ V.toSubring := fun a ↦ ofField_mem_algebraMap_v A p hplace a"
+       },
+       {
+        "quote": "have hkV : ∀ c : k, algebraMap k F c ∈ V.toSubring := fun c ↦ by"
+       }
+      ]
+     },
+     {
+      "quote": "\\item $\\operatorname{Frac}V=F$",
+      "kind": "prose",
+      "note": "Lean takes V as a valuation subring of F, and every valuation subring of F has fraction field F (statement of lemma_5_10)."
+     },
+     {
+      "quote": "\\item $q_i\\in V$ for all $i$",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "have hqV : ∀ a, Y a / Y j ∈ V.toSubring := fun a ↦ by"
+       }
+      ]
+     },
+     {
+      "quote": "\\item $\\bar x_1\\in\\mathfrak m_V$",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "have hxm : (⟨x i, hxV⟩ : V.toSubring) ∈ maximalIdeal V.toSubring := (hpV xA).2 hxp"
+       }
+      ]
+     },
+     {
+      "quote": "$V_K(p, x_1) = Y \\cap H = \\varnothing$",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Geometry.GeneralCoordinateAvoidance.exists_coordinate_inverse_of_avoidance",
+        "quote": "have htop : J = ⊤ := by"
+       },
+       {
+        "decl": "Stafford38.Geometry.GeneralCoordinateAvoidance.exists_coordinate_inverse_of_avoidance",
+        "quote": "obtain ⟨b, hb, z, hz, hbz⟩ := Submodule.mem_sup.mp hone"
+       }
+      ],
+      "note": "R ⊄ V is lemma_5_10_a_not_R_le, stated for every valuation ring with x̄_1 ∈ 𝔪_V and the unit x̄_1 as hypothesis; the Nullstellensatz step is exists_coordinate_inverse_of_avoidance, called in the proof of Theorem 5.7."
+     },
+     {
+      "quote": "this gives $1=\\bar g\\,\\bar x_1$, so $\\bar x_1\\in R^\\times$.",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section5.step_a_pos",
+        "quote": "have hinverse : x ⟨0, hm⟩ * MvPolynomial.eval₂ (algebraMap k K) x g = 1 := by"
+       },
+       {
+        "decl": "Stafford38.Paper.Section5.step_a_pos",
+        "quote": "have hgR :"
+       }
+      ]
+     },
+     {
+      "quote": "If $R\\subseteq V$, then $\\bar x_1\\in R^\\times\\subseteq V^\\times$",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section5.lemma_5_10_a_not_R_le",
+        "quote": "intro hRV"
+       },
+       {
+        "decl": "Stafford38.Paper.Section5.lemma_5_10_a_not_R_le",
+        "quote": "refine IsUnit.of_mul_eq_one (⟨(x i)⁻¹, hRV hinvR⟩ : V.toSubring) ?_"
+       }
+      ]
+     },
+     {
+      "quote": "This proves (a).",
+      "kind": "prose",
+      "note": "Closes the list."
+     },
+     {
+      "quote": "(b) Since $V=A_{\\mathfrak p_D}$ and $\\mathfrak m_V=\\mathfrak p_DV$",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "have hsurj : ∀ z : ResidueField V.toSubring"
+       }
+      ],
+      "note": "ofField_residue_surjective_v: every residue is a quotient of residues of elements of A."
+     },
+     {
+      "quote": "As $A$ is integral over $C_0$ and $\\bar x_1\\in\\mathfrak p_D$",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "have hBig := Stafford38.Geometry.DivisorialVisibleFrameStage4.stage4_residueField_isAlgebraic_of_isIntegral"
+       },
+       {
+        "quote": "have hyres"
+       },
+       {
+        "quote": "have hEq :"
+       }
+      ]
+     },
+     {
+      "quote": "So every element of\n$A/\\mathfrak p_D$",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "rw [← hEq]"
+       },
+       {
+        "quote": "convert hBig using 3"
+       }
+      ]
+     },
+     {
+      "quote": "(c) $A$ is a finitely generated $K$-algebra",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "exact stage7_kaehler_finite_ofField A p hkV"
+       }
+      ]
+     }
+    ],
+    "lean_adds": []
+   }
+  },
+  {
+   "id": "lem:kappa",
+   "paper": {
+    "quote": "\\label{lem:kappa}"
+   },
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section5.lemma_5_11"
+   ],
+   "note": "Lean states the lemma for residues r_0, …, r_n ∈ κ with r_0 = r_1 = 0, r_j = 1 and κ algebraic over K(r_0, …, r_n); witness_lemma_5_11 applies it to r_i = res q_i in the proof of Theorem 5.7.",
+   "citations": {
+    "lem:place": "Lemma 5.10(b) enters lemma_5_11 as its hypothesis halg; witness_lemma_5_11 supplies it in the proof of Theorem 5.7"
+   },
+   "proof": {
+    "sentences": [
+     {
+      "quote": "Since $q_0(0)=q_1(0)=0$ and $q_j(0)=1$, the field $L$ is generated",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "have hL : IntermediateField.adjoin k (Set.range r) = IntermediateField.adjoin k S := by"
+       },
+       {
+        "quote": "obtain ⟨BL, hBLS, hBL⟩ := (definition_5_1_closing (K := k)"
+       }
+      ]
+     },
+     {
+      "quote": "As $L/K(B)$ and $\\kappa/L$ are algebraic",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "have : Algebra.IsAlgebraic (IntermediateField.adjoin k S) κ := hL ▸ halg"
+       },
+       {
+        "quote": "have ht : IsTranscendenceBasis k ((↑) : t → κ) := hBL.algebraMap_comp.to_subtype_range"
+       }
+      ]
+     },
+     {
+      "quote": "Since $K$ has characteristic zero, a\ntranscendence basis of $\\kappa/K$ is a differential basis",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "have hrank : Module.finrank κ (Ω[κ⁄k]) = Fintype.card t :="
+       },
+       {
+        "quote": "have hspanT : Submodule.span κ"
+       },
+       {
+        "quote": "have hli : LinearIndependent κ (fun l ↦ KaehlerDifferential.D k κ (r (rows l))) :="
+       }
+      ]
+     }
+    ],
+    "lean_adds": []
+   }
+  },
+  {
+   "id": "lem:tangent",
+   "paper": {
+    "quote": "\\label{lem:tangent}"
+   },
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section5.rho",
+    "Stafford38.Paper.Section5.ker_rho",
+    "Stafford38.Paper.Section5.tangentSpaceAt",
+    "Stafford38.Paper.Section5.tangentCone",
+    "Stafford38.Paper.Section5.generic_tangent_finrank_eq_component_kaehler_finrank",
+    "Stafford38.Paper.Section5.component_kaehler_finrank_eq_trdeg",
+    "Stafford38.Paper.Section5.lemma_5_12_a_bound",
+    "Stafford38.Paper.Section5.lemma_5_12_a_cone",
+    "Stafford38.Paper.Section5.lemma_5_12_b"
+   ],
+   "note": "Lean states the lemma in pieces for a column q with q_0 ≠ 0 over a field L ⊇ K (L = κ((t)) in the proof): dim Θ_y = dim_F Ω_{F/K} = trdeg_K F, dim_F Ω_{F/K} ≤ d′ + 1 for a discrete valuation ring with Ω_{V/K} finite, dim 𝒞 = dim Θ_y + 1, and (b). It proves dim Θ_y = dim_F Ω_{F/K} by another route than the printed exact sequences (see the rows).",
+   "citations": {
+    "lem:place": "Lemma 5.10(c) enters lemma_5_12_a_bound as its hypothesis Module.Finite V Ω[V⁄K]; the proof of Theorem 5.7 supplies it from the witness"
+   },
+   "proof": {
+    "lean": "Stafford38.Paper.Section5.lemma_5_12_a_cone",
+    "sentences": [
+     {
+      "quote": "(a) For a finitely generated field extension $F/K$ in characteristic $0$",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section5.component_kaehler_finrank_eq_trdeg",
+        "quote": "obtain ⟨t, hts, ht⟩ := exists_isTranscendenceBasis_subset"
+       },
+       {
+        "decl": "Stafford38.Paper.Section5.component_kaehler_finrank_eq_trdeg",
+        "quote": "have hrank : Module.finrank F (Ω[F⁄k]) = Fintype.card t :="
+       },
+       {
+        "decl": "Stafford38.Paper.Section5.component_kaehler_finrank_eq_trdeg",
+        "quote": "have hcard"
+       }
+      ]
+     },
+     {
+      "quote": "The second fundamental exact sequence \\cite[Theorem 25.2]{matsumura} for",
+      "kind": "prose",
+      "note": "Lean does not use this sequence: it proves dim Θ_y = dim_F Ω_{F/K} by an upper bound (PaperGenericTangentRank.generic_tangent_finrank_le_component_kaehler_finrank) and a lower bound from the K-derivations of F (component_kaehler_finrank_le_generic_tangent_finrank, next rows)."
+     },
+     {
+      "quote": "Hence\n$\\Omega_{R/K}=R^n/",
+      "kind": "prose",
+      "note": "Lean does not use this sequence: it proves dim Θ_y = dim_F Ω_{F/K} by an upper bound (PaperGenericTangentRank.generic_tangent_finrank_le_component_kaehler_finrank) and a lower bound from the K-derivations of F (component_kaehler_finrank_le_generic_tangent_finrank, next rows)."
+     },
+     {
+      "quote": "For a multiplicative set $S\\subseteq R$",
+      "kind": "prose",
+      "note": "Lean does not use this sequence: it proves dim Θ_y = dim_F Ω_{F/K} by an upper bound (PaperGenericTangentRank.generic_tangent_finrank_le_component_kaehler_finrank) and a lower bound from the K-derivations of F (component_kaehler_finrank_le_generic_tangent_finrank, next rows)."
+     },
+     {
+      "quote": "In particular, this means for $F=S^{-1}R$",
+      "kind": "prose",
+      "note": "Lean does not use this sequence: it proves dim Θ_y = dim_F Ω_{F/K} by an upper bound (PaperGenericTangentRank.generic_tangent_finrank_le_component_kaehler_finrank) and a lower bound from the K-derivations of F (component_kaehler_finrank_le_generic_tangent_finrank, next rows)."
+     },
+     {
+      "quote": "Analogously, applying this for $S = V\\setminus \\{0\\}$",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section5.finrank_fraction_kaehler_le_of_span",
+        "quote": "let e := KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale k V F"
+       },
+       {
+        "decl": "Stafford38.Paper.Section5.finrank_fraction_kaehler_le_of_span",
+        "quote": "have hspan : Submodule.span F (Set.range g) = ⊤ := by"
+       }
+      ],
+      "note": "Lean uses only that generators of Ω_{V/K} span Ω_{F/K}, from F ⊗_V Ω_{V/K} ≅ Ω_{F/K} (V → F formally étale)."
+     },
+     {
+      "quote": "$\\operatorname{span}_F\\{df(\\bar x):f\\in\\mathfrak p\\}$ has therefore dimension $n-m$",
+      "kind": "prose",
+      "note": "Lean does not use this sequence: it proves dim Θ_y = dim_F Ω_{F/K} by an upper bound (PaperGenericTangentRank.generic_tangent_finrank_le_component_kaehler_finrank) and a lower bound from the K-derivations of F (component_kaehler_finrank_le_generic_tangent_finrank, next rows)."
+     },
+     {
+      "quote": "Rank does not change under the field extension",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section5.component_kaehler_finrank_le_generic_tangent_finrank",
+        "quote": "have hliF : LinearIndependent F z := b.linearIndependent.map' Φ hΦ"
+       },
+       {
+        "decl": "Stafford38.Paper.Section5.component_kaehler_finrank_le_generic_tangent_finrank",
+        "quote": "have hliE : LinearIndependent E"
+       },
+       {
+        "decl": "Stafford38.Paper.Section5.component_kaehler_finrank_le_generic_tangent_finrank",
+        "quote": "have htan (j : Fin (Module.finrank F (Ω[F⁄k]))) :"
+       },
+       {
+        "decl": "Stafford38.Paper.Section5.component_kaehler_finrank_le_generic_tangent_finrank",
+        "quote": "have hrank := Submodule.finrank_mono hle"
+       }
+      ],
+      "note": "Lower bound dim Θ_y ≥ dim_F Ω_{F/K}: the derivations D of F/K dual to a basis of Ω_{F/K} give tangent vectors (D y_i)_i, independent over F and so over κ((t)). The upper bound is generic_tangent_finrank_le_component_kaehler_finrank, and the two give generic_tangent_finrank_eq_component_kaehler_finrank."
+     },
+     {
+      "quote": "The second fundamental exact sequence for $V\\to\\kappa$ is",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section5.finrank_residue_tensor_kaehler_le",
+        "quote": "have hker : LinearMap.ker φ ≤ Submodule.span (ResidueField V)"
+       },
+       {
+        "decl": "Stafford38.Paper.Section5.finrank_residue_tensor_kaehler_le",
+        "quote": "have hrange : LinearMap.range φ = ⊤ :="
+       }
+      ]
+     },
+     {
+      "quote": "Since $\\dim_\\kappa\\mathfrak m_V/\\mathfrak m_V^2=1$ and",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section5.finrank_residue_tensor_kaehler_le",
+        "quote": "have hk : Module.finrank (ResidueField V) (LinearMap.ker φ) ≤ 1 := by"
+       },
+       {
+        "decl": "Stafford38.Paper.Section5.finrank_residue_tensor_kaehler_le",
+        "quote": "omega"
+       }
+      ]
+     },
+     {
+      "quote": "As $\\Omega_{V/K}$ is a finitely\ngenerated $V$-module",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section5.lemma_5_12_a_bound",
+        "quote": "obtain ⟨f, hf⟩ := exists_kaehler_generators (k := k) (V := V)"
+       },
+       {
+        "decl": "Stafford38.Paper.Section5.exists_kaehler_generators",
+        "quote": "exact ⟨f, IsLocalRing.span_eq_top_of_tmul_eq_basis f b hf⟩"
+       }
+      ],
+      "note": "In Lean, Ω_{V/K} finitely generated is the hypothesis Module.Finite of lemma_5_12_a_bound, supplied in the proof of Theorem 5.7 by the witness (Lemma 5.10(c))."
+     },
+     {
+      "quote": "Since $F\\otimes_V\\Omega_{V/K}=\\Omega_{F/K}$,",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section5.lemma_5_12_a_bound",
+        "quote": "have h := finrank_fraction_kaehler_le_of_span (F := F) f hf"
+       },
+       {
+        "decl": "Stafford38.Paper.Section5.lemma_5_12_a_bound",
+        "quote": "exact h.trans finrank_residue_tensor_kaehler_le"
+       }
+      ],
+      "note": "hence dim Θ_y ≤ d′ + 1 is the step hbound of the proof of Theorem 5.7, from dim Θ_y = dim_F Ω_{F/K}."
+     },
+     {
+      "quote": "Finally, $\\rho$ maps\n$\\mathcal C$ onto $\\Theta_y$",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "have hf : Function.Surjective f := by"
+       },
+       {
+        "quote": "have hker : Module.finrank L (LinearMap.ker f) = 1 := by"
+       },
+       {
+        "quote": "have := LinearMap.finrank_range_add_finrank_ker f"
+       }
+      ]
+     },
+     {
+      "quote": "(b) Let $f\\in\\mathfrak p$ and",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section5.lemma_5_12_b",
+        "quote": "intro δ"
+       }
+      ]
+     },
+     {
+      "quote": "By \\eqref{eq:generic}, $f(y)=0$, and $\\delta$ vanishes on",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section5.lemma_5_12_b",
+        "quote": "have htan := Stafford38.Geometry.PowerSeriesArcTangency.derivationVector_mem_zariskiTangentSpace_of_eval₂_eq_zero"
+       }
+      ],
+      "note": "f(y) = 0 is the hypothesis hbase; the chain rule δ(f(y)) = df_y · δy is in derivationVector_mem_zariskiTangentSpace_of_eval₂_eq_zero."
+     },
+     {
+      "quote": "Since $y_i=q_i/q_0$, the quotient rule gives",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section5.lemma_5_12_b",
+        "quote": "have hquot : rho q (fun a ↦ δ (q a)) = fun i ↦ δ (dehomogenizedPoint q i) := by"
+       }
+      ]
+     },
+     {
+      "quote": "Thus $\\rho(\\delta q)=\\delta y\\in\\Theta_y$",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section5.lemma_5_12_b",
+        "quote": "rw [hquot]"
+       },
+       {
+        "decl": "Stafford38.Paper.Section5.lemma_5_12_b",
+        "quote": "exact htan"
+       }
+      ]
+     },
+     {
+      "quote": "Moreover, $\\rho(q)_i=(q_iq_0-q_iq_0)/q_0^2=0$",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section5.lemma_5_12_b",
+        "quote": "change rho q q ∈ tangentSpaceAt q I"
+       },
+       {
+        "decl": "Stafford38.Paper.Section5.lemma_5_12_b",
+        "quote": "have : rho q q = 0 := by"
+       }
+      ]
+     }
+    ],
+    "lean_adds": []
+   }
+  },
+  {
+   "id": "lem:ell",
+   "paper": {
+    "quote": "\\label{lem:ell}"
+   },
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section5.lemma_5_13"
+   ],
+   "citations": {
+    "lem:tangent": "The Lean proof uses ker_rho (ρ q = 0), shown with Lemma 5.12; the text uses q ∈ 𝒞 and ρ(𝒞) = Θ_y without citing it"
+   },
+   "proof": {
+    "sentences": [
+     {
+      "quote": "Let $\\ell$ annihilate $\\mathcal C$.",
+      "kind": "prose",
+      "note": "The hypothesis hell of lemma_5_13."
+     },
+     {
+      "quote": "Since $q\\in\\mathcal C$, $\\ell(q)=0$",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "have hq : q ∈ tangentCone q I := by"
+       },
+       {
+        "quote": "have hellq := hell q hq"
+       }
+      ]
+     },
+     {
+      "quote": "For $v\\in\\mathcal C$ we have $\\ell(v)=0$",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "have hellv := hell v hv"
+       },
+       {
+        "quote": "have hsum :"
+       },
+       {
+        "quote": "have h1 :"
+       },
+       {
+        "quote": "have h2 :"
+       },
+       {
+        "quote": "ring_nf"
+       }
+      ]
+     },
+     {
+      "quote": "As $\\rho(\\mathcal C)=\\Theta_y$, the vector",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "rw [← affineConormalSpace_eq_equationCovectorSpan, affineConormalSpace,"
+       },
+       {
+        "quote": "have hw' : w ∈ (tangentCone q I).map (rho q) := by"
+       },
+       {
+        "quote": "obtain ⟨v, hv, rfl⟩ := hw'"
+       }
+      ],
+      "note": "Θ_y^⊥ = span{df_y : f ∈ 𝔭} is affineConormalSpace_eq_equationCovectorSpan."
+     }
+    ],
+    "lean_adds": []
+   }
+  }
+ ],
+ "lean_only": [
+  {
+   "decl": "Stafford38Challenge.PhaseVar",
+   "note": "Index type Fin n ⊕ Fin n of the coordinates (x, ξ) of T*X (Section 2)."
+  },
+  {
+   "decl": "Stafford38.Characteristic.PhaseVar",
+   "note": "Index type Fin n ⊕ Fin n of the coordinates (x, ξ) of T*X (Section 2)."
+  },
+  {
+   "decl": "Stafford38.Characteristic.SymbolRing",
+   "note": "K[x, ξ], the coordinate ring of T*X (Section 2)."
+  },
+  {
+   "decl": "Stafford38.Characteristic.poissonBracket",
+   "note": "The Poisson bracket {f, g} = Σ_i (∂f/∂ξ_i ∂g/∂x_i − ∂f/∂x_i ∂g/∂ξ_i) on K[x, ξ] (Definition 2.9)."
+  },
+  {
+   "decl": "Stafford38.Characteristic.PostScalarExtensionPoisson.IsInvolutive",
+   "note": "An ideal J of K[x, ξ] is involutive if {J, J} ⊆ J (Definition 2.10)."
+  },
+  {
+   "decl": "Stafford38.Paper.Section2.fibre",
+   "note": "The fibre T*_y X = π⁻¹(y) (Definition 2.5)."
+  },
+  {
+   "decl": "Stafford38.Paper.Section2.proj",
+   "note": "The projection π : T*X → X (Definition 2.5)."
+  },
+  {
+   "decl": "Stafford38.Geometry.CoisotropicTranslation.baseLift",
+   "note": "f ↦ f∘π, a polynomial in x read in K[x, ξ]."
+  },
+  {
+   "decl": "Stafford38.Geometry.AffineConormalSpan.AffineTangentVector",
+   "note": "Tangent vectors K^n of X."
+  },
+  {
+   "decl": "Stafford38.Geometry.AffineConormalSpan.coordinateCovector",
+   "note": "The covector Σ ξ_i dx_i with coordinate vector ξ."
+  },
+  {
+   "decl": "Stafford38.Geometry.AffineConormalSpan.differentialCovector",
+   "note": "The covector df_y = Σ ∂_i f(y) dx_i."
+  },
+  {
+   "decl": "Stafford38.Geometry.AffineConormalSpan.zariskiTangentSpace",
+   "note": "The tangent space ⋂_{f ∈ I} ker df_y of the zero set of an ideal I at a point y."
+  },
+  {
+   "decl": "Stafford38.Geometry.AffineConormalSpan.affineConormalSpace",
+   "note": "N*_y Y defined as the annihilator of the tangent space; Definition 5.4(c) (definition_5_4_c) shows it is span{df_y : f ∈ I(Y)}."
+  },
+  {
+   "decl": "Stafford38.Geometry.AffineConormalSpan.equationCovectorSpan",
+   "note": "span{df_y : f ∈ I}, the printed form of N*_y Y."
+  },
+  {
+   "decl": "Stafford38.Geometry.CoisotropicTranslation.differentialAt",
+   "note": "The gradient (∂_1 f(y), …, ∂_n f(y)), the coordinate vector of df_y."
+  },
+  {
+   "decl": "Stafford38.Geometry.SmoothAffineConormal.SmoothAffinePoint",
+   "note": "Mathlib's smooth locus of K[x]/I at y; equal to the printed Y_sm by definition_5_4_b_iff."
+  },
+  {
+   "decl": "Stafford38.Geometry.ProjectiveConormalDirections.smoothConormalFibreProjection",
+   "note": "N(Y) over Mathlib's smooth locus; equal to the printed cone by conormalCone_paper_eq."
+  },
+  {
+   "decl": "Stafford38.Geometry.ProjectiveConormalDirections.smoothConormalDirectionSet",
+   "note": "The nonzero vectors of N(Y), whose classes span Dir(Y)."
+  },
+  {
+   "decl": "Stafford38.Geometry.ProjectiveConormalDirections.projectivizedDirectionSet",
+   "note": "The set of classes [ξ] ∈ ℙ((K^n)*) of the nonzero ξ in a set."
+  },
+  {
+   "decl": "Stafford38.Geometry.ProjectiveConormalDirections.projectiveHomogeneousZeroLocus",
+   "note": "Common zeros in ℙ((K^n)*) of a set of homogeneous polynomials."
+  },
+  {
+   "decl": "Stafford38.Geometry.ProjectiveConormalDirections.projectiveHomogeneousClosure",
+   "note": "Zariski closure in ℙ((K^n)*): the points where every homogeneous polynomial vanishing on the set vanishes."
+  },
+  {
+   "decl": "Stafford38.Geometry.ProjectiveConormalDehomogenization.dehomogenizedPoint",
+   "note": "The affine point (q_1/q_0, …, q_n/q_0) of a homogeneous column q."
+  },
+  {
+   "decl": "Stafford38.Geometry.GenericPointKaehlerConormal.genericPoint",
+   "note": "The generic point (x̄_1, …, x̄_n) ∈ F^n of Y = V(𝔭)."
+  },
+  {
+   "decl": "Stafford38.Geometry.LaneC.placeSubalgebra",
+   "note": "The localization A_{𝔭_D} as a subalgebra of F."
+  },
+  {
+   "decl": "Stafford38.Geometry.LaneC.placeValuationSubring",
+   "note": "A_{𝔭_D} as a valuation subring of F, given that it is a valuation ring."
+  },
+  {
+   "decl": "Stafford38.Paper.Section5.homogeneousCoordinates",
+   "note": "The homogeneous coordinates (1, x̄_1, …, x̄_n), with x̄_0 = 1."
+  },
+  {
+   "decl": "Stafford38.Paper.Section5.idealPoint",
+   "note": "I(Y) as a point of Spec K[x] for nonempty irreducible closed Y (prime by Definition 5.4(a))."
+  }
+ ]
+}
