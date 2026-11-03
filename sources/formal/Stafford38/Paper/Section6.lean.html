@@ -1,0 +1,62 @@
+<!doctype html><meta charset="utf-8"><title>Stafford38/Paper/Section6.lean</title><style>body{font:14px monospace}pre span{display:block}pre span:target{background:#fff0ad}a{color:#666}pre{white-space:pre-wrap}a.ref{color:#0645ad;text-decoration:none}a.ref:hover{text-decoration:underline}</style><h1>Stafford38/Paper/Section6.lean</h1><p>This project (Stafford38) · 8c417b3a9f0043d85967059cc51a7bbec65ec6ec</p><pre><span id="L1"><a href="#L1">1</a> module</span>
+<span id="L2"><a href="#L2">2</a> </span>
+<span id="L3"><a href="#L3">3</a> public import Stafford38.Paper.Section6.Avoidance</span>
+<span id="L4"><a href="#L4">4</a> public import Stafford38.Paper.Section6.BaseChange</span>
+<span id="L5"><a href="#L5">5</a> public import Stafford38.Paper.Section6.Proof</span>
+<span id="L6"><a href="#L6">6</a> public import Stafford38.Paper.Section6.Ore</span>
+<span id="L7"><a href="#L7">7</a> public import Stafford38.Paper.Section6.Cyclicity</span>
+<span id="L8"><a href="#L8">8</a> </span>
+<span id="L9"><a href="#L9">9</a> @[expose] public section</span>
+<span id="L10"><a href="#L10">10</a> </span>
+<span id="L11"><a href="#L11">11</a> /-!</span>
+<span id="L12"><a href="#L12">12</a> # Section 6 of the paper: proof of Theorem 1.1</span>
+<span id="L13"><a href="#L13">13</a> </span>
+<span id="L14"><a href="#L14">14</a> * `Stafford38.Paper.Section6.Avoidance`: Proposition 6.1</span>
+<span id="L15"><a href="#L15">15</a>   (`proposition_6_1`, steps `step_6_1_*`), from Corollary 4.11.</span>
+<span id="L16"><a href="#L16">16</a> * `Stafford38.Paper.Section6.BaseChange`: Lemma 6.2 (`lemma_6_2`, steps</span>
+<span id="L17"><a href="#L17">17</a>   `step_6_2_*`).</span>
+<span id="L18"><a href="#L18">18</a> * `Stafford38.Paper.Section6.Proof`: the proof of Theorem 1.1, one `step_W_*`</span>
+<span id="L19"><a href="#L19">19</a>   per bullet, `theorem_6_Q_eq_zero` (`Q = 0`), `theorem_1_1_paper` and</span>
+<span id="L20"><a href="#L20">20</a>   `theorem_1_1_fixedSource_paper`.</span>
+<span id="L21"><a href="#L21">21</a> * `Stafford38.Paper.Section6.Ore`: `A_n(k)` is a right Ore domain</span>
+<span id="L22"><a href="#L22">22</a>   (`weyl_rightOreCondition`), cited in the proof of Corollary 6.3.</span>
+<span id="L23"><a href="#L23">23</a> * `Stafford38.Paper.Section6.Cyclicity`: the steps `step_6_3_*` and</span>
+<span id="L24"><a href="#L24">24</a>   `corollary_6_3_of`, the proof of Corollary 6.3, and the proofs</span>
+<span id="L25"><a href="#L25">25</a>   (`two_generators_of_identity`, `stably_generated_of_identity`) of the cited</span>
+<span id="L26"><a href="#L26">26</a>   [Sta78, Thm. 3.7]; Corollary 6.3 and `stafford_1978_theorem_3_7` are stated</span>
+<span id="L27"><a href="#L27">27</a>   in `Stafford38.Paper.Main`.</span>
+<span id="L28"><a href="#L28">28</a> -/</span>
+<span id="L29"><a href="#L29">29</a> </span>
+<span id="L30"><a href="#L30">30</a> namespace Stafford38.Paper.Section6</span>
+<span id="L31"><a href="#L31">31</a> </span>
+<span id="L32"><a href="#L32">32</a> #print axioms <a class="ref" href="./Section6/Avoidance.lean.html#L69" data-p="6876" aria-label="Stafford38.Paper.Section6.proposition_6_1">proposition_6_1</a></span>
+<span id="L33"><a href="#L33">33</a> #print axioms <a class="ref" href="./Section6/BaseChange.lean.html#L453" data-p="6872" aria-label="Stafford38.Paper.Section6.lemma_6_2">lemma_6_2</a></span>
+<span id="L34"><a href="#L34">34</a> #print axioms <a class="ref" href="./Section6/Proof.lean.html#L314" data-p="6921" aria-label="Stafford38.Paper.Section6.theorem_6_Q_eq_zero">theorem_6_Q_eq_zero</a></span>
+<span id="L35"><a href="#L35">35</a> #print axioms <a class="ref" href="./Section6/Proof.lean.html#L351" data-p="6920" aria-label="Stafford38.Paper.Section6.theorem_1_1_paper">theorem_1_1_paper</a></span>
+<span id="L36"><a href="#L36">36</a> #print axioms <a class="ref" href="./Section6/Proof.lean.html#L367" data-p="6919" aria-label="Stafford38.Paper.Section6.theorem_1_1_fixedSource_paper">theorem_1_1_fixedSource_paper</a></span>
+<span id="L37"><a href="#L37">37</a> #print axioms <a class="ref" href="./Section6/Ore.lean.html#L153" data-p="6926" aria-label="Stafford38.Paper.Section6.weyl_rightOreCondition">weyl_rightOreCondition</a></span>
+<span id="L38"><a href="#L38">38</a> #print axioms <a class="ref" href="./Section6/Cyclicity.lean.html#L211" data-p="6868" aria-label="Stafford38.Paper.Section6.corollary_6_3_of">corollary_6_3_of</a></span>
+<span id="L39"><a href="#L39">39</a> </span>
+<span id="L40"><a href="#L40">40</a> end Stafford38.Paper.Section6</span>
+<span id="L41"><a href="#L41">41</a> </span></pre><!--lean-previews--><style>.lean-preview{position:fixed;z-index:9999;display:none;max-width:min(680px,calc(100vw - 16px));background:#fffef8;color:#1d1d1f;border:1px solid #c9c5bb;border-radius:6px;box-shadow:0 6px 24px rgba(0,0,0,.18);padding:6px 9px;font:12px/1.45 ui-monospace,Menlo,Consolas,monospace;pointer-events:none;text-align:left}.lean-preview .lp-head{font-weight:600;overflow-wrap:anywhere}.lean-preview .lp-loc{color:#6b6b6b;font-size:11px;overflow-wrap:anywhere}.lean-preview pre{margin:5px 0 0;white-space:pre-wrap;overflow-wrap:anywhere;max-height:50vh;overflow:hidden;font:inherit;background:none;border:0;padding:0}@media (prefers-color-scheme:dark){.lean-preview{background:#202124;color:#e8e6e1;border-color:#44464b}.lean-preview .lp-loc{color:#a3a7ad}}</style><script type="application/json" id="lean-previews">{"6868":["Stafford38.Paper.Section6.corollary_6_3_of","Stafford38/Paper/Section6/Cyclicity.lean:211","/-- **Proof of Corollary 6.3**, given the cited theorem [Sta78, Thm. 3.7]\n(`h37`: `T` is generated by two elements and stably two-generated).  Take\ngenerators `t₁, t₂` (`h37`), `φ(r, s) = t₁r + t₂s` onto `T`, a common\n  …\nthe stable two-generation of `h37`. -/\ntheorem corollary_6_3_of (hOre : RightOreCondition A)\n    (hone : ∀ d : A, d ≠ 0 → ∃ F R S : A, (1 : A) = d * R + F * d * S)\n    (htorsion : Stafford38.Paper.Section2.IsTorsion A T)\n    (h37 : (∃ t₁ t₂ : T, Submodule.span Aᵐᵒᵖ ({t₁, t₂} : Set T) = ⊤) ∧\n      IsStablyGenerated A T 2) :\n    Stafford38.Paper.Section2.IsCyclic A T ∧ IsStablyGenerated A T 1 :="],"6872":["Stafford38.Paper.Section6.lemma_6_2","Stafford38/Paper/Section6/BaseChange.lean:453","/-- **Lemma 6.2.** Let `K/k` be a field extension, `𝓘_K = d̃A_n(K) + x₁^N d̃A_n(K)`\nand `Q_K = Q ⊗_k K = A_n(K)/𝓘_K` with the order filtration\n`Q_{K,i} = qF_iA_n(K)`.  Then `gr Q_K ≅ gr Q ⊗_k K` (as `K`-modules; Lean writes the factor `K` on\n  …\n`Spec K[x,ξ] → Spec k[x,ξ]`. -/\ntheorem lemma_6_2 {n N : ℕ} (dt : PresentedWeyl k (n + 1)) :\n    Nonempty (grQ K N (dtK K dt) ≃ₗ[K] K ⊗[k] grQ k N dt) ∧\n      Module.annihilator (SymbolRing K (n + 1)) (grQ K N (dtK K dt)) =\n        (Module.annihilator (SymbolRing k (n + 1)) (grQ k N dt)).map (σ k K n) ∧\n      (Subsingleton (Q k N dt) ↔ Subsingleton (Q K N (dtK K dt))) ∧\n      Section2.Char K (idealI K N (dtK K dt)) =\n        PrimeSpectrum.comap (σ k K n) ⁻¹' Section2.Char k (idealI k N dt) :="],"6876":["Stafford38.Paper.Section6.proposition_6_1","Stafford38/Paper/Section6/Avoidance.lean:69","/-- **Proposition 6.1.** `Char(Q) ∩ V(x₁) = ∅`, where `V(x₁) ⊆ Spec k[x, ξ]`\nis the set of primes containing `x₁`. -/\ntheorem proposition_6_1 [CharZero k] {n N : ℕ} {dt : PresentedWeyl k (n + 1)}\n    (hN : 0 < N) (hform : IsMonicNormalForm k N dt) :\n    Section2.Char k (idealI k N dt) ∩ Vx₁ k n = ∅ :="],"6919":["Stafford38.Paper.Section6.theorem_1_1_fixedSource_paper","Stafford38/Paper/Section6/Proof.lean:367","/-- **Theorem 1.1, \"moreover\".** For `n ≥ 1` one may take\n`F = Φ_g^{-1}(x₁)^{deg_B d}` with a linear `ω`-preserving `g`; for\n`deg_B d = 0` any linear coordinate works, since then `F = 1`. -/\ntheorem theorem_1_1_fixedSource_paper :\n    Stafford38FixedSourceChallenge.UniversalFixedSourceStatement.{u} :="],"6920":["Stafford38.Paper.Section6.theorem_1_1_paper","Stafford38/Paper/Section6/Proof.lean:351","/-- **Proof of Theorem 1.1.**  `n = 0` is `step_rank_zero`.  For `n ≥ 1`,\nSection 3 (`section_3_reduction`) either finds `deg_B d = 0` and a unit, or\nthe normal form `d̃ = c⁻¹Φ_g(d)` with `N = deg_B d ≥ 1`, for which `Q = 0`\n  …\n`1 = d(c⁻¹Φ_g^{-1}(R)) + F d(c⁻¹Φ_g^{-1}(S))` with `F = Φ_g^{-1}(x₁)^N`. -/\ntheorem theorem_1_1_paper : Stafford38Challenge.UniversalStatement.{u} :="],"6921":["Stafford38.Paper.Section6.theorem_6_Q_eq_zero","Stafford38/Paper/Section6/Proof.lean:314","/-- **Body of the proof of Theorem 1.1.** For `d̃` in the normal form (3.1)\nwith `N = deg_B d̃ ≥ 1`, `Q = A_n(k)/(d̃A_n(k) + x₁^N d̃A_n(k)) = 0`.  With\n`K = k̄`: `W = ∅` by Theorem 5.8, so `gr Q_K = 0`, `Q_K = 0`, and `Q = 0` by\nLemma 6.2. -/\ntheorem theorem_6_Q_eq_zero [CharZero k] {n N : ℕ} {dt : PresentedWeyl k (n + 1)}\n    (hN : 0 < N) (hform : IsMonicNormalForm k N dt) (hdeg : bernsteinDegree k dt = N) :\n    Subsingleton (Q k N dt) :="],"6926":["Stafford38.Paper.Section6.weyl_rightOreCondition","Stafford38/Paper/Section6/Ore.lean:153","/-- **`A_n(k)` is a right Ore domain** [Björk, Prop. 1.8.4]: nonzero `d₁, d₂`\nhave `r₁, r₂` with `d₁r₁ = d₂r₂ ≠ 0`. -/\ntheorem weyl_rightOreCondition (n : ℕ) :\n    AlgebraicAnalysis.OreRightIntersection.RightOreCondition (PresentedWeyl k n) :="]}</script><script>(()=>{
+const data=JSON.parse(document.getElementById('lean-previews').textContent);
+const box=document.createElement('div');box.className='lean-preview';box.setAttribute('role','tooltip');
+document.body.append(box);let timer;
+function add(cls,text){const e=document.createElement(cls==='pre'?'pre':'div');if(cls!=='pre')e.className=cls;e.textContent=text;box.append(e);}
+function show(a){
+  let head,loc,body;
+  if(a.dataset.p){const d=data[a.dataset.p];if(!d)return;[head,loc,body]=d;}
+  else{const t=document.getElementById(decodeURIComponent(a.hash.slice(1)));const pre=t&&t.querySelector('pre');if(!pre)return;
+    head=a.hash.slice(1).replace(/^definition-[a-z]+:/,'');loc='Definition panel on this page';
+    const lines=pre.textContent.split('\n');body=lines.slice(0,14).join('\n')+(lines.length>14?'\n…':'');}
+  box.replaceChildren();add('lp-head',head);add('lp-loc',loc);add('pre',body);
+  box.style.display='block';const r=a.getBoundingClientRect(),w=box.offsetWidth,h=box.offsetHeight;
+  box.style.left=Math.max(8,Math.min(r.left,innerWidth-w-8))+'px';
+  box.style.top=(r.bottom+6+h<innerHeight?r.bottom+6:Math.max(8,r.top-h-6))+'px';}
+function hide(){clearTimeout(timer);box.style.display='none';}
+const pick=e=>e.target.closest&&e.target.closest('a[data-p],a.definition-link');
+document.addEventListener('mouseover',e=>{const a=pick(e);clearTimeout(timer);if(a)timer=setTimeout(()=>show(a),150);else hide();});
+document.addEventListener('focusin',e=>{const a=pick(e);if(a)show(a);else hide();});
+document.addEventListener('focusout',hide);document.addEventListener('scroll',hide,true);
+document.addEventListener('keydown',e=>{if(e.key==='Escape')hide();});
+})();</script><!--/lean-previews-->

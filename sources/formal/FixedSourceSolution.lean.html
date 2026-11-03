@@ -1,41 +1,25 @@
-<!doctype html><meta charset="utf-8"><title>FixedSourceSolution.lean</title><style>body{font:14px monospace}pre span{display:block}pre span:target{background:#fff0ad}a{color:#666}pre{white-space:pre-wrap}a.ref{color:#0645ad;text-decoration:none}a.ref:hover{text-decoration:underline}</style><h1>FixedSourceSolution.lean</h1><p>This project (Stafford38) · 97f1da4fd0244a9d390a2f60d7531d39a8927914</p><pre><span id="L1"><a href="#L1">1</a> module</span>
-<span id="L2"><a href="#L2">2</a> public import Stafford38.FoundationClosure</span>
-<span id="L3"><a href="#L3">3</a> public import Stafford38.FixedSourceChallengeTransport</span>
+<!doctype html><meta charset="utf-8"><title>FixedSourceSolution.lean</title><style>body{font:14px monospace}pre span{display:block}pre span:target{background:#fff0ad}a{color:#666}pre{white-space:pre-wrap}a.ref{color:#0645ad;text-decoration:none}a.ref:hover{text-decoration:underline}</style><h1>FixedSourceSolution.lean</h1><p>This project (Stafford38) · 8c417b3a9f0043d85967059cc51a7bbec65ec6ec</p><pre><span id="L1"><a href="#L1">1</a> module</span>
+<span id="L2"><a href="#L2">2</a> public import Stafford38.ChallengeDefinitions</span>
+<span id="L3"><a href="#L3">3</a> public import Stafford38.Paper.Main</span>
 <span id="L4"><a href="#L4">4</a> </span>
 <span id="L5"><a href="#L5">5</a> @[expose] public section</span>
 <span id="L6"><a href="#L6">6</a> </span>
 <span id="L7"><a href="#L7">7</a> /-!</span>
-<span id="L8"><a href="#L8">8</a> # Solution for the exact-source challenge</span>
+<span id="L8"><a href="#L8">8</a> # Solution for the exact-source challenge: the proof along the paper</span>
 <span id="L9"><a href="#L9">9</a> </span>
-<span id="L10"><a href="#L10">10</a> The substantive development proves the exact fixed-source theorem on the same</span>
-<span id="L11"><a href="#L11">11</a> `RingQuot` presentation of the Weyl algebra</span>
-<span id="L12"><a href="#L12">12</a> (`Stafford38.universalFixedSourceStatement`).  The transport module identifies</span>
-<span id="L13"><a href="#L13">13</a> the challenge's intrinsic ordered-word filtration and its least-level degree</span>
-<span id="L14"><a href="#L14">14</a> with the development's checked PBW normal-form filtration and degree, and the</span>
-<span id="L15"><a href="#L15">15</a> two linear symplectic coordinate predicates are definitionally equal.  This</span>
-<span id="L16"><a href="#L16">16</a> file only combines those facts; it adds no hypothesis and supplies no degree</span>
-<span id="L17"><a href="#L17">17</a> or normal-form datum.</span>
-<span id="L18"><a href="#L18">18</a> -/</span>
-<span id="L19"><a href="#L19">19</a> </span>
-<span id="L20"><a href="#L20">20</a> namespace Stafford38FixedSourceChallenge</span>
-<span id="L21"><a href="#L21">21</a> </span>
-<span id="L22"><a href="#L22">22</a> universe u</span>
-<span id="L23"><a href="#L23">23</a> </span>
-<span id="L24"><a href="#L24">24</a> theorem universalFixedSourceStatement : <a class="ref" href="./Stafford38/ChallengeDefinitions.lean.html#L192" data-p="6912" aria-label="Stafford38FixedSourceChallenge.UniversalFixedSourceStatement">UniversalFixedSourceStatement</a> := by</span>
-<span id="L25"><a href="#L25">25</a>   intro k _ _ n d hd</span>
-<span id="L26"><a href="#L26">26</a>   obtain ⟨ell, R, S, hell, hcert⟩ :=</span>
-<span id="L27"><a href="#L27">27</a>     <a class="ref" href="./Stafford38/FoundationClosure.lean.html#L71" data-p="6898" aria-label="Stafford38.universalFixedSourceStatement">Stafford38.universalFixedSourceStatement</a> (k := k) n d hd</span>
-<span id="L28"><a href="#L28">28</a>   have hdeg := <a class="ref" href="./Stafford38/FixedSourceChallengeTransport.lean.html#L148" data-p="6927" aria-label="Stafford38FixedSourceChallengeTransport.bernsteinDegree_eq">Stafford38FixedSourceChallengeTransport.bernsteinDegree_eq</a> k d</span>
-<span id="L29"><a href="#L29">29</a>   refine ⟨ell, R, S,</span>
-<span id="L30"><a href="#L30">30</a>     (<a class="ref" href="./Stafford38/FixedSourceChallengeTransport.lean.html#L175" data-p="6929" aria-label="Stafford38FixedSourceChallengeTransport.isLinearWeylCoordinate_iff">Stafford38FixedSourceChallengeTransport.isLinearWeylCoordinate_iff</a></span>
-<span id="L31"><a href="#L31">31</a>       k n ell).<a class="ref" href="https://github.com/leanprover/lean4/blob/v4.35.0-rc3/src/Init/Core.lean#L194" data-p="1447" aria-label="Iff.mpr">mpr</a> hell, ?_⟩</span>
-<span id="L32"><a href="#L32">32</a>   rw [hdeg]</span>
-<span id="L33"><a href="#L33">33</a>   exact hcert</span>
-<span id="L34"><a href="#L34">34</a> </span>
-<span id="L35"><a href="#L35">35</a> end Stafford38FixedSourceChallenge</span>
-<span id="L36"><a href="#L36">36</a> </span>
-<span id="L37"><a href="#L37">37</a> #print axioms <a class="ref" href="./FixedSourceSolution.lean.html#L24" data-p="8038" aria-label="Stafford38FixedSourceChallenge.universalFixedSourceStatement">Stafford38FixedSourceChallenge.universalFixedSourceStatement</a></span>
-<span id="L38"><a href="#L38">38</a> </span></pre><!--lean-previews--><style>.lean-preview{position:fixed;z-index:9999;display:none;max-width:min(680px,calc(100vw - 16px));background:#fffef8;color:#1d1d1f;border:1px solid #c9c5bb;border-radius:6px;box-shadow:0 6px 24px rgba(0,0,0,.18);padding:6px 9px;font:12px/1.45 ui-monospace,Menlo,Consolas,monospace;pointer-events:none;text-align:left}.lean-preview .lp-head{font-weight:600;overflow-wrap:anywhere}.lean-preview .lp-loc{color:#6b6b6b;font-size:11px;overflow-wrap:anywhere}.lean-preview pre{margin:5px 0 0;white-space:pre-wrap;overflow-wrap:anywhere;max-height:50vh;overflow:hidden;font:inherit;background:none;border:0;padding:0}@media (prefers-color-scheme:dark){.lean-preview{background:#202124;color:#e8e6e1;border-color:#44464b}.lean-preview .lp-loc{color:#a3a7ad}}</style><script type="application/json" id="lean-previews">{"1447":["Iff.mpr","Init/Core.lean:194 · lean4","  mpr : b → a"],"6898":["Stafford38.universalFixedSourceStatement","Stafford38/FoundationClosure.lean:71","theorem universalFixedSourceStatement : FixedSource.UniversalFixedSourceStatement.{u} :="],"6912":["Stafford38FixedSourceChallenge.UniversalFixedSourceStatement","Stafford38/ChallengeDefinitions.lean:192","/-- The exact fixed-source challenge, using the intrinsic degree. -/\nabbrev UniversalFixedSourceStatement : Prop :=\n  UniversalFixedSourceStatementWithDegree.{u} bernsteinDegree"],"6927":["Stafford38FixedSourceChallengeTransport.bernsteinDegree_eq","Stafford38/FixedSourceChallengeTransport.lean:148","/-- The challenge's intrinsic degree is the development's checked PBW\nnormal-form degree. -/\ntheorem bernsteinDegree_eq {n : ℕ} (d : PresentedWeyl k n) :\n    Stafford38FixedSourceChallenge.bernsteinDegree k d =\n      Stafford38.FixedSource.bernsteinDegree k d :="],"6929":["Stafford38FixedSourceChallengeTransport.isLinearWeylCoordinate_iff","Stafford38/FixedSourceChallengeTransport.lean:175","/-- The two linear symplectic coordinate predicates are definitionally the\nsame. -/\ntheorem isLinearWeylCoordinate_iff (n : ℕ)\n    (ell : Stafford38FixedSourceChallenge.WeylAlg k (n + 1)) :\n    Stafford38FixedSourceChallenge.IsLinearWeylCoordinate k n ell ↔\n      Stafford38.FixedSource.IsLinearWeylCoordinate k n ell :="],"8038":["Stafford38FixedSourceChallenge.universalFixedSourceStatement","FixedSourceSolution.lean:24","theorem universalFixedSourceStatement : UniversalFixedSourceStatement :="]}</script><script>(()=>{
+<span id="L10"><a href="#L10">10</a> The statement is the "moreover" part of Theorem 1.1, proved by</span>
+<span id="L11"><a href="#L11">11</a> `Stafford38.Paper.theorem_1_1_fixedSource` along Sections 3–6 of the paper.</span>
+<span id="L12"><a href="#L12">12</a> -/</span>
+<span id="L13"><a href="#L13">13</a> </span>
+<span id="L14"><a href="#L14">14</a> namespace Stafford38FixedSourceChallenge</span>
+<span id="L15"><a href="#L15">15</a> </span>
+<span id="L16"><a href="#L16">16</a> theorem universalFixedSourceStatement : <a class="ref" href="./Stafford38/ChallengeDefinitions.lean.html#L192" data-p="7639" aria-label="Stafford38FixedSourceChallenge.UniversalFixedSourceStatement">UniversalFixedSourceStatement</a> :=</span>
+<span id="L17"><a href="#L17">17</a>   <a class="ref" href="./Stafford38/Paper/Main.lean.html#L27" data-p="7055" aria-label="Stafford38.Paper.theorem_1_1_fixedSource">Stafford38.Paper.theorem_1_1_fixedSource</a></span>
+<span id="L18"><a href="#L18">18</a> </span>
+<span id="L19"><a href="#L19">19</a> end Stafford38FixedSourceChallenge</span>
+<span id="L20"><a href="#L20">20</a> </span>
+<span id="L21"><a href="#L21">21</a> #print axioms <a class="ref" href="./FixedSourceSolution.lean.html#L16" data-p="8839" aria-label="Stafford38FixedSourceChallenge.universalFixedSourceStatement">Stafford38FixedSourceChallenge.universalFixedSourceStatement</a></span>
+<span id="L22"><a href="#L22">22</a> </span></pre><!--lean-previews--><style>.lean-preview{position:fixed;z-index:9999;display:none;max-width:min(680px,calc(100vw - 16px));background:#fffef8;color:#1d1d1f;border:1px solid #c9c5bb;border-radius:6px;box-shadow:0 6px 24px rgba(0,0,0,.18);padding:6px 9px;font:12px/1.45 ui-monospace,Menlo,Consolas,monospace;pointer-events:none;text-align:left}.lean-preview .lp-head{font-weight:600;overflow-wrap:anywhere}.lean-preview .lp-loc{color:#6b6b6b;font-size:11px;overflow-wrap:anywhere}.lean-preview pre{margin:5px 0 0;white-space:pre-wrap;overflow-wrap:anywhere;max-height:50vh;overflow:hidden;font:inherit;background:none;border:0;padding:0}@media (prefers-color-scheme:dark){.lean-preview{background:#202124;color:#e8e6e1;border-color:#44464b}.lean-preview .lp-loc{color:#a3a7ad}}</style><script type="application/json" id="lean-previews">{"7055":["Stafford38.Paper.theorem_1_1_fixedSource","Stafford38/Paper/Main.lean:27","/-- **Theorem 1.1, moreover.** If `n ≥ 1`, one may choose `F = ℓ^{deg_B d}`\nfor a linear symplectic coordinate `ℓ = Φ_g^{-1}(x₁)`. -/\ntheorem theorem_1_1_fixedSource :\n    Stafford38FixedSourceChallenge.UniversalFixedSourceStatement.{u} :="],"7639":["Stafford38FixedSourceChallenge.UniversalFixedSourceStatement","Stafford38/ChallengeDefinitions.lean:192","/-- The exact fixed-source challenge, using the intrinsic degree. -/\nabbrev UniversalFixedSourceStatement : Prop :=\n  UniversalFixedSourceStatementWithDegree.{u} bernsteinDegree"],"8839":["Stafford38FixedSourceChallenge.universalFixedSourceStatement","FixedSourceSolution.lean:16","theorem universalFixedSourceStatement : UniversalFixedSourceStatement :="]}</script><script>(()=>{
 const data=JSON.parse(document.getElementById('lean-previews').textContent);
 const box=document.createElement('div');box.className='lean-preview';box.setAttribute('role','tooltip');
 document.body.append(box);let timer;

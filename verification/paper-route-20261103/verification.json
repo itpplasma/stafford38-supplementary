@@ -1,0 +1,91 @@
+{
+  "status": "passed",
+  "paper": {
+    "repo": "itpplasma/stafford38-paper",
+    "commit": "0dd6189bdf1bf2c670a8421cfc9952d5b6b811b9",
+    "file": "human_readable_main.tex",
+    "origin_repo": "itpplasma/stafford38-paper",
+    "origin_commit": "0dd6189bdf1bf2c670a8421cfc9952d5b6b811b9",
+    "sha256": "9cdf65e2419f8a2c9c28c27a5b531d9d2a12be2305c190eafa726f0255d9db66",
+    "label": "Paper (frozen version)",
+    "local_source_base": "./sources/paper",
+    "note": "November 2 frozen version, preserved verbatim.",
+    "snapshot": {
+      "base": "sources/paper/raw",
+      "files": {
+        "human_readable_main.tex": "9cdf65e2419f8a2c9c28c27a5b531d9d2a12be2305c190eafa726f0255d9db66",
+        "references.bib": "dd9ca2fb6ca2abae741af600c4ac1728dac2b4758a1cc564a30f9c6043df0d4f",
+        "ai_review.tex": "3b245e5178736d12e247f24963a27d10a542f6fc25018070c24cf817d52d1591"
+      }
+    }
+  },
+  "generator": {
+    "repo": "itpplasma/paper-lean-audit",
+    "commit": "7c0b67c9c29f68be6af7e7db9273b18e4893e149",
+    "version": "manuscript-20261021",
+    "base_commit": "065db3e1fbc9001071422e9c66db36c0ef7da394",
+    "bundle": "verification/manuscript-20261021/generator.bundle"
+  },
+  "manuscript_cards": 69,
+  "active_statements": 46,
+  "manuscript_snapshot_byte_identical": true,
+  "paper_worktree_unchanged": true,
+  "formal_source_pins_unchanged": false,
+  "formal_verification": {
+    "source": "8c417b3a9f0043d85967059cc51a7bbec65ec6ec",
+    "status": "passed",
+    "receipt": "verification/paper-route-20261103/formal-verify.log",
+    "scope": "Repository verifier scripts/verify.sh: full Lake build of every module, all solution and challenge roots, and the strict dependency guard of the earlier and the paper-route terminal roots, and the route checks of both solutions (only propext, Classical.choice, Quot.sound). No Palomar service-runner receipt is claimed."
+  },
+  "reader_build": {
+    "status": "passed",
+    "warnings": [],
+    "scope": "Complete current source/reference and statement-coverage audit; warnings are unresolved references already present in the paper."
+  },
+  "generator_tests": {
+    "passed": 83,
+    "failed": 0,
+    "skipped": 1,
+    "scope": "Generator regression suite including its browser tests",
+    "skip_reason": "Historical sibling-paper fixture unavailable; current manuscript passes the actual pinned build.",
+    "rerun": false,
+    "log": "verification/manuscript-20261021/generator-tests.log",
+    "reason": "Generator unchanged at its pinned commit; only the formal pin and map cards changed."
+  },
+  "browser": {
+    "status": "passed",
+    "cards": 69,
+    "paper": "0dd6189bdf1bf2c670a8421cfc9952d5b6b811b9",
+    "source_links": 1724,
+    "definition_links": "all targets present",
+    "canonical_weyl_definitions": 1,
+    "ownership_labels": true,
+    "definition_clicks": true,
+    "new_cards": 0,
+    "obsolete_cards_absent": true,
+    "paper_source_links_local": true,
+    "search": true,
+    "guided_navigation": true,
+    "manuscript_annotations": true,
+    "notes_reload": true,
+    "review_export": true,
+    "review_findings": 4,
+    "math_errors": 0,
+    "mobile_overflow": false,
+    "javascript_errors": [],
+    "offline_requests": 0
+  },
+  "paper_pdf": {
+    "sha256": "b20a98208bdd5838ce4281245a000df80270394e032e350fd5051eb621802de6",
+    "source_commit": "0dd6189bdf1bf2c670a8421cfc9952d5b6b811b9",
+    "build": "latexmk -pdf -interaction=nonstopmode -halt-on-error human_readable_main.tex",
+    "isolated_checkout": true,
+    "unresolved_references": []
+  },
+  "comparison_review": {
+    "johanna": "pending",
+    "max": "pending",
+    "findings": 4
+  },
+  "html_sha256": "5924c0e440c86b5bb968ecb0aed03a2637d9bbf1d5fcc191a3fa3f1dedade642"
+}
