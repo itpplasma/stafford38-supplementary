@@ -1,0 +1,2746 @@
+{
+ "schema": "paper-lean-audit/map-2",
+ "title": "Stafford's conjecture: Section 4, paper beside Lean",
+ "output_stem": "sec4",
+ "sources": {
+  "paper": {
+   "repo": "itpplasma/stafford38-paper",
+   "commit": "c8f0d615ba3ad7271c1c99ad4b0085071da6a793",
+   "file": "human_readable_main.tex",
+   "snapshot": "../../sources/paper/raw/human_readable_main.tex",
+   "sha256": "9cdf65e2419f8a2c9c28c27a5b531d9d2a12be2305c190eafa726f0255d9db66",
+   "bib_snapshot": "../../sources/paper/raw/references.bib"
+  },
+  "formal": {
+   "repo": "itpplasma/stafford38-formal",
+   "commit": "665fb5bbd26967bfde5c9c30f27513f4cea37f24"
+  },
+  "generator": {
+   "repo": "itpplasma/paper-lean-audit",
+   "commit": "6cbb475d51d8be02189cf1c2c5de59cf10f4b880",
+   "note": "v2/extract.mjs and v2/build.mjs of branch sbs-gen-sec4-20261103 at this commit produce sec4.extraction.json and the reader; the branch adds step anchors into called lemmas and keeps the proof states of every traced declaration of a module."
+  }
+ },
+ "lean": {
+  "extraction": "sec4.extraction.json",
+  "imports": [
+   "Stafford38.Paper.Main"
+  ],
+  "project_modules": [
+   "Stafford38",
+   "Challenge",
+   "FixedSourceChallenge"
+  ],
+  "open": [
+   "Stafford38.Paper.Section4",
+   "Stafford38.Paper.Section3",
+   "Stafford38.Paper.Section2",
+   "Stafford38Challenge"
+  ]
+ },
+ "scope": {
+  "sections": [
+   "4"
+  ]
+ },
+ "entries": [
+  {
+   "id": "intro:weyl",
+   "paper": {
+    "quote": "be the $n$th Weyl algebra"
+   },
+   "kind": "formalizes",
+   "short": "Weyl algebra",
+   "lean": [
+    "Stafford38Challenge.WeylAlg",
+    "Stafford.FreeWeyl",
+    "Stafford.freeWeylRelation",
+    "Stafford38.WeylIteratedEquivalence.PresentedWeyl"
+   ],
+   "note": "Lean defines A_n(k) as the free algebra on x_i, ∂_i modulo the commutator relations given by the standard symplectic matrix; PresentedWeyl is the same algebra."
+  },
+  {
+   "id": "thm:main",
+   "paper": {
+    "quote": "\\label{thm:main}"
+   },
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.theorem_1_1",
+    "Stafford38.Paper.theorem_1_1_fixedSource",
+    "Stafford38Challenge.UniversalStatement",
+    "Stafford.Reduction.Stafford38",
+    "Stafford38FixedSourceChallenge.UniversalFixedSourceStatement",
+    "Stafford38FixedSourceChallenge.UniversalFixedSourceStatementWithDegree",
+    "Stafford38FixedSourceChallenge.IsLinearWeylCoordinate",
+    "Stafford38FixedSourceChallenge.bernsteinDegree"
+   ],
+   "note": "Lean writes A_n(k) as the Mathlib-only quotient Stafford38Challenge.WeylAlg k n and the moreover clause as the fixed-source statement with F = ℓ^{deg_B d} for a linear symplectic coordinate ℓ; the printed proof is Section 6, outside this slice.",
+   "short": "main theorem"
+  },
+  {
+   "id": "def:cyclic",
+   "paper": {
+    "quote": "\\label{def:cyclic}"
+   },
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section2.IsTorsion",
+    "Stafford38.Paper.Section2.IsCyclic",
+    "Stafford38.TorsionCyclicity.IsRightTorsion"
+   ],
+   "short": "torsion, cyclic"
+  },
+  {
+   "id": "conv:pair",
+   "paper": {
+    "quote": "\\label{conv:pair}"
+   },
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section2.x₁",
+    "Stafford38.Paper.Section2.p",
+    "Stafford38.Paper.Section2.transverse",
+    "Stafford38.Paper.Section2.C",
+    "Stafford38.Paper.Section2.convention_2_2_relations",
+    "Stafford38.Paper.Section2.convention_2_2_exists",
+    "Stafford38.Paper.Section2.convention_2_2_unique"
+   ],
+   "note": "Lean indexes the paper's A_n(k), n ≥ 1, as PresentedWeyl k (n + 1), and proves the stated relations and the normal form instead of citing them.",
+   "short": "x₁, p, C"
+  },
+  {
+   "id": "def:filtration",
+   "paper": {
+    "quote": "\\label{def:filtration}"
+   },
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section2.IsFiltration",
+    "Stafford38.Paper.Section2.gr",
+    "Stafford38.Paper.Section2.filtrationDegree",
+    "Stafford38.Paper.Section2.symbol"
+   ],
+   "note": "Lean indexes the filtration by ℕ with F_{-1} = 0 implicit, and defines the degree and symbol for every element, the paper only for a ≠ 0.",
+   "short": "filtration, gr, symbol"
+  },
+  {
+   "id": "par:filtrations",
+   "paper": {
+    "quote": "The \\emph{Bernstein filtration} $B_\\bullet$"
+   },
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section2.bernsteinFiltration",
+    "Stafford38.Paper.Section2.orderFiltration",
+    "Stafford38.Paper.Section2.bernsteinDegree",
+    "Stafford38.Paper.Section2.grEquivSymbolRing"
+   ],
+   "note": "Lean defines both filtrations as spans of ordered PBW words of bounded weight and proves gr A_n(k) ≅ k[x, ξ] (cited by the paper).",
+   "short": "Bernstein and order filtrations"
+  },
+  {
+   "id": "def:good-filtration",
+   "paper": {
+    "quote": "\\label{def:good-filtration}"
+   },
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section2.IsCompatibleFiltration",
+    "Stafford38.Paper.Section2.IsGoodFiltration"
+   ],
+   "short": "good filtration"
+  },
+  {
+   "id": "par:cyclic-good",
+   "paper": {
+    "quote": "As an example, the filtration $M_i:=qF_i$"
+   },
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section2.cyclicFiltration",
+    "Stafford38.Paper.Section2.cyclicFiltration_order_isCompatible",
+    "Stafford38.Paper.Section2.grCyclic",
+    "Stafford38.Paper.Section2.grCyclic_good",
+    "Stafford38.Paper.Section2.qFilt_isGoodFiltration"
+   ],
+   "short": "qF_i is good"
+  },
+  {
+   "id": "def:cotangent",
+   "paper": {
+    "quote": "\\label{def:cotangent}"
+   },
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section2.CotangentBundle",
+    "Stafford38.Paper.Section2.proj",
+    "Stafford38.Paper.Section2.fibre",
+    "Stafford38.Characteristic.SymbolRing",
+    "Stafford38.Characteristic.PhaseVar"
+   ],
+   "note": "Lean takes T*X to be Spec k[x, ξ] and states the projection and fibres on closed points K^{2n}.",
+   "short": "T*X"
+  },
+  {
+   "id": "def:spec",
+   "paper": {
+    "quote": "\\label{def:spec}"
+   },
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section2.V",
+    "Stafford38.Paper.Section2.VK",
+    "Stafford38.Paper.Section2.vanishingIdealOf",
+    "Stafford38.Paper.Section2.maxIdealAt",
+    "Stafford38.Paper.Section2.mem_VK_iff_closedPoint_mem_V",
+    "Stafford38.Paper.Section2.closedPoint"
+   ],
+   "short": "Spec, V, I"
+  },
+  {
+   "id": "def:char-variety",
+   "paper": {
+    "quote": "\\label{def:char-variety}"
+   },
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section2.CharOf",
+    "Stafford38.Paper.Section2.Char",
+    "Stafford38.Paper.Section2.definition_2_7_independent"
+   ],
+   "note": "Lean proves the independence of the good filtration that the paper cites from [HTT, Lemma D.3.1].",
+   "short": "Char"
+  },
+  {
+   "id": "def:symplectic",
+   "paper": {
+    "quote": "\\label{def:symplectic}"
+   },
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section2.IsSymplectic",
+    "Stafford38.Paper.Section2.gramMatrix",
+    "Stafford38.Paper.Section2.IsSymplecticBasis",
+    "Stafford38.Paper.Section2.omega",
+    "Stafford38.Paper.Section2.omega_isSymplectic"
+   ],
+   "short": "symplectic form"
+  },
+  {
+   "id": "def:poisson",
+   "paper": {
+    "quote": "\\label{def:poisson}"
+   },
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section2.poisson"
+   ],
+   "short": "Poisson bracket"
+  },
+  {
+   "id": "def:involutive",
+   "paper": {
+    "quote": "\\label{def:involutive}"
+   },
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section2.IsInvolutive",
+    "Stafford38.Paper.Section2.IsInvolutiveSet"
+   ],
+   "short": "involutive"
+  },
+  {
+   "id": "ithm:gabber",
+   "paper": {
+    "quote": "\\label{ithm:gabber}"
+   },
+   "kind": "cites",
+   "lean": [
+    "Stafford38.Paper.Section2.theorem_2_11",
+    "Stafford38.Paper.Section2.theorem_2_11_cyclic"
+   ],
+   "note": "Lean states Gabber's theorem for a good order filtration of a finitely generated module and proves it; theorem_2_11_cyclic is the case A_n(K)/I used later.",
+   "short": "Gabber"
+  },
+  {
+   "id": "thm:nss",
+   "paper": {
+    "quote": "\\label{thm:nss}"
+   },
+   "kind": "cites",
+   "lean": [
+    "Stafford38.Paper.Section2.theorem_2_12"
+   ],
+   "short": "Nullstellensatz"
+  },
+  {
+   "id": "prop:monic",
+   "paper": {
+    "quote": "\\label{prop:monic}"
+   },
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section3.proposition_3_2",
+    "Stafford38.Paper.Section3.IsMonicNormalForm"
+   ]
+  },
+  {
+   "id": "eq:I-Q",
+   "paper": {
+    "quote": "We will now define the modules"
+   },
+   "kind": "formalizes",
+   "short": "𝓘 and Q, (3.2)",
+   "lean": [
+    "Stafford38.Paper.Section3.idealI",
+    "Stafford38.Paper.Section3.Q"
+   ]
+  },
+  {
+   "id": "prop:charP",
+   "paper": {
+    "quote": "\\label{prop:charP}"
+   },
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section3.proposition_3_6",
+    "Stafford38.Paper.Section3.grQ"
+   ]
+  },
+  {
+   "id": "par:euler",
+   "paper": {
+    "quote": "We define $E=x_1p$."
+   },
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section4.eulerElement",
+    "Stafford38.Paper.Section4.nonnegativePart",
+    "Stafford38.Paper.Section4.presentedNonnegativePart",
+    "Stafford38.Paper.Section4.transverse",
+    "Stafford38.WeylEulerSubring.eulerSubring"
+   ],
+   "short": "E and A≥0",
+   "note": "Lean does not define the Euler grading on A_n(k); it takes A_{≥0} to be the subring generated by the transverse algebra, x₁ and E, which is the PBW description the paper gives, and the later proofs use only this subring."
+  },
+  {
+   "id": "par:euler-relations",
+   "paper": {
+    "quote": "By the commutation relations of the Weyl algebra, it holds that"
+   },
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section4.eq_nonnegative_pbw",
+    "Stafford38.Paper.Section4.step_coordinate_normal",
+    "Stafford38.Paper.Section4.transverse_commutes_coordinate"
+   ],
+   "short": "(4.1) and normality of x₁",
+   "note": "Lean proves the four relations from p x₁ = x₁ p + 1 in any ring, and only the one-sided normality x₁ r = r′ x₁ that Proposition 4.3 uses; the closing claim that every element of Euler degree ≥ 1 lies in A_{≥0}x₁ is proved only for the remainder terms of Lemma 4.2 (step_4_2_presented_remainder)."
+  },
+  {
+   "id": "lem:euler",
+   "paper": {
+    "quote": "\\label{lem:euler}"
+   },
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section4.lemma_4_1"
+   ],
+   "note": "Lean writes the products as list products in increasing i, because A_n(k) is not commutative; the last two clauses say the factors commute, so the order does not matter. lemma_4_1 is lemma_4_1_of_weylPair, the lemma for any ring with p x = x p + 1, applied to x₁, ∂₁ by Convention 2.2; the proof rows follow lemma_4_1_of_weylPair. Paper n is Lean n + 1.",
+   "proof": {
+    "sentences": [
+     {
+      "quote": "Since both products in \\eqref{",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section4.lemma_4_1_of_weylPair",
+        "quote": "refine ⟨?_, ?_, step_4_1_factors_commute x p⟩"
+       }
+      ]
+     },
+     {
+      "quote": "We induct on $m$; both id",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section4.lemma_4_1_of_weylPair",
+        "at": [
+         197,
+         2
+        ]
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.lemma_4_1_of_weylPair",
+        "quote": "simp [eulerElement]"
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.lemma_4_1_of_weylPair",
+        "at": [
+         201,
+         2
+        ]
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.lemma_4_1_of_weylPair",
+        "quote": "simp [eulerElement, hweyl]"
+       }
+      ]
+     },
+     {
+      "quote": "Assuming the\nfirst identi",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section4.lemma_4_1_of_weylPair",
+        "quote": "exact step_4_1_falling_succ x p hweyl m ih"
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_1_falling_succ"
+       }
+      ],
+      "note": "The Lean calc groups the paper's equalities differently: it moves E = x₁p from the end of the product to its front, which the commuting factors allow."
+     },
+     {
+      "quote": "The second identity follo",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section4.lemma_4_1_of_weylPair",
+        "quote": "exact step_4_1_rising_succ x p hweyl m ih"
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_1_rising_succ"
+       }
+      ],
+      "note": "Lean uses the relation in the equivalent form pE = (E + 1)p and writes the same induction step as a calc."
+     }
+    ]
+   },
+   "citations": {
+    "conv:pair": "Lean takes p x₁ = x₁ p + 1 from Convention 2.2, which the proof uses without citing it.",
+    "par:euler-relations": "Lean uses x₁E = (E − 1)x₁ and pE = (E + 1)p from equation (4.1), which the proof names but does not cite by number."
+   }
+  },
+  {
+   "id": "lem:euler-residue",
+   "paper": {
+    "quote": "\\label{lem:euler-residue}"
+   },
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section4.lemma_4_2"
+   ],
+   "note": "Lean adds the hypothesis that d̃ is in the form (3.1), which the paper fixes for the section, and a ℚ-algebra structure on k. 𝓘 is idealI k N d̃ = d̃A_n + x₁^N d̃A_n; A_{≥0} is the subring generated by A_{n−1}, x₁ and E. The proof follows lemma_4_2_of_positive, the lemma for a ring with p x = x p + 1, whose positivity input step_4_2_presented_remainder supplies for d̃.",
+   "proof": {
+    "sentences": [
+     {
+      "quote": "From Lemma \\ref{lem:euler",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_2_bezout",
+        "quote": "obtain ⟨hminus, hplus⟩ := h41 hN"
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_2_bezout",
+        "quote": "rw [(step_4_2_eval_products x p N).1, (step_4_2_eval_products x p N).2,"
+       }
+      ],
+      "note": "Lemma 4.1 for m = N enters as the hypothesis h41 of lemma_4_2_of_positive, which lemma_4_2 supplies from lemma_4_1 in its last step."
+     },
+     {
+      "quote": "The roots of $R_+$ and $R",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_2_coprime"
+       }
+      ]
+     },
+     {
+      "quote": "By the\nextended Euclidean",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section4.lemma_4_2_of_positive",
+        "quote": "obtain ⟨u, v, hbez⟩ := step_4_2_bezout x p N h41"
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_2_bezout"
+       }
+      ],
+      "note": "The Bézout identity in ℚ[E] is Mathlib's IsCoprime; Lean evaluates it at E and treats N = 0 separately."
+     },
+     {
+      "quote": "We write $\\tilde d=p^N+\\Sigma$",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "abel"
+       }
+      ],
+      "note": "Lean sets Σ = d̃ − p^N; the shape Σ_{j<N} p^j a_j of (3.1) is used only in step_4_2_presented_remainder."
+     },
+     {
+      "quote": "Then\n\\[(\\tilde d\\,x_1^N)u",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section4.lemma_4_2_of_positive",
+        "quote": "obtain ⟨-, hmem⟩ := step_4_2_residue x p d sigma N u v hd hbez"
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_2_residue"
+       }
+      ]
+     },
+     {
+      "quote": "We can write each $a_j$ i",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "obtain ⟨U, hU, V, hV, hright, hleft⟩ := step_4_2_presented_remainder hd"
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_2_presented_remainder",
+        "quote": "obtain ⟨U, V, hU, hV⟩ := presentedRemainder_hasPositiveCoordinateFactor k n N hd"
+       }
+      ],
+      "note": "Lean writes Σ in the PBW basis of the iterated Ore extension and factors each monomial b x₁^a p^j with j < N inside presentedRemainder_hasPositiveCoordinateFactor (Stafford38.WeylEulerRemainder)."
+     },
+     {
+      "quote": "A term $p^jx_1^lb$ coming",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_2_presented_remainder"
+       }
+      ],
+      "note": "The Euler-degree count is inside presentedRemainder_hasPositiveCoordinateFactor; its conclusion, Σx₁^N and x₁^NΣ in A_{≥0}x₁, is transported from the Ore extension to A_n(k) here."
+     },
+     {
+      "quote": "$u$ and $v$ only depend o",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_2_positive",
+        "quote": "obtain ⟨su, hsu⟩ := coordinate_mul_eulerPolynomial C x p hweyl hcomm hscalar u"
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_2_positive",
+        "quote": "obtain ⟨sv, hsv⟩ := coordinate_mul_eulerPolynomial C x p hweyl hcomm hscalar v"
+       }
+      ],
+      "note": "Lean uses degree 0 of u(E), v(E) in the form x₁u(E) = s_u x₁ with s_u ∈ A_{≥0}."
+     },
+     {
+      "quote": "Therefore every term of $",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section4.lemma_4_2_of_positive",
+        "quote": "obtain ⟨u₀, hu₀, hw⟩ :="
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_2_positive",
+        "quote": "refine ⟨U * su + V * sv,"
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_2_positive",
+        "quote": "rw [hright, hleft, mul_assoc, mul_assoc, hsu, hsv]"
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_2_positive",
+        "quote": "noncomm_ring"
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.lemma_4_2_of_positive",
+        "quote": "exact ⟨u₀, hu₀, hw ▸ hmem⟩"
+       },
+       {
+        "quote": "exact lemma_4_2_of_positive (transverse k n) (presentedCoordinate k n)"
+       }
+      ]
+     }
+    ],
+    "lean_adds": [
+     {
+      "step": {
+       "quote": "let := presentedRatAlgebra k n"
+      },
+      "note": "The ℚ-algebra structure of A_n(k) through ℚ → k, in which u(E), v(E) are evaluated."
+     },
+     {
+      "step": {
+       "quote": "have hd := Stafford38.Paper.Section3.isPBWMonicAt_of_isMonicNormalForm k hform"
+      },
+      "note": "Lean passes from the form (3.1) to its PBW-monic consequence, which the remainder factorization uses."
+     }
+    ]
+   },
+   "citations": {
+    "conv:pair": "Lean takes the Weyl relation and the commuting of x₁ with A_{n−1} from Convention 2.2.",
+    "par:euler-relations": "Lean uses that x₁ commutes with A_{n−1} (stated before Lemma 4.1) to move u(E), v(E) past x₁."
+   }
+  },
+  {
+   "id": "prop:x-surjective",
+   "paper": {
+    "quote": "\\label{prop:x-surjective}"
+   },
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section4.proposition_4_3"
+   ],
+   "note": "Lean adds the hypothesis that d̃ is in the form (3.1). rightMul 𝓘 x₁ is right multiplication by x₁ on Q = A_n/𝓘. The proof follows proposition_4_3_of, stated for a ring with a right ideal, in which qA_{≥0} is classSet 𝓘 A_{≥0}, the set of classes q r with r ∈ A_{≥0}.",
+   "proof": {
+    "sentences": [
+     {
+      "quote": "Let $q$ be the class of $",
+      "kind": "prose",
+      "note": "Notation; Lean writes the class of a ∈ A_n as qmk 𝓘 a, so q is qmk 𝓘 1."
+     },
+     {
+      "quote": "By Equation \\eqref{eq:eul",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "obtain ⟨u₀, hu₀, hres⟩ := lemma_4_2 hform"
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_3_q_mem"
+       }
+      ],
+      "note": "Lean states q = (q(−u₀))x₁; it is used inside step_4_3_normal_surj."
+     },
+     {
+      "quote": "We use the normality of $",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section4.proposition_4_3_of",
+        "quote": "have hsurj := step_4_3_normal_surj x u₀ hx hu₀ hres hnormal"
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_3_normal_surj",
+        "quote": "ext z"
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_3_normal_surj",
+        "quote": "constructor"
+       }
+      ]
+     },
+     {
+      "quote": "The inclusion $\\supseteq$",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_3_normal_surj",
+        "at": [
+         66,
+         2
+        ]
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_3_normal_surj",
+        "quote": "rintro ⟨w, ⟨r, hr, rfl⟩, rfl⟩"
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_3_normal_surj",
+        "quote": "exact ⟨r * x, R.mul_mem hr hx, (qmk_right_mul I r x).symm⟩"
+       }
+      ]
+     },
+     {
+      "quote": "For $\\subseteq$, let $r\\in ",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_3_normal_surj",
+        "at": [
+         57,
+         2
+        ]
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_3_normal_surj",
+        "quote": "rintro ⟨r, hr, rfl⟩"
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_3_normal_surj",
+        "quote": "obtain ⟨r', hr', hxr⟩ := hnormal r hr"
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_3_normal_surj",
+        "quote": "refine ⟨qmk I (-(u₀ * r')), ⟨_, R.neg_mem (R.mul_mem hu₀ hr'), rfl⟩, ?_⟩"
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_3_normal_surj",
+        "quote": "calc rightMul I x (qmk I (-(u₀ * r')))"
+       }
+      ]
+     },
+     {
+      "quote": "$qA_{\\geq0}$ is stable un",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_3_stable_momentum"
+       }
+      ]
+     },
+     {
+      "quote": "It is of course also stab",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_3_stable_coefficients"
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.transverseCoordinateAlgebra_le"
+       }
+      ],
+      "note": "Lean proves C ⊆ A_{≥0} from the generators of C, A_{n−1} and x₁, rather than from the absence of p."
+     },
+     {
+      "quote": "Since $C$ and $p$ togethe",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section4.proposition_4_3_of",
+        "quote": "have huniv := step_4_3_classSet_eq_univ C p"
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_3_classSet_eq_univ"
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.closure_transverseCoordinateAlgebra_momentum"
+       }
+      ],
+      "note": "Lean shows that the right multipliers preserving qA_{≥0} form a subring containing C and p, hence all of A_n; that C and p generate A_n is proved through the iterated Ore extension."
+     },
+     {
+      "quote": "Equation \\eqref{eq:normal",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section4.proposition_4_3_of",
+        "quote": "intro z"
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.proposition_4_3_of",
+        "quote": "have hz : z ∈ rightMul I x '' classSet I R := by"
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.proposition_4_3_of",
+        "quote": "obtain ⟨w, -, hw⟩ := hz"
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.proposition_4_3_of",
+        "quote": "exact ⟨w, hw⟩"
+       },
+       {
+        "quote": "exact proposition_4_3_of (transverseCoordinateAlgebra k n)"
+       }
+      ]
+     }
+    ]
+   },
+   "citations": {
+    "conv:pair": "Lean takes the Weyl relation and the commuting of x₁ with A_{n−1} from Convention 2.2.",
+    "par:euler-relations": "The normality of x₁ in A_{≥0}, which the proof uses by name."
+   }
+  },
+  {
+   "id": "def:localization",
+   "paper": {
+    "quote": "\\label{def:localization}"
+   },
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section4.definition_4_4"
+   ],
+   "note": "Lean uses Mathlib's Localization S and LocalizedModule S N; definition_4_4 proves that their equality of fractions is the printed one and that localization is exact."
+  },
+  {
+   "id": "def:supp",
+   "paper": {
+    "quote": "\\label{def:supp}"
+   },
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section4.definition_4_5"
+   ],
+   "note": "Lean uses Mathlib's Module.support; definition_4_5 proves 𝔭 ∈ Supp M iff M_𝔭 has a nonzero element."
+  },
+  {
+   "id": "def:length",
+   "paper": {
+    "quote": "\\label{def:length}"
+   },
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section4.definition_4_6"
+   ],
+   "note": "Lean uses Mathlib's Module.length, defined for every module with values in ℕ∞; definition_4_6 proves that it is the length of any composition series and additive on short exact sequences."
+  },
+  {
+   "id": "lem:supp-criterion",
+   "paper": {
+    "quote": "\\label{lem:supp-criterion}"
+   },
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section4.lemma_4_7"
+   ],
+   "note": "Ann_R(y) is the annihilator of the cyclic submodule R∙y.",
+   "proof": {
+    "sentences": [
+     {
+      "quote": "In $N_{\\mathfrak p}$, a\nf",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_7_mk_one_eq_zero_iff",
+        "quote": "rw [← LocalizedModule.zero_mk (1 : p.asIdeal.primeCompl),"
+       }
+      ]
+     },
+     {
+      "quote": "For $y/1$ this means: the",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_7_mk_one_eq_zero_iff",
+        "quote": "simp only [one_smul, smul_zero, sub_zero, IsConcreteLE.le_iff,"
+       }
+      ]
+     },
+     {
+      "quote": "Such a $u$ lies in $\\operatorname{",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_7_mk_one_eq_zero_iff",
+        "quote": "constructor"
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_7_mk_one_eq_zero_iff",
+        "at": [
+         82,
+         2
+        ]
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_7_mk_one_eq_zero_iff",
+        "quote": "rintro ⟨⟨u, hu⟩, h⟩"
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_7_mk_one_eq_zero_iff",
+        "quote": "exact ⟨u, h, hu⟩"
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_7_mk_one_eq_zero_iff",
+        "at": [
+         84,
+         2
+        ]
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_7_mk_one_eq_zero_iff",
+        "quote": "rintro ⟨u, h, hu⟩"
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_7_mk_one_eq_zero_iff",
+        "quote": "exact ⟨⟨u, hu⟩, h⟩"
+       }
+      ]
+     },
+     {
+      "quote": "So\n\\[y/1=0\\iff\\operatorname{",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_7_mk_one_ne_zero_iff"
+       }
+      ]
+     },
+     {
+      "quote": "\\emph{$(\\Leftarrow)$} Sup",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section4.lemma_4_7",
+        "at": [
+         121,
+         2
+        ]
+       },
+       {
+        "quote": "rintro ⟨y, hy⟩"
+       }
+      ]
+     },
+     {
+      "quote": "Then, $y/1\\neq0$ in\n$N_{\\mathfrak ",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "exact ⟨_, (step_4_7_mk_one_ne_zero_iff p y).2 hy⟩"
+       }
+      ]
+     },
+     {
+      "quote": "So $N_{\\mathfrak p}$ has ",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "rw [definition_4_5]"
+       },
+       {
+        "quote": "constructor"
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.lemma_4_7",
+        "at": [
+         115,
+         2
+        ]
+       }
+      ],
+      "note": "Lean rewrites 𝔭 ∈ Supp_R(N) as the existence of a nonzero element of N_𝔭 (Definition 4.5) before both directions; this row also holds the opening of (⇒), which the sentence splitter joins to it."
+     },
+     {
+      "quote": "Pick a nonzero\nelement of",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "rintro ⟨z, hz⟩"
+       }
+      ]
+     },
+     {
+      "quote": "It has the form $y/s$ wit",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "induction z using LocalizedModule.induction_on with"
+       }
+      ],
+      "note": "The induction over fractions contains the two steps of the next two sentences."
+     },
+     {
+      "quote": "The element $s$ is invert",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "rwa [ne_eq, ← step_4_7_mk_eq_zero_iff p y s]"
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_7_mk_eq_zero_iff"
+       }
+      ]
+     },
+     {
+      "quote": "Since $y/s\\neq0$, we get ",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "refine ⟨y, (step_4_7_mk_one_ne_zero_iff p y).1 ?_⟩"
+       }
+      ]
+     }
+    ]
+   },
+   "citations": {
+    "def:localization": "Lean uses the equality of fractions of Definition 4.4, which the proof uses without citing it.",
+    "def:supp": "Lean uses Definition 4.5 to rewrite 𝔭 ∈ Supp_R(N) as N_𝔭 ≠ 0."
+   }
+  },
+  {
+   "id": "par:setup",
+   "paper": {
+    "quote": "For this part, we write $M=\\operatorname{gr}Q$"
+   },
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section4.GrQ",
+    "Stafford38.Paper.Section4.Tangential",
+    "Stafford38.Paper.Section4.Symbol",
+    "Stafford38.Paper.Section4.symbolCoordinate",
+    "Stafford38.Paper.Section4.coordinateMap",
+    "Stafford38.Paper.Section4.kernelV",
+    "Stafford38.Paper.Section4.cokernelU",
+    "Stafford38.Paper.Section4.setup_coordinateMap_apply",
+    "Stafford38.Paper.Section4.setup_coordinateMap_eq"
+   ],
+   "short": "M, f, V, U, T",
+   "note": "Lean indexes the coordinates from 0, so paper n is Lean n + 1 and T = MvPolynomial (Fin n ⊕ Fin n) k (for paper n = 1 this is k). f is the T-linear action of the symbol x₁ on gr Q; setup_coordinateMap_eq says that it is the restriction to T of the k[x, ξ]-linear multiplication by x₁."
+  },
+  {
+   "id": "lem:tangential-finiteness",
+   "paper": {
+    "quote": "\\label{lem:tangential-finiteness}"
+   },
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section4.lemma_4_8"
+   ],
+   "note": "Lean adds the hypothesis that d̃ is in the form (3.1). \"Finite\" is Module.Finite; a minimal prime 𝔮 of Supp_T U is given by 𝔮 ∈ Supp_T U and minimality among the primes of Supp_T U below it.",
+   "proof": {
+    "sentences": [
+     {
+      "quote": "The good quotient filtrat",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "have hd := isPBWMonicAt_of_isMonicNormalForm k hform"
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_8_finite"
+       }
+      ],
+      "note": "Proved inside CanonicalOldTangentialFiniteness.canonical_finite_old_coordinate_kernel_cokernel, of which step_4_8_finite is an instance; beside it is the paragraph's conclusion."
+     },
+     {
+      "quote": "Since $P$ annihilates $M$",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_8_finite"
+       }
+      ],
+      "note": "Proved inside CanonicalOldTangentialFiniteness.canonical_finite_old_coordinate_kernel_cokernel, of which step_4_8_finite is an instance; beside it is the paragraph's conclusion."
+     },
+     {
+      "quote": "As $P$ is monic of\ndegree",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_8_finite"
+       }
+      ],
+      "note": "Proved inside CanonicalOldTangentialFiniteness.canonical_finite_old_coordinate_kernel_cokernel, of which step_4_8_finite is an instance; beside it is the paragraph's conclusion."
+     },
+     {
+      "quote": "If $m_1,\\dots,m_l$ genera",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_8_finite"
+       }
+      ],
+      "note": "Proved inside CanonicalOldTangentialFiniteness.canonical_finite_old_coordinate_kernel_cokernel, of which step_4_8_finite is an instance; beside it is the paragraph's conclusion."
+     },
+     {
+      "quote": "Hence $M$ is finite over\n",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_8_finite"
+       }
+      ],
+      "note": "Proved inside CanonicalOldTangentialFiniteness.canonical_finite_old_coordinate_kernel_cokernel, of which step_4_8_finite is an instance; beside it is the paragraph's conclusion."
+     },
+     {
+      "quote": "Because $M$ is finite, an",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_8_finite"
+       }
+      ],
+      "note": "Proved inside CanonicalOldTangentialFiniteness.canonical_finite_old_coordinate_kernel_cokernel, of which step_4_8_finite is an instance; beside it is the paragraph's conclusion."
+     },
+     {
+      "quote": "Since they are annihilate",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_8_finite"
+       },
+       {
+        "quote": "obtain ⟨hU, hV⟩ := step_4_8_finite hd"
+       }
+      ],
+      "note": "Proved inside CanonicalOldTangentialFiniteness.canonical_finite_old_coordinate_kernel_cokernel, of which step_4_8_finite is an instance; beside it is the paragraph's conclusion."
+     },
+     {
+      "quote": "Let $\\mathfrak p\\in\\operatorname{",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "have hsupp : Module.support (Tangential k n) (kernelV k n N d) ⊆"
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_8_support_inclusion",
+        "quote": "intro p hp"
+       }
+      ],
+      "note": "Lean proves the inclusion for any finite module over a Noetherian algebra C over T (step_4_8_support_inclusion), applied with C = k[x, ξ]."
+     },
+     {
+      "quote": "By Lemma \\ref{lem:supp-cr",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_8_support_inclusion",
+        "quote": "obtain ⟨v, hv⟩ := (lemma_4_7 p).mp hp"
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_8_support_inclusion",
+        "quote": "let vC : LinearMap.ker f := ⟨v.1, v.2⟩"
+       }
+      ]
+     },
+     {
+      "quote": "Let us now consider the a",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_8_support_inclusion",
+        "quote": "let I : Ideal C := (C ∙ vC).annihilator"
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_8_support_inclusion",
+        "quote": "have hdisj : Disjoint (I : Set C) (p.asIdeal.primeCompl.map (algebraMap R C)) := by"
+       }
+      ]
+     },
+     {
+      "quote": "Since $\\operatorname{Ann}",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_8_support_inclusion",
+        "quote": "exact hr (hv ((Submodule.mem_annihilator_span_singleton _ _).mpr hrv))"
+       }
+      ]
+     },
+     {
+      "quote": "There must therefore exis",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_8_support_inclusion",
+        "quote": "obtain ⟨Q, hQprime, hIQ, hQdisj⟩ := I.exists_le_prime_disjoint _ hdisj"
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_8_support_inclusion",
+        "quote": "let Q' : PrimeSpectrum C := ⟨Q, hQprime⟩"
+       }
+      ]
+     },
+     {
+      "quote": "Since $v \\in V = \\ker f$,",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_8_support_inclusion",
+        "quote": "have hQker : Q' ∈ Module.support C (LinearMap.ker f) := (lemma_4_7 Q').mpr ⟨vC, hIQ⟩"
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_8_support_inclusion",
+        "quote": "have hQcoker := step_4_8_vasconcelos f hQker"
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_8_vasconcelos",
+        "quote": "intro Q hQ"
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_8_vasconcelos",
+        "quote": "by_contra hc"
+       }
+      ],
+      "note": "This row also holds the announcement of the contrapositive, which the sentence splitter joins to it."
+     },
+     {
+      "quote": "Let $\\mathfrak Q$ be a pr",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_8_vasconcelos",
+        "quote": "let S := Q.asIdeal.primeCompl"
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_8_vasconcelos",
+        "quote": "have hzero : Subsingleton (LocalizedModule S (E ⧸ LinearMap.range f)) :="
+       }
+      ]
+     },
+     {
+      "quote": "Since localization is exa",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_8_vasconcelos",
+        "quote": "have hexc := (definition_4_4 S).2.2 f (LinearMap.range f).mkQ"
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_8_vasconcelos",
+        "quote": "have hsurj : Function.Surjective (LocalizedModule.map S f) := by"
+       }
+      ]
+     },
+     {
+      "quote": "The localization $M_{\\mathfrak ",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_8_vasconcelos",
+        "quote": "have hinj : Function.Injective (LocalizedModule.map S f) :="
+       }
+      ],
+      "note": "Finiteness of M_𝔔 and linearity of f_𝔔 are the instances under which Lean applies the theorem."
+     },
+     {
+      "quote": "By Vasconcelos'\ntheorem, ",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_8_vasconcelos",
+        "quote": "have hinj : Function.Injective (LocalizedModule.map S f) :="
+       }
+      ],
+      "note": "Mathlib: IsNoetherian.injective_of_surjective_endomorphism."
+     },
+     {
+      "quote": "Hence\n$f_{\\mathfrak Q}$ i",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_8_vasconcelos",
+        "quote": "have hexk := (definition_4_4 S).2.2 (LinearMap.ker f).subtype f"
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_8_vasconcelos",
+        "quote": "have hsub : Subsingleton (LocalizedModule S (LinearMap.ker f)) := by"
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_8_vasconcelos",
+        "quote": "exact Module.notMem_support_iff.mpr hsub hQ"
+       }
+      ]
+     },
+     {
+      "quote": "The contrapositive is the",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_8_support_inclusion",
+        "quote": "obtain ⟨u, hu⟩ := (lemma_4_7 Q').mp hQcoker"
+       }
+      ]
+     },
+     {
+      "quote": "To get back to the suppor",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_8_support_inclusion",
+        "quote": "refine (lemma_4_7 p).mpr ⟨u, fun r hr => ?_⟩"
+       }
+      ]
+     },
+     {
+      "quote": "Then $ru=0$, so\n$r\\in\\operatorname{",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_8_support_inclusion",
+        "quote": "have hmap : algebraMap R C r ∈ (C ∙ u).annihilator := by"
+       }
+      ]
+     },
+     {
+      "quote": "If $r\\notin\\mathfrak p$,\n",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_8_support_inclusion",
+        "quote": "by_contra hrp"
+       }
+      ]
+     },
+     {
+      "quote": "Hence $r\\in\\mathfrak p$, ",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_8_support_inclusion",
+        "quote": "exact Set.disjoint_left.mp hQdisj (hu hmap) ⟨r, hrp, rfl⟩"
+       }
+      ]
+     },
+     {
+      "quote": "Since $\\mathfrak p\\in\n\\operatorname{",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "rwa [setup_coordinateMap_eq] at h"
+       }
+      ]
+     },
+     {
+      "quote": "Let now $\\mathfrak q$ be ",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "exact ⟨hU, hV, hsupp, fun q hqmem hq => step_4_8_finite_length hsupp q hqmem hq⟩"
+       }
+      ]
+     },
+     {
+      "quote": "The primes of\n$T_{\\mathfrak ",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_8_localized_isFiniteLength",
+        "quote": "have hmin : q.asIdeal ∈ (Module.annihilator R L).minimalPrimes := by"
+       }
+      ],
+      "note": "Lean takes a shorter route: it shows that 𝔮 is a minimal prime over Ann_T U, using Supp U = V(Ann U), instead of computing Supp(U_𝔮)."
+     },
+     {
+      "quote": "Hence $\\operatorname{Supp",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_8_localized_isFiniteLength",
+        "quote": "have hmin : q.asIdeal ∈ (Module.annihilator R L).minimalPrimes := by"
+       }
+      ],
+      "note": "Same Lean step as the previous sentence: minimality of 𝔮 over Ann_T U."
+     },
+     {
+      "quote": "The same argument applies",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_8_finite_length",
+        "quote": "by_cases hk : q ∈ Module.support R V"
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_8_finite_length",
+        "at": [
+         131,
+         2
+        ]
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_8_finite_length",
+        "quote": "exact step_4_8_localized_isFiniteLength q hk fun p hp hpq => hq p (hsupp hp) hpq"
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_8_finite_length",
+        "at": [
+         132,
+         2
+        ]
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_8_finite_length",
+        "quote": "have : Subsingleton (LocalizedModule q.asIdeal.primeCompl V) :="
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_8_finite_length",
+        "quote": "exact IsFiniteLength.of_subsingleton"
+       }
+      ],
+      "note": "Lean distinguishes 𝔮 ∈ Supp V, where 𝔮 is minimal in Supp V by the inclusion, from 𝔮 ∉ Supp V, where V_𝔮 = 0."
+     },
+     {
+      "quote": "Now $T_{\\mathfrak q}$ is ",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_8_localized_isFiniteLength",
+        "quote": "exact AlgebraicAnalysis.MinimalPrimeFiniteLengthLocalization.localizedModule_isFiniteLength"
+       }
+      ],
+      "note": "The Artinian argument of this paragraph is inside MinimalPrimeFiniteLengthLocalization.localizedModule_isFiniteLength."
+     },
+     {
+      "quote": "For a\nfinite module $L$ o",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_8_localized_isFiniteLength",
+        "quote": "exact AlgebraicAnalysis.MinimalPrimeFiniteLengthLocalization.localizedModule_isFiniteLength"
+       }
+      ],
+      "note": "Inside MinimalPrimeFiniteLengthLocalization.localizedModule_isFiniteLength."
+     },
+     {
+      "quote": "Hence\n$T_{\\mathfrak q}/\\operatorname{",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_8_localized_isFiniteLength",
+        "quote": "exact AlgebraicAnalysis.MinimalPrimeFiniteLengthLocalization.localizedModule_isFiniteLength"
+       }
+      ],
+      "note": "Inside MinimalPrimeFiniteLengthLocalization.localizedModule_isFiniteLength."
+     },
+     {
+      "quote": "Thus\n$U_{\\mathfrak q}$ an",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_8_finite_length",
+        "quote": "refine ⟨step_4_8_localized_isFiniteLength q hqmem hq, ?_⟩"
+       }
+      ]
+     }
+    ]
+   },
+   "citations": {
+    "prop:charP": "The Lean proof does not use proposition_3_6: finiteness of gr Q over T[x₁] is proved inside step_4_8_finite (CanonicalOldTangentialFiniteness), which reaches the annihilation by P through its own route.",
+    "def:localization": "Exactness of localization (Definition 4.4) in the Vasconcelos paragraph.",
+    "par:setup": "setup_coordinateMap_eq identifies f with multiplication by x₁ on gr Q."
+   }
+  },
+  {
+   "id": "lem:page-inequality",
+   "paper": {
+    "quote": "\\label{lem:page-inequality}"
+   },
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section4.lemma_4_9"
+   ],
+   "note": "Lean states the lemma for d̃ in the form (3.1) and a minimal prime 𝔮 of Supp_T U given by hqmem and hqmin; the filtered complex is CanonicalFilteredTwoTerm.canonicalFilteredTwoTerm (complex k n N d hd), with pages SourceTotal r, TargetTotal r and d_r = tangentialDrop r.",
+   "proof": {
+    "lean_adds": [
+     {
+      "step": {
+       "quote": "have hd := isPBWMonicAt_of_isMonicNormalForm k hform"
+      },
+      "note": "Lean passes from the form (3.1) to its PBW-monic consequence, on which the filtered complex is built."
+     }
+    ],
+    "sentences": [
+     {
+      "quote": "To prove the inequality w",
+      "kind": "prose",
+      "note": "Overview of the proof; the claims follow."
+     },
+     {
+      "quote": "Consider the filtered com",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "obtain ⟨hsucc, htsucc, ⟨eV⟩, ⟨eU⟩⟩ := step_4_9_pages hd"
+       }
+      ],
+      "note": "The filtered complex Q → Q with G^p = F_{−p}Q is complex k n N d hd; it first enters through step_4_9_pages."
+     },
+     {
+      "quote": "Since ${x_1}$ has order $",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_9_pages"
+       }
+      ],
+      "note": "That f preserves G^p and induces x₁ on gr Q is part of the construction of complex; step_4_9_pages records its consequence A_1 ≅ V, B_1 ≅ U."
+     },
+     {
+      "quote": "This is the crudest appro",
+      "kind": "prose",
+      "note": "Motivation for the pages; no claim."
+     },
+     {
+      "quote": "The spectral sequence ref",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "let A : ℕ → Type _ := fun r => LocalizedModule S ((complex k n N d hd).SourceTotal r)"
+       },
+       {
+        "quote": "let B : ℕ → Type _ := fun r => LocalizedModule S ((complex k n N d hd).TargetTotal r)"
+       }
+      ],
+      "note": "SourceTotal r and TargetTotal r are the printed direct sums A_r and B_r; Lean names their localizations at S = T∖𝔮 A r and B r."
+     },
+     {
+      "quote": "Applying $f$ to a represe",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_9_pages"
+       }
+      ],
+      "note": "Lean proves A_{r+1} ≅ ker d_r, B_{r+1} ≅ coker d_r and A_1 ≅ V, B_1 ≅ U; page 0 is not used."
+     },
+     {
+      "quote": "These pages carry a $T$-m",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_9_pages"
+       }
+      ],
+      "note": "The T-action on the pages is defined in CanonicalTangentialTotalAction (sourceModule, targetModule) from the symbols of the transverse generators; step_4_9_pages states the successor identities and A_1 ≅ V, B_1 ≅ U as T-linear isomorphisms."
+     },
+     {
+      "quote": "The pages $A_r,B_r$ are\ns",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_9_pages"
+       }
+      ],
+      "note": "The T-action on the pages is defined in CanonicalTangentialTotalAction (sourceModule, targetModule) from the symbols of the transverse generators; step_4_9_pages states the successor identities and A_1 ≅ V, B_1 ≅ U as T-linear isomorphisms."
+     },
+     {
+      "quote": "This action commutes with",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_9_pages"
+       }
+      ],
+      "note": "The T-action on the pages is defined in CanonicalTangentialTotalAction (sourceModule, targetModule) from the symbols of the transverse generators; step_4_9_pages states the successor identities and A_1 ≅ V, B_1 ≅ U as T-linear isomorphisms."
+     },
+     {
+      "quote": "Two transverse elements c",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_9_pages"
+       }
+      ],
+      "note": "The lowering of the filtration by commutators is generator_commutator_lowers, used in the construction of the T-action."
+     },
+     {
+      "quote": "On the page\nquotients suc",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_9_pages"
+       }
+      ],
+      "note": "The T-action on the pages is defined in CanonicalTangentialTotalAction (sourceModule, targetModule) from the symbols of the transverse generators; step_4_9_pages states the successor identities and A_1 ≅ V, B_1 ≅ U as T-linear isomorphisms."
+     },
+     {
+      "quote": "The maps $d_r$ and the su",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_9_pages"
+       }
+      ],
+      "note": "The T-action on the pages is defined in CanonicalTangentialTotalAction (sourceModule, targetModule) from the symbols of the transverse generators; step_4_9_pages states the successor identities and A_1 ≅ V, B_1 ≅ U as T-linear isomorphisms."
+     },
+     {
+      "quote": "In particular, this means",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_9_pages"
+       }
+      ],
+      "note": "The pages are T-modules, so they can be localized at T∖𝔮; this is the statement of the T-linear isomorphisms beside it."
+     },
+     {
+      "quote": "Now we fix a minimal prim",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "let S := q.asIdeal.primeCompl"
+       }
+      ],
+      "note": "𝔮 and its minimality are the hypotheses q, hqmem, hqmin of the Lean statement."
+     },
+     {
+      "quote": "We localize the $T$-modul",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "let A : ℕ → Type _ := fun r => LocalizedModule S ((complex k n N d hd).SourceTotal r)"
+       },
+       {
+        "quote": "let B : ℕ → Type _ := fun r => LocalizedModule S ((complex k n N d hd).TargetTotal r)"
+       },
+       {
+        "quote": "let : ∀ r, AddCommGroup (A r)"
+       },
+       {
+        "quote": "let : ∀ r, Module (Localization S) (A r)"
+       },
+       {
+        "quote": "let : ∀ r, AddCommGroup (B r)"
+       },
+       {
+        "quote": "let : ∀ r, Module (Localization S) (B r)"
+       },
+       {
+        "quote": "let dd : ∀ r, A r →ₗ[Localization S] B r := fun r =>"
+       }
+      ]
+     },
+     {
+      "quote": "Exactness of localization",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "let es : ∀ r, A (r + 1) ≃ₗ[Localization S] LinearMap.ker (dd r) := fun r =>"
+       },
+       {
+        "quote": "let et : ∀ r, B (r + 1) ≃ₗ[Localization S] B r ⧸ LinearMap.range (dd r) := fun r =>"
+       }
+      ]
+     },
+     {
+      "quote": "By\nLemma~\\ref{lem:tangent",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "let eV' : A 1 ≃ₗ[Localization S] LocalizedModule S (kernelV k n N d) := localizedEquiv S eV"
+       },
+       {
+        "quote": "let eU' : B 1 ≃ₗ[Localization S] LocalizedModule S (cokernelU k n N d) :="
+       },
+       {
+        "quote": "obtain ⟨-, -, -, hfin⟩ := lemma_4_8 hform"
+       },
+       {
+        "quote": "obtain ⟨hU, hV⟩ := hfin q hqmem hqmin"
+       },
+       {
+        "quote": "have hfl := step_4_9_pages_finite_length dd es et"
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_9_pages_finite_length"
+       }
+      ]
+     },
+     {
+      "quote": "The maps $(B_1)_{\\mathfrak ",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_9_exhaustion"
+       }
+      ],
+      "note": "Proved inside AlgebraicAnalysis.exists_uniform_subsingleton_localized, which step_4_9_exhaustion applies; beside it is the paragraph's conclusion, (B_R)_𝔮 = 0."
+     },
+     {
+      "quote": "Let $K_r:=\\ker((B_1)_{\\mathfrak ",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_9_exhaustion"
+       }
+      ],
+      "note": "Proved inside AlgebraicAnalysis.exists_uniform_subsingleton_localized, which step_4_9_exhaustion applies; beside it is the paragraph's conclusion, (B_R)_𝔮 = 0."
+     },
+     {
+      "quote": "Since $(B_1)_{\\mathfrak q}\\to ",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_9_exhaustion"
+       }
+      ],
+      "note": "Proved inside AlgebraicAnalysis.exists_uniform_subsingleton_localized, which step_4_9_exhaustion applies; beside it is the paragraph's conclusion, (B_R)_𝔮 = 0."
+     },
+     {
+      "quote": "This chain exhausts $(B_1",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_9_exhaustion"
+       }
+      ],
+      "note": "Proved inside AlgebraicAnalysis.exists_uniform_subsingleton_localized, which step_4_9_exhaustion applies; beside it is the paragraph's conclusion, (B_R)_𝔮 = 0."
+     },
+     {
+      "quote": "Since $Q=Qx_1$ by Proposi",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_9_exhaustion"
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_9_f_surjective"
+       }
+      ],
+      "note": "Proposition 4.3 enters through step_4_9_f_surjective, which step_4_9_exhaustion uses; the rest of the paragraph is inside step_4_9_exhaustion."
+     },
+     {
+      "quote": "Exhaustiveness of the fil",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_9_exhaustion"
+       }
+      ],
+      "note": "Proved inside AlgebraicAnalysis.exists_uniform_subsingleton_localized, which step_4_9_exhaustion applies; beside it is the paragraph's conclusion, (B_R)_𝔮 = 0."
+     },
+     {
+      "quote": "Then $w\\in G^{p-r+1}$, so",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_9_exhaustion"
+       }
+      ],
+      "note": "Proved inside AlgebraicAnalysis.exists_uniform_subsingleton_localized, which step_4_9_exhaustion applies; beside it is the paragraph's conclusion, (B_R)_𝔮 = 0."
+     },
+     {
+      "quote": "Every class is a finite s",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_9_exhaustion"
+       }
+      ],
+      "note": "Proved inside AlgebraicAnalysis.exists_uniform_subsingleton_localized, which step_4_9_exhaustion applies; beside it is the paragraph's conclusion, (B_R)_𝔮 = 0."
+     },
+     {
+      "quote": "The same holds for a\nloca",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_9_exhaustion"
+       }
+      ],
+      "note": "Proved inside AlgebraicAnalysis.exists_uniform_subsingleton_localized, which step_4_9_exhaustion applies; beside it is the paragraph's conclusion, (B_R)_𝔮 = 0."
+     },
+     {
+      "quote": "As $z\\in B_1$ was arbitra",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_9_exhaustion"
+       }
+      ],
+      "note": "Proved inside AlgebraicAnalysis.exists_uniform_subsingleton_localized, which step_4_9_exhaustion applies; beside it is the paragraph's conclusion, (B_R)_𝔮 = 0."
+     },
+     {
+      "quote": "Since $(B_1)_{\\mathfrak q}$",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "let : IsNoetherian (Localization S) (B 1) :="
+       }
+      ]
+     },
+     {
+      "quote": "By the ascending\nchain co",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_9_exhaustion"
+       }
+      ],
+      "note": "Proved inside AlgebraicAnalysis.exists_uniform_subsingleton_localized, which step_4_9_exhaustion applies; beside it is the paragraph's conclusion, (B_R)_𝔮 = 0."
+     },
+     {
+      "quote": "Combined with $\\bigcup_rK",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_9_exhaustion"
+       }
+      ],
+      "note": "Proved inside AlgebraicAnalysis.exists_uniform_subsingleton_localized, which step_4_9_exhaustion applies; beside it is the paragraph's conclusion, (B_R)_𝔮 = 0."
+     },
+     {
+      "quote": "Finally, $K_R=(B_1)_{\\mathfrak ",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_9_exhaustion"
+       }
+      ],
+      "note": "Proved inside AlgebraicAnalysis.exists_uniform_subsingleton_localized, which step_4_9_exhaustion applies; beside it is the paragraph's conclusion, (B_R)_𝔮 = 0."
+     },
+     {
+      "quote": "But $(B_1)_{\\mathfrak q}\\to ",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_9_exhaustion"
+       },
+       {
+        "quote": "obtain ⟨R', hR'⟩ := step_4_9_exhaustion hform S"
+       },
+       {
+        "quote": "have hBR : Module.length (Localization S) (B (R' + 1)) = 0 :="
+       }
+      ],
+      "note": "Proved inside AlgebraicAnalysis.exists_uniform_subsingleton_localized, which step_4_9_exhaustion applies; beside it is the paragraph's conclusion, (B_R)_𝔮 = 0."
+     },
+     {
+      "quote": "At each stage $r\\ge1$ the",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "exact step_4_9_additivity (dd r) (es r) (et r)"
+       }
+      ],
+      "note": "Lean uses the two short exact sequences ker d_r → A_r → im d_r and im d_r → B_r → coker d_r directly."
+     },
+     {
+      "quote": "Additivity of length give",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_9_additivity"
+       }
+      ]
+     },
+     {
+      "quote": "Summing this identity ove",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "have hlen := step_4_9_telescope"
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_9_telescope"
+       }
+      ],
+      "note": "Lean sums by induction on R over natural-number lengths, after checking that every length is finite."
+     },
+     {
+      "quote": "\\[\\ell((B_1)_{\\mathfrak q",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "simp only [le_refl, ite_true, show 1 ≤ R' + 1 by omega] at hlen"
+       }
+      ]
+     },
+     {
+      "quote": "Since $(B_{R})_{\\mathfrak ",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "have hBR : Module.length (Localization S) (B (R' + 1)) = 0 :="
+       }
+      ]
+     },
+     {
+      "quote": "As $\\ell((A_{R})_{\\mathfrak ",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "calc Module.length (Localization S) (LocalizedModule S (cokernelU k n N d))"
+       }
+      ]
+     }
+    ]
+   },
+   "citations": {
+    "def:length": "Additivity of length (Definition 4.6) in equation (4.5)."
+   }
+  },
+  {
+   "id": "lem:strict-support-inequality",
+   "paper": {
+    "quote": "\\label{lem:strict-support-inequality}"
+   },
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section4.lemma_4_10"
+   ],
+   "note": "Lean adds the hypotheses that d̃ is in the form (3.1) with N ≥ 1 and that k has characteristic 0 (CharZero, used for N! ≠ 0). The middle paragraphs are proved for a base ring R = T_𝔮, a Noetherian algebra C = k[x, ξ]_𝔮 and a finite C-module E = M_𝔮; Ẽ/x₁Ẽ is E ⧸ (K_∞ ⊔ x₁E), the same module by the third isomorphism theorem.",
+   "proof": {
+    "lean_adds": [
+     {
+      "step": {
+       "quote": "have hd := isPBWMonicAt_of_isMonicNormalForm k hform"
+      },
+      "note": "Lean passes from the form (3.1) to its PBW-monic consequence, which the Gabber step uses."
+     }
+    ],
+    "sentences": [
+     {
+      "quote": "We start by showing, that",
+      "kind": "prose",
+      "note": "Outline of the proof; each claim is matched below."
+     },
+     {
+      "quote": "We then define a module $",
+      "kind": "prose",
+      "note": "Outline of the proof; each claim is matched below."
+     },
+     {
+      "quote": "It remains to show that t",
+      "kind": "prose",
+      "note": "Outline of the proof; each claim is matched below."
+     },
+     {
+      "quote": "For this we use the fact ",
+      "kind": "prose",
+      "note": "Outline of the proof; each claim is matched below."
+     },
+     {
+      "quote": "Nakayama's lemma then sho",
+      "kind": "prose",
+      "note": "Outline of the proof; each claim is matched below."
+     },
+     {
+      "quote": "\\\\",
+      "kind": "prose",
+      "note": "A line break; no claim."
+     },
+     {
+      "quote": "Let us consider $\\operatorname{",
+      "kind": "prose",
+      "note": "Introduces Ann M; no claim."
+     },
+     {
+      "quote": "By Gabber's Theorem (\\ref{",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_10_gabber"
+       }
+      ],
+      "note": "Proved inside NoncharacteristicMinimalPrime.canonical_minimalPrime_mem_of_normalCoordinate_false, of which step_4_10_gabber is an instance."
+     },
+     {
+      "quote": "If $\\mathfrak p$ is a min",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_10_gabber"
+       }
+      ],
+      "note": "Proved inside NoncharacteristicMinimalPrime.canonical_minimalPrime_mem_of_normalCoordinate_false, of which step_4_10_gabber is an instance."
+     },
+     {
+      "quote": "\\AIadd{\\formalref{",
+      "kind": "prose",
+      "note": "An annotation of the paper naming a Lean declaration; no claim."
+     },
+     {
+      "quote": "From the involutivity of ",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_10_gabber"
+       }
+      ],
+      "note": "Proved inside NoncharacteristicMinimalPrime.canonical_minimalPrime_mem_of_normalCoordinate_false, of which step_4_10_gabber is an instance."
+     },
+     {
+      "quote": "Since $P \\in \\mathfrak p$",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_10_gabber"
+       }
+      ],
+      "note": "Proved inside NoncharacteristicMinimalPrime.canonical_minimalPrime_mem_of_normalCoordinate_false, of which step_4_10_gabber is an instance."
+     },
+     {
+      "quote": "$\\{{x_1},-\\}$ differentia",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_10_gabber"
+       }
+      ],
+      "note": "Proved inside NoncharacteristicMinimalPrime.canonical_minimalPrime_mem_of_normalCoordinate_false, of which step_4_10_gabber is an instance."
+     },
+     {
+      "quote": "Since $\\mathfrak p$ is a ",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_10_gabber"
+       },
+       {
+        "quote": "have h := step_4_10_localized (R := Tangential k n) (symbolCoordinate k n) q"
+       }
+      ],
+      "note": "The conclusion x₁ ∉ 𝔭 for every minimal prime 𝔭 enters the proof through step_4_10_localized_avoid, an argument of the main step."
+     },
+     {
+      "quote": "This persists after local",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_10_localized",
+        "quote": "let S : Submonoid R := q.asIdeal.primeCompl"
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_10_localized",
+        "quote": "let SC : Submonoid C := Algebra.algebraMapSubmonoid C S"
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_10_localized",
+        "quote": "let fC : Module.End C E := LinearMap.lsmul C E x"
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_10_localized",
+        "quote": "let fR : Module.End R E := fC.restrictScalars R"
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_10_localized",
+        "quote": "let : Module (Localization S) (LocalizedModule SC E) :="
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_10_localized",
+        "quote": "let : IsScalarTower (Localization S) (Localization SC) (LocalizedModule SC E) :="
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_10_localized",
+        "quote": "let e : LocalizedModule S E ≃ₗ[Localization S] LocalizedModule SC E :="
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_10_localized",
+        "quote": "let gR : Module.End (Localization S) (LocalizedModule S E) := localizedMap S fR"
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_10_localized",
+        "quote": "let y : Localization SC := algebraMap C (Localization SC) x"
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_10_localized",
+        "quote": "let gC : Module.End (Localization SC) (LocalizedModule SC E) :="
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_10_localized",
+        "quote": "have heq (z : LocalizedModule S E) : e (gR z) = gC (e z) := by"
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_10_localized",
+        "quote": "let ek : LinearMap.ker gR ≃ₗ[Localization S]"
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_10_localized",
+        "quote": "have herange : Submodule.map e.toLinearMap (LinearMap.range gR) ="
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_10_localized",
+        "quote": "let ec : (LocalizedModule S E ⧸ LinearMap.range gR) ≃ₗ[Localization S]"
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_10_localized",
+        "quote": "have hrange : LinearMap.range gC ="
+       }
+      ],
+      "note": "Lean identifies M_𝔮 = S⁻¹M over T_𝔮 with S⁻¹M over k[x, ξ]_𝔮 (localizedModuleComparison) and transports f, its kernel and its cokernel along this identification."
+     },
+     {
+      "quote": "Since $M$ is finite, $\\operatorname{",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_10_localized_avoid"
+       }
+      ],
+      "note": "Proved inside LocalizedMinimalSupportAvoidance.localized_minimalPrime_avoids, of which step_4_10_localized_avoid is an instance."
+     },
+     {
+      "quote": "A prime minimal among tho",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_10_localized_avoid"
+       }
+      ],
+      "note": "Proved inside LocalizedMinimalSupportAvoidance.localized_minimalPrime_avoids, of which step_4_10_localized_avoid is an instance."
+     },
+     {
+      "quote": "Hence every minimal prime",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_10_localized_avoid"
+       }
+      ],
+      "note": "Proved inside LocalizedMinimalSupportAvoidance.localized_minimalPrime_avoids, of which step_4_10_localized_avoid is an instance."
+     },
+     {
+      "quote": "Consider the increasing c",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_10_core",
+        "quote": "let f : Module.End R E := (LinearMap.lsmul C E x).restrictScalars R"
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_10_core",
+        "quote": "obtain ⟨m, hstable, hK⟩ := step_4_10_stable_kernel x hV"
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_10_stable_kernel",
+        "quote": "let fC : Module.End C E := LinearMap.lsmul C E x"
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_10_stable_kernel",
+        "quote": "let fR : Module.End R E := fC.restrictScalars R"
+       }
+      ]
+     },
+     {
+      "quote": "Since $M_{\\mathfrak q}$ i",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_10_stable_kernel",
+        "quote": "obtain ⟨m, hm⟩ := PrincipalKoszulPositivity.exists_stable_kernel_power_smul (E := E) x"
+       }
+      ]
+     },
+     {
+      "quote": "Let\n$K_{\\infty}:=\\ker(f^m",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_10_stable_kernel",
+        "quote": "have hpow : ∀ j, fR ^ j = (fC ^ j).restrictScalars R := by"
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_10_stable_kernel",
+        "quote": "change LinearMap.ker (fR ^ m) = LinearMap.ker (fR ^ (m + 1))"
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_10_stable_kernel",
+        "quote": "rw [hpow, hpow, LinearMap.ker_restrictScalars, LinearMap.ker_restrictScalars]"
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_10_stable_kernel",
+        "quote": "exact congrArg (Submodule.restrictScalars R) hm"
+       }
+      ],
+      "note": "Lean states K_∞ = ker f^m = ker f^{m+1}; the inclusion f(K_∞) ⊆ K_∞ is the first of the two facts below."
+     },
+     {
+      "quote": "Each quotient $\\ker(f_{\\mathfrak ",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_10_stable_kernel",
+        "quote": "refine ⟨m, ?_, PrincipalKoszulFiniteTorsion.isFiniteLength_kernel_power fR hV m⟩"
+       },
+       {
+        "quote": "obtain ⟨-, -, -, hfin⟩ := lemma_4_8 hform"
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_10_localized",
+        "quote": "have hkbase : IsFiniteLength (Localization S) (LinearMap.ker gR) :="
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_10_localized",
+        "quote": "have hkfinite : IsFiniteLength (Localization S)"
+       }
+      ],
+      "note": "The injection of the layers into V_𝔮 is inside PrincipalKoszulFiniteTorsion.isFiniteLength_kernel_power; finite length of V_𝔮 comes from Lemma 4.8."
+     },
+     {
+      "quote": "Two elementary facts abou",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_10_core",
+        "quote": "obtain ⟨hcomap, hinter⟩ := step_4_10_two_facts f m hstable"
+       }
+      ]
+     },
+     {
+      "quote": "\\item ${f_{\\mathfrak q}}^",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_10_two_facts",
+        "quote": "have hcomap : (LinearMap.ker (f ^ m)).comap f = LinearMap.ker (f ^ m) := by"
+       }
+      ]
+     },
+     {
+      "quote": "\\item $K_{\\infty}\\cap {x_",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_10_two_facts",
+        "quote": "refine ⟨hcomap, le_antisymm ?_ ?_⟩"
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_10_two_facts",
+        "at": [
+         87,
+         2
+        ]
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_10_two_facts",
+        "quote": "rintro w ⟨v, hv, rfl⟩"
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_10_two_facts",
+        "quote": "refine ⟨?_, v, rfl⟩"
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_10_two_facts",
+        "quote": "have : v ∈ (LinearMap.ker (f ^ m)).comap f := by rw [hcomap]; exact hv"
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_10_two_facts",
+        "quote": "exact this"
+       }
+      ]
+     },
+     {
+      "quote": "For \"$\\subseteq$\", if $w=",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_10_two_facts",
+        "at": [
+         83,
+         2
+        ]
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_10_two_facts",
+        "quote": "rintro w ⟨hwK, v, rfl⟩"
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_10_two_facts",
+        "quote": "have hv : v ∈ (LinearMap.ker (f ^ m)).comap f := hwK"
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_10_two_facts",
+        "quote": "rw [hcomap] at hv"
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_10_two_facts",
+        "quote": "exact ⟨v, hv, rfl⟩"
+       }
+      ]
+     },
+     {
+      "quote": "For any endomorphism $\\varphi$",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_10_kernel_length",
+        "quote": "have hsource := (definition_4_6 (T := R) (M := K)).2 (LinearMap.ker fK).subtype"
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_10_kernel_length",
+        "quote": "have htarget := (definition_4_6 (T := R) (M := K)).2 (LinearMap.range fK).subtype"
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_10_kernel_length",
+        "quote": "rw [← hker]"
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_10_kernel_length",
+        "quote": "apply ENat.add_left_injective_of_ne_top"
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_10_kernel_length",
+        "quote": "change Module.length R (K ⧸ LinearMap.range fK) + Module.length R (LinearMap.range fK) ="
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_10_kernel_length",
+        "quote": "rw [add_comm (Module.length R (K ⧸ LinearMap.range fK)), ← htarget]"
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_10_kernel_length",
+        "quote": "exact hsource"
+       }
+      ],
+      "note": "Lean proves this only for φ = f|_{K_∞} inside step_4_10_kernel_length, not as a separate statement."
+     },
+     {
+      "quote": "We can apply this to $\\varphi=",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_10_kernel_length",
+        "quote": "let fK : Module.End R K := f.restrict"
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_10_kernel_length",
+        "quote": "have hparts := isFiniteLength_iff_isNoetherian_isArtinian.mp hK"
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_10_kernel_length",
+        "quote": "let : IsNoetherian R K := hparts.1"
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_10_kernel_length",
+        "quote": "let : IsArtinian R K := hparts.2"
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_10_kernel_length",
+        "quote": "have hkerle : LinearMap.ker f ≤ K := by"
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_10_kernel_length",
+        "quote": "have hker : Module.length R (LinearMap.ker fK) = Module.length R (LinearMap.ker f) :="
+       }
+      ]
+     },
+     {
+      "quote": "On the other hand, the na",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_10_core",
+        "quote": "have hsplit := step_4_10_length_split f _ hK hcomap hinter"
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_10_length_split"
+       }
+      ]
+     },
+     {
+      "quote": "It remains to show the la",
+      "kind": "prose",
+      "note": "Announces the remaining step; it is proved below."
+     },
+     {
+      "quote": "Since $\\mathfrak q\\in\\operatorname{",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_10_localized",
+        "quote": "have hnontrivBase : Nontrivial (LocalizedModule S (E ⧸ LinearMap.range fR)) := by"
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_10_localized",
+        "quote": "have hnontrivCokerR : Nontrivial (LocalizedModule S E ⧸ LinearMap.range gR) :="
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_10_localized",
+        "quote": "have hnontrivCokerC : Nontrivial"
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_10_localized",
+        "quote": "have hnontrivQuot : Nontrivial (QuotSMulTop y (LocalizedModule SC E)) := by"
+       }
+      ]
+     },
+     {
+      "quote": "We choose $\\mathfrak P\\in\\operatorname{",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_10_residual_nonzero",
+        "quote": "let fC : Module.End C E := LinearMap.lsmul C E x"
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_10_residual_nonzero",
+        "quote": "let fR : Module.End R E := fC.restrictScalars R"
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_10_residual_nonzero",
+        "quote": "obtain ⟨P, hPquot⟩ := Module.nonempty_support_of_nontrivial"
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_10_residual_nonzero",
+        "quote": "have hPE : P ∈ Module.support C E := by"
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_10_residual_nonzero",
+        "quote": "obtain ⟨p, hpmin, hpP⟩ := Ideal.exists_minimalPrimes_le"
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_10_residual_nonzero",
+        "quote": "let p' : PrimeSpectrum C := ⟨p, hpmin.1.1⟩"
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_10_residual_nonzero",
+        "quote": "have hp' : p' ∈ Module.support C E := Module.mem_support_iff_of_finite.mpr hpmin.1.2"
+       }
+      ],
+      "note": "Lean takes 𝔭′ minimal over Ann(M_𝔮), which is minimal in Supp(M_𝔮) for a finite module."
+     },
+     {
+      "quote": "By the above, ${x_1}\\notin\\mathfrak ",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_10_residual_nonzero",
+        "quote": "have hnonzeroC : Nontrivial (E ⧸ (LinearMap.ker (fC ^ m) ⊔ LinearMap.range fC)) :="
+       }
+      ],
+      "note": "Inside StableTorsionResidualSupport.residual_nontrivial_of_support; the state beside it is its conclusion Ẽ/x₁Ẽ ≠ 0 over k[x, ξ]_𝔮."
+     },
+     {
+      "quote": "From\n$0\\to (K_{\\infty})_{",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_10_residual_nonzero",
+        "quote": "have hnonzeroC : Nontrivial (E ⧸ (LinearMap.ker (fC ^ m) ⊔ LinearMap.range fC)) :="
+       }
+      ],
+      "note": "Inside StableTorsionResidualSupport.residual_nontrivial_of_support; the state beside it is its conclusion Ẽ/x₁Ẽ ≠ 0 over k[x, ξ]_𝔮."
+     },
+     {
+      "quote": "Since support is closed u",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_10_residual_nonzero",
+        "quote": "have hnonzeroC : Nontrivial (E ⧸ (LinearMap.ker (fC ^ m) ⊔ LinearMap.range fC)) :="
+       }
+      ],
+      "note": "Inside StableTorsionResidualSupport.residual_nontrivial_of_support; the state beside it is its conclusion Ẽ/x₁Ẽ ≠ 0 over k[x, ξ]_𝔮."
+     },
+     {
+      "quote": "Since $\\mathfrak P\\in\\operatorname{",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_10_residual_nonzero",
+        "quote": "have hnonzeroC : Nontrivial (E ⧸ (LinearMap.ker (fC ^ m) ⊔ LinearMap.range fC)) :="
+       }
+      ],
+      "note": "Inside StableTorsionResidualSupport.residual_nontrivial_of_support; the state beside it is its conclusion Ẽ/x₁Ẽ ≠ 0 over k[x, ξ]_𝔮."
+     },
+     {
+      "quote": "If $({x_1}\\tilde E_{\\mathfrak ",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_10_residual_nonzero",
+        "quote": "have hnonzeroC : Nontrivial (E ⧸ (LinearMap.ker (fC ^ m) ⊔ LinearMap.range fC)) :="
+       }
+      ],
+      "note": "Inside StableTorsionResidualSupport.residual_nontrivial_of_support; the state beside it is its conclusion Ẽ/x₁Ẽ ≠ 0 over k[x, ξ]_𝔮."
+     },
+     {
+      "quote": "Hence\n$\\bigl(\\tilde E/({x",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_10_residual_nonzero",
+        "quote": "have hpow : ∀ j, fR ^ j = (fC ^ j).restrictScalars R := by"
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_10_residual_nonzero",
+        "quote": "have hPR : LinearMap.ker (fR ^ m) ⊔ LinearMap.range fR ="
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_10_residual_nonzero",
+        "quote": "apply Submodule.Quotient.nontrivial_iff.mpr"
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_10_residual_nonzero",
+        "quote": "intro htop"
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_10_residual_nonzero",
+        "quote": "apply (Submodule.Quotient.nontrivial_iff.mp hnonzeroC)"
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_10_residual_nonzero",
+        "quote": "apply (Submodule.restrictScalars_eq_top_iff R C E).mp"
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_10_residual_nonzero",
+        "quote": "change LinearMap.ker (fR ^ m) ⊔ LinearMap.range fR = ⊤ at htop"
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_10_residual_nonzero",
+        "quote": "rw [← hPR, htop]"
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_10_core",
+        "quote": "have hres := step_4_10_residual_nonzero (R := R) x havoid hU m"
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_10_core",
+        "quote": "have hpos : 0 < Module.length R (E ⧸ (LinearMap.ker (f ^ m) ⊔ LinearMap.range f)) :="
+       }
+      ]
+     },
+     {
+      "quote": "Therefore $\\ell(U_{\\mathfrak ",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_10_core",
+        "quote": "change Module.length R (E ⧸ LinearMap.range f) > Module.length R (LinearMap.ker f)"
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_10_core",
+        "quote": "rw [hsplit]"
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_10_core",
+        "quote": "have hVtop : Module.length R (LinearMap.ker f) ≠ ⊤ := Module.length_ne_top_iff.mpr hV"
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_10_core",
+        "quote": "simpa [add_comm] using ENat.lt_add_left hVtop hpos"
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_10_localized",
+        "quote": "have hpos := step_4_10_core (R := Localization S) (C := Localization SC)"
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_10_localized",
+        "quote": "have h1 : Module.length (Localization S) (LocalizedModule S (E ⧸ LinearMap.range fR)) ="
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_10_localized",
+        "quote": "have hek : Module.length (Localization S) (LinearMap.ker gR) ="
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_10_localized",
+        "quote": "have h2 : Module.length (Localization S) (LocalizedModule S (LinearMap.ker fR)) ="
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_10_localized",
+        "quote": "change Module.length (Localization S) (LocalizedModule S (LinearMap.ker fR)) <"
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_10_localized",
+        "quote": "rw [h1, h2]"
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_10_localized",
+        "quote": "exact hpos"
+       },
+       {
+        "quote": "rwa [setup_coordinateMap_eq] at h"
+       }
+      ],
+      "note": "Lean proves the inequality over k[x, ξ]_𝔮 (step_4_10_core) and transports it back to M_𝔮 over T_𝔮."
+     }
+    ]
+   },
+   "citations": {
+    "ithm:gabber": "The Lean proof does not use theorem_2_11: step_4_10_gabber gets the involutivity of the minimal primes from GabberGlobalAssembly.minimalPrime_isInvolutive for gr Q.",
+    "def:length": "Additivity of length (Definition 4.6).",
+    "lem:tangential-finiteness": "Finite length of V_𝔮, which the proof uses (\"as V_𝔮 has finite length\") without citing Lemma 4.8.",
+    "par:setup": "setup_coordinateMap_eq identifies f with multiplication by x₁ on gr Q."
+   }
+  },
+  {
+   "id": "cor:Uzero",
+   "paper": {
+    "quote": "\\label{cor:Uzero}"
+   },
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section4.corollary_4_11",
+    "Stafford38.Paper.Section4.corollary_4_11_quotSMulTop"
+   ],
+   "note": "Lean adds the hypotheses that d̃ is in the form (3.1) with N ≥ 1 (for N = 0 the proposition is not needed: Section 3 treats that case separately). corollary_4_11_quotSMulTop is the same statement as M/x₁M = 0 over k[x, ξ], the form Section 6 uses.",
+   "proof": {
+    "sentences": [
+     {
+      "quote": "We write $M = \\gr Q$ and ",
+      "kind": "prose",
+      "note": "Notation of the paragraph before Lemma 4.8 (GrQ and cokernelU)."
+     },
+     {
+      "quote": "If $U\\ne0$, it has a mini",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_11_cokernel_zero",
+        "quote": "obtain ⟨hU, -, -, -⟩ := lemma_4_8 hform"
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_11_cokernel_zero",
+        "quote": "by_contra h"
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_11_cokernel_zero",
+        "quote": "have : Nontrivial (cokernelU k n N d) := not_subsingleton_iff_nontrivial.mp h"
+       },
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_11_cokernel_zero",
+        "quote": "obtain ⟨q, hqmem, hqmin⟩ :="
+       }
+      ],
+      "note": "The minimal support prime exists because U ≠ 0 is finite over the Noetherian ring T (Lemma 4.8); Lean uses MinimalSupportExistence.exists_minimal_support_prime."
+     },
+     {
+      "quote": "Lemma~\\ref{lem:tangential",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "decl": "Stafford38.Paper.Section4.step_4_11_cokernel_zero",
+        "quote": "exact not_lt_of_ge (lemma_4_9 hform q hqmem hqmin) (lemma_4_10 hN hform q hqmem hqmin)"
+       }
+      ],
+      "note": "The finite lengths are used inside the Lean proofs of Lemmas 4.9 and 4.10, which take only the minimal prime as hypothesis."
+     },
+     {
+      "quote": "Thus $U = M/{x_1}M=0$ and",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "have hU := step_4_11_cokernel_zero hN hform"
+       },
+       {
+        "quote": "have htop : LinearMap.range (coordinateMap k n N d) = ⊤ :="
+       },
+       {
+        "quote": "intro z"
+       },
+       {
+        "quote": "obtain ⟨w, hw⟩ := LinearMap.range_eq_top.mp htop z"
+       },
+       {
+        "quote": "exact ⟨w, (setup_coordinateMap_apply k n N d w).symm.trans hw⟩"
+       }
+      ]
+     }
+    ]
+   },
+   "citations": {
+    "par:setup": "setup_coordinateMap_apply identifies f with multiplication by x₁ on gr Q."
+   }
+  }
+ ],
+ "lean_only": [
+  {
+   "prefix": "Stafford38.Ore",
+   "note": "Iterated Ore-extension construction A_n(k) = C[p; δ], used to prove the normal form of Notation 2.2 that the paper cites from Coutinho, Prop. 1.2.1."
+  },
+  {
+   "prefix": "Stafford38.WeylIteratedEquivalence.",
+   "note": "Isomorphism between the presented Weyl algebra and the iterated Ore construction, with its generators; the paper identifies the two without comment."
+  },
+  {
+   "prefix": "Stafford38.WeylPBW.",
+   "note": "Basis of A_n(k) by ordered monomials x^α ∂^β (normal form), used to define the filtrations."
+  },
+  {
+   "prefix": "Stafford38.WeylFiltration.",
+   "note": "Weights of the generators and the spans of ordered monomials of bounded weight that define the Bernstein and order filtrations."
+  },
+  {
+   "prefix": "Stafford38.WeylLeadingSymbol.",
+   "note": "Principal component of an element, used to identify gr A_n(k) with k[x, ξ]."
+  },
+  {
+   "prefix": "Stafford38.WeylAssociatedGraded.",
+   "note": "Strict lower pieces and principal components on a filtration piece, used to identify gr A_n(k) with k[x, ξ]."
+  },
+  {
+   "prefix": "Stafford38.WeylUniversal.",
+   "note": "Universal property of the free-algebra presentation of A_n(k)."
+  },
+  {
+   "decl": "Stafford38.Characteristic.fibreWeight",
+   "note": "Weight 1 on the fibre coordinates ξ_i and 0 on x_i, which defines the order filtration."
+  },
+  {
+   "prefix": "Stafford38.CharacteristicFilteredQuotient",
+   "note": "The quotient Q = A_n(k)/I with the filtration Q_m = qF_m, its graded pieces and associated graded module."
+  },
+  {
+   "prefix": "Stafford38.CharacteristicAssociatedGradedModule.",
+   "note": "The associated graded module of Q = A_n(k)/I for the order filtration."
+  },
+  {
+   "decl": "Stafford38.CharacteristicSymplecticCompletion.phasePairing",
+   "note": "The pairing Σ_i (u_{ξ_i} v_{x_i} − u_{x_i} v_{ξ_i}) on k^{2n} from which ω is built."
+  },
+  {
+   "prefix": "Stafford38.EulerSurjectivity.",
+   "note": "Right ideals of A_n(k) as submodules of the regular right module, and the quotient module A_n(k)/I."
+  },
+  {
+   "decl": "Stafford38.Paper.Section2.lowerPiece",
+   "note": "F_{j−1}, with F_{−1} = 0."
+  },
+  {
+   "decl": "Stafford38.Paper.Section2.grPiece",
+   "note": "The graded piece F_j/F_{j−1}."
+  },
+  {
+   "decl": "Stafford38.Paper.Section2.grPieceEquiv",
+   "note": "Graded piece of A_n(k) identified with the homogeneous polynomials of that weight."
+  },
+  {
+   "decl": "Stafford38.Paper.Section2.orbitMap",
+   "note": "The map a ↦ qa from A_n(k) to a module M."
+  },
+  {
+   "decl": "Stafford38.Paper.Section2.qClass",
+   "note": "The class q of 1 in A_n(k)/I."
+  },
+  {
+   "decl": "Stafford38.Paper.Support.Gabber.qFilt",
+   "note": "The filtration Q_m = qF_m of Q = A_n(k)/I."
+  },
+  {
+   "decl": "Stafford38.Paper.Support.Gabber.GrModule",
+   "note": "The associated graded module as a module over k[x, ξ]."
+  },
+  {
+   "decl": "MvPolynomial.coeff",
+   "note": "Project abbreviation for the coefficient of a monomial in a multivariate polynomial."
+  },
+  {
+   "prefix": "Stafford38Challenge.",
+   "note": "Generators x_i, ∂_i, their index type, the standard symplectic matrix and the relations of the Mathlib-only formulation."
+  },
+  {
+   "prefix": "Stafford38FixedSourceChallenge.",
+   "note": "Generators, ordered monomials, Bernstein pieces and linear changes of generators used to state the moreover clause in the Mathlib-only formulation."
+  },
+  {
+   "prefix": "Stafford.",
+   "note": "Linear combinations of generators and the generator map of the free-algebra presentation."
+  },
+  {
+   "decl": "Stafford38.WeylEulerResidue.canonicalRightIdeal",
+   "note": "The right ideal dA + x^N dA generated by two elements."
+  },
+  {
+   "decl": "Stafford38.WeylQuotientTransport.presentedCanonicalRightIdeal",
+   "note": "The right ideal 𝓘 = d̃A_n + x₁^N d̃A_n of the presented Weyl algebra."
+  },
+  {
+   "decl": "Stafford38.Characteristic.CanonicalGradedTangentialEquivalences.Graded",
+   "note": "gr Q for the order filtration Q_m = qF_m of Q = A_n/𝓘."
+  },
+  {
+   "decl": "Stafford38.Characteristic.CanonicalGradedTangentialEquivalences.T",
+   "note": "T = k[x₂,…,xₙ,ξ₂,…,ξₙ], as MvPolynomial (Fin n ⊕ Fin n) k."
+  },
+  {
+   "decl": "Stafford38.Characteristic.CanonicalKoszulContradiction.gradedModule",
+   "note": "The T-module structure of gr Q, through T ⊆ k[x, ξ]."
+  },
+  {
+   "decl": "Stafford38.Characteristic.CanonicalKoszulContradiction.coefficientAlgebra",
+   "note": "T as a subalgebra of k[x, ξ]."
+  },
+  {
+   "prefix": "Stafford38.Characteristic.CanonicalOldTangentialFiniteness.",
+   "note": "The action of T and of the symbol x₁ on a k[x, ξ]-module; oldCoordinateMap is f."
+  },
+  {
+   "prefix": "Stafford38.Characteristic.CanonicalTangentialRingEquivalence.",
+   "note": "T identified with the polynomial ring in the variables of k[x, ξ] other than x₁ and ξ₁."
+  },
+  {
+   "prefix": "Stafford38.Characteristic.CanonicalTangentialSymbolFiniteness.",
+   "note": "k[x, ξ] written as T[x₁][ξ₁], used to let T and x₁ act on gr Q."
+  },
+  {
+   "prefix": "Stafford38.Characteristic.CanonicalNormalSymbolFiniteness.",
+   "note": "k[x, ξ] written as polynomials in ξ₁ over the other variables."
+  },
+  {
+   "prefix": "Stafford38.Characteristic.NormalSymbolPolynomial.",
+   "note": "k[x, ξ] written as a polynomial ring in ξ₁ over the remaining variables."
+  }
+ ]
+}

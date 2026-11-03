@@ -1,0 +1,5326 @@
+{
+ "anchors": {
+  "cor:Uzero": {
+   "lean": [
+    {
+     "name": "Stafford38.Paper.Section4.corollary_4_11",
+     "range": {
+      "end": [
+       52,
+       64
+      ],
+      "start": [
+       43,
+       0
+      ]
+     }
+    },
+    {
+     "name": "Stafford38.Paper.Section4.corollary_4_11_quotSMulTop",
+     "range": {
+      "end": [
+       64,
+       55
+      ],
+      "start": [
+       54,
+       0
+      ]
+     }
+    }
+   ],
+   "paper": {
+    "line": 940,
+    "start": 68677
+   }
+  },
+  "cor:Uzero.proof.sentences[0]": {
+   "paper": {
+    "line": 945,
+    "start": 68816
+   },
+   "steps": []
+  },
+  "cor:Uzero.proof.sentences[1]": {
+   "paper": {
+    "line": 945,
+    "start": 68857
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_11_cokernel_zero",
+     "index": 0,
+     "start": [
+      35,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_11_cokernel_zero",
+     "index": 1,
+     "start": [
+      36,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_11_cokernel_zero",
+     "index": 2,
+     "start": [
+      37,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_11_cokernel_zero",
+     "index": 3,
+     "start": [
+      38,
+      2
+     ]
+    }
+   ]
+  },
+  "cor:Uzero.proof.sentences[2]": {
+   "paper": {
+    "line": 946,
+    "start": 68915
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_11_cokernel_zero",
+     "index": 4,
+     "start": [
+      41,
+      2
+     ]
+    }
+   ]
+  },
+  "cor:Uzero.proof.sentences[3]": {
+   "paper": {
+    "line": 949,
+    "start": 69089
+   },
+   "steps": [
+    {
+     "index": 0,
+     "start": [
+      47,
+      2
+     ]
+    },
+    {
+     "index": 1,
+     "start": [
+      48,
+      2
+     ]
+    },
+    {
+     "index": 2,
+     "start": [
+      50,
+      2
+     ]
+    },
+    {
+     "index": 3,
+     "start": [
+      51,
+      2
+     ]
+    },
+    {
+     "index": 4,
+     "start": [
+      52,
+      2
+     ]
+    }
+   ]
+  },
+  "def:length": {
+   "lean": [
+    {
+     "name": "Stafford38.Paper.Section4.definition_4_6",
+     "range": {
+      "end": [
+       66,
+       65
+      ],
+      "start": [
+       55,
+       0
+      ]
+     }
+    }
+   ],
+   "paper": {
+    "line": 639,
+    "start": 44142
+   }
+  },
+  "def:localization": {
+   "lean": [
+    {
+     "name": "Stafford38.Paper.Section4.definition_4_4",
+     "range": {
+      "end": [
+       46,
+       44
+      ],
+      "start": [
+       27,
+       0
+      ]
+     }
+    }
+   ],
+   "paper": {
+    "line": 620,
+    "start": 42971
+   }
+  },
+  "def:supp": {
+   "lean": [
+    {
+     "name": "Stafford38.Paper.Section4.definition_4_5",
+     "range": {
+      "end": [
+       53,
+       34
+      ],
+      "start": [
+       48,
+       0
+      ]
+     }
+    }
+   ],
+   "paper": {
+    "line": 633,
+    "start": 43852
+   }
+  },
+  "lem:euler": {
+   "lean": [
+    {
+     "name": "Stafford38.Paper.Section4.lemma_4_1",
+     "range": {
+      "end": [
+       222,
+       65
+      ],
+      "start": [
+       208,
+       0
+      ]
+     }
+    }
+   ],
+   "paper": {
+    "line": 544,
+    "start": 38129
+   }
+  },
+  "lem:euler-residue": {
+   "lean": [
+    {
+     "name": "Stafford38.Paper.Section4.lemma_4_2",
+     "range": {
+      "end": [
+       334,
+       98
+      ],
+      "start": [
+       319,
+       0
+      ]
+     }
+    }
+   ],
+   "paper": {
+    "line": 571,
+    "start": 39437
+   }
+  },
+  "lem:euler-residue.proof.sentences[0]": {
+   "paper": {
+    "line": 578,
+    "start": 39624
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_2_bezout",
+     "index": 8,
+     "start": [
+      106,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_2_bezout",
+     "index": 9,
+     "start": [
+      107,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:euler-residue.proof.sentences[1]": {
+   "paper": {
+    "line": 581,
+    "start": 39750
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_2_coprime",
+     "index": 0,
+     "start": [
+      59,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_2_coprime",
+     "index": 1,
+     "start": [
+      60,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_2_coprime",
+     "index": 2,
+     "start": [
+      61,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_2_coprime",
+     "index": 3,
+     "start": [
+      62,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_2_coprime",
+     "index": 4,
+     "start": [
+      63,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_2_coprime",
+     "index": 5,
+     "start": [
+      64,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_2_coprime",
+     "index": 12,
+     "start": [
+      69,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_2_coprime",
+     "index": 13,
+     "start": [
+      70,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:euler-residue.proof.sentences[2]": {
+   "paper": {
+    "line": 582,
+    "start": 39948
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section4.lemma_4_2_of_positive",
+     "index": 0,
+     "start": [
+      172,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_2_bezout",
+     "index": 0,
+     "start": [
+      99,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_2_bezout",
+     "index": 1,
+     "start": [
+      100,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_2_bezout",
+     "index": 2,
+     "start": [
+      101,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_2_bezout",
+     "index": 3,
+     "start": [
+      102,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_2_bezout",
+     "index": 4,
+     "start": [
+      103,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_2_bezout",
+     "index": 5,
+     "start": [
+      104,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_2_bezout",
+     "index": 6,
+     "start": [
+      105,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_2_bezout",
+     "index": 7,
+     "start": [
+      105,
+      4
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_2_bezout",
+     "index": 8,
+     "start": [
+      106,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_2_bezout",
+     "index": 9,
+     "start": [
+      107,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_2_bezout",
+     "index": 10,
+     "start": [
+      109,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:euler-residue.proof.sentences[3]": {
+   "paper": {
+    "line": 586,
+    "start": 40091
+   },
+   "steps": [
+    {
+     "index": 4,
+     "start": [
+      334,
+      70
+     ]
+    }
+   ]
+  },
+  "lem:euler-residue.proof.sentences[4]": {
+   "paper": {
+    "line": 586,
+    "start": 40160
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section4.lemma_4_2_of_positive",
+     "index": 1,
+     "start": [
+      173,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_2_residue",
+     "index": 0,
+     "start": [
+      123,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_2_residue",
+     "index": 1,
+     "start": [
+      125,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_2_residue",
+     "index": 2,
+     "start": [
+      126,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_2_residue",
+     "index": 3,
+     "start": [
+      127,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_2_residue",
+     "index": 4,
+     "start": [
+      128,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_2_residue",
+     "index": 5,
+     "start": [
+      129,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_2_residue",
+     "index": 6,
+     "start": [
+      129,
+      4
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_2_residue",
+     "index": 7,
+     "start": [
+      130,
+      4
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_2_residue",
+     "index": 8,
+     "start": [
+      132,
+      4
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_2_residue",
+     "index": 9,
+     "start": [
+      133,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_2_residue",
+     "index": 10,
+     "start": [
+      133,
+      4
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_2_residue",
+     "index": 11,
+     "start": [
+      135,
+      4
+     ]
+    }
+   ]
+  },
+  "lem:euler-residue.proof.sentences[5]": {
+   "paper": {
+    "line": 590,
+    "start": 40277
+   },
+   "steps": [
+    {
+     "index": 2,
+     "start": [
+      329,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_2_presented_remainder",
+     "index": 0,
+     "start": [
+      290,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:euler-residue.proof.sentences[6]": {
+   "paper": {
+    "line": 590,
+    "start": 40383
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_2_presented_remainder",
+     "index": 0,
+     "start": [
+      290,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_2_presented_remainder",
+     "index": 1,
+     "start": [
+      291,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_2_presented_remainder",
+     "index": 2,
+     "start": [
+      293,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_2_presented_remainder",
+     "index": 5,
+     "start": [
+      295,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_2_presented_remainder",
+     "index": 8,
+     "start": [
+      297,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_2_presented_remainder",
+     "index": 14,
+     "start": [
+      304,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_2_presented_remainder",
+     "index": 15,
+     "start": [
+      306,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_2_presented_remainder",
+     "index": 16,
+     "start": [
+      306,
+      4
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_2_presented_remainder",
+     "index": 17,
+     "start": [
+      307,
+      4
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_2_presented_remainder",
+     "index": 18,
+     "start": [
+      308,
+      4
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_2_presented_remainder",
+     "index": 19,
+     "start": [
+      309,
+      4
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_2_presented_remainder",
+     "index": 20,
+     "start": [
+      310,
+      4
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_2_presented_remainder",
+     "index": 21,
+     "start": [
+      311,
+      4
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_2_presented_remainder",
+     "index": 22,
+     "start": [
+      312,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_2_presented_remainder",
+     "index": 23,
+     "start": [
+      312,
+      4
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_2_presented_remainder",
+     "index": 24,
+     "start": [
+      313,
+      4
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_2_presented_remainder",
+     "index": 25,
+     "start": [
+      314,
+      4
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_2_presented_remainder",
+     "index": 26,
+     "start": [
+      315,
+      4
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_2_presented_remainder",
+     "index": 27,
+     "start": [
+      316,
+      4
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_2_presented_remainder",
+     "index": 28,
+     "start": [
+      317,
+      4
+     ]
+    }
+   ]
+  },
+  "lem:euler-residue.proof.sentences[7]": {
+   "paper": {
+    "line": 590,
+    "start": 40524
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_2_positive",
+     "index": 0,
+     "start": [
+      152,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_2_positive",
+     "index": 1,
+     "start": [
+      153,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:euler-residue.proof.sentences[8]": {
+   "paper": {
+    "line": 590,
+    "start": 40585
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section4.lemma_4_2_of_positive",
+     "index": 2,
+     "start": [
+      174,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_2_positive",
+     "index": 2,
+     "start": [
+      154,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_2_positive",
+     "index": 3,
+     "start": [
+      156,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_2_positive",
+     "index": 4,
+     "start": [
+      157,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.lemma_4_2_of_positive",
+     "index": 3,
+     "start": [
+      176,
+      2
+     ]
+    },
+    {
+     "index": 3,
+     "start": [
+      330,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:euler.proof.sentences[0]": {
+   "paper": {
+    "line": 553,
+    "start": 38387
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section4.lemma_4_1_of_weylPair",
+     "index": 0,
+     "start": [
+      196,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:euler.proof.sentences[1]": {
+   "paper": {
+    "line": 554,
+    "start": 38497
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section4.lemma_4_1_of_weylPair",
+     "index": 1,
+     "start": [
+      197,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.lemma_4_1_of_weylPair",
+     "index": 3,
+     "start": [
+      199,
+      14
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.lemma_4_1_of_weylPair",
+     "index": 5,
+     "start": [
+      201,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.lemma_4_1_of_weylPair",
+     "index": 7,
+     "start": [
+      202,
+      14
+     ]
+    }
+   ]
+  },
+  "lem:euler.proof.sentences[2]": {
+   "paper": {
+    "line": 554,
+    "start": 38554
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section4.lemma_4_1_of_weylPair",
+     "index": 4,
+     "start": [
+      200,
+      21
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_1_falling_succ",
+     "index": 0,
+     "start": [
+      137,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:euler.proof.sentences[3]": {
+   "paper": {
+    "line": 563,
+    "start": 38852
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section4.lemma_4_1_of_weylPair",
+     "index": 8,
+     "start": [
+      203,
+      21
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_1_rising_succ",
+     "index": 0,
+     "start": [
+      163,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_1_rising_succ",
+     "index": 1,
+     "start": [
+      164,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:page-inequality": {
+   "lean": [
+    {
+     "name": "Stafford38.Paper.Section4.lemma_4_9",
+     "range": {
+      "end": [
+       235,
+       93
+      ],
+      "start": [
+       171,
+       0
+      ]
+     }
+    }
+   ],
+   "paper": {
+    "line": 758,
+    "start": 53328
+   }
+  },
+  "lem:page-inequality.proof.sentences[0]": {
+   "paper": {
+    "line": 767,
+    "start": 53544
+   },
+   "steps": []
+  },
+  "lem:page-inequality.proof.sentences[10]": {
+   "paper": {
+    "line": 801,
+    "start": 55752
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_9_pages",
+     "index": -1,
+     "start": [
+      120,
+      0
+     ]
+    }
+   ]
+  },
+  "lem:page-inequality.proof.sentences[11]": {
+   "paper": {
+    "line": 804,
+    "start": 55943
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_9_pages",
+     "index": -1,
+     "start": [
+      120,
+      0
+     ]
+    }
+   ]
+  },
+  "lem:page-inequality.proof.sentences[12]": {
+   "paper": {
+    "line": 805,
+    "start": 56002
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_9_pages",
+     "index": -1,
+     "start": [
+      120,
+      0
+     ]
+    }
+   ]
+  },
+  "lem:page-inequality.proof.sentences[13]": {
+   "paper": {
+    "line": 808,
+    "start": 56157
+   },
+   "steps": [
+    {
+     "index": 1,
+     "start": [
+      183,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:page-inequality.proof.sentences[14]": {
+   "paper": {
+    "line": 809,
+    "start": 56267
+   },
+   "steps": [
+    {
+     "index": 2,
+     "start": [
+      184,
+      2
+     ]
+    },
+    {
+     "index": 3,
+     "start": [
+      185,
+      2
+     ]
+    },
+    {
+     "index": 4,
+     "start": [
+      186,
+      2
+     ]
+    },
+    {
+     "index": 7,
+     "start": [
+      187,
+      2
+     ]
+    },
+    {
+     "index": 10,
+     "start": [
+      188,
+      2
+     ]
+    },
+    {
+     "index": 13,
+     "start": [
+      189,
+      2
+     ]
+    },
+    {
+     "index": 17,
+     "start": [
+      192,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:page-inequality.proof.sentences[15]": {
+   "paper": {
+    "line": 810,
+    "start": 56332
+   },
+   "steps": [
+    {
+     "index": 18,
+     "start": [
+      194,
+      2
+     ]
+    },
+    {
+     "index": 19,
+     "start": [
+      196,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:page-inequality.proof.sentences[16]": {
+   "paper": {
+    "line": 811,
+    "start": 56419
+   },
+   "steps": [
+    {
+     "index": 20,
+     "start": [
+      198,
+      2
+     ]
+    },
+    {
+     "index": 21,
+     "start": [
+      199,
+      2
+     ]
+    },
+    {
+     "index": 22,
+     "start": [
+      202,
+      2
+     ]
+    },
+    {
+     "index": 23,
+     "start": [
+      203,
+      2
+     ]
+    },
+    {
+     "index": 24,
+     "start": [
+      204,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_9_pages_finite_length",
+     "index": 0,
+     "start": [
+      56,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_9_pages_finite_length",
+     "index": 1,
+     "start": [
+      57,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:page-inequality.proof.sentences[17]": {
+   "paper": {
+    "line": 818,
+    "start": 56766
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_9_exhaustion",
+     "index": -1,
+     "start": [
+      152,
+      0
+     ]
+    }
+   ]
+  },
+  "lem:page-inequality.proof.sentences[18]": {
+   "paper": {
+    "line": 819,
+    "start": 56852
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_9_exhaustion",
+     "index": -1,
+     "start": [
+      152,
+      0
+     ]
+    }
+   ]
+  },
+  "lem:page-inequality.proof.sentences[19]": {
+   "paper": {
+    "line": 819,
+    "start": 56913
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_9_exhaustion",
+     "index": -1,
+     "start": [
+      152,
+      0
+     ]
+    }
+   ]
+  },
+  "lem:page-inequality.proof.sentences[1]": {
+   "paper": {
+    "line": 771,
+    "start": 53734
+   },
+   "steps": [
+    {
+     "index": 16,
+     "start": [
+      191,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:page-inequality.proof.sentences[20]": {
+   "paper": {
+    "line": 821,
+    "start": 57171
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_9_exhaustion",
+     "index": -1,
+     "start": [
+      152,
+      0
+     ]
+    }
+   ]
+  },
+  "lem:page-inequality.proof.sentences[21]": {
+   "paper": {
+    "line": 822,
+    "start": 57297
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_9_exhaustion",
+     "index": -1,
+     "start": [
+      152,
+      0
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_9_f_surjective",
+     "index": 0,
+     "start": [
+      139,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_9_f_surjective",
+     "index": 1,
+     "start": [
+      140,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_9_f_surjective",
+     "index": 2,
+     "start": [
+      142,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_9_f_surjective",
+     "index": 3,
+     "start": [
+      143,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_9_f_surjective",
+     "index": 4,
+     "start": [
+      145,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_9_f_surjective",
+     "index": 5,
+     "start": [
+      146,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_9_f_surjective",
+     "index": 6,
+     "start": [
+      147,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_9_f_surjective",
+     "index": 7,
+     "start": [
+      149,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_9_f_surjective",
+     "index": 8,
+     "start": [
+      150,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:page-inequality.proof.sentences[22]": {
+   "paper": {
+    "line": 823,
+    "start": 57382
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_9_exhaustion",
+     "index": -1,
+     "start": [
+      152,
+      0
+     ]
+    }
+   ]
+  },
+  "lem:page-inequality.proof.sentences[23]": {
+   "paper": {
+    "line": 824,
+    "start": 57495
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_9_exhaustion",
+     "index": -1,
+     "start": [
+      152,
+      0
+     ]
+    }
+   ]
+  },
+  "lem:page-inequality.proof.sentences[24]": {
+   "paper": {
+    "line": 825,
+    "start": 57585
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_9_exhaustion",
+     "index": -1,
+     "start": [
+      152,
+      0
+     ]
+    }
+   ]
+  },
+  "lem:page-inequality.proof.sentences[25]": {
+   "paper": {
+    "line": 826,
+    "start": 57684
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_9_exhaustion",
+     "index": -1,
+     "start": [
+      152,
+      0
+     ]
+    }
+   ]
+  },
+  "lem:page-inequality.proof.sentences[26]": {
+   "paper": {
+    "line": 828,
+    "start": 57781
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_9_exhaustion",
+     "index": -1,
+     "start": [
+      152,
+      0
+     ]
+    }
+   ]
+  },
+  "lem:page-inequality.proof.sentences[27]": {
+   "paper": {
+    "line": 829,
+    "start": 57894
+   },
+   "steps": [
+    {
+     "index": 25,
+     "start": [
+      207,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:page-inequality.proof.sentences[28]": {
+   "paper": {
+    "line": 829,
+    "start": 57986
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_9_exhaustion",
+     "index": -1,
+     "start": [
+      152,
+      0
+     ]
+    }
+   ]
+  },
+  "lem:page-inequality.proof.sentences[29]": {
+   "paper": {
+    "line": 831,
+    "start": 58151
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_9_exhaustion",
+     "index": -1,
+     "start": [
+      152,
+      0
+     ]
+    }
+   ]
+  },
+  "lem:page-inequality.proof.sentences[2]": {
+   "paper": {
+    "line": 772,
+    "start": 53862
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_9_pages",
+     "index": -1,
+     "start": [
+      120,
+      0
+     ]
+    }
+   ]
+  },
+  "lem:page-inequality.proof.sentences[30]": {
+   "paper": {
+    "line": 832,
+    "start": 58249
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_9_exhaustion",
+     "index": -1,
+     "start": [
+      152,
+      0
+     ]
+    }
+   ]
+  },
+  "lem:page-inequality.proof.sentences[31]": {
+   "paper": {
+    "line": 834,
+    "start": 58619
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_9_exhaustion",
+     "index": -1,
+     "start": [
+      152,
+      0
+     ]
+    },
+    {
+     "index": 26,
+     "start": [
+      209,
+      2
+     ]
+    },
+    {
+     "index": 44,
+     "start": [
+      227,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:page-inequality.proof.sentences[32]": {
+   "paper": {
+    "line": 836,
+    "start": 58719
+   },
+   "steps": [
+    {
+     "index": 40,
+     "start": [
+      224,
+      6
+     ]
+    }
+   ]
+  },
+  "lem:page-inequality.proof.sentences[33]": {
+   "paper": {
+    "line": 839,
+    "start": 59038
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_9_additivity",
+     "index": 0,
+     "start": [
+      74,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_9_additivity",
+     "index": 2,
+     "start": [
+      80,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_9_additivity",
+     "index": 3,
+     "start": [
+      85,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_9_additivity",
+     "index": 4,
+     "start": [
+      86,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:page-inequality.proof.sentences[34]": {
+   "paper": {
+    "line": 847,
+    "start": 59530
+   },
+   "steps": [
+    {
+     "index": 27,
+     "start": [
+      211,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_9_telescope",
+     "index": 0,
+     "start": [
+      93,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_9_telescope",
+     "index": 1,
+     "start": [
+      94,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_9_telescope",
+     "index": 2,
+     "start": [
+      95,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_9_telescope",
+     "index": 6,
+     "start": [
+      100,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_9_telescope",
+     "index": 7,
+     "start": [
+      101,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_9_telescope",
+     "index": 8,
+     "start": [
+      102,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_9_telescope",
+     "index": 9,
+     "start": [
+      103,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:page-inequality.proof.sentences[35]": {
+   "paper": {
+    "line": 850,
+    "start": 59944
+   },
+   "steps": [
+    {
+     "index": 42,
+     "start": [
+      226,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:page-inequality.proof.sentences[36]": {
+   "paper": {
+    "line": 851,
+    "start": 60057
+   },
+   "steps": [
+    {
+     "index": 44,
+     "start": [
+      227,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:page-inequality.proof.sentences[37]": {
+   "paper": {
+    "line": 853,
+    "start": 60264
+   },
+   "steps": [
+    {
+     "index": 45,
+     "start": [
+      230,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:page-inequality.proof.sentences[3]": {
+   "paper": {
+    "line": 774,
+    "start": 54039
+   },
+   "steps": []
+  },
+  "lem:page-inequality.proof.sentences[4]": {
+   "paper": {
+    "line": 777,
+    "start": 54263
+   },
+   "steps": [
+    {
+     "index": 2,
+     "start": [
+      184,
+      2
+     ]
+    },
+    {
+     "index": 3,
+     "start": [
+      185,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:page-inequality.proof.sentences[5]": {
+   "paper": {
+    "line": 789,
+    "start": 54914
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_9_pages",
+     "index": -1,
+     "start": [
+      120,
+      0
+     ]
+    }
+   ]
+  },
+  "lem:page-inequality.proof.sentences[6]": {
+   "paper": {
+    "line": 796,
+    "start": 55341
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_9_pages",
+     "index": -1,
+     "start": [
+      120,
+      0
+     ]
+    }
+   ]
+  },
+  "lem:page-inequality.proof.sentences[7]": {
+   "paper": {
+    "line": 796,
+    "start": 55383
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_9_pages",
+     "index": -1,
+     "start": [
+      120,
+      0
+     ]
+    }
+   ]
+  },
+  "lem:page-inequality.proof.sentences[8]": {
+   "paper": {
+    "line": 798,
+    "start": 55530
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_9_pages",
+     "index": -1,
+     "start": [
+      120,
+      0
+     ]
+    }
+   ]
+  },
+  "lem:page-inequality.proof.sentences[9]": {
+   "paper": {
+    "line": 800,
+    "start": 55653
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_9_pages",
+     "index": -1,
+     "start": [
+      120,
+      0
+     ]
+    }
+   ]
+  },
+  "lem:strict-support-inequality": {
+   "lean": [
+    {
+     "name": "Stafford38.Paper.Section4.lemma_4_10",
+     "range": {
+      "end": [
+       399,
+       35
+      ],
+      "start": [
+       381,
+       0
+      ]
+     }
+    }
+   ],
+   "paper": {
+    "line": 863,
+    "start": 60834
+   }
+  },
+  "lem:strict-support-inequality.proof.sentences[0]": {
+   "paper": {
+    "line": 871,
+    "start": 61057
+   },
+   "steps": []
+  },
+  "lem:strict-support-inequality.proof.sentences[10]": {
+   "paper": {
+    "line": 881,
+    "start": 62402
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_10_gabber",
+     "index": -1,
+     "start": [
+      360,
+      0
+     ]
+    }
+   ]
+  },
+  "lem:strict-support-inequality.proof.sentences[11]": {
+   "paper": {
+    "line": 881,
+    "start": 62520
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_10_gabber",
+     "index": -1,
+     "start": [
+      360,
+      0
+     ]
+    }
+   ]
+  },
+  "lem:strict-support-inequality.proof.sentences[12]": {
+   "paper": {
+    "line": 883,
+    "start": 62650
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_10_gabber",
+     "index": -1,
+     "start": [
+      360,
+      0
+     ]
+    }
+   ]
+  },
+  "lem:strict-support-inequality.proof.sentences[13]": {
+   "paper": {
+    "line": 883,
+    "start": 62889
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_10_gabber",
+     "index": -1,
+     "start": [
+      360,
+      0
+     ]
+    },
+    {
+     "index": 2,
+     "start": [
+      395,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:strict-support-inequality.proof.sentences[14]": {
+   "paper": {
+    "line": 884,
+    "start": 63027
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_10_localized",
+     "index": 0,
+     "start": [
+      251,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_10_localized",
+     "index": 1,
+     "start": [
+      252,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_10_localized",
+     "index": 2,
+     "start": [
+      253,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_10_localized",
+     "index": 3,
+     "start": [
+      254,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_10_localized",
+     "index": 4,
+     "start": [
+      256,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_10_localized",
+     "index": 5,
+     "start": [
+      258,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_10_localized",
+     "index": 6,
+     "start": [
+      260,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_10_localized",
+     "index": 7,
+     "start": [
+      262,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_10_localized",
+     "index": 8,
+     "start": [
+      263,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_10_localized",
+     "index": 9,
+     "start": [
+      264,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_10_localized",
+     "index": 10,
+     "start": [
+      266,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_10_localized",
+     "index": 15,
+     "start": [
+      271,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_10_localized",
+     "index": 28,
+     "start": [
+      286,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_10_localized",
+     "index": 39,
+     "start": [
+      295,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_10_localized",
+     "index": 49,
+     "start": [
+      313,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:strict-support-inequality.proof.sentences[15]": {
+   "paper": {
+    "line": 884,
+    "start": 63136
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_10_localized_avoid",
+     "index": -1,
+     "start": [
+      369,
+      0
+     ]
+    }
+   ]
+  },
+  "lem:strict-support-inequality.proof.sentences[16]": {
+   "paper": {
+    "line": 884,
+    "start": 63371
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_10_localized_avoid",
+     "index": -1,
+     "start": [
+      369,
+      0
+     ]
+    }
+   ]
+  },
+  "lem:strict-support-inequality.proof.sentences[17]": {
+   "paper": {
+    "line": 884,
+    "start": 63519
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_10_localized_avoid",
+     "index": -1,
+     "start": [
+      369,
+      0
+     ]
+    }
+   ]
+  },
+  "lem:strict-support-inequality.proof.sentences[18]": {
+   "paper": {
+    "line": 886,
+    "start": 63696
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_10_core",
+     "index": 0,
+     "start": [
+      219,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_10_core",
+     "index": 1,
+     "start": [
+      220,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_10_stable_kernel",
+     "index": 0,
+     "start": [
+      53,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_10_stable_kernel",
+     "index": 1,
+     "start": [
+      54,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:strict-support-inequality.proof.sentences[19]": {
+   "paper": {
+    "line": 888,
+    "start": 63927
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_10_stable_kernel",
+     "index": 2,
+     "start": [
+      55,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:strict-support-inequality.proof.sentences[1]": {
+   "paper": {
+    "line": 871,
+    "start": 61156
+   },
+   "steps": []
+  },
+  "lem:strict-support-inequality.proof.sentences[20]": {
+   "paper": {
+    "line": 888,
+    "start": 63989
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_10_stable_kernel",
+     "index": 3,
+     "start": [
+      56,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_10_stable_kernel",
+     "index": 12,
+     "start": [
+      65,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_10_stable_kernel",
+     "index": 13,
+     "start": [
+      66,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_10_stable_kernel",
+     "index": 14,
+     "start": [
+      67,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:strict-support-inequality.proof.sentences[21]": {
+   "paper": {
+    "line": 890,
+    "start": 64204
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_10_stable_kernel",
+     "index": 11,
+     "start": [
+      64,
+      2
+     ]
+    },
+    {
+     "index": 1,
+     "start": [
+      394,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_10_localized",
+     "index": 58,
+     "start": [
+      324,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_10_localized",
+     "index": 59,
+     "start": [
+      326,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:strict-support-inequality.proof.sentences[22]": {
+   "paper": {
+    "line": 894,
+    "start": 64455
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_10_core",
+     "index": 2,
+     "start": [
+      221,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:strict-support-inequality.proof.sentences[23]": {
+   "paper": {
+    "line": 896,
+    "start": 64512
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_10_two_facts",
+     "index": 0,
+     "start": [
+      75,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:strict-support-inequality.proof.sentences[24]": {
+   "paper": {
+    "line": 898,
+    "start": 64830
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_10_two_facts",
+     "index": 6,
+     "start": [
+      82,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_10_two_facts",
+     "index": 12,
+     "start": [
+      87,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_10_two_facts",
+     "index": 13,
+     "start": [
+      87,
+      4
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_10_two_facts",
+     "index": 14,
+     "start": [
+      88,
+      4
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_10_two_facts",
+     "index": 15,
+     "start": [
+      89,
+      4
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_10_two_facts",
+     "index": 18,
+     "start": [
+      90,
+      4
+     ]
+    }
+   ]
+  },
+  "lem:strict-support-inequality.proof.sentences[25]": {
+   "paper": {
+    "line": 898,
+    "start": 64947
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_10_two_facts",
+     "index": 7,
+     "start": [
+      83,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_10_two_facts",
+     "index": 8,
+     "start": [
+      83,
+      4
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_10_two_facts",
+     "index": 9,
+     "start": [
+      84,
+      4
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_10_two_facts",
+     "index": 10,
+     "start": [
+      85,
+      4
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_10_two_facts",
+     "index": 11,
+     "start": [
+      86,
+      4
+     ]
+    }
+   ]
+  },
+  "lem:strict-support-inequality.proof.sentences[26]": {
+   "paper": {
+    "line": 902,
+    "start": 65164
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_10_kernel_length",
+     "index": 15,
+     "start": [
+      115,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_10_kernel_length",
+     "index": 17,
+     "start": [
+      119,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_10_kernel_length",
+     "index": 18,
+     "start": [
+      122,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_10_kernel_length",
+     "index": 19,
+     "start": [
+      123,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_10_kernel_length",
+     "index": 20,
+     "start": [
+      124,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_10_kernel_length",
+     "index": 21,
+     "start": [
+      126,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_10_kernel_length",
+     "index": 22,
+     "start": [
+      127,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:strict-support-inequality.proof.sentences[27]": {
+   "paper": {
+    "line": 904,
+    "start": 65379
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_10_kernel_length",
+     "index": 0,
+     "start": [
+      100,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_10_kernel_length",
+     "index": 1,
+     "start": [
+      101,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_10_kernel_length",
+     "index": 2,
+     "start": [
+      102,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_10_kernel_length",
+     "index": 3,
+     "start": [
+      103,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_10_kernel_length",
+     "index": 4,
+     "start": [
+      104,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_10_kernel_length",
+     "index": 10,
+     "start": [
+      110,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:strict-support-inequality.proof.sentences[28]": {
+   "paper": {
+    "line": 908,
+    "start": 65693
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_10_core",
+     "index": 3,
+     "start": [
+      222,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_10_length_split",
+     "index": 0,
+     "start": [
+      137,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_10_length_split",
+     "index": 1,
+     "start": [
+      139,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_10_length_split",
+     "index": 2,
+     "start": [
+      140,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_10_length_split",
+     "index": 13,
+     "start": [
+      149,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_10_length_split",
+     "index": 14,
+     "start": [
+      151,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_10_length_split",
+     "index": 15,
+     "start": [
+      153,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_10_length_split",
+     "index": 19,
+     "start": [
+      157,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_10_length_split",
+     "index": 22,
+     "start": [
+      160,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_10_length_split",
+     "index": 25,
+     "start": [
+      164,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_10_length_split",
+     "index": 26,
+     "start": [
+      165,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:strict-support-inequality.proof.sentences[29]": {
+   "paper": {
+    "line": 914,
+    "start": 66432
+   },
+   "steps": []
+  },
+  "lem:strict-support-inequality.proof.sentences[2]": {
+   "paper": {
+    "line": 871,
+    "start": 61486
+   },
+   "steps": []
+  },
+  "lem:strict-support-inequality.proof.sentences[30]": {
+   "paper": {
+    "line": 916,
+    "start": 66479
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_10_localized",
+     "index": 40,
+     "start": [
+      299,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_10_localized",
+     "index": 42,
+     "start": [
+      301,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_10_localized",
+     "index": 46,
+     "start": [
+      307,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_10_localized",
+     "index": 54,
+     "start": [
+      319,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:strict-support-inequality.proof.sentences[31]": {
+   "paper": {
+    "line": 917,
+    "start": 66587
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_10_residual_nonzero",
+     "index": 0,
+     "start": [
+      176,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_10_residual_nonzero",
+     "index": 1,
+     "start": [
+      177,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_10_residual_nonzero",
+     "index": 2,
+     "start": [
+      179,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_10_residual_nonzero",
+     "index": 3,
+     "start": [
+      180,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_10_residual_nonzero",
+     "index": 7,
+     "start": [
+      184,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_10_residual_nonzero",
+     "index": 8,
+     "start": [
+      186,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_10_residual_nonzero",
+     "index": 9,
+     "start": [
+      187,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:strict-support-inequality.proof.sentences[32]": {
+   "paper": {
+    "line": 918,
+    "start": 66820
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_10_residual_nonzero",
+     "index": 10,
+     "start": [
+      188,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:strict-support-inequality.proof.sentences[33]": {
+   "paper": {
+    "line": 918,
+    "start": 67008
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_10_residual_nonzero",
+     "index": 10,
+     "start": [
+      188,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:strict-support-inequality.proof.sentences[34]": {
+   "paper": {
+    "line": 921,
+    "start": 67290
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_10_residual_nonzero",
+     "index": 10,
+     "start": [
+      188,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:strict-support-inequality.proof.sentences[35]": {
+   "paper": {
+    "line": 925,
+    "start": 67520
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_10_residual_nonzero",
+     "index": 10,
+     "start": [
+      188,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:strict-support-inequality.proof.sentences[36]": {
+   "paper": {
+    "line": 926,
+    "start": 67730
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_10_residual_nonzero",
+     "index": 10,
+     "start": [
+      188,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:strict-support-inequality.proof.sentences[37]": {
+   "paper": {
+    "line": 928,
+    "start": 68017
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_10_residual_nonzero",
+     "index": 11,
+     "start": [
+      191,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_10_residual_nonzero",
+     "index": 19,
+     "start": [
+      199,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_10_residual_nonzero",
+     "index": 23,
+     "start": [
+      204,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_10_residual_nonzero",
+     "index": 24,
+     "start": [
+      205,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_10_residual_nonzero",
+     "index": 25,
+     "start": [
+      206,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_10_residual_nonzero",
+     "index": 26,
+     "start": [
+      207,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_10_residual_nonzero",
+     "index": 27,
+     "start": [
+      208,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_10_residual_nonzero",
+     "index": 28,
+     "start": [
+      209,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_10_core",
+     "index": 4,
+     "start": [
+      223,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_10_core",
+     "index": 5,
+     "start": [
+      224,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:strict-support-inequality.proof.sentences[38]": {
+   "paper": {
+    "line": 931,
+    "start": 68169
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_10_core",
+     "index": 6,
+     "start": [
+      226,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_10_core",
+     "index": 7,
+     "start": [
+      227,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_10_core",
+     "index": 8,
+     "start": [
+      228,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_10_core",
+     "index": 9,
+     "start": [
+      229,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_10_localized",
+     "index": 60,
+     "start": [
+      330,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_10_localized",
+     "index": 61,
+     "start": [
+      332,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_10_localized",
+     "index": 62,
+     "start": [
+      336,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_10_localized",
+     "index": 64,
+     "start": [
+      339,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_10_localized",
+     "index": 65,
+     "start": [
+      342,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_10_localized",
+     "index": 66,
+     "start": [
+      344,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_10_localized",
+     "index": 67,
+     "start": [
+      345,
+      2
+     ]
+    },
+    {
+     "index": 7,
+     "start": [
+      399,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:strict-support-inequality.proof.sentences[3]": {
+   "paper": {
+    "line": 871,
+    "start": 61538
+   },
+   "steps": []
+  },
+  "lem:strict-support-inequality.proof.sentences[4]": {
+   "paper": {
+    "line": 871,
+    "start": 61744
+   },
+   "steps": []
+  },
+  "lem:strict-support-inequality.proof.sentences[5]": {
+   "paper": {
+    "line": 871,
+    "start": 61843
+   },
+   "steps": []
+  },
+  "lem:strict-support-inequality.proof.sentences[6]": {
+   "paper": {
+    "line": 874,
+    "start": 61848
+   },
+   "steps": []
+  },
+  "lem:strict-support-inequality.proof.sentences[7]": {
+   "paper": {
+    "line": 874,
+    "start": 61899
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_10_gabber",
+     "index": -1,
+     "start": [
+      360,
+      0
+     ]
+    }
+   ]
+  },
+  "lem:strict-support-inequality.proof.sentences[8]": {
+   "paper": {
+    "line": 875,
+    "start": 62019
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_10_gabber",
+     "index": -1,
+     "start": [
+      360,
+      0
+     ]
+    }
+   ]
+  },
+  "lem:strict-support-inequality.proof.sentences[9]": {
+   "paper": {
+    "line": 878,
+    "start": 62184
+   },
+   "steps": []
+  },
+  "lem:supp-criterion": {
+   "lean": [
+    {
+     "name": "Stafford38.Paper.Section4.lemma_4_7",
+     "range": {
+      "end": [
+       123,
+       53
+      ],
+      "start": [
+       110,
+       0
+      ]
+     }
+    }
+   ],
+   "paper": {
+    "line": 646,
+    "start": 44903
+   }
+  },
+  "lem:supp-criterion.proof.sentences[0]": {
+   "paper": {
+    "line": 653,
+    "start": 45266
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_7_mk_one_eq_zero_iff",
+     "index": 0,
+     "start": [
+      77,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:supp-criterion.proof.sentences[10]": {
+   "paper": {
+    "line": 668,
+    "start": 46157
+   },
+   "steps": [
+    {
+     "index": 5,
+     "start": [
+      119,
+      8
+     ]
+    }
+   ]
+  },
+  "lem:supp-criterion.proof.sentences[1]": {
+   "paper": {
+    "line": 655,
+    "start": 45367
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_7_mk_one_eq_zero_iff",
+     "index": 1,
+     "start": [
+      79,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:supp-criterion.proof.sentences[2]": {
+   "paper": {
+    "line": 656,
+    "start": 45440
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_7_mk_one_eq_zero_iff",
+     "index": 2,
+     "start": [
+      81,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_7_mk_one_eq_zero_iff",
+     "index": 3,
+     "start": [
+      82,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_7_mk_one_eq_zero_iff",
+     "index": 4,
+     "start": [
+      82,
+      4
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_7_mk_one_eq_zero_iff",
+     "index": 5,
+     "start": [
+      83,
+      4
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_7_mk_one_eq_zero_iff",
+     "index": 6,
+     "start": [
+      84,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_7_mk_one_eq_zero_iff",
+     "index": 7,
+     "start": [
+      84,
+      4
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_7_mk_one_eq_zero_iff",
+     "index": 8,
+     "start": [
+      85,
+      4
+     ]
+    }
+   ]
+  },
+  "lem:supp-criterion.proof.sentences[3]": {
+   "paper": {
+    "line": 656,
+    "start": 45511
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_7_mk_one_ne_zero_iff",
+     "index": 0,
+     "start": [
+      91,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:supp-criterion.proof.sentences[4]": {
+   "paper": {
+    "line": 660,
+    "start": 45669
+   },
+   "steps": [
+    {
+     "index": 7,
+     "start": [
+      121,
+      2
+     ]
+    },
+    {
+     "index": 8,
+     "start": [
+      122,
+      4
+     ]
+    }
+   ]
+  },
+  "lem:supp-criterion.proof.sentences[5]": {
+   "paper": {
+    "line": 661,
+    "start": 45759
+   },
+   "steps": [
+    {
+     "index": 9,
+     "start": [
+      123,
+      4
+     ]
+    }
+   ]
+  },
+  "lem:supp-criterion.proof.sentences[6]": {
+   "paper": {
+    "line": 662,
+    "start": 45798
+   },
+   "steps": [
+    {
+     "index": 0,
+     "start": [
+      113,
+      2
+     ]
+    },
+    {
+     "index": 1,
+     "start": [
+      114,
+      2
+     ]
+    },
+    {
+     "index": 2,
+     "start": [
+      115,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:supp-criterion.proof.sentences[7]": {
+   "paper": {
+    "line": 664,
+    "start": 45974
+   },
+   "steps": [
+    {
+     "index": 3,
+     "start": [
+      116,
+      4
+     ]
+    }
+   ]
+  },
+  "lem:supp-criterion.proof.sentences[8]": {
+   "paper": {
+    "line": 665,
+    "start": 46019
+   },
+   "steps": [
+    {
+     "index": 4,
+     "start": [
+      117,
+      4
+     ]
+    }
+   ]
+  },
+  "lem:supp-criterion.proof.sentences[9]": {
+   "paper": {
+    "line": 666,
+    "start": 46081
+   },
+   "steps": [
+    {
+     "index": 6,
+     "start": [
+      120,
+      8
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_7_mk_eq_zero_iff",
+     "index": 0,
+     "start": [
+      96,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_7_mk_eq_zero_iff",
+     "index": 2,
+     "start": [
+      100,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_7_mk_eq_zero_iff",
+     "index": 3,
+     "start": [
+      101,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_7_mk_eq_zero_iff",
+     "index": 4,
+     "start": [
+      102,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_7_mk_eq_zero_iff",
+     "index": 5,
+     "start": [
+      102,
+      4
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_7_mk_eq_zero_iff",
+     "index": 6,
+     "start": [
+      103,
+      4
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_7_mk_eq_zero_iff",
+     "index": 7,
+     "start": [
+      104,
+      4
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_7_mk_eq_zero_iff",
+     "index": 8,
+     "start": [
+      105,
+      4
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_7_mk_eq_zero_iff",
+     "index": 9,
+     "start": [
+      107,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_7_mk_eq_zero_iff",
+     "index": 10,
+     "start": [
+      107,
+      4
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_7_mk_eq_zero_iff",
+     "index": 11,
+     "start": [
+      108,
+      4
+     ]
+    }
+   ]
+  },
+  "lem:tangential-finiteness": {
+   "lean": [
+    {
+     "name": "Stafford38.Paper.Section4.lemma_4_8",
+     "range": {
+      "end": [
+       178,
+       82
+      ],
+      "start": [
+       156,
+       0
+      ]
+     }
+    }
+   ],
+   "paper": {
+    "line": 684,
+    "start": 46722
+   }
+  },
+  "lem:tangential-finiteness.proof.sentences[0]": {
+   "paper": {
+    "line": 693,
+    "start": 47045
+   },
+   "steps": [
+    {
+     "index": 0,
+     "start": [
+      171,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_8_finite",
+     "index": -1,
+     "start": [
+      145,
+      0
+     ]
+    }
+   ]
+  },
+  "lem:tangential-finiteness.proof.sentences[10]": {
+   "paper": {
+    "line": 704,
+    "start": 48680
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_8_support_inclusion",
+     "index": 12,
+     "start": [
+      83,
+      4
+     ]
+    }
+   ]
+  },
+  "lem:tangential-finiteness.proof.sentences[11]": {
+   "paper": {
+    "line": 704,
+    "start": 48806
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_8_support_inclusion",
+     "index": 13,
+     "start": [
+      84,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_8_support_inclusion",
+     "index": 14,
+     "start": [
+      85,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:tangential-finiteness.proof.sentences[12]": {
+   "paper": {
+    "line": 704,
+    "start": 48970
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_8_support_inclusion",
+     "index": 15,
+     "start": [
+      86,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_8_support_inclusion",
+     "index": 16,
+     "start": [
+      87,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_8_vasconcelos",
+     "index": 0,
+     "start": [
+      35,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_8_vasconcelos",
+     "index": 1,
+     "start": [
+      36,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:tangential-finiteness.proof.sentences[13]": {
+   "paper": {
+    "line": 706,
+    "start": 49314
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_8_vasconcelos",
+     "index": 2,
+     "start": [
+      37,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_8_vasconcelos",
+     "index": 3,
+     "start": [
+      38,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:tangential-finiteness.proof.sentences[14]": {
+   "paper": {
+    "line": 709,
+    "start": 49487
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_8_vasconcelos",
+     "index": 4,
+     "start": [
+      41,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_8_vasconcelos",
+     "index": 5,
+     "start": [
+      43,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:tangential-finiteness.proof.sentences[15]": {
+   "paper": {
+    "line": 713,
+    "start": 49743
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_8_vasconcelos",
+     "index": 8,
+     "start": [
+      47,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:tangential-finiteness.proof.sentences[16]": {
+   "paper": {
+    "line": 715,
+    "start": 49996
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_8_vasconcelos",
+     "index": 8,
+     "start": [
+      47,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:tangential-finiteness.proof.sentences[17]": {
+   "paper": {
+    "line": 716,
+    "start": 50080
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_8_vasconcelos",
+     "index": 9,
+     "start": [
+      50,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_8_vasconcelos",
+     "index": 10,
+     "start": [
+      52,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_8_vasconcelos",
+     "index": 15,
+     "start": [
+      58,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:tangential-finiteness.proof.sentences[18]": {
+   "paper": {
+    "line": 719,
+    "start": 50267
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_8_support_inclusion",
+     "index": 17,
+     "start": [
+      88,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:tangential-finiteness.proof.sentences[19]": {
+   "paper": {
+    "line": 723,
+    "start": 50584
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_8_support_inclusion",
+     "index": 18,
+     "start": [
+      89,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:tangential-finiteness.proof.sentences[1]": {
+   "paper": {
+    "line": 694,
+    "start": 47184
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_8_finite",
+     "index": -1,
+     "start": [
+      145,
+      0
+     ]
+    }
+   ]
+  },
+  "lem:tangential-finiteness.proof.sentences[20]": {
+   "paper": {
+    "line": 723,
+    "start": 50662
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_8_support_inclusion",
+     "index": 19,
+     "start": [
+      90,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:tangential-finiteness.proof.sentences[21]": {
+   "paper": {
+    "line": 724,
+    "start": 50738
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_8_support_inclusion",
+     "index": 23,
+     "start": [
+      94,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:tangential-finiteness.proof.sentences[22]": {
+   "paper": {
+    "line": 726,
+    "start": 50847
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_8_support_inclusion",
+     "index": 24,
+     "start": [
+      95,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:tangential-finiteness.proof.sentences[23]": {
+   "paper": {
+    "line": 729,
+    "start": 51008
+   },
+   "steps": [
+    {
+     "index": 4,
+     "start": [
+      177,
+      4
+     ]
+    }
+   ]
+  },
+  "lem:tangential-finiteness.proof.sentences[24]": {
+   "paper": {
+    "line": 733,
+    "start": 51133
+   },
+   "steps": [
+    {
+     "index": 5,
+     "start": [
+      178,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:tangential-finiteness.proof.sentences[25]": {
+   "paper": {
+    "line": 733,
+    "start": 51203
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_8_localized_isFiniteLength",
+     "index": 0,
+     "start": [
+      106,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:tangential-finiteness.proof.sentences[26]": {
+   "paper": {
+    "line": 735,
+    "start": 51384
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_8_localized_isFiniteLength",
+     "index": 0,
+     "start": [
+      106,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:tangential-finiteness.proof.sentences[27]": {
+   "paper": {
+    "line": 739,
+    "start": 51742
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_8_finite_length",
+     "index": 1,
+     "start": [
+      130,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_8_finite_length",
+     "index": 2,
+     "start": [
+      131,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_8_finite_length",
+     "index": 3,
+     "start": [
+      131,
+      4
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_8_finite_length",
+     "index": 4,
+     "start": [
+      132,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_8_finite_length",
+     "index": 5,
+     "start": [
+      132,
+      4
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_8_finite_length",
+     "index": 6,
+     "start": [
+      134,
+      4
+     ]
+    }
+   ]
+  },
+  "lem:tangential-finiteness.proof.sentences[28]": {
+   "paper": {
+    "line": 744,
+    "start": 52021
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_8_localized_isFiniteLength",
+     "index": 5,
+     "start": [
+      113,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:tangential-finiteness.proof.sentences[29]": {
+   "paper": {
+    "line": 746,
+    "start": 52294
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_8_localized_isFiniteLength",
+     "index": 5,
+     "start": [
+      113,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:tangential-finiteness.proof.sentences[2]": {
+   "paper": {
+    "line": 695,
+    "start": 47314
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_8_finite",
+     "index": -1,
+     "start": [
+      145,
+      0
+     ]
+    }
+   ]
+  },
+  "lem:tangential-finiteness.proof.sentences[30]": {
+   "paper": {
+    "line": 748,
+    "start": 52528
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_8_localized_isFiniteLength",
+     "index": 5,
+     "start": [
+      113,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:tangential-finiteness.proof.sentences[31]": {
+   "paper": {
+    "line": 750,
+    "start": 52758
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_8_finite_length",
+     "index": 0,
+     "start": [
+      129,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:tangential-finiteness.proof.sentences[3]": {
+   "paper": {
+    "line": 698,
+    "start": 47523
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_8_finite",
+     "index": -1,
+     "start": [
+      145,
+      0
+     ]
+    }
+   ]
+  },
+  "lem:tangential-finiteness.proof.sentences[4]": {
+   "paper": {
+    "line": 699,
+    "start": 47667
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_8_finite",
+     "index": -1,
+     "start": [
+      145,
+      0
+     ]
+    }
+   ]
+  },
+  "lem:tangential-finiteness.proof.sentences[5]": {
+   "paper": {
+    "line": 701,
+    "start": 47702
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_8_finite",
+     "index": -1,
+     "start": [
+      145,
+      0
+     ]
+    }
+   ]
+  },
+  "lem:tangential-finiteness.proof.sentences[6]": {
+   "paper": {
+    "line": 701,
+    "start": 47863
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_8_finite",
+     "index": -1,
+     "start": [
+      145,
+      0
+     ]
+    },
+    {
+     "index": 1,
+     "start": [
+      172,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:tangential-finiteness.proof.sentences[7]": {
+   "paper": {
+    "line": 703,
+    "start": 48122
+   },
+   "steps": [
+    {
+     "index": 2,
+     "start": [
+      173,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_8_support_inclusion",
+     "index": 0,
+     "start": [
+      70,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:tangential-finiteness.proof.sentences[8]": {
+   "paper": {
+    "line": 703,
+    "start": 48168
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_8_support_inclusion",
+     "index": 1,
+     "start": [
+      71,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_8_support_inclusion",
+     "index": 2,
+     "start": [
+      72,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:tangential-finiteness.proof.sentences[9]": {
+   "paper": {
+    "line": 704,
+    "start": 48285
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_8_support_inclusion",
+     "index": 3,
+     "start": [
+      73,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_8_support_inclusion",
+     "index": 4,
+     "start": [
+      74,
+      2
+     ]
+    }
+   ]
+  },
+  "par:euler": {
+   "lean": [
+    {
+     "name": "Stafford38.Paper.Section4.eulerElement",
+     "range": {
+      "end": [
+       49,
+       42
+      ],
+      "start": [
+       48,
+       0
+      ]
+     }
+    },
+    {
+     "name": "Stafford38.Paper.Section4.nonnegativePart",
+     "range": {
+      "end": [
+       56,
+       20
+      ],
+      "start": [
+       51,
+       0
+      ]
+     }
+    },
+    {
+     "name": "Stafford38.Paper.Section4.presentedNonnegativePart",
+     "range": {
+      "end": [
+       195,
+       84
+      ],
+      "start": [
+       192,
+       0
+      ]
+     }
+    },
+    {
+     "name": "Stafford38.Paper.Section4.transverse",
+     "range": {
+      "end": [
+       190,
+       45
+      ],
+      "start": [
+       188,
+       0
+      ]
+     }
+    },
+    {
+     "name": "Stafford38.WeylEulerSubring.eulerSubring",
+     "range": {
+      "end": [
+       26,
+       44
+      ],
+      "start": [
+       22,
+       0
+      ]
+     }
+    }
+   ],
+   "paper": {
+    "line": 528,
+    "start": 36880
+   }
+  },
+  "par:euler-relations": {
+   "lean": [
+    {
+     "name": "Stafford38.Paper.Section4.eq_nonnegative_pbw",
+     "range": {
+      "end": [
+       72,
+       27
+      ],
+      "start": [
+       58,
+       0
+      ]
+     }
+    },
+    {
+     "name": "Stafford38.Paper.Section4.step_coordinate_normal",
+     "range": {
+      "end": [
+       83,
+       27
+      ],
+      "start": [
+       74,
+       0
+      ]
+     }
+    },
+    {
+     "name": "Stafford38.Paper.Section4.transverse_commutes_coordinate",
+     "range": {
+      "end": [
+       202,
+       77
+      ],
+      "start": [
+       198,
+       0
+      ]
+     }
+    }
+   ],
+   "paper": {
+    "line": 533,
+    "start": 37256
+   }
+  },
+  "par:setup": {
+   "lean": [
+    {
+     "name": "Stafford38.Paper.Section4.GrQ",
+     "range": {
+      "end": [
+       32,
+       28
+      ],
+      "start": [
+       31,
+       0
+      ]
+     }
+    },
+    {
+     "name": "Stafford38.Paper.Section4.Tangential",
+     "range": {
+      "end": [
+       35,
+       26
+      ],
+      "start": [
+       34,
+       0
+      ]
+     }
+    },
+    {
+     "name": "Stafford38.Paper.Section4.Symbol",
+     "range": {
+      "end": [
+       38,
+       37
+      ],
+      "start": [
+       37,
+       0
+      ]
+     }
+    },
+    {
+     "name": "Stafford38.Paper.Section4.symbolCoordinate",
+     "range": {
+      "end": [
+       41,
+       79
+      ],
+      "start": [
+       40,
+       0
+      ]
+     }
+    },
+    {
+     "name": "Stafford38.Paper.Section4.coordinateMap",
+     "range": {
+      "end": [
+       48,
+       43
+      ],
+      "start": [
+       46,
+       0
+      ]
+     }
+    },
+    {
+     "name": "Stafford38.Paper.Section4.kernelV",
+     "range": {
+      "end": [
+       51,
+       55
+      ],
+      "start": [
+       50,
+       0
+      ]
+     }
+    },
+    {
+     "name": "Stafford38.Paper.Section4.cokernelU",
+     "range": {
+      "end": [
+       54,
+       73
+      ],
+      "start": [
+       53,
+       0
+      ]
+     }
+    },
+    {
+     "name": "Stafford38.Paper.Section4.setup_coordinateMap_apply",
+     "range": {
+      "end": [
+       59,
+       61
+      ],
+      "start": [
+       56,
+       0
+      ]
+     }
+    },
+    {
+     "name": "Stafford38.Paper.Section4.setup_coordinateMap_eq",
+     "range": {
+      "end": [
+       64,
+       55
+      ],
+      "start": [
+       61,
+       0
+      ]
+     }
+    }
+   ],
+   "paper": {
+    "line": 672,
+    "start": 46294
+   }
+  },
+  "prop:x-surjective": {
+   "lean": [
+    {
+     "name": "Stafford38.Paper.Section4.proposition_4_3",
+     "range": {
+      "end": [
+       231,
+       63
+      ],
+      "start": [
+       218,
+       0
+      ]
+     }
+    }
+   ],
+   "paper": {
+    "line": 598,
+    "start": 41338
+   }
+  },
+  "prop:x-surjective.proof.sentences[0]": {
+   "paper": {
+    "line": 602,
+    "start": 41448
+   },
+   "steps": []
+  },
+  "prop:x-surjective.proof.sentences[1]": {
+   "paper": {
+    "line": 602,
+    "start": 41484
+   },
+   "steps": [
+    {
+     "index": 0,
+     "start": [
+      224,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_3_q_mem",
+     "index": 0,
+     "start": [
+      44,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_3_q_mem",
+     "index": 1,
+     "start": [
+      45,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_3_q_mem",
+     "index": 2,
+     "start": [
+      46,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_3_q_mem",
+     "index": 3,
+     "start": [
+      47,
+      2
+     ]
+    }
+   ]
+  },
+  "prop:x-surjective.proof.sentences[2]": {
+   "paper": {
+    "line": 603,
+    "start": 41570
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section4.proposition_4_3_of",
+     "index": 0,
+     "start": [
+      155,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_3_normal_surj",
+     "index": 0,
+     "start": [
+      55,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_3_normal_surj",
+     "index": 1,
+     "start": [
+      56,
+      2
+     ]
+    }
+   ]
+  },
+  "prop:x-surjective.proof.sentences[3]": {
+   "paper": {
+    "line": 606,
+    "start": 41691
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_3_normal_surj",
+     "index": 14,
+     "start": [
+      66,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_3_normal_surj",
+     "index": 15,
+     "start": [
+      66,
+      4
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_3_normal_surj",
+     "index": 16,
+     "start": [
+      67,
+      4
+     ]
+    }
+   ]
+  },
+  "prop:x-surjective.proof.sentences[4]": {
+   "paper": {
+    "line": 607,
+    "start": 41777
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_3_normal_surj",
+     "index": 2,
+     "start": [
+      57,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_3_normal_surj",
+     "index": 3,
+     "start": [
+      57,
+      4
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_3_normal_surj",
+     "index": 4,
+     "start": [
+      58,
+      4
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_3_normal_surj",
+     "index": 5,
+     "start": [
+      59,
+      4
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_3_normal_surj",
+     "index": 6,
+     "start": [
+      60,
+      4
+     ]
+    }
+   ]
+  },
+  "prop:x-surjective.proof.sentences[5]": {
+   "paper": {
+    "line": 610,
+    "start": 41964
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_3_stable_momentum",
+     "index": 0,
+     "start": [
+      74,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_3_stable_momentum",
+     "index": 1,
+     "start": [
+      75,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_3_stable_momentum",
+     "index": 2,
+     "start": [
+      76,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_3_stable_momentum",
+     "index": 3,
+     "start": [
+      77,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_3_stable_momentum",
+     "index": 4,
+     "start": [
+      78,
+      2
+     ]
+    }
+   ]
+  },
+  "prop:x-surjective.proof.sentences[6]": {
+   "paper": {
+    "line": 612,
+    "start": 42077
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_3_stable_coefficients",
+     "index": 0,
+     "start": [
+      83,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_3_stable_coefficients",
+     "index": 1,
+     "start": [
+      84,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.transverseCoordinateAlgebra_le",
+     "index": 0,
+     "start": [
+      180,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.transverseCoordinateAlgebra_le",
+     "index": 1,
+     "start": [
+      181,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.transverseCoordinateAlgebra_le",
+     "index": 2,
+     "start": [
+      182,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.transverseCoordinateAlgebra_le",
+     "index": 3,
+     "start": [
+      182,
+      4
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.transverseCoordinateAlgebra_le",
+     "index": 4,
+     "start": [
+      183,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.transverseCoordinateAlgebra_le",
+     "index": 5,
+     "start": [
+      183,
+      4
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.transverseCoordinateAlgebra_le",
+     "index": 6,
+     "start": [
+      184,
+      4
+     ]
+    }
+   ]
+  },
+  "prop:x-surjective.proof.sentences[7]": {
+   "paper": {
+    "line": 612,
+    "start": 42200
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section4.proposition_4_3_of",
+     "index": 1,
+     "start": [
+      156,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_3_classSet_eq_univ",
+     "index": 0,
+     "start": [
+      132,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_3_classSet_eq_univ",
+     "index": 10,
+     "start": [
+      140,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_3_classSet_eq_univ",
+     "index": 11,
+     "start": [
+      141,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_3_classSet_eq_univ",
+     "index": 12,
+     "start": [
+      142,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_3_classSet_eq_univ",
+     "index": 13,
+     "start": [
+      143,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_3_classSet_eq_univ",
+     "index": 14,
+     "start": [
+      144,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.step_4_3_classSet_eq_univ",
+     "index": 15,
+     "start": [
+      145,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.closure_transverseCoordinateAlgebra_momentum",
+     "index": 0,
+     "start": [
+      190,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.closure_transverseCoordinateAlgebra_momentum",
+     "index": 1,
+     "start": [
+      191,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.closure_transverseCoordinateAlgebra_momentum",
+     "index": 3,
+     "start": [
+      192,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.closure_transverseCoordinateAlgebra_momentum",
+     "index": 4,
+     "start": [
+      194,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.closure_transverseCoordinateAlgebra_momentum",
+     "index": 5,
+     "start": [
+      195,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.closure_transverseCoordinateAlgebra_momentum",
+     "index": 6,
+     "start": [
+      196,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.closure_transverseCoordinateAlgebra_momentum",
+     "index": 20,
+     "start": [
+      211,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.closure_transverseCoordinateAlgebra_momentum",
+     "index": 21,
+     "start": [
+      214,
+      2
+     ]
+    }
+   ]
+  },
+  "prop:x-surjective.proof.sentences[8]": {
+   "paper": {
+    "line": 612,
+    "start": 42272
+   },
+   "steps": [
+    {
+     "decl": "Stafford38.Paper.Section4.proposition_4_3_of",
+     "index": 2,
+     "start": [
+      158,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.proposition_4_3_of",
+     "index": 3,
+     "start": [
+      159,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.proposition_4_3_of",
+     "index": 6,
+     "start": [
+      162,
+      2
+     ]
+    },
+    {
+     "decl": "Stafford38.Paper.Section4.proposition_4_3_of",
+     "index": 7,
+     "start": [
+      163,
+      2
+     ]
+    },
+    {
+     "index": 1,
+     "start": [
+      225,
+      2
+     ]
+    }
+   ]
+  }
+ },
+ "cards": [
+  {
+   "account": null,
+   "fingerprint": "4cf72961b0c1cc5c",
+   "flags": [
+    "Lean-only definitions"
+   ],
+   "id": "par:euler",
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section4.eulerElement",
+    "Stafford38.Paper.Section4.nonnegativePart",
+    "Stafford38.Paper.Section4.presentedNonnegativePart",
+    "Stafford38.Paper.Section4.transverse",
+    "Stafford38.WeylEulerSubring.eulerSubring"
+   ],
+   "paper_line": 528,
+   "title": "Paragraph: E and A≥0"
+  },
+  {
+   "account": null,
+   "fingerprint": "ac33e7d56ede3cc7",
+   "flags": [],
+   "id": "par:euler-relations",
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section4.eq_nonnegative_pbw",
+    "Stafford38.Paper.Section4.step_coordinate_normal",
+    "Stafford38.Paper.Section4.transverse_commutes_coordinate"
+   ],
+   "paper_line": 533,
+   "title": "Paragraph: (4.1) and normality of x₁"
+  },
+  {
+   "account": {
+    "cited": [],
+    "large": 2,
+    "lean_adds": 0,
+    "matched": 4,
+    "only_lean": [
+     "conv:pair",
+     "par:euler-relations"
+    ],
+    "only_paper": [],
+    "prose": 0,
+    "sentences": 4,
+    "used": [
+     "conv:pair",
+     "par:euler-relations"
+    ]
+   },
+   "fingerprint": "8a54a179fe863f92",
+   "flags": [
+    "large step"
+   ],
+   "id": "lem:euler",
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section4.lemma_4_1"
+   ],
+   "paper_line": 544,
+   "title": "Lemma 4.1"
+  },
+  {
+   "account": {
+    "cited": [
+     "lem:euler"
+    ],
+    "large": 5,
+    "lean_adds": 2,
+    "matched": 9,
+    "only_lean": [
+     "conv:pair",
+     "par:euler-relations"
+    ],
+    "only_paper": [],
+    "prose": 0,
+    "sentences": 9,
+    "used": [
+     "conv:pair",
+     "lem:euler",
+     "par:euler-relations"
+    ]
+   },
+   "fingerprint": "a980f6e3c05af997",
+   "flags": [
+    "Lean-only definitions",
+    "Lean adds",
+    "large step"
+   ],
+   "id": "lem:euler-residue",
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section4.lemma_4_2"
+   ],
+   "paper_line": 571,
+   "title": "Lemma 4.2"
+  },
+  {
+   "account": {
+    "cited": [
+     "lem:euler-residue"
+    ],
+    "large": 4,
+    "lean_adds": 0,
+    "matched": 8,
+    "only_lean": [
+     "conv:pair",
+     "par:euler-relations"
+    ],
+    "only_paper": [],
+    "prose": 1,
+    "sentences": 9,
+    "used": [
+     "conv:pair",
+     "lem:euler-residue",
+     "par:euler-relations"
+    ]
+   },
+   "fingerprint": "3c1b311dfa420549",
+   "flags": [
+    "Lean-only definitions",
+    "large step",
+    "prose"
+   ],
+   "id": "prop:x-surjective",
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section4.proposition_4_3"
+   ],
+   "paper_line": 598,
+   "title": "Proposition 4.3"
+  },
+  {
+   "account": null,
+   "fingerprint": "3d8e410fbdb35be8",
+   "flags": [],
+   "id": "def:localization",
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section4.definition_4_4"
+   ],
+   "paper_line": 620,
+   "title": "Definition 4.4"
+  },
+  {
+   "account": null,
+   "fingerprint": "32c3216a83c7ee12",
+   "flags": [],
+   "id": "def:supp",
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section4.definition_4_5"
+   ],
+   "paper_line": 633,
+   "title": "Definition 4.5"
+  },
+  {
+   "account": null,
+   "fingerprint": "988048f94e714300",
+   "flags": [],
+   "id": "def:length",
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section4.definition_4_6"
+   ],
+   "paper_line": 639,
+   "title": "Definition 4.6"
+  },
+  {
+   "account": {
+    "cited": [],
+    "large": 2,
+    "lean_adds": 0,
+    "matched": 11,
+    "only_lean": [
+     "def:localization",
+     "def:supp"
+    ],
+    "only_paper": [],
+    "prose": 0,
+    "sentences": 11,
+    "used": [
+     "def:localization",
+     "def:supp"
+    ]
+   },
+   "fingerprint": "ed2fbf0273a7ddc5",
+   "flags": [
+    "large step"
+   ],
+   "id": "lem:supp-criterion",
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section4.lemma_4_7"
+   ],
+   "paper_line": 646,
+   "title": "Lemma 4.7"
+  },
+  {
+   "account": null,
+   "fingerprint": "f5db40b67cf1fa62",
+   "flags": [
+    "Lean-only definitions"
+   ],
+   "id": "par:setup",
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section4.GrQ",
+    "Stafford38.Paper.Section4.Tangential",
+    "Stafford38.Paper.Section4.Symbol",
+    "Stafford38.Paper.Section4.symbolCoordinate",
+    "Stafford38.Paper.Section4.coordinateMap",
+    "Stafford38.Paper.Section4.kernelV",
+    "Stafford38.Paper.Section4.cokernelU",
+    "Stafford38.Paper.Section4.setup_coordinateMap_apply",
+    "Stafford38.Paper.Section4.setup_coordinateMap_eq"
+   ],
+   "paper_line": 672,
+   "title": "Paragraph: M, f, V, U, T"
+  },
+  {
+   "account": {
+    "cited": [
+     "lem:supp-criterion",
+     "prop:charP"
+    ],
+    "large": 3,
+    "lean_adds": 0,
+    "matched": 32,
+    "only_lean": [
+     "def:localization",
+     "par:setup"
+    ],
+    "only_paper": [
+     "prop:charP"
+    ],
+    "prose": 0,
+    "sentences": 32,
+    "used": [
+     "def:localization",
+     "lem:supp-criterion",
+     "par:setup"
+    ]
+   },
+   "fingerprint": "73d00c1680736379",
+   "flags": [
+    "large step"
+   ],
+   "id": "lem:tangential-finiteness",
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section4.lemma_4_8"
+   ],
+   "paper_line": 684,
+   "title": "Lemma 4.8"
+  },
+  {
+   "account": {
+    "cited": [
+     "lem:tangential-finiteness",
+     "prop:x-surjective"
+    ],
+    "large": 4,
+    "lean_adds": 1,
+    "matched": 36,
+    "only_lean": [
+     "def:length"
+    ],
+    "only_paper": [],
+    "prose": 2,
+    "sentences": 38,
+    "used": [
+     "def:length",
+     "lem:tangential-finiteness",
+     "prop:x-surjective"
+    ]
+   },
+   "fingerprint": "69abdef966cb12ca",
+   "flags": [
+    "Lean adds",
+    "large step",
+    "prose"
+   ],
+   "id": "lem:page-inequality",
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section4.lemma_4_9"
+   ],
+   "paper_line": 758,
+   "title": "Lemma 4.9"
+  },
+  {
+   "account": {
+    "cited": [
+     "ithm:gabber"
+    ],
+    "large": 12,
+    "lean_adds": 1,
+    "matched": 30,
+    "only_lean": [
+     "def:length",
+     "lem:tangential-finiteness",
+     "par:setup"
+    ],
+    "only_paper": [
+     "ithm:gabber"
+    ],
+    "prose": 9,
+    "sentences": 39,
+    "used": [
+     "def:length",
+     "lem:tangential-finiteness",
+     "par:setup"
+    ]
+   },
+   "fingerprint": "de141234397a73c6",
+   "flags": [
+    "Lean adds",
+    "large step",
+    "prose"
+   ],
+   "id": "lem:strict-support-inequality",
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section4.lemma_4_10"
+   ],
+   "paper_line": 863,
+   "title": "Lemma 4.10"
+  },
+  {
+   "account": {
+    "cited": [
+     "lem:page-inequality",
+     "lem:strict-support-inequality",
+     "lem:tangential-finiteness"
+    ],
+    "large": 0,
+    "lean_adds": 0,
+    "matched": 3,
+    "only_lean": [
+     "par:setup"
+    ],
+    "only_paper": [],
+    "prose": 1,
+    "sentences": 4,
+    "used": [
+     "lem:page-inequality",
+     "lem:strict-support-inequality",
+     "lem:tangential-finiteness",
+     "par:setup"
+    ]
+   },
+   "fingerprint": "8cdfc6d1af13fc72",
+   "flags": [
+    "prose"
+   ],
+   "id": "cor:Uzero",
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section4.corollary_4_11",
+    "Stafford38.Paper.Section4.corollary_4_11_quotSMulTop"
+   ],
+   "paper_line": 940,
+   "title": "Corollary 4.11"
+  }
+ ],
+ "errors": [],
+ "graph": {
+  "graphviz": "dot - graphviz version 16.1.0 (0)",
+  "overall": [
+   {
+    "from": "par:euler",
+    "kind": "def",
+    "to": "par:euler-relations"
+   },
+   {
+    "from": "par:euler",
+    "kind": "def",
+    "to": "lem:euler"
+   },
+   {
+    "from": "par:euler",
+    "kind": "def",
+    "to": "lem:euler-residue"
+   },
+   {
+    "from": "par:euler-relations",
+    "kind": "lean-only",
+    "to": "lem:euler"
+   },
+   {
+    "from": "par:euler-relations",
+    "kind": "lean-only",
+    "to": "lem:euler-residue"
+   },
+   {
+    "from": "par:euler-relations",
+    "kind": "lean-only",
+    "to": "prop:x-surjective"
+   },
+   {
+    "from": "lem:euler",
+    "kind": "both",
+    "to": "lem:euler-residue"
+   },
+   {
+    "from": "lem:euler-residue",
+    "kind": "both",
+    "to": "prop:x-surjective"
+   },
+   {
+    "from": "prop:x-surjective",
+    "kind": "both",
+    "to": "lem:page-inequality"
+   },
+   {
+    "from": "def:localization",
+    "kind": "lean-only",
+    "to": "lem:supp-criterion"
+   },
+   {
+    "from": "def:localization",
+    "kind": "lean-only",
+    "to": "lem:tangential-finiteness"
+   },
+   {
+    "from": "def:supp",
+    "kind": "lean-only",
+    "to": "lem:supp-criterion"
+   },
+   {
+    "from": "def:length",
+    "kind": "lean-only",
+    "to": "lem:page-inequality"
+   },
+   {
+    "from": "def:length",
+    "kind": "lean-only",
+    "to": "lem:strict-support-inequality"
+   },
+   {
+    "from": "lem:supp-criterion",
+    "kind": "both",
+    "to": "lem:tangential-finiteness"
+   },
+   {
+    "from": "par:setup",
+    "kind": "lean-only",
+    "to": "lem:tangential-finiteness"
+   },
+   {
+    "from": "par:setup",
+    "kind": "def",
+    "to": "lem:page-inequality"
+   },
+   {
+    "from": "par:setup",
+    "kind": "lean-only",
+    "to": "lem:strict-support-inequality"
+   },
+   {
+    "from": "par:setup",
+    "kind": "lean-only",
+    "to": "cor:Uzero"
+   },
+   {
+    "from": "lem:tangential-finiteness",
+    "kind": "both",
+    "to": "lem:page-inequality"
+   },
+   {
+    "from": "lem:tangential-finiteness",
+    "kind": "lean-only",
+    "to": "lem:strict-support-inequality"
+   },
+   {
+    "from": "lem:tangential-finiteness",
+    "kind": "both",
+    "to": "cor:Uzero"
+   },
+   {
+    "from": "lem:page-inequality",
+    "kind": "both",
+    "to": "cor:Uzero"
+   },
+   {
+    "from": "lem:strict-support-inequality",
+    "kind": "both",
+    "to": "cor:Uzero"
+   }
+  ]
+ },
+ "schema": "paper-lean-audit/report-2",
+ "warnings": [
+  "unresolved \\leandecl{Stafford38/Weyl/EulerSubring.lean}{25}{Stafford38.WeylEulerSubring.eulerSubring}",
+  "unresolved \\leandecl{Stafford38/Weyl/EulerSubring.lean}{71}{Stafford38.WeylEulerSubring.coordinate_normal_eulerSubring}",
+  "unresolved \\leandecl{Stafford38/Characteristic/PaperLocalizedInvolutivity.lean}{187}{Stafford38.Characteristic.PaperLocalizedInvolutivity.minimalPrimes_isInvolutive_of_radical_isInvolutive_viaLocalization}",
+  "unresolved \\leandecl{Stafford38/Weyl/EulerResidue.lean}{26}{Stafford38.WeylEulerResidue.canonicalRightIdeal}",
+  "unresolved \\leandecl{Stafford38/Weyl/EulerProductIdentities.lean}{70}{Stafford38.Weyl.EulerProductIdentities.eval_fallingEulerProduct}",
+  "unresolved \\leandecl{Stafford38/Weyl/EulerProductIdentities.lean}{79}{Stafford38.Weyl.EulerProductIdentities.eval_risingEulerProduct}",
+  "unresolved \\leandecl{proofs/weyl_pure_power.lean}{148}{Stafford.exists_eulerPolynomial_x_pow_mul_d_pow}",
+  "unresolved \\leandecl{Stafford38/Weyl/EulerResidue.lean}{41}{Stafford38.WeylEulerResidue.positiveEulerResidue_identity}",
+  "unresolved \\leandecl{Stafford38/Weyl/EulerRemainder.lean}{257}{Stafford38.WeylEulerRemainder.positiveEulerResidue_eq_eulerSubring_mul_coordinate}",
+  "unresolved \\leandecl{Stafford38/Weyl/EulerRemainder.lean}{405}{Stafford38.WeylEulerRemainder.presentedPositiveEulerResidue}",
+  "unresolved \\leandecl{Stafford38/Weyl/QuotientTransport.lean}{240}{Stafford38.WeylQuotientTransport.presentedCanonicalRightQuotient_rightMul_coordinate_surjective}",
+  "unresolved \\leandecl{Stafford38/Quotient/EulerSurjectivity.lean}{86}{Stafford38.EulerSurjectivity.rightMul_surjective_of_euler_normal}",
+  "unresolved \\leandecl{Stafford38/Weyl/EulerRemainder.lean}{310}{Stafford38.WeylEulerRemainder.closure_pairOldSubring_union_coordinate_momentum_eq_top}",
+  "unresolved \\leanlib{AlgebraicAnalysis/Module/MinimalSupportKernelCokernelLengths.lean}{48}{AlgebraicAnalysis.localized_kernel_and_cokernel_isFiniteLength}",
+  "unresolved \\leandecl{Stafford38/Characteristic/CanonicalOldTangentialFiniteness.lean}{73}{Stafford38.Characteristic.CanonicalOldTangentialFiniteness.canonical_finite_old_coordinate_kernel_cokernel}",
+  "unresolved \\leandecl{Stafford38/Characteristic/CanonicalTangentialSymbolFiniteness.lean}{116}{Stafford38.Characteristic.CanonicalTangentialSymbolFiniteness.canonical_orderAssociatedGradedModule_finite_tangential_coordinate}",
+  "unresolved \\leandecl{Stafford38/Characteristic/CanonicalPageEulerInequality.lean}{25}{Stafford38.Characteristic.CanonicalPageEulerInequality.canonicalPage_length_target_le_source}",
+  "unresolved \\leanlib{AlgebraicAnalysis/Module/UniformBoundaryVanishing.lean}{106}{AlgebraicAnalysis.exists_uniform_subsingleton_localized}",
+  "unresolved \\leandecl{Stafford38/Characteristic/CanonicalKoszulContradiction.lean}{86}{Stafford38.Characteristic.CanonicalKoszulContradiction.coordinate_cokernel_subsingleton}",
+  "unresolved \\leandecl{Stafford38/Characteristic/CanonicalKoszulContradiction.lean}{50}{Stafford38.Characteristic.CanonicalKoszulContradiction.no_minimal_coordinate_cokernel_support}"
+ ]
+}
