@@ -1,0 +1,564 @@
+{
+ "schema": "paper-lean-audit/map-2",
+ "title": "Stafford's conjecture: abstract, Sections 1, 2, 7 and the appendix, paper beside Lean",
+ "output_stem": "frontback",
+ "sources": {
+  "paper": {
+   "repo": "itpplasma/stafford38-paper",
+   "commit": "c8f0d615ba3ad7271c1c99ad4b0085071da6a793",
+   "file": "human_readable_main.tex",
+   "snapshot": "../../sources/paper/raw/human_readable_main.tex",
+   "sha256": "9cdf65e2419f8a2c9c28c27a5b531d9d2a12be2305c190eafa726f0255d9db66",
+   "bib_snapshot": "../../sources/paper/raw/references.bib"
+  },
+  "formal": {
+   "repo": "itpplasma/stafford38-formal",
+   "commit": "665fb5bbd26967bfde5c9c30f27513f4cea37f24"
+  },
+  "generator": {
+   "repo": "itpplasma/paper-lean-audit",
+   "commit": "6ecfb6e68eb4bd33040b404fddb6867d92fddbe2",
+   "note": "v2/extract.mjs and v2/build.mjs at this commit produce extraction.json and the reader.",
+   "branch": "sbs-gen-frontback-20261103"
+  }
+ },
+ "lean": {
+  "extraction": "frontback.extraction.json",
+  "imports": [
+   "Stafford38.Paper.Main",
+   "Stafford38.Paper.Section7",
+   "Solution"
+  ],
+  "project_modules": [
+   "Stafford38",
+   "Challenge",
+   "FixedSourceChallenge",
+   "Solution"
+  ],
+  "open": [
+   "Stafford38.Paper.Section2",
+   "Stafford38Challenge"
+  ]
+ },
+ "scope": {
+  "sections": [
+   "front",
+   "1",
+   "2",
+   "7",
+   "8"
+  ]
+ },
+ "settings": {
+  "lean_ref_commands": [
+   "leanglobal",
+   "leanfiltered"
+  ]
+ },
+ "entries": [
+  {
+   "id": "abstract",
+   "paper": {
+    "quote": "We prove that over a Weyl algebra over a field of characteristic zero"
+   },
+   "kind": "formalizes",
+   "short": "abstract",
+   "lean": [
+    "Stafford38Challenge.universalStatement",
+    "Stafford38Challenge.corollary_6_3",
+    "Stafford38Challenge.PaperCorollary_6_3"
+   ],
+   "note": "Lean proves the two claims of the first two sentences; the remaining sentences outline Sections 3 to 6 and are mapped there."
+  },
+  {
+   "id": "intro:weyl",
+   "paper": {
+    "quote": "be the $n$th Weyl algebra"
+   },
+   "kind": "formalizes",
+   "short": "Weyl algebra",
+   "lean": [
+    "Stafford38Challenge.WeylAlg",
+    "Stafford.FreeWeyl",
+    "Stafford.freeWeylRelation",
+    "Stafford38.WeylIteratedEquivalence.PresentedWeyl"
+   ],
+   "note": "Lean defines A_n(k) as the free algebra on x_i, ∂_i modulo the commutator relations given by the standard symplectic matrix; PresentedWeyl is the same algebra."
+  },
+  {
+   "id": "intro:conjecture",
+   "paper": {
+    "quote": "Stafford's Conjecture~3.8 in"
+   },
+   "kind": "formalizes",
+   "short": "Conjecture 3.8 and stable cyclicity",
+   "lean": [
+    "Stafford38Challenge.UniversalStatement",
+    "Stafford.Reduction.Stafford38",
+    "Stafford38Challenge.corollary_6_3_stablyCyclic",
+    "Stafford38Challenge.PaperCorollary_6_3_stablyCyclic",
+    "Stafford38Challenge.IsStablyCyclic"
+   ],
+   "note": "UniversalStatement requires d ≠ 0, as the paper quotes the conjecture. The implication to stable cyclicity, which the paper attributes to Stafford, is proved in Lean (corollary_6_3_stablyCyclic, through the printed proof of Corollary 6.3), not cited."
+  },
+  {
+   "id": "thm:main",
+   "paper": {
+    "quote": "\\label{thm:main}"
+   },
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38Challenge.theorem_1_1",
+    "Stafford38Challenge.PaperTheorem_1_1",
+    "Stafford38Challenge.phiG",
+    "Stafford38Challenge.x₁",
+    "Stafford38.Paper.theorem_1_1",
+    "Stafford38.Paper.theorem_1_1_fixedSource",
+    "Stafford38FixedSourceChallenge.UniversalFixedSourceStatement",
+    "Stafford38FixedSourceChallenge.UniversalFixedSourceStatementWithDegree",
+    "Stafford38FixedSourceChallenge.IsLinearWeylCoordinate",
+    "Stafford38FixedSourceChallenge.bernsteinDegree"
+   ],
+   "note": "PaperTheorem_1_1 is the printed statement: the span form, the identity form and, for n ≥ 1, F = Φ_{g⁻¹}(x₁)^{deg_B d} with g in the symplectic group (g J gᵀ = J); the moreover clause is stated in identity form. The paper-route proofs are theorem_1_1 and theorem_1_1_fixedSource (Section 6, outside this part); theorem_1_1 of the Challenge assembles them. The paper's own Lean reference below the theorem names Stafford38.universalStatement in FoundationClosure.lean, a separate assembly that does not go through Stafford38.Paper.",
+   "short": "main theorem"
+  },
+  {
+   "id": "intro:sketch",
+   "paper": {
+    "quote": "\\textit{Proof sketch:}"
+   },
+   "kind": "prose",
+   "short": "proof sketch",
+   "note": "Outline of Sections 3 to 6; each claim is mapped at the environment it summarizes."
+  },
+  {
+   "id": "lit:dixmier",
+   "paper": {
+    "quote": "Dixmier showed that over the first Weyl algebra"
+   },
+   "kind": "prose",
+   "short": "related literature",
+   "note": "Results of other authors, cited; not formalized here."
+  },
+  {
+   "id": "lit:stafford",
+   "paper": {
+    "quote": "In the same paper, Stafford states the Conjecture 3.8"
+   },
+   "kind": "prose",
+   "short": "Stafford 1978",
+   "note": "Report on Stafford 1978. The identification with Theorem 1.1 and the stable cyclicity are the Lean statements shown with the paragraph on Conjecture 3.8; the monomial case is an instance of Theorem 1.1 with no separate Lean statement; the case n = 1 through the restricted minimum condition is not formalized."
+  },
+  {
+   "id": "lit:holonomic",
+   "paper": {
+    "quote": "For \\textit{holonomic} modules"
+   },
+   "kind": "prose",
+   "short": "holonomic modules",
+   "note": "Results of other authors, cited; not formalized here."
+  },
+  {
+   "id": "formal:lean",
+   "paper": {
+    "quote": "Corollary~\\ref{cor:cyclic} are proved in Lean~4"
+   },
+   "kind": "prose",
+   "short": "formal verification",
+   "note": "Claims about the formalization, checked outside this view: at the pinned Lean commit, #print axioms in Solution.lean reports propext, Classical.choice and Quot.sound for every compared theorem, and lake-manifest.json pins AlgebraicAnalysis at its tag v0.3.3."
+  },
+  {
+   "id": "sec2:right",
+   "paper": {
+    "quote": "All ideals are \\emph{right} ideals"
+   },
+   "kind": "prose",
+   "short": "right modules",
+   "note": "Convention. Lean writes a right A_n(k)-module as a module over A_n(k)ᵐᵒᵖ, so m·a is op a • m, and a right ideal as a submodule of the regular right module."
+  },
+  {
+   "id": "def:cyclic",
+   "paper": {
+    "quote": "\\label{def:cyclic}"
+   },
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section2.IsTorsion",
+    "Stafford38.Paper.Section2.IsCyclic",
+    "Stafford38.TorsionCyclicity.IsRightTorsion",
+    "Stafford38Challenge.IsCyclicModule"
+   ],
+   "short": "torsion, cyclic",
+   "note": "Right modules are modules over A_n(k)ᵐᵒᵖ. IsCyclicModule is the same notion in the Mathlib-only statements."
+  },
+  {
+   "id": "conv:pair",
+   "paper": {
+    "quote": "\\label{conv:pair}"
+   },
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section2.x₁",
+    "Stafford38.Paper.Section2.p",
+    "Stafford38.Paper.Section2.transverse",
+    "Stafford38.Paper.Section2.C",
+    "Stafford38.Paper.Section2.convention_2_2_relations",
+    "Stafford38.Paper.Section2.convention_2_2_exists",
+    "Stafford38.Paper.Section2.convention_2_2_unique"
+   ],
+   "note": "Lean indexes the paper's A_n(k), n ≥ 1, as PresentedWeyl k (n + 1), and proves the stated relations and the normal form instead of citing them.",
+   "short": "x₁, p, C"
+  },
+  {
+   "id": "def:filtration",
+   "paper": {
+    "quote": "\\label{def:filtration}"
+   },
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section2.IsFiltration",
+    "Stafford38.Paper.Section2.gr",
+    "Stafford38.Paper.Section2.filtrationDegree",
+    "Stafford38.Paper.Section2.symbol"
+   ],
+   "note": "Lean indexes the filtration by ℕ with F_{-1} = 0 implicit, and defines the degree and symbol for every element, the paper only for a ≠ 0.",
+   "short": "filtration, gr, symbol"
+  },
+  {
+   "id": "par:filtrations",
+   "paper": {
+    "quote": "The \\emph{Bernstein filtration} $B_\\bullet$"
+   },
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section2.bernsteinFiltration",
+    "Stafford38.Paper.Section2.orderFiltration",
+    "Stafford38.Paper.Section2.bernsteinDegree",
+    "Stafford38.Paper.Section2.grEquivSymbolRing"
+   ],
+   "note": "Lean defines both filtrations as spans of ordered PBW words of bounded weight and proves gr A_n(k) ≅ k[x, ξ] (cited by the paper).",
+   "short": "Bernstein and order filtrations"
+  },
+  {
+   "id": "def:good-filtration",
+   "paper": {
+    "quote": "\\label{def:good-filtration}"
+   },
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section2.IsCompatibleFiltration",
+    "Stafford38.Paper.Section2.IsGoodFiltration"
+   ],
+   "short": "good filtration"
+  },
+  {
+   "id": "par:cyclic-good",
+   "paper": {
+    "quote": "As an example, the filtration $M_i:=qF_i$"
+   },
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section2.cyclicFiltration",
+    "Stafford38.Paper.Section2.cyclicFiltration_order_isCompatible",
+    "Stafford38.Paper.Section2.grCyclic",
+    "Stafford38.Paper.Section2.grCyclic_good",
+    "Stafford38.Paper.Section2.qFilt_isGoodFiltration"
+   ],
+   "short": "qF_i is good"
+  },
+  {
+   "id": "par:good-fg",
+   "paper": {
+    "quote": "For a finitely generated right $A_n$-module $M$ with a good order filtration"
+   },
+   "kind": "prose",
+   "short": "gr M finitely generated",
+   "note": "Restates Definition 2.4 for the order filtration, with gr A_n(k) = k[x, ξ] as above; IsGoodFiltration is shown at Definition 2.4."
+  },
+  {
+   "id": "def:cotangent",
+   "paper": {
+    "quote": "\\label{def:cotangent}"
+   },
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section2.CotangentBundle",
+    "Stafford38.Paper.Section2.proj",
+    "Stafford38.Paper.Section2.fibre",
+    "Stafford38.Characteristic.SymbolRing",
+    "Stafford38.Characteristic.PhaseVar"
+   ],
+   "note": "Lean takes T*X to be Spec k[x, ξ] and states the projection and fibres on closed points K^{2n}.",
+   "short": "T*X"
+  },
+  {
+   "id": "def:spec",
+   "paper": {
+    "quote": "\\label{def:spec}"
+   },
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section2.V",
+    "Stafford38.Paper.Section2.VK",
+    "Stafford38.Paper.Section2.vanishingIdealOf",
+    "Stafford38.Paper.Section2.maxIdealAt",
+    "Stafford38.Paper.Section2.mem_VK_iff_closedPoint_mem_V",
+    "Stafford38.Paper.Section2.closedPoint"
+   ],
+   "short": "Spec, V, I"
+  },
+  {
+   "id": "def:char-variety",
+   "paper": {
+    "quote": "\\label{def:char-variety}"
+   },
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section2.CharOf",
+    "Stafford38.Paper.Section2.Char",
+    "Stafford38.Paper.Section2.definition_2_7_independent"
+   ],
+   "note": "Lean proves the independence of the good filtration that the paper cites from [HTT, Lemma D.3.1].",
+   "short": "Char"
+  },
+  {
+   "id": "def:symplectic",
+   "paper": {
+    "quote": "\\label{def:symplectic}"
+   },
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section2.IsSymplectic",
+    "Stafford38.Paper.Section2.gramMatrix",
+    "Stafford38.Paper.Section2.IsSymplecticBasis",
+    "Stafford38.Paper.Section2.omega",
+    "Stafford38.Paper.Section2.omega_isSymplectic"
+   ],
+   "short": "symplectic form"
+  },
+  {
+   "id": "def:poisson",
+   "paper": {
+    "quote": "\\label{def:poisson}"
+   },
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section2.poisson"
+   ],
+   "short": "Poisson bracket"
+  },
+  {
+   "id": "def:involutive",
+   "paper": {
+    "quote": "\\label{def:involutive}"
+   },
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section2.IsInvolutive",
+    "Stafford38.Paper.Section2.IsInvolutiveSet"
+   ],
+   "short": "involutive"
+  },
+  {
+   "id": "ithm:gabber",
+   "paper": {
+    "quote": "\\label{ithm:gabber}"
+   },
+   "kind": "cites",
+   "lean": [
+    "Stafford38.Paper.Section2.theorem_2_11",
+    "Stafford38.Paper.Section2.theorem_2_11_cyclic"
+   ],
+   "note": "Lean states Gabber's theorem for a good order filtration of a finitely generated module and proves it; theorem_2_11_cyclic is the case A_n(K)/I used later.",
+   "short": "Gabber"
+  },
+  {
+   "id": "thm:nss",
+   "paper": {
+    "quote": "\\label{thm:nss}"
+   },
+   "kind": "cites",
+   "lean": [
+    "Stafford38.Paper.Section2.theorem_2_12"
+   ],
+   "short": "Nullstellensatz"
+  },
+  {
+   "id": "gen:consequences",
+   "paper": {
+    "quote": "also proves the following consequences, which have no printed proof"
+   },
+   "kind": "formalizes",
+   "short": "consequences without printed proof",
+   "lean": [
+    "Stafford38.Paper.Section7.leftHandedIdentity",
+    "Stafford38Challenge.LeftHandedIdentity",
+    "Stafford38.Paper.Section7.corollary_6_3_left",
+    "Stafford38Challenge.LeftCorollary_6_3",
+    "Stafford38Challenge.IsLeftTorsion",
+    "Stafford38Challenge.IsLeftCyclicModule",
+    "Stafford38.Paper.Section7.localizedDifferentialIdentity",
+    "Stafford38Challenge.LocalizedDifferentialIdentity",
+    "Stafford38Challenge.principalOpenDifferentialIdentity",
+    "Stafford38Challenge.laurentDifferentialIdentity",
+    "Stafford38Challenge.fractionFieldDifferentialIdentity",
+    "Stafford38Challenge.HasDifferentialIdentity",
+    "Stafford38Challenge.IsDifferentialOperator",
+    "Stafford38Challenge.IsDifferentialOperatorOfOrder",
+    "Stafford38.Paper.Section7.evolutionaryIdentity",
+    "Stafford38Challenge.EvolutionaryIdentity"
+   ],
+   "note": "Left modules are Module A_n(k) M. Finite-order differential operators are k-linear endomorphisms killed by N+1 iterated commutators with multiplications (Grothendieck); \"localizations\" are all B with IsLocalization S B for a submonoid S of k[x₁,…,xₙ]; Laurent coefficients are the localization at x₁⋯xₙ. In the evolutionary identity k is a field of characteristic zero, the convention of Section 2, and the Lean proof uses neither Theorem 1.1 nor Section 5."
+  },
+  {
+   "id": "gen:further",
+   "paper": {
+    "quote": "Two further results, also proved in Lean"
+   },
+   "kind": "prose",
+   "short": "generalizations, algorithm",
+   "note": "(a) and (b) are proved in separate Lean projects that this view does not import, so no Lean is shown here. The search algorithm is not formalized; that it terminates rests on the moreover clause of Theorem 1.1 (PaperTheorem_1_1), since some (g, D) bounds the Bernstein degrees of R and S."
+  },
+  {
+   "id": "ai:history",
+   "paper": {
+    "quote": "decisive step was to study the quotient"
+   },
+   "kind": "prose",
+   "short": "history",
+   "note": "History of the work; the mathematical content is Sections 3 to 6."
+  },
+  {
+   "id": "ai:rewrite",
+   "paper": {
+    "quote": "After the Lean proof was complete and published"
+   },
+   "kind": "prose",
+   "short": "paper from Lean",
+   "note": "Describes how the text was written; this view is where the correspondence it claims can be checked."
+  },
+  {
+   "id": "ai:checks",
+   "paper": {
+    "quote": "Comparator checked that the proved theorems"
+   },
+   "kind": "prose",
+   "short": "checks",
+   "note": "Checks of the formal proof by tools outside this view (Comparator, NanoDa, Palomar); not a mathematical claim."
+  }
+ ],
+ "lean_only": [
+  {
+   "prefix": "Stafford38.Ore",
+   "note": "Iterated Ore-extension construction A_n(k) = C[p; δ], used to prove the normal form of Notation 2.2 that the paper cites from Coutinho, Prop. 1.2.1."
+  },
+  {
+   "prefix": "Stafford38.WeylIteratedEquivalence.",
+   "note": "Isomorphism between the presented Weyl algebra and the iterated Ore construction, with its generators; the paper identifies the two without comment."
+  },
+  {
+   "prefix": "Stafford38.WeylPBW.",
+   "note": "Basis of A_n(k) by ordered monomials x^α ∂^β (normal form), used to define the filtrations."
+  },
+  {
+   "prefix": "Stafford38.WeylFiltration.",
+   "note": "Weights of the generators and the spans of ordered monomials of bounded weight that define the Bernstein and order filtrations."
+  },
+  {
+   "prefix": "Stafford38.WeylLeadingSymbol.",
+   "note": "Principal component of an element, used to identify gr A_n(k) with k[x, ξ]."
+  },
+  {
+   "prefix": "Stafford38.WeylAssociatedGraded.",
+   "note": "Strict lower pieces and principal components on a filtration piece, used to identify gr A_n(k) with k[x, ξ]."
+  },
+  {
+   "prefix": "Stafford38.WeylUniversal.",
+   "note": "Universal property of the free-algebra presentation of A_n(k)."
+  },
+  {
+   "decl": "Stafford38.Characteristic.fibreWeight",
+   "note": "Weight 1 on the fibre coordinates ξ_i and 0 on x_i, which defines the order filtration."
+  },
+  {
+   "prefix": "Stafford38.CharacteristicFilteredQuotient",
+   "note": "The quotient Q = A_n(k)/I with the filtration Q_m = qF_m, its graded pieces and associated graded module."
+  },
+  {
+   "prefix": "Stafford38.CharacteristicAssociatedGradedModule.",
+   "note": "The associated graded module of Q = A_n(k)/I for the order filtration."
+  },
+  {
+   "decl": "Stafford38.CharacteristicSymplecticCompletion.phasePairing",
+   "note": "The pairing Σ_i (u_{ξ_i} v_{x_i} − u_{x_i} v_{ξ_i}) on k^{2n} from which ω is built."
+  },
+  {
+   "prefix": "Stafford38.EulerSurjectivity.",
+   "note": "Right ideals of A_n(k) as submodules of the regular right module, and the quotient module A_n(k)/I."
+  },
+  {
+   "decl": "Stafford38.Paper.Section2.lowerPiece",
+   "note": "F_{j−1}, with F_{−1} = 0."
+  },
+  {
+   "decl": "Stafford38.Paper.Section2.grPiece",
+   "note": "The graded piece F_j/F_{j−1}."
+  },
+  {
+   "decl": "Stafford38.Paper.Section2.grPieceEquiv",
+   "note": "Graded piece of A_n(k) identified with the homogeneous polynomials of that weight."
+  },
+  {
+   "decl": "Stafford38.Paper.Section2.orbitMap",
+   "note": "The map a ↦ qa from A_n(k) to a module M."
+  },
+  {
+   "decl": "Stafford38.Paper.Section2.qClass",
+   "note": "The class q of 1 in A_n(k)/I."
+  },
+  {
+   "decl": "Stafford38.Paper.Support.Gabber.qFilt",
+   "note": "The filtration Q_m = qF_m of Q = A_n(k)/I."
+  },
+  {
+   "decl": "Stafford38.Paper.Support.Gabber.GrModule",
+   "note": "The associated graded module as a module over k[x, ξ]."
+  },
+  {
+   "decl": "MvPolynomial.coeff",
+   "note": "Project abbreviation for the coefficient of a monomial in a multivariate polynomial."
+  },
+  {
+   "prefix": "Stafford38FixedSourceChallenge.",
+   "note": "Generators, ordered monomials, Bernstein pieces and linear changes of generators used to state the moreover clause in the Mathlib-only formulation."
+  },
+  {
+   "decl": "Stafford38Challenge.PhaseVar",
+   "note": "Index type Fin n ⊕ Fin n of the generators: x_i on the left summand, ∂_i on the right."
+  },
+  {
+   "decl": "Stafford38Challenge.generator",
+   "note": "The generator x_i or ∂_i of A_n(k) named by a phase variable."
+  },
+  {
+   "decl": "Stafford38Challenge.relation",
+   "note": "The commutator relations [∂_i, x_j] = δ_ij, [x_i, x_j] = [∂_i, ∂_j] = 0 of the Mathlib-only presentation."
+  },
+  {
+   "decl": "Stafford38Challenge.standardForm",
+   "note": "The standard symplectic matrix J on the generators, whose entries give the commutators."
+  },
+  {
+   "decl": "Stafford38Challenge.linearImage",
+   "note": "The linear change of generators u_i ↦ Σ_j g_ij u_j that defines Φ_g (Section 3)."
+  },
+  {
+   "decl": "Stafford.linearCombination",
+   "note": "Linear combination of the generators by the rows of a matrix."
+  },
+  {
+   "decl": "Stafford.freeWeylGenerator",
+   "note": "The generators of the free-algebra presentation of A_n(k)."
+  }
+ ]
+}
