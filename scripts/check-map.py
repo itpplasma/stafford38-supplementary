@@ -53,6 +53,21 @@ def map_entries(mapping):
         yield from walk(card, item.get('lean', []))
 
 
+def formal_files(mapping):
+    """(where, file) for every formal file the map links, cards or not."""
+    def walk(where, x):
+        if isinstance(x, dict):
+            if isinstance(x.get('file'), str) and x.get('repo', 'formal') == 'formal':
+                yield where, x['file']
+            where = x.get('id', where)
+            for v in x.values():
+                yield from walk(where, v)
+        elif isinstance(x, list):
+            for v in x:
+                yield from walk(where, v)
+    return sorted(set(walk('map', {k: v for k, v in mapping.items() if k != 'sources'})))
+
+
 def card_names(mapping):
     names = set()
     def walk(x):
@@ -115,7 +130,8 @@ def dump(args):
     args.out.write_text(json.dumps(dict(
         formal_commit=git(formal, 'rev-parse', 'HEAD').strip(),
         toolchain=(formal / 'lean-toolchain').read_text().strip(),
-        comparators=comparators(formal), groups=result, lexical=lexical), ensure_ascii=False) + '\n')
+        comparators=comparators(formal), groups=result, lexical=lexical,
+        files=sorted(git(formal, 'ls-files').split())), ensure_ascii=False) + '\n')
     print(f'{sum(map(len, result.values()))} declarations from {len(result)} import groups; '
           f'{len(lexical)} checked by name')
 
@@ -159,6 +175,10 @@ def compare(args):
                             f'now: {" ".join(now["type"].split())[:300]}')
         elif changed_body:
             failures.append(f'{card}: the definition of {name} changed since formal {old["formal_commit"][:7]}')
+    tracked = set(new['files'])
+    for where, file in formal_files(mapping):
+        if file not in tracked:
+            failures.append(f'{where}: links {file}, which does not exist at {at}')
     carded = card_names(mapping)
     for comparator, group, name in new['comparators']:
         if name not in new['groups'].get(group, {}):
