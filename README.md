@@ -8,15 +8,17 @@ All 46 theorem-like statements are represented. Paper source links
 open the bundled, unmodified manuscript; search, annotations and review notes
 work offline.
 
-**Current manuscript review:** open [index.html](index.html). Theorem 5.7
-and Lemmas 5.9–5.13 are each mapped to their own Lean theorem, and the Lean
-proof of Theorem 5.7 follows the printed proof paragraph by paragraph and uses
-these lemmas. Four editorial findings are recorded in Comparison notes. See
-the [manuscript records](verification/manuscript-20261102/README.md) and the
-[Section 5 update](verification/section5-proof-20261102/README.md).
+**Current manuscript review:** open [index.html](index.html). Every numbered
+statement of Sections 2–6 is mapped to its own Lean declaration, and each card
+lists the Lean steps of the printed proof in order and the results it cites.
+Where Lean still differs from the printed text, the card says how. Theorem 1.1
+and Corollary 6.3 are also stated as printed in the Mathlib-only Palomar
+challenge. Four editorial findings are recorded in Comparison notes. See the
+[manuscript records](verification/manuscript-20261102/README.md) and the
+[paper-route update](verification/paper-route-20261103/README.md).
 The paper has not been edited. The Lean sources are pinned to formal commit
-97f1da4, which passes the repository verifier
-([log](verification/section5-proof-20261102/formal-verify.log)).
+8c417b3, which passes the repository verifier
+([log](verification/paper-route-20261103/formal-verify.log)).
 This review update has no new journal release or Zenodo DOI.
 
 **Offline:** download this repository, unzip it, and open **index.html**.
