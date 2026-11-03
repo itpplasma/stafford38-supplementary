@@ -1,0 +1,69 @@
+<!doctype html><meta charset="utf-8"><title>Stafford38/Paper/Section2.lean</title><style>body{font:14px monospace}pre span{display:block}pre span:target{background:#fff0ad}a{color:#666}pre{white-space:pre-wrap}a.ref{color:#0645ad;text-decoration:none}a.ref:hover{text-decoration:underline}</style><h1>Stafford38/Paper/Section2.lean</h1><p>This project (Stafford38) · 8c417b3a9f0043d85967059cc51a7bbec65ec6ec</p><pre><span id="L1"><a href="#L1">1</a> module</span>
+<span id="L2"><a href="#L2">2</a> </span>
+<span id="L3"><a href="#L3">3</a> public import Stafford38.Paper.Section2.Weyl</span>
+<span id="L4"><a href="#L4">4</a> public import Stafford38.Paper.Section2.Filtration</span>
+<span id="L5"><a href="#L5">5</a> public import Stafford38.Paper.Section2.Geometry</span>
+<span id="L6"><a href="#L6">6</a> public import Stafford38.Paper.Section2.CharacteristicVariety</span>
+<span id="L7"><a href="#L7">7</a> public import Stafford38.Paper.Section2.Symplectic</span>
+<span id="L8"><a href="#L8">8</a> </span>
+<span id="L9"><a href="#L9">9</a> @[expose] public section</span>
+<span id="L10"><a href="#L10">10</a> </span>
+<span id="L11"><a href="#L11">11</a> /-!</span>
+<span id="L12"><a href="#L12">12</a> # Section 2 of the paper: preliminaries</span>
+<span id="L13"><a href="#L13">13</a> </span>
+<span id="L14"><a href="#L14">14</a> * `Stafford38.Paper.Section2.Weyl`: Definition 2.1 (`IsTorsion`, `IsCyclic`)</span>
+<span id="L15"><a href="#L15">15</a>   and Convention 2.2 (`x₁`, `p`, `transverse`, `C`, `C_eq_range`,</span>
+<span id="L16"><a href="#L16">16</a>   `convention_2_2_relations`, `convention_2_2_exists`, `convention_2_2_unique`).</span>
+<span id="L17"><a href="#L17">17</a> * `Stafford38.Paper.Section2.Filtration`: Definition 2.3 (`IsFiltration`,</span>
+<span id="L18"><a href="#L18">18</a>   `gr`, `filtrationDegree`, `symbol`; `bernsteinFiltration`,</span>
+<span id="L19"><a href="#L19">19</a>   `orderFiltration`, `bernsteinDegree`, `grEquivSymbolRing`) and Definition 2.4</span>
+<span id="L20"><a href="#L20">20</a>   (`IsCompatibleFiltration`, `cyclicFiltration`, `grCyclic`, `grCyclic_good`;</span>
+<span id="L21"><a href="#L21">21</a>   `qClass`, `cyclicFiltration_order_isCompatible` and `grCyclicEquiv`, which</span>
+<span id="L22"><a href="#L22">22</a>   identifies `grCyclic` with `gr` of `Q_m = qF_m`).</span>
+<span id="L23"><a href="#L23">23</a> * `Stafford38.Paper.Section2.Geometry`: Definitions 2.5–2.7</span>
+<span id="L24"><a href="#L24">24</a>   (`CotangentBundle`, `proj`, `fibre`; `V`, `VK`, `vanishingIdealOf`,</span>
+<span id="L25"><a href="#L25">25</a>   `maxIdealAt`) and Theorem 2.12 (`theorem_2_12`).</span>
+<span id="L26"><a href="#L26">26</a> * `Stafford38.Paper.Section2.CharacteristicVariety`: Definitions 2.4 and 2.7 for</span>
+<span id="L27"><a href="#L27">27</a>   every module (`IsGoodFiltration`, `CharOf`, independence of the good filtration</span>
+<span id="L28"><a href="#L28">28</a>   `definition_2_7_independent`) and the cyclic case `Char`.</span>
+<span id="L29"><a href="#L29">29</a> * `Stafford38.Paper.Section2.Symplectic`: Definitions 2.8–2.10</span>
+<span id="L30"><a href="#L30">30</a>   (`IsSymplectic`, `gramMatrix`, `IsSymplecticBasis`, `omega`; `poisson`;</span>
+<span id="L31"><a href="#L31">31</a>   `IsInvolutive`, `IsInvolutiveSet`) and Theorem 2.11 (`theorem_2_11`, general</span>
+<span id="L32"><a href="#L32">32</a>   finitely generated modules; `theorem_2_11_cyclic`, the case `A_n(K)/I`).</span>
+<span id="L33"><a href="#L33">33</a> -/</span>
+<span id="L34"><a href="#L34">34</a> </span>
+<span id="L35"><a href="#L35">35</a> namespace Stafford38.Paper.Section2</span>
+<span id="L36"><a href="#L36">36</a> </span>
+<span id="L37"><a href="#L37">37</a> #print axioms <a class="ref" href="./Section2/Weyl.lean.html#L106" data-p="6467" aria-label="Stafford38.Paper.Section2.C_eq_range">C_eq_range</a></span>
+<span id="L38"><a href="#L38">38</a> #print axioms <a class="ref" href="./Section2/Weyl.lean.html#L197" data-p="6500" aria-label="Stafford38.Paper.Section2.convention_2_2_exists">convention_2_2_exists</a></span>
+<span id="L39"><a href="#L39">39</a> #print axioms <a class="ref" href="./Section2/Weyl.lean.html#L226" data-p="6502" aria-label="Stafford38.Paper.Section2.convention_2_2_unique">convention_2_2_unique</a></span>
+<span id="L40"><a href="#L40">40</a> #print axioms <a class="ref" href="./Section2/Filtration.lean.html#L179" data-p="6517" aria-label="Stafford38.Paper.Section2.grEquivSymbolRing">grEquivSymbolRing</a></span>
+<span id="L41"><a href="#L41">41</a> #print axioms <a class="ref" href="./Section2/Filtration.lean.html#L258" data-p="6516" aria-label="Stafford38.Paper.Section2.grCyclic_good">grCyclic_good</a></span>
+<span id="L42"><a href="#L42">42</a> #print axioms <a class="ref" href="./Section2/Filtration.lean.html#L340" data-p="6513" aria-label="Stafford38.Paper.Section2.grCyclicEquiv">grCyclicEquiv</a></span>
+<span id="L43"><a href="#L43">43</a> #print axioms <a class="ref" href="./Section2/Symplectic.lean.html#L155" data-p="6561" aria-label="Stafford38.Paper.Section2.theorem_2_11">theorem_2_11</a></span>
+<span id="L44"><a href="#L44">44</a> #print axioms <a class="ref" href="./Section2/Symplectic.lean.html#L171" data-p="6562" aria-label="Stafford38.Paper.Section2.theorem_2_11_cyclic">theorem_2_11_cyclic</a></span>
+<span id="L45"><a href="#L45">45</a> #print axioms <a class="ref" href="./Section2/Geometry.lean.html#L120" data-p="6563" aria-label="Stafford38.Paper.Section2.theorem_2_12">theorem_2_12</a></span>
+<span id="L46"><a href="#L46">46</a> </span>
+<span id="L47"><a href="#L47">47</a> end Stafford38.Paper.Section2</span>
+<span id="L48"><a href="#L48">48</a> </span></pre><!--lean-previews--><style>.lean-preview{position:fixed;z-index:9999;display:none;max-width:min(680px,calc(100vw - 16px));background:#fffef8;color:#1d1d1f;border:1px solid #c9c5bb;border-radius:6px;box-shadow:0 6px 24px rgba(0,0,0,.18);padding:6px 9px;font:12px/1.45 ui-monospace,Menlo,Consolas,monospace;pointer-events:none;text-align:left}.lean-preview .lp-head{font-weight:600;overflow-wrap:anywhere}.lean-preview .lp-loc{color:#6b6b6b;font-size:11px;overflow-wrap:anywhere}.lean-preview pre{margin:5px 0 0;white-space:pre-wrap;overflow-wrap:anywhere;max-height:50vh;overflow:hidden;font:inherit;background:none;border:0;padding:0}@media (prefers-color-scheme:dark){.lean-preview{background:#202124;color:#e8e6e1;border-color:#44464b}.lean-preview .lp-loc{color:#a3a7ad}}</style><script type="application/json" id="lean-previews">{"6467":["Stafford38.Paper.Section2.C_eq_range","Stafford38/Paper/Section2/Weyl.lean:106","/-- `C` is the coefficient ring of the last Ore stage of the iterated Ore\npresentation `A_n(k) = C[p; δ]`, embedded by `coordinateStageToPresented`. -/\ntheorem C_eq_range (n : ℕ) : C k n = (coordinateStageToPresented k n).range :="],"6500":["Stafford38.Paper.Section2.convention_2_2_exists","Stafford38/Paper/Section2/Weyl.lean:197","/-- **Convention 2.2, normal form (existence).** Every element of `A_n(k)` can\nbe written as `∑_j p^j c_j` with `c_j ∈ C`. -/\ntheorem convention_2_2_exists (n : ℕ) (d : PresentedWeyl k (n + 1)) :\n    ∃ (L : ℕ) (a : ℕ → PresentedWeyl k (n + 1)), (∀ j, a j ∈ C k n) ∧\n      d = ∑ j ∈ Finset.range L, p k n ^ j * a j :="],"6502":["Stafford38.Paper.Section2.convention_2_2_unique","Stafford38/Paper/Section2/Weyl.lean:226","/-- **Convention 2.2, normal form (uniqueness).** If `∑_{j<L} p^j c_j = 0`\nwith `c_j ∈ C`, then every `c_j = 0`. -/\ntheorem convention_2_2_unique (n L : ℕ) (a : ℕ → PresentedWeyl k (n + 1))\n    (ha : ∀ j, a j ∈ C k n) (h0 : ∑ j ∈ Finset.range L, p k n ^ j * a j = 0) :\n    ∀ j < L, a j = 0 :="],"6513":["Stafford38.Paper.Section2.grCyclicEquiv","Stafford38/Paper/Section2/Filtration.lean:340","/-- **Definition 2.4, `gr Q`.** The associated graded module\n`⊕_m Q_m/Q_{m-1}` of the filtration `Q_m = qF_m` (Definition 2.3, `gr`) is\n`grCyclic`, the module on which `k[x, ξ]` acts. -/\ndef grCyclicEquiv {n : ℕ} (I : RightIdeal (PresentedWeyl k n)) :\n    grCyclic k I ≃ₗ[k] gr (cyclicFiltration (orderFiltration k n) (qClass k I)) :=\n  DFinsupp.mapRange.linearEquiv fun m =>\n    (quotientMapEquiv (filteredRightQuotientEquivRightQuotient k I) _ _).trans\n      (Submodule.Quotient.equiv _ _ (LinearEquiv.ofEq _ _ (cyclicFiltration_order_eq k I m).symm)\n        (by\n          rw [lowerPiece_cyclicFiltration_order_eq]\n          ext ⟨x, hx⟩\n          simp [Submodule.mem_comap]))"],"6516":["Stafford38.Paper.Section2.grCyclic_good","Stafford38/Paper/Section2/Filtration.lean:258","/-- **Definition 2.4, example: goodness.** `gr Q` is finitely generated over\n`gr A_n = k[x, ξ]`, being generated by `q̄`. -/\ntheorem grCyclic_good {n : ℕ} (I : RightIdeal (PresentedWeyl k n)) :\n    Module.Finite (SymbolRing k n) (grCyclic k I) :="],"6517":["Stafford38.Paper.Section2.grEquivSymbolRing","Stafford38/Paper/Section2/Filtration.lean:179","/-- **`gr A_n(k) = k[x, ξ]`** for the Bernstein and the order filtration\n(any weight): `⊕_j F_j/F_{j-1}` is identified with the polynomial ring by\nsumming the homogeneous symbols.  Multiplication of classes is the product of\n  …\n`presentedPrincipalComponent_mul_order`), so `gr A_n(k)` is commutative. -/\ndef grEquivSymbolRing {n : ℕ} (w : PhaseVar n → ℕ) :\n    gr (presentedWeightPiece k w) ≃ₗ[k] SymbolRing k n := by\n  letI := MvPolynomial.weightedDecomposition k w\n  exact (DFinsupp.mapRange.linearEquiv fun j => grPieceEquiv k w j).trans\n    (DirectSum.decomposeLinearEquiv (MvPolynomial.weightedHomogeneousSubmodule k w)).symm"],"6561":["Stafford38.Paper.Section2.theorem_2_11","Stafford38/Paper/Section2/Symplectic.lean:155","/-- **Theorem 2.11 (Gabber).** Let `K` be a field of characteristic zero and `M`\na finitely generated right `A_n(K)`-module with a good order filtration `M_•`\n(Definition 2.4, `IsGoodFiltration`: compatible and exhaustive, `gr M` finitely\n  …\nmodules and the repository's proof of the cyclic case. -/\ntheorem theorem_2_11 (K : Type u) [Field K] [CharZero K] (n : ℕ)\n    {M : Type w} [AddCommGroup M] [Module (Stafford38Challenge.WeylAlg K n)ᵐᵒᵖ M] [Module K M]\n    [IsScalarTower K (Stafford38Challenge.WeylAlg K n)ᵐᵒᵖ M]\n    [Module.Finite (Stafford38Challenge.WeylAlg K n)ᵐᵒᵖ M]\n    (Γ : ℕ → Submodule K M) (hgood : IsGoodFiltration K n Γ) :\n    IsInvolutive K (Module.annihilator (SymbolRing K n)\n      (Stafford38.Paper.Support.Gabber.GrModule Γ)).radical :="],"6562":["Stafford38.Paper.Section2.theorem_2_11_cyclic","Stafford38/Paper/Section2/Symplectic.lean:171","/-- Theorem 2.11 for the cyclic module `M = A_n(K)/I` with `M_m = qF_m`, the case\nused in the proof of Theorem 1.1 (for `Q_K`): for this filtration `gr M` is\n`grCyclic` as a `K[x, ξ]`-module. -/\ntheorem theorem_2_11_cyclic (K : Type u) [Field K] [CharZero K] (n : ℕ)\n    (I : RightIdeal (PresentedWeyl K n)) :\n    IsInvolutive K (Module.annihilator (SymbolRing K n) (grCyclic K I)).radical :="],"6563":["Stafford38.Paper.Section2.theorem_2_12","Stafford38/Paper/Section2/Geometry.lean:120","/-- **Theorem 2.12 (Hilbert's Nullstellensatz).** Let `K` be algebraically\nclosed and `J ⊆ K[z_1, …, z_N]` an ideal (the variables indexed by any\nfinite type `σ`, e.g. `PhaseVar n` for `K[x, ξ]`).\n  …\n(c) `I(V_K(J)) = √J`. -/\ntheorem theorem_2_12 [IsAlgClosed K] [Finite σ] (J : Ideal (MvPolynomial σ K)) :\n    ((∀ M : Ideal (MvPolynomial σ K), M.IsMaximal ↔ ∃ a, M = maxIdealAt K a) ∧\n      Function.Injective (maxIdealAt K (σ :="]}</script><script>(()=>{
+const data=JSON.parse(document.getElementById('lean-previews').textContent);
+const box=document.createElement('div');box.className='lean-preview';box.setAttribute('role','tooltip');
+document.body.append(box);let timer;
+function add(cls,text){const e=document.createElement(cls==='pre'?'pre':'div');if(cls!=='pre')e.className=cls;e.textContent=text;box.append(e);}
+function show(a){
+  let head,loc,body;
+  if(a.dataset.p){const d=data[a.dataset.p];if(!d)return;[head,loc,body]=d;}
+  else{const t=document.getElementById(decodeURIComponent(a.hash.slice(1)));const pre=t&&t.querySelector('pre');if(!pre)return;
+    head=a.hash.slice(1).replace(/^definition-[a-z]+:/,'');loc='Definition panel on this page';
+    const lines=pre.textContent.split('\n');body=lines.slice(0,14).join('\n')+(lines.length>14?'\n…':'');}
+  box.replaceChildren();add('lp-head',head);add('lp-loc',loc);add('pre',body);
+  box.style.display='block';const r=a.getBoundingClientRect(),w=box.offsetWidth,h=box.offsetHeight;
+  box.style.left=Math.max(8,Math.min(r.left,innerWidth-w-8))+'px';
+  box.style.top=(r.bottom+6+h<innerHeight?r.bottom+6:Math.max(8,r.top-h-6))+'px';}
+function hide(){clearTimeout(timer);box.style.display='none';}
+const pick=e=>e.target.closest&&e.target.closest('a[data-p],a.definition-link');
+document.addEventListener('mouseover',e=>{const a=pick(e);clearTimeout(timer);if(a)timer=setTimeout(()=>show(a),150);else hide();});
+document.addEventListener('focusin',e=>{const a=pick(e);if(a)show(a);else hide();});
+document.addEventListener('focusout',hide);document.addEventListener('scroll',hide,true);
+document.addEventListener('keydown',e=>{if(e.key==='Escape')hide();});
+})();</script><!--/lean-previews-->

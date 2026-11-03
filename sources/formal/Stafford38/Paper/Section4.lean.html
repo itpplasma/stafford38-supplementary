@@ -1,0 +1,68 @@
+<!doctype html><meta charset="utf-8"><title>Stafford38/Paper/Section4.lean</title><style>body{font:14px monospace}pre span{display:block}pre span:target{background:#fff0ad}a{color:#666}pre{white-space:pre-wrap}a.ref{color:#0645ad;text-decoration:none}a.ref:hover{text-decoration:underline}</style><h1>Stafford38/Paper/Section4.lean</h1><p>This project (Stafford38) · 8c417b3a9f0043d85967059cc51a7bbec65ec6ec</p><pre><span id="L1"><a href="#L1">1</a> module</span>
+<span id="L2"><a href="#L2">2</a> </span>
+<span id="L3"><a href="#L3">3</a> public import Stafford38.Paper.Section4.Euler</span>
+<span id="L4"><a href="#L4">4</a> public import Stafford38.Paper.Section4.Residue</span>
+<span id="L5"><a href="#L5">5</a> public import Stafford38.Paper.Section4.Surjectivity</span>
+<span id="L6"><a href="#L6">6</a> public import Stafford38.Paper.Section4.Support</span>
+<span id="L7"><a href="#L7">7</a> public import Stafford38.Paper.Section4.Setup</span>
+<span id="L8"><a href="#L8">8</a> public import Stafford38.Paper.Section4.TangentialFiniteness</span>
+<span id="L9"><a href="#L9">9</a> public import Stafford38.Paper.Section4.PageInequality</span>
+<span id="L10"><a href="#L10">10</a> public import Stafford38.Paper.Section4.StrictInequality</span>
+<span id="L11"><a href="#L11">11</a> public import Stafford38.Paper.Section4.Vanishing</span>
+<span id="L12"><a href="#L12">12</a> </span>
+<span id="L13"><a href="#L13">13</a> @[expose] public section</span>
+<span id="L14"><a href="#L14">14</a> </span>
+<span id="L15"><a href="#L15">15</a> /-!</span>
+<span id="L16"><a href="#L16">16</a> # Section 4 of the paper: `x₁` as a surjective map</span>
+<span id="L17"><a href="#L17">17</a> </span>
+<span id="L18"><a href="#L18">18</a> * `Stafford38.Paper.Section4.Euler`: the Euler grading paragraph (equation</span>
+<span id="L19"><a href="#L19">19</a>   (nonnegative-pbw), normality of `x₁` in `A_{≥0}`) and Lemma 4.1.</span>
+<span id="L20"><a href="#L20">20</a> * `Stafford38.Paper.Section4.Residue`: Lemma 4.2, `1 + u₀x₁ ∈ 𝓘`.</span>
+<span id="L21"><a href="#L21">21</a> * `Stafford38.Paper.Section4.Surjectivity`: Proposition 4.3, `Q = Qx₁`.</span>
+<span id="L22"><a href="#L22">22</a> * `Stafford38.Paper.Section4.Support`: Definitions 4.4–4.6 and Lemma 4.7.</span>
+<span id="L23"><a href="#L23">23</a> * `Stafford38.Paper.Section4.Setup`: the objects `M = gr Q`, `f`, `V`, `U`, `T`.</span>
+<span id="L24"><a href="#L24">24</a> * `Stafford38.Paper.Section4.TangentialFiniteness`: Lemma 4.8.</span>
+<span id="L25"><a href="#L25">25</a> * `Stafford38.Paper.Section4.PageInequality`: Lemma 4.9.</span>
+<span id="L26"><a href="#L26">26</a> * `Stafford38.Paper.Section4.StrictInequality`: Lemma 4.10.</span>
+<span id="L27"><a href="#L27">27</a> * `Stafford38.Paper.Section4.Vanishing`: Corollary 4.11.</span>
+<span id="L28"><a href="#L28">28</a> </span>
+<span id="L29"><a href="#L29">29</a> As in the paper, every statement from Lemma 4.2 on assumes `d̃` in the form</span>
+<span id="L30"><a href="#L30">30</a> (3.1) (`Section3.IsMonicNormalForm`, with `N ≥ 1` where the proof needs it), and</span>
+<span id="L31"><a href="#L31">31</a> Lemma 4.1 is stated for `x₁, ∂₁ ∈ A_n(k)`; the proofs pass to the PBW-monic</span>
+<span id="L32"><a href="#L32">32</a> consequence `Section3.isPBWMonicAt_of_isMonicNormalForm` internally.</span>
+<span id="L33"><a href="#L33">33</a> </span>
+<span id="L34"><a href="#L34">34</a> Each printed proof is assembled from `step_*` declarations, one per paragraph,</span>
+<span id="L35"><a href="#L35">35</a> and calls the paper declarations it cites: Proposition 4.3 uses Lemma 4.2 (which</span>
+<span id="L36"><a href="#L36">36</a> uses Lemma 4.1); Lemma 4.8 uses Lemma 4.7; Lemma 4.9 uses Lemma 4.8 and</span>
+<span id="L37"><a href="#L37">37</a> Proposition 4.3; Lemma 4.10 uses Lemma 4.8; Corollary 4.11 uses Lemmas 4.8–4.10.</span>
+<span id="L38"><a href="#L38">38</a> -/</span>
+<span id="L39"><a href="#L39">39</a> </span>
+<span id="L40"><a href="#L40">40</a> namespace Stafford38.Paper.Section4</span>
+<span id="L41"><a href="#L41">41</a> </span>
+<span id="L42"><a href="#L42">42</a> #print axioms <a class="ref" href="./Section4/Surjectivity.lean.html#L218" data-p="6659" aria-label="Stafford38.Paper.Section4.proposition_4_3">proposition_4_3</a></span>
+<span id="L43"><a href="#L43">43</a> #print axioms <a class="ref" href="./Section4/Vanishing.lean.html#L43" data-p="6633" aria-label="Stafford38.Paper.Section4.corollary_4_11">corollary_4_11</a></span>
+<span id="L44"><a href="#L44">44</a> #print axioms <a class="ref" href="./Section4/Vanishing.lean.html#L54" data-p="6634" aria-label="Stafford38.Paper.Section4.corollary_4_11_quotSMulTop">corollary_4_11_quotSMulTop</a></span>
+<span id="L45"><a href="#L45">45</a> </span>
+<span id="L46"><a href="#L46">46</a> end Stafford38.Paper.Section4</span>
+<span id="L47"><a href="#L47">47</a> </span></pre><!--lean-previews--><style>.lean-preview{position:fixed;z-index:9999;display:none;max-width:min(680px,calc(100vw - 16px));background:#fffef8;color:#1d1d1f;border:1px solid #c9c5bb;border-radius:6px;box-shadow:0 6px 24px rgba(0,0,0,.18);padding:6px 9px;font:12px/1.45 ui-monospace,Menlo,Consolas,monospace;pointer-events:none;text-align:left}.lean-preview .lp-head{font-weight:600;overflow-wrap:anywhere}.lean-preview .lp-loc{color:#6b6b6b;font-size:11px;overflow-wrap:anywhere}.lean-preview pre{margin:5px 0 0;white-space:pre-wrap;overflow-wrap:anywhere;max-height:50vh;overflow:hidden;font:inherit;background:none;border:0;padding:0}@media (prefers-color-scheme:dark){.lean-preview{background:#202124;color:#e8e6e1;border-color:#44464b}.lean-preview .lp-loc{color:#a3a7ad}}</style><script type="application/json" id="lean-previews">{"6633":["Stafford38.Paper.Section4.corollary_4_11","Stafford38/Paper/Section4/Vanishing.lean:43","/-- **Corollary 4.11.** Multiplication by `x₁` on `gr Q` is surjective, i.e.\n`gr Q = (gr Q) x₁`, for `d̃` in the form (3.1) with `N ≥ 1`. -/\ntheorem corollary_4_11 (hN : 0 < N) (hform : IsMonicNormalForm k N d) :\n    Function.Surjective (fun z : GrQ k n N d => symbolCoordinate k n • z) :="],"6634":["Stafford38.Paper.Section4.corollary_4_11_quotSMulTop","Stafford38/Paper/Section4/Vanishing.lean:54","/-- Corollary 4.11 in the form `M/x₁M = 0` over `k[x,ξ]` (`QuotSMulTop`), as\nconsumed by the support-avoidance argument of Section 6. -/\ntheorem corollary_4_11_quotSMulTop (hN : 0 < N)\n    (hform : IsMonicNormalForm k N d) :\n    Subsingleton (QuotSMulTop (symbolCoordinate k n) (GrQ k n N d)) :="],"6659":["Stafford38.Paper.Section4.proposition_4_3","Stafford38/Paper/Section4/Surjectivity.lean:218","/-- **Proposition 4.3.** For `d̃` in the form (3.1), right multiplication by `x₁`\non `Q = A_n/𝓘` (Equation (3.2)) is surjective, i.e. `Q = Qx₁`. -/\ntheorem proposition_4_3 [Algebra ℚ k] {N : ℕ} {d : PresentedWeyl k (n + 1)}\n    (hform : Stafford38.Paper.Section3.IsMonicNormalForm k N d) :\n    Function.Surjective\n      (rightMul (Stafford38.Paper.Section3.idealI k N d) (presentedCoordinate k n)) :="]}</script><script>(()=>{
+const data=JSON.parse(document.getElementById('lean-previews').textContent);
+const box=document.createElement('div');box.className='lean-preview';box.setAttribute('role','tooltip');
+document.body.append(box);let timer;
+function add(cls,text){const e=document.createElement(cls==='pre'?'pre':'div');if(cls!=='pre')e.className=cls;e.textContent=text;box.append(e);}
+function show(a){
+  let head,loc,body;
+  if(a.dataset.p){const d=data[a.dataset.p];if(!d)return;[head,loc,body]=d;}
+  else{const t=document.getElementById(decodeURIComponent(a.hash.slice(1)));const pre=t&&t.querySelector('pre');if(!pre)return;
+    head=a.hash.slice(1).replace(/^definition-[a-z]+:/,'');loc='Definition panel on this page';
+    const lines=pre.textContent.split('\n');body=lines.slice(0,14).join('\n')+(lines.length>14?'\n…':'');}
+  box.replaceChildren();add('lp-head',head);add('lp-loc',loc);add('pre',body);
+  box.style.display='block';const r=a.getBoundingClientRect(),w=box.offsetWidth,h=box.offsetHeight;
+  box.style.left=Math.max(8,Math.min(r.left,innerWidth-w-8))+'px';
+  box.style.top=(r.bottom+6+h<innerHeight?r.bottom+6:Math.max(8,r.top-h-6))+'px';}
+function hide(){clearTimeout(timer);box.style.display='none';}
+const pick=e=>e.target.closest&&e.target.closest('a[data-p],a.definition-link');
+document.addEventListener('mouseover',e=>{const a=pick(e);clearTimeout(timer);if(a)timer=setTimeout(()=>show(a),150);else hide();});
+document.addEventListener('focusin',e=>{const a=pick(e);if(a)show(a);else hide();});
+document.addEventListener('focusout',hide);document.addEventListener('scroll',hide,true);
+document.addEventListener('keydown',e=>{if(e.key==='Escape')hide();});
+})();</script><!--/lean-previews-->
