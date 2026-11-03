@@ -1,0 +1,1055 @@
+{
+ "schema": "paper-lean-audit/map-2",
+ "title": "Stafford's conjecture: Section 3, paper beside Lean",
+ "output_stem": "sec3",
+ "sources": {
+  "paper": {
+   "repo": "itpplasma/stafford38-paper",
+   "commit": "c8f0d615ba3ad7271c1c99ad4b0085071da6a793",
+   "file": "human_readable_main.tex",
+   "snapshot": "../../sources/paper/raw/human_readable_main.tex",
+   "sha256": "9cdf65e2419f8a2c9c28c27a5b531d9d2a12be2305c190eafa726f0255d9db66",
+   "bib_snapshot": "../../sources/paper/raw/references.bib"
+  },
+  "formal": {
+   "repo": "itpplasma/stafford38-formal",
+   "commit": "665fb5bbd26967bfde5c9c30f27513f4cea37f24"
+  },
+  "generator": {
+   "repo": "itpplasma/paper-lean-audit",
+   "commit": "743a4ee33b88e79693f69a8c298959af9ebaa2b4",
+   "note": "v2/extract.mjs and v2/build.mjs at this commit (branch sbs-gen-sec3-20261103: side-by-side-v2 plus two fixes: the proof states of every traced declaration of a module are kept, and Lean-added steps stay in place after a prose sentence) produce sec3.extraction.json and the reader."
+  }
+ },
+ "lean": {
+  "extraction": "sec3.extraction.json",
+  "imports": [
+   "Stafford38.Paper.Main"
+  ],
+  "project_modules": [
+   "Stafford38",
+   "Challenge",
+   "FixedSourceChallenge"
+  ],
+  "open": [
+   "Stafford38.Paper.Section3",
+   "Stafford38.Paper.Section2",
+   "Stafford38Challenge"
+  ]
+ },
+ "scope": {
+  "sections": [
+   "3"
+  ]
+ },
+ "entries": [
+  {
+   "id": "intro:weyl",
+   "paper": {
+    "quote": "be the $n$th Weyl algebra"
+   },
+   "kind": "formalizes",
+   "short": "Weyl algebra",
+   "lean": [
+    "Stafford38Challenge.WeylAlg",
+    "Stafford.FreeWeyl",
+    "Stafford.freeWeylRelation",
+    "Stafford38.WeylIteratedEquivalence.PresentedWeyl"
+   ],
+   "note": "Lean defines A_n(k) as the free algebra on x_i, ∂_i modulo the commutator relations given by the standard symplectic matrix; PresentedWeyl is the same algebra."
+  },
+  {
+   "id": "thm:main",
+   "paper": {
+    "quote": "\\label{thm:main}"
+   },
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.theorem_1_1",
+    "Stafford38.Paper.theorem_1_1_fixedSource",
+    "Stafford38Challenge.UniversalStatement",
+    "Stafford.Reduction.Stafford38",
+    "Stafford38FixedSourceChallenge.UniversalFixedSourceStatement",
+    "Stafford38FixedSourceChallenge.UniversalFixedSourceStatementWithDegree",
+    "Stafford38FixedSourceChallenge.IsLinearWeylCoordinate",
+    "Stafford38FixedSourceChallenge.bernsteinDegree"
+   ],
+   "note": "Lean writes A_n(k) as the Mathlib-only quotient Stafford38Challenge.WeylAlg k n and the moreover clause as the fixed-source statement with F = ℓ^{deg_B d} for a linear symplectic coordinate ℓ; the printed proof is Section 6, outside this slice.",
+   "short": "main theorem"
+  },
+  {
+   "id": "def:cyclic",
+   "paper": {
+    "quote": "\\label{def:cyclic}"
+   },
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section2.IsTorsion",
+    "Stafford38.Paper.Section2.IsCyclic",
+    "Stafford38.TorsionCyclicity.IsRightTorsion"
+   ],
+   "short": "torsion, cyclic"
+  },
+  {
+   "id": "conv:pair",
+   "paper": {
+    "quote": "\\label{conv:pair}"
+   },
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section2.x₁",
+    "Stafford38.Paper.Section2.p",
+    "Stafford38.Paper.Section2.transverse",
+    "Stafford38.Paper.Section2.C",
+    "Stafford38.Paper.Section2.convention_2_2_relations",
+    "Stafford38.Paper.Section2.convention_2_2_exists",
+    "Stafford38.Paper.Section2.convention_2_2_unique"
+   ],
+   "note": "Lean indexes the paper's A_n(k), n ≥ 1, as PresentedWeyl k (n + 1), and proves the stated relations and the normal form instead of citing them.",
+   "short": "x₁, p, C"
+  },
+  {
+   "id": "def:filtration",
+   "paper": {
+    "quote": "\\label{def:filtration}"
+   },
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section2.IsFiltration",
+    "Stafford38.Paper.Section2.gr",
+    "Stafford38.Paper.Section2.filtrationDegree",
+    "Stafford38.Paper.Section2.symbol"
+   ],
+   "note": "Lean indexes the filtration by ℕ with F_{-1} = 0 implicit, and defines the degree and symbol for every element, the paper only for a ≠ 0.",
+   "short": "filtration, gr, symbol"
+  },
+  {
+   "id": "par:filtrations",
+   "paper": {
+    "quote": "The \\emph{Bernstein filtration} $B_\\bullet$"
+   },
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section2.bernsteinFiltration",
+    "Stafford38.Paper.Section2.orderFiltration",
+    "Stafford38.Paper.Section2.bernsteinDegree",
+    "Stafford38.Paper.Section2.grEquivSymbolRing"
+   ],
+   "note": "Lean defines both filtrations as spans of ordered PBW words of bounded weight and proves gr A_n(k) ≅ k[x, ξ] (cited by the paper).",
+   "short": "Bernstein and order filtrations"
+  },
+  {
+   "id": "def:good-filtration",
+   "paper": {
+    "quote": "\\label{def:good-filtration}"
+   },
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section2.IsCompatibleFiltration",
+    "Stafford38.Paper.Section2.IsGoodFiltration"
+   ],
+   "short": "good filtration"
+  },
+  {
+   "id": "par:cyclic-good",
+   "paper": {
+    "quote": "As an example, the filtration $M_i:=qF_i$"
+   },
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section2.cyclicFiltration",
+    "Stafford38.Paper.Section2.cyclicFiltration_order_isCompatible",
+    "Stafford38.Paper.Section2.grCyclic",
+    "Stafford38.Paper.Section2.grCyclic_good",
+    "Stafford38.Paper.Section2.qFilt_isGoodFiltration"
+   ],
+   "short": "qF_i is good"
+  },
+  {
+   "id": "def:cotangent",
+   "paper": {
+    "quote": "\\label{def:cotangent}"
+   },
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section2.CotangentBundle",
+    "Stafford38.Paper.Section2.proj",
+    "Stafford38.Paper.Section2.fibre",
+    "Stafford38.Characteristic.SymbolRing",
+    "Stafford38.Characteristic.PhaseVar"
+   ],
+   "note": "Lean takes T*X to be Spec k[x, ξ] and states the projection and fibres on closed points K^{2n}.",
+   "short": "T*X"
+  },
+  {
+   "id": "def:spec",
+   "paper": {
+    "quote": "\\label{def:spec}"
+   },
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section2.V",
+    "Stafford38.Paper.Section2.VK",
+    "Stafford38.Paper.Section2.vanishingIdealOf",
+    "Stafford38.Paper.Section2.maxIdealAt",
+    "Stafford38.Paper.Section2.mem_VK_iff_closedPoint_mem_V",
+    "Stafford38.Paper.Section2.closedPoint"
+   ],
+   "short": "Spec, V, I"
+  },
+  {
+   "id": "def:char-variety",
+   "paper": {
+    "quote": "\\label{def:char-variety}"
+   },
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section2.CharOf",
+    "Stafford38.Paper.Section2.Char",
+    "Stafford38.Paper.Section2.definition_2_7_independent"
+   ],
+   "note": "Lean proves the independence of the good filtration that the paper cites from [HTT, Lemma D.3.1].",
+   "short": "Char"
+  },
+  {
+   "id": "def:symplectic",
+   "paper": {
+    "quote": "\\label{def:symplectic}"
+   },
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section2.IsSymplectic",
+    "Stafford38.Paper.Section2.gramMatrix",
+    "Stafford38.Paper.Section2.IsSymplecticBasis",
+    "Stafford38.Paper.Section2.omega",
+    "Stafford38.Paper.Section2.omega_isSymplectic"
+   ],
+   "short": "symplectic form"
+  },
+  {
+   "id": "def:poisson",
+   "paper": {
+    "quote": "\\label{def:poisson}"
+   },
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section2.poisson"
+   ],
+   "short": "Poisson bracket"
+  },
+  {
+   "id": "def:involutive",
+   "paper": {
+    "quote": "\\label{def:involutive}"
+   },
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section2.IsInvolutive",
+    "Stafford38.Paper.Section2.IsInvolutiveSet"
+   ],
+   "short": "involutive"
+  },
+  {
+   "id": "ithm:gabber",
+   "paper": {
+    "quote": "\\label{ithm:gabber}"
+   },
+   "kind": "cites",
+   "lean": [
+    "Stafford38.Paper.Section2.theorem_2_11",
+    "Stafford38.Paper.Section2.theorem_2_11_cyclic"
+   ],
+   "note": "Lean states Gabber's theorem for a good order filtration of a finitely generated module and proves it; theorem_2_11_cyclic is the case A_n(K)/I used later.",
+   "short": "Gabber"
+  },
+  {
+   "id": "thm:nss",
+   "paper": {
+    "quote": "\\label{thm:nss}"
+   },
+   "kind": "cites",
+   "lean": [
+    "Stafford38.Paper.Section2.theorem_2_12"
+   ],
+   "short": "Nullstellensatz"
+  },
+  {
+   "id": "par:monic-goal",
+   "paper": {
+    "quote": "our first goal is to find a map to replace $d$ by a normal form"
+   },
+   "kind": "prose",
+   "short": "aim of Section 3",
+   "note": "States the aim of the section; the normal form is made precise in (3.1) of Proposition 3.2 (IsMonicNormalForm)."
+  },
+  {
+   "id": "par:scalar-case",
+   "paper": {
+    "quote": "If $N=0$, then $d \\in B_0 = k$ is a nonzero scalar"
+   },
+   "kind": "formalizes",
+   "short": "N = 0",
+   "lean": [
+    "Stafford38.Paper.Section3.step_scalar_case"
+   ]
+  },
+  {
+   "id": "par:three-stages",
+   "paper": {
+    "quote": "We want to construct a well-behaved automorphism"
+   },
+   "kind": "prose",
+   "short": "plan",
+   "note": "Announces the three stages carried out in Lemma 3.1, the construction of Φ_g and Proposition 3.2; no claim of its own."
+  },
+  {
+   "id": "par:V",
+   "paper": {
+    "quote": "We can identify $\\mathbb V = k^{2n}$ with the Bernstein-degree-one part"
+   },
+   "kind": "formalizes",
+   "short": "𝕍 = k^{2n}",
+   "lean": [
+    "Stafford38.Paper.Section2.finrank_phaseSpace",
+    "Stafford38.CharacteristicSymplecticCompletion.phaseBasis"
+   ],
+   "note": "Lean takes 𝕍 to be PhaseVar n → k, coordinate Sum.inl i the coefficient of x_{i+1} and Sum.inr i that of ∂_{i+1}; ω is Section2.omega of Definition 2.8. The identification with B_1/B_0 enters only through the matrix action of Φ_g on generators."
+  },
+  {
+   "id": "lem:sympcompl",
+   "paper": {
+    "quote": "\\label{lem:sympcompl}"
+   },
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section3.lemma_3_1"
+   ],
+   "note": "Lean assumes ω antisymmetric (ω(x,y) = −ω(y,x)) and derives ω(x,x) = 0 from characteristic zero; the basis is indexed by Fin n ⊕ Fin n with Sum.inl i = e_{i+1}, Sum.inr i = f_{i+1}, and n ≥ 1 is part of the conclusion.",
+   "proof": {
+    "sentences": [
+     {
+      "quote": "Since $\\omega$ is nondegenerate and $v\\neq0$",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "obtain ⟨w, huw⟩ := step_lemma_3_1_partner ω hnd hu"
+       }
+      ],
+      "note": "Lean runs paragraphs 1–4 for an arbitrary nonzero u (the local statement hcomplete) and applies it to v and to e."
+     },
+     {
+      "quote": "Let $U=\\operatorname{span}(v,w)$.",
+      "kind": "prose",
+      "note": "Names U; Lean writes Submodule.span k {v, w} in the statements of the next steps."
+     },
+     {
+      "quote": "For $0\\neq av+bw\\in U$: if $a\\neq0$",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "obtain ⟨-, hcompl, hWnd, hWdim⟩ := step_lemma_3_1_complement ω hAlt hnd huw"
+       }
+      ],
+      "note": "The computation ω(av+bw, w) = a, ω(av+bw, v) = −b is step_lemma_3_1_plane, used inside step_lemma_3_1_complement."
+     },
+     {
+      "quote": "pairs nontrivially with something in $U$",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "obtain ⟨-, hcompl, hWnd, hWdim⟩ := step_lemma_3_1_complement ω hAlt hnd huw"
+       }
+      ],
+      "note": "Lean does not state that ω|_U is nondegenerate; it uses the computation of the previous sentence directly to show U ∩ U^⊥ = 0 (discarded first component)."
+     },
+     {
+      "quote": "Since $\\omega|_U$ is nondegenerate, $U\\cap U^\\perp=0$",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "obtain ⟨-, hcompl, hWnd, hWdim⟩ := step_lemma_3_1_complement ω hAlt hnd huw"
+       }
+      ],
+      "note": "hcompl is 𝕍 = U ⊕ U^⊥; the dimension count hWdim (dim U^⊥ + 2 = dim 𝕍), which the paper cites, is proved in SymplecticComplement.pairComplementData."
+     },
+     {
+      "quote": "If $u\\in U^\\perp$ pairs to zero with all of",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "obtain ⟨-, hcompl, hWnd, hWdim⟩ := step_lemma_3_1_complement ω hAlt hnd huw"
+       }
+      ],
+      "note": "hWnd is the nondegeneracy of ω on U^⊥, proved in SymplecticComplement.pairComplementData."
+     },
+     {
+      "quote": "By induction on $n$ (trivial for $n=1$",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "step_lemma_3_1_basis m ω hAlt huw hcompl hWnd (by omega)"
+       }
+      ],
+      "note": "The induction is CharacteristicPaperSymplecticBasis.exists_symplectic_basis applied to U^⊥; the assembly of e_1 = v, f_1 = w with that basis is step_lemma_3_1_basis."
+     },
+     {
+      "quote": "Consequently: given nonzero $v,e\\in\\mathbb V$",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "obtain ⟨m, rfl, b, hb, hb0⟩ := hcomplete v hv"
+       },
+       {
+        "quote": "obtain ⟨m', hm', b', hb', hb'0⟩ := hcomplete e he"
+       }
+      ]
+     },
+     {
+      "quote": "We then define the linear map $g$ to send $e$ to $v$",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "obtain ⟨hpres, happ⟩ := step_lemma_3_1_transport ω hAlt b' b hb' hb"
+       }
+      ],
+      "note": "g is Basis.equiv b' b, the linear map sending each vector of the basis through e to the corresponding vector of the basis through v."
+     },
+     {
+      "quote": "Through the bilinearity of $\\omega$",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "obtain ⟨hpres, happ⟩ := step_lemma_3_1_transport ω hAlt b' b hb' hb"
+       },
+       {
+        "quote": "exact ⟨b'.equiv b (Equiv.refl _), hpres, by rw [← hb'0, happ, hb0]⟩"
+       }
+      ]
+     }
+    ],
+    "lean_adds": [
+     {
+      "step": {
+       "quote": "have hAlt := alternating_of_antisymmetric ω hanti"
+      },
+      "note": "Lean derives ω(x, x) = 0 from antisymmetry, which needs 2 ≠ 0 in k; the paper uses ω(w, w) = 0 in paragraph 2 without comment."
+     },
+     {
+      "step": {
+       "quote": "intro u hu"
+      },
+      "note": "Start of the local statement hcomplete: every nonzero u is the first vector of a symplectic basis (paragraphs 1–4 for u)."
+     },
+     {
+      "step": {
+       "quote": "obtain ⟨m, rfl⟩ : ∃ m, n = m + 1 := ⟨n - 1, by omega⟩"
+      },
+      "note": "n ≥ 1 follows from dim U^⊥ + 2 = 2n; Lean writes n = m + 1 so that the basis of U^⊥ has 2m vectors."
+     },
+     {
+      "step": {
+       "quote": "refine ⟨m, rfl, ?_⟩"
+      },
+      "note": "Bookkeeping: n = m + 1."
+     },
+     {
+      "step": {
+       "quote": "exact ⟨b, hb, hb0⟩"
+      },
+      "note": "Closes hcomplete with the basis of paragraph 4."
+     },
+     {
+      "step": {
+       "quote": "refine ⟨⟨Nat.succ_pos m, b, hb, hb0⟩, fun e he => ?_⟩"
+      },
+      "note": "The first claim of the lemma (v is the first vector of a symplectic basis) is hcomplete for v; the remaining goal is the second claim."
+     },
+     {
+      "step": {
+       "quote": "obtain rfl : m' = m := by omega"
+      },
+      "note": "Both bases have 2(m + 1) vectors, so they are indexed by the same type."
+     }
+    ]
+   }
+  },
+  {
+   "id": "par:phi-g",
+   "paper": {
+    "quote": "Let $g$ be a $k$-linear automorphism of $\\mathbb V$ that preserves $\\omega$."
+   },
+   "kind": "formalizes",
+   "short": "Φ_g",
+   "lean": [
+    "Stafford38.Paper.Section3.phiG",
+    "Stafford38.Paper.Section3.step_phi_g"
+   ],
+   "note": "Lean records g by its matrix in Sp(2n, k), rows = images of the generators (g(u_i) = Σ_j g_ij u_j), and builds Φ_g as an algebra equivalence from g and g⁻¹; the existence and uniqueness that the paper cites from Coutinho are proved (WeylSymplectic, WeylUniversal)."
+  },
+  {
+   "id": "prop:monic",
+   "paper": {
+    "quote": "\\label{prop:monic}"
+   },
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section3.proposition_3_2",
+    "Stafford38.Paper.Section3.IsMonicNormalForm",
+    "Stafford38.Paper.Section3.step_3_2_decomposition",
+    "Stafford38.Paper.Section3.step_3_2_leading",
+    "Stafford38.Paper.Section3.step_3_2_monic"
+   ],
+   "citations": {
+    "def:symplectic": "Lean applies Lemma 3.1 to the standard form ω and so uses that ω is symplectic (omega_isSymplectic, Definition 2.8); the paper states this in the paragraph before Lemma 3.1.",
+    "par:V": "Lean applies Lemma 3.1 with dim 𝕍 = 2n (finrank_phaseSpace); the paper takes this from the identification 𝕍 = k^{2n}."
+   },
+   "note": "A_n(k) with n ≥ 1 is PresentedWeyl k (n + 1). The last three theorems are the Lean statements of the final paragraph of the proof, shown here because the proof row only shows the closing step.",
+   "proof": {
+    "sentences": [
+     {
+      "quote": "Let $s\\in k[x,\\xi]$ be the Bernstein principal symbol of $d$",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "obtain ⟨hpiece, hne, hhom, -, -⟩ := bernsteinSymbol_ne_zero k hd"
+       }
+      ],
+      "note": "s is presentedPrincipalComponent k bernsteinWeight N d; bernsteinSymbol_ne_zero also identifies it with σ_N^B(d) under gr A_n(k) ≅ k[x, ξ]."
+     },
+     {
+      "quote": "A characteristic-zero field is",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "obtain ⟨v, hv, hv0⟩ := step_3_2_nonvanishing k hhom hne hN"
+       }
+      ]
+     },
+     {
+      "quote": "Because $s$ is homogeneous of degree $N\\geq 1$",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "obtain ⟨v, hv, hv0⟩ := step_3_2_nonvanishing k hhom hne hN"
+       }
+      ]
+     },
+     {
+      "quote": "Let $e_p\\in\\mathbb V$ be the standard basis vector corresponding to $p$.",
+      "kind": "prose",
+      "note": "Notation: Lean writes e_p as phaseBasis k (.inr 0), the coefficient vector of ∂₁ = p, in the next step."
+     },
+     {
+      "quote": "By Lemma~\\ref{lem:sympcompl} there is an $\\omega$-preserving automorphism",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "obtain ⟨h, hpres, hhe⟩ := step_3_2_h k hv0 (.inr (0 : Fin (n + 1)))"
+       }
+      ]
+     },
+     {
+      "quote": "If $h$ preserves $\\omega$, then $h^{\\mathsf T}Jh=J$",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "obtain ⟨g, -, hmul⟩ := step_3_2_transpose k h hpres"
+       }
+      ],
+      "note": "Inside step_3_2_transpose, toMatrix_mem_symplecticGroup derives hᵀ(−J)h = −J from ω-preservation, with −J the Gram matrix of ω in Lean’s sign convention."
+     },
+     {
+      "quote": "In particular $h$ is invertible, and inverting gives",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "obtain ⟨g, -, hmul⟩ := step_3_2_transpose k h hpres"
+       }
+      ],
+      "note": "The inversion is Mathlib’s SymplecticGroup.mem_iff'."
+     },
+     {
+      "quote": "Since $J^2=-\\mathrm{Id}$",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "obtain ⟨g, -, hmul⟩ := step_3_2_transpose k h hpres"
+       }
+      ],
+      "note": "Lean does not form hᵀ: its g is the symplectic matrix M = h itself (the matrix whose rows give the images of the generators), which is the paper’s Φ_{hᵀ}."
+     },
+     {
+      "quote": "Let $\\Phi_g$ be the",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "obtain ⟨g, -, hmul⟩ := step_3_2_transpose k h hpres"
+       }
+      ],
+      "note": "Φ_g is phiG k g for the matrix g obtained here."
+     },
+     {
+      "quote": "Let $M$ be the matrix whose rows are the images of the generators",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "obtain ⟨g, -, hmul⟩ := step_3_2_transpose k h hpres"
+       }
+      ],
+      "note": "M is g.1 = toMatrix' h (discarded first component)."
+     },
+     {
+      "quote": "Since $\\Phi_g$ sends each generator to a",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "obtain ⟨hpiece', heval, hdeg'⟩ := step_3_2_symbol k g hpiece (.inr (0 : Fin (n + 1)))"
+       }
+      ],
+      "note": "The substitution of generators in the symbol is WeylSymbolCompatibility.standardSymplecticAlgHom_principal_compatibility, through phiG_principal."
+     },
+     {
+      "quote": "Hence $\\Phi_g(d)\\equiv s(Mu)\\bmod B_{N-1}$.",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "obtain ⟨hpiece', heval, hdeg'⟩ := step_3_2_symbol k g hpiece (.inr (0 : Fin (n + 1)))"
+       }
+      ],
+      "note": "Lean keeps only the value of the symbol at e_p: heval."
+     },
+     {
+      "quote": "As $M$ is invertible,",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "obtain ⟨hpiece', heval, hdeg'⟩ := step_3_2_symbol k g hpiece (.inr (0 : Fin (n + 1)))"
+       }
+      ],
+      "note": "Lean does not use invertibility here: hdeg' gives deg_B Φ_g(d) = N once s(M e_p) ≠ 0, which the next two sentences supply."
+     },
+     {
+      "quote": "Since the rows of $M$ are the coordinate vectors",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "rw [hmul, hhe] at heval hdeg'"
+       }
+      ]
+     },
+     {
+      "quote": "value of $s_g$ at $e_p$ is",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "rw [hmul, hhe] at heval hdeg'"
+       }
+      ]
+     },
+     {
+      "quote": "Set $c:=s(v)$.",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "obtain ⟨hpiece'', hdeg'', hval⟩ := step_3_2_normalize k hpiece' (hdeg' hv) _ hv heval"
+       }
+      ],
+      "note": "c is the placeholder _ , fixed to s(v) by heval."
+     },
+     {
+      "quote": "Since $c$ is a nonzero scalar, it is a central unit",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "obtain ⟨hpiece'', hdeg'', hval⟩ := step_3_2_normalize k hpiece' (hdeg' hv) _ hv heval"
+       }
+      ],
+      "note": "Lean writes c⁻¹Φ_g(d) as the scalar multiple c⁻¹ • Φ_g(d), so centrality is not needed."
+     },
+     {
+      "quote": "Using the normal form $A_n(k)=\\bigoplus_j p^{\\,j}C$",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "exact ⟨g, _, hv, step_3_2_monic k hpiece'' hval, hdeg''⟩"
+       }
+      ],
+      "note": "Inside step_3_2_monic: step_3_2_decomposition (statement above), from RightDecomposition.exists_bounded_decomposition."
+     },
+     {
+      "quote": "The Bernstein filtration is",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "exact ⟨g, _, hv, step_3_2_monic k hpiece'' hval, hdeg''⟩"
+       }
+      ],
+      "note": "step_3_2_decomposition proves only the bounds deg_B a_j ≤ N − j for j ≤ N and a_N ∈ k, not the equality N = max_j (j + deg_B a_j); the sum runs over j ≤ N."
+     },
+     {
+      "quote": "The symbol is",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "exact ⟨g, _, hv, step_3_2_monic k hpiece'' hval, hdeg''⟩"
+       }
+      ],
+      "note": "step_3_2_leading (statement above): σ_N^B(p^j a_j) = ξ₁^j σ_{N−j}^B(a_j) (principal_bernstein_p_pow_mul), and for j < N its value at e_p, the PBW coefficient of ∂₁^{N−j} in a_j, vanishes because a_j ∈ C has no ∂₁ (normalForm_C_no_p)."
+     },
+     {
+      "quote": "Because we defined $\\tilde d$ to be $c^{-1}\\Phi_g(d)$",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "exact ⟨g, _, hv, step_3_2_monic k hpiece'' hval, hdeg''⟩"
+       }
+      ],
+      "note": "step_3_2_leading concludes a_N = 1 from σ_N^B(d̃)(e_p) = 1 (hval); step_3_2_monic then rewrites the decomposition as (3.1)."
+     }
+    ]
+   }
+  },
+  {
+   "id": "rem:transport",
+   "paper": {
+    "quote": "\\label{rem:transport}"
+   },
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section3.remark_3_3",
+    "Stafford38.Paper.Section3.remark_3_3_of_Q_eq_zero",
+    "Stafford38.Paper.Section3.section_3_reduction"
+   ],
+   "note": "remark_3_3 is the displayed identity; remark_3_3_of_Q_eq_zero combines it with Q = 0 for (3.2) and shows that ℓ = Φ_g⁻¹(x₁) is a linear symplectic coordinate; section_3_reduction packages the case N = 0, Proposition 3.2 and this remark for the final assembly."
+  },
+  {
+   "id": "eq:I-Q",
+   "paper": {
+    "quote": "We will now define the modules"
+   },
+   "kind": "formalizes",
+   "short": "𝓘 and Q, (3.2)",
+   "lean": [
+    "Stafford38.Paper.Section3.idealI",
+    "Stafford38.Paper.Section3.Q"
+   ],
+   "note": "𝓘 is a right ideal (a submodule of A over Aᵐᵒᵖ) and Q = A/𝓘 the quotient right module."
+  },
+  {
+   "id": "par:order-symbol",
+   "paper": {
+    "quote": "We now use the order filtration on $A_n(k)$"
+   },
+   "kind": "formalizes",
+   "short": "P = σ_N^ord(d̃)",
+   "lean": [
+    "Stafford38.Paper.Section3.orderSymbol"
+   ],
+   "note": "σ_N^ord(d̃) is the weight-N component, for the order weight, of the PBW normal form of d̃, read in k[x, ξ]."
+  },
+  {
+   "id": "def:monic-xi1",
+   "paper": {
+    "quote": "\\label{def:monic-xi1}"
+   },
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section3.IsMonicInXi1"
+   ],
+   "note": "Lean writes P as a polynomial in ξ₁ = X 0 over k[ξ_2, …, ξ_n] by finSuccEquiv and requires, besides c_N = 1, that no power of ξ₁ above N occurs, which the paper expresses by the sum ending at i = N."
+  },
+  {
+   "id": "lem:order-symbol",
+   "paper": {
+    "quote": "\\label{lem:order-symbol}"
+   },
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section3.lemma_3_5",
+    "Stafford38.Paper.Section3.lemma_3_5_eval_axis"
+   ],
+   "note": "P is a polynomial in Fin (n + 1) variables embedded in k[x, ξ] by rename Sum.inr; “order N” is d̃ ∈ F_N and d̃ ∉ F_j for j < N. lemma_3_5_eval_axis is (3.4) read in k[x, ξ] at the point x = 0, ξ = (1, 0, …, 0).",
+   "proof": {
+    "sentences": [
+     {
+      "quote": "Since $\\deg_B\\tilde d=N$, every PBW monomial",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "obtain ⟨hF, hfibre, hhom⟩ := step_3_5_fibre k hdeg"
+       }
+      ]
+     },
+     {
+      "quote": "contributing to the order-$N$ part has",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "obtain ⟨hF, hfibre, hhom⟩ := step_3_5_fibre k hdeg"
+       }
+      ],
+      "note": "IsFibreOnly: no monomial of σ_N^ord(d̃) contains an x_i."
+     },
+     {
+      "quote": "Thus $\\tilde d$ has",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "obtain ⟨hF, hfibre, hhom⟩ := step_3_5_fibre k hdeg"
+       },
+       {
+        "quote": "obtain ⟨P, hsP, hP⟩ := step_3_5_fibre_polynomial k hfibre hhom"
+       }
+      ],
+      "note": "This paragraph gives only d̃ ∈ F_N (hF); that d̃ has order exactly N needs σ_N^ord(d̃) ≠ 0, which Lean derives after the second paragraph (Lean-added steps hne and the final exact)."
+     },
+     {
+      "quote": "The monomial $p^N=\\partial_1^N$ occurs in $\\tilde d$ with coefficient $1$",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "have hpure := step_3_5_pure_coefficient k hform"
+       }
+      ],
+      "note": "The monomial bookkeeping is step_3_5_lower_term: for j < N every order-N monomial of p^j a_j has ∂₁-exponent exactly j."
+     },
+     {
+      "quote": "monomial contributes only to coefficients $c_i$ with $i<N$",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "have hpure := step_3_5_pure_coefficient k hform"
+       },
+       {
+        "quote": "have hcoeff"
+       },
+       {
+        "quote": "obtain ⟨hmonic, htot, heval⟩ := step_3_5_monic k hP hcoeff"
+       }
+      ]
+     },
+     {
+      "quote": "Evaluating at $(1,0,\\ldots,0)$ then gives",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "obtain ⟨hmonic, htot, heval⟩ := step_3_5_monic k hP hcoeff"
+       }
+      ]
+     }
+    ],
+    "lean_adds": [
+     {
+      "step": {
+       "quote": "have hne : orderSymbol k N dt ≠ 0"
+      },
+      "note": "σ_N^ord(d̃) ≠ 0 because its coefficient of ξ₁^N is 1; this gives the order N claimed in the first paragraph."
+     },
+     {
+      "step": {
+       "quote": "exact ⟨step_3_5_order k hF hne, P, hsP, hP, htot, hmonic, heval⟩"
+      },
+      "note": "step_3_5_order: d̃ ∉ F_j for j < N since its order-N symbol is nonzero."
+     }
+    ]
+   }
+  },
+  {
+   "id": "prop:charP",
+   "paper": {
+    "quote": "\\label{prop:charP}"
+   },
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section3.proposition_3_6",
+    "Stafford38.Paper.Section3.grQ"
+   ],
+   "citations": {
+    "par:cyclic-good": "The first sentence of the proof (Q_• is good because Q is cyclic) is the Section 2 example that qF_m is a good filtration (cyclicFiltration_order_isCompatible, grCyclic_good), which the paper does not cite by number."
+   },
+   "note": "gr Q is the associated graded module of Q = A/𝓘 for Q_m = qF_m (Section2.grCyclic); P is σ_N^ord(d̃) in k[x, ξ].",
+   "proof": {
+    "sentences": [
+     {
+      "quote": "$Q_\\bullet$ is a good filtration because $Q$ is cyclic.",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "obtain ⟨f, rfl⟩ := (step_3_6_generated k dt).2.2 m"
+       }
+      ],
+      "note": "step_3_6_generated states compatibility, finiteness and generation by q̄; the Lean proof uses only generation."
+     },
+     {
+      "quote": "Let $\\bar q$ be the class of $q$ in $\\gr Q$.",
+      "kind": "prose",
+      "note": "Notation: Lean’s q̄ is qBar k (idealI k N dt)."
+     },
+     {
+      "quote": "We know that $q\\,\\tilde d=[\\tilde d]=0$ in $Q$",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "obtain ⟨⟨hF, -⟩, -⟩ := lemma_3_5 k hform hdeg"
+       },
+       {
+        "quote": "rw [smul_comm, step_3_6_kills k hF, smul_zero]"
+       }
+      ],
+      "note": "hF : d̃ ∈ F_N comes from Lemma 3.5; [d̃] = 0 in Q is inside step_3_6_kills (firstGenerator_mem)."
+     },
+     {
+      "quote": "Therefore $\\bar q\\cdot P$",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "rw [smul_comm, step_3_6_kills k hF, smul_zero]"
+       }
+      ],
+      "note": "step_3_6_kills: σ_N^ord(d̃) • q̄ = 0, the class of q d̃ in Q_N/Q_{N−1}."
+     },
+     {
+      "quote": "Since $\\gr Q$ is generated over $k[x,\\xi]$ by $\\bar q$",
+      "kind": "formalizes",
+      "steps": [
+       {
+        "quote": "rw [Module.mem_annihilator]"
+       },
+       {
+        "quote": "intro m"
+       },
+       {
+        "quote": "obtain ⟨f, rfl⟩ := (step_3_6_generated k dt).2.2 m"
+       },
+       {
+        "quote": "rw [smul_comm, step_3_6_kills k hF, smul_zero]"
+       }
+      ]
+     }
+    ]
+   }
+  }
+ ],
+ "lean_only": [
+  {
+   "prefix": "Stafford38.Ore",
+   "note": "Iterated Ore-extension construction A_n(k) = C[p; δ], used to prove the normal form of Notation 2.2 that the paper cites from Coutinho, Prop. 1.2.1."
+  },
+  {
+   "prefix": "Stafford38.WeylIteratedEquivalence.",
+   "note": "Isomorphism between the presented Weyl algebra and the iterated Ore construction, with its generators; the paper identifies the two without comment."
+  },
+  {
+   "prefix": "Stafford38.WeylPBW.",
+   "note": "Basis of A_n(k) by ordered monomials x^α ∂^β (normal form), used to define the filtrations."
+  },
+  {
+   "prefix": "Stafford38.WeylFiltration.",
+   "note": "Weights of the generators and the spans of ordered monomials of bounded weight that define the Bernstein and order filtrations."
+  },
+  {
+   "prefix": "Stafford38.WeylLeadingSymbol.",
+   "note": "Principal component of an element, used to identify gr A_n(k) with k[x, ξ]."
+  },
+  {
+   "prefix": "Stafford38.WeylAssociatedGraded.",
+   "note": "Strict lower pieces and principal components on a filtration piece, used to identify gr A_n(k) with k[x, ξ]."
+  },
+  {
+   "prefix": "Stafford38.WeylUniversal.",
+   "note": "Universal property of the free-algebra presentation of A_n(k)."
+  },
+  {
+   "decl": "Stafford38.Characteristic.fibreWeight",
+   "note": "Weight 1 on the fibre coordinates ξ_i and 0 on x_i, which defines the order filtration."
+  },
+  {
+   "prefix": "Stafford38.CharacteristicFilteredQuotient",
+   "note": "The quotient Q = A_n(k)/I with the filtration Q_m = qF_m, its graded pieces and associated graded module."
+  },
+  {
+   "prefix": "Stafford38.CharacteristicAssociatedGradedModule.",
+   "note": "The associated graded module of Q = A_n(k)/I for the order filtration."
+  },
+  {
+   "decl": "Stafford38.CharacteristicSymplecticCompletion.phasePairing",
+   "note": "The pairing Σ_i (u_{ξ_i} v_{x_i} − u_{x_i} v_{ξ_i}) on k^{2n} from which ω is built."
+  },
+  {
+   "prefix": "Stafford38.EulerSurjectivity.",
+   "note": "Right ideals of A_n(k) as submodules of the regular right module, and the quotient module A_n(k)/I."
+  },
+  {
+   "decl": "Stafford38.Paper.Section2.lowerPiece",
+   "note": "F_{j−1}, with F_{−1} = 0."
+  },
+  {
+   "decl": "Stafford38.Paper.Section2.grPiece",
+   "note": "The graded piece F_j/F_{j−1}."
+  },
+  {
+   "decl": "Stafford38.Paper.Section2.grPieceEquiv",
+   "note": "Graded piece of A_n(k) identified with the homogeneous polynomials of that weight."
+  },
+  {
+   "decl": "Stafford38.Paper.Section2.orbitMap",
+   "note": "The map a ↦ qa from A_n(k) to a module M."
+  },
+  {
+   "decl": "Stafford38.Paper.Section2.qClass",
+   "note": "The class q of 1 in A_n(k)/I."
+  },
+  {
+   "decl": "Stafford38.Paper.Support.Gabber.qFilt",
+   "note": "The filtration Q_m = qF_m of Q = A_n(k)/I."
+  },
+  {
+   "decl": "Stafford38.Paper.Support.Gabber.GrModule",
+   "note": "The associated graded module as a module over k[x, ξ]."
+  },
+  {
+   "decl": "MvPolynomial.coeff",
+   "note": "Project abbreviation for the coefficient of a monomial in a multivariate polynomial."
+  },
+  {
+   "prefix": "Stafford38Challenge.",
+   "note": "Generators x_i, ∂_i, their index type, the standard symplectic matrix and the relations of the Mathlib-only formulation."
+  },
+  {
+   "prefix": "Stafford38FixedSourceChallenge.",
+   "note": "Generators, ordered monomials, Bernstein pieces and linear changes of generators used to state the moreover clause in the Mathlib-only formulation."
+  },
+  {
+   "prefix": "Stafford.",
+   "note": "Linear combinations of generators and the generator map of the free-algebra presentation."
+  },
+  {
+   "decl": "Stafford38.WeylSymplectic.standardSymplecticHpres",
+   "note": "The images Σ_j M_ij u_j of the generators satisfy the Weyl relations when M is symplectic."
+  },
+  {
+   "decl": "Stafford38.Paper.Section3.toMatrix_mem_symplecticGroup",
+   "note": "An ω-preserving linear map of 𝕍 has a matrix in Sp(2n, k)."
+  },
+  {
+   "decl": "Stafford38.WeylSymplectic.standardForm",
+   "note": "The matrix of the Weyl relations [∂_i, x_j] = δ_ij on generators indexed by Fin n ⊕ Fin n."
+  },
+  {
+   "decl": "Stafford38.WeylSymplectic.standardSymplecticAlgEquivOfInverse",
+   "note": "The algebra automorphism of A_n(k) given by a symplectic matrix and its inverse on generators."
+  },
+  {
+   "decl": "Stafford38.WeylSymplectic.standardSymplecticAlgHom",
+   "note": "The algebra endomorphism of A_n(k) that substitutes Σ_j M_ij u_j for the generator u_i."
+  },
+  {
+   "decl": "Stafford38.CharacteristicHomogeneousChart.axisPoint",
+   "note": "The point of k^{2n} with coordinate 1 at one index and 0 elsewhere (e_p for the index of ∂₁)."
+  },
+  {
+   "decl": "Stafford38.WeylEulerResidue.canonicalRightIdeal",
+   "note": "The right ideal dA + x^N dA generated by two elements."
+  }
+ ]
+}

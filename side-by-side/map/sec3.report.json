@@ -1,0 +1,1400 @@
+{
+ "anchors": {
+  "def:monic-xi1": {
+   "lean": [
+    {
+     "name": "Stafford38.Paper.Section3.IsMonicInXi1",
+     "range": {
+      "end": [
+       54,
+       49
+      ],
+      "start": [
+       48,
+       0
+      ]
+     }
+    }
+   ],
+   "paper": {
+    "line": 467,
+    "start": 32605
+   }
+  },
+  "eq:I-Q": {
+   "lean": [
+    {
+     "name": "Stafford38.Paper.Section3.idealI",
+     "range": {
+      "end": [
+       37,
+       35
+      ],
+      "start": [
+       34,
+       0
+      ]
+     }
+    },
+    {
+     "name": "Stafford38.Paper.Section3.Q",
+     "range": {
+      "end": [
+       41,
+       31
+      ],
+      "start": [
+       39,
+       0
+      ]
+     }
+    }
+   ],
+   "paper": {
+    "line": 456,
+    "start": 32171
+   }
+  },
+  "lem:order-symbol": {
+   "lean": [
+    {
+     "name": "Stafford38.Paper.Section3.lemma_3_5",
+     "range": {
+      "end": [
+       232,
+       66
+      ],
+      "start": [
+       205,
+       0
+      ]
+     }
+    },
+    {
+     "name": "Stafford38.Paper.Section3.lemma_3_5_eval_axis",
+     "range": {
+      "end": [
+       246,
+       13
+      ],
+      "start": [
+       234,
+       0
+      ]
+     }
+    }
+   ],
+   "paper": {
+    "line": 475,
+    "start": 33064
+   }
+  },
+  "lem:order-symbol.proof.sentences[0]": {
+   "paper": {
+    "line": 488,
+    "start": 33602
+   },
+   "steps": [
+    {
+     "index": 0,
+     "start": [
+      218,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:order-symbol.proof.sentences[1]": {
+   "paper": {
+    "line": 490,
+    "start": 33742
+   },
+   "steps": [
+    {
+     "index": 0,
+     "start": [
+      218,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:order-symbol.proof.sentences[2]": {
+   "paper": {
+    "line": 491,
+    "start": 33869
+   },
+   "steps": [
+    {
+     "index": 0,
+     "start": [
+      218,
+      2
+     ]
+    },
+    {
+     "index": 1,
+     "start": [
+      219,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:order-symbol.proof.sentences[3]": {
+   "paper": {
+    "line": 496,
+    "start": 34109
+   },
+   "steps": [
+    {
+     "index": 2,
+     "start": [
+      220,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:order-symbol.proof.sentences[4]": {
+   "paper": {
+    "line": 500,
+    "start": 34399
+   },
+   "steps": [
+    {
+     "index": 2,
+     "start": [
+      220,
+      2
+     ]
+    },
+    {
+     "index": 7,
+     "start": [
+      225,
+      2
+     ]
+    },
+    {
+     "index": 11,
+     "start": [
+      231,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:order-symbol.proof.sentences[5]": {
+   "paper": {
+    "line": 503,
+    "start": 34626
+   },
+   "steps": [
+    {
+     "index": 11,
+     "start": [
+      231,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:sympcompl": {
+   "lean": [
+    {
+     "name": "Stafford38.Paper.Section3.lemma_3_1",
+     "range": {
+      "end": [
+       294,
+       69
+      ],
+      "start": [
+       264,
+       0
+      ]
+     }
+    }
+   ],
+   "paper": {
+    "line": 335,
+    "start": 23962
+   }
+  },
+  "lem:sympcompl.proof.sentences[0]": {
+   "paper": {
+    "line": 343,
+    "start": 24367
+   },
+   "steps": [
+    {
+     "index": 3,
+     "start": [
+      282,
+      4
+     ]
+    }
+   ]
+  },
+  "lem:sympcompl.proof.sentences[1]": {
+   "paper": {
+    "line": 347,
+    "start": 24566
+   },
+   "steps": []
+  },
+  "lem:sympcompl.proof.sentences[2]": {
+   "paper": {
+    "line": 347,
+    "start": 24600
+   },
+   "steps": [
+    {
+     "index": 4,
+     "start": [
+      283,
+      4
+     ]
+    }
+   ]
+  },
+  "lem:sympcompl.proof.sentences[3]": {
+   "paper": {
+    "line": 349,
+    "start": 24722
+   },
+   "steps": [
+    {
+     "index": 4,
+     "start": [
+      283,
+      4
+     ]
+    }
+   ]
+  },
+  "lem:sympcompl.proof.sentences[4]": {
+   "paper": {
+    "line": 352,
+    "start": 24798
+   },
+   "steps": [
+    {
+     "index": 4,
+     "start": [
+      283,
+      4
+     ]
+    }
+   ]
+  },
+  "lem:sympcompl.proof.sentences[5]": {
+   "paper": {
+    "line": 354,
+    "start": 24997
+   },
+   "steps": [
+    {
+     "index": 4,
+     "start": [
+      283,
+      4
+     ]
+    }
+   ]
+  },
+  "lem:sympcompl.proof.sentences[6]": {
+   "paper": {
+    "line": 359,
+    "start": 25196
+   },
+   "steps": [
+    {
+     "index": 8,
+     "start": [
+      286,
+      4
+     ]
+    }
+   ]
+  },
+  "lem:sympcompl.proof.sentences[7]": {
+   "paper": {
+    "line": 365,
+    "start": 25513
+   },
+   "steps": [
+    {
+     "index": 11,
+     "start": [
+      289,
+      2
+     ]
+    },
+    {
+     "index": 13,
+     "start": [
+      291,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:sympcompl.proof.sentences[8]": {
+   "paper": {
+    "line": 365,
+    "start": 25621
+   },
+   "steps": [
+    {
+     "index": 16,
+     "start": [
+      293,
+      2
+     ]
+    }
+   ]
+  },
+  "lem:sympcompl.proof.sentences[9]": {
+   "paper": {
+    "line": 365,
+    "start": 25817
+   },
+   "steps": [
+    {
+     "index": 16,
+     "start": [
+      293,
+      2
+     ]
+    },
+    {
+     "index": 17,
+     "start": [
+      294,
+      2
+     ]
+    }
+   ]
+  },
+  "par:V": {
+   "lean": [
+    {
+     "name": "Stafford38.Paper.Section2.finrank_phaseSpace",
+     "range": {
+      "end": [
+       102,
+       16
+      ],
+      "start": [
+       99,
+       0
+      ]
+     }
+    },
+    {
+     "name": "Stafford38.CharacteristicSymplecticCompletion.phaseBasis",
+     "range": {
+      "end": [
+       35,
+       33
+      ],
+      "start": [
+       34,
+       0
+      ]
+     }
+    }
+   ],
+   "paper": {
+    "line": 330,
+    "start": 23589
+   }
+  },
+  "par:monic-goal": {
+   "lean": [],
+   "paper": {
+    "line": 319,
+    "start": 22915
+   }
+  },
+  "par:order-symbol": {
+   "lean": [
+    {
+     "name": "Stafford38.Paper.Section3.orderSymbol",
+     "range": {
+      "end": [
+       58,
+       53
+      ],
+      "start": [
+       56,
+       0
+      ]
+     }
+    }
+   ],
+   "paper": {
+    "line": 462,
+    "start": 32317
+   }
+  },
+  "par:phi-g": {
+   "lean": [
+    {
+     "name": "Stafford38.Paper.Section3.phiG",
+     "range": {
+      "end": [
+       79,
+       45
+      ],
+      "start": [
+       65,
+       0
+      ]
+     }
+    },
+    {
+     "name": "Stafford38.Paper.Section3.step_phi_g",
+     "range": {
+      "end": [
+       112,
+       36
+      ],
+      "start": [
+       91,
+       0
+      ]
+     }
+    }
+   ],
+   "paper": {
+    "line": 371,
+    "start": 26386
+   }
+  },
+  "par:scalar-case": {
+   "lean": [
+    {
+     "name": "Stafford38.Paper.Section3.step_scalar_case",
+     "range": {
+      "end": [
+       51,
+       65
+      ],
+      "start": [
+       39,
+       0
+      ]
+     }
+    }
+   ],
+   "paper": {
+    "line": 321,
+    "start": 23098
+   }
+  },
+  "par:three-stages": {
+   "lean": [],
+   "paper": {
+    "line": 324,
+    "start": 23260
+   }
+  },
+  "prop:charP": {
+   "lean": [
+    {
+     "name": "Stafford38.Paper.Section3.proposition_3_6",
+     "range": {
+      "end": [
+       297,
+       48
+      ],
+      "start": [
+       287,
+       0
+      ]
+     }
+    },
+    {
+     "name": "Stafford38.Paper.Section3.grQ",
+     "range": {
+      "end": [
+       251,
+       28
+      ],
+      "start": [
+       248,
+       0
+      ]
+     }
+    }
+   ],
+   "paper": {
+    "line": 510,
+    "start": 35372
+   }
+  },
+  "prop:charP.proof.sentences[0]": {
+   "paper": {
+    "line": 518,
+    "start": 35704
+   },
+   "steps": [
+    {
+     "index": 3,
+     "start": [
+      296,
+      2
+     ]
+    }
+   ]
+  },
+  "prop:charP.proof.sentences[1]": {
+   "paper": {
+    "line": 518,
+    "start": 35760
+   },
+   "steps": []
+  },
+  "prop:charP.proof.sentences[2]": {
+   "paper": {
+    "line": 518,
+    "start": 35805
+   },
+   "steps": [
+    {
+     "index": 0,
+     "start": [
+      293,
+      2
+     ]
+    },
+    {
+     "index": 4,
+     "start": [
+      297,
+      2
+     ]
+    }
+   ]
+  },
+  "prop:charP.proof.sentences[3]": {
+   "paper": {
+    "line": 518,
+    "start": 35964
+   },
+   "steps": [
+    {
+     "index": 4,
+     "start": [
+      297,
+      2
+     ]
+    }
+   ]
+  },
+  "prop:charP.proof.sentences[4]": {
+   "paper": {
+    "line": 519,
+    "start": 36103
+   },
+   "steps": [
+    {
+     "index": 1,
+     "start": [
+      294,
+      2
+     ]
+    },
+    {
+     "index": 2,
+     "start": [
+      295,
+      2
+     ]
+    },
+    {
+     "index": 3,
+     "start": [
+      296,
+      2
+     ]
+    },
+    {
+     "index": 4,
+     "start": [
+      297,
+      2
+     ]
+    }
+   ]
+  },
+  "prop:monic": {
+   "lean": [
+    {
+     "name": "Stafford38.Paper.Section3.proposition_3_2",
+     "range": {
+      "end": [
+       255,
+       58
+      ],
+      "start": [
+       239,
+       0
+      ]
+     }
+    },
+    {
+     "name": "Stafford38.Paper.Section3.IsMonicNormalForm",
+     "range": {
+      "end": [
+       47,
+       60
+      ],
+      "start": [
+       42,
+       0
+      ]
+     }
+    },
+    {
+     "name": "Stafford38.Paper.Section3.step_3_2_decomposition",
+     "range": {
+      "end": [
+       189,
+       22
+      ],
+      "start": [
+       176,
+       0
+      ]
+     }
+    },
+    {
+     "name": "Stafford38.Paper.Section3.step_3_2_leading",
+     "range": {
+      "end": [
+       224,
+       9
+      ],
+      "start": [
+       191,
+       0
+      ]
+     }
+    },
+    {
+     "name": "Stafford38.Paper.Section3.step_3_2_monic",
+     "range": {
+      "end": [
+       237,
+       20
+      ],
+      "start": [
+       226,
+       0
+      ]
+     }
+    }
+   ],
+   "paper": {
+    "line": 384,
+    "start": 27448
+   }
+  },
+  "prop:monic.proof.sentences[0]": {
+   "paper": {
+    "line": 395,
+    "start": 27859
+   },
+   "steps": [
+    {
+     "index": 0,
+     "start": [
+      248,
+      2
+     ]
+    }
+   ]
+  },
+  "prop:monic.proof.sentences[10]": {
+   "paper": {
+    "line": 410,
+    "start": 28954
+   },
+   "steps": [
+    {
+     "index": 4,
+     "start": [
+      252,
+      2
+     ]
+    }
+   ]
+  },
+  "prop:monic.proof.sentences[11]": {
+   "paper": {
+    "line": 415,
+    "start": 29297
+   },
+   "steps": [
+    {
+     "index": 4,
+     "start": [
+      252,
+      2
+     ]
+    }
+   ]
+  },
+  "prop:monic.proof.sentences[12]": {
+   "paper": {
+    "line": 415,
+    "start": 29341
+   },
+   "steps": [
+    {
+     "index": 4,
+     "start": [
+      252,
+      2
+     ]
+    }
+   ]
+  },
+  "prop:monic.proof.sentences[13]": {
+   "paper": {
+    "line": 418,
+    "start": 29535
+   },
+   "steps": [
+    {
+     "index": 5,
+     "start": [
+      253,
+      2
+     ]
+    }
+   ]
+  },
+  "prop:monic.proof.sentences[14]": {
+   "paper": {
+    "line": 420,
+    "start": 29690
+   },
+   "steps": [
+    {
+     "index": 5,
+     "start": [
+      253,
+      2
+     ]
+    }
+   ]
+  },
+  "prop:monic.proof.sentences[15]": {
+   "paper": {
+    "line": 422,
+    "start": 29763
+   },
+   "steps": [
+    {
+     "index": 6,
+     "start": [
+      254,
+      2
+     ]
+    }
+   ]
+  },
+  "prop:monic.proof.sentences[16]": {
+   "paper": {
+    "line": 422,
+    "start": 29778
+   },
+   "steps": [
+    {
+     "index": 6,
+     "start": [
+      254,
+      2
+     ]
+    }
+   ]
+  },
+  "prop:monic.proof.sentences[17]": {
+   "paper": {
+    "line": 425,
+    "start": 29939
+   },
+   "steps": [
+    {
+     "index": 7,
+     "start": [
+      255,
+      2
+     ]
+    }
+   ]
+  },
+  "prop:monic.proof.sentences[18]": {
+   "paper": {
+    "line": 426,
+    "start": 30059
+   },
+   "steps": [
+    {
+     "index": 7,
+     "start": [
+      255,
+      2
+     ]
+    }
+   ]
+  },
+  "prop:monic.proof.sentences[19]": {
+   "paper": {
+    "line": 430,
+    "start": 30273
+   },
+   "steps": [
+    {
+     "index": 7,
+     "start": [
+      255,
+      2
+     ]
+    }
+   ]
+  },
+  "prop:monic.proof.sentences[1]": {
+   "paper": {
+    "line": 396,
+    "start": 27984
+   },
+   "steps": [
+    {
+     "index": 1,
+     "start": [
+      249,
+      2
+     ]
+    }
+   ]
+  },
+  "prop:monic.proof.sentences[20]": {
+   "paper": {
+    "line": 434,
+    "start": 30535
+   },
+   "steps": [
+    {
+     "index": 7,
+     "start": [
+      255,
+      2
+     ]
+    }
+   ]
+  },
+  "prop:monic.proof.sentences[2]": {
+   "paper": {
+    "line": 398,
+    "start": 28124
+   },
+   "steps": [
+    {
+     "index": 1,
+     "start": [
+      249,
+      2
+     ]
+    }
+   ]
+  },
+  "prop:monic.proof.sentences[3]": {
+   "paper": {
+    "line": 399,
+    "start": 28219
+   },
+   "steps": []
+  },
+  "prop:monic.proof.sentences[4]": {
+   "paper": {
+    "line": 400,
+    "start": 28292
+   },
+   "steps": [
+    {
+     "index": 2,
+     "start": [
+      250,
+      2
+     ]
+    }
+   ]
+  },
+  "prop:monic.proof.sentences[5]": {
+   "paper": {
+    "line": 402,
+    "start": 28402
+   },
+   "steps": [
+    {
+     "index": 3,
+     "start": [
+      251,
+      2
+     ]
+    }
+   ]
+  },
+  "prop:monic.proof.sentences[6]": {
+   "paper": {
+    "line": 403,
+    "start": 28497
+   },
+   "steps": [
+    {
+     "index": 3,
+     "start": [
+      251,
+      2
+     ]
+    }
+   ]
+  },
+  "prop:monic.proof.sentences[7]": {
+   "paper": {
+    "line": 405,
+    "start": 28630
+   },
+   "steps": [
+    {
+     "index": 3,
+     "start": [
+      251,
+      2
+     ]
+    }
+   ]
+  },
+  "prop:monic.proof.sentences[8]": {
+   "paper": {
+    "line": 406,
+    "start": 28753
+   },
+   "steps": [
+    {
+     "index": 3,
+     "start": [
+      251,
+      2
+     ]
+    }
+   ]
+  },
+  "prop:monic.proof.sentences[9]": {
+   "paper": {
+    "line": 409,
+    "start": 28854
+   },
+   "steps": [
+    {
+     "index": 3,
+     "start": [
+      251,
+      2
+     ]
+    }
+   ]
+  },
+  "rem:transport": {
+   "lean": [
+    {
+     "name": "Stafford38.Paper.Section3.remark_3_3",
+     "range": {
+      "end": [
+       87,
+       80
+      ],
+      "start": [
+       74,
+       0
+      ]
+     }
+    },
+    {
+     "name": "Stafford38.Paper.Section3.remark_3_3_of_Q_eq_zero",
+     "range": {
+      "end": [
+       98,
+       86
+      ],
+      "start": [
+       89,
+       0
+      ]
+     }
+    },
+    {
+     "name": "Stafford38.Paper.Section3.section_3_reduction",
+     "range": {
+      "end": [
+       120,
+       38
+      ],
+      "start": [
+       100,
+       0
+      ]
+     }
+    }
+   ],
+   "paper": {
+    "line": 447,
+    "start": 31626
+   }
+  }
+ },
+ "cards": [
+  {
+   "account": null,
+   "fingerprint": "34bdc51b6856b08e",
+   "flags": [],
+   "id": "par:monic-goal",
+   "kind": "prose",
+   "lean": [],
+   "paper_line": 319,
+   "title": "Paragraph: aim of Section 3"
+  },
+  {
+   "account": null,
+   "fingerprint": "161778fb443b8cec",
+   "flags": [
+    "Lean-only definitions"
+   ],
+   "id": "par:scalar-case",
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section3.step_scalar_case"
+   ],
+   "paper_line": 321,
+   "title": "Paragraph: N = 0"
+  },
+  {
+   "account": null,
+   "fingerprint": "853d7f3694073b80",
+   "flags": [],
+   "id": "par:three-stages",
+   "kind": "prose",
+   "lean": [],
+   "paper_line": 324,
+   "title": "Paragraph: plan"
+  },
+  {
+   "account": null,
+   "fingerprint": "53cdba676b647e84",
+   "flags": [],
+   "id": "par:V",
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section2.finrank_phaseSpace",
+    "Stafford38.CharacteristicSymplecticCompletion.phaseBasis"
+   ],
+   "paper_line": 330,
+   "title": "Paragraph: 𝕍 = k^{2n}"
+  },
+  {
+   "account": {
+    "cited": [],
+    "large": 0,
+    "lean_adds": 7,
+    "matched": 9,
+    "only_lean": [],
+    "only_paper": [],
+    "prose": 1,
+    "sentences": 10,
+    "used": []
+   },
+   "fingerprint": "5c69aba4a37c9d25",
+   "flags": [
+    "Lean adds",
+    "prose"
+   ],
+   "id": "lem:sympcompl",
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section3.lemma_3_1"
+   ],
+   "paper_line": 335,
+   "title": "Lemma 3.1"
+  },
+  {
+   "account": null,
+   "fingerprint": "fec3bec69b2353c3",
+   "flags": [
+    "Lean-only definitions"
+   ],
+   "id": "par:phi-g",
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section3.phiG",
+    "Stafford38.Paper.Section3.step_phi_g"
+   ],
+   "paper_line": 371,
+   "title": "Paragraph: Φ_g"
+  },
+  {
+   "account": {
+    "cited": [
+     "lem:sympcompl"
+    ],
+    "large": 0,
+    "lean_adds": 0,
+    "matched": 20,
+    "only_lean": [
+     "def:symplectic",
+     "par:V"
+    ],
+    "only_paper": [],
+    "prose": 1,
+    "sentences": 21,
+    "used": [
+     "def:symplectic",
+     "lem:sympcompl",
+     "par:V"
+    ]
+   },
+   "fingerprint": "d0adfb70825f84c4",
+   "flags": [
+    "Lean-only definitions",
+    "prose"
+   ],
+   "id": "prop:monic",
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section3.proposition_3_2",
+    "Stafford38.Paper.Section3.IsMonicNormalForm",
+    "Stafford38.Paper.Section3.step_3_2_decomposition",
+    "Stafford38.Paper.Section3.step_3_2_leading",
+    "Stafford38.Paper.Section3.step_3_2_monic"
+   ],
+   "paper_line": 384,
+   "title": "Proposition 3.2"
+  },
+  {
+   "account": null,
+   "fingerprint": "b6f4735da385ccbc",
+   "flags": [
+    "Lean-only definitions"
+   ],
+   "id": "rem:transport",
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section3.remark_3_3",
+    "Stafford38.Paper.Section3.remark_3_3_of_Q_eq_zero",
+    "Stafford38.Paper.Section3.section_3_reduction"
+   ],
+   "paper_line": 447,
+   "title": "Remark 3.3"
+  },
+  {
+   "account": null,
+   "fingerprint": "2db70c9f0bedb633",
+   "flags": [],
+   "id": "eq:I-Q",
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section3.idealI",
+    "Stafford38.Paper.Section3.Q"
+   ],
+   "paper_line": 456,
+   "title": "Paragraph: 𝓘 and Q, (3.2)"
+  },
+  {
+   "account": null,
+   "fingerprint": "3f88eb69f71c32b7",
+   "flags": [
+    "Lean-only definitions"
+   ],
+   "id": "par:order-symbol",
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section3.orderSymbol"
+   ],
+   "paper_line": 462,
+   "title": "Paragraph: P = σ_N^ord(d̃)"
+  },
+  {
+   "account": null,
+   "fingerprint": "db6aaf04cebbb405",
+   "flags": [],
+   "id": "def:monic-xi1",
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section3.IsMonicInXi1"
+   ],
+   "paper_line": 467,
+   "title": "Definition 3.4"
+  },
+  {
+   "account": {
+    "cited": [],
+    "large": 1,
+    "lean_adds": 2,
+    "matched": 6,
+    "only_lean": [],
+    "only_paper": [],
+    "prose": 0,
+    "sentences": 6,
+    "used": []
+   },
+   "fingerprint": "be46c26241932e3d",
+   "flags": [
+    "Lean-only definitions",
+    "Lean adds",
+    "large step"
+   ],
+   "id": "lem:order-symbol",
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section3.lemma_3_5",
+    "Stafford38.Paper.Section3.lemma_3_5_eval_axis"
+   ],
+   "paper_line": 475,
+   "title": "Lemma 3.5"
+  },
+  {
+   "account": {
+    "cited": [
+     "lem:order-symbol"
+    ],
+    "large": 0,
+    "lean_adds": 0,
+    "matched": 4,
+    "only_lean": [
+     "par:cyclic-good"
+    ],
+    "only_paper": [],
+    "prose": 1,
+    "sentences": 5,
+    "used": [
+     "lem:order-symbol",
+     "par:cyclic-good"
+    ]
+   },
+   "fingerprint": "d82b7c864f1eaf6e",
+   "flags": [
+    "Lean-only definitions",
+    "prose"
+   ],
+   "id": "prop:charP",
+   "kind": "formalizes",
+   "lean": [
+    "Stafford38.Paper.Section3.proposition_3_6",
+    "Stafford38.Paper.Section3.grQ"
+   ],
+   "paper_line": 510,
+   "title": "Proposition 3.6"
+  }
+ ],
+ "errors": [],
+ "graph": {
+  "graphviz": "dot - graphviz version 16.1.0 (0)",
+  "overall": [
+   {
+    "from": "par:scalar-case",
+    "kind": "lean",
+    "to": "rem:transport"
+   },
+   {
+    "from": "par:V",
+    "kind": "lean-only",
+    "to": "prop:monic"
+   },
+   {
+    "from": "lem:sympcompl",
+    "kind": "both",
+    "to": "prop:monic"
+   },
+   {
+    "from": "par:phi-g",
+    "kind": "def",
+    "to": "prop:monic"
+   },
+   {
+    "from": "par:phi-g",
+    "kind": "lean",
+    "to": "rem:transport"
+   },
+   {
+    "from": "prop:monic",
+    "kind": "lean",
+    "to": "rem:transport"
+   },
+   {
+    "from": "prop:monic",
+    "kind": "paper-only",
+    "to": "lem:order-symbol"
+   },
+   {
+    "from": "prop:monic",
+    "kind": "def",
+    "to": "prop:charP"
+   },
+   {
+    "from": "eq:I-Q",
+    "kind": "def",
+    "to": "rem:transport"
+   },
+   {
+    "from": "eq:I-Q",
+    "kind": "def",
+    "to": "prop:charP"
+   },
+   {
+    "from": "par:order-symbol",
+    "kind": "def",
+    "to": "lem:order-symbol"
+   },
+   {
+    "from": "par:order-symbol",
+    "kind": "def",
+    "to": "prop:charP"
+   },
+   {
+    "from": "def:monic-xi1",
+    "kind": "def",
+    "to": "lem:order-symbol"
+   },
+   {
+    "from": "lem:order-symbol",
+    "kind": "both",
+    "to": "prop:charP"
+   }
+  ]
+ },
+ "schema": "paper-lean-audit/report-2",
+ "warnings": [
+  "unresolved \\leandecl{Stafford38/Characteristic/PaperSymplecticBasis.lean}{134}{Stafford38.CharacteristicPaperSymplecticBasis.exists_symplectic_basis}",
+  "unresolved \\leandecl{Stafford38/Characteristic/PaperSymplecticBasis.lean}{283}{Stafford38.CharacteristicPaperSymplecticBasis.exists_symplectic_basis_with_pair}",
+  "unresolved \\leandecl{Stafford38/Characteristic/SymplecticCompletion.lean}{238}{Stafford38.CharacteristicSymplecticCompletion.exists_symplectic_mulVec_eq}",
+  "unresolved \\leandecl{Stafford38/Weyl/Symplectic.lean}{46}{Stafford38.WeylSymplectic.standardSymplecticAlgHom}",
+  "unresolved \\leandecl{Stafford38/Weyl/Symplectic.lean}{91}{Stafford38.WeylSymplectic.standardSymplecticAlgEquivOfInverse}",
+  "unresolved \\leandecl{Stafford38/Weyl/SymbolCompatibility.lean}{416}{Stafford38.WeylSymbolCompatibility.standardSymplecticAlgHom_principal_compatibility}",
+  "unresolved \\leandecl{Stafford38/Weyl/MonicNormalization.lean}{158}{Stafford38.WeylMonicNormalization.exists_normalized_symplectic_image}",
+  "unresolved \\leandecl{Stafford38/Weyl/MonicNormalization.lean}{181}{Stafford38.WeylMonicNormalization.scalar_or_normalized_symplectic_image}",
+  "unresolved \\leandecl{Stafford38/Weyl/PBWMonicBridge.lean}{98}{Stafford38.WeylPBWMonicBridge.IsPBWMonicAt}",
+  "unresolved \\leandecl{Stafford38/Weyl/PaperRightMonic.lean}{669}{Stafford38.WeylPaperRightMonic.presentedOuter_right_monic_decomposition}",
+  "unresolved \\leandecl{Stafford38/Characteristic/SymplecticCompletion.lean}{346}{Stafford38.CharacteristicSymplecticCompletion.exists_symplectic_chart_matrices}",
+  "unresolved \\leandecl{Stafford38/UniversalAssembly.lean}{69}{Stafford38.UniversalAssembly.universalStatement_of_canonicalSupportVanishing}",
+  "unresolved \\leandecl{Stafford38/FixedSourceAssembly.lean}{24}{Stafford38.FixedSource.universalFixedSourceStatement_of_canonicalSupportVanishing}",
+  "unresolved \\leandecl{Stafford38/Characteristic/NormalSymbolPolynomial.lean}{28}{Stafford38.Characteristic.NormalSymbolPolynomial.normalSymbolAlgEquiv}",
+  "unresolved \\leandecl{Stafford38/Characteristic/InitialIdeal.lean}{320}{Stafford38.CharacteristicInitialIdeal.canonical_orderPrincipalComponent_isFibreOnly}",
+  "unresolved \\leandecl{Stafford38/Geometry/ConormalAxisContradiction.lean}{61}{Stafford38.Geometry.ConormalAxisContradiction.canonical_orderPrincipalComponent_isHomogeneous}",
+  "unresolved \\leandecl{Stafford38/Characteristic/NormalSymbolPolynomial.lean}{104}{Stafford38.Characteristic.NormalSymbolPolynomial.canonicalNormalPolynomial_monic}",
+  "unresolved \\leandecl{Stafford38/Geometry/ConormalAxisContradiction.lean}{131}{Stafford38.Geometry.ConormalAxisContradiction.canonical_orderPrincipalComponent_eval_pureMomentumAxis}"
+ ]
+}
