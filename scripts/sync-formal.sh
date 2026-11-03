@@ -84,7 +84,7 @@ checkout_formal() {
 }
 
 dump_map() {
-  capped python3 "$here/check-map.py" dump --formal "$formal" --out "$1"
+  capped python3 "$here/check-map.py" dump --map "$wt/paper-lean-map.json" --formal "$formal" --out "$1"
 }
 
 tools_key() { cat "$here/check-map.py" "$here/MapDeclarations.lean" | sha256sum | cut -c1-12; }
@@ -426,7 +426,7 @@ step formal-build build_formal
 step map-dump dump_map "$run/map-new.json"
 mkdir -p "$cache/dumps" && cp "$run/map-new.json" "$cache/dumps/$target-$(tools_key).json"
 current=map-check
-if ! python3 "$here/check-map.py" compare "$run/map-old.json" "$run/map-new.json" "${reviewed[@]}" >"$run/map-check.log" 2>&1; then
+if ! python3 "$here/check-map.py" compare --map "$wt/paper-lean-map.json" "$run/map-old.json" "$run/map-new.json" "${reviewed[@]}" >"$run/map-check.log" 2>&1; then
   cat "$run/map-check.log" >&2
   die "add or correct the cards in $wt/paper-lean-map.json (or pass --reviewed NAME after checking a changed statement), then rerun $0 $target"
 fi

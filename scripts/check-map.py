@@ -79,7 +79,7 @@ def comparators(formal):
 
 def dump(args):
     formal = args.formal.resolve()
-    mapping = json.loads((root / 'paper-lean-map.json').read_text())
+    mapping = json.loads(args.map.read_text())
     tracked = set(git(formal, 'ls-files', '*.lean').split())
     built = lambda f: (formal / '.lake/build/lib/lean' / f).with_suffix('.olean').exists()
     groups = {MAIN: (set(MAIN_ROOTS), set())}
@@ -129,7 +129,7 @@ def paper_declarations(data):
 
 def compare(args):
     old, new = (json.loads(p.read_text()) for p in (args.old, args.new))
-    mapping = json.loads((root / 'paper-lean-map.json').read_text())
+    mapping = json.loads(args.map.read_text())
     reviewed = set(args.reviewed)
     same_toolchain = old['toolchain'] == new['toolchain']
     at = f"formal {new['formal_commit'][:7]}"
@@ -193,6 +193,9 @@ def main():
     c.add_argument('new', type=Path)
     c.add_argument('--reviewed', action='append', default=[], metavar='NAME',
                    help='declaration whose changed statement the cards were checked against')
+    for p in (d, c):
+        p.add_argument('--map', type=Path, default=root / 'paper-lean-map.json',
+                       help='paper-lean-map.json to check (default: the one beside this script)')
     args = parser.parse_args()
     dump(args) if args.command == 'dump' else compare(args)
 
