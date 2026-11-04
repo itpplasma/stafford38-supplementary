@@ -25,8 +25,8 @@
     },
     "formal": {
       "repo": "itpplasma/stafford38-formal",
-      "commit": "8c417b3a9f0043d85967059cc51a7bbec65ec6ec",
-      "note": "Formal proof at the merge that proves Theorem 5.7 along the printed proof of Section 5.2 (Stafford38/Paper/Section5).",
+      "commit": "1029fdb382eee06e7b59bcf32801f40931e2079a",
+      "note": "Formal proof at commit 1029fdb: Define A_{≥0} by the Euler grading and prove Lemma 4.2 positivity by Euler degree.",
       "label": "This project (Stafford38)",
       "local_source_base": "./sources/formal"
     },
@@ -1537,7 +1537,7 @@
       "label": "ithm:gabber",
       "statement_relation": "exact",
       "route_relation": "lean-only",
-      "correspondence": "Section2.theorem_2_11 states the theorem as printed: for a field K of characteristic zero and a finitely generated right A_n(K)-module M with a good order filtration (IsGoodFiltration, Definition 2.4: compatible, exhaustive, gr M finite over K[x, ξ]), √(Ann_{K[x,ξ]} gr M) is involutive. The paper cites it [Gab81, SK14, HTT Thm. D.3.4] without proof; the repository proves it by its own route: Support.Gabber.theorem_2_11_general reduces it to cyclic modules (independence of the good filtration, exactness of gr for induced filtrations, induction on the number of generators), and the cyclic case M = A_n(K)/I is GabberGlobalAssembly.associatedGraded_radical_isInvolutive, which follows Gabber and Singh–Kumar (order-Rees ring modulo T², Ore localization at a minimal prime, an Artinian special fibre with a coefficient field, and a trace argument). theorem_2_11_cyclic is the case used in Section 6.",
+      "correspondence": "Section2.theorem_2_11 states the theorem as printed: for a field K of characteristic zero and a finitely generated right A_n(K)-module M with a good order filtration (IsGoodFiltration, Definition 2.4: compatible, exhaustive, gr M finite over K[x, ξ]), √(Ann_{K[x,ξ]} gr M) is involutive. The paper cites it [Gab81, SK14, HTT Thm. D.3.4] without proof; the repository proves it by its own route: Support.Gabber.theorem_2_11_general reduces it to cyclic modules (independence of the good filtration, exactness of gr for induced filtrations, induction on the number of generators), and the cyclic case M = A_n(K)/I is GabberGlobalAssembly.associatedGraded_radical_isInvolutive, which follows Gabber and Singh–Kumar (order-Rees ring modulo T², Ore localization at a minimal prime, an Artinian special fibre with a coefficient field, and a trace argument). theorem_2_11_cyclic is the case used in Lemma 4.10 and Section 6.",
       "route": "theorem_2_11 → Support.Gabber.theorem_2_11_general → GabberGlobalAssembly.associatedGraded_radical_isInvolutive (cyclic case).",
       "lean": [
         {
@@ -1893,7 +1893,7 @@
       "label": "prop:monic",
       "statement_relation": "exact",
       "route_relation": "same",
-      "correspondence": "proposition_3_2 states the proposition for A_{n+1}(k), k of characteristic zero: for 0 ≠ d with N = deg_B d ≥ 1 there are g ∈ Sp(2(n+1), k) and c ≠ 0 with c⁻¹Φ_g(d) in the normal form (3.1) (IsMonicNormalForm: p^N + Σ_{j<N} p^j a_j, a_j ∈ C, deg_B a_j ≤ N − j) and deg_B(c⁻¹Φ_g(d)) = deg_B d. The proof follows the five paragraphs, one step each, and the fifth paragraph in three steps; step_3_2_h applies Lemma 3.1, and step_3_2_decomposition the normal form of Convention 2.2 with the degree bound of Section3.exists_bounded_decomposition.",
+      "correspondence": "proposition_3_2 states the proposition for A_{n+1}(k), k of characteristic zero: for 0 ≠ d with N = deg_B d ≥ 1 there are g ∈ Sp(2(n+1), k) and c ≠ 0 with c⁻¹Φ_g(d) in the normal form (3.1) (IsMonicNormalForm: p^N + Σ_{j<N} p^j a_j, a_j ∈ C, deg_B a_j ≤ N − j) and deg_B(c⁻¹Φ_g(d)) = deg_B d. The proof follows the five paragraphs, one step each, and the fifth paragraph in three steps; step_3_2_h applies Lemma 3.1, and step_3_2_decomposition the normal form of Convention 2.2 with the degree bound of Section3.exists_bounded_decomposition. Section3.bernsteinDegree_eq_of_isMonicNormalForm shows the last sentence for every d̃ in the form (3.1): deg_B d̃ = N.",
       "route": "proposition_3_2 → step_3_2_nonvanishing → step_3_2_h (lemma_3_1) → step_3_2_transpose → step_3_2_symbol → step_3_2_normalize → step_3_2_monic (step_3_2_decomposition, step_3_2_leading).",
       "lean": [
         {
@@ -1963,6 +1963,13 @@
           "repo": "formal",
           "role": "step",
           "note": "Paragraph 5: conclusion (3.1)."
+        },
+        {
+          "file": "Stafford38/Paper/Section3/MonicForm.lean",
+          "name": "Stafford38.Paper.Section3.bernsteinDegree_eq_of_isMonicNormalForm",
+          "repo": "formal",
+          "role": "step",
+          "note": "Last sentence: deg_B d̃ = N for d̃ in the form (3.1)."
         },
         {
           "file": "Stafford38/Paper/Section3/Symplectic.lean",
@@ -2384,8 +2391,8 @@
       "section": "4",
       "kind": "Paragraph",
       "number": "",
-      "short": "Transverse–Euler subring",
-      "title": "Transverse–Euler subring and one-sided normality",
+      "short": "Euler grading and A_{≥0}",
+      "title": "Euler grading, A_{≥0} and normality of x₁",
       "tex_lines": [
         523,
         543
@@ -2393,25 +2400,306 @@
       "label": "eq:nonnegative-pbw",
       "statement_relation": "exact",
       "route_relation": "same",
-      "correspondence": "eq_nonnegative_pbw gives the four relations (eq:nonnegative-pbw) from p x₁ = x₁ p + 1, for E = x₁p. A_{≥0} is the subring generated by the transverse algebra, E and x₁, as printed (WeylEulerSubring.eulerSubring). step_coordinate_normal is the one-sided normality x₁r = r′x₁ for r ∈ A_{≥0}, the only normality used.",
+      "correspondence": "Lean defines the grading as printed: eulerDegree is the part of Euler degree m, the eigenspace [E, z] = m z of the commutator [E, ·] (eulerCommutator) with E = x₁p (eulerElement), and the grading is multiplicative (eulerDegree_mul). x₁ has Euler degree 1 (coordinate_mem_eulerDegree), elements commuting with x₁ and p, such as the transverse Weyl algebra, have degree 0 (mem_eulerDegree_zero_of_commute), and a PBW monomial b x₁^a p^c has degree a − c (pairMonomial_mem_eulerDegree). Lean does not state separately for A_n that p has degree −1 or that A_n is the sum of its degree parts; both are used at the pair stage, as the degree a − c of b x₁^a p^c and as the decomposition into homogeneous PBW monomials (mem_iSup_pairWeightSpan). A_{≥0} is the nonnegative part, the sum of the parts of degree m ≥ 0 (nonnegativePart; presentedNonnegativePart in A_n). step_nonnegative_pbw proves that A_{≥0} is generated by the transverse algebra, E and x₁ (WeylEulerSubring.eulerSubring): these lie in A_{≥0} (eulerSubring_le_nonnegativePart), and in PBW form an element of degree m ≥ 0 is a sum of monomials b x₁^a p^c with a − c = m (mem_pairWeightSpan_of_mem_eulerDegree), each in the pair-stage subring generated by the coefficients, x₁ and E (pairWeightSpan_le_eulerSubring), which A_n ≃ PairStage(A_{n−1}) maps into the subring of A_n generated by the transverse algebra, x₁ and E (iterated_eulerSubring_le). eq_nonnegative_pbw gives the four relations (eq:nonnegative-pbw) from p x₁ = x₁ p + 1. step_coordinate_normal derives the normality x₁r = r′x₁ (r, r′ ∈ A_{≥0}) from x₁ commuting with the transverse algebra and the PBW description, and presented_coordinate_normal is the case of A_n. step_positive_mem_nonnegative_mul_coordinate proves that every element of Euler degree ≥ 1 (presentedPositivePart) lies in A_{≥0}x₁: in PBW form b x₁^a p^c = b x₁^{a−c−1} · x₁(x₁^c p^c) with a > c, where x₁^c p^c is a polynomial in E and x₁ crosses it by normality (pairWeightSpan_eq_mul_coordinate).",
       "route": null,
       "lean": [
         {
           "file": "Stafford38/Paper/Section4/Euler.lean",
           "name": "Stafford38.Paper.Section4.eq_nonnegative_pbw",
           "repo": "formal",
-          "role": "statement"
+          "role": "statement",
+          "note": "Equation (nonnegative-pbw)."
+        },
+        {
+          "file": "Stafford38/Paper/Section4/Euler.lean",
+          "name": "Stafford38.Paper.Section4.eulerElement",
+          "repo": "formal",
+          "role": "definition",
+          "note": "E = x₁p."
+        },
+        {
+          "file": "Stafford38/Paper/Section4/Euler.lean",
+          "name": "Stafford38.Paper.Section4.eulerDegree",
+          "repo": "formal",
+          "role": "definition",
+          "note": "Part of Euler degree m: [E, z] = m z."
+        },
+        {
+          "file": "Stafford38/Paper/Section4/Euler.lean",
+          "name": "Stafford38.Paper.Section4.eulerCommutator",
+          "repo": "formal",
+          "role": "definition",
+          "note": "The commutator [E, ·]."
+        },
+        {
+          "file": "Stafford38/Paper/Section4/Euler.lean",
+          "name": "Stafford38.Paper.Section4.nonnegativePart",
+          "repo": "formal",
+          "role": "definition",
+          "note": "A_{≥0}: sum of the parts of degree m ≥ 0."
+        },
+        {
+          "file": "Stafford38/Paper/Section4/Euler.lean",
+          "name": "Stafford38.Paper.Section4.positivePart",
+          "repo": "formal",
+          "role": "definition",
+          "note": "Elements of Euler degree ≥ 1."
+        },
+        {
+          "file": "Stafford38/Paper/Section4/Euler.lean",
+          "name": "Stafford38.Paper.Section4.presentedNonnegativePart",
+          "repo": "formal",
+          "role": "definition",
+          "note": "A_{≥0} ⊆ A_n."
+        },
+        {
+          "file": "Stafford38/Paper/Section4/Euler.lean",
+          "name": "Stafford38.Paper.Section4.transverse",
+          "repo": "formal",
+          "role": "definition",
+          "note": "The transverse Weyl algebra A_{n−1} ⊆ A_n."
+        },
+        {
+          "file": "Stafford38/Paper/Section4/Euler.lean",
+          "name": "Stafford38.Paper.Section4.step_nonnegative_pbw",
+          "repo": "formal",
+          "role": "statement",
+          "note": "A_{≥0} is generated by the transverse algebra, E and x₁."
         },
         {
           "file": "Stafford38/Paper/Section4/Euler.lean",
           "name": "Stafford38.Paper.Section4.step_coordinate_normal",
           "repo": "formal",
-          "role": "statement"
+          "role": "statement",
+          "note": "Normality: x₁r = r′x₁ for r ∈ A_{≥0}."
+        },
+        {
+          "file": "Stafford38/Paper/Section4/Euler.lean",
+          "name": "Stafford38.Paper.Section4.presented_coordinate_normal",
+          "repo": "formal",
+          "role": "statement",
+          "note": "Normality of x₁ in A_{≥0} ⊆ A_n."
+        },
+        {
+          "file": "Stafford38/Paper/Section4/Euler.lean",
+          "name": "Stafford38.Paper.Section4.step_positive_mem_nonnegative_mul_coordinate",
+          "repo": "formal",
+          "role": "statement",
+          "note": "Euler degree ≥ 1 implies membership in A_{≥0}x₁."
         },
         {
           "file": "Stafford38/Weyl/EulerSubring.lean",
           "role": "definition",
-          "name": "Stafford38.WeylEulerSubring.eulerSubring"
+          "name": "Stafford38.WeylEulerSubring.eulerSubring",
+          "note": "Subring generated by the transverse algebra, x₁ and E.",
+          "repo": "formal"
+        },
+        {
+          "file": "Stafford38/Paper/Section4/Euler.lean",
+          "name": "Stafford38.Paper.Section4.mem_eulerDegree",
+          "repo": "formal",
+          "role": "helper",
+          "note": "Membership in a degree part."
+        },
+        {
+          "file": "Stafford38/Paper/Section4/Euler.lean",
+          "name": "Stafford38.Paper.Section4.eulerDegree_mul",
+          "repo": "formal",
+          "role": "helper",
+          "note": "The grading is multiplicative."
+        },
+        {
+          "file": "Stafford38/Paper/Section4/Euler.lean",
+          "name": "Stafford38.Paper.Section4.eulerDegree_pow",
+          "repo": "formal",
+          "role": "helper",
+          "note": "Powers of homogeneous elements."
+        },
+        {
+          "file": "Stafford38/Paper/Section4/Euler.lean",
+          "name": "Stafford38.Paper.Section4.coordinate_mem_eulerDegree",
+          "repo": "formal",
+          "role": "helper",
+          "note": "x₁ has Euler degree 1."
+        },
+        {
+          "file": "Stafford38/Paper/Section4/Euler.lean",
+          "name": "Stafford38.Paper.Section4.euler_mem_eulerDegree",
+          "repo": "formal",
+          "role": "helper",
+          "note": "E has Euler degree 0."
+        },
+        {
+          "file": "Stafford38/Paper/Section4/Euler.lean",
+          "name": "Stafford38.Paper.Section4.mem_eulerDegree_zero_of_commute",
+          "repo": "formal",
+          "role": "helper",
+          "note": "Elements commuting with x₁ and p have degree 0."
+        },
+        {
+          "file": "Stafford38/Paper/Section4/Euler.lean",
+          "name": "Stafford38.Paper.Section4.mem_nonnegativePart",
+          "repo": "formal",
+          "role": "helper"
+        },
+        {
+          "file": "Stafford38/Paper/Section4/Euler.lean",
+          "name": "Stafford38.Paper.Section4.coordinate_mem_nonnegativePart",
+          "repo": "formal",
+          "role": "helper",
+          "note": "x₁ ∈ A_{≥0}."
+        },
+        {
+          "file": "Stafford38/Paper/Section4/Euler.lean",
+          "name": "Stafford38.Paper.Section4.euler_mem_nonnegativePart",
+          "repo": "formal",
+          "role": "helper",
+          "note": "E ∈ A_{≥0}."
+        },
+        {
+          "file": "Stafford38/Paper/Section4/Euler.lean",
+          "name": "Stafford38.Paper.Section4.eulerSubring_le_nonnegativePart",
+          "repo": "formal",
+          "role": "helper",
+          "note": "The subring generated by the transverse algebra, x₁ and E lies in A_{≥0}."
+        },
+        {
+          "file": "Stafford38/Paper/Section4/Euler.lean",
+          "name": "Stafford38.Paper.Section4.mem_positivePart_of_mem",
+          "repo": "formal",
+          "role": "helper"
+        },
+        {
+          "file": "Stafford38/Paper/Section4/Euler.lean",
+          "name": "Stafford38.Paper.Section4.positivePart_mul_eulerDegree_zero",
+          "repo": "formal",
+          "role": "helper",
+          "note": "Degree ≥ 1 times degree 0 has degree ≥ 1."
+        },
+        {
+          "file": "Stafford38/Paper/Section4/Euler.lean",
+          "name": "Stafford38.Paper.Section4.presentedPositivePart",
+          "repo": "formal",
+          "role": "definition",
+          "note": "Elements of A_n of Euler degree ≥ 1."
+        },
+        {
+          "file": "Stafford38/Paper/Section4/Euler.lean",
+          "name": "Stafford38.Paper.Section4.map_mem_eulerDegree",
+          "repo": "formal",
+          "role": "helper",
+          "note": "Ring maps fixing x₁, p preserve Euler degrees."
+        },
+        {
+          "file": "Stafford38/Paper/Section4/Euler.lean",
+          "name": "Stafford38.Paper.Section4.map_mem_nonnegativePart",
+          "repo": "formal",
+          "role": "helper"
+        },
+        {
+          "file": "Stafford38/Paper/Section4/Euler.lean",
+          "name": "Stafford38.Paper.Section4.map_mem_positivePart",
+          "repo": "formal",
+          "role": "helper"
+        },
+        {
+          "file": "Stafford38/Paper/Section4/Euler.lean",
+          "name": "Stafford38.Paper.Section4.pairStage_pbw_induction",
+          "repo": "formal",
+          "role": "helper",
+          "note": "Induction over the PBW form Σ b x^a p^j."
+        },
+        {
+          "file": "Stafford38/Paper/Section4/Euler.lean",
+          "name": "Stafford38.Paper.Section4.pairMonomial_mem_eulerDegree",
+          "repo": "formal",
+          "role": "helper",
+          "note": "b x^a p^c has Euler degree a − c."
+        },
+        {
+          "file": "Stafford38/Paper/Section4/Euler.lean",
+          "name": "Stafford38.Paper.Section4.pairWeightSpan",
+          "repo": "formal",
+          "role": "definition",
+          "note": "Span of the PBW monomials of degree m."
+        },
+        {
+          "file": "Stafford38/Paper/Section4/Euler.lean",
+          "name": "Stafford38.Paper.Section4.pairWeightSpan_le",
+          "repo": "formal",
+          "role": "helper"
+        },
+        {
+          "file": "Stafford38/Paper/Section4/Euler.lean",
+          "name": "Stafford38.Paper.Section4.mem_iSup_pairWeightSpan",
+          "repo": "formal",
+          "role": "helper",
+          "note": "Every element is a sum of homogeneous PBW monomials."
+        },
+        {
+          "file": "Stafford38/Paper/Section4/Euler.lean",
+          "name": "Stafford38.Paper.Section4.mem_pairWeightSpan_of_mem_eulerDegree",
+          "repo": "formal",
+          "role": "helper",
+          "note": "Degree m elements are sums of degree m monomials."
+        },
+        {
+          "file": "Stafford38/Paper/Section4/Euler.lean",
+          "name": "Stafford38.Paper.Section4.pairWeightSpan_le_eulerSubring",
+          "repo": "formal",
+          "role": "helper",
+          "note": "Monomials of degree ≥ 0 lie in the generated subring."
+        },
+        {
+          "file": "Stafford38/Paper/Section4/Euler.lean",
+          "name": "Stafford38.Paper.Section4.pairWeightSpan_eq_mul_coordinate",
+          "repo": "formal",
+          "role": "helper",
+          "note": "Monomials of degree ≥ 1 have a right factor x₁."
+        },
+        {
+          "file": "Stafford38/Paper/Section4/Euler.lean",
+          "name": "Stafford38.Paper.Section4.pair_nonnegativePart_le",
+          "repo": "formal",
+          "role": "helper"
+        },
+        {
+          "file": "Stafford38/Paper/Section4/Euler.lean",
+          "name": "Stafford38.Paper.Section4.pair_positivePart_eq_mul_coordinate",
+          "repo": "formal",
+          "role": "helper"
+        },
+        {
+          "file": "Stafford38/Paper/Section4/Euler.lean",
+          "name": "Stafford38.Paper.Section4.toIterated",
+          "repo": "formal",
+          "role": "definition",
+          "note": "A_n ≃ PairStage(A_{n−1})."
+        },
+        {
+          "file": "Stafford38/Paper/Section4/Euler.lean",
+          "name": "Stafford38.Paper.Section4.toIterated_coordinate",
+          "repo": "formal",
+          "role": "helper"
+        },
+        {
+          "file": "Stafford38/Paper/Section4/Euler.lean",
+          "name": "Stafford38.Paper.Section4.toIterated_momentum",
+          "repo": "formal",
+          "role": "helper"
+        },
+        {
+          "file": "Stafford38/Paper/Section4/Euler.lean",
+          "name": "Stafford38.Paper.Section4.fromIterated_toIterated_ringHom",
+          "repo": "formal",
+          "role": "helper"
+        },
+        {
+          "file": "Stafford38/Paper/Section4/Euler.lean",
+          "name": "Stafford38.Paper.Section4.iterated_eulerSubring_le",
+          "repo": "formal",
+          "role": "helper",
+          "note": "PairStage(A_{n−1}) → A_n maps the pair-stage subring into the subring generated by the transverse algebra, x₁ and E."
         }
       ],
       "depends_on": [],
@@ -2460,7 +2748,7 @@
         }
       ],
       "issues": [],
-      "comparison_updated_on": "2026-11-03"
+      "comparison_updated_on": "2026-11-04"
     },
     {
       "id": "lem:euler",
@@ -2577,9 +2865,9 @@
       ],
       "label": "lem:euler-residue",
       "statement_relation": "lean-stronger",
-      "route_relation": "similar",
-      "correspondence": "lemma_4_2 states the lemma for d̃ in the form (3.1) (Section3.IsMonicNormalForm) and 𝓘 = d̃A_n + x₁^N d̃A_n (Section3.idealI, Equation (3.2)), over a field k of characteristic zero: there is u₀ ∈ A_{≥0} with 1 + u₀x₁ ∈ 𝓘. Lean does not need N ≥ 1 (for N = 0, (3.1) is d̃ = 1). The proof uses (3.1) through its consequence that d̃ ∈ B_N has coefficient 1 at ∂₁^N (Section3.isPBWMonicAt_of_isMonicNormalForm). Lemma 4.1 is cited for m = N. The three paragraphs are step_4_2_bezout (R_± coprime in ℚ[E], step_4_2_coprime; R_± are the products of Lemma 4.1, step_4_2_eval_products), step_4_2_residue (1 + w ∈ 𝓘) and step_4_2_positive (w = u₀x₁), assembled in lemma_4_2_of_positive. The input that Σx₁^N and x₁^NΣ lie in A_{≥0}x₁ (step_4_2_presented_remainder) is proved differently: the paper counts Euler degrees of the terms p^j x₁^l b; Lean writes Σ in the PBW basis of the Ore tower and factors each monomial with j < N.",
-      "route": "lemma_4_2 → isPBWMonicAt_of_isMonicNormalForm → step_4_2_presented_remainder → lemma_4_2_of_positive (lemma_4_1, step_4_2_bezout (step_4_2_coprime, step_4_2_eval_products) → step_4_2_residue → step_4_2_positive).",
+      "route_relation": "same",
+      "correspondence": "lemma_4_2 states the lemma for d̃ in the form (3.1) (Section3.IsMonicNormalForm) and 𝓘 = d̃A_n + x₁^N d̃A_n (Section3.idealI, Equation (3.2)), over a field k of characteristic zero: there is u₀ ∈ A_{≥0} with 1 + u₀x₁ ∈ 𝓘. Lean does not need N ≥ 1 (for N = 0, (3.1) is d̃ = 1). The proof uses (3.1) through its consequence that d̃ ∈ B_N has coefficient 1 at ∂₁^N (Section3.isPBWMonicAt_of_isMonicNormalForm). Lemma 4.1 is cited for m = N. The proof follows the three paragraphs: step_4_2_bezout (R_± coprime in ℚ[E], step_4_2_coprime; R_± are the products of Lemma 4.1, step_4_2_eval_products), step_4_2_residue (1 + w ∈ 𝓘) and step_4_2_positive (every term of w has positive Euler degree, so w = u₀x₁), assembled in lemma_4_2_of_positive. The third paragraph counts Euler degrees as printed: each PBW term b x₁^a p^j of Σ = d̃ − p^N has j < N, because d̃ ∈ B_N has coefficient 1 at ∂₁^N (WeylEulerRemainder.presentedRemainder_outer_support_lt), so after multiplication by x₁^N on either side it has Euler degree a + N − j ≥ N − j > 0; hence Σx₁^N and x₁^NΣ are sums of elements of Euler degree ≥ 1 (step_4_2_presented_remainder); u(E) and v(E) have Euler degree 0 (step_4_2_eulerPolynomial_degree_zero); and an element of positive Euler degree lies in A_{≥0}x₁ (step_positive_mem_nonnegative_mul_coordinate, from the paragraph before Lemma 4.1).",
+      "route": "lemma_4_2 → isPBWMonicAt_of_isMonicNormalForm → step_4_2_presented_remainder (presentedRemainder_outer_support_lt) → lemma_4_2_of_positive (lemma_4_1, step_4_2_bezout (step_4_2_coprime, step_4_2_eval_products) → step_4_2_residue → step_4_2_positive (step_4_2_eulerPolynomial_degree_zero, step_positive_mem_nonnegative_mul_coordinate)).",
       "lean": [
         {
           "file": "Stafford38/Paper/Section4/Residue.lean",
@@ -2620,14 +2908,21 @@
           "name": "Stafford38.Paper.Section4.step_4_2_presented_remainder",
           "repo": "formal",
           "role": "step",
-          "note": "Paragraph 3, input: Σx₁^N, x₁^NΣ ∈ A_{≥0}x₁ (PBW factorization)."
+          "note": "Paragraph 3: Σx₁^N and x₁^NΣ are sums of elements of Euler degree ≥ 1."
+        },
+        {
+          "file": "Stafford38/Paper/Section4/Residue.lean",
+          "name": "Stafford38.Paper.Section4.step_4_2_eulerPolynomial_degree_zero",
+          "repo": "formal",
+          "role": "step",
+          "note": "Paragraph 3: u(E), v(E) have Euler degree 0."
         },
         {
           "file": "Stafford38/Paper/Section4/Residue.lean",
           "name": "Stafford38.Paper.Section4.step_4_2_positive",
           "repo": "formal",
           "role": "step",
-          "note": "Paragraph 3: w = u₀x₁, u₀ ∈ A_{≥0}."
+          "note": "Paragraph 3: every term of w has positive Euler degree, so w = u₀x₁, u₀ ∈ A_{≥0}."
         },
         {
           "file": "Stafford38/Paper/Section4/Residue.lean",
@@ -2649,11 +2944,40 @@
           "repo": "formal",
           "role": "cited result",
           "note": "(3.1) gives d̃ ∈ B_N with coefficient 1 at ∂₁^N."
+        },
+        {
+          "file": "Stafford38/Paper/Section4/Euler.lean",
+          "name": "Stafford38.Paper.Section4.step_positive_mem_nonnegative_mul_coordinate",
+          "repo": "formal",
+          "role": "cited result",
+          "note": "Euler degree ≥ 1 implies membership in A_{≥0}x₁."
+        },
+        {
+          "file": "Stafford38/Weyl/EulerRemainder.lean",
+          "name": "Stafford38.WeylEulerRemainder.presentedRemainder_outer_support_lt",
+          "repo": "formal",
+          "role": "helper",
+          "note": "The terms of Σ = d̃ − p^N have p-exponent j < N."
+        },
+        {
+          "file": "Stafford38/Paper/Section4/Euler.lean",
+          "name": "Stafford38.Paper.Section4.pairMonomial_mem_eulerDegree",
+          "repo": "formal",
+          "role": "helper",
+          "note": "b x^a p^j has Euler degree a − j."
+        },
+        {
+          "file": "Stafford38/Paper/Section4/Euler.lean",
+          "name": "Stafford38.Paper.Section4.positivePart_mul_eulerDegree_zero",
+          "repo": "formal",
+          "role": "helper",
+          "note": "Degree ≥ 1 times degree 0 has degree ≥ 1."
         }
       ],
       "depends_on": [
         "lem:euler",
-        "prop:monic"
+        "prop:monic",
+        "euler-grading"
       ],
       "in_graph": true,
       "graph_sub": "Euler residue",
@@ -2719,7 +3043,7 @@
         }
       ],
       "issues": [],
-      "comparison_updated_on": "2026-11-03"
+      "comparison_updated_on": "2026-11-04"
     },
     {
       "id": "prop:x-surjective",
@@ -2735,7 +3059,7 @@
       "label": "prop:x-surjective",
       "statement_relation": "lean-stronger",
       "route_relation": "same",
-      "correspondence": "proposition_4_3 states the proposition for d̃ in the form (3.1) (Section3.IsMonicNormalForm) over a field k of characteristic zero: right multiplication by x₁ on Q = A_n/𝓘 (Section3.idealI, Equation (3.2)) is surjective. Lean does not need N ≥ 1 (for N = 0, (3.1) is d̃ = 1). The proof follows the printed order: step_4_3_q_mem (q = −qu₀x₁, from Lemma 4.2), step_4_3_normal_surj (equation (normal-surj), using the normality of x₁), step_4_3_stable_momentum (stable under p), step_4_3_stable_coefficients (stable under C) and step_4_3_classSet_eq_univ (qA_{≥0} = Q), assembled in proposition_4_3_of.",
+      "correspondence": "proposition_4_3 states the proposition for d̃ in the form (3.1) (Section3.IsMonicNormalForm) over a field k of characteristic zero: right multiplication by x₁ on Q = A_n/𝓘 (Section3.idealI, Equation (3.2)) is surjective. Lean does not need N ≥ 1 (for N = 0, (3.1) is d̃ = 1). The proof follows the printed order: step_4_3_q_mem (q = −qu₀x₁, from Lemma 4.2), step_4_3_normal_surj (equation (normal-surj), using the normality of x₁), step_4_3_stable_momentum (stable under p), step_4_3_stable_coefficients (stable under C) and step_4_3_classSet_eq_univ (qA_{≥0} = Q), assembled in proposition_4_3_of. C = A_{n−1}[x₁] (transverseCoordinateAlgebra) lies in A_{≥0} (transverseCoordinateAlgebra_le), and C and p generate A_n (closure_transverseCoordinateAlgebra_momentum).",
       "route": "proposition_4_3 → lemma_4_2 → proposition_4_3_of (step_4_3_q_mem → step_4_3_normal_surj → step_4_3_stable_momentum → step_4_3_stable_coefficients → step_4_3_classSet_eq_univ).",
       "lean": [
         {
@@ -2749,7 +3073,7 @@
           "name": "Stafford38.Paper.Section4.step_4_3_q_mem",
           "repo": "formal",
           "role": "step",
-          "note": "q ∈ (qA_{≥0})x₁."
+          "note": "q = (q·(−u₀))x₁, from 1 + u₀x₁ ∈ 𝓘."
         },
         {
           "file": "Stafford38/Paper/Section4/Surjectivity.lean",
@@ -2781,6 +3105,27 @@
         },
         {
           "file": "Stafford38/Paper/Section4/Surjectivity.lean",
+          "name": "Stafford38.Paper.Section4.transverseCoordinateAlgebra",
+          "repo": "formal",
+          "role": "definition",
+          "note": "C = A_{n−1}[x₁]."
+        },
+        {
+          "file": "Stafford38/Paper/Section4/Surjectivity.lean",
+          "name": "Stafford38.Paper.Section4.transverseCoordinateAlgebra_le",
+          "repo": "formal",
+          "role": "helper",
+          "note": "C ⊆ A_{≥0}."
+        },
+        {
+          "file": "Stafford38/Paper/Section4/Surjectivity.lean",
+          "name": "Stafford38.Paper.Section4.closure_transverseCoordinateAlgebra_momentum",
+          "repo": "formal",
+          "role": "helper",
+          "note": "C and p generate A_n."
+        },
+        {
+          "file": "Stafford38/Paper/Section4/Surjectivity.lean",
           "name": "Stafford38.Paper.Section4.proposition_4_3_of",
           "repo": "formal",
           "role": "helper",
@@ -2795,14 +3140,15 @@
         },
         {
           "file": "Stafford38/Paper/Section4/Euler.lean",
-          "name": "Stafford38.Paper.Section4.step_coordinate_normal",
+          "name": "Stafford38.Paper.Section4.presented_coordinate_normal",
           "repo": "formal",
           "role": "cited result",
           "note": "Normality of x₁ in A_{≥0}."
         }
       ],
       "depends_on": [
-        "lem:euler-residue"
+        "lem:euler-residue",
+        "euler-grading"
       ],
       "in_graph": true,
       "graph_sub": "Q = Q x₁",
@@ -2841,7 +3187,7 @@
         }
       ],
       "issues": [],
-      "comparison_updated_on": "2026-11-03"
+      "comparison_updated_on": "2026-11-04"
     },
     {
       "id": "def:localization",
@@ -3131,8 +3477,8 @@
       "label": "lem:tangential-finiteness",
       "statement_relation": "lean-stronger",
       "route_relation": "same",
-      "correspondence": "lemma_4_8 states the lemma as printed: U and V are finite over T, Supp_T V ⊆ Supp_T U, and at every minimal prime 𝔮 of Supp_T U, U_𝔮 and V_𝔮 have finite length over T_𝔮. Lean states it for d̃ in the form (3.1) (Section3.IsMonicNormalForm). Lean does not need N ≥ 1 (for N = 0, (3.1) is d̃ = 1). The proof uses (3.1) through its consequence that d̃ ∈ B_N has coefficient 1 at ∂₁^N (Section3.isPBWMonicAt_of_isMonicNormalForm). The proof follows the paragraphs: step_4_8_finite (M finite over T[x₁] because P is monic in ξ₁), step_4_8_support_inclusion (Lemma 4.7 and Vasconcelos' theorem, step_4_8_vasconcelos), step_4_8_localized_isFiniteLength and step_4_8_finite_length.",
-      "route": "lemma_4_8 → step_4_8_finite → step_4_8_support_inclusion (lemma_4_7, step_4_8_vasconcelos) → step_4_8_finite_length (step_4_8_localized_isFiniteLength).",
+      "correspondence": "lemma_4_8 states the lemma as printed: U and V are finite over T, Supp_T V ⊆ Supp_T U, and at every minimal prime 𝔮 of Supp_T U, U_𝔮 and V_𝔮 have finite length over T_𝔮. Lean states it for d̃ in the form (3.1) (Section3.IsMonicNormalForm). Lean does not need N ≥ 1 (for N = 0, (3.1) is d̃ = 1). The proof uses (3.1) through Proposition 3.6 (P annihilates M; deg_B d̃ = N by Section3.bernsteinDegree_eq_of_isMonicNormalForm) and through its consequence that d̃ ∈ B_N has coefficient 1 at ∂₁^N (Section3.isPBWMonicAt_of_isMonicNormalForm). The proof follows the paragraphs: step_4_8_finite (M finite over T[x₁] because P annihilates M and is monic in ξ₁), step_4_8_support_inclusion (Lemma 4.7 and Vasconcelos' theorem, step_4_8_vasconcelos), step_4_8_localized_isFiniteLength and step_4_8_finite_length.",
+      "route": "lemma_4_8 → step_4_8_finite (proposition_3_6) → step_4_8_support_inclusion (lemma_4_7, step_4_8_vasconcelos) → step_4_8_finite_length (step_4_8_localized_isFiniteLength).",
       "lean": [
         {
           "file": "Stafford38/Paper/Section4/TangentialFiniteness.lean",
@@ -3145,7 +3491,7 @@
           "name": "Stafford38.Paper.Section4.step_4_8_finite",
           "repo": "formal",
           "role": "step",
-          "note": "Paragraph 1: U, V finite over T."
+          "note": "Paragraph 1: P annihilates M and is monic in ξ₁, so U, V are finite over T."
         },
         {
           "file": "Stafford38/Paper/Section4/TangentialFiniteness.lean",
@@ -3181,6 +3527,20 @@
           "repo": "formal",
           "role": "cited result",
           "note": "Lemma 4.7."
+        },
+        {
+          "file": "Stafford38/Paper/Section3/OrderSymbol.lean",
+          "name": "Stafford38.Paper.Section3.proposition_3_6",
+          "repo": "formal",
+          "role": "cited result",
+          "note": "Proposition 3.6: P annihilates M."
+        },
+        {
+          "file": "Stafford38/Paper/Section3/MonicForm.lean",
+          "name": "Stafford38.Paper.Section3.bernsteinDegree_eq_of_isMonicNormalForm",
+          "repo": "formal",
+          "role": "helper",
+          "note": "deg_B d̃ = N for d̃ in the form (3.1)."
         },
         {
           "file": "Stafford38/Paper/Section3/MonicForm.lean",
@@ -3403,8 +3763,8 @@
       "label": "lem:strict-support-inequality",
       "statement_relation": "exact",
       "route_relation": "same",
-      "correspondence": "lemma_4_10 states the lemma as printed: ℓ_{T_𝔮}(U_𝔮) > ℓ_{T_𝔮}(V_𝔮) for every minimal prime 𝔮 of Supp_T U, for d̃ in the form (3.1) (Section3.IsMonicNormalForm) with N ≥ 1. The proof uses (3.1) through its consequence that d̃ ∈ B_N has coefficient 1 at ∂₁^N (Section3.isPBWMonicAt_of_isMonicNormalForm). The proof follows the paragraphs: Gabber (step_4_10_gabber: x₁ lies in no minimal prime of √Ann M), localization (step_4_10_localized_avoid, step_4_10_localized), K_∞ (step_4_10_stable_kernel), the two elementary facts, ℓ(K_∞/x₁K_∞) = ℓ(V), the split ℓ(U) = ℓ(V) + ℓ(Ẽ/x₁Ẽ) and the Nakayama paragraph Ẽ/x₁Ẽ ≠ 0, assembled in step_4_10_core. step_4_10_gabber is proved by the earlier formal result NoncharacteristicMinimalPrime.canonical_minimalPrime_mem_of_normalCoordinate_false, which applies Gabber's theorem for cyclic modules (GabberGlobalAssembly.minimalPrime_isInvolutive) and the ξ₁-derivative argument.",
-      "route": "lemma_4_10 → lemma_4_8 → step_4_10_localized (step_4_10_core: step_4_10_stable_kernel → step_4_10_two_facts → step_4_10_length_split (step_4_10_kernel_length) → step_4_10_residual_nonzero) → step_4_10_localized_avoid (step_4_10_gabber).",
+      "correspondence": "lemma_4_10 states the lemma as printed: ℓ_{T_𝔮}(U_𝔮) > ℓ_{T_𝔮}(V_𝔮) for every minimal prime 𝔮 of Supp_T U, for d̃ in the form (3.1) (Section3.IsMonicNormalForm) with N ≥ 1. The proof uses (3.1) through Proposition 3.6 (P ∈ Ann M; deg_B d̃ = N by Section3.bernsteinDegree_eq_of_isMonicNormalForm) and through its consequence that d̃ ∈ B_N has coefficient 1 at ∂₁^N (Section3.isPBWMonicAt_of_isMonicNormalForm). The proof follows the paragraphs: Gabber (step_4_10_radical_isInvolutive: J = √Ann M is involutive by Theorem 2.11 for the cyclic module Q, Section2.theorem_2_11_cyclic; step_4_10_gabber: every minimal prime 𝔭 of J is involutive [HTT D.3.4], P ∈ 𝔭, and the bracket argument gives x₁ ∉ 𝔭), localization (step_4_10_localized_avoid, step_4_10_localized), K_∞ (step_4_10_stable_kernel), the two elementary facts, ℓ(K_∞/x₁K_∞) = ℓ(V), the split ℓ(U) = ℓ(V) + ℓ(Ẽ/x₁Ẽ) and the Nakayama paragraph Ẽ/x₁Ẽ ≠ 0, assembled in step_4_10_core. step_4_10_gabber takes the involutivity of minimal primes from PaperLocalizedInvolutivity.minimalPrimes_isInvolutive_of_radical_isInvolutive_viaLocalization and the bracket argument from NoncharacteristicMinimalPrime.normalCoordinate_not_mem_of_isInvolutive.",
+      "route": "lemma_4_10 → lemma_4_8 → step_4_10_localized (step_4_10_core: step_4_10_stable_kernel → step_4_10_two_facts → step_4_10_length_split (step_4_10_kernel_length) → step_4_10_residual_nonzero) → step_4_10_localized_avoid (step_4_10_gabber (step_4_10_radical_isInvolutive, proposition_3_6)).",
       "lean": [
         {
           "file": "Stafford38/Paper/Section4/StrictInequality.lean",
@@ -3414,10 +3774,17 @@
         },
         {
           "file": "Stafford38/Paper/Section4/StrictInequality.lean",
+          "name": "Stafford38.Paper.Section4.step_4_10_radical_isInvolutive",
+          "repo": "formal",
+          "role": "step",
+          "note": "Gabber paragraph: J = √Ann M is involutive (Theorem 2.11)."
+        },
+        {
+          "file": "Stafford38/Paper/Section4/StrictInequality.lean",
           "name": "Stafford38.Paper.Section4.step_4_10_gabber",
           "repo": "formal",
           "role": "step",
-          "note": "Gabber paragraph: x₁ ∉ minimal primes of √Ann M."
+          "note": "Gabber paragraph: minimal primes of J are involutive, so x₁ ∉ 𝔭."
         },
         {
           "file": "Stafford38/Paper/Section4/StrictInequality.lean",
@@ -3483,11 +3850,39 @@
           "note": "Lemma 4.8."
         },
         {
-          "file": "Stafford38/Characteristic/NoncharacteristicMinimalPrime.lean",
-          "name": "Stafford38.Characteristic.NoncharacteristicMinimalPrime.canonical_minimalPrime_mem_of_normalCoordinate_false",
+          "file": "Stafford38/Paper/Section2/Symplectic.lean",
+          "name": "Stafford38.Paper.Section2.theorem_2_11_cyclic",
           "repo": "formal",
           "role": "cited result",
-          "note": "Earlier formal result used by step_4_10_gabber."
+          "note": "Theorem 2.11 for cyclic modules."
+        },
+        {
+          "file": "Stafford38/Characteristic/PaperLocalizedInvolutivity.lean",
+          "name": "Stafford38.Characteristic.PaperLocalizedInvolutivity.minimalPrimes_isInvolutive_of_radical_isInvolutive_viaLocalization",
+          "repo": "formal",
+          "role": "cited result",
+          "note": "[HTT D.3.4]: minimal primes of an involutive radical are involutive."
+        },
+        {
+          "file": "Stafford38/Characteristic/NoncharacteristicMinimalPrime.lean",
+          "name": "Stafford38.Characteristic.NoncharacteristicMinimalPrime.normalCoordinate_not_mem_of_isInvolutive",
+          "repo": "formal",
+          "role": "helper",
+          "note": "The bracket argument: the N-th bracket {x₁, …{x₁, P}} is N! ≠ 0."
+        },
+        {
+          "file": "Stafford38/Paper/Section3/OrderSymbol.lean",
+          "name": "Stafford38.Paper.Section3.proposition_3_6",
+          "repo": "formal",
+          "role": "cited result",
+          "note": "Proposition 3.6: P ∈ Ann M."
+        },
+        {
+          "file": "Stafford38/Paper/Section3/MonicForm.lean",
+          "name": "Stafford38.Paper.Section3.bernsteinDegree_eq_of_isMonicNormalForm",
+          "repo": "formal",
+          "role": "helper",
+          "note": "deg_B d̃ = N for d̃ in the form (3.1)."
         },
         {
           "file": "Stafford38/Paper/Section3/MonicForm.lean",
@@ -4386,8 +4781,8 @@
       ],
       "statement_relation": "n/a",
       "route_relation": "same",
-      "correspondence": "theorem_5_7_i_paper is the printed proof of (i), one declaration per paragraph, in the printed order. The algebraic case uses x₁ − c ∈ 𝔭 as in the first paragraph. In the transcendental case the discrete valuation ring V comes from Lemmas 5.9 and 5.10 (generalDivisorialVisibleFrameWithKaehlerFinite through LaneC.divisorialVisibleFrameExistence, which calls lemma_5_9 and lemma_5_10), keeping Lemma 5.10(c), Ω_{V/K} finitely generated. Then step_completion (V̂ ≅ κ[[t]], F ↪ κ((t))), step_orders (0 < a < b, j ∉ {0, 1}; a > 0 by Lemma 5.10(a) in step_a_pos), step_generic_point (equation (generic)), Lemma 5.11 at V (witness_lemma_5_11), step_dual_derivations (D_k, Z(t)), step_lambda_w_tau (λ, w = q′ − Zλ = t^c τ), step_M_minor (M(0) has full column rank; a unit minor M_ι), Lemma 5.12(a) at V with m ≤ d′ + 1 by the second fundamental sequence and Nakayama (witness_lemma_5_12_5_13_paper, witness_lemma_5_12_a_bound), step_M_spans_cone (Lemmas 5.12(a), (b)), step_lift_ell_minor (ℓ_υ = u_υ, ℓ_ι = −u_υM_υM_ι⁻¹, ℓM = 0, ℓ(0) = u), step_ell_conormal (Lemma 5.13) and step_polynomial_limit (the final paragraph). Two points are done differently: the lower bound dim Θ_y ≥ m in Lemma 5.12(a) uses the derivations of F/K, each of which gives a tangent vector, instead of the Jacobian rank; and the place is followed by a field E ⊆ V over which κ is finite, which Lean uses to obtain the coefficient field of V̂ (Matsumura Thm. 28.3). The last paragraph, (ii), is step_dir_of_fibre. The terminal theorem GeneralAsymptoticConormal.coordinate_axis_mem_smooth_fibre_closure proves (i) by a second, chart-based route through SameWitness.coordinate_axis_mem_smooth_fibre_closure.",
-      "route": "theorem_5_7_i_paper → generalDivisorialVisibleFrameWithKaehlerFinite (LaneC.divisorialVisibleFrameExistence: lemma_5_9, lemma_5_10) → step_completion → step_orders (step_a_pos, lemma_5_10_a_not_R_le) → step_generic_point → witness_lemma_5_11 (lemma_5_11) → step_dual_derivations → step_lambda_w_tau → step_M_minor → witness_lemma_5_12_5_13_paper (witness_lemma_5_12_a_bound, lemma_5_12_a_bound) → step_M_spans_cone (lemma_5_12_b, lemma_5_12_a_cone) → step_lift_ell_minor → step_ell_conormal (lemma_5_13) → step_polynomial_limit; (ii): step_dir_of_fibre. Alternative route: GeneralAsymptoticConormal.coordinate_axis_mem_smooth_fibre_closure → SameWitness.coordinate_axis_mem_smooth_fibre_closure.",
+      "correspondence": "theorem_5_7_i_paper is the printed proof of (i), one declaration per paragraph, in the printed order. The algebraic case is step_coordinate_algebraic, the first paragraph: g(x₁) = λ∏(x₁ − c_i), a factor x₁ − c ∈ 𝔭 with c ≠ 0, and dx₁ = d(x₁ − c) conormal at a smooth point of Y (exists_smoothAffinePoint), so (1, 0, …, 0) ∈ N(Y). In the transcendental case the discrete valuation ring V comes from Lemmas 5.9 and 5.10 (generalDivisorialVisibleFrameWithKaehlerFinite through LaneC.divisorialVisibleFrameExistenceWithChart, which calls lemma_5_9 and lemma_5_10; the column is q_a = x̄_a/x̄_j for the chart j of Lemma 5.9), keeping Lemma 5.10(c), Ω_{V/K} finitely generated. Then step_completion (V̂ ≅ κ[[t]], F ↪ κ((t))), step_orders (0 < a < b, j ∉ {0, 1}; a > 0 by Lemma 5.10(a) in step_a_pos), step_generic_point (equation (generic)), Lemma 5.11 at V (witness_lemma_5_11), step_dual_derivations (D_k, Z(t)), step_lambda_w_tau (λ, w = q′ − Zλ = t^c τ), step_M_minor (M(0) has full column rank; a unit minor M_ι), Lemma 5.12(a) at V with m ≤ d′ + 1 by the second fundamental sequence and Nakayama (witness_lemma_5_12_5_13_paper, witness_lemma_5_12_a_bound), step_M_spans_cone (Lemmas 5.12(a), (b)), step_lift_ell_minor (ℓ_υ = u_υ, ℓ_ι = −u_υM_υM_ι⁻¹, ℓM = 0, ℓ(0) = u), step_ell_conormal (Lemma 5.13) and step_polynomial_limit (the final paragraph). One point is done differently: the place is followed by a field E ⊆ V over which κ is finite, which Lean uses to obtain the coefficient field of V̂ (Matsumura Thm. 28.3). The last paragraph, (ii), is step_dir_of_fibre. The terminal theorem GeneralAsymptoticConormal.coordinate_axis_mem_smooth_fibre_closure proves (i) by a second, chart-based route through SameWitness.coordinate_axis_mem_smooth_fibre_closure.",
+      "route": "theorem_5_7_i_paper → step_coordinate_algebraic (exists_smoothAffinePoint) → generalDivisorialVisibleFrameWithKaehlerFinite (LaneC.divisorialVisibleFrameExistenceWithChart: lemma_5_9, lemma_5_10) → step_completion → step_orders (step_a_pos, lemma_5_10_a_not_R_le) → step_generic_point → witness_lemma_5_11 (lemma_5_11) → step_dual_derivations → step_lambda_w_tau → step_M_minor → witness_lemma_5_12_5_13_paper (witness_lemma_5_12_a_bound, lemma_5_12_a_bound) → step_M_spans_cone (lemma_5_12_b, lemma_5_12_a_cone) → step_lift_ell_minor → step_ell_conormal (lemma_5_13) → step_polynomial_limit; (ii): step_dir_of_fibre. Alternative route: GeneralAsymptoticConormal.coordinate_axis_mem_smooth_fibre_closure → SameWitness.coordinate_axis_mem_smooth_fibre_closure.",
       "lean": [
         {
           "file": "Stafford38/Paper/Section5/Proof.lean",
@@ -4403,6 +4798,27 @@
           "role": "statement"
         },
         {
+          "file": "Stafford38/Paper/Section5/Steps.lean",
+          "name": "Stafford38.Paper.Section5.step_coordinate_algebraic",
+          "repo": "formal",
+          "role": "step",
+          "note": "First paragraph: x̄₁ algebraic, x₁ − c ∈ 𝔭 with c ≠ 0, (1, 0, …, 0) ∈ N(Y)."
+        },
+        {
+          "file": "Stafford38/Paper/Section5/Steps.lean",
+          "name": "Stafford38.Paper.Section5.exists_smoothAffinePoint",
+          "repo": "formal",
+          "role": "helper",
+          "note": "Y_sm ≠ ∅ for Y = V(𝔭)."
+        },
+        {
+          "file": "Stafford38/Paper/Section5/Steps.lean",
+          "name": "Stafford38.Paper.Section5.exists_mem_zeroLocus_of_isPrime",
+          "repo": "formal",
+          "role": "helper",
+          "note": "Y = V(𝔭) ≠ ∅ (Nullstellensatz)."
+        },
+        {
           "file": "Stafford38/Geometry/GeneralDivisorialVisibleFrame.lean",
           "name": "Stafford38.Geometry.GeneralDivisorialVisibleFrame.generalDivisorialVisibleFrameWithKaehlerFinite",
           "repo": "formal",
@@ -4411,10 +4827,10 @@
         },
         {
           "file": "Stafford38/Geometry/DivisorialVisibleFrameStageAssembly.lean",
-          "name": "Stafford38.Geometry.LaneC.divisorialVisibleFrameExistence",
+          "name": "Stafford38.Geometry.LaneC.divisorialVisibleFrameExistenceWithChart",
           "repo": "formal",
           "role": "helper",
-          "note": "Calls lemma_5_9, then lemma_5_10."
+          "note": "Calls lemma_5_9, then lemma_5_10, and returns the chart j of Lemma 5.9."
         },
         {
           "file": "Stafford38/Paper/Section5/Completion.lean",
@@ -4707,7 +5123,7 @@
       ],
       "statement_relation": "exact",
       "route_relation": "same",
-      "correspondence": "lemma_5_9: if x̄₁ is transcendental over K, there are a valuation ring W of F with K ⊆ W ≠ F and x̄₁ ∈ 𝔪_W, and an index j with x̄_j ≠ 0 and x̄_i/x̄_j ∈ W for 0 ≤ i ≤ n, where x̄₀ = 1. The proof is the printed one: a valuation ring dominating K[x̄₁] localized at x̄₁ (Stacks Tag 00IA), then j maximal for the preorder x̄_a/x̄_b ∈ W; Definition 5.3(a) enters through definition_5_3 (𝔪_W = W ∖ W^×, and a ∈ W or a⁻¹ ∈ W). The proof of Theorem 5.7 calls it through LaneC.divisorialVisibleFrameExistence.",
+      "correspondence": "lemma_5_9: if x̄₁ is transcendental over K, there are a valuation ring W of F with K ⊆ W ≠ F and x̄₁ ∈ 𝔪_W, and an index j with x̄_j ≠ 0 and x̄_i/x̄_j ∈ W for 0 ≤ i ≤ n, where x̄₀ = 1. The proof is the printed one: a valuation ring dominating K[x̄₁] localized at x̄₁ (Stacks Tag 00IA), then j maximal for the preorder x̄_a/x̄_b ∈ W; Definition 5.3(a) enters through definition_5_3 (𝔪_W = W ∖ W^×, and a ∈ W or a⁻¹ ∈ W). The proof of Theorem 5.7 calls it through LaneC.divisorialVisibleFrameExistenceWithChart and takes the column q_a = x̄_a/x̄_j with its chart j.",
       "route": null,
       "lean": [
         {
@@ -4718,7 +5134,7 @@
         },
         {
           "file": "Stafford38/Geometry/DivisorialVisibleFrameStageAssembly.lean",
-          "name": "Stafford38.Geometry.LaneC.divisorialVisibleFrameExistence",
+          "name": "Stafford38.Geometry.LaneC.divisorialVisibleFrameExistenceWithChart",
           "repo": "formal",
           "role": "helper",
           "note": "Calls lemma_5_9 in the proof of Theorem 5.7."
@@ -4756,7 +5172,7 @@
       ],
       "statement_relation": "exact",
       "route_relation": "same",
-      "correspondence": "lemma_5_10 takes W and j from Lemma 5.9 and gives a discrete valuation ring V of F containing K with (a) q_i ∈ V and x̄₁ ∈ 𝔪_V, (b) κ algebraic over K(res q₀, …, res q_n) and (c) Ω_{V/K} finitely generated, as the fields of Lemma510Place, which also records V = A_{𝔭_D}. The clause R ⊄ V of (a) is lemma_5_10_a_not_R_le, for every valuation ring with x̄₁ ∈ 𝔪_V; its hypothesis 1 = ḡx̄₁ with ḡ ∈ R is what the paper derives from Y ∩ H = ∅ by the Nullstellensatz. The proof is the printed one, through the normalization A of C₀ and a height-one prime 𝔭_D over x̄₁A, except where the discrete valuation ring is recorded. LaneC.stage3_exists_height_one_prime_valuation shows, as printed, that A_{𝔭_D} is a discrete valuation ring, being a Noetherian local normal domain of dimension one [Matsumura, Thm. 11.2] (LaneC.isDiscreteValuationRing_of_isLocalization_atPrime), but passes on only that A_{𝔭_D} is a valuation ring of F. lemma_5_10 then obtains the discrete valuation ring from Definition 5.3(b) (definition_5_3): V is Noetherian as a localization of the Noetherian ring A, and V ≠ F because x̄₁ ∈ 𝔪_V. The proof of Theorem 5.7 calls lemma_5_10 through LaneC.divisorialVisibleFrameExistence and lemma_5_10_a_not_R_le in step_a_pos.",
+      "correspondence": "lemma_5_10 takes W and j from Lemma 5.9 and gives a discrete valuation ring V of F containing K with (a) q_i ∈ V and x̄₁ ∈ 𝔪_V, (b) κ algebraic over K(res q₀, …, res q_n) and (c) Ω_{V/K} finitely generated, as the fields of Lemma510Place, which also records V = A_{𝔭_D}. Frac V = F holds for every valuation subring of F; the proof also derives it from A ⊆ V as printed. The clause R ⊄ V of (a) is lemma_5_10_a_not_R_le, for every valuation ring with x̄₁ ∈ 𝔪_V; its hypothesis 1 = ḡx̄₁ with ḡ ∈ R is what the paper derives from Y ∩ H = ∅ by the Nullstellensatz. The proof is the printed one: the normalization A of C₀ = K[q₀, …, q_n, x̄₁], a prime 𝔭_D minimal over x̄₁, of height one by Krull’s principal ideal theorem, and V = A_{𝔭_D}, a Noetherian local normal domain of dimension one and hence a discrete valuation ring [Matsumura, Thm. 11.2]; (b) from the integrality of A/𝔭_D over the image of C₀ and (c) by localizing Ω_{A/K}. Definition 5.3 (definition_5_3) gives 𝔪_W = W ∖ W^×. The proof of Theorem 5.7 calls lemma_5_10 through LaneC.divisorialVisibleFrameExistenceWithChart and lemma_5_10_a_not_R_le in step_a_pos.",
       "route": null,
       "lean": [
         {
@@ -4780,7 +5196,7 @@
         },
         {
           "file": "Stafford38/Geometry/DivisorialVisibleFrameStageAssembly.lean",
-          "name": "Stafford38.Geometry.LaneC.divisorialVisibleFrameExistence",
+          "name": "Stafford38.Geometry.LaneC.divisorialVisibleFrameExistenceWithChart",
           "repo": "formal",
           "role": "helper",
           "note": "Calls lemma_5_10 in the proof of Theorem 5.7."
@@ -4798,20 +5214,6 @@
           "repo": "formal",
           "role": "cited result",
           "note": "Definition 5.3."
-        },
-        {
-          "file": "Stafford38/Geometry/DivisorialVisibleFrameCore.lean",
-          "name": "Stafford38.Geometry.LaneC.stage3_exists_height_one_prime_valuation",
-          "repo": "formal",
-          "role": "helper",
-          "note": "A height-one prime 𝔭_D over x̄₁ with A_{𝔭_D} a valuation ring."
-        },
-        {
-          "file": "Stafford38/Geometry/DivisorialVisibleFrameCore.lean",
-          "name": "Stafford38.Geometry.LaneC.isDiscreteValuationRing_of_isLocalization_atPrime",
-          "repo": "formal",
-          "role": "helper",
-          "note": "A Noetherian normal domain localized at a height-one prime is a discrete valuation ring."
         }
       ],
       "depends_on": [
@@ -4911,10 +5313,24 @@
         1355
       ],
       "statement_relation": "exact",
-      "route_relation": "similar",
-      "correspondence": "Lean states the lemma for a column q with q₀ ≠ 0 over a field L ⊇ K, with Θ_y and 𝒞 = ρ⁻¹(Θ_y) as in the text, and applies it at the Laurent point of the proof of Theorem 5.7 (witness_lemma_5_12_5_13_paper). (a): generic_tangent_finrank_eq_component_kaehler_finrank gives dim Θ_y = dim_F Ω_{F/K}, component_kaehler_finrank_eq_trdeg gives dim_F Ω_{F/K} = trdeg_K F = m, lemma_5_12_a_bound gives m ≤ d′ + 1 for a discrete valuation ring with Ω_{V/K} finitely generated, by the printed second fundamental sequence for V → κ, Nakayama and F ⊗_V Ω_{V/K} = Ω_{F/K} (witness_lemma_5_12_a_bound at V), and lemma_5_12_a_cone gives dim 𝒞 = dim Θ_y + 1. (b) is lemma_5_12_b. Route: (b), the bound and the cone dimension follow the printed proof; for dim Θ_y ≥ m Lean uses the derivations of F/K, each of which gives a tangent vector (component_kaehler_finrank_le_generic_tangent_finrank), instead of the Jacobian rank. The proof of Theorem 5.7 uses (a) and (b) in step_M_spans_cone.",
+      "route_relation": "same",
+      "correspondence": "Lean states the lemma for a column q with q₀ ≠ 0 over a field L ⊇ K, with Θ_y and 𝒞 = ρ⁻¹(Θ_y) as in the text, and applies it at the Laurent point of the proof of Theorem 5.7 (witness_lemma_5_12_5_13_paper). (a) follows the printed proof: quotientKaehlerMap_exact is the second fundamental exact sequence for K[x] → R = K[x]/𝔭, Ω_{R/K} = R^n/span_R{df(x̄) : f ∈ 𝔭}; fieldKaehlerMap_exact is its localization, Ω_{F/K} = F^n/span_F{df(x̄) : f ∈ 𝔭}; generic_tangent_finrank_eq_component_kaehler_finrank gives dim Θ_y = dim_F Ω_{F/K} over every field E ⊇ F (in the paper E = κ((t))), since rank does not change under F ⊆ E and Θ_y is the common kernel of the df_y; component_kaehler_finrank_eq_trdeg gives dim_F Ω_{F/K} = trdeg_K F = m; lemma_5_12_a_bound gives m ≤ d′ + 1 for a discrete valuation ring with Ω_{V/K} finitely generated, by the second fundamental sequence for V → κ, Nakayama and F ⊗_V Ω_{V/K} = Ω_{F/K} (witness_lemma_5_12_a_bound at V); and lemma_5_12_a_cone gives dim 𝒞 = dim Θ_y + 1. (b) is lemma_5_12_b. The proof of Theorem 5.7 uses (a) and (b) in step_M_spans_cone.",
       "route": null,
       "lean": [
+        {
+          "file": "Stafford38/Paper/Section5/GenericTangentRank.lean",
+          "name": "Stafford38.Paper.Section5.quotientKaehlerMap_exact",
+          "repo": "formal",
+          "role": "step",
+          "note": "(a): Ω_{R/K} = R^n/span_R{df(x̄) : f ∈ 𝔭}, second fundamental exact sequence."
+        },
+        {
+          "file": "Stafford38/Paper/Section5/GenericTangentRank.lean",
+          "name": "Stafford38.Paper.Section5.fieldKaehlerMap_exact",
+          "repo": "formal",
+          "role": "step",
+          "note": "(a): Ω_{F/K} = F^n/span_F{df(x̄) : f ∈ 𝔭}, by localization."
+        },
         {
           "file": "Stafford38/Paper/Section5/GenericTangentRank.lean",
           "name": "Stafford38.Paper.Section5.generic_tangent_finrank_eq_component_kaehler_finrank",
@@ -4952,10 +5368,38 @@
         },
         {
           "file": "Stafford38/Paper/Section5/GenericTangentRank.lean",
-          "name": "Stafford38.Paper.Section5.component_kaehler_finrank_le_generic_tangent_finrank",
+          "name": "Stafford38.Paper.Section5.quotientGradient",
+          "repo": "formal",
+          "role": "definition",
+          "note": "df(x̄) ∈ R^n."
+        },
+        {
+          "file": "Stafford38/Paper/Section5/GenericTangentRank.lean",
+          "name": "Stafford38.Paper.Section5.quotientKaehlerMap",
+          "repo": "formal",
+          "role": "definition",
+          "note": "ξ ↦ Σ ξ_i dx̄_i, from R^n to Ω_{R/K}."
+        },
+        {
+          "file": "Stafford38/Paper/Section5/GenericTangentRank.lean",
+          "name": "Stafford38.Paper.Section5.genericGradient",
+          "repo": "formal",
+          "role": "definition",
+          "note": "df(x̄) ∈ F^n."
+        },
+        {
+          "file": "Stafford38/Paper/Section5/GenericTangentRank.lean",
+          "name": "Stafford38.Paper.Section5.fieldKaehlerMap",
+          "repo": "formal",
+          "role": "definition",
+          "note": "ξ ↦ Σ ξ_i dx̄_i, from F^n to Ω_{F/K}."
+        },
+        {
+          "file": "Stafford38/Paper/Section5/GenericTangentRank.lean",
+          "name": "Stafford38.Paper.Section5.algebraMap_comp_mem_span",
           "repo": "formal",
           "role": "helper",
-          "note": "Lower bound through derivations."
+          "note": "A span maps into the span of the image under a scalar extension."
         },
         {
           "file": "Stafford38/Paper/Section5/Completion.lean",
@@ -5833,8 +6277,8 @@
       ],
       "statement_relation": "exact",
       "route_relation": "same",
-      "correspondence": "Stafford38Challenge.PaperCorollary_6_3 (Challenge.lean, Mathlib-only) states the corollary as printed, and Stafford38.Paper.corollary_6_3 proves it, for every field of characteristic zero and every n. The proof is Section6.corollary_6_3_of, the printed argument: two generators t₁, t₂ and φ(r, s) = t₁r + t₂s (step_6_3_phi_range), a common annihilator d by the right Ore condition (step_6_3_common_annihilator, weyl_rightOreCondition [Björk, Prop. 1.8.4], proved), (a, 1 − Fa) ∈ ker φ (step_6_3_kernel), generation of A_n ⊕ A_n by (a, 1 − Fa) and (1, −F) (step_6_3_generators), and T generated by t₁ − t₂F (step_6_3_pair); corollary_6_3_of also gives stable cyclicity. The input [Sta78, Thm. 3.7] (T is generated by two elements and stably two-generated) is stated as cited, Section6.stafford_1978_theorem_3_7, and proved in the repository by another route than Stafford's: from Theorem 1.1, which does not use Corollary 6.3 (two_generators_of_identity, stably_generated_of_identity). Solution.lean proves PaperCorollary_6_3 through Paper.corollary_6_3; AlternativeSolution.lean through the earlier TorsionCyclicity.weyl_isCyclic_of_isRightTorsion.",
-      "route": "Stafford38Challenge.corollary_6_3 (Solution.lean) → Paper.corollary_6_3 → Section6.corollary_6_3_of (step_6_3_common_annihilator, step_6_3_pair (step_6_3_kernel, step_6_3_phi_range, step_6_3_generators)), with stafford_1978_theorem_3_7 (two_generators_of_identity, stably_generated_of_identity from theorem_1_1) and weyl_rightOreCondition.",
+      "correspondence": "Stafford38Challenge.PaperCorollary_6_3 (Challenge.lean, Mathlib-only) states the corollary as printed, and Stafford38.Paper.corollary_6_3 proves it, for every field of characteristic zero and every n. The proof is Section6.corollary_6_3_of, the printed argument: two generators t₁, t₂ and φ(r, s) = t₁r + t₂s (step_6_3_phi_range), a common annihilator d by the right Ore condition (step_6_3_common_annihilator, weyl_rightOreCondition [Björk, Prop. 1.8.4], proved), (a, 1 − Fa) ∈ ker φ (step_6_3_kernel), generation of A_n ⊕ A_n by (a, 1 − Fa) and (1, −F) (step_6_3_generators), and T generated by t₁ − t₂F (step_6_3_pair); corollary_6_3_of also gives stable cyclicity. The input [Sta78, Thm. 3.7] (T is generated by two elements and stably two-generated) is stated as cited, Section6.stafford_1978_theorem_3_7, and proved in the repository by another route than Stafford's: from Theorem 1.1, which does not use Corollary 6.3 (two_generators_of_identity, stably_generated_of_identity). Solution.lean proves PaperCorollary_6_3 through Paper.corollary_6_3; AlternativeSolution.lean through the earlier TorsionCyclicity.weyl_isCyclic_of_isRightTorsion. Stafford38Challenge.PaperCorollary_6_3_stablyCyclic (Challenge.lean, Mathlib-only) states the stable cyclicity of the closing paragraph: every finitely generated torsion right A_n(k)-module T is stably cyclic (IsStablyCyclic: for l ≥ 1 and generators a_1, …, a_{l+1} of T there are f_i with a_i + a_{l+1}f_i, i = 1, …, l, generating T). Stafford38.Paper.corollary_6_3_stablyCyclic proves it as the second component of Section6.corollary_6_3_of: f₁ = −F for l = 1, and the stable two-generation of [Sta78, Thm. 3.7] for l ≥ 2. Solution.lean proves PaperCorollary_6_3_stablyCyclic through Paper.corollary_6_3_stablyCyclic.",
+      "route": "Stafford38Challenge.corollary_6_3 (Solution.lean) → Paper.corollary_6_3 → Section6.corollary_6_3_of (step_6_3_common_annihilator, step_6_3_pair (step_6_3_kernel, step_6_3_phi_range, step_6_3_generators)), with stafford_1978_theorem_3_7 (two_generators_of_identity, stably_generated_of_identity from theorem_1_1) and weyl_rightOreCondition. Stable cyclicity: Stafford38Challenge.corollary_6_3_stablyCyclic (Solution.lean) → Paper.corollary_6_3_stablyCyclic → Section6.corollary_6_3_of.",
       "lean": [
         {
           "file": "Challenge.lean",
@@ -5855,6 +6299,33 @@
           "repo": "formal",
           "role": "proof-entry",
           "note": "Proved by Stafford38.Paper.corollary_6_3."
+        },
+        {
+          "file": "Challenge.lean",
+          "name": "Stafford38Challenge.PaperCorollary_6_3_stablyCyclic",
+          "repo": "formal",
+          "role": "statement",
+          "note": "Stable cyclicity as printed, Mathlib only."
+        },
+        {
+          "file": "Challenge.lean",
+          "name": "Stafford38Challenge.IsStablyCyclic",
+          "repo": "formal",
+          "role": "definition",
+          "note": "Stably cyclic [Sta78, p. 435]."
+        },
+        {
+          "file": "Stafford38/Paper/Main.lean",
+          "name": "Stafford38.Paper.corollary_6_3_stablyCyclic",
+          "repo": "formal",
+          "role": "statement"
+        },
+        {
+          "file": "Solution.lean",
+          "name": "Stafford38Challenge.corollary_6_3_stablyCyclic",
+          "repo": "formal",
+          "role": "proof-entry",
+          "note": "Proved by Stafford38.Paper.corollary_6_3_stablyCyclic."
         },
         {
           "file": "Stafford38/Paper/Section6/Cyclicity.lean",
@@ -6065,7 +6536,7 @@
       ],
       "statement_relation": "n/a",
       "route_relation": "n/a",
-      "correspondence": "The first paragraph of Section 7 lists three consequences without printed proofs; each is mapped separately below. The identity in every right Ore localization is no longer listed, although the paragraph’s Lean reference still cites it (MS28-REF-01). The left-handed, localized differential-operator and evolutionary declarations exist at the pinned formal commit.",
+      "correspondence": "The first paragraph of Section 7 lists three consequences without printed proofs; each is mapped separately below. The identity in every right Ore localization is no longer listed, although the paragraph’s Lean reference still cites it (MS28-REF-01). Stafford38/Paper/Section7.lean proves them in the Mathlib-only form of Challenge.lean, and Solution.lean proves the compared theorems through them.",
       "route": null,
       "lean": [
         {
@@ -6172,13 +6643,86 @@
       ],
       "statement_relation": "exact",
       "route_relation": "same",
-      "correspondence": "The paragraph adds that the left-handed identity gives Corollary 6.3 for left torsion modules. The paper cites the formal-adjoint corollary directly.",
+      "correspondence": "The paragraph adds that the left-handed identity gives Corollary 6.3 for left torsion modules. The paper cites the formal-adjoint corollary directly. Stafford38Challenge.LeftHandedIdentity (Challenge.lean, Mathlib-only) states the identity: for every field k of characteristic zero, every n and every nonzero d ∈ A_n(k) there are R, S, F with 1 = Rd + SdF. Section7.leftHandedIdentity proves it from Theorem 1.1 through the formal adjoint (LeftHandedCorollary.leftHanded_of_universalStatement). Stafford38Challenge.LeftCorollary_6_3 states that every finitely generated torsion left A_n(k)-module is cyclic. Section7.corollary_6_3_left proves it by the printed proof of Corollary 6.3 (Section6.corollary_6_3_of) for the ring A_n(k)ᵐᵒᵖ, whose right modules are the left A_n(k)-modules, with 1 = Rd + SdF in place of 1 = dR + FdS and the left Ore condition (Section7.weyl_leftOreCondition, from the right Ore condition through the transpose); the two generators and the stable two-generation come from the same identity. Solution.lean proves both compared theorems through these declarations.",
       "route": null,
       "lean": [
+        {
+          "file": "Challenge.lean",
+          "name": "Stafford38Challenge.LeftHandedIdentity",
+          "repo": "formal",
+          "role": "statement",
+          "note": "The identity 1 = Rd + SdF, Mathlib only."
+        },
+        {
+          "file": "Stafford38/Paper/Section7.lean",
+          "name": "Stafford38.Paper.Section7.leftHandedIdentity",
+          "repo": "formal",
+          "role": "statement"
+        },
+        {
+          "file": "Solution.lean",
+          "name": "Stafford38Challenge.leftHandedIdentity",
+          "repo": "formal",
+          "role": "proof-entry",
+          "note": "Proved by Stafford38.Paper.Section7.leftHandedIdentity."
+        },
         {
           "file": "Stafford38/LeftHandedCorollary.lean",
           "role": "statement",
           "name": "Stafford38.LeftHandedCorollary.leftHanded_of_universalStatement"
+        },
+        {
+          "file": "Challenge.lean",
+          "name": "Stafford38Challenge.LeftCorollary_6_3",
+          "repo": "formal",
+          "role": "statement",
+          "note": "Corollary 6.3 for left torsion modules, Mathlib only."
+        },
+        {
+          "file": "Challenge.lean",
+          "name": "Stafford38Challenge.IsLeftTorsion",
+          "repo": "formal",
+          "role": "definition"
+        },
+        {
+          "file": "Challenge.lean",
+          "name": "Stafford38Challenge.IsLeftCyclicModule",
+          "repo": "formal",
+          "role": "definition"
+        },
+        {
+          "file": "Stafford38/Paper/Section7.lean",
+          "name": "Stafford38.Paper.Section7.corollary_6_3_left",
+          "repo": "formal",
+          "role": "statement"
+        },
+        {
+          "file": "Solution.lean",
+          "name": "Stafford38Challenge.corollary_6_3_left",
+          "repo": "formal",
+          "role": "proof-entry",
+          "note": "Proved by Stafford38.Paper.Section7.corollary_6_3_left."
+        },
+        {
+          "file": "Stafford38/Paper/Section6/Cyclicity.lean",
+          "name": "Stafford38.Paper.Section6.corollary_6_3_of",
+          "repo": "formal",
+          "role": "cited result",
+          "note": "The printed proof of Corollary 6.3, here for A_n(k)ᵐᵒᵖ."
+        },
+        {
+          "file": "Stafford38/Paper/Section7.lean",
+          "name": "Stafford38.Paper.Section7.weyl_leftOreCondition",
+          "repo": "formal",
+          "role": "helper",
+          "note": "A_n(k) is a left Ore domain."
+        },
+        {
+          "file": "Stafford38/Paper/Main.lean",
+          "name": "Stafford38.Paper.theorem_1_1",
+          "repo": "formal",
+          "role": "cited result",
+          "note": "Theorem 1.1."
         }
       ],
       "depends_on": [],
@@ -6204,13 +6748,145 @@
       ],
       "statement_relation": "lean-stronger",
       "route_relation": "same",
-      "correspondence": "The paper cites the unconditional localization theorem; its specializations include principal opens, Laurent-polynomial coefficients, and the fraction field.\n\nThe Lean theorem handles a submonoid localization of a polynomial algebra, with its localization algebra and scalar-tower instances. Principal opens, Laurent-polynomial coefficients and the fraction field are the stated special cases.",
+      "correspondence": "The paper cites the unconditional localization theorem; its specializations include principal opens, Laurent-polynomial coefficients, and the fraction field.\n\nStafford38Challenge.LocalizedDifferentialIdentity (Challenge.lean, Mathlib-only) states it for every localization B of k[x_1, …, x_n] at a submonoid S, k a field of characteristic zero: every nonzero k-linear differential operator d of finite order on B (IsDifferentialOperator: the iterated commutators with multiplication operators vanish) has F, R, S of finite order with 1 = dR + FdS (HasDifferentialIdentity). Section7.localizedDifferentialIdentity proves it from Theorem 1.1 by LocalizedDifferentialCorollaries.s38_localized_differential for Localization S and then along the isomorphism Localization S ≅ B (hasDifferentialIdentity_of_algEquiv); isDifferentialOperator_iff identifies this order with the order filtration used there. Solution.lean derives the compared theorems principalOpenDifferentialIdentity (B = k[x]_f), laurentDifferentialIdentity (f = x_1⋯x_n) and fractionFieldDifferentialIdentity (B = k(x_1, …, x_n)) from it.",
       "route": null,
       "lean": [
+        {
+          "file": "Challenge.lean",
+          "name": "Stafford38Challenge.LocalizedDifferentialIdentity",
+          "repo": "formal",
+          "role": "statement",
+          "note": "Every localization of k[x_1, …, x_n], Mathlib only."
+        },
+        {
+          "file": "Challenge.lean",
+          "name": "Stafford38Challenge.HasDifferentialIdentity",
+          "repo": "formal",
+          "role": "definition"
+        },
+        {
+          "file": "Challenge.lean",
+          "name": "Stafford38Challenge.IsDifferentialOperator",
+          "repo": "formal",
+          "role": "definition"
+        },
+        {
+          "file": "Challenge.lean",
+          "name": "Stafford38Challenge.IsDifferentialOperatorOfOrder",
+          "repo": "formal",
+          "role": "definition"
+        },
+        {
+          "file": "Stafford38/Paper/Section7.lean",
+          "name": "Stafford38.Paper.Section7.localizedDifferentialIdentity",
+          "repo": "formal",
+          "role": "statement"
+        },
+        {
+          "file": "Solution.lean",
+          "name": "Stafford38Challenge.localizedDifferentialIdentity",
+          "repo": "formal",
+          "role": "proof-entry",
+          "note": "Proved by Stafford38.Paper.Section7.localizedDifferentialIdentity."
+        },
+        {
+          "file": "Solution.lean",
+          "name": "Stafford38Challenge.principalOpenDifferentialIdentity",
+          "repo": "formal",
+          "role": "statement",
+          "note": "Principal opens k[x]_f."
+        },
+        {
+          "file": "Solution.lean",
+          "name": "Stafford38Challenge.laurentDifferentialIdentity",
+          "repo": "formal",
+          "role": "statement",
+          "note": "Laurent-polynomial coefficients, f = x_1⋯x_n."
+        },
+        {
+          "file": "Solution.lean",
+          "name": "Stafford38Challenge.fractionFieldDifferentialIdentity",
+          "repo": "formal",
+          "role": "statement",
+          "note": "The fraction field k(x_1, …, x_n)."
+        },
         {
           "file": "Stafford38/LocalizedDifferentialCorollaries.lean",
           "role": "statement",
           "name": "Stafford38.LocalizedDifferentialCorollaries.s38_unconditional_localized_differential"
+        },
+        {
+          "file": "Stafford38/LocalizedDifferentialCorollaries.lean",
+          "name": "Stafford38.LocalizedDifferentialCorollaries.s38_localized_differential",
+          "repo": "formal",
+          "role": "cited result",
+          "note": "Theorem 1.1 transferred to D_k(S⁻¹k[x])."
+        },
+        {
+          "file": "Stafford38/Paper/Section7.lean",
+          "name": "Stafford38.Paper.Section7.isDifferentialOperatorOfOrder_iff",
+          "repo": "formal",
+          "role": "helper",
+          "note": "The commutator order is the order filtration."
+        },
+        {
+          "file": "Stafford38/Paper/Section7.lean",
+          "name": "Stafford38.Paper.Section7.isDifferentialOperator_iff",
+          "repo": "formal",
+          "role": "helper"
+        },
+        {
+          "file": "Stafford38/Paper/Section7.lean",
+          "name": "Stafford38.Paper.Section7.hasDifferentialIdentity_of",
+          "repo": "formal",
+          "role": "helper",
+          "note": "The identity in the subalgebra D_k(B) gives the Mathlib-only form."
+        },
+        {
+          "file": "Stafford38/Paper/Section7.lean",
+          "name": "Stafford38.Paper.Section7.hasDifferentialIdentity_of_algEquiv",
+          "repo": "formal",
+          "role": "helper",
+          "note": "The identity transfers along an isomorphism B′ ≅ B."
+        },
+        {
+          "file": "Stafford38/Paper/Section7.lean",
+          "name": "Stafford38.Paper.Section7.conjEnd",
+          "repo": "formal",
+          "role": "definition",
+          "note": "Conjugation P ↦ e ∘ P ∘ e⁻¹."
+        },
+        {
+          "file": "Stafford38/Paper/Section7.lean",
+          "name": "Stafford38.Paper.Section7.conjEnd_apply",
+          "repo": "formal",
+          "role": "helper"
+        },
+        {
+          "file": "Stafford38/Paper/Section7.lean",
+          "name": "Stafford38.Paper.Section7.conjEnd_mulLeft",
+          "repo": "formal",
+          "role": "helper"
+        },
+        {
+          "file": "Stafford38/Paper/Section7.lean",
+          "name": "Stafford38.Paper.Section7.foldl_conjEnd",
+          "repo": "formal",
+          "role": "helper"
+        },
+        {
+          "file": "Stafford38/Paper/Section7.lean",
+          "name": "Stafford38.Paper.Section7.isDifferentialOperator_conjEnd",
+          "repo": "formal",
+          "role": "helper",
+          "note": "Conjugation preserves finite order."
+        },
+        {
+          "file": "Stafford38/Paper/Main.lean",
+          "name": "Stafford38.Paper.theorem_1_1",
+          "repo": "formal",
+          "role": "cited result",
+          "note": "Theorem 1.1."
         }
       ],
       "depends_on": [],
@@ -6236,13 +6912,40 @@
       ],
       "statement_relation": "exact",
       "route_relation": "same",
-      "correspondence": "The cited theorem supplies the stated evolutionary extension.\n\nThe quantified input is a characteristic-zero field algebra with p*x=x*p+1, r>0, and a finite list of potential terms whose coefficients commute with x and p. For d=p^r-potentialSum it proves 1=dR+x^r*d*S; the coefficients need not commute with one another.",
+      "correspondence": "The cited theorem supplies the stated evolutionary extension.\n\nStafford38Challenge.EvolutionaryIdentity (Challenge.lean, Mathlib-only) states it with a finite sum: for a field k of characteristic zero, a k-algebra D with px = xp + 1, r ≥ 1 and d = p^r − Σ_{j<J} a_j x^{m_j}, each a_j commuting with x and p, there are R, S with 1 = dR + x^r dS. Section7.evolutionaryIdentity proves it from Evolution.evolutionaryCorollary, without Theorem 1.1; potentialSum_ofFn rewrites the sum in the list form of that theorem. The a_j need not commute with one another.",
       "route": null,
       "lean": [
+        {
+          "file": "Challenge.lean",
+          "name": "Stafford38Challenge.EvolutionaryIdentity",
+          "repo": "formal",
+          "role": "statement",
+          "note": "Mathlib only."
+        },
+        {
+          "file": "Stafford38/Paper/Section7.lean",
+          "name": "Stafford38.Paper.Section7.evolutionaryIdentity",
+          "repo": "formal",
+          "role": "statement"
+        },
+        {
+          "file": "Solution.lean",
+          "name": "Stafford38Challenge.evolutionaryIdentity",
+          "repo": "formal",
+          "role": "proof-entry",
+          "note": "Proved by Stafford38.Paper.Section7.evolutionaryIdentity."
+        },
         {
           "file": "Stafford38/EvolutionaryCorollary.lean",
           "role": "statement",
           "name": "Stafford38.Evolution.evolutionaryCorollary"
+        },
+        {
+          "file": "Stafford38/Paper/Section7.lean",
+          "name": "Stafford38.Paper.Section7.potentialSum_ofFn",
+          "repo": "formal",
+          "role": "helper",
+          "note": "potentialSum of the list is Σ_j a_j x^{m_j}."
         }
       ],
       "depends_on": [],
@@ -6403,23 +7106,15 @@
       ],
       "statement_relation": "n/a",
       "route_relation": "n/a",
-      "correspondence": "Rewritten and shortened: the appendix describes the general evolution of the work, the role of AI agents in discovery, review, formalization and writing, and the local models used. Workflow and independent-check claims are provenance, not mathematical consequences. The formal verification record is available in the pinned formal repository; tool participation and chronology require the project’s source ledgers.",
+      "correspondence": "The appendix describes the evolution of the work, the role of AI agents in discovery, review, formalization and writing, and the models used. Workflow and independent-check claims are provenance, not mathematical consequences. docs/building.md of the formal repository describes the repository verifier and the Comparator replay.",
       "route": null,
       "lean": [
         {
           "repo": "formal",
-          "file": "docs/verification-results.json",
+          "file": "docs/building.md",
           "role": "verification provenance",
-          "name": "",
           "module_only": true,
-          "line": 1
-        },
-        {
-          "repo": "formal",
-          "file": "docs/paper-lean-audit/workflow-evidence/README.md",
-          "role": "historical provenance",
-          "module_only": true,
-          "note": "History/prompt reconstructions, source protocols and model inventory; provenance rather than mathematical premises."
+          "note": "Repository verifier, dependency guard and Comparator replay."
         }
       ],
       "depends_on": [],

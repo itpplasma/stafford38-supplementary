@@ -1,0 +1,96 @@
+Local preflight against Palomar source policy 65f0154ed776cd26c224254aa57b379137f28b0d: 632 Lean files satisfy module-header, UTF-8, symlink, and 10000-line checks (not a Palomar service-runner receipt)
+pins: Lean leanprover/lean4:v4.35.0-rc3 (470d5ce1400764999581fd26d5d72b00d990b0f4), Mathlib c55e6e786f49471c72fbddbec5415808896aec1e, AlgebraicAnalysis bbbbf3fc358ca8100b158cec4cf47f336ab70163; all four Palomar configs passed
+Palomar uses bundled Lean 4.35.0-rc3 tools and bwrap; recorded at .lake/palomar-tools/revisions.txt
+Supplementary literal pair consumer: exact statement and permitted axioms passed
+Literal consumers and import/axiom audits: 317 reports passed
+Paper-linked declarations: 111 exact names and axiom reports passed
+source audit: only the deliberate placeholders of the compared theorems in each Challenge; neither Solution imports either Challenge; no other sorry, admit, or axiom declaration
+axiom audit: 45 declarations use only ['Classical.choice', 'Quot.sound', 'propext']
+Challenge: audited 3529 loaded modules
+CorollaryChallenge: audited 3530 loaded modules
+Solution: audited 11308 loaded modules
+FixedSourceChallenge: audited 3529 loaded modules
+FixedSourceSolution: audited 11286 loaded modules
+AlternativeSolution: audited 5390 loaded modules
+AlternativeFixedSourceSolution: audited 5383 loaded modules
+Stafford38 verification passed
+verify exit 0
+root: Stafford38.Paper.theorem_1_1; declarations reached: 1051; forbidden hits: 0; unavailable dependencies: 321
+root: Stafford38.Paper.theorem_1_1; declarations reached: 1702; forbidden hits: 0; unavailable dependencies: 21
+root: Stafford38.Paper.theorem_1_1; declarations reached: 9718; forbidden hits: 0; unavailable dependencies: 1311
+root: Stafford38.Paper.theorem_1_1; declarations reached: 18948; forbidden hits: 0; unavailable dependencies: 1175
+root: Stafford38.Paper.theorem_1_1; declarations reached: 29294; forbidden hits: 0; unavailable dependencies: 1190
+root: Stafford38.Paper.theorem_1_1; declarations reached: 35995; forbidden hits: 0; unavailable dependencies: 680
+root: Stafford38.Paper.theorem_1_1; declarations reached: 40988; forbidden hits: 0; unavailable dependencies: 662
+root: Stafford38.Paper.theorem_1_1; declarations reached: 44036; forbidden hits: 0; unavailable dependencies: 209
+root: Stafford38.Paper.theorem_1_1; declarations reached: 45744; forbidden hits: 0; unavailable dependencies: 77
+root: Stafford38.Paper.theorem_1_1; declarations reached: 46402; forbidden hits: 0; unavailable dependencies: 38
+root: Stafford38.Paper.theorem_1_1; declarations reached: 47075; forbidden hits: 0; unavailable dependencies: 55
+root: Stafford38.Paper.theorem_1_1; declarations reached: 48357; forbidden hits: 0; unavailable dependencies: 197
+root: Stafford38.Paper.theorem_1_1; declarations reached: 49003; forbidden hits: 0; unavailable dependencies: 39
+root: Stafford38.Paper.theorem_1_1; declarations reached: 49206; forbidden hits: 0; unavailable dependencies: 0
+root: Stafford38.Paper.theorem_1_1_fixedSource; declarations reached: 49206; forbidden hits: 0; unavailable dependencies: 0
+root: Stafford38.Paper.corollary_6_3; declarations reached: 52767; forbidden hits: 0; unavailable dependencies: 0
+root: Stafford38.Paper.corollary_6_3_stablyCyclic; declarations reached: 52767; forbidden hits: 0; unavailable dependencies: 0
+root: Stafford38.Paper.Section7.leftHandedIdentity; declarations reached: 49270; forbidden hits: 0; unavailable dependencies: 0
+root: Stafford38.Paper.Section7.corollary_6_3_left; declarations reached: 52834; forbidden hits: 0; unavailable dependencies: 0
+root: Stafford38.Paper.Section7.localizedDifferentialIdentity; declarations reached: 49450; forbidden hits: 0; unavailable dependencies: 0
+root: Stafford38Challenge.universalStatement; declarations reached: 49207; forbidden hits: 0; unavailable dependencies: 0
+root: Stafford38Challenge.theorem_1_1; declarations reached: 49223; forbidden hits: 0; unavailable dependencies: 0
+root: Stafford38Challenge.corollary_6_3; declarations reached: 52770; forbidden hits: 0; unavailable dependencies: 0
+root: Stafford38Challenge.corollary_6_3_stablyCyclic; declarations reached: 52770; forbidden hits: 0; unavailable dependencies: 0
+root: Stafford38Challenge.leftHandedIdentity; declarations reached: 49271; forbidden hits: 0; unavailable dependencies: 0
+root: Stafford38Challenge.corollary_6_3_left; declarations reached: 52835; forbidden hits: 0; unavailable dependencies: 0
+root: Stafford38Challenge.localizedDifferentialIdentity; declarations reached: 49451; forbidden hits: 0; unavailable dependencies: 0
+root: Stafford38Challenge.principalOpenDifferentialIdentity; declarations reached: 49452; forbidden hits: 0; unavailable dependencies: 0
+root: Stafford38Challenge.laurentDifferentialIdentity; declarations reached: 49453; forbidden hits: 0; unavailable dependencies: 0
+root: Stafford38Challenge.fractionFieldDifferentialIdentity; declarations reached: 49452; forbidden hits: 0; unavailable dependencies: 0
+root: Stafford38FixedSourceChallenge.universalFixedSourceStatement; declarations reached: 49207; forbidden hits: 0; unavailable dependencies: 0
+strict dependency guard passed for all 18 terminal roots
+root: Stafford38.universalStatement; declarations reached: 1052; forbidden hits: 0; unavailable dependencies: 321
+root: Stafford38.universalStatement; declarations reached: 6982; forbidden hits: 0; unavailable dependencies: 1054
+root: Stafford38.universalStatement; declarations reached: 12851; forbidden hits: 0; unavailable dependencies: 1051
+root: Stafford38.universalStatement; declarations reached: 19372; forbidden hits: 0; unavailable dependencies: 1121
+root: Stafford38.universalStatement; declarations reached: 26505; forbidden hits: 0; unavailable dependencies: 1160
+root: Stafford38.universalStatement; declarations reached: 32478; forbidden hits: 0; unavailable dependencies: 1108
+root: Stafford38.universalStatement; declarations reached: 39620; forbidden hits: 0; unavailable dependencies: 969
+root: Stafford38.universalStatement; declarations reached: 46149; forbidden hits: 0; unavailable dependencies: 465
+root: Stafford38.universalStatement; declarations reached: 49892; forbidden hits: 0; unavailable dependencies: 456
+root: Stafford38.universalStatement; declarations reached: 52783; forbidden hits: 0; unavailable dependencies: 293
+root: Stafford38.universalStatement; declarations reached: 54292; forbidden hits: 0; unavailable dependencies: 220
+root: Stafford38.universalStatement; declarations reached: 54825; forbidden hits: 0; unavailable dependencies: 23
+root: Stafford38.universalStatement; declarations reached: 54875; forbidden hits: 0; unavailable dependencies: 8
+root: Stafford38.universalStatement; declarations reached: 54886; forbidden hits: 0; unavailable dependencies: 0
+root: Stafford38Challenge.universalStatement; declarations reached: 54887; forbidden hits: 0; unavailable dependencies: 0
+root: Stafford38.universalFixedSourceStatement; declarations reached: 54894; forbidden hits: 0; unavailable dependencies: 0
+root: Stafford38FixedSourceChallenge.universalFixedSourceStatement; declarations reached: 54916; forbidden hits: 0; unavailable dependencies: 0
+strict dependency guard passed for all 4 terminal roots
+dependency route passed: Stafford38Challenge.corollary_6_3_left reaches Stafford38.Paper.Section5.theorem_5_8 and excludes Stafford38.Geometry.SameWitness.coordinate_axis_mem_smooth_fibre_closure
+dependency route passed: Stafford38Challenge.corollary_6_3_left reaches Stafford38.Paper.Section6.corollary_6_3_of and excludes Stafford38.TorsionCyclicity.weyl_isCyclic_of_isRightTorsion
+dependency route passed: Stafford38Challenge.corollary_6_3_left reaches Stafford38.Paper.theorem_1_1 and excludes Stafford38.universalStatement
+dependency route passed: Stafford38Challenge.corollary_6_3 reaches Stafford38.Paper.Section5.theorem_5_8 and excludes Stafford38.Geometry.SameWitness.coordinate_axis_mem_smooth_fibre_closure
+dependency route passed: Stafford38Challenge.corollary_6_3 reaches Stafford38.Paper.Section6.corollary_6_3_of and excludes Stafford38.TorsionCyclicity.weyl_isCyclic_of_isRightTorsion
+dependency route passed: Stafford38Challenge.corollary_6_3 reaches Stafford38.Paper.theorem_1_1 and excludes Stafford38.universalStatement
+dependency route passed: Stafford38Challenge.corollary_6_3_stablyCyclic reaches Stafford38.Paper.Section5.theorem_5_8 and excludes Stafford38.Geometry.SameWitness.coordinate_axis_mem_smooth_fibre_closure
+dependency route passed: Stafford38Challenge.corollary_6_3_stablyCyclic reaches Stafford38.Paper.Section6.corollary_6_3_of and excludes Stafford38.TorsionCyclicity.weyl_isCyclic_of_isRightTorsion
+dependency route passed: Stafford38Challenge.corollary_6_3_stablyCyclic reaches Stafford38.Paper.theorem_1_1 and excludes Stafford38.universalStatement
+dependency route passed: Stafford38Challenge.fractionFieldDifferentialIdentity reaches Stafford38.Paper.Section5.theorem_5_8 and excludes Stafford38.Geometry.SameWitness.coordinate_axis_mem_smooth_fibre_closure
+dependency route passed: Stafford38Challenge.fractionFieldDifferentialIdentity reaches Stafford38.Paper.theorem_1_1 and excludes Stafford38.universalStatement
+dependency route passed: Stafford38Challenge.laurentDifferentialIdentity reaches Stafford38.Paper.Section5.theorem_5_8 and excludes Stafford38.Geometry.SameWitness.coordinate_axis_mem_smooth_fibre_closure
+dependency route passed: Stafford38Challenge.laurentDifferentialIdentity reaches Stafford38.Paper.theorem_1_1 and excludes Stafford38.universalStatement
+dependency route passed: Stafford38Challenge.leftHandedIdentity reaches Stafford38.Paper.Section5.theorem_5_8 and excludes Stafford38.Geometry.SameWitness.coordinate_axis_mem_smooth_fibre_closure
+dependency route passed: Stafford38Challenge.leftHandedIdentity reaches Stafford38.Paper.theorem_1_1 and excludes Stafford38.universalStatement
+dependency route passed: Stafford38Challenge.localizedDifferentialIdentity reaches Stafford38.Paper.Section5.theorem_5_8 and excludes Stafford38.Geometry.SameWitness.coordinate_axis_mem_smooth_fibre_closure
+dependency route passed: Stafford38Challenge.localizedDifferentialIdentity reaches Stafford38.Paper.theorem_1_1 and excludes Stafford38.universalStatement
+dependency route passed: Stafford38Challenge.principalOpenDifferentialIdentity reaches Stafford38.Paper.Section5.theorem_5_8 and excludes Stafford38.Geometry.SameWitness.coordinate_axis_mem_smooth_fibre_closure
+dependency route passed: Stafford38Challenge.principalOpenDifferentialIdentity reaches Stafford38.Paper.theorem_1_1 and excludes Stafford38.universalStatement
+dependency route passed: Stafford38Challenge.theorem_1_1 reaches Stafford38.Paper.Section5.theorem_5_8 and excludes Stafford38.Geometry.AlternativeAsymptoticConormal.coordinate_axis_mem_smooth_fibre_closure
+dependency route passed: Stafford38Challenge.theorem_1_1 reaches Stafford38.Paper.Section5.theorem_5_8 and excludes Stafford38.Geometry.SameWitness.coordinate_axis_mem_smooth_fibre_closure
+dependency route passed: Stafford38Challenge.theorem_1_1 reaches Stafford38.Paper.theorem_1_1 and excludes Stafford38.universalStatement
+dependency route passed: Stafford38Challenge.universalStatement reaches Stafford38.Geometry.SameWitness.coordinate_axis_mem_smooth_fibre_closure and excludes Stafford38.Paper.Section5.theorem_5_8
+dependency route passed: Stafford38Challenge.universalStatement reaches Stafford38.Paper.Section5.theorem_5_8 and excludes Stafford38.Geometry.AlternativeAsymptoticConormal.coordinate_axis_mem_smooth_fibre_closure
+dependency route passed: Stafford38Challenge.universalStatement reaches Stafford38.Paper.Section5.theorem_5_8 and excludes Stafford38.Geometry.SameWitness.coordinate_axis_mem_smooth_fibre_closure
+dependency route passed: Stafford38Challenge.universalStatement reaches Stafford38.Paper.theorem_1_1 and excludes Stafford38.universalStatement
+dependency route passed: Stafford38FixedSourceChallenge.universalFixedSourceStatement reaches Stafford38.Geometry.SameWitness.coordinate_axis_mem_smooth_fibre_closure and excludes Stafford38.Paper.Section5.theorem_5_8
+dependency route passed: Stafford38FixedSourceChallenge.universalFixedSourceStatement reaches Stafford38.Paper.Section5.theorem_5_8 and excludes Stafford38.Geometry.AlternativeAsymptoticConormal.coordinate_axis_mem_smooth_fibre_closure
+dependency route passed: Stafford38FixedSourceChallenge.universalFixedSourceStatement reaches Stafford38.Paper.Section5.theorem_5_8 and excludes Stafford38.Geometry.SameWitness.coordinate_axis_mem_smooth_fibre_closure
