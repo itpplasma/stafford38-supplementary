@@ -17,8 +17,8 @@ challenge. Four editorial findings are recorded in Comparison notes. See the
 [manuscript records](verification/manuscript-20261102/README.md) and the
 [paper-route update](verification/paper-route-20261103/README.md).
 The paper has not been edited. The Lean sources are pinned to formal commit
-8c417b3, which passes the repository verifier
-([log](verification/paper-route-20261103/formal-verify.log)).
+1029fdb, which passes the repository verifier
+([log](verification/formal-1029fdb-20261104/formal-verify.log)).
 This review update has no new journal release or Zenodo DOI.
 
 **Offline:** download this repository, unzip it, and open **index.html**.

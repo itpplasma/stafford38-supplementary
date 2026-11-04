@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "formal_commit": "8c417b3a9f0043d85967059cc51a7bbec65ec6ec",
+ "formal_commit": "1029fdb382eee06e7b59bcf32801f40931e2079a",
  "source": "Constants used by types and proofs (scripts/LeanDag.lean); lines from findDeclarationRanges?.",
  "nodes": {
   "T": {
@@ -424,10 +424,6 @@
     "ore"
    ],
    "helpers": {
-    "Stafford38.Paper.Section4.transverse_commutes_coordinate": {
-     "keys": [],
-     "leaves": []
-    },
     "Stafford38.Paper.Section3.isPBWMonicAt_of_isMonicNormalForm": {
      "keys": [],
      "leaves": [
@@ -440,19 +436,17 @@
       "ore"
      ]
     },
+    "Stafford38.Paper.Section4.step_positive_mem_nonnegative_mul_coordinate": {
+     "keys": [],
+     "leaves": [
+      "ore"
+     ]
+    },
     "Stafford38.Paper.Section4.lemma_4_2_of_positive": {
      "keys": [],
      "leaves": [
       "coprime"
      ]
-    },
-    "Stafford38.Paper.Section2.convention_2_2_relations": {
-     "keys": [],
-     "leaves": []
-    },
-    "Stafford38.Paper.Section4.rat_mem_transverse": {
-     "keys": [],
-     "leaves": []
     }
    }
   },
@@ -464,27 +458,25 @@
     "ore"
    ],
    "helpers": {
-    "Stafford38.Paper.Section4.transverse_commutes_coordinate": {
-     "keys": [],
-     "leaves": []
-    },
-    "Stafford38.WeylEulerSubring.coordinate_mem_eulerSubring": {
-     "keys": [],
-     "leaves": []
-    },
     "Stafford38.Paper.Section4.proposition_4_3_of": {
      "keys": [],
      "leaves": []
+    },
+    "Stafford38.Paper.Section4.coordinate_mem_nonnegativePart": {
+     "keys": [],
+     "leaves": []
+    },
+    "Stafford38.Paper.Section4.presented_coordinate_normal": {
+     "keys": [],
+     "leaves": [
+      "ore"
+     ]
     },
     "Stafford38.Paper.Section4.closure_transverseCoordinateAlgebra_momentum": {
      "keys": [],
      "leaves": [
       "ore"
      ]
-    },
-    "Stafford38.WeylEulerSubring.euler_mem_eulerSubring": {
-     "keys": [],
-     "leaves": []
     },
     "Stafford38.Paper.Section2.convention_2_2_relations": {
      "keys": [],
@@ -494,7 +486,7 @@
      "keys": [],
      "leaves": []
     },
-    "Stafford38.Paper.Section4.step_coordinate_normal": {
+    "Stafford38.Paper.Section4.euler_mem_nonnegativePart": {
      "keys": [],
      "leaves": []
     }
@@ -526,7 +518,8 @@
   },
   "L48": {
    "keys": [
-    "L47"
+    "L47",
+    "P36"
    ],
    "leaves": [
     "aasupp",
@@ -535,12 +528,6 @@
     "support"
    ],
    "helpers": {
-    "Stafford38.Paper.Section3.isPBWMonicAt_of_isMonicNormalForm": {
-     "keys": [],
-     "leaves": [
-      "ore"
-     ]
-    },
     "Stafford38.Paper.Section4.setup_coordinateMap_eq": {
      "keys": [],
      "leaves": [
@@ -563,7 +550,9 @@
      ]
     },
     "Stafford38.Paper.Section4.step_4_8_finite": {
-     "keys": [],
+     "keys": [
+      "P36"
+     ],
      "leaves": [
       "aasupp",
       "ore"
@@ -641,21 +630,17 @@
   "L410": {
    "keys": [
     "GABBER",
-    "L48"
+    "L48",
+    "P36"
    ],
    "leaves": [
     "aasupp",
+    "kahler",
     "length",
     "ore",
     "support"
    ],
    "helpers": {
-    "Stafford38.Paper.Section3.isPBWMonicAt_of_isMonicNormalForm": {
-     "keys": [],
-     "leaves": [
-      "ore"
-     ]
-    },
     "Stafford38.Paper.Section4.setup_coordinateMap_eq": {
      "keys": [],
      "leaves": [
@@ -664,12 +649,15 @@
     },
     "Stafford38.Paper.Section4.step_4_10_localized_avoid": {
      "keys": [
-      "GABBER"
+      "GABBER",
+      "P36"
      ],
      "leaves": [
       "aasupp",
+      "kahler",
       "length",
-      "ore"
+      "ore",
+      "support"
      ]
     },
     "Stafford38.Paper.Section4.step_4_10_localized": {
@@ -881,6 +869,16 @@
       "nss"
      ]
     },
+    "Stafford38.Paper.Section5.step_coordinate_algebraic": {
+     "keys": [],
+     "leaves": [
+      "flat",
+      "kahler",
+      "length",
+      "nss",
+      "support"
+     ]
+    },
     "Stafford38.Geometry.GeneralCoordinateAvoidance.exists_coordinate_inverse_of_avoidance": {
      "keys": [],
      "leaves": [
@@ -899,29 +897,10 @@
      "keys": [],
      "leaves": []
     },
-    "Stafford38.Geometry.GeneralConstantCoordinateAxis.exists_constant_coordinate_equation_and_pure_axis": {
-     "keys": [],
-     "leaves": [
-      "flat",
-      "kahler",
-      "nss",
-      "support"
-     ]
-    },
     "Stafford38.Paper.Section5.valuationSubring_toSubring_isLocalRing": {
      "keys": [],
      "leaves": [
       "val"
-     ]
-    },
-    "Stafford38.Geometry.SmoothConormalFibreVanishing.fibreLift_mem_vanishingIdeal_equationConormal": {
-     "keys": [],
-     "leaves": [
-      "flat",
-      "kahler",
-      "length",
-      "nss",
-      "support"
      ]
     },
     "Stafford38.Paper.Section5.definition_5_5": {
@@ -1104,7 +1083,7 @@
      "keys": [],
      "leaves": []
     },
-    "Stafford38.Geometry.LaneC.divisorialVisibleFrameExistence": {
+    "Stafford38.Geometry.LaneC.divisorialVisibleFrameExistenceWithChart": {
      "keys": [
       "L510",
       "L59"
@@ -1118,13 +1097,6 @@
     "Stafford38.Geometry.ComponentProjectiveOrder.normalized_denominator_nonunit_of_polynomial_inverse": {
      "keys": [],
      "leaves": []
-    },
-    "Stafford38.Geometry.ProjectiveValuationNormalization.exists_normalized_projective_lift": {
-     "keys": [],
-     "leaves": [
-      "support",
-      "val"
-     ]
     }
    }
   },
@@ -1175,13 +1147,6 @@
    ],
    "helpers": {
     "Stafford38.Paper.Section5.definition_5_3": {
-     "keys": [],
-     "leaves": [
-      "support",
-      "val"
-     ]
-    },
-    "Stafford38.Geometry.LaneC.stage3_exists_height_one_prime_valuation": {
      "keys": [],
      "leaves": [
       "support",
@@ -1586,14 +1551,13 @@
     "series"
    ],
    "helpers": {
-    "Stafford38.GeometryFormalDivisorAxisLift.exists_formalDivisorAxisLift": {
+    "Stafford38.Paper.Section5.order_X_pow_mul_of_constantCoeff_ne_zero": {
      "keys": [],
      "leaves": [
-      "kahler",
       "series"
      ]
     },
-    "Stafford38.Paper.Section5.order_X_pow_mul_of_constantCoeff_ne_zero": {
+    "Stafford38.GeometryFormalDivisorTangent.exists_primitive_commonPower_of_coeff_ne_zero": {
      "keys": [],
      "leaves": [
       "series"
@@ -1603,6 +1567,12 @@
      "keys": [],
      "leaves": [
       "kahler",
+      "series"
+     ]
+    },
+    "Stafford38.GeometryFormalDivisorTangent.correctedVector_selectedRow_eq_zero": {
+     "keys": [],
+     "leaves": [
       "series"
      ]
     }
@@ -1645,18 +1615,29 @@
     "val"
    ],
    "helpers": {
-    "Stafford38.Geometry.PaperGenericTangentRank.generic_tangent_finrank_le_component_kaehler_finrank": {
+    "Stafford38.Paper.Section5.mem_zariskiTangentSpace_map_of_forall_mem": {
+     "keys": [],
+     "leaves": []
+    },
+    "Stafford38.Geometry.AffineConormalSpan.differentialCovector_apply": {
+     "keys": [],
+     "leaves": []
+    },
+    "Stafford38.Paper.Section5.fieldKaehlerMap_exact": {
      "keys": [],
      "leaves": [
+      "flat",
       "kahler",
       "support"
      ]
     },
-    "Stafford38.Paper.Section5.component_kaehler_finrank_le_generic_tangent_finrank": {
+    "Stafford38.Paper.Section5.algebraMap_comp_mem_span": {
      "keys": [],
-     "leaves": [
-      "kahler"
-     ]
+     "leaves": []
+    },
+    "Stafford38.Geometry.AffineConormalSpan.coordinateCovector_injective": {
+     "keys": [],
+     "leaves": []
     },
     "Stafford38.Geometry.kaehlerFinrankOfTranscendenceBasis": {
      "keys": [],
@@ -2121,6 +2102,14 @@
    "Stafford38.Geometry.AffineConormalSpan",
    124
   ],
+  "Stafford38.Geometry.AffineConormalSpan.coordinateCovector_injective": [
+   "Stafford38.Geometry.AffineConormalSpan",
+   129
+  ],
+  "Stafford38.Geometry.AffineConormalSpan.differentialCovector_apply": [
+   "Stafford38.Geometry.AffineConormalSpan",
+   53
+  ],
   "Stafford38.Geometry.AsymptoticDivisorExistence.coordinateZeroPrime_isPrime": [
    "Stafford38.Geometry.AsymptoticDivisorExistence",
    57
@@ -2160,10 +2149,6 @@
   "Stafford38.Geometry.FormalDivisorLaurentConormal.residueColumn_tail": [
    "Stafford38.Geometry.FormalDivisorLaurentConormal",
    131
-  ],
-  "Stafford38.Geometry.GeneralConstantCoordinateAxis.exists_constant_coordinate_equation_and_pure_axis": [
-   "Stafford38.Geometry.GeneralConstantCoordinateAxis",
-   18
   ],
   "Stafford38.Geometry.GeneralCoordinateAvoidance.exists_coordinate_inverse_of_avoidance": [
    "Stafford38.Geometry.GeneralCoordinateAvoidance",
@@ -2225,7 +2210,7 @@
    "Stafford38.Geometry.KaehlerVisibleDerivationFrame",
    100
   ],
-  "Stafford38.Geometry.LaneC.divisorialVisibleFrameExistence": [
+  "Stafford38.Geometry.LaneC.divisorialVisibleFrameExistenceWithChart": [
    "Stafford38.Geometry.DivisorialVisibleFrameStageAssembly",
    36
   ],
@@ -2245,10 +2230,6 @@
    "Stafford38.Geometry.DivisorialVisibleFrameCore",
    236
   ],
-  "Stafford38.Geometry.LaneC.stage3_exists_height_one_prime_valuation": [
-   "Stafford38.Geometry.DivisorialVisibleFrameCore",
-   275
-  ],
   "Stafford38.Geometry.LaneC.stage7_kaehler_finite_ofField": [
    "Stafford38.Geometry.DivisorialVisibleFrameCore",
    332
@@ -2264,10 +2245,6 @@
   "Stafford38.Geometry.PaperActualDivisorTangent.retainedToCompletedPowerSeries_chosenUniformizer": [
    "Stafford38.Geometry.PaperActualDivisorTangent",
    70
-  ],
-  "Stafford38.Geometry.PaperGenericTangentRank.generic_tangent_finrank_le_component_kaehler_finrank": [
-   "Stafford38.Geometry.PaperGenericTangentRank",
-   499
   ],
   "Stafford38.Geometry.PaperLaurentChartDerivation.extendPowerSeriesDerivation_on_powerSeries": [
    "Stafford38.Geometry.PaperLaurentChartDerivation",
@@ -2296,10 +2273,6 @@
   "Stafford38.Geometry.ProjectiveDivisorOrderGap.exists_uniformizer_strict_orderGap": [
    "Stafford38.Geometry.ProjectiveDivisorOrderGap",
    42
-  ],
-  "Stafford38.Geometry.ProjectiveValuationNormalization.exists_normalized_projective_lift": [
-   "Stafford38.Geometry.ProjectiveValuationNormalization",
-   73
   ],
   "Stafford38.Geometry.RelativeCoefficientDVR.relativeCoefficientMap_commutes": [
    "Stafford38.Geometry.RelativeCoefficientDVRPlace",
@@ -2345,10 +2318,6 @@
    "Stafford38.Geometry.RetainedProjectiveCompletion",
    52
   ],
-  "Stafford38.Geometry.SmoothConormalFibreVanishing.fibreLift_mem_vanishingIdeal_equationConormal": [
-   "Stafford38.Geometry.SmoothConormalFibreVanishing",
-   24
-  ],
   "Stafford38.Geometry.kaehlerFinrankOfTranscendenceBasis": [
    "Stafford38.Geometry.KaehlerTranscendenceBasis",
    136
@@ -2357,9 +2326,13 @@
    "Stafford38.Geometry.FormalDivisorAxisLift",
    91
   ],
-  "Stafford38.GeometryFormalDivisorAxisLift.exists_formalDivisorAxisLift": [
-   "Stafford38.Geometry.FormalDivisorAxisLift",
-   219
+  "Stafford38.GeometryFormalDivisorTangent.correctedVector_selectedRow_eq_zero": [
+   "Stafford38.Geometry.FormalDivisorTangent",
+   91
+  ],
+  "Stafford38.GeometryFormalDivisorTangent.exists_primitive_commonPower_of_coeff_ne_zero": [
+   "Stafford38.Geometry.FormalDivisorTangent",
+   119
   ],
   "Stafford38.GeometryFormalDivisorTangent.residue_formalTangentMatrix_mulVec_injective": [
    "Stafford38.Geometry.FormalDivisorTangent",
@@ -2575,7 +2548,11 @@
   ],
   "Stafford38.Paper.Section4.closure_transverseCoordinateAlgebra_momentum": [
    "Stafford38.Paper.Section4.Surjectivity",
-   186
+   189
+  ],
+  "Stafford38.Paper.Section4.coordinate_mem_nonnegativePart": [
+   "Stafford38.Paper.Section4.Euler",
+   144
   ],
   "Stafford38.Paper.Section4.corollary_4_11": [
    "Stafford38.Paper.Section4.Vanishing",
@@ -2589,25 +2566,29 @@
    "Stafford38.Paper.Section4.Support",
    48
   ],
+  "Stafford38.Paper.Section4.euler_mem_nonnegativePart": [
+   "Stafford38.Paper.Section4.Euler",
+   149
+  ],
   "Stafford38.Paper.Section4.lemma_4_1": [
    "Stafford38.Paper.Section4.Euler",
-   208
+   343
   ],
   "Stafford38.Paper.Section4.lemma_4_10": [
    "Stafford38.Paper.Section4.StrictInequality",
-   381
+   403
   ],
   "Stafford38.Paper.Section4.lemma_4_1_of_weylPair": [
    "Stafford38.Paper.Section4.Euler",
-   186
+   321
   ],
   "Stafford38.Paper.Section4.lemma_4_2": [
    "Stafford38.Paper.Section4.Residue",
-   319
+   238
   ],
   "Stafford38.Paper.Section4.lemma_4_2_of_positive": [
    "Stafford38.Paper.Section4.Residue",
-   159
+   167
   ],
   "Stafford38.Paper.Section4.lemma_4_7": [
    "Stafford38.Paper.Section4.Support",
@@ -2615,23 +2596,23 @@
   ],
   "Stafford38.Paper.Section4.lemma_4_8": [
    "Stafford38.Paper.Section4.TangentialFiniteness",
-   156
+   161
   ],
   "Stafford38.Paper.Section4.lemma_4_9": [
    "Stafford38.Paper.Section4.PageInequality",
    171
   ],
+  "Stafford38.Paper.Section4.presented_coordinate_normal": [
+   "Stafford38.Paper.Section4.Euler",
+   652
+  ],
   "Stafford38.Paper.Section4.proposition_4_3": [
    "Stafford38.Paper.Section4.Surjectivity",
-   218
+   221
   ],
   "Stafford38.Paper.Section4.proposition_4_3_of": [
    "Stafford38.Paper.Section4.Surjectivity",
    147
-  ],
-  "Stafford38.Paper.Section4.rat_mem_transverse": [
-   "Stafford38.Paper.Section4.Residue",
-   208
   ],
   "Stafford38.Paper.Section4.setup_coordinateMap_apply": [
    "Stafford38.Paper.Section4.Setup",
@@ -2643,11 +2624,11 @@
   ],
   "Stafford38.Paper.Section4.step_4_10_localized": [
    "Stafford38.Paper.Section4.StrictInequality",
-   231
+   235
   ],
   "Stafford38.Paper.Section4.step_4_10_localized_avoid": [
    "Stafford38.Paper.Section4.StrictInequality",
-   369
+   391
   ],
   "Stafford38.Paper.Section4.step_4_11_cokernel_zero": [
    "Stafford38.Paper.Section4.Vanishing",
@@ -2655,19 +2636,19 @@
   ],
   "Stafford38.Paper.Section4.step_4_1_factors_commute": [
    "Stafford38.Paper.Section4.Euler",
-   93
+   228
   ],
   "Stafford38.Paper.Section4.step_4_1_falling_succ": [
    "Stafford38.Paper.Section4.Euler",
-   131
+   266
   ],
   "Stafford38.Paper.Section4.step_4_1_rising_succ": [
    "Stafford38.Paper.Section4.Euler",
-   156
+   291
   ],
   "Stafford38.Paper.Section4.step_4_2_presented_remainder": [
    "Stafford38.Paper.Section4.Residue",
-   278
+   194
   ],
   "Stafford38.Paper.Section4.step_4_7_mk_eq_zero_iff": [
    "Stafford38.Paper.Section4.Support",
@@ -2679,15 +2660,15 @@
   ],
   "Stafford38.Paper.Section4.step_4_8_finite": [
    "Stafford38.Paper.Section4.TangentialFiniteness",
-   145
+   146
   ],
   "Stafford38.Paper.Section4.step_4_8_finite_length": [
    "Stafford38.Paper.Section4.TangentialFiniteness",
-   116
+   117
   ],
   "Stafford38.Paper.Section4.step_4_8_support_inclusion": [
    "Stafford38.Paper.Section4.TangentialFiniteness",
-   60
+   61
   ],
   "Stafford38.Paper.Section4.step_4_9_additivity": [
    "Stafford38.Paper.Section4.PageInequality",
@@ -2709,17 +2690,17 @@
    "Stafford38.Paper.Section4.PageInequality",
    88
   ],
-  "Stafford38.Paper.Section4.step_coordinate_normal": [
+  "Stafford38.Paper.Section4.step_positive_mem_nonnegative_mul_coordinate": [
    "Stafford38.Paper.Section4.Euler",
-   74
+   659
   ],
   "Stafford38.Paper.Section4.transverseCoordinateAlgebra_le": [
    "Stafford38.Paper.Section4.Surjectivity",
    177
   ],
-  "Stafford38.Paper.Section4.transverse_commutes_coordinate": [
-   "Stafford38.Paper.Section4.Residue",
-   198
+  "Stafford38.Paper.Section5.algebraMap_comp_mem_span": [
+   "Stafford38.Paper.Section5.GenericTangentRank",
+   183
   ],
   "Stafford38.Paper.Section5.componentDimension_le": [
    "Stafford38.Paper.Section5.SmoothLocus",
@@ -2727,15 +2708,11 @@
   ],
   "Stafford38.Paper.Section5.component_kaehler_finrank_eq_trdeg": [
    "Stafford38.Paper.Section5.GenericTangentRank",
-   207
-  ],
-  "Stafford38.Paper.Section5.component_kaehler_finrank_le_generic_tangent_finrank": [
-   "Stafford38.Paper.Section5.GenericTangentRank",
-   101
+   424
   ],
   "Stafford38.Paper.Section5.conormalCone_paper_eq": [
    "Stafford38.Paper.Section5.SmoothLocus",
-   557
+   551
   ],
   "Stafford38.Paper.Section5.definition_5_1_closing": [
    "Stafford38.Paper.Section5.Definitions",
@@ -2755,11 +2732,11 @@
   ],
   "Stafford38.Paper.Section5.definition_5_4_b": [
    "Stafford38.Paper.Section5.SmoothLocus",
-   491
+   485
   ],
   "Stafford38.Paper.Section5.definition_5_4_b_iff": [
    "Stafford38.Paper.Section5.SmoothLocus",
-   508
+   502
   ],
   "Stafford38.Paper.Section5.definition_5_4_d": [
    "Stafford38.Paper.Section5.Definitions",
@@ -2767,19 +2744,23 @@
   ],
   "Stafford38.Paper.Section5.definition_5_5": [
    "Stafford38.Paper.Section5.SmoothLocus",
-   584
+   578
   ],
   "Stafford38.Paper.Section5.derivative_sub_mulVec_eq_X_pow_mul": [
    "Stafford38.Paper.Section5.Steps",
-   159
+   275
   ],
   "Stafford38.Paper.Section5.eval_residue_eq_zero_of_mem_groundEquationConormalLocus": [
    "Stafford38.Paper.Section5.Steps",
-   572
+   725
   ],
   "Stafford38.Paper.Section5.exists_kaehler_generators": [
    "Stafford38.Paper.Section5.KaehlerRankBound",
    89
+  ],
+  "Stafford38.Paper.Section5.fieldKaehlerMap_exact": [
+   "Stafford38.Paper.Section5.GenericTangentRank",
+   222
   ],
   "Stafford38.Paper.Section5.finrank_fraction_kaehler_le_of_span": [
    "Stafford38.Paper.Section5.KaehlerRankBound",
@@ -2791,7 +2772,7 @@
   ],
   "Stafford38.Paper.Section5.generic_tangent_finrank_eq_component_kaehler_finrank": [
    "Stafford38.Paper.Section5.GenericTangentRank",
-   184
+   296
   ],
   "Stafford38.Paper.Section5.jacobianSmoothPoint_iff_trdeg": [
    "Stafford38.Paper.Section5.SmoothLocus",
@@ -2803,11 +2784,11 @@
   ],
   "Stafford38.Paper.Section5.lemma_5_10": [
    "Stafford38.Paper.Section5.Place",
-   147
+   148
   ],
   "Stafford38.Paper.Section5.lemma_5_10_a_not_R_le": [
    "Stafford38.Paper.Section5.Place",
-   360
+   392
   ],
   "Stafford38.Paper.Section5.lemma_5_11": [
    "Stafford38.Paper.Section5.ResidueBasis",
@@ -2831,23 +2812,27 @@
   ],
   "Stafford38.Paper.Section5.lemma_5_9": [
    "Stafford38.Paper.Section5.Place",
-   47
+   48
   ],
   "Stafford38.Paper.Section5.liftRow_apply_of_not_mem": [
    "Stafford38.Paper.Section5.Steps",
-   430
+   583
   ],
   "Stafford38.Paper.Section5.liftRow_apply_rows": [
    "Stafford38.Paper.Section5.Steps",
-   437
+   590
   ],
   "Stafford38.Paper.Section5.linearIndependent_laurent_of_selectedMinor": [
    "Stafford38.Paper.Section5.Steps",
-   260
+   413
+  ],
+  "Stafford38.Paper.Section5.mem_zariskiTangentSpace_map_of_forall_mem": [
+   "Stafford38.Paper.Section5.GenericTangentRank",
+   36
   ],
   "Stafford38.Paper.Section5.order_X_pow_mul_of_constantCoeff_ne_zero": [
    "Stafford38.Paper.Section5.Steps",
-   150
+   266
   ],
   "Stafford38.Paper.Section5.rho_apply": [
    "Stafford38.Paper.Section5.TangentCone",
@@ -2863,15 +2848,15 @@
   ],
   "Stafford38.Paper.Section5.smoothAffinePoint_of_jacobian": [
    "Stafford38.Paper.Section5.JacobianConverse",
-   718
+   712
   ],
   "Stafford38.Paper.Section5.step_M_minor": [
    "Stafford38.Paper.Section5.Steps",
-   292
+   445
   ],
   "Stafford38.Paper.Section5.step_M_spans_cone": [
    "Stafford38.Paper.Section5.Steps",
-   329
+   482
   ],
   "Stafford38.Paper.Section5.step_P_vanishes_on_N": [
    "Stafford38.Paper.Section5.Exclusion",
@@ -2883,7 +2868,7 @@
   ],
   "Stafford38.Paper.Section5.step_a_pos": [
    "Stafford38.Paper.Section5.Steps",
-   638
+   791
   ],
   "Stafford38.Paper.Section5.step_completion": [
    "Stafford38.Paper.Section5.Completion",
@@ -2893,29 +2878,33 @@
    "Stafford38.Paper.Section5.Exclusion",
    237
   ],
+  "Stafford38.Paper.Section5.step_coordinate_algebraic": [
+   "Stafford38.Paper.Section5.Steps",
+   136
+  ],
   "Stafford38.Paper.Section5.step_dir_of_fibre": [
    "Stafford38.Paper.Section5",
    78
   ],
   "Stafford38.Paper.Section5.step_dual_derivations": [
    "Stafford38.Paper.Section5.Steps",
-   90
+   206
   ],
   "Stafford38.Paper.Section5.step_ell_conormal": [
    "Stafford38.Paper.Section5.Steps",
-   516
+   669
   ],
   "Stafford38.Paper.Section5.step_generic_point": [
    "Stafford38.Paper.Section5.Steps",
-   798
+   951
   ],
   "Stafford38.Paper.Section5.step_lambda_w_tau": [
    "Stafford38.Paper.Section5.Steps",
-   181
+   297
   ],
   "Stafford38.Paper.Section5.step_lift_ell_minor": [
    "Stafford38.Paper.Section5.Steps",
-   443
+   596
   ],
   "Stafford38.Paper.Section5.step_minimal_primes": [
    "Stafford38.Paper.Section5.Exclusion",
@@ -2923,11 +2912,11 @@
   ],
   "Stafford38.Paper.Section5.step_orders": [
    "Stafford38.Paper.Section5.Steps",
-   717
+   870
   ],
   "Stafford38.Paper.Section5.step_polynomial_limit": [
    "Stafford38.Paper.Section5.Steps",
-   600
+   753
   ],
   "Stafford38.Paper.Section5.step_separator": [
    "Stafford38.Paper.Section5.Exclusion",
@@ -2947,11 +2936,11 @@
   ],
   "Stafford38.Paper.Section5.theorem_5_7_i_prime": [
    "Stafford38.Paper.Section5.SmoothLocus",
-   598
+   592
   ],
   "Stafford38.Paper.Section5.theorem_5_7_i_printed": [
    "Stafford38.Paper.Section5.SmoothLocus",
-   646
+   640
   ],
   "Stafford38.Paper.Section5.theorem_5_7_ii": [
    "Stafford38.Paper.Section5",
@@ -2959,11 +2948,11 @@
   ],
   "Stafford38.Paper.Section5.theorem_5_7_ii_prime": [
    "Stafford38.Paper.Section5.SmoothLocus",
-   613
+   607
   ],
   "Stafford38.Paper.Section5.theorem_5_7_ii_printed": [
    "Stafford38.Paper.Section5.SmoothLocus",
-   664
+   658
   ],
   "Stafford38.Paper.Section5.theorem_5_8": [
    "Stafford38.Paper.Section5.Exclusion",
@@ -2971,7 +2960,7 @@
   ],
   "Stafford38.Paper.Section5.valuationSubringToSubringIsLocal": [
    "Stafford38.Paper.Section5.Place",
-   38
+   39
   ],
   "Stafford38.Paper.Section5.valuationSubring_toSubring_isLocalRing": [
    "Stafford38.Paper.Section5.Valuation",
@@ -2979,15 +2968,15 @@
   ],
   "Stafford38.Paper.Section5.witness_lemma_5_11": [
    "Stafford38.Paper.Section5.Steps",
-   835
+   988
   ],
   "Stafford38.Paper.Section5.witness_lemma_5_12_5_13_of_bound": [
    "Stafford38.Paper.Section5.Steps",
-   900
+   1053
   ],
   "Stafford38.Paper.Section5.witness_lemma_5_12_5_13_paper": [
    "Stafford38.Paper.Section5.Steps",
-   1019
+   1162
   ],
   "Stafford38.Paper.Section5.witness_lemma_5_12_a_bound": [
    "Stafford38.Paper.Section5.Completion",
@@ -3160,14 +3149,6 @@
   "Stafford38.Paper.theorem_1_1_fixedSource": [
    "Stafford38.Paper.Main",
    27
-  ],
-  "Stafford38.WeylEulerSubring.coordinate_mem_eulerSubring": [
-   "Stafford38.Weyl.EulerSubring",
-   60
-  ],
-  "Stafford38.WeylEulerSubring.euler_mem_eulerSubring": [
-   "Stafford38.Weyl.EulerSubring",
-   65
   ],
   "Stafford38.WeylFiltration.exists_mem_bernsteinPiece": [
    "Stafford38.Weyl.Filtration",
