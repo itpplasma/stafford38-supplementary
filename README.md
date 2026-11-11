@@ -3,7 +3,7 @@
 ## [Open the proof comparison →](https://itpplasma.github.io/stafford38-supplementary/)
 
 Read 69 paper passages beside the pinned Lean results. The reader uses the
-November 2 frozen version of `human_readable_main.tex`, commit `0dd6189`.
+November 11 version of `human_readable_main.tex`, commit `8e294b7`.
 All 46 theorem-like statements are represented. Paper source links
 open the bundled, unmodified manuscript; search, annotations and review notes
 work offline.
@@ -13,10 +13,11 @@ statement of Sections 2–6 is mapped to its own Lean declaration, and each card
 lists the Lean steps of the printed proof in order and the results it cites.
 Where Lean still differs from the printed text, the card says how. Theorem 1.1
 and Corollary 6.3 are also stated as printed in the Mathlib-only Palomar
-challenge. Four editorial findings are recorded in Comparison notes. See the
-[manuscript records](verification/manuscript-20261102/README.md) and the
+challenge. No review finding is open. Each Lean reference of the manuscript
+names the declaration of its statement in `Stafford38.Paper`. See the
+[manuscript records](verification/manuscript-20261111/verification.json) and the
 [paper-route update](verification/paper-route-20261103/README.md).
-The paper has not been edited. The Lean sources are pinned to formal commit
+The Lean sources are pinned to formal commit
 1029fdb, which passes the repository verifier
 ([log](verification/formal-1029fdb-20261104/formal-verify.log)).
 This review update has no new journal release or Zenodo DOI.
@@ -65,6 +66,6 @@ Rebuild the HTML with `python3 scripts/rebuild.py` (Git, Python, Node.js and npm
 required). The manuscript snapshot is bundled and checked by SHA-256; rebuilding
 does not need access to the paper repository. `--source NAME=PATH` selects an
 existing source checkout; `--skip-install` uses installed dependencies offline.
-Run `node scripts/check-reader-cdp.mjs . /tmp/stafford-reader-check verification/manuscript-20261102/migration.json`
+Run `node scripts/check-reader-cdp.mjs . /tmp/stafford-reader-check verification/manuscript-20261111/migration.json`
 for browser checks; set `CHROMIUM_PATH` when Chrome is installed elsewhere.
 Attribution: [NOTICE](NOTICE).

@@ -1,0 +1,726 @@
+{
+  "base_supplementary_revision": "1f4c2302b97d727918606f76b4cc2e2dde84999c",
+  "previous_paper": {
+    "repo": "itpplasma/stafford38-paper",
+    "commit": "0dd6189bdf1bf2c670a8421cfc9952d5b6b811b9",
+    "file": "human_readable_main.tex",
+    "origin_repo": "itpplasma/stafford38-paper",
+    "origin_commit": "0dd6189bdf1bf2c670a8421cfc9952d5b6b811b9",
+    "sha256": "9cdf65e2419f8a2c9c28c27a5b531d9d2a12be2305c190eafa726f0255d9db66",
+    "label": "Paper (frozen version)",
+    "local_source_base": "./sources/paper",
+    "note": "November 2 frozen version, preserved verbatim.",
+    "snapshot": {
+      "base": "sources/paper/raw",
+      "files": {
+        "human_readable_main.tex": "9cdf65e2419f8a2c9c28c27a5b531d9d2a12be2305c190eafa726f0255d9db66",
+        "references.bib": "dd9ca2fb6ca2abae741af600c4ac1728dac2b4758a1cc564a30f9c6043df0d4f",
+        "ai_review.tex": "3b245e5178736d12e247f24963a27d10a542f6fc25018070c24cf817d52d1591"
+      }
+    }
+  },
+  "current_paper": {
+    "repo": "itpplasma/stafford38-paper",
+    "commit": "8e294b70d528a9ecd85cab86a10396aedd4dbe0c",
+    "file": "human_readable_main.tex",
+    "origin_repo": "itpplasma/stafford38-paper",
+    "origin_commit": "8e294b70d528a9ecd85cab86a10396aedd4dbe0c",
+    "sha256": "159b20c7afbe680294cb88d5e224f3e04ff61e2a14601f480758a832d724612d",
+    "label": "Paper (November 11 version)",
+    "local_source_base": "./sources/paper",
+    "note": "November 11 version, preserved verbatim.",
+    "snapshot": {
+      "base": "sources/paper/raw",
+      "files": {
+        "human_readable_main.tex": "159b20c7afbe680294cb88d5e224f3e04ff61e2a14601f480758a832d724612d",
+        "references.bib": "dd9ca2fb6ca2abae741af600c4ac1728dac2b4758a1cc564a30f9c6043df0d4f",
+        "ai_review.tex": "35e5d20a9b2a0ac9b1662b7fc4b9eb3b091c8756c423f4a24ae258b7f4c894ef"
+      }
+    }
+  },
+  "renamed_labels": {},
+  "deleted_labels": [],
+  "renumbered_statements": {},
+  "removed_cards": [],
+  "added_cards": [],
+  "moved_ranges": {
+    "thm:main": [
+      [
+        69,
+        99
+      ],
+      [
+        69,
+        95
+      ]
+    ],
+    "challenge-main": [
+      [
+        78,
+        99
+      ],
+      [
+        78,
+        95
+      ]
+    ],
+    "challenge-fixed-source": [
+      [
+        78,
+        99
+      ],
+      [
+        78,
+        95
+      ]
+    ],
+    "intro-proof-sketch": [
+      [
+        100,
+        103
+      ],
+      [
+        96,
+        99
+      ]
+    ],
+    "context-prior-art": [
+      [
+        104,
+        118
+      ],
+      [
+        100,
+        114
+      ]
+    ],
+    "formal-verification": [
+      [
+        119,
+        137
+      ],
+      [
+        115,
+        133
+      ]
+    ],
+    "def:cyclic": [
+      [
+        146,
+        149
+      ],
+      [
+        142,
+        145
+      ]
+    ],
+    "conv:pair": [
+      [
+        150,
+        162
+      ],
+      [
+        146,
+        161
+      ]
+    ],
+    "def:filtration": [
+      [
+        163,
+        188
+      ],
+      [
+        162,
+        192
+      ]
+    ],
+    "def:good-filtration": [
+      [
+        189,
+        201
+      ],
+      [
+        193,
+        205
+      ]
+    ],
+    "cotangent": [
+      [
+        202,
+        219
+      ],
+      [
+        206,
+        226
+      ]
+    ],
+    "def:spec": [
+      [
+        220,
+        235
+      ],
+      [
+        227,
+        242
+      ]
+    ],
+    "def:char-variety": [
+      [
+        236,
+        250
+      ],
+      [
+        243,
+        258
+      ]
+    ],
+    "def:symplectic-poisson": [
+      [
+        251,
+        266
+      ],
+      [
+        259,
+        274
+      ]
+    ],
+    "def:poisson": [
+      [
+        267,
+        277
+      ],
+      [
+        275,
+        285
+      ]
+    ],
+    "def:involutive": [
+      [
+        278,
+        286
+      ],
+      [
+        286,
+        296
+      ]
+    ],
+    "ithm:gabber": [
+      [
+        287,
+        304
+      ],
+      [
+        297,
+        313
+      ]
+    ],
+    "thm:nss": [
+      [
+        305,
+        317
+      ],
+      [
+        314,
+        326
+      ]
+    ],
+    "monic-scalar": [
+      [
+        321,
+        323
+      ],
+      [
+        330,
+        332
+      ]
+    ],
+    "lem:sympcompl": [
+      [
+        335,
+        383
+      ],
+      [
+        344,
+        389
+      ]
+    ],
+    "phi-g": [
+      [
+        371,
+        383
+      ],
+      [
+        378,
+        389
+      ]
+    ],
+    "prop:monic": [
+      [
+        384,
+        446
+      ],
+      [
+        390,
+        449
+      ]
+    ],
+    "rem:transport": [
+      [
+        447,
+        466
+      ],
+      [
+        450,
+        469
+      ]
+    ],
+    "eq:I-Q": [
+      [
+        456,
+        461
+      ],
+      [
+        459,
+        464
+      ]
+    ],
+    "def:monic-xi1": [
+      [
+        467,
+        474
+      ],
+      [
+        470,
+        477
+      ]
+    ],
+    "lem:order-symbol": [
+      [
+        475,
+        509
+      ],
+      [
+        478,
+        509
+      ]
+    ],
+    "euler-grading": [
+      [
+        523,
+        543
+      ],
+      [
+        523,
+        547
+      ]
+    ],
+    "lem:euler": [
+      [
+        544,
+        570
+      ],
+      [
+        548,
+        572
+      ]
+    ],
+    "lem:euler-residue": [
+      [
+        571,
+        597
+      ],
+      [
+        573,
+        597
+      ]
+    ],
+    "prop:x-surjective": [
+      [
+        598,
+        619
+      ],
+      [
+        598,
+        617
+      ]
+    ],
+    "def:localization": [
+      [
+        620,
+        632
+      ],
+      [
+        618,
+        630
+      ]
+    ],
+    "def:supp": [
+      [
+        633,
+        638
+      ],
+      [
+        631,
+        636
+      ]
+    ],
+    "def:length": [
+      [
+        639,
+        645
+      ],
+      [
+        637,
+        644
+      ]
+    ],
+    "lem:supp-criterion": [
+      [
+        646,
+        683
+      ],
+      [
+        645,
+        682
+      ]
+    ],
+    "vc-setup": [
+      [
+        672,
+        683
+      ],
+      [
+        671,
+        682
+      ]
+    ],
+    "lem:tangential-finiteness": [
+      [
+        684,
+        757
+      ],
+      [
+        683,
+        755
+      ]
+    ],
+    "lem:page-inequality": [
+      [
+        758,
+        862
+      ],
+      [
+        756,
+        860
+      ]
+    ],
+    "lem:strict-support-inequality": [
+      [
+        863,
+        938
+      ],
+      [
+        861,
+        935
+      ]
+    ],
+    "lem:Uzero": [
+      [
+        939,
+        954
+      ],
+      [
+        936,
+        950
+      ]
+    ],
+    "conormal-intro": [
+      [
+        955,
+        964
+      ],
+      [
+        951,
+        960
+      ]
+    ],
+    "def:fieldextension": [
+      [
+        991,
+        1016
+      ],
+      [
+        987,
+        1012
+      ]
+    ],
+    "def:omega": [
+      [
+        1017,
+        1039
+      ],
+      [
+        1013,
+        1035
+      ]
+    ],
+    "def:valuation": [
+      [
+        1040,
+        1050
+      ],
+      [
+        1036,
+        1046
+      ]
+    ],
+    "def:conormal": [
+      [
+        1051,
+        1064
+      ],
+      [
+        1047,
+        1060
+      ]
+    ],
+    "dir-def": [
+      [
+        1065,
+        1071
+      ],
+      [
+        1061,
+        1067
+      ]
+    ],
+    "def:fibre-can": [
+      [
+        1072,
+        1077
+      ],
+      [
+        1068,
+        1073
+      ]
+    ],
+    "thm:asymptotic-conormal": [
+      [
+        1078,
+        1090
+      ],
+      [
+        1074,
+        1086
+      ]
+    ],
+    "thm:coisotropic-exclusion": [
+      [
+        1091,
+        1103
+      ],
+      [
+        1087,
+        1096
+      ]
+    ],
+    "thm:asymptotic-conormal-proof": [
+      [
+        1104,
+        1439
+      ],
+      [
+        1097,
+        1432
+      ]
+    ],
+    "lem:W": [
+      [
+        1134,
+        1149
+      ],
+      [
+        1127,
+        1142
+      ]
+    ],
+    "lem:place": [
+      [
+        1156,
+        1207
+      ],
+      [
+        1149,
+        1200
+      ]
+    ],
+    "lem:kappa": [
+      [
+        1251,
+        1267
+      ],
+      [
+        1244,
+        1260
+      ]
+    ],
+    "lem:tangent": [
+      [
+        1306,
+        1355
+      ],
+      [
+        1299,
+        1348
+      ]
+    ],
+    "lem:ell": [
+      [
+        1363,
+        1377
+      ],
+      [
+        1356,
+        1370
+      ]
+    ],
+    "thm:coisotropic-exclusion-proof": [
+      [
+        1440,
+        1486
+      ],
+      [
+        1433,
+        1477
+      ]
+    ],
+    "prop:char-avoids": [
+      [
+        1491,
+        1508
+      ],
+      [
+        1481,
+        1497
+      ]
+    ],
+    "lem:initial-base-change": [
+      [
+        1509,
+        1530
+      ],
+      [
+        1498,
+        1519
+      ]
+    ],
+    "proof-main": [
+      [
+        1531,
+        1597
+      ],
+      [
+        1520,
+        1582
+      ]
+    ],
+    "cyclicity": [
+      [
+        1598,
+        1627
+      ],
+      [
+        1583,
+        1612
+      ]
+    ],
+    "further-work": [
+      [
+        1628,
+        1639
+      ],
+      [
+        1613,
+        1624
+      ]
+    ],
+    "appendix-left-handed": [
+      [
+        1629,
+        1630
+      ],
+      [
+        1614,
+        1615
+      ]
+    ],
+    "appendix-localized-differential": [
+      [
+        1630,
+        1631
+      ],
+      [
+        1615,
+        1616
+      ]
+    ],
+    "appendix-evolutionary": [
+      [
+        1631,
+        1634
+      ],
+      [
+        1616,
+        1619
+      ]
+    ],
+    "global-stafford": [
+      [
+        1644,
+        1650
+      ],
+      [
+        1629,
+        1635
+      ]
+    ],
+    "generalization-filtered": [
+      [
+        1651,
+        1660
+      ],
+      [
+        1636,
+        1645
+      ]
+    ],
+    "outlook": [
+      [
+        1661,
+        1673
+      ],
+      [
+        1646,
+        1656
+      ]
+    ],
+    "ai-workflow": [
+      [
+        1681,
+        1730
+      ],
+      [
+        1664,
+        1713
+      ]
+    ]
+  },
+  "remapped_cards": [],
+  "active_statements": 46,
+  "current_cards": 69,
+  "open_findings": [],
+  "expected_unresolved_refs": [],
+  "expected_unresolved_citations": [],
+  "paper_worktree_status_before": "",
+  "note": "The paper repository is read-only throughout this migration."
+}
