@@ -1,0 +1,1210 @@
+{
+ "schema": 1,
+ "formal_commit": "1029fdb382eee06e7b59bcf32801f40931e2079a",
+ "source": "Constants used by types and proofs (scripts/LeanDag.lean). \"used\" lists the roots whose proof reaches a declaration; \"stated\" lists the tracked declarations a statement names.",
+ "roots": {
+  "main": "Stafford38.Paper.theorem_1_1",
+  "cyclic": "Stafford38.Paper.corollary_6_3",
+  "stable": "Stafford38.Paper.corollary_6_3_stablyCyclic",
+  "original": "Stafford38.universalStatement"
+ },
+ "used": {
+  "AdicCompletion": [
+   "cyclic",
+   "main",
+   "original",
+   "stable"
+  ],
+  "Algebra.smoothLocus": [
+   "cyclic",
+   "main",
+   "original",
+   "stable"
+  ],
+  "Algebra.trdeg": [
+   "cyclic",
+   "main",
+   "original",
+   "stable"
+  ],
+  "IsDiscreteValuationRing": [
+   "cyclic",
+   "main",
+   "original",
+   "stable"
+  ],
+  "IsTranscendenceBasis": [
+   "cyclic",
+   "main",
+   "original",
+   "stable"
+  ],
+  "KaehlerDifferential": [
+   "cyclic",
+   "main",
+   "original",
+   "stable"
+  ],
+  "LaurentSeries": [
+   "cyclic",
+   "main",
+   "original",
+   "stable"
+  ],
+  "Localization": [
+   "cyclic",
+   "main",
+   "original",
+   "stable"
+  ],
+  "LocalizedModule": [
+   "cyclic",
+   "main",
+   "original",
+   "stable"
+  ],
+  "Module.length": [
+   "cyclic",
+   "main",
+   "original",
+   "stable"
+  ],
+  "Module.support": [
+   "cyclic",
+   "main",
+   "original",
+   "stable"
+  ],
+  "MvPolynomial.vanishingIdeal": [
+   "cyclic",
+   "main",
+   "original",
+   "stable"
+  ],
+  "MvPolynomial.zeroLocus": [
+   "cyclic",
+   "main",
+   "original",
+   "stable"
+  ],
+  "PowerSeries": [
+   "cyclic",
+   "main",
+   "original",
+   "stable"
+  ],
+  "PrimeSpectrum": [
+   "cyclic",
+   "main",
+   "original",
+   "stable"
+  ],
+  "PrimeSpectrum.zeroLocus": [
+   "cyclic",
+   "main",
+   "original",
+   "stable"
+  ],
+  "Projectivization": [
+   "original"
+  ],
+  "Stafford38.Characteristic.PostScalarExtensionPoisson.IsInvolutive": [
+   "cyclic",
+   "main",
+   "original",
+   "stable"
+  ],
+  "Stafford38.Characteristic.SymbolRing": [
+   "cyclic",
+   "main",
+   "original",
+   "stable"
+  ],
+  "Stafford38.Characteristic.poissonBracket": [
+   "cyclic",
+   "main",
+   "original",
+   "stable"
+  ],
+  "Stafford38.CharacteristicAssociatedGradedModule.OrderAssociatedGradedModule": [
+   "cyclic",
+   "main",
+   "original",
+   "stable"
+  ],
+  "Stafford38.CharacteristicSymplecticCompletion.phasePairing": [
+   "cyclic",
+   "main",
+   "original",
+   "stable"
+  ],
+  "Stafford38.EulerSurjectivity.RightQuotient": [
+   "cyclic",
+   "main",
+   "original",
+   "stable"
+  ],
+  "Stafford38.FixedSource.bernsteinDegree": [
+   "cyclic",
+   "main",
+   "stable"
+  ],
+  "Stafford38.Geometry.AffineConormalSpan.affineConormalSpace": [
+   "cyclic",
+   "main",
+   "original",
+   "stable"
+  ],
+  "Stafford38.Geometry.AffineConormalSpan.affineConormalSpace_eq_equationCovectorSpan": [
+   "cyclic",
+   "main",
+   "original",
+   "stable"
+  ],
+  "Stafford38.Geometry.AffineConormalSpan.equationCovectorSpan": [
+   "cyclic",
+   "main",
+   "original",
+   "stable"
+  ],
+  "Stafford38.Geometry.AffineConormalSpan.zariskiTangentSpace": [
+   "cyclic",
+   "main",
+   "original",
+   "stable"
+  ],
+  "Stafford38.Geometry.CoisotropicTranslation.differentialAt": [
+   "cyclic",
+   "main",
+   "original",
+   "stable"
+  ],
+  "Stafford38.Geometry.CoisotropicTranslation.fibreLinePolynomial": [
+   "cyclic",
+   "main",
+   "original",
+   "stable"
+  ],
+  "Stafford38.Geometry.FibreConicalVanishingIdeal.IsFibreConical": [
+   "cyclic",
+   "main",
+   "original",
+   "stable"
+  ],
+  "Stafford38.Geometry.ProjectiveConormalDirections.projectiveHomogeneousClosure": [
+   "original"
+  ],
+  "Stafford38.Geometry.ProjectiveConormalDirections.projectivizedDirectionSet": [
+   "original"
+  ],
+  "Stafford38.Geometry.ProjectiveConormalDirections.smoothConormalDirectionSet": [
+   "original"
+  ],
+  "Stafford38.Geometry.ProjectiveConormalDirections.smoothConormalFibreProjection": [
+   "cyclic",
+   "main",
+   "original",
+   "stable"
+  ],
+  "Stafford38.Geometry.SmoothAffineConormal.SmoothAffinePoint": [
+   "cyclic",
+   "main",
+   "original",
+   "stable"
+  ],
+  "Stafford38.Paper.Section2.C": [
+   "cyclic",
+   "main",
+   "stable"
+  ],
+  "Stafford38.Paper.Section2.C_eq_range": [
+   "cyclic",
+   "main",
+   "stable"
+  ],
+  "Stafford38.Paper.Section2.Char": [
+   "cyclic",
+   "main",
+   "stable"
+  ],
+  "Stafford38.Paper.Section2.CharOf": [
+   "cyclic",
+   "main",
+   "stable"
+  ],
+  "Stafford38.Paper.Section2.Char_eq": [
+   "cyclic",
+   "main",
+   "stable"
+  ],
+  "Stafford38.Paper.Section2.Char_eq_charOf": [],
+  "Stafford38.Paper.Section2.CotangentBundle": [
+   "cyclic",
+   "main",
+   "stable"
+  ],
+  "Stafford38.Paper.Section2.IsCompatibleFiltration": [
+   "cyclic",
+   "main",
+   "stable"
+  ],
+  "Stafford38.Paper.Section2.IsCyclic": [
+   "cyclic",
+   "stable"
+  ],
+  "Stafford38.Paper.Section2.IsFiltration": [
+   "cyclic",
+   "main",
+   "stable"
+  ],
+  "Stafford38.Paper.Section2.IsGoodFiltration": [
+   "cyclic",
+   "main",
+   "stable"
+  ],
+  "Stafford38.Paper.Section2.IsInvolutive": [
+   "cyclic",
+   "main",
+   "stable"
+  ],
+  "Stafford38.Paper.Section2.IsInvolutiveSet": [
+   "cyclic",
+   "main",
+   "stable"
+  ],
+  "Stafford38.Paper.Section2.IsSymplectic": [
+   "cyclic",
+   "main",
+   "stable"
+  ],
+  "Stafford38.Paper.Section2.IsSymplecticBasis": [
+   "cyclic",
+   "main",
+   "stable"
+  ],
+  "Stafford38.Paper.Section2.IsTorsion": [
+   "cyclic",
+   "stable"
+  ],
+  "Stafford38.Paper.Section2.V": [
+   "cyclic",
+   "main",
+   "stable"
+  ],
+  "Stafford38.Paper.Section2.VK": [
+   "cyclic",
+   "main",
+   "stable"
+  ],
+  "Stafford38.Paper.Section2.VK_eq_zeroLocus": [
+   "cyclic",
+   "main",
+   "stable"
+  ],
+  "Stafford38.Paper.Section2.bernsteinDegree": [
+   "cyclic",
+   "main",
+   "stable"
+  ],
+  "Stafford38.Paper.Section2.bernsteinDegree_eq": [
+   "cyclic",
+   "main",
+   "stable"
+  ],
+  "Stafford38.Paper.Section2.bernsteinFiltration": [
+   "cyclic",
+   "main",
+   "stable"
+  ],
+  "Stafford38.Paper.Section2.cyclicFiltration": [
+   "cyclic",
+   "main",
+   "stable"
+  ],
+  "Stafford38.Paper.Section2.cyclicFiltration_order_eq": [
+   "cyclic",
+   "main",
+   "stable"
+  ],
+  "Stafford38.Paper.Section2.definition_2_7_independent": [],
+  "Stafford38.Paper.Section2.fibre": [
+   "cyclic",
+   "main",
+   "stable"
+  ],
+  "Stafford38.Paper.Section2.filtrationDegree": [
+   "cyclic",
+   "main",
+   "stable"
+  ],
+  "Stafford38.Paper.Section2.gr": [
+   "cyclic",
+   "main",
+   "stable"
+  ],
+  "Stafford38.Paper.Section2.grCyclicEquiv": [
+   "cyclic",
+   "main",
+   "stable"
+  ],
+  "Stafford38.Paper.Section2.grEquivSymbolRing": [
+   "cyclic",
+   "main",
+   "stable"
+  ],
+  "Stafford38.Paper.Section2.grPieceEquiv": [
+   "cyclic",
+   "main",
+   "stable"
+  ],
+  "Stafford38.Paper.Section2.grPiece_mk_eq_zero_iff": [
+   "cyclic",
+   "main",
+   "stable"
+  ],
+  "Stafford38.Paper.Section2.gramMatrix": [
+   "cyclic",
+   "main",
+   "stable"
+  ],
+  "Stafford38.Paper.Section2.gramMatrix_omega": [
+   "cyclic",
+   "main",
+   "stable"
+  ],
+  "Stafford38.Paper.Section2.isCyclic_iff_span": [
+   "cyclic",
+   "stable"
+  ],
+  "Stafford38.Paper.Section2.isInvolutive_iff": [
+   "cyclic",
+   "main",
+   "stable"
+  ],
+  "Stafford38.Paper.Section2.maxIdealAt": [
+   "cyclic",
+   "main",
+   "stable"
+  ],
+  "Stafford38.Paper.Section2.maxIdealAt_eq_vanishingIdeal": [
+   "cyclic",
+   "main",
+   "stable"
+  ],
+  "Stafford38.Paper.Section2.mem_VK_iff_closedPoint_mem_V": [
+   "cyclic",
+   "main",
+   "stable"
+  ],
+  "Stafford38.Paper.Section2.mem_vanishingIdealOf": [
+   "cyclic",
+   "main",
+   "stable"
+  ],
+  "Stafford38.Paper.Section2.omega": [
+   "cyclic",
+   "main",
+   "stable"
+  ],
+  "Stafford38.Paper.Section2.orderFiltration": [
+   "cyclic",
+   "main",
+   "stable"
+  ],
+  "Stafford38.Paper.Section2.p": [
+   "cyclic",
+   "main",
+   "stable"
+  ],
+  "Stafford38.Paper.Section2.poisson": [
+   "cyclic",
+   "main",
+   "stable"
+  ],
+  "Stafford38.Paper.Section2.poisson_eq": [
+   "cyclic",
+   "main",
+   "stable"
+  ],
+  "Stafford38.Paper.Section2.proj": [
+   "cyclic",
+   "main",
+   "stable"
+  ],
+  "Stafford38.Paper.Section2.symbol": [
+   "cyclic",
+   "main",
+   "stable"
+  ],
+  "Stafford38.Paper.Section2.theorem_2_11": [
+   "cyclic",
+   "main",
+   "stable"
+  ],
+  "Stafford38.Paper.Section2.theorem_2_11_cyclic": [
+   "cyclic",
+   "main",
+   "stable"
+  ],
+  "Stafford38.Paper.Section2.theorem_2_12": [
+   "cyclic",
+   "main",
+   "stable"
+  ],
+  "Stafford38.Paper.Section2.transverse": [
+   "cyclic",
+   "main",
+   "stable"
+  ],
+  "Stafford38.Paper.Section2.vanishingIdealOf": [
+   "cyclic",
+   "main",
+   "stable"
+  ],
+  "Stafford38.Paper.Section2.x₁": [
+   "cyclic",
+   "main",
+   "stable"
+  ],
+  "Stafford38.Paper.Section3.IsMonicInXi1": [
+   "cyclic",
+   "main",
+   "stable"
+  ],
+  "Stafford38.Paper.Section3.IsMonicNormalForm": [
+   "cyclic",
+   "main",
+   "stable"
+  ],
+  "Stafford38.Paper.Section3.Q": [
+   "cyclic",
+   "main",
+   "stable"
+  ],
+  "Stafford38.Paper.Section3.grQ": [
+   "cyclic",
+   "main",
+   "stable"
+  ],
+  "Stafford38.Paper.Section3.idealI": [
+   "cyclic",
+   "main",
+   "stable"
+  ],
+  "Stafford38.Paper.Section3.isPBWMonicAt_of_isMonicNormalForm": [
+   "cyclic",
+   "main",
+   "stable"
+  ],
+  "Stafford38.Paper.Section3.lemma_3_5": [
+   "cyclic",
+   "main",
+   "stable"
+  ],
+  "Stafford38.Paper.Section3.orderSymbol": [
+   "cyclic",
+   "main",
+   "stable"
+  ],
+  "Stafford38.Paper.Section3.phiG": [
+   "cyclic",
+   "main",
+   "stable"
+  ],
+  "Stafford38.Paper.Section3.proposition_3_6": [
+   "cyclic",
+   "main",
+   "stable"
+  ],
+  "Stafford38.Paper.Section4.GrQ": [
+   "cyclic",
+   "main",
+   "stable"
+  ],
+  "Stafford38.Paper.Section4.Tangential": [
+   "cyclic",
+   "main",
+   "stable"
+  ],
+  "Stafford38.Paper.Section4.cokernelU": [
+   "cyclic",
+   "main",
+   "stable"
+  ],
+  "Stafford38.Paper.Section4.coordinateMap": [
+   "cyclic",
+   "main",
+   "stable"
+  ],
+  "Stafford38.Paper.Section4.definition_4_4": [
+   "cyclic",
+   "main",
+   "stable"
+  ],
+  "Stafford38.Paper.Section4.definition_4_5": [
+   "cyclic",
+   "main",
+   "stable"
+  ],
+  "Stafford38.Paper.Section4.definition_4_6": [
+   "cyclic",
+   "main",
+   "stable"
+  ],
+  "Stafford38.Paper.Section4.eulerDegree": [
+   "cyclic",
+   "main",
+   "stable"
+  ],
+  "Stafford38.Paper.Section4.kernelV": [
+   "cyclic",
+   "main",
+   "stable"
+  ],
+  "Stafford38.Paper.Section4.nonnegativePart": [
+   "cyclic",
+   "main",
+   "stable"
+  ],
+  "Stafford38.Paper.Section4.positivePart": [
+   "cyclic",
+   "main",
+   "stable"
+  ],
+  "Stafford38.Paper.Section4.step_nonnegative_pbw": [
+   "cyclic",
+   "main",
+   "stable"
+  ],
+  "Stafford38.Paper.Section5.IsIrreducibleClosed": [
+   "cyclic",
+   "main",
+   "stable"
+  ],
+  "Stafford38.Paper.Section5.IsZariskiClosed": [
+   "cyclic",
+   "main",
+   "stable"
+  ],
+  "Stafford38.Paper.Section5.JacobianSmoothPoint": [
+   "cyclic",
+   "main",
+   "stable"
+  ],
+  "Stafford38.Paper.Section5.conormalCone": [
+   "cyclic",
+   "main",
+   "stable"
+  ],
+  "Stafford38.Paper.Section5.conormalCone_paper_eq": [
+   "cyclic",
+   "main",
+   "stable"
+  ],
+  "Stafford38.Paper.Section5.conormalDirections": [],
+  "Stafford38.Paper.Section5.definition_5_1_g_h": [
+   "cyclic",
+   "main",
+   "stable"
+  ],
+  "Stafford38.Paper.Section5.definition_5_2_b": [
+   "cyclic",
+   "main",
+   "stable"
+  ],
+  "Stafford38.Paper.Section5.definition_5_3": [
+   "cyclic",
+   "main",
+   "original",
+   "stable"
+  ],
+  "Stafford38.Paper.Section5.definition_5_4_a": [
+   "cyclic",
+   "main",
+   "stable"
+  ],
+  "Stafford38.Paper.Section5.definition_5_4_b_iff": [
+   "cyclic",
+   "main",
+   "stable"
+  ],
+  "Stafford38.Paper.Section5.definition_5_4_c": [
+   "cyclic",
+   "main",
+   "stable"
+  ],
+  "Stafford38.Paper.Section5.definition_5_4_d": [
+   "cyclic",
+   "main",
+   "stable"
+  ],
+  "Stafford38.Paper.Section5.definition_5_5": [],
+  "Stafford38.Paper.Section5.definition_5_6": [
+   "cyclic",
+   "main",
+   "stable"
+  ],
+  "Stafford38.Paper.Section5.differentialRelations": [
+   "cyclic",
+   "main",
+   "stable"
+  ],
+  "Stafford38.Paper.Section5.idealPoint": [
+   "cyclic",
+   "main",
+   "stable"
+  ],
+  "Stafford38.Paper.Section5.rho": [
+   "cyclic",
+   "main",
+   "stable"
+  ],
+  "Stafford38.Paper.Section5.tangentCone": [
+   "cyclic",
+   "main",
+   "stable"
+  ],
+  "Stafford38.Paper.Section5.tangentSpaceAt": [
+   "cyclic",
+   "main",
+   "stable"
+  ],
+  "Stafford38.Paper.Section5.theorem_5_7_i": [
+   "cyclic",
+   "main",
+   "stable"
+  ],
+  "Stafford38.Paper.Section5.theorem_5_7_i_printed": [
+   "cyclic",
+   "main",
+   "stable"
+  ],
+  "Stafford38.Paper.Section5.theorem_5_7_ii_printed": [],
+  "Stafford38.Paper.Section5.theorem_5_8": [
+   "cyclic",
+   "main",
+   "stable"
+  ],
+  "Stafford38.Paper.Section6.IsStablyGenerated": [
+   "cyclic",
+   "stable"
+  ],
+  "Stafford38.Paper.Section6.Vx₁": [
+   "cyclic",
+   "main",
+   "stable"
+  ],
+  "Stafford38.Paper.Section6.W": [
+   "cyclic",
+   "main",
+   "stable"
+  ],
+  "Stafford38.Paper.Section6.lemma_6_2": [
+   "cyclic",
+   "main",
+   "stable"
+  ],
+  "Stafford38.Paper.Section6.proposition_6_1": [
+   "cyclic",
+   "main",
+   "stable"
+  ],
+  "Stafford38.Paper.Section6.step_6_1_char_eq_support": [
+   "cyclic",
+   "main",
+   "stable"
+  ],
+  "Stafford38.Paper.Support.Gabber.GrModule": [
+   "cyclic",
+   "main",
+   "stable"
+  ],
+  "Stafford38.Paper.Support.Gabber.grCyclicEquivS": [
+   "cyclic",
+   "main",
+   "stable"
+  ],
+  "Stafford38.Paper.Support.Gabber.qFilt": [
+   "cyclic",
+   "main",
+   "stable"
+  ],
+  "Stafford38.Paper.corollary_6_3": [
+   "cyclic"
+  ],
+  "Stafford38.Paper.corollary_6_3_stablyCyclic": [
+   "stable"
+  ],
+  "Stafford38.Paper.theorem_1_1": [
+   "cyclic",
+   "main",
+   "stable"
+  ],
+  "Stafford38.TorsionCyclicity.IsRightTorsion": [
+   "cyclic",
+   "stable"
+  ],
+  "Stafford38.WeylEulerResidue.canonicalRightIdeal": [
+   "cyclic",
+   "main",
+   "original",
+   "stable"
+  ],
+  "Stafford38.WeylEulerSubring.eulerSubring": [
+   "cyclic",
+   "main",
+   "original",
+   "stable"
+  ],
+  "Stafford38.WeylFiltration.bernsteinPiece": [
+   "cyclic",
+   "main",
+   "original",
+   "stable"
+  ],
+  "Stafford38.WeylFiltration.orderPiece": [
+   "cyclic",
+   "main",
+   "original",
+   "stable"
+  ],
+  "Stafford38.WeylIteratedEquivalence.presentedCoordinate": [
+   "cyclic",
+   "main",
+   "original",
+   "stable"
+  ],
+  "Stafford38.WeylIteratedEquivalence.presentedIteratedEquiv": [
+   "cyclic",
+   "main",
+   "original",
+   "stable"
+  ],
+  "Stafford38.WeylIteratedEquivalence.presentedMomentum": [
+   "cyclic",
+   "main",
+   "original",
+   "stable"
+  ],
+  "Stafford38.WeylIteratedEquivalence.previousWeylEmbedding": [
+   "cyclic",
+   "main",
+   "original",
+   "stable"
+  ],
+  "Stafford38.WeylLeadingSymbol.presentedPrincipalComponent": [
+   "cyclic",
+   "main",
+   "original",
+   "stable"
+  ],
+  "Stafford38.WeylLeadingSymbol.presentedPrincipalComponent_mul_bernstein": [
+   "cyclic",
+   "main",
+   "original",
+   "stable"
+  ],
+  "Stafford38.WeylLeadingSymbol.presentedPrincipalComponent_mul_order": [
+   "cyclic",
+   "main",
+   "original",
+   "stable"
+  ],
+  "Stafford38.WeylPBWMonicBridge.IsPBWMonicAt": [
+   "cyclic",
+   "main",
+   "original",
+   "stable"
+  ],
+  "Stafford38.universalStatement": [
+   "original"
+  ],
+  "Stafford38Challenge.IsStablyCyclic": [],
+  "Stafford38Challenge.WeylAlg": [
+   "cyclic",
+   "main",
+   "original",
+   "stable"
+  ],
+  "Stafford38FixedSourceChallenge.bernsteinDegree": [
+   "cyclic",
+   "main",
+   "stable"
+  ],
+  "Stafford38FixedSourceChallengeTransport.bernsteinDegree_eq": [
+   "cyclic",
+   "main",
+   "stable"
+  ],
+  "ValuationSubring": [
+   "cyclic",
+   "main",
+   "original",
+   "stable"
+  ],
+  "ringKrullDim": [
+   "cyclic",
+   "main",
+   "original",
+   "stable"
+  ]
+ },
+ "kinds": {
+  "AdicCompletion": "def",
+  "Algebra.smoothLocus": "def",
+  "Algebra.trdeg": "def",
+  "IsDiscreteValuationRing": "inductive",
+  "IsTranscendenceBasis": "def",
+  "KaehlerDifferential": "def",
+  "LaurentSeries": "def",
+  "Localization": "def",
+  "LocalizedModule": "def",
+  "Module.length": "def",
+  "Module.support": "def",
+  "MvPolynomial.vanishingIdeal": "def",
+  "MvPolynomial.zeroLocus": "def",
+  "PowerSeries": "def",
+  "PrimeSpectrum": "inductive",
+  "PrimeSpectrum.zeroLocus": "def",
+  "Projectivization": "def",
+  "Stafford38.Characteristic.PostScalarExtensionPoisson.IsInvolutive": "def",
+  "Stafford38.Characteristic.SymbolRing": "def",
+  "Stafford38.Characteristic.poissonBracket": "def",
+  "Stafford38.CharacteristicAssociatedGradedModule.OrderAssociatedGradedModule": "def",
+  "Stafford38.CharacteristicSymplecticCompletion.phasePairing": "def",
+  "Stafford38.EulerSurjectivity.RightQuotient": "def",
+  "Stafford38.FixedSource.bernsteinDegree": "def",
+  "Stafford38.Geometry.AffineConormalSpan.affineConormalSpace": "def",
+  "Stafford38.Geometry.AffineConormalSpan.affineConormalSpace_eq_equationCovectorSpan": "theorem",
+  "Stafford38.Geometry.AffineConormalSpan.equationCovectorSpan": "def",
+  "Stafford38.Geometry.AffineConormalSpan.zariskiTangentSpace": "def",
+  "Stafford38.Geometry.CoisotropicTranslation.differentialAt": "def",
+  "Stafford38.Geometry.CoisotropicTranslation.fibreLinePolynomial": "def",
+  "Stafford38.Geometry.FibreConicalVanishingIdeal.IsFibreConical": "def",
+  "Stafford38.Geometry.ProjectiveConormalDirections.projectiveHomogeneousClosure": "def",
+  "Stafford38.Geometry.ProjectiveConormalDirections.projectivizedDirectionSet": "def",
+  "Stafford38.Geometry.ProjectiveConormalDirections.smoothConormalDirectionSet": "def",
+  "Stafford38.Geometry.ProjectiveConormalDirections.smoothConormalFibreProjection": "def",
+  "Stafford38.Geometry.SmoothAffineConormal.SmoothAffinePoint": "def",
+  "Stafford38.Paper.Section2.C": "def",
+  "Stafford38.Paper.Section2.C_eq_range": "theorem",
+  "Stafford38.Paper.Section2.Char": "def",
+  "Stafford38.Paper.Section2.CharOf": "def",
+  "Stafford38.Paper.Section2.Char_eq": "theorem",
+  "Stafford38.Paper.Section2.Char_eq_charOf": "theorem",
+  "Stafford38.Paper.Section2.CotangentBundle": "def",
+  "Stafford38.Paper.Section2.IsCompatibleFiltration": "inductive",
+  "Stafford38.Paper.Section2.IsCyclic": "def",
+  "Stafford38.Paper.Section2.IsFiltration": "inductive",
+  "Stafford38.Paper.Section2.IsGoodFiltration": "inductive",
+  "Stafford38.Paper.Section2.IsInvolutive": "def",
+  "Stafford38.Paper.Section2.IsInvolutiveSet": "def",
+  "Stafford38.Paper.Section2.IsSymplectic": "def",
+  "Stafford38.Paper.Section2.IsSymplecticBasis": "def",
+  "Stafford38.Paper.Section2.IsTorsion": "def",
+  "Stafford38.Paper.Section2.V": "def",
+  "Stafford38.Paper.Section2.VK": "def",
+  "Stafford38.Paper.Section2.VK_eq_zeroLocus": "theorem",
+  "Stafford38.Paper.Section2.bernsteinDegree": "def",
+  "Stafford38.Paper.Section2.bernsteinDegree_eq": "theorem",
+  "Stafford38.Paper.Section2.bernsteinFiltration": "def",
+  "Stafford38.Paper.Section2.cyclicFiltration": "def",
+  "Stafford38.Paper.Section2.cyclicFiltration_order_eq": "theorem",
+  "Stafford38.Paper.Section2.definition_2_7_independent": "theorem",
+  "Stafford38.Paper.Section2.fibre": "def",
+  "Stafford38.Paper.Section2.filtrationDegree": "def",
+  "Stafford38.Paper.Section2.gr": "def",
+  "Stafford38.Paper.Section2.grCyclicEquiv": "def",
+  "Stafford38.Paper.Section2.grEquivSymbolRing": "def",
+  "Stafford38.Paper.Section2.grPieceEquiv": "def",
+  "Stafford38.Paper.Section2.grPiece_mk_eq_zero_iff": "theorem",
+  "Stafford38.Paper.Section2.gramMatrix": "def",
+  "Stafford38.Paper.Section2.gramMatrix_omega": "theorem",
+  "Stafford38.Paper.Section2.isCyclic_iff_span": "theorem",
+  "Stafford38.Paper.Section2.isInvolutive_iff": "theorem",
+  "Stafford38.Paper.Section2.maxIdealAt": "def",
+  "Stafford38.Paper.Section2.maxIdealAt_eq_vanishingIdeal": "theorem",
+  "Stafford38.Paper.Section2.mem_VK_iff_closedPoint_mem_V": "theorem",
+  "Stafford38.Paper.Section2.mem_vanishingIdealOf": "theorem",
+  "Stafford38.Paper.Section2.omega": "def",
+  "Stafford38.Paper.Section2.orderFiltration": "def",
+  "Stafford38.Paper.Section2.p": "def",
+  "Stafford38.Paper.Section2.poisson": "def",
+  "Stafford38.Paper.Section2.poisson_eq": "theorem",
+  "Stafford38.Paper.Section2.proj": "def",
+  "Stafford38.Paper.Section2.symbol": "def",
+  "Stafford38.Paper.Section2.theorem_2_11": "theorem",
+  "Stafford38.Paper.Section2.theorem_2_11_cyclic": "theorem",
+  "Stafford38.Paper.Section2.theorem_2_12": "theorem",
+  "Stafford38.Paper.Section2.transverse": "def",
+  "Stafford38.Paper.Section2.vanishingIdealOf": "def",
+  "Stafford38.Paper.Section2.x₁": "def",
+  "Stafford38.Paper.Section3.IsMonicInXi1": "def",
+  "Stafford38.Paper.Section3.IsMonicNormalForm": "def",
+  "Stafford38.Paper.Section3.Q": "def",
+  "Stafford38.Paper.Section3.grQ": "def",
+  "Stafford38.Paper.Section3.idealI": "def",
+  "Stafford38.Paper.Section3.isPBWMonicAt_of_isMonicNormalForm": "theorem",
+  "Stafford38.Paper.Section3.lemma_3_5": "theorem",
+  "Stafford38.Paper.Section3.orderSymbol": "def",
+  "Stafford38.Paper.Section3.phiG": "def",
+  "Stafford38.Paper.Section3.proposition_3_6": "theorem",
+  "Stafford38.Paper.Section4.GrQ": "def",
+  "Stafford38.Paper.Section4.Tangential": "def",
+  "Stafford38.Paper.Section4.cokernelU": "def",
+  "Stafford38.Paper.Section4.coordinateMap": "def",
+  "Stafford38.Paper.Section4.definition_4_4": "theorem",
+  "Stafford38.Paper.Section4.definition_4_5": "theorem",
+  "Stafford38.Paper.Section4.definition_4_6": "theorem",
+  "Stafford38.Paper.Section4.eulerDegree": "def",
+  "Stafford38.Paper.Section4.kernelV": "def",
+  "Stafford38.Paper.Section4.nonnegativePart": "def",
+  "Stafford38.Paper.Section4.positivePart": "def",
+  "Stafford38.Paper.Section4.step_nonnegative_pbw": "theorem",
+  "Stafford38.Paper.Section5.IsIrreducibleClosed": "def",
+  "Stafford38.Paper.Section5.IsZariskiClosed": "def",
+  "Stafford38.Paper.Section5.JacobianSmoothPoint": "def",
+  "Stafford38.Paper.Section5.conormalCone": "def",
+  "Stafford38.Paper.Section5.conormalCone_paper_eq": "theorem",
+  "Stafford38.Paper.Section5.conormalDirections": "def",
+  "Stafford38.Paper.Section5.definition_5_1_g_h": "theorem",
+  "Stafford38.Paper.Section5.definition_5_2_b": "theorem",
+  "Stafford38.Paper.Section5.definition_5_3": "theorem",
+  "Stafford38.Paper.Section5.definition_5_4_a": "theorem",
+  "Stafford38.Paper.Section5.definition_5_4_b_iff": "theorem",
+  "Stafford38.Paper.Section5.definition_5_4_c": "theorem",
+  "Stafford38.Paper.Section5.definition_5_4_d": "theorem",
+  "Stafford38.Paper.Section5.definition_5_5": "theorem",
+  "Stafford38.Paper.Section5.definition_5_6": "theorem",
+  "Stafford38.Paper.Section5.differentialRelations": "def",
+  "Stafford38.Paper.Section5.idealPoint": "def",
+  "Stafford38.Paper.Section5.rho": "def",
+  "Stafford38.Paper.Section5.tangentCone": "def",
+  "Stafford38.Paper.Section5.tangentSpaceAt": "def",
+  "Stafford38.Paper.Section5.theorem_5_7_i": "theorem",
+  "Stafford38.Paper.Section5.theorem_5_7_i_printed": "theorem",
+  "Stafford38.Paper.Section5.theorem_5_7_ii_printed": "theorem",
+  "Stafford38.Paper.Section5.theorem_5_8": "theorem",
+  "Stafford38.Paper.Section6.IsStablyGenerated": "def",
+  "Stafford38.Paper.Section6.Vx₁": "def",
+  "Stafford38.Paper.Section6.W": "def",
+  "Stafford38.Paper.Section6.lemma_6_2": "theorem",
+  "Stafford38.Paper.Section6.proposition_6_1": "theorem",
+  "Stafford38.Paper.Section6.step_6_1_char_eq_support": "theorem",
+  "Stafford38.Paper.Support.Gabber.GrModule": "def",
+  "Stafford38.Paper.Support.Gabber.grCyclicEquivS": "def",
+  "Stafford38.Paper.Support.Gabber.qFilt": "def",
+  "Stafford38.Paper.corollary_6_3": "theorem",
+  "Stafford38.Paper.corollary_6_3_stablyCyclic": "theorem",
+  "Stafford38.Paper.theorem_1_1": "theorem",
+  "Stafford38.TorsionCyclicity.IsRightTorsion": "def",
+  "Stafford38.WeylEulerResidue.canonicalRightIdeal": "def",
+  "Stafford38.WeylEulerSubring.eulerSubring": "def",
+  "Stafford38.WeylFiltration.bernsteinPiece": "def",
+  "Stafford38.WeylFiltration.orderPiece": "def",
+  "Stafford38.WeylIteratedEquivalence.presentedCoordinate": "def",
+  "Stafford38.WeylIteratedEquivalence.presentedIteratedEquiv": "def",
+  "Stafford38.WeylIteratedEquivalence.presentedMomentum": "def",
+  "Stafford38.WeylIteratedEquivalence.previousWeylEmbedding": "def",
+  "Stafford38.WeylLeadingSymbol.presentedPrincipalComponent": "def",
+  "Stafford38.WeylLeadingSymbol.presentedPrincipalComponent_mul_bernstein": "theorem",
+  "Stafford38.WeylLeadingSymbol.presentedPrincipalComponent_mul_order": "theorem",
+  "Stafford38.WeylPBWMonicBridge.IsPBWMonicAt": "def",
+  "Stafford38.universalStatement": "theorem",
+  "Stafford38Challenge.IsStablyCyclic": "def",
+  "Stafford38Challenge.WeylAlg": "def",
+  "Stafford38FixedSourceChallenge.bernsteinDegree": "def",
+  "Stafford38FixedSourceChallengeTransport.bernsteinDegree_eq": "theorem",
+  "ValuationSubring": "inductive",
+  "ringKrullDim": "def"
+ },
+ "stated": {
+  "Stafford38.Paper.Section2.theorem_2_11": [
+   "Stafford38.Characteristic.SymbolRing",
+   "Stafford38.Paper.Section2.IsGoodFiltration",
+   "Stafford38.Paper.Section2.IsInvolutive",
+   "Stafford38.Paper.Support.Gabber.GrModule",
+   "Stafford38Challenge.WeylAlg"
+  ],
+  "Stafford38.Paper.Section2.theorem_2_11_cyclic": [
+   "Stafford38.Characteristic.SymbolRing",
+   "Stafford38.Paper.Section2.IsInvolutive"
+  ],
+  "Stafford38.Paper.Section2.theorem_2_12": [
+   "PrimeSpectrum",
+   "Stafford38.Paper.Section2.V",
+   "Stafford38.Paper.Section2.VK",
+   "Stafford38.Paper.Section2.maxIdealAt",
+   "Stafford38.Paper.Section2.vanishingIdealOf"
+  ],
+  "Stafford38.Paper.Section3.lemma_3_5": [
+   "Stafford38.Characteristic.SymbolRing",
+   "Stafford38.Paper.Section2.bernsteinDegree",
+   "Stafford38.Paper.Section3.IsMonicInXi1",
+   "Stafford38.Paper.Section3.IsMonicNormalForm",
+   "Stafford38.Paper.Section3.orderSymbol",
+   "Stafford38.WeylFiltration.orderPiece"
+  ],
+  "Stafford38.Paper.Section3.proposition_3_6": [
+   "Stafford38.Characteristic.SymbolRing",
+   "Stafford38.Paper.Section2.bernsteinDegree",
+   "Stafford38.Paper.Section3.IsMonicNormalForm",
+   "Stafford38.Paper.Section3.grQ",
+   "Stafford38.Paper.Section3.idealI",
+   "Stafford38.Paper.Section3.orderSymbol"
+  ],
+  "Stafford38.Paper.Section5.theorem_5_7_i_printed": [
+   "Stafford38.Paper.Section5.IsIrreducibleClosed",
+   "Stafford38.Paper.Section5.conormalCone",
+   "Stafford38.Paper.Section5.idealPoint"
+  ],
+  "Stafford38.Paper.Section5.theorem_5_7_i": [
+   "MvPolynomial.vanishingIdeal",
+   "MvPolynomial.zeroLocus",
+   "PrimeSpectrum",
+   "Stafford38.Geometry.ProjectiveConormalDirections.smoothConormalFibreProjection"
+  ],
+  "Stafford38.Paper.Section5.theorem_5_7_ii_printed": [
+   "Projectivization",
+   "Stafford38.Paper.Section5.IsIrreducibleClosed",
+   "Stafford38.Paper.Section5.conormalDirections",
+   "Stafford38.Paper.Section5.idealPoint"
+  ],
+  "Stafford38.Paper.Section5.theorem_5_8": [
+   "MvPolynomial.vanishingIdeal",
+   "MvPolynomial.zeroLocus",
+   "Stafford38.Characteristic.PostScalarExtensionPoisson.IsInvolutive",
+   "Stafford38.Characteristic.SymbolRing",
+   "Stafford38.Geometry.FibreConicalVanishingIdeal.IsFibreConical"
+  ],
+  "Stafford38.Paper.Section6.proposition_6_1": [
+   "Stafford38.Paper.Section2.Char",
+   "Stafford38.Paper.Section2.CotangentBundle",
+   "Stafford38.Paper.Section3.IsMonicNormalForm",
+   "Stafford38.Paper.Section3.idealI",
+   "Stafford38.Paper.Section6.Vx₁"
+  ],
+  "Stafford38.Paper.Section6.lemma_6_2": [
+   "PrimeSpectrum",
+   "Stafford38.Characteristic.SymbolRing",
+   "Stafford38.Paper.Section2.Char",
+   "Stafford38.Paper.Section2.CotangentBundle",
+   "Stafford38.Paper.Section3.Q",
+   "Stafford38.Paper.Section3.grQ",
+   "Stafford38.Paper.Section3.idealI"
+  ],
+  "Stafford38.Paper.corollary_6_3": [
+   "Stafford38.Paper.Section2.IsCyclic",
+   "Stafford38.Paper.Section2.IsTorsion",
+   "Stafford38Challenge.WeylAlg"
+  ],
+  "Stafford38.Paper.corollary_6_3_stablyCyclic": [
+   "Stafford38.Paper.Section2.IsTorsion",
+   "Stafford38.Paper.Section6.IsStablyGenerated",
+   "Stafford38Challenge.WeylAlg"
+  ]
+ },
+ "geometry": {
+  "modules": 236,
+  "main": [
+   "Stafford38.Geometry.ActualWitnessConormalAssembly",
+   "Stafford38.Geometry.AffineComponentCoordinateSplit",
+   "Stafford38.Geometry.AffineConormalClosure",
+   "Stafford38.Geometry.AffineConormalSpan",
+   "Stafford38.Geometry.AsymptoticDivisorExistence",
+   "Stafford38.Geometry.CoisotropicTranslation",
+   "Stafford38.Geometry.CompletedDVRCoefficientSection",
+   "Stafford38.Geometry.CompletedDVRPowerSeriesEquiv",
+   "Stafford38.Geometry.ComponentFunctionFieldBoundary",
+   "Stafford38.Geometry.ComponentProjectiveClosure",
+   "Stafford38.Geometry.ComponentProjectiveClosureNormalization",
+   "Stafford38.Geometry.ComponentProjectiveOrder",
+   "Stafford38.Geometry.ConormalAxisContradiction",
+   "Stafford38.Geometry.ConormalPrincipalOpenDensity",
+   "Stafford38.Geometry.ConormalScalarExtensionVanishing",
+   "Stafford38.Geometry.ContinuousPowerSeriesTangentFrame",
+   "Stafford38.Geometry.DivisorTangentLattice",
+   "Stafford38.Geometry.DivisorialVisibleFrameCore",
+   "Stafford38.Geometry.DivisorialVisibleFrameStage4",
+   "Stafford38.Geometry.DivisorialVisibleFrameStage5",
+   "Stafford38.Geometry.DivisorialVisibleFrameStageAssembly",
+   "Stafford38.Geometry.ExactDivisorialVisibleFrameExistence",
+   "Stafford38.Geometry.FibreConicalVanishingIdeal",
+   "Stafford38.Geometry.FiniteGradientResidueExtension",
+   "Stafford38.Geometry.FiniteSeparableDVRChartFoundation",
+   "Stafford38.Geometry.FormalDivisorAxisLift",
+   "Stafford38.Geometry.FormalDivisorLaurentConormal",
+   "Stafford38.Geometry.FormalDivisorTangent",
+   "Stafford38.Geometry.GeneralCoisotropicSets",
+   "Stafford38.Geometry.GeneralConormalContainment",
+   "Stafford38.Geometry.GeneralCoordinateAvoidance",
+   "Stafford38.Geometry.GeneralDivisorialVisibleFrame",
+   "Stafford38.Geometry.GeneralDivisorialVisibleFrameColumn",
+   "Stafford38.Geometry.GeneralDivisorialVisibleFrameCoreData",
+   "Stafford38.Geometry.GeneralDivisorialVisibleFrameWitness",
+   "Stafford38.Geometry.GenericPointKaehlerConormal",
+   "Stafford38.Geometry.GenericSmoothOpen",
+   "Stafford38.Geometry.KaehlerDVRVisibility",
+   "Stafford38.Geometry.KaehlerSpanSeparableAdjoin",
+   "Stafford38.Geometry.KaehlerTranscendenceBasis",
+   "Stafford38.Geometry.KaehlerVisibleDerivationFrame",
+   "Stafford38.Geometry.LaurentConormalDirection",
+   "Stafford38.Geometry.LaurentConormalResidueExtension",
+   "Stafford38.Geometry.NormalizationHeightOne",
+   "Stafford38.Geometry.PaperActualDivisorTangent",
+   "Stafford38.Geometry.PaperHamiltonianFlow",
+   "Stafford38.Geometry.PaperLaurentChartDerivation",
+   "Stafford38.Geometry.PaperResidueDerivationFrame",
+   "Stafford38.Geometry.PaperResidueGroundAlgebraTransport",
+   "Stafford38.Geometry.PaperRetainedChartAssembly",
+   "Stafford38.Geometry.PowerSeriesArcTangency",
+   "Stafford38.Geometry.PowerSeriesTangentLimit",
+   "Stafford38.Geometry.ProjectiveChartCoordinates",
+   "Stafford38.Geometry.ProjectiveConormalDehomogenization",
+   "Stafford38.Geometry.ProjectiveConormalDirections",
+   "Stafford38.Geometry.ProjectiveDivisorOrderGap",
+   "Stafford38.Geometry.ProjectiveValuationNormalization",
+   "Stafford38.Geometry.RelativeCoefficientDVRPlace",
+   "Stafford38.Geometry.RelativeRetainedBoundaryPlace",
+   "Stafford38.Geometry.ResidueMinorSelection",
+   "Stafford38.Geometry.RetainedDVRPlace",
+   "Stafford38.Geometry.RetainedGroundMapIdentification",
+   "Stafford38.Geometry.RetainedPlaceConormalTransport",
+   "Stafford38.Geometry.RetainedProjectiveCompletion",
+   "Stafford38.Geometry.RetractionSpecialization",
+   "Stafford38.Geometry.ScalarExtensionPoints",
+   "Stafford38.Geometry.SmoothAffineConormal",
+   "Stafford38.Geometry.SmoothConormalFibreVanishing",
+   "Stafford38.Geometry.SplitTangentMatrix"
+  ],
+  "original": 191,
+  "shared": 60
+ },
+ "library_modules": [
+  "AlgebraicAnalysis.Commutator",
+  "AlgebraicAnalysis.DifferentialOperators.LocalizedPolynomialDerivations",
+  "AlgebraicAnalysis.Module.BaseLocalizationModuleComparison",
+  "AlgebraicAnalysis.Module.CommutingPolynomialAction",
+  "AlgebraicAnalysis.Module.FilteredTwoTermBoundaryExhaustion",
+  "AlgebraicAnalysis.Module.FilteredTwoTermBoundaryNaturality",
+  "AlgebraicAnalysis.Module.FilteredTwoTermPageActions",
+  "AlgebraicAnalysis.Module.FilteredTwoTermPageEquivalences",
+  "AlgebraicAnalysis.Module.FilteredTwoTermPages",
+  "AlgebraicAnalysis.Module.FilteredTwoTermSuccessorNaturality",
+  "AlgebraicAnalysis.Module.FilteredTwoTermTotalActions",
+  "AlgebraicAnalysis.Module.FilteredTwoTermTotalPages",
+  "AlgebraicAnalysis.Module.LocalizedKernelCokernelEquivalences",
+  "AlgebraicAnalysis.Module.LocalizedMinimalSupportAvoidance",
+  "AlgebraicAnalysis.Module.MinimalPrimeFiniteLengthLocalization",
+  "AlgebraicAnalysis.Module.MinimalSupportExistence",
+  "AlgebraicAnalysis.Module.MonicAnnihilatorFinite",
+  "AlgebraicAnalysis.Module.PrincipalKoszulFiniteTorsion",
+  "AlgebraicAnalysis.Module.PrincipalKoszulPositivity",
+  "AlgebraicAnalysis.Module.StableTorsionResidualSupport",
+  "AlgebraicAnalysis.Module.UniformBoundaryVanishing",
+  "AlgebraicAnalysis.Ore.Associativity",
+  "AlgebraicAnalysis.Ore.RightDivision",
+  "AlgebraicAnalysis.Ore.RightPBW",
+  "AlgebraicAnalysis.Ore.RightQuotient"
+ ]
+}

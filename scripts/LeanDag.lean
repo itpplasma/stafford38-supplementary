@@ -5,7 +5,8 @@ Run from a built formal checkout:
   lake env lean --run <supplementary>/scripts/LeanDag.lean <out.json>
 For every project constant the output lists its module, its kind and the
 constants used by its type and value: project constants under `uses`,
-constants of other packages under `external`; `externals` gives the module,
+constants of other packages under `external`, and the constants of its type
+alone under `statement`; `externals` gives the module,
 kind and instance-or-projection flag of each of those. scripts/build-lean-dag.py contracts this graph
 to the key declarations.
 -/
@@ -47,7 +48,8 @@ def main (args : List String) : IO Unit := do
         seen := seen.insert d
     out := out.push (c.toString, Json.mkObj [
       ("module", Json.str ((moduleOf c).getD .anonymous).toString),
-      ("kind", Json.str (kind info)), ("uses", Json.arr uses), ("external", Json.arr external)])
+      ("kind", Json.str (kind info)), ("uses", Json.arr uses), ("external", Json.arr external),
+      ("statement", Json.arr (info.type.getUsedConstants.map fun d => Json.str d.toString))])
   -- Instances and structure projections are plumbing, not results used.
   let externals := seen.toList.filterMap fun d => (env.find? d).map fun info =>
     (d.toString, Json.arr #[Json.str ((moduleOf d).getD .anonymous).toString, Json.str (kind info),

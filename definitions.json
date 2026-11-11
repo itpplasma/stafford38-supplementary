@@ -1,0 +1,905 @@
+{
+  "schema": 1,
+  "roots": {
+    "main": "Stafford38.Paper.theorem_1_1",
+    "cyclic": "Stafford38.Paper.corollary_6_3",
+    "stable": "Stafford38.Paper.corollary_6_3_stablyCyclic",
+    "original": "Stafford38.universalStatement"
+  },
+  "groups": [
+    {
+      "title": "The Weyl algebra and the Bernstein degree",
+      "rows": [
+        {
+          "paper": "Section 1",
+          "notion": "Weyl algebra A_n(k)",
+          "class": "direct",
+          "printed": [
+            "Stafford38Challenge.WeylAlg"
+          ],
+          "working": [],
+          "bridges": [
+            {
+              "name": "Stafford38.WeylIteratedEquivalence.presentedIteratedEquiv",
+              "says": "algebra isomorphism from A_n(k) to the iterated Ore extension (`IteratedPairStage`)"
+            }
+          ],
+          "note": "The free algebra on x_i, ∂_i modulo the commutation relations. This one definition is used in every statement and in the proofs; `PresentedWeyl` is a second name for it. The iterated Ore extension A_{n-1}[x][p; ∂] is an auxiliary second construction: the Euler and normal-form arguments of Sections 3 and 4 are carried out there and transported along the isomorphism below."
+        },
+        {
+          "paper": "Definition 2.3, Theorem 1.1",
+          "notion": "Bernstein degree deg_B",
+          "class": "equivalent",
+          "printed": [
+            "Stafford38.Paper.Section2.bernsteinDegree"
+          ],
+          "working": [
+            "Stafford38FixedSourceChallenge.bernsteinDegree",
+            "Stafford38.FixedSource.bernsteinDegree"
+          ],
+          "bridges": [
+            {
+              "name": "Stafford38.Paper.Section2.bernsteinDegree_eq",
+              "says": "printed degree = degree of the stand-alone statement"
+            },
+            {
+              "name": "Stafford38FixedSourceChallengeTransport.bernsteinDegree_eq",
+              "says": "degree of the stand-alone statement = total degree of the normal form"
+            }
+          ],
+          "note": "Three definitions of the same number. Printed: the least j with d ∈ B_j, through the general filtration degree. Stand-alone statement of Theorem 1.1: the least N such that d lies in the span of ordered words of degree at most N. Proofs: the total degree of the normal form of d. Lean proves all three equal."
+        }
+      ]
+    },
+    {
+      "title": "Section 2: modules, filtrations, characteristic variety",
+      "rows": [
+        {
+          "paper": "Definition 2.1",
+          "notion": "Torsion module",
+          "class": "alias",
+          "printed": [
+            "Stafford38.Paper.Section2.IsTorsion"
+          ],
+          "working": [
+            "Stafford38.TorsionCyclicity.IsRightTorsion"
+          ],
+          "bridges": [],
+          "note": "Every m has md = 0 for some d ≠ 0. The printed name abbreviates the definition used in Corollary 6.3."
+        },
+        {
+          "paper": "Definition 2.1",
+          "notion": "Cyclic module",
+          "class": "direct",
+          "printed": [
+            "Stafford38.Paper.Section2.IsCyclic"
+          ],
+          "working": [],
+          "bridges": [
+            {
+              "name": "Stafford38.Paper.Section2.isCyclic_iff_span",
+              "says": "M = mA ⇔ the submodule spanned by m is everything (Mathlib's form)"
+            }
+          ],
+          "note": "M = mA, as printed. Corollary 6.3 is stated with this definition; its proof passes to Mathlib's form through the theorem below."
+        },
+        {
+          "paper": "Convention 2.2",
+          "notion": "x₁, p = ∂₁, the transverse algebra A_{n-1}",
+          "class": "alias",
+          "printed": [
+            "Stafford38.Paper.Section2.x₁",
+            "Stafford38.Paper.Section2.p",
+            "Stafford38.Paper.Section2.transverse"
+          ],
+          "working": [
+            "Stafford38.WeylIteratedEquivalence.presentedCoordinate",
+            "Stafford38.WeylIteratedEquivalence.presentedMomentum",
+            "Stafford38.WeylIteratedEquivalence.previousWeylEmbedding"
+          ],
+          "bridges": [],
+          "note": "Names for the first generator pair and for the image of A_{n-1} in A_n. Lean numbers the generator pairs from 0 and writes the rank as n+1 where the paper assumes n ≥ 1: `PresentedWeyl k (n+1)` has n+1 pairs and is the paper's A_n with n ≥ 1."
+        },
+        {
+          "paper": "Convention 2.2",
+          "notion": "C = A_{n-1}[x₁]",
+          "class": "equivalent",
+          "printed": [
+            "Stafford38.Paper.Section2.C"
+          ],
+          "working": [],
+          "bridges": [
+            {
+              "name": "Stafford38.Paper.Section2.C_eq_range",
+              "says": "C = the image in A_n of the coefficient ring of the last Ore step"
+            }
+          ],
+          "note": "Printed: the subalgebra generated by the transverse algebra and x₁. The normal form ⊕ p^j C is proved in the Ore extension, whose coefficient ring is shown to be the same subalgebra."
+        },
+        {
+          "paper": "Definition 2.3",
+          "notion": "Filtration, associated graded, degree, symbol",
+          "class": "direct",
+          "printed": [
+            "Stafford38.Paper.Section2.IsFiltration",
+            "Stafford38.Paper.Section2.gr",
+            "Stafford38.Paper.Section2.filtrationDegree",
+            "Stafford38.Paper.Section2.symbol"
+          ],
+          "working": [],
+          "bridges": [],
+          "note": "Written as printed for any algebra over k."
+        },
+        {
+          "paper": "Definition 2.3",
+          "notion": "Bernstein filtration B and order filtration F of A_n",
+          "class": "alias",
+          "printed": [
+            "Stafford38.Paper.Section2.bernsteinFiltration",
+            "Stafford38.Paper.Section2.orderFiltration"
+          ],
+          "working": [
+            "Stafford38.WeylFiltration.bernsteinPiece",
+            "Stafford38.WeylFiltration.orderPiece"
+          ],
+          "bridges": [],
+          "note": "Spans of the ordered words x^α ∂^β of bounded weight: weight 1 on every generator for B, weight 0 on x_i and 1 on ∂_i for F."
+        },
+        {
+          "paper": "Definition 2.3",
+          "notion": "gr A_n(k) and k[x, ξ]",
+          "class": "equivalent",
+          "printed": [
+            "Stafford38.Paper.Section2.gr"
+          ],
+          "working": [
+            "Stafford38.Characteristic.SymbolRing",
+            "Stafford38.WeylLeadingSymbol.presentedPrincipalComponent"
+          ],
+          "bridges": [
+            {
+              "name": "Stafford38.Paper.Section2.grEquivSymbolRing",
+              "says": "⊕_j F_j/F_{j-1} ≅ k[x, ξ] as k-vector spaces, for both filtrations"
+            },
+            {
+              "name": "Stafford38.WeylLeadingSymbol.presentedPrincipalComponent_mul_bernstein",
+              "says": "σ(ab) = σ(a)σ(b) for the Bernstein filtration"
+            },
+            {
+              "name": "Stafford38.WeylLeadingSymbol.presentedPrincipalComponent_mul_order",
+              "says": "σ(ab) = σ(a)σ(b) for the order filtration"
+            }
+          ],
+          "note": "The proofs take the polynomial ring k[x, ξ] itself as gr A_n, and the symbol of an element is the top homogeneous part of its normal form. The identification with ⊕_j F_j/F_{j-1} is proved as a linear isomorphism together with multiplicativity of symbols. It is not packaged as one ring isomorphism."
+        },
+        {
+          "paper": "Definition 2.4",
+          "notion": "Compatible and good filtrations of a module",
+          "class": "direct",
+          "printed": [
+            "Stafford38.Paper.Section2.IsCompatibleFiltration",
+            "Stafford38.Paper.Section2.IsGoodFiltration",
+            "Stafford38.Paper.Support.Gabber.GrModule"
+          ],
+          "working": [],
+          "bridges": [],
+          "note": "As printed, for right A_n-modules and the order filtration. gr M is `GrModule`, the graded module of Definition 2.3; x_i and ξ_i act on it through right multiplication by x_i and ∂_i, which gives the module structure over k[x, ξ]."
+        },
+        {
+          "paper": "Definition 2.4",
+          "notion": "Q_m = qF_m and gr Q for Q = A_n/I",
+          "class": "equivalent",
+          "printed": [
+            "Stafford38.Paper.Section2.cyclicFiltration",
+            "Stafford38.Paper.Support.Gabber.qFilt"
+          ],
+          "working": [
+            "Stafford38.CharacteristicAssociatedGradedModule.OrderAssociatedGradedModule"
+          ],
+          "bridges": [
+            {
+              "name": "Stafford38.Paper.Section2.cyclicFiltration_order_eq",
+              "says": "qF_m = the m-th piece of the quotient filtration used in the proofs"
+            },
+            {
+              "name": "Stafford38.Paper.Section2.grCyclicEquiv",
+              "says": "gr Q of the proofs ≅ ⊕_m Q_m/Q_{m-1} as k-vector spaces"
+            },
+            {
+              "name": "Stafford38.Paper.Support.Gabber.grCyclicEquivS",
+              "says": "the same isomorphism is linear over k[x, ξ]"
+            }
+          ],
+          "note": "The proofs of Sections 3 to 6 work with one fixed module gr Q, built from the images of F_m in A_n/I. The paper modules call it `grCyclic`. It is isomorphic, over k[x, ξ], to the printed ⊕_m Q_m/Q_{m-1}."
+        },
+        {
+          "paper": "Definition 2.5",
+          "notion": "T*X = Spec k[x, ξ]",
+          "class": "library",
+          "printed": [
+            "Stafford38.Paper.Section2.CotangentBundle"
+          ],
+          "working": [
+            "PrimeSpectrum"
+          ],
+          "bridges": [],
+          "note": "Mathlib's prime spectrum of the polynomial ring k[x, ξ]."
+        },
+        {
+          "paper": "Definition 2.5",
+          "notion": "Projection π and fibre T*_y X",
+          "class": "direct",
+          "printed": [
+            "Stafford38.Paper.Section2.proj",
+            "Stafford38.Paper.Section2.fibre"
+          ],
+          "working": [],
+          "bridges": [],
+          "note": "A closed point (y, ξ) is a function on the 2n coordinate indices; π keeps the first n values, and the fibre over y is π⁻¹(y). The fibre is used once, to state Definition 5.6. The projection is used in the last step of Section 6, where W does not meet π⁻¹(H) for the hyperplane H = {x₁ = 0}."
+        },
+        {
+          "paper": "Definition 2.6",
+          "notion": "V(J) ⊆ Spec S",
+          "class": "library",
+          "printed": [
+            "Stafford38.Paper.Section2.V"
+          ],
+          "working": [
+            "PrimeSpectrum.zeroLocus"
+          ],
+          "bridges": [],
+          "note": "Mathlib's zero locus in the prime spectrum."
+        },
+        {
+          "paper": "Definition 2.6",
+          "notion": "V_K(J), I(S), 𝔪_a",
+          "class": "equivalent",
+          "printed": [
+            "Stafford38.Paper.Section2.VK",
+            "Stafford38.Paper.Section2.vanishingIdealOf",
+            "Stafford38.Paper.Section2.maxIdealAt"
+          ],
+          "working": [
+            "MvPolynomial.zeroLocus",
+            "MvPolynomial.vanishingIdeal"
+          ],
+          "bridges": [
+            {
+              "name": "Stafford38.Paper.Section2.VK_eq_zeroLocus",
+              "says": "V_K(J) = Mathlib's zero locus of J"
+            },
+            {
+              "name": "Stafford38.Paper.Section2.mem_vanishingIdealOf",
+              "says": "f ∈ I(S) ⇔ f(a) = 0 for all a ∈ S"
+            },
+            {
+              "name": "Stafford38.Paper.Section2.maxIdealAt_eq_vanishingIdeal",
+              "says": "(z_1 - a_1, …, z_N - a_N) = vanishing ideal of the point a"
+            },
+            {
+              "name": "Stafford38.Paper.Section2.mem_VK_iff_closedPoint_mem_V",
+              "says": "a ∈ V_K(J) ⇔ 𝔪_a ∈ V(J)"
+            }
+          ],
+          "note": "Classical zero sets and vanishing ideals. I(S) is Mathlib's vanishing ideal by definition. Sections 5 and 6 state their closed sets with Mathlib's `zeroLocus` and `vanishingIdeal`."
+        },
+        {
+          "paper": "Definition 2.7",
+          "notion": "Char(M) for a good filtration",
+          "class": "direct",
+          "printed": [
+            "Stafford38.Paper.Section2.CharOf"
+          ],
+          "working": [],
+          "bridges": [
+            {
+              "name": "Stafford38.Paper.Section2.definition_2_7_independent",
+              "says": "two good filtrations give the same Char(M)"
+            }
+          ],
+          "note": "V(Ann gr M), as printed. Independence of the filtration is proved, but no later proof needs it, because Sections 3 to 6 only use the filtration Q_m = qF_m."
+        },
+        {
+          "paper": "Definition 2.7",
+          "notion": "Char(A_n/I)",
+          "class": "equivalent",
+          "printed": [
+            "Stafford38.Paper.Section2.Char"
+          ],
+          "working": [
+            "Stafford38.CharacteristicAssociatedGradedModule.OrderAssociatedGradedModule",
+            "Module.support"
+          ],
+          "bridges": [
+            {
+              "name": "Stafford38.Paper.Section2.Char_eq",
+              "says": "Char(A_n/I) = V(Ann gr Q) for the module gr Q of the proofs"
+            },
+            {
+              "name": "Stafford38.Paper.Section6.step_6_1_char_eq_support",
+              "says": "Char(Q) = Supp(gr Q), since gr Q is finitely generated"
+            },
+            {
+              "name": "Stafford38.Paper.Section2.Char_eq_charOf",
+              "says": "Char(A_n/I) can be computed from any good filtration"
+            }
+          ],
+          "note": "Printed: Definition 2.7 applied to the filtration Q_m = qF_m. The proofs use the annihilator and the support of the module gr Q they work with."
+        },
+        {
+          "paper": "Definition 2.8",
+          "notion": "Symplectic form, symplectic basis, Gram matrix",
+          "class": "direct",
+          "printed": [
+            "Stafford38.Paper.Section2.IsSymplectic",
+            "Stafford38.Paper.Section2.IsSymplecticBasis",
+            "Stafford38.Paper.Section2.gramMatrix"
+          ],
+          "working": [],
+          "bridges": [],
+          "note": "As printed."
+        },
+        {
+          "paper": "Definition 2.8",
+          "notion": "Standard form ω on k^{2n}",
+          "class": "direct",
+          "printed": [
+            "Stafford38.Paper.Section2.omega"
+          ],
+          "working": [
+            "Stafford38.CharacteristicSymplecticCompletion.phasePairing"
+          ],
+          "bridges": [
+            {
+              "name": "Stafford38.Paper.Section2.gramMatrix_omega",
+              "says": "the Gram matrix of ω in the generators is -J, J the matrix of commutators [u_i, u_j]"
+            }
+          ],
+          "note": "ω(x_i, ∂_j) = δ_ij as printed. Lean defines it as the negative of the pairing used in the proofs, which has the opposite sign convention."
+        },
+        {
+          "paper": "Definition 2.9",
+          "notion": "Poisson bracket",
+          "class": "equivalent",
+          "printed": [
+            "Stafford38.Paper.Section2.poisson"
+          ],
+          "working": [
+            "Stafford38.Characteristic.poissonBracket"
+          ],
+          "bridges": [
+            {
+              "name": "Stafford38.Paper.Section2.poisson_eq",
+              "says": "printed bracket = bracket of the proofs, with the same sign"
+            }
+          ],
+          "note": "The printed formula with partial derivatives. The proofs use a bracket defined in the proof library; the two are equal."
+        },
+        {
+          "paper": "Definition 2.10",
+          "notion": "Involutive ideal and involutive closed set",
+          "class": "equivalent",
+          "printed": [
+            "Stafford38.Paper.Section2.IsInvolutive",
+            "Stafford38.Paper.Section2.IsInvolutiveSet"
+          ],
+          "working": [
+            "Stafford38.Characteristic.PostScalarExtensionPoisson.IsInvolutive"
+          ],
+          "bridges": [
+            {
+              "name": "Stafford38.Paper.Section2.isInvolutive_iff",
+              "says": "printed {J, J} ⊆ J ⇔ the condition used in the proofs"
+            }
+          ],
+          "note": "A closed set W is involutive, by definition, if I(W) is an involutive ideal. Theorem 2.11 is stated with the printed definition. Theorem 5.8 is stated with the definition of the proofs, applied to I(W)."
+        }
+      ]
+    },
+    {
+      "title": "Section 3: normal form",
+      "rows": [
+        {
+          "paper": "Section 3",
+          "notion": "Automorphism Φ_g",
+          "class": "direct",
+          "printed": [
+            "Stafford38.Paper.Section3.phiG"
+          ],
+          "working": [],
+          "bridges": [],
+          "note": "The automorphism of A_n extending a linear symplectic map g of the generators; g is given by its matrix in Sp(2n, k)."
+        },
+        {
+          "paper": "Equation (3.1)",
+          "notion": "Monic normal form of d̃",
+          "class": "implied",
+          "printed": [
+            "Stafford38.Paper.Section3.IsMonicNormalForm"
+          ],
+          "working": [
+            "Stafford38.WeylPBWMonicBridge.IsPBWMonicAt"
+          ],
+          "bridges": [
+            {
+              "name": "Stafford38.Paper.Section3.isPBWMonicAt_of_isMonicNormalForm",
+              "says": "the printed form (3.1) implies the monicity condition of the proofs"
+            }
+          ],
+          "note": "Printed: d̃ = p^N + Σ p^j a_j with a_j ∈ C and deg_B a_j ≤ N - j. The Euler arguments of Section 4 use a monicity condition on the normal form of d̃. Only the direction the proofs need is proved."
+        },
+        {
+          "paper": "Equation (3.2)",
+          "notion": "Ideal 𝓘 and module Q = A_n/𝓘",
+          "class": "alias",
+          "printed": [
+            "Stafford38.Paper.Section3.idealI",
+            "Stafford38.Paper.Section3.Q",
+            "Stafford38.Paper.Section3.grQ"
+          ],
+          "working": [
+            "Stafford38.WeylEulerResidue.canonicalRightIdeal",
+            "Stafford38.EulerSurjectivity.RightQuotient",
+            "Stafford38.CharacteristicAssociatedGradedModule.OrderAssociatedGradedModule"
+          ],
+          "bridges": [],
+          "note": "𝓘 = d̃A_n + x₁^N d̃A_n and its quotient; gr Q is the module of Definition 2.4 for this ideal."
+        },
+        {
+          "paper": "Definition 3.4",
+          "notion": "Monic of degree N in ξ₁",
+          "class": "direct",
+          "printed": [
+            "Stafford38.Paper.Section3.IsMonicInXi1"
+          ],
+          "working": [],
+          "bridges": [],
+          "note": "As printed: P, read as a polynomial in ξ₁, has degree at most N and coefficient 1 at ξ₁^N."
+        },
+        {
+          "paper": "Lemma 3.5",
+          "notion": "Order symbol σ^ord_N(d̃)",
+          "class": "equivalent",
+          "printed": [
+            "Stafford38.Paper.Section2.symbol"
+          ],
+          "working": [
+            "Stafford38.Paper.Section3.orderSymbol",
+            "Stafford38.WeylLeadingSymbol.presentedPrincipalComponent"
+          ],
+          "bridges": [
+            {
+              "name": "Stafford38.Paper.Section2.grPieceEquiv",
+              "says": "F_j/F_{j-1} ≅ homogeneous polynomials of degree j, sending a class to the degree-j part of the normal form"
+            },
+            {
+              "name": "Stafford38.Paper.Section2.grPiece_mk_eq_zero_iff",
+              "says": "the class of a in F_j/F_{j-1} vanishes ⇔ the degree-j part of its normal form vanishes"
+            }
+          ],
+          "note": "Printed: the class of d̃ in F_N/F_{N-1} (Definition 2.3). The proofs use the degree-N part of the normal form, a polynomial in k[x, ξ]."
+        }
+      ]
+    },
+    {
+      "title": "Section 4: Euler grading and supports",
+      "rows": [
+        {
+          "paper": "Before Lemma 4.1",
+          "notion": "Euler grading and A_{≥0}",
+          "class": "equivalent",
+          "printed": [
+            "Stafford38.Paper.Section4.eulerDegree",
+            "Stafford38.Paper.Section4.nonnegativePart",
+            "Stafford38.Paper.Section4.positivePart"
+          ],
+          "working": [
+            "Stafford38.WeylEulerSubring.eulerSubring"
+          ],
+          "bridges": [
+            {
+              "name": "Stafford38.Paper.Section4.step_nonnegative_pbw",
+              "says": "A_{≥0} = the subring generated by the transverse algebra, x₁ and E = x₁p"
+            }
+          ],
+          "note": "Printed: the eigenspaces of the commutator with E = x₁p, and A_{≥0} as the sum of those of degree ≥ 0. The normal-form arguments use the subring generated by the transverse algebra, x₁ and E. Lean proves that the two subrings are equal."
+        },
+        {
+          "paper": "Definitions 4.4 to 4.6",
+          "notion": "Localization, support, length",
+          "class": "library",
+          "printed": [
+            "Stafford38.Paper.Section4.definition_4_4",
+            "Stafford38.Paper.Section4.definition_4_5",
+            "Stafford38.Paper.Section4.definition_4_6"
+          ],
+          "working": [
+            "Localization",
+            "LocalizedModule",
+            "Module.support",
+            "Module.length"
+          ],
+          "bridges": [],
+          "note": "Mathlib's notions. One theorem per definition states the printed description: equality of fractions, Supp(M) = {𝔭 : M_𝔭 ≠ 0}, and length as the length of any composition series."
+        },
+        {
+          "paper": "Before Lemma 4.8",
+          "notion": "M = gr Q, T, f, V = ker f, U = coker f",
+          "class": "alias",
+          "printed": [
+            "Stafford38.Paper.Section4.GrQ",
+            "Stafford38.Paper.Section4.Tangential",
+            "Stafford38.Paper.Section4.coordinateMap",
+            "Stafford38.Paper.Section4.kernelV",
+            "Stafford38.Paper.Section4.cokernelU"
+          ],
+          "working": [],
+          "bridges": [],
+          "note": "Names for the objects of the setup paragraph, built on gr Q of Definition 2.4; f is multiplication by the symbol x₁."
+        }
+      ]
+    },
+    {
+      "title": "Section 5: conormal geometry",
+      "rows": [
+        {
+          "paper": "Definitions 5.1 to 5.3",
+          "notion": "Field extensions, Kähler differentials, valuation rings",
+          "class": "library",
+          "printed": [
+            "Stafford38.Paper.Section5.definition_5_1_g_h",
+            "Stafford38.Paper.Section5.differentialRelations",
+            "Stafford38.Paper.Section5.definition_5_3"
+          ],
+          "working": [
+            "IsTranscendenceBasis",
+            "Algebra.trdeg",
+            "KaehlerDifferential",
+            "ValuationSubring",
+            "IsDiscreteValuationRing"
+          ],
+          "bridges": [
+            {
+              "name": "Stafford38.Paper.Section5.definition_5_2_b",
+              "says": "the free module modulo the printed relations ≅ Mathlib's Ω, with ⟨a⟩ ↦ da"
+            }
+          ],
+          "note": "Mathlib's notions; the listed theorems state the printed descriptions as their properties. For Ω the printed construction, a free module modulo the Leibniz relations, is proved isomorphic to Mathlib's module of differentials."
+        },
+        {
+          "paper": "Definition 5.4(a)",
+          "notion": "Irreducible closed set Y",
+          "class": "equivalent",
+          "printed": [
+            "Stafford38.Paper.Section5.IsZariskiClosed",
+            "Stafford38.Paper.Section5.IsIrreducibleClosed"
+          ],
+          "working": [
+            "Stafford38.Paper.Section5.idealPoint"
+          ],
+          "bridges": [
+            {
+              "name": "Stafford38.Paper.Section5.definition_5_4_a",
+              "says": "Y irreducible ⇔ I(Y) prime, for nonempty closed Y"
+            }
+          ],
+          "note": "Printed: not a union of two proper closed subsets. The proofs work with the prime ideal 𝔭 = I(Y) as a point of Spec K[x]. The equivalence needs Y nonempty."
+        },
+        {
+          "paper": "Definition 5.4(b)",
+          "notion": "Smooth locus Y_sm",
+          "class": "equivalent",
+          "printed": [
+            "Stafford38.Paper.Section5.JacobianSmoothPoint"
+          ],
+          "working": [
+            "Stafford38.Geometry.SmoothAffineConormal.SmoothAffinePoint",
+            "Algebra.smoothLocus"
+          ],
+          "bridges": [
+            {
+              "name": "Stafford38.Paper.Section5.definition_5_4_b_iff",
+              "says": "y is smooth in Mathlib's sense ⇔ the Jacobian has rank n - dim Y at y"
+            }
+          ],
+          "note": "Printed: the Jacobian rank condition. The proofs use Mathlib's smooth locus of K[x]/𝔭, read at the point y. The equivalence is the Jacobian criterion; it is proved for a prime ideal 𝔭 over an algebraically closed field K of characteristic zero, the setting of Section 5."
+        },
+        {
+          "paper": "Definition 5.4(c)",
+          "notion": "Conormal space N*_y Y",
+          "class": "equivalent",
+          "printed": [
+            "Stafford38.Geometry.AffineConormalSpan.equationCovectorSpan"
+          ],
+          "working": [
+            "Stafford38.Geometry.AffineConormalSpan.affineConormalSpace",
+            "Stafford38.Geometry.AffineConormalSpan.zariskiTangentSpace"
+          ],
+          "bridges": [
+            {
+              "name": "Stafford38.Paper.Section5.definition_5_4_c",
+              "says": "ξ lies in the conormal space of the proofs ⇔ ξ is in the span of the df_y, f ∈ I"
+            },
+            {
+              "name": "Stafford38.Geometry.AffineConormalSpan.affineConormalSpace_eq_equationCovectorSpan",
+              "says": "annihilator of the tangent space = span of the differentials"
+            }
+          ],
+          "note": "Printed: the span of the differentials df_y (this form is also defined in the geometry modules). The proofs define the tangent space as the common kernel of these differentials and the conormal space as its annihilator. The two agree by duality in finite dimension."
+        },
+        {
+          "paper": "Definition 5.4(d)",
+          "notion": "Conormal cone N(Y)",
+          "class": "equivalent",
+          "printed": [
+            "Stafford38.Paper.Section5.conormalCone"
+          ],
+          "working": [
+            "Stafford38.Geometry.ProjectiveConormalDirections.smoothConormalFibreProjection"
+          ],
+          "bridges": [
+            {
+              "name": "Stafford38.Paper.Section5.conormalCone_paper_eq",
+              "says": "printed N(Y) = the conormal cone of the proofs"
+            },
+            {
+              "name": "Stafford38.Paper.Section5.definition_5_4_d",
+              "says": "ξ in the cone of the proofs ⇔ ξ ∈ span{df_y} at some smooth y"
+            }
+          ],
+          "note": "Printed: the union of the spans of differentials over the Jacobian smooth locus. The proofs use the same union with Mathlib's smooth locus and the annihilator form of N*_y Y."
+        },
+        {
+          "paper": "Definition 5.5",
+          "notion": "Direction closure Dir(Y)",
+          "class": "equivalent",
+          "printed": [
+            "Stafford38.Paper.Section5.conormalDirections"
+          ],
+          "working": [
+            "Stafford38.Geometry.ProjectiveConormalDirections.projectiveHomogeneousClosure",
+            "Stafford38.Geometry.ProjectiveConormalDirections.projectivizedDirectionSet",
+            "Stafford38.Geometry.ProjectiveConormalDirections.smoothConormalDirectionSet"
+          ],
+          "bridges": [
+            {
+              "name": "Stafford38.Paper.Section5.definition_5_5",
+              "says": "printed Dir(Y) = the closure of directions used for Theorem 5.7(ii)"
+            }
+          ],
+          "note": "The closure in projective space of the classes [ξ], 0 ≠ ξ ∈ N(Y); closed means cut out by homogeneous polynomials. Dir(Y) occurs only in Theorem 5.7(ii), which neither the paper nor Lean uses afterwards."
+        },
+        {
+          "paper": "Definition 5.6",
+          "notion": "Fibre-conical set",
+          "class": "equivalent",
+          "printed": [],
+          "working": [
+            "Stafford38.Geometry.FibreConicalVanishingIdeal.IsFibreConical"
+          ],
+          "bridges": [
+            {
+              "name": "Stafford38.Paper.Section5.definition_5_6",
+              "says": "the condition of the proofs ⇔ every W ∩ T*_y X is stable under ξ ↦ tξ, t ≠ 0"
+            }
+          ],
+          "note": "The printed form, with the fibres T*_y X of Definition 2.5, has no declaration of its own; it is written out in the statement of the theorem below. The proofs use the condition point by point: (y, ξ) ∈ W implies (y, tξ) ∈ W for t ≠ 0. Theorem 5.8 is stated with the latter."
+        },
+        {
+          "paper": "Subsection 5.2",
+          "notion": "Tangent space Θ_y",
+          "class": "alias",
+          "printed": [
+            "Stafford38.Paper.Section5.tangentSpaceAt"
+          ],
+          "working": [
+            "Stafford38.Geometry.AffineConormalSpan.zariskiTangentSpace"
+          ],
+          "bridges": [],
+          "note": "The tangent space of the proofs, taken at the point y = (q_i/q_0) with coordinates in a field L ⊇ K, for the equations with coefficients extended to L."
+        },
+        {
+          "paper": "Subsection 5.2",
+          "notion": "The map ρ and the cone 𝒞 = ρ⁻¹(Θ_y)",
+          "class": "direct",
+          "printed": [
+            "Stafford38.Paper.Section5.rho",
+            "Stafford38.Paper.Section5.tangentCone"
+          ],
+          "working": [],
+          "bridges": [],
+          "note": "As printed."
+        }
+      ]
+    },
+    {
+      "title": "Section 6: assembly and Corollary 6.3",
+      "rows": [
+        {
+          "paper": "Proposition 6.1, proof of Theorem 1.1",
+          "notion": "V(x₁) and W = V_K(Ann gr Q_K)",
+          "class": "alias",
+          "printed": [
+            "Stafford38.Paper.Section6.Vx₁",
+            "Stafford38.Paper.Section6.W"
+          ],
+          "working": [
+            "Stafford38.Paper.Section2.V",
+            "Stafford38.Paper.Section2.VK"
+          ],
+          "bridges": [],
+          "note": "Names for sets built with Definition 2.6; K is an algebraically closed field containing k."
+        },
+        {
+          "paper": "Corollary 6.3",
+          "notion": "Stably cyclic module",
+          "class": "direct",
+          "printed": [
+            "Stafford38.Paper.Section6.IsStablyGenerated",
+            "Stafford38Challenge.IsStablyCyclic"
+          ],
+          "working": [],
+          "bridges": [],
+          "note": "Stafford's condition for l ≥ m generators; stably cyclic is m = 1. The stand-alone statement of Corollary 6.3 writes out the same formula for m = 1."
+        }
+      ]
+    }
+  ],
+  "statements": [
+    {
+      "paper": "Theorem 2.11 (Gabber)",
+      "name": "Stafford38.Paper.Section2.theorem_2_11"
+    },
+    {
+      "paper": "Theorem 2.11, cyclic case used in Section 6",
+      "name": "Stafford38.Paper.Section2.theorem_2_11_cyclic"
+    },
+    {
+      "paper": "Theorem 2.12 (Nullstellensatz)",
+      "name": "Stafford38.Paper.Section2.theorem_2_12"
+    },
+    {
+      "paper": "Lemma 3.5",
+      "name": "Stafford38.Paper.Section3.lemma_3_5"
+    },
+    {
+      "paper": "Proposition 3.6",
+      "name": "Stafford38.Paper.Section3.proposition_3_6"
+    },
+    {
+      "paper": "Theorem 5.7(i) as printed",
+      "name": "Stafford38.Paper.Section5.theorem_5_7_i_printed"
+    },
+    {
+      "paper": "Theorem 5.7(i) for a prime ideal",
+      "name": "Stafford38.Paper.Section5.theorem_5_7_i"
+    },
+    {
+      "paper": "Theorem 5.7(ii) as printed",
+      "name": "Stafford38.Paper.Section5.theorem_5_7_ii_printed"
+    },
+    {
+      "paper": "Theorem 5.8",
+      "name": "Stafford38.Paper.Section5.theorem_5_8"
+    },
+    {
+      "paper": "Proposition 6.1",
+      "name": "Stafford38.Paper.Section6.proposition_6_1"
+    },
+    {
+      "paper": "Lemma 6.2",
+      "name": "Stafford38.Paper.Section6.lemma_6_2"
+    },
+    {
+      "paper": "Corollary 6.3",
+      "name": "Stafford38.Paper.corollary_6_3"
+    },
+    {
+      "paper": "Corollary 6.3, stable cyclicity",
+      "name": "Stafford38.Paper.corollary_6_3_stablyCyclic"
+    }
+  ],
+  "geometry": {
+    "core": [
+      {
+        "name": "Stafford38.Geometry.CoisotropicTranslation.differentialAt",
+        "paper": "df_y",
+        "says": "The differential of a polynomial f at a point y, as the vector of partial derivatives (∂_1 f(y), …, ∂_n f(y))."
+      },
+      {
+        "name": "Stafford38.Geometry.AffineConormalSpan.zariskiTangentSpace",
+        "paper": "T_y Y, Θ_y",
+        "says": "The tangent space of V(I) at y: the vectors killed by df_y for every f ∈ I."
+      },
+      {
+        "name": "Stafford38.Geometry.AffineConormalSpan.affineConormalSpace",
+        "paper": "N*_y Y (Definition 5.4(c))",
+        "says": "The conormal space: the covectors vanishing on the tangent space. Equal to the span of the df_y."
+      },
+      {
+        "name": "Stafford38.Geometry.SmoothAffineConormal.SmoothAffinePoint",
+        "paper": "y ∈ Y_sm (Definition 5.4(b))",
+        "says": "y is a point of V(I) at which K[x]/I is smooth over K in Mathlib's sense."
+      },
+      {
+        "name": "Stafford38.Geometry.ProjectiveConormalDirections.smoothConormalFibreProjection",
+        "paper": "N(Y) (Definition 5.4(d))",
+        "says": "All covectors ξ that are conormal to Y at some smooth point. The name refers to the conormal variety {(y, ξ)} ⊆ T*X projected to the fibre coordinate ξ."
+      },
+      {
+        "name": "Stafford38.Geometry.ProjectiveConormalDirections.projectiveHomogeneousClosure",
+        "paper": "Zariski closure in ℙ((K^n)*) (Definition 5.5)",
+        "says": "The points of projective space at which every homogeneous polynomial vanishing on the given set vanishes."
+      },
+      {
+        "name": "Stafford38.Geometry.FibreConicalVanishingIdeal.IsFibreConical",
+        "paper": "fibre-conical (Definition 5.6)",
+        "says": "W ⊆ T*X is stable under (y, ξ) ↦ (y, tξ) for every t ≠ 0."
+      },
+      {
+        "name": "Stafford38.Geometry.CoisotropicTranslation.fibreLinePolynomial",
+        "paper": "φ(t) = g(y, t·df_y) (proof of Theorem 5.8)",
+        "says": "A polynomial g on T*X restricted to the line t ↦ (y, tξ) in the fibre over y, as a polynomial in t."
+      },
+      {
+        "name": "Stafford38.Paper.Section2.fibre",
+        "paper": "T*_y X (Definition 2.5)",
+        "says": "The fibre π⁻¹(y) of the cotangent bundle over a point y, a copy of (K^n)*."
+      }
+    ],
+    "mathlib": [
+      {
+        "name": "PrimeSpectrum",
+        "says": "Spec; T*X = Spec k[x, ξ] and the points 𝔭 of Spec K[x]"
+      },
+      {
+        "name": "MvPolynomial.zeroLocus",
+        "says": "classical zero sets V_K(J) ⊆ K^N"
+      },
+      {
+        "name": "MvPolynomial.vanishingIdeal",
+        "says": "vanishing ideals I(S)"
+      },
+      {
+        "name": "Algebra.smoothLocus",
+        "says": "the smooth locus of K[x]/𝔭"
+      },
+      {
+        "name": "KaehlerDifferential",
+        "says": "Ω of a ring or field extension, with its universal derivation"
+      },
+      {
+        "name": "Algebra.trdeg",
+        "says": "transcendence degree, dim Y = trdeg of the function field"
+      },
+      {
+        "name": "ringKrullDim",
+        "says": "Krull dimension of K[x]/𝔭"
+      },
+      {
+        "name": "ValuationSubring",
+        "says": "valuation rings of the function field"
+      },
+      {
+        "name": "IsDiscreteValuationRing",
+        "says": "the discrete valuation ring V of Lemma 5.10"
+      },
+      {
+        "name": "AdicCompletion",
+        "says": "the completion of V"
+      },
+      {
+        "name": "PowerSeries",
+        "says": "κ[[t]], the completed valuation ring"
+      },
+      {
+        "name": "LaurentSeries",
+        "says": "κ((t)), where the generic point is expanded"
+      },
+      {
+        "name": "Projectivization",
+        "says": "ℙ((K^n)*) for Dir(Y)"
+      }
+    ]
+  }
+}

@@ -37,6 +37,15 @@ computed from Lean's environment and contracted to the key declarations.
 Mathlib, AlgebraicAnalysis and the Lean proof of Gabber's theorem appear as cited
 inputs.
 
+**Definitions:** [definitions.html](definitions.html) lists, for every definition
+of the paper, its Lean form as printed, the definition the Lean proofs work
+with, and the theorems connecting the two. It marks which printed definitions
+are used directly and for which only an equivalence is proved, and it places
+the geometric definitions of Section 5 in Mathlib and the project's geometry
+modules. Which connecting theorems the proofs use is computed from Lean's
+environment. Edit `definitions.json` and run
+`python3 scripts/build-definitions.py --formal PATH`.
+
 **Every Lean identifier is linked to its declaration.** This applies in the
 proof comparison and in all bundled source pages. The links come from Lean's
 own reference data (`.ilean`) of the built formal checkout, stored in
