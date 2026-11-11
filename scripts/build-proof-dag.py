@@ -669,7 +669,7 @@ def page():
 <style>{STYLE}</style>
 </head><body>
 <main>
-<p class="mute"><a href="index.html">← Proof comparison</a> · <a href="lean-dag.html">Lean proof graph</a></p>
+<p class="mute"><a href="index.html">← Proof comparison</a> · <a href="lean-dag.html">Lean proof graph</a> · <a href="definitions.html">Definitions</a></p>
 <h1>Proof graph</h1>
 <p>Dependency graphs of the printed proofs in the October 28 manuscript
 (<code>human_readable_main.tex</code>, paper commit {manifest()['sources']['paper']['commit'][:7]}).

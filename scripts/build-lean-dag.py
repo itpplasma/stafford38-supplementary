@@ -409,7 +409,7 @@ def page(data):
 <style>{paperdag.STYLE}</style>
 </head><body>
 <main>
-<p class="mute"><a href="index.html">← Proof comparison</a> · <a href="proof-dag.html">Paper proof graph</a></p>
+<p class="mute"><a href="index.html">← Proof comparison</a> · <a href="proof-dag.html">Paper proof graph</a> · <a href="definitions.html">Definitions</a></p>
 <h1>Lean proof graph</h1>
 <p>Building blocks of the Lean proof (formal commit {data['formal_commit'][:7]}) and how they combine.
 Every edge is computed from the constants Lean records in each declaration's type and proof

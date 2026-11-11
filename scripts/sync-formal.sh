@@ -283,11 +283,12 @@ regenerate() {
   python3 scripts/link-lean-references.py
   python3 scripts/build-lean-dag.py --formal "$formal"
   python3 scripts/build-proof-dag.py
+  python3 scripts/build-definitions.py --formal "$formal"
   rm -rf scripts/__pycache__
 }
 
-generated_paths=(README.md manifest.json paper-lean-map.json version.json index.html lean-dag.html proof-dag.html
-                 SHA256SUMS human_readable_main.pdf sources verification/lean-dag verification/lean-references)
+generated_paths=(README.md manifest.json paper-lean-map.json version.json index.html lean-dag.html proof-dag.html definitions.html
+                 SHA256SUMS human_readable_main.pdf sources verification/lean-dag verification/lean-references verification/definitions)
 
 commit_paths() {
   local message=$1
