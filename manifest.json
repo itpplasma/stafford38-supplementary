@@ -5,20 +5,22 @@
   "sources": {
     "paper": {
       "repo": "itpplasma/stafford38-paper",
-      "commit": "8e294b70d528a9ecd85cab86a10396aedd4dbe0c",
+      "commit": "8dc295387ef316bf2c186f25e91c5bead0a82f53",
       "file": "human_readable_main.tex",
       "origin_repo": "itpplasma/stafford38-paper",
-      "origin_commit": "8e294b70d528a9ecd85cab86a10396aedd4dbe0c",
-      "sha256": "159b20c7afbe680294cb88d5e224f3e04ff61e2a14601f480758a832d724612d",
+      "origin_commit": "8dc295387ef316bf2c186f25e91c5bead0a82f53",
+      "sha256": "8ac9bd4b85fcf5f712bcbd02d51c074569c7cdb49439c557305a93e8088e2c6f",
       "label": "Paper (November 11 version)",
       "local_source_base": "./sources/paper",
       "note": "November 11 version, preserved verbatim.",
       "snapshot": {
         "base": "sources/paper/raw",
         "files": {
-          "human_readable_main.tex": "159b20c7afbe680294cb88d5e224f3e04ff61e2a14601f480758a832d724612d",
-          "references.bib": "dd9ca2fb6ca2abae741af600c4ac1728dac2b4758a1cc564a30f9c6043df0d4f",
-          "ai_review.tex": "35e5d20a9b2a0ac9b1662b7fc4b9eb3b091c8756c423f4a24ae258b7f4c894ef"
+          "human_readable_main.tex": "8ac9bd4b85fcf5f712bcbd02d51c074569c7cdb49439c557305a93e8088e2c6f",
+          "references.bib": "d8098b57d42c6ff63b1c01ebc0057218d31f7b4508d2488df95ac0507e1aeda8",
+          "ai_review.tex": "35e5d20a9b2a0ac9b1662b7fc4b9eb3b091c8756c423f4a24ae258b7f4c894ef",
+          "sn-jnl.cls": "36d0c3273a59d48dc6a9c7b080dfa1ec50dc10229d8751568d1f2e490ffa5ecc",
+          "sn-mathphys-num.bst": "b3a7c7fbcc1e7f9619de634fcea2f5bb7a245818a5942bc576e40ea001633332"
         }
       }
     },
@@ -65,8 +67,8 @@
   },
   "manuscript_pdfs": {
     "paper": {
-      "sha256": "3d892f688d8ac6b5d37e5be1b9f29516b5dbcf48948b917ff59f6a9e3aa5634b",
-      "source_commit": "8e294b70d528a9ecd85cab86a10396aedd4dbe0c",
+      "sha256": "b8ceeaced679d507a81c27bd38b0749bd61c455f25048e26115a846473de76c3",
+      "source_commit": "8dc295387ef316bf2c186f25e91c5bead0a82f53",
       "build": "latexmk -pdf -interaction=nonstopmode -halt-on-error human_readable_main.tex",
       "isolated_checkout": true,
       "unresolved_references": []
@@ -107,14 +109,14 @@
     "LICENSES/generator-Apache-2.0.txt": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
     "LICENSES/manuscript-CC-BY-4.0.txt": "98b6fde2693d4044dce4a071640e90bd8d250dd789d9033dbd5b77c79f389de4",
     "NOTICE": "203492e6a24996e31d976b06a52a479c08af9904501940296d4a422e95834851",
-    "README.md": "985b7d3a4c1140c8960182759d02d03de733d1f4b102a8588753688513c26486",
+    "README.md": "6d224a8e43bd6fa2822a167f78812be611961c8794a723373bb20a9bd4f05c99",
     "definitions.html": "2a5b90cc358f650e931453aa588bf6b972afab1f63317e8485cceda767e1e877",
     "definitions.json": "2436049f4237ad02f0417e952e0ccf7079ab20bdfb268e3647e531b80b83041f",
-    "human_readable_main.pdf": "3d892f688d8ac6b5d37e5be1b9f29516b5dbcf48948b917ff59f6a9e3aa5634b",
-    "index.html": "dd69615bf72fa1072f578cf62796c186370ef583e60e89ae263dbcd4a09eb9f9",
+    "human_readable_main.pdf": "b8ceeaced679d507a81c27bd38b0749bd61c455f25048e26115a846473de76c3",
+    "index.html": "a9c395ccb4bc995d2b937d3ee71dc4accb5769d7554437965869419cf93ea155",
     "lean-dag.html": "7fb09eff83ebe9be4137198a75c2c0acc56ff12a2aa4a3e8c24d01bd1887d221",
-    "paper-lean-map.json": "4b53cea0b29240865fdfe4c30bc8e25bc6dc08dc066b67eac7cdefb66f100d87",
-    "proof-dag.html": "1d907ec07fa59c1ff812d2b26f5de8d002438f5d413b93e7a35d49ae0db68073",
+    "paper-lean-map.json": "b095aafa9415cba150836163a543591bcda8dd7b0635548844b82752b99662c8",
+    "proof-dag.html": "9852affda55897765b0da61e6ac9433be710b6dd2376bbb6207e21ee8dfaf3c5",
     "scripts/LeanDag.lean": "a0edde6881747ddd1735db0269f751a9526fad63f03af73a1333b40bced37b6d",
     "scripts/LeanDeclRanges.lean": "7904945e39b31911b082975a070d6bccaa98d05d8e2a54a40eae9ae05e79f8c0",
     "scripts/MapDeclarations.lean": "66b00735d91819fd6127baccfa46049e89428a0047042caec5bd1b4519f7be23",
@@ -132,7 +134,7 @@
     "scripts/update-manuscript-20261021.py": "f239877003fbe7041020a16e81940e437514d4533cb11d9f6aa66008c21c589e",
     "scripts/update-manuscript-20261028.py": "f4604b71a44364d7991ce0c970a8bf98905a16220a048d303b9b98220b8ce943",
     "scripts/update-manuscript-20261102.py": "f92bd57b94df79069b77d27ad88c7fe5a8adcd91b3415e3641497f0a31632c24",
-    "scripts/update-manuscript-20261111.py": "3ca1731e90970df4e0b2bde76dae67d6a73f487c27840c4d0474b8808cb70f8f",
+    "scripts/update-manuscript-20261111.py": "213f16ac1f8241ac9a436b1e3fd918f538e8cca3709f7ea2bf202c3922a9d7b2",
     "scripts/update-manuscript.py": "2c289a528265adedae0e1e0dba2c0f83cc0a8a40d578ca081514388efb6336b3",
     "sources/formal/AlternativeFixedSourceSolution.lean.html": "caa0920a0c8c955b796667534da2cfeacde9f7895920992fb59147f29cdfee5c",
     "sources/formal/AlternativeSolution.lean.html": "c47b9012b4cd9950bd5343b82eba3faf72201866a85df34649cabcec9323bb13",
@@ -680,10 +682,12 @@
     "sources/library/AlgebraicAnalysis/Ore/RightQuotient.lean.html": "f2d4b7d7c6488eafc7344c17c0b4e6ad0bb853a7d1dccf49a973d73432143130",
     "sources/library/AlgebraicAnalysis/Polynomial/DistinguishedVariable.lean.html": "c34dfd07b5860b669bc2a842299c12868a9ac16694b3032eb405aed0796674db",
     "sources/library/AlgebraicAnalysis/RingTheory/TwoGeneratorIdentity.lean.html": "98df9aa1389a7c73f5fc0cd510dc42133c6fadf6bb95c41c902602ffd58f73d7",
-    "sources/paper/human_readable_main.tex.html": "cd4242aa0e7cc921b7bc26e9a863bb37c3323a56969d6fe5038a42338cae7ff8",
+    "sources/paper/human_readable_main.tex.html": "8b13e771a96af07b1638435d54ffc7ba4c89948f739782ecd4b39584bbfb3f3d",
     "sources/paper/raw/ai_review.tex": "35e5d20a9b2a0ac9b1662b7fc4b9eb3b091c8756c423f4a24ae258b7f4c894ef",
-    "sources/paper/raw/human_readable_main.tex": "159b20c7afbe680294cb88d5e224f3e04ff61e2a14601f480758a832d724612d",
-    "sources/paper/raw/references.bib": "dd9ca2fb6ca2abae741af600c4ac1728dac2b4758a1cc564a30f9c6043df0d4f",
+    "sources/paper/raw/human_readable_main.tex": "8ac9bd4b85fcf5f712bcbd02d51c074569c7cdb49439c557305a93e8088e2c6f",
+    "sources/paper/raw/references.bib": "d8098b57d42c6ff63b1c01ebc0057218d31f7b4508d2488df95ac0507e1aeda8",
+    "sources/paper/raw/sn-jnl.cls": "36d0c3273a59d48dc6a9c7b080dfa1ec50dc10229d8751568d1f2e490ffa5ecc",
+    "sources/paper/raw/sn-mathphys-num.bst": "b3a7c7fbcc1e7f9619de634fcea2f5bb7a245818a5942bc576e40ea001633332",
     "verification/canonical-definitions/README.md": "878570fa551329b607652020b6ff10d990a79f3e7bbc829056e65eebfdd55544",
     "verification/canonical-definitions/formal.bundle": "b4fee468c1512e16874df65b2d2cbf25f86908d78ac82e97b3a95c39ac5c4eb1",
     "verification/canonical-definitions/formal.patch": "b06566b90e1932d3de9af3bdd62fd86d729c9375a845b83e564244481a465a46",
@@ -747,11 +751,11 @@
     "verification/manuscript-20261102/paper-build.log": "0a4df0e306bb50f047314c93c6a04eb88ddd156d4e1c895632ea16acbc825578",
     "verification/manuscript-20261102/reader-build.log": "5996f426b41572bcd9da3fc809f9e3e5d643a3cb9d20730b933911304190e78b",
     "verification/manuscript-20261102/verification.json": "adcadd3ebfcd8bb4d2fd5274dcc5611ce6acbc5cdf5872fe98b048a55ec22623",
-    "verification/manuscript-20261111/browser.json": "b2f15f261a19837a20969ae729a1ffed14c3615a3392c5bdd97d2278c490b319",
-    "verification/manuscript-20261111/migration.json": "1fd12b8456008e3246a2a29129906215ea0c151e9d0bff179c9a8e171aab2d5d",
-    "verification/manuscript-20261111/paper-build.log": "8aed0c60483006b6e82e342f8e0fddbb776ce62b66a226f16cc109775f17474f",
+    "verification/manuscript-20261111/browser.json": "6baa4186b8db76955f89304435a83a9a89598b9c8f2af99c560ad4ce3c93e29a",
+    "verification/manuscript-20261111/migration.json": "10723c34e9e448ec98f7e23c9f78e371c5df991d37dfd739a4cd30d07b2e4012",
+    "verification/manuscript-20261111/paper-build.log": "67fef7c52752577a4b573a5619c1dbcd46fba2be4023f8d00410d129e81389a6",
     "verification/manuscript-20261111/reader-build.log": "e89b81cbf910e31043c5806880e188e0f6719b7287d57b11ba153a92b73bdb68",
-    "verification/manuscript-20261111/verification.json": "e8aa41e6dc0678e81c654c7fe4c560b2655b77f2b6a8c369882614b6dc77f182",
+    "verification/manuscript-20261111/verification.json": "1c73a9c703a93dc463288b6548aaf4fd6862cee44033e572aa61bd24c23ba004",
     "verification/paper-route-20261103/README.md": "3c082105a58369dacf8ccfe0c3ef4a2cb1f170cf5c604d085aa753ea43c03e22",
     "verification/paper-route-20261103/browser.json": "8da22508b622db69b83fbe543b6d39a9d0bf7982e846dc742be4f3ca22d4b3f3",
     "verification/paper-route-20261103/formal-verify.log": "ae92e2984e33539510de2ae46e46b7704deaf01babbfffee3f1a53c71c2fa372",
@@ -766,7 +770,7 @@
     "verification/section5-proof-20261102/paper-build.log": "b36264e34ec591ed789a70bd5c8ceaea589969bf9b740b97da3384037f6fb9cf",
     "verification/section5-proof-20261102/reader-build.log": "4612839405b40e7eb74aeaefd3387ac959e6010f37cb6a4a2ab64774cd05659b",
     "verification/section5-proof-20261102/verification.json": "23b4035270f035312587533da9a522c412bcb9dfdd51555798d26364c1200919",
-    "version.json": "8bad414814c82a3b495a65510fdd5ad72785cf66379a713edcb888283d5b53ba"
+    "version.json": "8c8a828f972b52dc31d0c33dd1a03c85554e26c0ee82cdb5df6500782689eb6d"
   },
   "historical_release": {
     "version": "0.2.2",
@@ -850,7 +854,7 @@
     "browser": {
       "status": "passed",
       "cards": 69,
-      "paper": "8e294b70d528a9ecd85cab86a10396aedd4dbe0c",
+      "paper": "8dc295387ef316bf2c186f25e91c5bead0a82f53",
       "source_links": 1897,
       "definition_links": "all targets present",
       "canonical_weyl_definitions": 1,

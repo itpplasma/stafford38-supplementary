@@ -3,7 +3,8 @@
 ## [Open the proof comparison →](https://itpplasma.github.io/stafford38-supplementary/)
 
 Read 69 paper passages beside the pinned Lean results. The reader uses the
-November 11 version of `human_readable_main.tex`, commit `8e294b7`.
+November 11 version of `human_readable_main.tex`, commit `8dc2953`, set in the
+Springer Nature template for Inventiones mathematicae.
 All 46 theorem-like statements are represented. Paper source links
 open the bundled, unmodified manuscript; search, annotations and review notes
 work offline.
