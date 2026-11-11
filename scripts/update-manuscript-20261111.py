@@ -21,6 +21,7 @@ import importlib.util
 import json
 import re
 import shutil
+import subprocess
 
 ROOT = Path(__file__).resolve().parent.parent
 RECEIPT = ROOT / 'verification/manuscript-20261111'
@@ -29,7 +30,34 @@ UPDATED = '2026-11-11'
 _spec = importlib.util.spec_from_file_location('previous', ROOT / 'scripts/update-manuscript-20261102.py')
 previous = importlib.util.module_from_spec(_spec)
 _spec.loader.exec_module(previous)
-git, active_tex, card_ranges = previous.git, previous.active_tex, previous.card_ranges
+git, active_tex = previous.git, previous.active_tex
+
+
+def template_anchors(raw):
+    """The Springer Nature template's front and back matter, rewritten to the amsart anchors of the range rules.
+
+    Only the copy used for computing line ranges is rewritten; every replacement stays on its line.
+    """
+    start = raw.find('\\abstract{')
+    if start >= 0:
+        depth, end = 0, start + len('\\abstract')
+        for end in range(end, len(raw)):
+            depth += {'{': 1, '}': -1}.get(raw[end], 0)
+            if depth == 0:
+                break
+        raw = raw[:start] + '\\begin{abstract}' + raw[start + len('\\abstract{'):end] + '\\end{abstract}' + raw[end + 1:]
+    return (raw.replace('\\backmatter', '\\bibliographystyle{}')
+               .replace('\\begin{appendices}', '\\begin{appendix}')
+               .replace('\\end{appendices}', '\\end{appendix}'))
+
+
+def card_ranges(raw, items):
+    result = previous.card_ranges(template_anchors(raw), items)
+    if '\\abstract{%' in raw:
+        # The template abstract opens and closes on lines of their own; the card shows only its text.
+        first, last = result[0]['abstract']
+        result[0]['abstract'] = [first + 1, last - 1]
+    return result
 
 PINNED = 'the Lean sources are pinned to formal commit 1029fdb, which passes the repository verifier'
 RESOLVED = {
@@ -112,6 +140,10 @@ def main():
     for identifier, (old_text, new_text) in TEXTS.items():
         item = by_id[identifier]
         if item['correspondence'].count(old_text) != 1:
+            if old_text and new_text and new_text in item['correspondence']:
+                continue
+            if not new_text and old_text not in item['correspondence']:
+                continue
             raise ValueError(f'Card text of {identifier} changed; update TEXTS')
         item['correspondence'] = item['correspondence'].replace(old_text, new_text)
         item['comparison_updated_on'] = UPDATED
@@ -122,10 +154,10 @@ def main():
     snapshot_files = {}
     snapshot_base = ROOT / 'sources/paper/raw'
     snapshot_base.mkdir(parents=True, exist_ok=True)
-    for file in ['human_readable_main.tex', 'references.bib', 'ai_review.tex']:
-        content = git(paper, 'show', f'{commit}:{file}')
-        (snapshot_base / file).write_text(content)
-        snapshot_files[file] = hashlib.sha256(content.encode()).hexdigest()
+    for file in ['human_readable_main.tex', 'references.bib', 'ai_review.tex', 'sn-jnl.cls', 'sn-mathphys-num.bst']:
+        content = subprocess.check_output(['git', '-C', str(paper), 'show', f'{commit}:{file}'])
+        (snapshot_base / file).write_bytes(content)
+        snapshot_files[file] = hashlib.sha256(content).hexdigest()
     source['snapshot'] = dict(base='sources/paper/raw', files=snapshot_files)
     open_findings = sorted(i['id'] for item in items for i in item['issues'] if i['id'].startswith('MS'))
     mapping['version'] = VERSION
