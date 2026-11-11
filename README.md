@@ -21,7 +21,7 @@ names the declaration of its statement in `Stafford38.Paper`. See the
 The Lean sources are pinned to formal commit
 1029fdb, which passes the repository verifier
 ([log](verification/formal-1029fdb-20261104/formal-verify.log)).
-This review update has no new journal release or Zenodo DOI.
+This version is release v0.3.0.
 
 **Offline:** download this repository, unzip it, and open **index.html**.
 Paper and project source pages are bundled. External library links require
@@ -60,7 +60,7 @@ the links. Regenerating the data needs a built checkout of the pinned formal
 commit: `python3 scripts/extract-lean-references.py --formal PATH --global GLOBAL_PATH` and
 `python3 scripts/build-lean-dag.py --formal PATH`.
 
-[Updated paper PDF](human_readable_main.pdf) · [Formal proof v1.3.1](https://doi.org/10.5281/zenodo.23127367)
+[Updated paper PDF](human_readable_main.pdf) · [Formal proof v1.4.0](https://doi.org/10.5281/zenodo.24140371)
 
 Exact sources, licenses and review scope are in [manifest.json](manifest.json).
 Rebuild the HTML with `python3 scripts/rebuild.py` (Git, Python, Node.js and npm
