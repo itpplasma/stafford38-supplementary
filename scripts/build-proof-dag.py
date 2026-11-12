@@ -671,7 +671,7 @@ def page():
 <main>
 <p class="mute"><a href="index.html">← Proof comparison</a> · <a href="lean-dag.html">Lean proof graph</a> · <a href="definitions.html">Definitions</a></p>
 <h1>Proof graph</h1>
-<p>Dependency graphs of the printed proofs in the October 28 manuscript
+<p>Dependency graphs of the printed proofs in the manuscript
 (<code>human_readable_main.tex</code>, paper commit {manifest()['sources']['paper']['commit'][:7]}).
 Arrows run from premise to consequence. Results the paper cites,
 and standard facts it uses without a citation, are drawn as axioms together with their source.
@@ -680,7 +680,7 @@ Click a node to jump to its proof graph or source.</p>
 <h2 id="overall">From the axioms to Theorem 1.1</h2>
 <p>Roots are the three Lean base axioms and the external inputs. The three axioms sit under the
 logic of every step of the paper. The Lean development proves Theorem 1.1 from these
-three axioms alone; its route differs in places from the printed proof graphed here
+three axioms alone and follows the printed proof statement by statement
 (see the <a href="lean-dag.html">Lean proof graph</a>).</p>
 <div class="fig bleed">{svg(overall_dot(), shrink=False)}</div>
 <h2 id="proofs">One graph per proof</h2>

@@ -2,8 +2,8 @@ cff-version: 1.2.0
 message: "Cite this proof comparison using its Zenodo record."
 title: "Stafford’s Conjecture 3.8: paper and Lean proof comparison"
 type: dataset
-version: 0.3.0
-date-released: "2026-11-11"
+version: 0.3.1
+date-released: "2026-11-12"
 license: CC-BY-4.0
 url: "https://itpplasma.github.io/stafford38-supplementary/"
 authors:

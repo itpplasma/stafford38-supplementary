@@ -1,7 +1,7 @@
 {
-  "version": "0.3.0",
-  "paper": "8dc295387ef316bf2c186f25e91c5bead0a82f53",
+  "version": "0.3.1",
+  "paper": "c854d9e20fa528cd3fff013ea47d5f44a66c9526",
   "formal": "1029fdb382eee06e7b59bcf32801f40931e2079a",
-  "generator": "09c5a08cd6fe4209",
-  "release_version": "0.3.0"
+  "generator": "caa1be95beb2812b",
+  "release_version": "0.3.1"
 }

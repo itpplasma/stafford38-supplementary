@@ -1,25 +1,25 @@
 {
   "schema": 2,
-  "version": "0.3.0",
+  "version": "0.3.1",
   "reader": "https://itpplasma.github.io/stafford38-supplementary/",
   "sources": {
     "paper": {
       "repo": "itpplasma/stafford38-paper",
-      "commit": "8dc295387ef316bf2c186f25e91c5bead0a82f53",
+      "commit": "c854d9e20fa528cd3fff013ea47d5f44a66c9526",
       "file": "human_readable_main.tex",
       "origin_repo": "itpplasma/stafford38-paper",
-      "origin_commit": "8dc295387ef316bf2c186f25e91c5bead0a82f53",
-      "sha256": "8ac9bd4b85fcf5f712bcbd02d51c074569c7cdb49439c557305a93e8088e2c6f",
-      "label": "Paper (November 11 version)",
+      "origin_commit": "c854d9e20fa528cd3fff013ea47d5f44a66c9526",
+      "sha256": "d66f0aae0905c0f3158c4a41c7355047ce076915f09a225636a1a5af3dc09bfe",
+      "label": "Paper (November 12 version)",
       "local_source_base": "./sources/paper",
-      "note": "November 11 version, preserved verbatim.",
+      "note": "November 12 version, preserved verbatim.",
       "snapshot": {
         "base": "sources/paper/raw",
         "files": {
-          "human_readable_main.tex": "8ac9bd4b85fcf5f712bcbd02d51c074569c7cdb49439c557305a93e8088e2c6f",
-          "references.bib": "d8098b57d42c6ff63b1c01ebc0057218d31f7b4508d2488df95ac0507e1aeda8",
-          "ai_review.tex": "35e5d20a9b2a0ac9b1662b7fc4b9eb3b091c8756c423f4a24ae258b7f4c894ef",
-          "sn-jnl.cls": "36d0c3273a59d48dc6a9c7b080dfa1ec50dc10229d8751568d1f2e490ffa5ecc",
+          "human_readable_main.tex": "d66f0aae0905c0f3158c4a41c7355047ce076915f09a225636a1a5af3dc09bfe",
+          "references.bib": "6460312c2fa98586c4ce3298f64a154d3db8f9e0db6ebc3408d0e16099b6da09",
+          "ai_review.tex": "22072207008bd71f6a328f4f0126f8b9f9f8f5d509126b17a622d220b059c1fb",
+          "sn-jnl.cls": "afdd709e43a76c1452c8696429d428b1c35a9339de050c7ca8a9b6f32c180556",
           "sn-mathphys-num.bst": "b3a7c7fbcc1e7f9619de634fcea2f5bb7a245818a5942bc576e40ea001633332"
         }
       }
@@ -60,15 +60,15 @@
   },
   "generator": {
     "repo": "itpplasma/paper-lean-audit",
-    "commit": "7c0b67c9c29f68be6af7e7db9273b18e4893e149",
-    "version": "manuscript-20261021",
+    "commit": "fc85d047ddee885c8f2adf1eb4e376cbac65b689",
+    "version": "manuscript-20261112",
     "base_commit": "065db3e1fbc9001071422e9c66db36c0ef7da394",
-    "bundle": "verification/manuscript-20261021/generator.bundle"
+    "bundle": "verification/manuscript-20261112/generator.bundle"
   },
   "manuscript_pdfs": {
     "paper": {
-      "sha256": "b8ceeaced679d507a81c27bd38b0749bd61c455f25048e26115a846473de76c3",
-      "source_commit": "8dc295387ef316bf2c186f25e91c5bead0a82f53",
+      "sha256": "958afbb25fc6badac15c58afd19b668c20a8ff5a95e3f810346ff86b611f19b8",
+      "source_commit": "c854d9e20fa528cd3fff013ea47d5f44a66c9526",
       "build": "latexmk -pdf -interaction=nonstopmode -halt-on-error human_readable_main.tex",
       "isolated_checkout": true,
       "unresolved_references": []
@@ -77,19 +77,19 @@
   "review": {
     "claims": 69,
     "statement_relations": {
-      "partial": 3,
-      "exact": 38,
+      "exact": 41,
       "equivalent": 13,
       "n/a": 9,
-      "lean-stronger": 6
+      "partial": 1,
+      "lean-stronger": 5
     },
     "proof_routes": {
       "n/a": 28,
-      "same": 33,
+      "same": 30,
       "similar": 1,
-      "lean-only": 7
+      "lean-only": 10
     },
-    "scope": "The November 11 manuscript. Lean sources are pinned to formal commit 1029fdb, which states every numbered statement of Sections 2–6 in Stafford38.Paper; it passes the repository verifier. The Lean references of the manuscript name these declarations at the same commit.",
+    "scope": "The November 12 manuscript. Lean sources are pinned to formal commit 1029fdb (release v1.4.0), which states every numbered statement of Sections 2–6 in Stafford38.Paper; it passes the repository verifier. The Lean references of the manuscript name these declarations at the same commit.",
     "johanna": "pending",
     "max": "pending"
   },
@@ -103,26 +103,26 @@
     ".github/workflows/pages.yml": "c59be78c49fed449d1c9fd31ffd6dda853c539212b60156476d19002df4554d7",
     ".github/workflows/repo-hygiene.yml": "260383f8f71b5027ddb74ad7009fbd0ee098c2471d567f5b0a949c3b83c3e857",
     ".repo-hygiene-allow": "bcd64eb7a3b2bce5011593e7d9f4111d318a58499fbec2fa763e56a3e049958d",
-    ".zenodo.json": "e55a7a52f05cd19f50e8c5c576c648c36234c2ac753aa0ede59225c88f0b04e9",
-    "CITATION.cff": "3d1e3798277e4c26449967c7d0cb452e30a6ca29165b8e165b2b5583d99bd1d1",
+    ".zenodo.json": "007889036d7faba084818dff71aa6b0801fe1e1888e2bcb04bc17aa8f6f145de",
+    "CITATION.cff": "b73ad51be51f22f72c5248ddef980ac952e1da7a4c66bedb685aa5f435b8e595",
     "LICENSES/KaTeX-MIT.txt": "766ccc1f306c885aa45542a9846bbd0a505b27a0374f146778171c2254ce18e3",
     "LICENSES/generator-Apache-2.0.txt": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
     "LICENSES/manuscript-CC-BY-4.0.txt": "98b6fde2693d4044dce4a071640e90bd8d250dd789d9033dbd5b77c79f389de4",
     "NOTICE": "203492e6a24996e31d976b06a52a479c08af9904501940296d4a422e95834851",
-    "README.md": "1407655988b3bcbcd318d5aff051acc66c8cefc7c7c7fdfdaf07fea1f3be99bc",
-    "definitions.html": "2a5b90cc358f650e931453aa588bf6b972afab1f63317e8485cceda767e1e877",
+    "README.md": "b8f7dbb973b2bf7de03fdab4bdbb359fedb87818978baf95de79506f90bcfd7f",
+    "definitions.html": "913755af6a5bfbfb6ebf5acea10cebe155d3723ef81920c46b52e32621c74264",
     "definitions.json": "2436049f4237ad02f0417e952e0ccf7079ab20bdfb268e3647e531b80b83041f",
-    "human_readable_main.pdf": "b8ceeaced679d507a81c27bd38b0749bd61c455f25048e26115a846473de76c3",
-    "index.html": "a9c395ccb4bc995d2b937d3ee71dc4accb5769d7554437965869419cf93ea155",
+    "human_readable_main.pdf": "958afbb25fc6badac15c58afd19b668c20a8ff5a95e3f810346ff86b611f19b8",
+    "index.html": "54ce0bc83410e969e2624b1968dd6432b80c5e30b5628177a8e7aa0d7be6ab57",
     "lean-dag.html": "7fb09eff83ebe9be4137198a75c2c0acc56ff12a2aa4a3e8c24d01bd1887d221",
-    "paper-lean-map.json": "b095aafa9415cba150836163a543591bcda8dd7b0635548844b82752b99662c8",
-    "proof-dag.html": "9852affda55897765b0da61e6ac9433be710b6dd2376bbb6207e21ee8dfaf3c5",
+    "paper-lean-map.json": "405035a61d4124e4c1762284e004d34d3cbaa919dbf510c2ee7d805fe8a12f65",
+    "proof-dag.html": "73ca14fffe27ea38f1a536e94e3519df65da96e176c88210bb9273f0e65f0dd2",
     "scripts/LeanDag.lean": "a0edde6881747ddd1735db0269f751a9526fad63f03af73a1333b40bced37b6d",
     "scripts/LeanDeclRanges.lean": "7904945e39b31911b082975a070d6bccaa98d05d8e2a54a40eae9ae05e79f8c0",
     "scripts/MapDeclarations.lean": "66b00735d91819fd6127baccfa46049e89428a0047042caec5bd1b4519f7be23",
-    "scripts/build-definitions.py": "7fbefb14ebd621e718f3fb999e2677856f399fbb8a55389f7cb8cb7bfc500545",
+    "scripts/build-definitions.py": "af84920c5e85ec306a395bb45fe0ad3c66a6f371cfa01600884e06807575510c",
     "scripts/build-lean-dag.py": "a3754fb0258183ccb3eb5bf8b0c5261eb3b4309e3c4e5e6af0bcef1a959296bc",
-    "scripts/build-proof-dag.py": "f6cbffdfcbabd0608932f1086cefeaeb1979c32bf1fa22f88ad4dbcd68ec8961",
+    "scripts/build-proof-dag.py": "e7c01a44773246f6a4596c89fad548be3a29b0ff98d2ad1ad3ac776cef49ca61",
     "scripts/check-map.py": "80669ef2f2f01f61cc2081a9e00af40871e7d12770760713ae6660be297fdccc",
     "scripts/check-reader-cdp.mjs": "61101c5f4f54df357f0a9d89f166e5336662e168155291b09788b52a54a36ce6",
     "scripts/check-reader.mjs": "9248c6caf236d3ac1b0592bc650494c0fccc1ce91856ee9489424dfd005e6be0",
@@ -135,6 +135,7 @@
     "scripts/update-manuscript-20261028.py": "f4604b71a44364d7991ce0c970a8bf98905a16220a048d303b9b98220b8ce943",
     "scripts/update-manuscript-20261102.py": "f92bd57b94df79069b77d27ad88c7fe5a8adcd91b3415e3641497f0a31632c24",
     "scripts/update-manuscript-20261111.py": "213f16ac1f8241ac9a436b1e3fd918f538e8cca3709f7ea2bf202c3922a9d7b2",
+    "scripts/update-manuscript-20261112.py": "f88f67304c37043bf28f5d0d9f06ba44ef65c53d6263792d8a703b6f5c5604e6",
     "scripts/update-manuscript.py": "2c289a528265adedae0e1e0dba2c0f83cc0a8a40d578ca081514388efb6336b3",
     "sources/formal/AlternativeFixedSourceSolution.lean.html": "caa0920a0c8c955b796667534da2cfeacde9f7895920992fb59147f29cdfee5c",
     "sources/formal/AlternativeSolution.lean.html": "c47b9012b4cd9950bd5343b82eba3faf72201866a85df34649cabcec9323bb13",
@@ -682,11 +683,11 @@
     "sources/library/AlgebraicAnalysis/Ore/RightQuotient.lean.html": "f2d4b7d7c6488eafc7344c17c0b4e6ad0bb853a7d1dccf49a973d73432143130",
     "sources/library/AlgebraicAnalysis/Polynomial/DistinguishedVariable.lean.html": "c34dfd07b5860b669bc2a842299c12868a9ac16694b3032eb405aed0796674db",
     "sources/library/AlgebraicAnalysis/RingTheory/TwoGeneratorIdentity.lean.html": "98df9aa1389a7c73f5fc0cd510dc42133c6fadf6bb95c41c902602ffd58f73d7",
-    "sources/paper/human_readable_main.tex.html": "8b13e771a96af07b1638435d54ffc7ba4c89948f739782ecd4b39584bbfb3f3d",
-    "sources/paper/raw/ai_review.tex": "35e5d20a9b2a0ac9b1662b7fc4b9eb3b091c8756c423f4a24ae258b7f4c894ef",
-    "sources/paper/raw/human_readable_main.tex": "8ac9bd4b85fcf5f712bcbd02d51c074569c7cdb49439c557305a93e8088e2c6f",
-    "sources/paper/raw/references.bib": "d8098b57d42c6ff63b1c01ebc0057218d31f7b4508d2488df95ac0507e1aeda8",
-    "sources/paper/raw/sn-jnl.cls": "36d0c3273a59d48dc6a9c7b080dfa1ec50dc10229d8751568d1f2e490ffa5ecc",
+    "sources/paper/human_readable_main.tex.html": "54e0b1d3fe7edfe69fc0459f4399d511ba696f48334ef76728fb842789f30c87",
+    "sources/paper/raw/ai_review.tex": "22072207008bd71f6a328f4f0126f8b9f9f8f5d509126b17a622d220b059c1fb",
+    "sources/paper/raw/human_readable_main.tex": "d66f0aae0905c0f3158c4a41c7355047ce076915f09a225636a1a5af3dc09bfe",
+    "sources/paper/raw/references.bib": "6460312c2fa98586c4ce3298f64a154d3db8f9e0db6ebc3408d0e16099b6da09",
+    "sources/paper/raw/sn-jnl.cls": "afdd709e43a76c1452c8696429d428b1c35a9339de050c7ca8a9b6f32c180556",
     "sources/paper/raw/sn-mathphys-num.bst": "b3a7c7fbcc1e7f9619de634fcea2f5bb7a245818a5942bc576e40ea001633332",
     "verification/canonical-definitions/README.md": "878570fa551329b607652020b6ff10d990a79f3e7bbc829056e65eebfdd55544",
     "verification/canonical-definitions/formal.bundle": "b4fee468c1512e16874df65b2d2cbf25f86908d78ac82e97b3a95c39ac5c4eb1",
@@ -756,6 +757,13 @@
     "verification/manuscript-20261111/paper-build.log": "67fef7c52752577a4b573a5619c1dbcd46fba2be4023f8d00410d129e81389a6",
     "verification/manuscript-20261111/reader-build.log": "e89b81cbf910e31043c5806880e188e0f6719b7287d57b11ba153a92b73bdb68",
     "verification/manuscript-20261111/verification.json": "1c73a9c703a93dc463288b6548aaf4fd6862cee44033e572aa61bd24c23ba004",
+    "verification/manuscript-20261112/browser.json": "505ec97d8c7f1ca9fd9c06328685e949bf3aa9da8fd1f8938dc3690a4e4d493f",
+    "verification/manuscript-20261112/generator-tests.log": "a172d0bce7479049b56ea5cdaf3343cd68f2e05e2bc7ec16e74f3fb0c19c9e63",
+    "verification/manuscript-20261112/generator.bundle": "51187a105a581360dfc653b642424f13375ff3aed796e6fa8576cbc67b53f789",
+    "verification/manuscript-20261112/migration.json": "b8f0a734f7e85137f9a89114b8c36a30c53c0a3e50f72d33bb693277d1676502",
+    "verification/manuscript-20261112/paper-build.log": "bcc4b516853b9db5ee124cf8946fb74474900a32208d8308fce559a358362daa",
+    "verification/manuscript-20261112/reader-build.log": "55a496ff69d26c9e02e6fc8ef474fc9b2c6dfcd54b3cb16ed25a6bfd9bf0b5c3",
+    "verification/manuscript-20261112/verification.json": "f2682bae3a4091afe564fac7e68f7e0672130f9c70ad65adfb804eaf5ce9ff81",
     "verification/paper-route-20261103/README.md": "3c082105a58369dacf8ccfe0c3ef4a2cb1f170cf5c604d085aa753ea43c03e22",
     "verification/paper-route-20261103/browser.json": "8da22508b622db69b83fbe543b6d39a9d0bf7982e846dc742be4f3ca22d4b3f3",
     "verification/paper-route-20261103/formal-verify.log": "ae92e2984e33539510de2ae46e46b7704deaf01babbfffee3f1a53c71c2fa372",
@@ -770,7 +778,7 @@
     "verification/section5-proof-20261102/paper-build.log": "b36264e34ec591ed789a70bd5c8ceaea589969bf9b740b97da3384037f6fb9cf",
     "verification/section5-proof-20261102/reader-build.log": "4612839405b40e7eb74aeaefd3387ac959e6010f37cb6a4a2ab64774cd05659b",
     "verification/section5-proof-20261102/verification.json": "23b4035270f035312587533da9a522c412bcb9dfdd51555798d26364c1200919",
-    "version.json": "8c8a828f972b52dc31d0c33dd1a03c85554e26c0ee82cdb5df6500782689eb6d"
+    "version.json": "c2ca7677cb066029e174d867e025628338b461f77e43044b2e8a82506825028b"
   },
   "historical_release": {
     "version": "0.2.2",
@@ -835,27 +843,24 @@
   },
   "checks": {
     "status": "passed",
-    "receipt": "verification/manuscript-20261111/verification.json",
+    "receipt": "verification/manuscript-20261112/verification.json",
     "reader_build": {
       "status": "passed",
       "warnings": [],
       "scope": "Complete current source/reference and statement-coverage audit; warnings are unresolved references already present in the paper."
     },
     "generator_tests": {
-      "passed": 83,
+      "passed": 84,
       "failed": 0,
       "skipped": 1,
       "scope": "Generator regression suite including its browser tests",
-      "skip_reason": "Historical sibling-paper fixture unavailable; current manuscript passes the actual pinned build.",
-      "rerun": false,
-      "log": "verification/manuscript-20261021/generator-tests.log",
-      "reason": "Generator unchanged at its pinned commit; only the manuscript snapshot and card texts changed."
+      "skip_reason": "Historical sibling-paper fixture unavailable; current manuscript passes the actual pinned build."
     },
     "browser": {
       "status": "passed",
       "cards": 69,
-      "paper": "8dc295387ef316bf2c186f25e91c5bead0a82f53",
-      "source_links": 1897,
+      "paper": "c854d9e20fa528cd3fff013ea47d5f44a66c9526",
+      "source_links": 1884,
       "definition_links": "all targets present",
       "canonical_weyl_definitions": 1,
       "ownership_labels": true,

@@ -3,7 +3,7 @@
 ## [Open the proof comparison →](https://itpplasma.github.io/stafford38-supplementary/)
 
 Read 69 paper passages beside the pinned Lean results. The reader uses the
-November 11 version of `human_readable_main.tex`, commit `8dc2953`, set in the
+November 12 version of `human_readable_main.tex`, commit `c854d9e`, set in the
 Springer Nature template for Inventiones mathematicae.
 All 46 theorem-like statements are represented. Paper source links
 open the bundled, unmodified manuscript; search, annotations and review notes
@@ -12,16 +12,16 @@ work offline.
 **Current manuscript review:** open [index.html](index.html). Every numbered
 statement of Sections 2–6 is mapped to its own Lean declaration, and each card
 lists the Lean steps of the printed proof in order and the results it cites.
-Where Lean still differs from the printed text, the card says how. Theorem 1.1
+The Lean proofs follow the printed proofs statement by statement. Theorem 1.1
 and Corollary 6.3 are also stated as printed in the Mathlib-only Palomar
 challenge. No review finding is open. Each Lean reference of the manuscript
 names the declaration of its statement in `Stafford38.Paper`. See the
-[manuscript records](verification/manuscript-20261111/verification.json) and the
+[manuscript records](verification/manuscript-20261112/verification.json) and the
 [paper-route update](verification/paper-route-20261103/README.md).
 The Lean sources are pinned to formal commit
 1029fdb, which passes the repository verifier
 ([log](verification/formal-1029fdb-20261104/formal-verify.log)).
-This version is release v0.3.0.
+This version is release v0.3.1.
 
 **Offline:** download this repository, unzip it, and open **index.html**.
 Paper and project source pages are bundled. External library links require
@@ -29,7 +29,8 @@ internet access. The [v0.2.2 release](https://github.com/itpplasma/stafford38-su
 and its [Zenodo archive](https://doi.org/10.5281/zenodo.23132562) preserve the
 earlier October 3 manuscript and retain their original citation metadata.
 
-**Proof graph:** [proof-dag.html](proof-dag.html) draws one dependency DAG per
+**Proof graph:** the reader opens with a map of the dependencies between the
+statements of the paper. [proof-dag.html](proof-dag.html) draws one dependency DAG per
 printed proof, with hypotheses entering and the statement exiting. An overall
 DAG runs from Lean's three base axioms to Theorem 1.1. Cited results and
 uncited standard facts appear as axioms with their sources. Regenerate it with
