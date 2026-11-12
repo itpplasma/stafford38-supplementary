@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "version": "0.3.1",
+  "version": "0.3.2",
   "title": "Stafford’s Conjecture 3.8",
   "subtitle": "November 12 manuscript · paper and Lean proof comparison",
   "sources": {
@@ -834,7 +834,7 @@
         177,
         207
       ],
-      "statement_relation": "equivalent",
+      "statement_relation": "exact",
       "route_relation": "lean-only",
       "correspondence": "IsFiltration, gr, filtrationDegree and symbol are the printed notions with filtrations indexed by ℕ: F_{-1} = 0 is lowerPiece F 0 = ⊥, and gr = ⊕_j F_j/F_{j-1} is the direct sum of k-modules. filtrationDegree is defined for every a (the least j with a ∈ F_j); the paper defines it for a ≠ 0. The Bernstein and order filtrations are spans of ordered PBW words of bounded weight (isFiltration_bernstein, isFiltration_order), and bernsteinDegree is the filtration degree for B_• (bernsteinDegree_eq: the degree of the Palomar statement). The cited identification gr A_n(k) = k[x, ξ] [Coutinho, Th. 7.3.1] is proved for both filtrations (grEquivSymbolRing), with σ_{i+j}(ab) = σ_i(a)σ_j(b), so gr A_n(k) is commutative.",
       "route": null,
@@ -928,7 +928,7 @@
         }
       ],
       "issues": [],
-      "comparison_updated_on": "2026-11-03"
+      "comparison_updated_on": "2026-11-12"
     },
     {
       "id": "def:good-filtration",
@@ -2741,9 +2741,9 @@
         587
       ],
       "label": "lem:euler",
-      "statement_relation": "lean-stronger",
+      "statement_relation": "exact",
       "route_relation": "same",
-      "correspondence": "lemma_4_1 states the lemma for x₁ and p = ∂₁ in A_n(k), with E = x₁p: for m ≥ 1, x₁^m p^m = Π_{i=0}^{m−1}(E − i) and p^m x₁^m = Π_{i=1}^{m}(E + i), the products taken in the listed order, and the factors in each product commute. Lean states it for every field k (the characteristic is not used); the paper's n is Lean's n + 1. It is lemma_4_1_of_weylPair, the same identities in any ring with elements x, p such that px = xp + 1, applied to p x₁ = x₁ p + 1 (convention_2_2_relations). The proof is the printed induction: step_4_1_factors_commute, then the induction steps step_4_1_falling_succ (x₁E = (E − 1)x₁, step_4_1_coordinate_shift) and step_4_1_rising_succ (pE = (E + 1)p, step_4_1_momentum_shift).",
+      "correspondence": "lemma_4_1 states the lemma for x₁ and p = ∂₁ in A_n(k), with E = x₁p: for m ≥ 1, x₁^m p^m = Π_{i=0}^{m−1}(E − i) and p^m x₁^m = Π_{i=1}^{m}(E + i), the products taken in the listed order, and the factors in each product commute. the paper's n is Lean's n + 1. It is lemma_4_1_of_weylPair, the same identities in any ring with elements x, p such that px = xp + 1, applied to p x₁ = x₁ p + 1 (convention_2_2_relations). The proof is the printed induction: step_4_1_factors_commute, then the induction steps step_4_1_falling_succ (x₁E = (E − 1)x₁, step_4_1_coordinate_shift) and step_4_1_rising_succ (pE = (E + 1)p, step_4_1_momentum_shift).",
       "route": "lemma_4_1 → lemma_4_1_of_weylPair (convention_2_2_relations) → step_4_1_factors_commute → step_4_1_falling_succ (step_4_1_coordinate_shift) → step_4_1_rising_succ (step_4_1_momentum_shift).",
       "lean": [
         {
@@ -2829,7 +2829,7 @@
         }
       ],
       "issues": [],
-      "comparison_updated_on": "2026-11-03"
+      "comparison_updated_on": "2026-11-12"
     },
     {
       "id": "lem:euler-residue",
@@ -2843,9 +2843,9 @@
         612
       ],
       "label": "lem:euler-residue",
-      "statement_relation": "lean-stronger",
+      "statement_relation": "exact",
       "route_relation": "same",
-      "correspondence": "lemma_4_2 states the lemma for d̃ in the form (3.1) (Section3.IsMonicNormalForm) and 𝓘 = d̃A_n + x₁^N d̃A_n (Section3.idealI, Equation (3.2)), over a field k of characteristic zero: there is u₀ ∈ A_{≥0} with 1 + u₀x₁ ∈ 𝓘. Lean does not need N ≥ 1 (for N = 0, (3.1) is d̃ = 1). The proof uses (3.1) through its consequence that d̃ ∈ B_N has coefficient 1 at ∂₁^N (Section3.isPBWMonicAt_of_isMonicNormalForm). Lemma 4.1 is cited for m = N. The proof follows the three paragraphs: step_4_2_bezout (R_± coprime in ℚ[E], step_4_2_coprime; R_± are the products of Lemma 4.1, step_4_2_eval_products), step_4_2_residue (1 + w ∈ 𝓘) and step_4_2_positive (every term of w has positive Euler degree, so w = u₀x₁), assembled in lemma_4_2_of_positive. The third paragraph counts Euler degrees as printed: each PBW term b x₁^a p^j of Σ = d̃ − p^N has j < N, because d̃ ∈ B_N has coefficient 1 at ∂₁^N (WeylEulerRemainder.presentedRemainder_outer_support_lt), so after multiplication by x₁^N on either side it has Euler degree a + N − j ≥ N − j > 0; hence Σx₁^N and x₁^NΣ are sums of elements of Euler degree ≥ 1 (step_4_2_presented_remainder); u(E) and v(E) have Euler degree 0 (step_4_2_eulerPolynomial_degree_zero); and an element of positive Euler degree lies in A_{≥0}x₁ (step_positive_mem_nonnegative_mul_coordinate, from the paragraph before Lemma 4.1).",
+      "correspondence": "lemma_4_2 states the lemma for d̃ in the form (3.1) (Section3.IsMonicNormalForm) and 𝓘 = d̃A_n + x₁^N d̃A_n (Section3.idealI, Equation (3.2)), over a field k of characteristic zero: there is u₀ ∈ A_{≥0} with 1 + u₀x₁ ∈ 𝓘. The proof uses (3.1) through its consequence that d̃ ∈ B_N has coefficient 1 at ∂₁^N (Section3.isPBWMonicAt_of_isMonicNormalForm). Lemma 4.1 is cited for m = N. The proof follows the three paragraphs: step_4_2_bezout (R_± coprime in ℚ[E], step_4_2_coprime; R_± are the products of Lemma 4.1, step_4_2_eval_products), step_4_2_residue (1 + w ∈ 𝓘) and step_4_2_positive (every term of w has positive Euler degree, so w = u₀x₁), assembled in lemma_4_2_of_positive. The third paragraph counts Euler degrees as printed: each PBW term b x₁^a p^j of Σ = d̃ − p^N has j < N, because d̃ ∈ B_N has coefficient 1 at ∂₁^N (WeylEulerRemainder.presentedRemainder_outer_support_lt), so after multiplication by x₁^N on either side it has Euler degree a + N − j ≥ N − j > 0; hence Σx₁^N and x₁^NΣ are sums of elements of Euler degree ≥ 1 (step_4_2_presented_remainder); u(E) and v(E) have Euler degree 0 (step_4_2_eulerPolynomial_degree_zero); and an element of positive Euler degree lies in A_{≥0}x₁ (step_positive_mem_nonnegative_mul_coordinate, from the paragraph before Lemma 4.1).",
       "route": "lemma_4_2 → isPBWMonicAt_of_isMonicNormalForm → step_4_2_presented_remainder (presentedRemainder_outer_support_lt) → lemma_4_2_of_positive (lemma_4_1, step_4_2_bezout (step_4_2_coprime, step_4_2_eval_products) → step_4_2_residue → step_4_2_positive (step_4_2_eulerPolynomial_degree_zero, step_positive_mem_nonnegative_mul_coordinate)).",
       "lean": [
         {
@@ -3022,7 +3022,7 @@
         }
       ],
       "issues": [],
-      "comparison_updated_on": "2026-11-04"
+      "comparison_updated_on": "2026-11-12"
     },
     {
       "id": "prop:x-surjective",
@@ -3036,9 +3036,9 @@
         632
       ],
       "label": "prop:x-surjective",
-      "statement_relation": "lean-stronger",
+      "statement_relation": "exact",
       "route_relation": "same",
-      "correspondence": "proposition_4_3 states the proposition for d̃ in the form (3.1) (Section3.IsMonicNormalForm) over a field k of characteristic zero: right multiplication by x₁ on Q = A_n/𝓘 (Section3.idealI, Equation (3.2)) is surjective. Lean does not need N ≥ 1 (for N = 0, (3.1) is d̃ = 1). The proof follows the printed order: step_4_3_q_mem (q = −qu₀x₁, from Lemma 4.2), step_4_3_normal_surj (equation (normal-surj), using the normality of x₁), step_4_3_stable_momentum (stable under p), step_4_3_stable_coefficients (stable under C) and step_4_3_classSet_eq_univ (qA_{≥0} = Q), assembled in proposition_4_3_of. C = A_{n−1}[x₁] (transverseCoordinateAlgebra) lies in A_{≥0} (transverseCoordinateAlgebra_le), and C and p generate A_n (closure_transverseCoordinateAlgebra_momentum).",
+      "correspondence": "proposition_4_3 states the proposition for d̃ in the form (3.1) (Section3.IsMonicNormalForm) over a field k of characteristic zero: right multiplication by x₁ on Q = A_n/𝓘 (Section3.idealI, Equation (3.2)) is surjective. The proof follows the printed order: step_4_3_q_mem (q = −qu₀x₁, from Lemma 4.2), step_4_3_normal_surj (equation (normal-surj), using the normality of x₁), step_4_3_stable_momentum (stable under p), step_4_3_stable_coefficients (stable under C) and step_4_3_classSet_eq_univ (qA_{≥0} = Q), assembled in proposition_4_3_of. C = A_{n−1}[x₁] (transverseCoordinateAlgebra) lies in A_{≥0} (transverseCoordinateAlgebra_le), and C and p generate A_n (closure_transverseCoordinateAlgebra_momentum).",
       "route": "proposition_4_3 → lemma_4_2 → proposition_4_3_of (step_4_3_q_mem → step_4_3_normal_surj → step_4_3_stable_momentum → step_4_3_stable_coefficients → step_4_3_classSet_eq_univ).",
       "lean": [
         {
@@ -3166,7 +3166,7 @@
         }
       ],
       "issues": [],
-      "comparison_updated_on": "2026-11-04"
+      "comparison_updated_on": "2026-11-12"
     },
     {
       "id": "def:localization",
@@ -3454,9 +3454,9 @@
         770
       ],
       "label": "lem:tangential-finiteness",
-      "statement_relation": "lean-stronger",
+      "statement_relation": "exact",
       "route_relation": "same",
-      "correspondence": "lemma_4_8 states the lemma as printed: U and V are finite over T, Supp_T V ⊆ Supp_T U, and at every minimal prime 𝔮 of Supp_T U, U_𝔮 and V_𝔮 have finite length over T_𝔮. Lean states it for d̃ in the form (3.1) (Section3.IsMonicNormalForm). Lean does not need N ≥ 1 (for N = 0, (3.1) is d̃ = 1). The proof uses (3.1) through Proposition 3.6 (P annihilates M; deg_B d̃ = N by Section3.bernsteinDegree_eq_of_isMonicNormalForm) and through its consequence that d̃ ∈ B_N has coefficient 1 at ∂₁^N (Section3.isPBWMonicAt_of_isMonicNormalForm). The proof follows the paragraphs: step_4_8_finite (M finite over T[x₁] because P annihilates M and is monic in ξ₁), step_4_8_support_inclusion (Lemma 4.7 and Vasconcelos' theorem, step_4_8_vasconcelos), step_4_8_localized_isFiniteLength and step_4_8_finite_length.",
+      "correspondence": "lemma_4_8 states the lemma as printed: U and V are finite over T, Supp_T V ⊆ Supp_T U, and at every minimal prime 𝔮 of Supp_T U, U_𝔮 and V_𝔮 have finite length over T_𝔮. Lean states it for d̃ in the form (3.1) (Section3.IsMonicNormalForm). The proof uses (3.1) through Proposition 3.6 (P annihilates M; deg_B d̃ = N by Section3.bernsteinDegree_eq_of_isMonicNormalForm) and through its consequence that d̃ ∈ B_N has coefficient 1 at ∂₁^N (Section3.isPBWMonicAt_of_isMonicNormalForm). The proof follows the paragraphs: step_4_8_finite (M finite over T[x₁] because P annihilates M and is monic in ξ₁), step_4_8_support_inclusion (Lemma 4.7 and Vasconcelos' theorem, step_4_8_vasconcelos), step_4_8_localized_isFiniteLength and step_4_8_finite_length.",
       "route": "lemma_4_8 → step_4_8_finite (proposition_3_6) → step_4_8_support_inclusion (lemma_4_7, step_4_8_vasconcelos) → step_4_8_finite_length (step_4_8_localized_isFiniteLength).",
       "lean": [
         {
@@ -3578,7 +3578,7 @@
         }
       ],
       "issues": [],
-      "comparison_updated_on": "2026-11-03"
+      "comparison_updated_on": "2026-11-12"
     },
     {
       "id": "lem:page-inequality",
@@ -3592,9 +3592,9 @@
         875
       ],
       "label": "lem:page-inequality",
-      "statement_relation": "lean-stronger",
+      "statement_relation": "exact",
       "route_relation": "same",
-      "correspondence": "lemma_4_9 states the lemma as printed: ℓ_{T_𝔮}(U_𝔮) ≤ ℓ_{T_𝔮}(V_𝔮) for every minimal prime 𝔮 of Supp_T U. Lean states it for d̃ in the form (3.1) (Section3.IsMonicNormalForm). Lean does not need N ≥ 1 (for N = 0, (3.1) is d̃ = 1). The proof uses (3.1) through its consequence that d̃ ∈ B_N has coefficient 1 at ∂₁^N (Section3.isPBWMonicAt_of_isMonicNormalForm). The proof follows the printed one: the pages A_r, B_r with their T-structure and A_1 ≅ V, B_1 ≅ U (step_4_9_pages), finite length of later pages (step_4_9_pages_finite_length), surjectivity of f from Proposition 4.3 (step_4_9_f_surjective), exhaustion (B_R)_𝔮 = 0 (step_4_9_exhaustion), equation (additivity) (step_4_9_additivity) and the telescoping sum (step_4_9_telescope); Lemma 4.8 gives the finite lengths.",
+      "correspondence": "lemma_4_9 states the lemma as printed: ℓ_{T_𝔮}(U_𝔮) ≤ ℓ_{T_𝔮}(V_𝔮) for every minimal prime 𝔮 of Supp_T U. Lean states it for d̃ in the form (3.1) (Section3.IsMonicNormalForm). The proof uses (3.1) through its consequence that d̃ ∈ B_N has coefficient 1 at ∂₁^N (Section3.isPBWMonicAt_of_isMonicNormalForm). The proof follows the printed one: the pages A_r, B_r with their T-structure and A_1 ≅ V, B_1 ≅ U (step_4_9_pages), finite length of later pages (step_4_9_pages_finite_length), surjectivity of f from Proposition 4.3 (step_4_9_f_surjective), exhaustion (B_R)_𝔮 = 0 (step_4_9_exhaustion), equation (additivity) (step_4_9_additivity) and the telescoping sum (step_4_9_telescope); Lemma 4.8 gives the finite lengths.",
       "route": "lemma_4_9 → step_4_9_pages → lemma_4_8 → step_4_9_pages_finite_length → step_4_9_exhaustion (step_4_9_f_surjective, proposition_4_3) → step_4_9_telescope (step_4_9_additivity).",
       "lean": [
         {
@@ -3726,7 +3726,7 @@
         }
       ],
       "issues": [],
-      "comparison_updated_on": "2026-11-03"
+      "comparison_updated_on": "2026-11-12"
     },
     {
       "id": "lem:strict-support-inequality",
