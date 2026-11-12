@@ -52,7 +52,7 @@
 % (tools/paper_lean_audit) checks every such reference against the Lean
 % source, so a stale file, line or name fails its build.
 % Accepting: keep this file and the \formalref lines, or delete both.
-% Pins: stafford38-formal at the commit of \leanrepo below,
+% Pins: stafford38-formal v1.4.0 (Lean sources of commit 1029fdb, DOI 10.5281/zenodo.24140371),
 % AlgebraicAnalysis v0.3.3, global-stafford-formal v1.0.6, and
 % symplectic-stafford-formal main (unreleased).
 \newcommand{\leanrepo}{https://github.com/itpplasma/stafford38-formal/blob/1029fdb382eee06e7b59bcf32801f40931e2079a}
@@ -66,7 +66,7 @@
 % \leanglobal, \leanfiltered: declarations in the two generalizations of Section 1.2.
 \newcommand{\leanglobal}[3]{\href{\leanglobalrepo/#1\#L#2}{\nolinkurl{#3}}}
 \newcommand{\leanfiltered}[3]{\href{\leanfilteredrepo/#1\#L#2}{\nolinkurl{#3}}}
-% The human-readable paper displays only substantive mathematical qualifications.
+% The printed paper shows no Lean references; the links stay in the source and the supplement.
 % Full file paths and declaration names remain in source and in the supplement.
 \newif\ifshowleandetails
 \showleandetailsfalse
@@ -76,9 +76,4 @@
     \par\smallskip\noindent
     {\small\textsf{Lean}\if\relax\detokenize{#1}\relax\else\ (#1)\fi: #2}%
     \par\smallskip
-  \else
-    \if\relax\detokenize{#1}\relax\else
-      \par\smallskip\noindent{\small\textsf{Formal comparison:} #1}%
-      \par\smallskip
-    \fi
   \fi}

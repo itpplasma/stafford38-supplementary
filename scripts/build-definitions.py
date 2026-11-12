@@ -153,7 +153,7 @@ def page(spec_data, data):
         if 'cyclic' in used or 'stable' in used:
             return '<span class="use">used for Corollary 6.3</span>'
         if 'original' in used:
-            return '<span class="use">used only by the earlier proof of the universal statement</span>'
+            return '<span class="use">not used for Theorem 1.1 or Corollary 6.3; the earlier proof of the universal statement uses it</span>'
         return '<span class="use no">not used by a later proof</span>'
 
     def tag(cls):
