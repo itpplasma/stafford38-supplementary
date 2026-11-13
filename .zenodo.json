@@ -1,7 +1,7 @@
 {
   "title": "Stafford’s Conjecture 3.8: paper and Lean proof comparison",
   "upload_type": "dataset",
-  "description": "<p><a href=\"https://itpplasma.github.io/stafford38-supplementary/\">Open the paper and Lean proof comparison</a>.</p><p>All 69 passages of the manuscript, each beside the Lean declaration of its statement and the steps of its Lean proof, with direct links to the exact sources. A map of the dependencies between the statements opens the reader. Also a page that sets out, for every definition of the paper, the form the Lean proofs work with and the theorems connecting the two; proof dependency graphs of the paper and of the Lean proof; and the manuscript PDF. Download the ZIP, unzip it, and open index.html in a browser.</p><p>Uses formal proof v1.4.0 (DOI 10.5281/zenodo.24140371) and the November 12, 2026 manuscript.</p>",
+  "description": "<p><a href=\"https://itpplasma.github.io/stafford38-supplementary/\">Open the paper and Lean proof comparison</a>.</p><p>All 68 passages of the manuscript, each beside the Lean declaration of its statement and the steps of its Lean proof, with direct links to the exact sources. A map of the dependencies between the statements opens the reader. Also a page that sets out, for every definition of the paper, the form the Lean proofs work with and the theorems connecting the two; proof dependency graphs of the paper and of the Lean proof; and the manuscript PDF. Download the ZIP, unzip it, and open index.html in a browser.</p><p>Uses formal proof v1.4.0 (DOI 10.5281/zenodo.24140371) and the November 13, 2026 manuscript.</p>",
   "creators": [
     {
       "name": "Albert, Christopher",
@@ -25,7 +25,7 @@
       "resource_type": "publication"
     },
     {
-      "identifier": "https://github.com/itpplasma/stafford38-paper/tree/c854d9e20fa528cd3fff013ea47d5f44a66c9526",
+      "identifier": "https://github.com/itpplasma/stafford38-paper/tree/ecd77611496309f8908e6f08a6347f531d6f5527",
       "relation": "isSupplementTo",
       "resource_type": "publication"
     },
@@ -35,5 +35,5 @@
       "resource_type": "software"
     }
   ],
-  "version": "v0.3.2"
+  "version": "v0.3.3"
 }

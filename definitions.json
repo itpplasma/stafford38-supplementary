@@ -213,8 +213,8 @@
           "note": "The proofs of Sections 3 to 6 work with one fixed module gr Q, built from the images of F_m in A_n/I. The paper modules call it `grCyclic`. It is isomorphic, over k[x, ξ], to the printed ⊕_m Q_m/Q_{m-1}."
         },
         {
-          "paper": "Definition 2.5",
-          "notion": "T*X = Spec k[x, ξ]",
+          "paper": "Definition 2.6",
+          "notion": "T*𝔸ⁿ_k = Spec k[x, ξ]",
           "class": "library",
           "printed": [
             "Stafford38.Paper.Section2.CotangentBundle"
@@ -226,7 +226,7 @@
           "note": "Mathlib's prime spectrum of the polynomial ring k[x, ξ]."
         },
         {
-          "paper": "Definition 2.5",
+          "paper": "Section 5.1",
           "notion": "Projection π and fibre T*_y X",
           "class": "direct",
           "printed": [
@@ -238,7 +238,7 @@
           "note": "A closed point (y, ξ) is a function on the 2n coordinate indices; π keeps the first n values, and the fibre over y is π⁻¹(y). The fibre is used once, to state Definition 5.6. The projection is used in the last step of Section 6, where W does not meet π⁻¹(H) for the hyperplane H = {x₁ = 0}."
         },
         {
-          "paper": "Definition 2.6",
+          "paper": "Definition 2.5",
           "notion": "V(J) ⊆ Spec S",
           "class": "library",
           "printed": [
@@ -251,7 +251,7 @@
           "note": "Mathlib's zero locus in the prime spectrum."
         },
         {
-          "paper": "Definition 2.6",
+          "paper": "Definition 2.5",
           "notion": "V_K(J), I(S), 𝔪_a",
           "class": "equivalent",
           "printed": [
@@ -376,7 +376,7 @@
           "note": "The printed formula with partial derivatives. The proofs use a bracket defined in the proof library; the two are equal."
         },
         {
-          "paper": "Definition 2.10",
+          "paper": "Definitions 2.9 and 5.6",
           "notion": "Involutive ideal and involutive closed set",
           "class": "equivalent",
           "printed": [
@@ -392,7 +392,7 @@
               "says": "printed {J, J} ⊆ J ⇔ the condition used in the proofs"
             }
           ],
-          "note": "A closed set W is involutive, by definition, if I(W) is an involutive ideal. Theorem 2.11 is stated with the printed definition. Theorem 5.8 is stated with the definition of the proofs, applied to I(W)."
+          "note": "A closed set W is involutive, by definition, if I(W) is an involutive ideal. Theorem 2.10 is stated with the printed definition. Theorem 5.8 is stated with the definition of the proofs, applied to I(W)."
         }
       ]
     },
@@ -683,7 +683,7 @@
               "says": "the condition of the proofs ⇔ every W ∩ T*_y X is stable under ξ ↦ tξ, t ≠ 0"
             }
           ],
-          "note": "The printed form, with the fibres T*_y X of Definition 2.5, has no declaration of its own; it is written out in the statement of the theorem below. The proofs use the condition point by point: (y, ξ) ∈ W implies (y, tξ) ∈ W for t ≠ 0. Theorem 5.8 is stated with the latter."
+          "note": "The printed form, with the fibres T*_y X defined in Section 5.1, has no declaration of its own; it is written out in the statement of the theorem below. The proofs use the condition point by point: (y, ξ) ∈ W implies (y, tξ) ∈ W for t ≠ 0. Theorem 5.8 is stated with the latter."
         },
         {
           "paper": "Subsection 5.2",
@@ -728,7 +728,7 @@
             "Stafford38.Paper.Section2.VK"
           ],
           "bridges": [],
-          "note": "Names for sets built with Definition 2.6; K is an algebraically closed field containing k."
+          "note": "Names for sets built with Definition 2.5; K is an algebraically closed field containing k."
         },
         {
           "paper": "Corollary 6.3",
@@ -747,15 +747,15 @@
   ],
   "statements": [
     {
-      "paper": "Theorem 2.11 (Gabber)",
+      "paper": "Theorem 2.10 (Gabber)",
       "name": "Stafford38.Paper.Section2.theorem_2_11"
     },
     {
-      "paper": "Theorem 2.11, cyclic case used in Section 6",
+      "paper": "Theorem 2.10, cyclic case used in Section 6",
       "name": "Stafford38.Paper.Section2.theorem_2_11_cyclic"
     },
     {
-      "paper": "Theorem 2.12 (Nullstellensatz)",
+      "paper": "Theorem 2.11 (Nullstellensatz)",
       "name": "Stafford38.Paper.Section2.theorem_2_12"
     },
     {
@@ -843,7 +843,7 @@
       },
       {
         "name": "Stafford38.Paper.Section2.fibre",
-        "paper": "T*_y X (Definition 2.5)",
+        "paper": "T*_y X (Section 5.1)",
         "says": "The fibre π⁻¹(y) of the cotangent bundle over a point y, a copy of (K^n)*."
       }
     ],

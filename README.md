@@ -2,10 +2,9 @@
 
 ## [Open the proof comparison →](https://itpplasma.github.io/stafford38-supplementary/)
 
-Read 69 paper passages beside the pinned Lean results. The reader uses the
-November 12 version of `human_readable_main.tex`, commit `c854d9e`, set in the
-Springer Nature template for Inventiones mathematicae.
-All 46 theorem-like statements are represented. Paper source links
+Read the manuscript beside the pinned Lean results. The reader uses the
+November 13 version of `human_readable_main.tex`, set in the Springer Nature
+template for Inventiones mathematicae. All theorem-like statements are represented. Paper source links
 open the bundled, unmodified manuscript; search, annotations and review notes
 work offline.
 
@@ -16,12 +15,12 @@ The Lean proofs follow the printed proofs statement by statement. Theorem 1.1
 and Corollary 6.3 are also stated as printed in the Mathlib-only Palomar
 challenge. No review finding is open. Each Lean reference of the manuscript
 names the declaration of its statement in `Stafford38.Paper`. See the
-[manuscript records](verification/labels-20261112/verification.json) and the
+[manuscript records](verification/manuscript-20261113/verification.json) and the
 [paper-route update](verification/paper-route-20261103/README.md).
 The Lean sources are pinned to formal commit
 1029fdb, which passes the repository verifier
 ([log](verification/formal-1029fdb-20261104/formal-verify.log)).
-This version is release v0.3.2.
+This version is [release v0.3.3](https://github.com/itpplasma/stafford38-supplementary/releases/tag/v0.3.3).
 
 **Offline:** download this repository, unzip it, and open **index.html**.
 Paper and project source pages are bundled. External library links require
