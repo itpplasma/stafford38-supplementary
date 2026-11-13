@@ -100,8 +100,8 @@ KEYS = {
 }
 # Cited results: heading and source of each 'cited' key.
 CITED = {
-    'GABBER': ('cited: Thm 2.11 (Gabber)', 'Gab81 · SK14 · HTT D.3.4; proved in Lean'),
-    'NSS': ('cited: Thm 2.12 (Nullstellensatz)', 'Hartshorne I.1.3A; proved in Lean from Mathlib'),
+    'GABBER': ('cited: Thm 2.10 (Gabber)', 'Gab81 · SK14 · HTT D.3.4; proved in Lean'),
+    'NSS': ('cited: Thm 2.11 (Nullstellensatz)', 'Hartshorne I.1.3A; proved in Lean from Mathlib'),
     'STA78': ('cited: [Sta78, Thm 3.7]', 'Stafford 1978; proved in Lean from Theorem 1.1'),
     'ORE': ('cited: [Björk, Prop. 1.8.4]', 'right Ore condition; proved in Lean'),
     'DIM': ('dimension theory', 'used for Def. 5.4(b); proved in Lean'),
@@ -118,7 +118,7 @@ LEAVES = {
                'AlgebraicAnalysis.Module.UniformBoundaryVanishing']),
     'aasupp': ('minimal support, localized lengths, Koszul positivity', 'AlgebraicAnalysis Module.*',
                ['AlgebraicAnalysis.Module.']),
-    'nss': ('Nullstellensatz', 'paper Thm 2.12; Mathlib RingTheory.Nullstellensatz, Jacobson',
+    'nss': ('Nullstellensatz', 'paper Thm 2.11; Mathlib RingTheory.Nullstellensatz, Jacobson',
             ['Mathlib.RingTheory.Nullstellensatz', 'Mathlib.RingTheory.Jacobson']),
     'length': ('length, Artinian and Noetherian modules', 'paper Def 4.6; Mathlib RingTheory.Length, SimpleModule, Artinian',
                ['Mathlib.RingTheory.Length', 'Mathlib.RingTheory.FiniteLength', 'Mathlib.RingTheory.SimpleModule',

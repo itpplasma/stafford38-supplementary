@@ -24,7 +24,7 @@ LEAN = [('propext', 'propositional extensionality'),
 # kind 'cited': the paper gives the source; 'std': used without a citation;
 # 'warn': an input the printed text does not supply.
 EXT = {
-    'gabber': ('Gabber: √Ann gr M and its minimal primes are involutive (stated as Thm 2.11)',
+    'gabber': ('Gabber: √Ann gr M and its minimal primes are involutive (stated as Thm 2.10)',
                'Gabber 1981; Singh–Kumar 2014; Hotta–Takeuchi–Tanisaki Thm D.3.4', 'cited'),
     'grpoly': ('gr A_n = k[x,ξ], commutative; symbols multiply',
                'Coutinho Th. 7.3.1; Schnell, D-modules notes, Prop. 2.10', 'cited'),
@@ -54,7 +54,7 @@ EXT = {
                 'Stafford 1978, Thm 3.7, p. 438', 'cited'),
     'stafdef': ('Stafford: definition of a stably cyclic module',
                 'Stafford 1978, p. 435', 'cited'),
-    'nss': ("Hilbert's Nullstellensatz (stated as Thm 2.12)",
+    'nss': ("Hilbert's Nullstellensatz (stated as Thm 2.11)",
             'Hartshorne Thm I.1.3A, Cor. I.1.4, Thm I.3.2; Atiyah–Macdonald Cor. 7.10, Ex. 7.14', 'cited'),
     'symp': ('Symplectic bases exist; dim U + dim U^⊥ = 2n',
              'Lang XV.8.1, XV.8.2; Coutinho Prop. 11.2.1', 'cited'),
@@ -94,7 +94,7 @@ TAG = {
     '07T8': ('Ann flat base change', 'Stacks 07T8'),
     'staff37': ('Stafford 2 generators', 'Sta78 Thm 3.7'),
     'stafdef': ('stably cyclic', 'Sta78 p. 435'),
-    'nss': ('Nullstellensatz', 'Thm 2.12 · Hart · AM'),
+    'nss': ('Nullstellensatz', 'Thm 2.11 · Hart · AM'),
     'symp': ('symplectic bases', 'Lang XV.8 · Coutinho 11.2.1'),
     'alg': ('field facts', 'uncited'),
     'weyl': ('Weyl/PBW basics', 'Coutinho 1.2.1'),
@@ -333,7 +333,7 @@ PROOFS = [
     ('s2', 'step', 'A = integral closure of C₀:\nf.g., normal, Noetherian, A ⊆ W'),
     ('s3', 'step', 'x̄₁ nonzero nonunit of A; minimal 𝔭_D ∋ x̄₁\nhas height 1 (Krull)'),
     ('s4', 'step', 'V = A_{𝔭_D} normal local of dimension 1 ⇒ DVR'),
-    ('s5', 'step', '1 ∈ (𝔭, x₁) (Thm 2.12) ⇒ x̄₁ ∈ R^× ⇒ R ⊄ V'),
+    ('s5', 'step', '1 ∈ (𝔭, x₁) (Thm 2.11) ⇒ x̄₁ ∈ R^× ⇒ R ⊄ V'),
     ('s6', 'step', '(b) κ = Frac(A/𝔭_D) integral over\nK[res q] ⇒ algebraic over L'),
     ('s7', 'step', '(c) Ω_{A/K} finite ⇒ Ω_{V/K} = V ⊗ Ω_{A/K} finite'),
     ('goal', 'goal', '(a) q_i ∈ V, x̄₁ ∈ 𝔪_V, R ⊄ V;\n(b) κ algebraic over L; (c) Ω_{V/K} finite')],
@@ -684,8 +684,8 @@ three axioms alone and follows the printed proof statement by statement
 (see the <a href="lean-dag.html">Lean proof graph</a>).</p>
 <div class="fig bleed">{svg(overall_dot(), shrink=False)}</div>
 <h2 id="proofs">One graph per proof</h2>
-<p>Hypotheses enter at the top; the proved statement exits at the bottom. Theorem 2.11 (Gabber) and
-Theorem 2.12 (Nullstellensatz) are cited without proof and appear as axioms.</p>
+<p>Hypotheses enter at the top; the proved statement exits at the bottom. Theorem 2.10 (Gabber) and
+Theorem 2.11 (Nullstellensatz) are cited without proof and appear as axioms.</p>
 <div class="grid">{"".join(cards)}</div>
 <h2 id="axioms">External inputs used as axioms</h2>
 <div class="tbl"><table><thead><tr><th>Input</th><th>Source given</th><th>Used in</th></tr></thead>

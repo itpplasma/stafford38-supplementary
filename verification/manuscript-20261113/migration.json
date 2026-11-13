@@ -1,0 +1,698 @@
+{
+  "base_supplementary_revision": "baa4b85673013e247b8d4b8c1949f5a10c1109ca",
+  "previous_paper": {
+    "repo": "itpplasma/stafford38-paper",
+    "commit": "c854d9e20fa528cd3fff013ea47d5f44a66c9526",
+    "file": "human_readable_main.tex",
+    "origin_repo": "itpplasma/stafford38-paper",
+    "origin_commit": "c854d9e20fa528cd3fff013ea47d5f44a66c9526",
+    "sha256": "d66f0aae0905c0f3158c4a41c7355047ce076915f09a225636a1a5af3dc09bfe",
+    "label": "Paper (November 12 version)",
+    "local_source_base": "./sources/paper",
+    "note": "November 12 version, preserved verbatim.",
+    "snapshot": {
+      "base": "sources/paper/raw",
+      "files": {
+        "human_readable_main.tex": "d66f0aae0905c0f3158c4a41c7355047ce076915f09a225636a1a5af3dc09bfe",
+        "references.bib": "6460312c2fa98586c4ce3298f64a154d3db8f9e0db6ebc3408d0e16099b6da09",
+        "ai_review.tex": "22072207008bd71f6a328f4f0126f8b9f9f8f5d509126b17a622d220b059c1fb",
+        "sn-jnl.cls": "afdd709e43a76c1452c8696429d428b1c35a9339de050c7ca8a9b6f32c180556",
+        "sn-mathphys-num.bst": "b3a7c7fbcc1e7f9619de634fcea2f5bb7a245818a5942bc576e40ea001633332"
+      }
+    }
+  },
+  "current_paper": {
+    "repo": "itpplasma/stafford38-paper",
+    "commit": "f4c5033292d8770a534a02bb24f9fa93a6cb9b75",
+    "file": "human_readable_main.tex",
+    "origin_repo": "itpplasma/stafford38-paper",
+    "origin_commit": "f4c5033292d8770a534a02bb24f9fa93a6cb9b75",
+    "sha256": "1283befd7a12dced7e92b7d2b88b1423df54e737bf97899c737c678535de674e",
+    "label": "Paper (November 13 version)",
+    "local_source_base": "./sources/paper",
+    "note": "November 13 version, preserved verbatim.",
+    "snapshot": {
+      "base": "sources/paper/raw",
+      "files": {
+        "human_readable_main.tex": "1283befd7a12dced7e92b7d2b88b1423df54e737bf97899c737c678535de674e",
+        "references.bib": "f31939104dc3485490c5ebb6c902b773145bd56238facde25db79eb3d6e5eb64",
+        "ai_review.tex": "fd1b442ecc83a3b7cb195886ea8a63aa3ac2a0f9eb79eab93eae531031a1cdda",
+        "sn-jnl.cls": "afdd709e43a76c1452c8696429d428b1c35a9339de050c7ca8a9b6f32c180556",
+        "sn-mathphys-num.bst": "b3a7c7fbcc1e7f9619de634fcea2f5bb7a245818a5942bc576e40ea001633332"
+      }
+    }
+  },
+  "renamed_labels": {},
+  "deleted_labels": [
+    "def:involutive"
+  ],
+  "renumbered_statements": {
+    "2.6": "2.5",
+    "2.5": "2.6",
+    "2.11": "2.10",
+    "2.12": "2.11"
+  },
+  "removed_cards": [
+    "def:involutive"
+  ],
+  "added_cards": [],
+  "moved_ranges": {
+    "context-prior-art": [
+      [
+        115,
+        129
+      ],
+      [
+        115,
+        128
+      ]
+    ],
+    "formal-verification": [
+      [
+        130,
+        148
+      ],
+      [
+        129,
+        147
+      ]
+    ],
+    "def:cyclic": [
+      [
+        157,
+        160
+      ],
+      [
+        156,
+        159
+      ]
+    ],
+    "conv:pair": [
+      [
+        161,
+        176
+      ],
+      [
+        160,
+        175
+      ]
+    ],
+    "def:filtration": [
+      [
+        177,
+        207
+      ],
+      [
+        176,
+        206
+      ]
+    ],
+    "def:good-filtration": [
+      [
+        208,
+        220
+      ],
+      [
+        207,
+        219
+      ]
+    ],
+    "cotangent": [
+      [
+        221,
+        241
+      ],
+      [
+        239,
+        255
+      ]
+    ],
+    "def:spec": [
+      [
+        242,
+        257
+      ],
+      [
+        220,
+        238
+      ]
+    ],
+    "def:char-variety": [
+      [
+        258,
+        273
+      ],
+      [
+        256,
+        271
+      ]
+    ],
+    "def:symplectic-poisson": [
+      [
+        274,
+        289
+      ],
+      [
+        272,
+        285
+      ]
+    ],
+    "def:poisson": [
+      [
+        290,
+        300
+      ],
+      [
+        286,
+        305
+      ]
+    ],
+    "ithm:gabber": [
+      [
+        312,
+        328
+      ],
+      [
+        306,
+        322
+      ]
+    ],
+    "thm:nss": [
+      [
+        329,
+        341
+      ],
+      [
+        323,
+        335
+      ]
+    ],
+    "monic-scalar": [
+      [
+        345,
+        347
+      ],
+      [
+        339,
+        341
+      ]
+    ],
+    "lem:sympcompl": [
+      [
+        359,
+        404
+      ],
+      [
+        353,
+        398
+      ]
+    ],
+    "phi-g": [
+      [
+        393,
+        404
+      ],
+      [
+        387,
+        398
+      ]
+    ],
+    "prop:monic": [
+      [
+        405,
+        464
+      ],
+      [
+        399,
+        458
+      ]
+    ],
+    "rem:transport": [
+      [
+        465,
+        484
+      ],
+      [
+        459,
+        478
+      ]
+    ],
+    "eq:I-Q": [
+      [
+        474,
+        479
+      ],
+      [
+        468,
+        473
+      ]
+    ],
+    "def:monic-xi1": [
+      [
+        485,
+        492
+      ],
+      [
+        479,
+        486
+      ]
+    ],
+    "lem:order-symbol": [
+      [
+        493,
+        524
+      ],
+      [
+        487,
+        518
+      ]
+    ],
+    "cor:charP": [
+      [
+        525,
+        536
+      ],
+      [
+        519,
+        530
+      ]
+    ],
+    "euler-grading": [
+      [
+        538,
+        562
+      ],
+      [
+        532,
+        556
+      ]
+    ],
+    "lem:euler": [
+      [
+        563,
+        587
+      ],
+      [
+        557,
+        581
+      ]
+    ],
+    "lem:euler-residue": [
+      [
+        588,
+        612
+      ],
+      [
+        582,
+        606
+      ]
+    ],
+    "prop:x-surjective": [
+      [
+        613,
+        632
+      ],
+      [
+        607,
+        626
+      ]
+    ],
+    "def:localization": [
+      [
+        633,
+        645
+      ],
+      [
+        627,
+        639
+      ]
+    ],
+    "def:supp": [
+      [
+        646,
+        651
+      ],
+      [
+        640,
+        645
+      ]
+    ],
+    "def:length": [
+      [
+        652,
+        659
+      ],
+      [
+        646,
+        653
+      ]
+    ],
+    "lem:supp-criterion": [
+      [
+        660,
+        697
+      ],
+      [
+        654,
+        691
+      ]
+    ],
+    "vc-setup": [
+      [
+        686,
+        697
+      ],
+      [
+        680,
+        691
+      ]
+    ],
+    "lem:tangential-finiteness": [
+      [
+        698,
+        770
+      ],
+      [
+        692,
+        764
+      ]
+    ],
+    "lem:page-inequality": [
+      [
+        771,
+        875
+      ],
+      [
+        765,
+        869
+      ]
+    ],
+    "lem:strict-support-inequality": [
+      [
+        876,
+        950
+      ],
+      [
+        870,
+        942
+      ]
+    ],
+    "lem:Uzero": [
+      [
+        951,
+        965
+      ],
+      [
+        943,
+        957
+      ]
+    ],
+    "conormal-intro": [
+      [
+        966,
+        975
+      ],
+      [
+        958,
+        968
+      ]
+    ],
+    "def:fieldextension": [
+      [
+        1002,
+        1027
+      ],
+      [
+        999,
+        1024
+      ]
+    ],
+    "def:omega": [
+      [
+        1028,
+        1050
+      ],
+      [
+        1025,
+        1047
+      ]
+    ],
+    "def:valuation": [
+      [
+        1051,
+        1061
+      ],
+      [
+        1048,
+        1058
+      ]
+    ],
+    "def:conormal": [
+      [
+        1062,
+        1075
+      ],
+      [
+        1059,
+        1072
+      ]
+    ],
+    "dir-def": [
+      [
+        1076,
+        1082
+      ],
+      [
+        1073,
+        1079
+      ]
+    ],
+    "def:fibre-can": [
+      [
+        1083,
+        1088
+      ],
+      [
+        1080,
+        1086
+      ]
+    ],
+    "thm:asymptotic-conormal": [
+      [
+        1089,
+        1101
+      ],
+      [
+        1087,
+        1099
+      ]
+    ],
+    "thm:coisotropic-exclusion": [
+      [
+        1102,
+        1111
+      ],
+      [
+        1100,
+        1109
+      ]
+    ],
+    "thm:asymptotic-conormal-proof": [
+      [
+        1112,
+        1447
+      ],
+      [
+        1110,
+        1445
+      ]
+    ],
+    "lem:W": [
+      [
+        1142,
+        1157
+      ],
+      [
+        1140,
+        1155
+      ]
+    ],
+    "lem:place": [
+      [
+        1164,
+        1215
+      ],
+      [
+        1162,
+        1213
+      ]
+    ],
+    "lem:kappa": [
+      [
+        1259,
+        1275
+      ],
+      [
+        1257,
+        1273
+      ]
+    ],
+    "lem:tangent": [
+      [
+        1314,
+        1363
+      ],
+      [
+        1312,
+        1361
+      ]
+    ],
+    "lem:ell": [
+      [
+        1371,
+        1385
+      ],
+      [
+        1369,
+        1383
+      ]
+    ],
+    "thm:coisotropic-exclusion-proof": [
+      [
+        1448,
+        1492
+      ],
+      [
+        1446,
+        1490
+      ]
+    ],
+    "prop:char-avoids": [
+      [
+        1496,
+        1512
+      ],
+      [
+        1494,
+        1510
+      ]
+    ],
+    "lem:initial-base-change": [
+      [
+        1513,
+        1534
+      ],
+      [
+        1511,
+        1532
+      ]
+    ],
+    "proof-main": [
+      [
+        1535,
+        1597
+      ],
+      [
+        1533,
+        1592
+      ]
+    ],
+    "cyclicity": [
+      [
+        1598,
+        1627
+      ],
+      [
+        1593,
+        1622
+      ]
+    ],
+    "further-work": [
+      [
+        1628,
+        1639
+      ],
+      [
+        1623,
+        1634
+      ]
+    ],
+    "appendix-left-handed": [
+      [
+        1629,
+        1630
+      ],
+      [
+        1624,
+        1625
+      ]
+    ],
+    "appendix-localized-differential": [
+      [
+        1630,
+        1631
+      ],
+      [
+        1625,
+        1626
+      ]
+    ],
+    "appendix-evolutionary": [
+      [
+        1631,
+        1634
+      ],
+      [
+        1626,
+        1629
+      ]
+    ],
+    "global-stafford": [
+      [
+        1644,
+        1650
+      ],
+      [
+        1639,
+        1645
+      ]
+    ],
+    "generalization-filtered": [
+      [
+        1651,
+        1660
+      ],
+      [
+        1646,
+        1655
+      ]
+    ],
+    "outlook": [
+      [
+        1661,
+        1671
+      ],
+      [
+        1656,
+        1666
+      ]
+    ],
+    "ai-workflow": [
+      [
+        1693,
+        1742
+      ],
+      [
+        1688,
+        1737
+      ]
+    ]
+  },
+  "active_statements": 45,
+  "current_cards": 68,
+  "open_findings": [],
+  "expected_unresolved_refs": [],
+  "expected_unresolved_citations": [],
+  "paper_worktree_status_before": "",
+  "note": "Involutive ideals are now in Definition 2.9 and involutive closed sets in Definition 5.6. Formal source pins and declarations are unchanged."
+}

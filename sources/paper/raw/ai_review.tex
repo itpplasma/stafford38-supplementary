@@ -34,16 +34,6 @@
     \parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}{%
       \normalfont\small\color{AIreview}\textbf{AI comment #1.} #2}}%
   \par\smallskip}
-\newcommand{\AIreviewlegend}{%
-  \AIcomment{Review guide}{Red text proposes additions or corrections;
-  blue struck text preserves the original wording.
-  \textbf{Johanna:} review the proposals as mathematics and prose, and resolve
-  their boxes after accepting or revising them. No Lean installation, code
-  editing, or proof replay is required for her review.
-  \textbf{Max:} review the whole paper--Lean correspondence, including
-  every statement, its hypotheses, and the definitions entering the challenge. The technical supplement contains the comparison notes, mathematical accounts,
-  and optional declaration links. The
-  side-by-side review interface links statements to their checked sources.}}
 
 % Lean cross-references for the paper--Lean audit.
 % Each formalized result is followed by \formalref{...}; every \leandecl or
@@ -73,7 +63,7 @@
 % \formalref[relation to the printed statement]{declarations}
 \newcommand{\formalref}[2][]{%
   \ifshowleandetails
-    \par\smallskip\noindent
+    %\par\smallskip\noindent
     {\small\textsf{Lean}\if\relax\detokenize{#1}\relax\else\ (#1)\fi: #2}%
-    \par\smallskip
+   % \par\smallskip
   \fi}

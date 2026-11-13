@@ -1,0 +1,93 @@
+{
+  "status": "passed",
+  "paper": {
+    "repo": "itpplasma/stafford38-paper",
+    "commit": "f4c5033292d8770a534a02bb24f9fa93a6cb9b75",
+    "file": "human_readable_main.tex",
+    "origin_repo": "itpplasma/stafford38-paper",
+    "origin_commit": "f4c5033292d8770a534a02bb24f9fa93a6cb9b75",
+    "sha256": "1283befd7a12dced7e92b7d2b88b1423df54e737bf97899c737c678535de674e",
+    "label": "Paper (November 13 version)",
+    "local_source_base": "./sources/paper",
+    "note": "November 13 version, preserved verbatim.",
+    "snapshot": {
+      "base": "sources/paper/raw",
+      "files": {
+        "human_readable_main.tex": "1283befd7a12dced7e92b7d2b88b1423df54e737bf97899c737c678535de674e",
+        "references.bib": "f31939104dc3485490c5ebb6c902b773145bd56238facde25db79eb3d6e5eb64",
+        "ai_review.tex": "fd1b442ecc83a3b7cb195886ea8a63aa3ac2a0f9eb79eab93eae531031a1cdda",
+        "sn-jnl.cls": "afdd709e43a76c1452c8696429d428b1c35a9339de050c7ca8a9b6f32c180556",
+        "sn-mathphys-num.bst": "b3a7c7fbcc1e7f9619de634fcea2f5bb7a245818a5942bc576e40ea001633332"
+      }
+    }
+  },
+  "generator": {
+    "repo": "itpplasma/paper-lean-audit",
+    "commit": "fc85d047ddee885c8f2adf1eb4e376cbac65b689",
+    "version": "manuscript-20261112",
+    "base_commit": "065db3e1fbc9001071422e9c66db36c0ef7da394",
+    "bundle": "verification/manuscript-20261112/generator.bundle"
+  },
+  "manuscript_cards": 68,
+  "active_statements": 45,
+  "manuscript_snapshot_byte_identical": true,
+  "paper_worktree_unchanged": true,
+  "formal_source_pins_unchanged": true,
+  "formal_verification": {
+    "source": "1029fdb382eee06e7b59bcf32801f40931e2079a",
+    "status": "passed",
+    "receipt": "verification/formal-1029fdb-20261104/formal-verify.log",
+    "scope": "Repository verifier scripts/verify.sh: full Lake build of every module, all solution and challenge roots, and the strict dependency guard of the earlier and the paper-route terminal roots, and the route checks of both solutions (only propext, Classical.choice, Quot.sound). No Palomar service-runner receipt is claimed."
+  },
+  "reader_build": {
+    "status": "passed",
+    "warnings": [],
+    "scope": "Complete current source/reference and statement-coverage audit; warnings are unresolved references already present in the paper."
+  },
+  "generator_tests": {
+    "passed": 84,
+    "failed": 0,
+    "skipped": 1,
+    "scope": "Generator regression suite including its browser tests",
+    "skip_reason": "Historical sibling-paper fixture unavailable; current manuscript passes the actual pinned build.",
+    "rerun": false,
+    "log": "verification/manuscript-20261112/generator-tests.log",
+    "reason": "Generator unchanged at its pinned commit; the current preview was rebuilt and its reader browser checks were rerun."
+  },
+  "browser": {
+    "status": "passed",
+    "cards": 68,
+    "paper": "f4c5033292d8770a534a02bb24f9fa93a6cb9b75",
+    "source_links": 1883,
+    "definition_links": "all targets present",
+    "canonical_weyl_definitions": 1,
+    "ownership_labels": true,
+    "definition_clicks": true,
+    "new_cards": 0,
+    "obsolete_cards_absent": true,
+    "paper_source_links_local": true,
+    "search": true,
+    "guided_navigation": true,
+    "manuscript_annotations": true,
+    "notes_reload": true,
+    "review_export": true,
+    "review_findings": 0,
+    "math_errors": 0,
+    "mobile_overflow": false,
+    "javascript_errors": [],
+    "offline_requests": 0
+  },
+  "paper_pdf": {
+    "sha256": "c2f322f5eba3956c2be9b87bbbf2d3e0035a2448cbd24c57740c3e2eb5b9cfb8",
+    "source_commit": "f4c5033292d8770a534a02bb24f9fa93a6cb9b75",
+    "build": "latexmk -pdf -interaction=nonstopmode -halt-on-error human_readable_main.tex",
+    "isolated_checkout": true,
+    "unresolved_references": []
+  },
+  "comparison_review": {
+    "johanna": "pending",
+    "max": "pending",
+    "findings": 0
+  },
+  "html_sha256": "d3650f1a5c931948f9e964a76fd6dc6d2dee1036fb1a59bcfab19a4e4bd46cc3"
+}
