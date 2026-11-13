@@ -20,8 +20,7 @@ names the declaration of its statement in `Stafford38.Paper`. See the
 The Lean sources are pinned to formal commit
 1029fdb, which passes the repository verifier
 ([log](verification/formal-1029fdb-20261104/formal-verify.log)).
-This is a preview while manuscript editing continues. The latest archived release is
-[v0.3.2](https://github.com/itpplasma/stafford38-supplementary/releases/tag/v0.3.2).
+This version is [release v0.3.3](https://github.com/itpplasma/stafford38-supplementary/releases/tag/v0.3.3).
 
 **Offline:** download this repository, unzip it, and open **index.html**.
 Paper and project source pages are bundled. External library links require

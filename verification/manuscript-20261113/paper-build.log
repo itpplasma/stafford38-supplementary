@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026/Homebrew) (preloaded format=pdflatex 2026.3.4)  13 NOV 2026 11:16
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026/Homebrew) (preloaded format=pdflatex 2026.3.4)  13 NOV 2026 11:30
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1545,10 +1545,14 @@ Package hyperref Warning: Difference (3) between bookmark levels is greater
 Package hyperref Warning: Difference (2) between bookmark levels is greater 
 (hyperref)                than one, level fixed on input line 1683.
 
-(./human_readable_main.bbl
+
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [29]
+(./human_readable_main.bbl
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [30]
@@ -1570,11 +1574,11 @@ Package rerunfilecheck Info: File `human_readable_main.out' has not changed.
 (rerunfilecheck)             Checksum: 5D16E8DB61E01B60ADC6788280BF4E71;2842.
  ) 
 Here is how much of TeX's memory you used:
- 26694 strings out of 467525
- 493532 string characters out of 5408440
+ 26698 strings out of 467525
+ 493564 string characters out of 5408440
  917237 words of memory out of 5000000
  54558 multiletter control sequences out of 15000+600000
- 675137 words of font info for 376 fonts, out of 8000000 for 9000
+ 675239 words of font info for 378 fonts, out of 8000000 for 9000
  1151 hyphenation exceptions out of 8191
  99i,12n,118p,1854b,747s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/fonts/type1/public/am
@@ -1624,10 +1628,10 @@ onts/type1/public/amsfonts/symbols/msbm7.pfb></opt/homebrew/Cellar/texlive/2026
 0301/share/texmf-dist/fonts/type1/public/cm-super/sfrm0900.pfb></opt/homebrew/C
 ellar/texlive/20260301/share/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pf
 b>
-Output written on human_readable_main.pdf (32 pages, 631969 bytes).
+Output written on human_readable_main.pdf (32 pages, 632051 bytes).
 PDF statistics:
- 829 PDF objects out of 1000 (max. 8388607)
- 713 compressed objects within 8 object streams
+ 830 PDF objects out of 1000 (max. 8388607)
+ 714 compressed objects within 8 object streams
  172 named destinations out of 1000 (max. 500000)
  82573 words of extra memory for PDF output out of 89155 (max. 10000000)
 
